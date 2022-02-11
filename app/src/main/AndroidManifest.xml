@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.chiranths.jobportal1">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/dataflair"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/dataflair"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.JobPortal">
+        <activity android:name="com.chiranths.jobportal1.Activities.JobDetailsActivity"></activity>
+        <activity android:name="com.chiranths.jobportal1.Activities.AdminActivity" />
+        <activity android:name="com.chiranths.jobportal1.Activities.RoleActivity" />
+        <activity android:name="com.chiranths.jobportal1.Activities.LoginActivity" />
+        <activity android:name="com.chiranths.jobportal1.Activities.StartingActivity" />
+        <activity android:name="com.chiranths.jobportal1.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

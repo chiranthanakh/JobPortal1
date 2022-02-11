@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.StartingActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/data_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:text="Pro-Team Events"
+                android:textColor="@color/grey"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        <LinearLayout
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_home_event"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="2dp" />
+        </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:text="Pro-Team Notice"
+                android:textColor="@color/grey"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+            <LinearLayout
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_home_notice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="2dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:visibility="gone"
+                android:orientation="vertical">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:elevation="3dp"
+                    app:cardCornerRadius="15dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:orientation="horizontal"
+                        android:id="@+id/ll_back"
+                        android:background="@color/grey">
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp">
+                            <ImageView
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/sound"
+                                />
+
+                        </FrameLayout>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:maxLines="5"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:textStyle="bold"/>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="For what you looking "
+                android:textColor="@color/grey"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/GetStartedBtn"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="5dp"
+                    android:elevation="3dp"
+                    app:cardCornerRadius="20dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:background="@color/white">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:src="@drawable/job"
+                            android:layout_gravity="center_vertical"/>
+                        <TextView
+                            android:text="Jobs"
+                            android:gravity="center"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="10dp"
+                            android:maxLines="2"
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_servicess"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="5dp"
+                    android:elevation="3dp"
+                    app:cardCornerRadius="20dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:background="@color/white">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:src="@drawable/services"
+                            android:layout_gravity="center_vertical"/>
+                        <TextView
+                            android:text="Servicess"
+                            android:gravity="center"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="10dp"
+                            android:maxLines="2"
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_shoping"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="5dp"
+                    android:elevation="3dp"
+                    app:cardCornerRadius="20dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:background="@color/white">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:src="@drawable/shop" />
+
+                        <TextView
+                            android:text="Shopping"
+                            android:gravity="center"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="10dp"
+                            android:maxLines="2"
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_buy"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="5dp"
+                    android:elevation="3dp"
+                    app:cardCornerRadius="20dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:background="@color/white">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:src="@drawable/buy"
+                            android:layout_gravity="center_vertical"/>
+
+                        <TextView
+                            android:text="Buy"
+                            android:gravity="center"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="10dp"
+                            android:maxLines="2"
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_sell"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="5dp"
+                    android:elevation="3dp"
+                    app:cardCornerRadius="20dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:background="@color/white">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:src="@drawable/sell"
+                            android:layout_gravity="center_vertical"/>
+                        <TextView
+                            android:text="Sell"
+                            android:gravity="center"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="10dp"
+                            android:maxLines="2"
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_propertys"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="5dp"
+                    android:elevation="3dp"
+                    app:cardCornerRadius="20dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:background="@color/white">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:src="@drawable/property"
+                            android:layout_gravity="center_vertical"/>
+                        <TextView
+                            android:text="Propertys"
+                            android:gravity="center"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="10dp"
+                            android:maxLines="2"
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_cabs"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="5dp"
+                    android:elevation="3dp"
+                    app:cardCornerRadius="20dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:background="@color/white">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:src="@drawable/cab"
+                            android:layout_gravity="center_vertical"/>
+                        <TextView
+                            android:text="Cabs"
+                            android:gravity="center"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="10dp"
+                            android:maxLines="2"
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="5dp"
+                    android:id="@+id/cv_transport"
+                    android:elevation="3dp"
+                    app:cardCornerRadius="20dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:background="@color/white">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:src="@drawable/truck"
+                            android:layout_gravity="center_vertical"/>
+                        <TextView
+                            android:text="Transport"
+                            android:gravity="center"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="10dp"
+                            android:maxLines="2"
+                            android:textStyle="bold"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/cv_loans"
+                    android:layout_margin="5dp"
+                    android:elevation="3dp"
+                    app:cardCornerRadius="20dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:background="@color/white">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:src="@drawable/loan"
+                            android:layout_gravity="center_vertical"/>
+                        <TextView
+                            android:text="Loans"
+                            android:gravity="center"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="10dp"
+                            android:maxLines="2"
+                            android:textStyle="bold"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_home_employee_self_service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="2dp" />
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
