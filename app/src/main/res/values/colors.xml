@@ -45,4 +45,33 @@
     <color name="seekbar_color">#3be3e3</color>
     <color name="line_color">#FF15FF00</color>
     <color name="shadow_color">#00000000</color>
+
+
+
+
+
+    <color name="splash_color">#2151fb</color>
+    <color name="welcome_screen_background">#393939</color>
+
+    <color name="colorSecondaryText">#80253248</color>
+
+
+    <color name="grey_very_light">#e0e0e0</color>
+    <color name="red_color">#ff0000</color>
+    <color name="greenish_blue">#10c2bf</color>
+
+    <color name="blue_light">#88c3f5</color>
+    <color name="light_purple">#7048EC </color>
+
+    <color name="electric_blue">#536878</color>
+    <color name="fb">#2151fb</color>
+    <color name="icon_color">#b1b1b1</color>
+    <color name="rejected">#DD3333</color>
+
+
+    <color name="black_v2">#242424</color>
+    <color name="orange_light">#ffcc80</color>
+    <color name="red_light">#e57373</color>
+    <color name="green_light">#81c784</color>
+    <color name="blue_very_light">#b3e5fc</color>
 </resources>
