@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chiranths.jobportal1.Activities.JobDetailsActivity;
+import com.chiranths.jobportal1.Activities.jobs.JobDetailsActivity;
 import com.chiranths.jobportal1.Model.Model;
 import com.chiranths.jobportal1.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;

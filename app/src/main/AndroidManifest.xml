@@ -11,12 +11,16 @@
         android:roundIcon="@drawable/dataflair"
         android:supportsRtl="true"
         android:theme="@style/Theme.JobPortal">
-        <activity android:name="com.chiranths.jobportal1.Activities.JobDetailsActivity"></activity>
-        <activity android:name="com.chiranths.jobportal1.Activities.AdminActivity" />
-        <activity android:name="com.chiranths.jobportal1.Activities.RoleActivity" />
-        <activity android:name="com.chiranths.jobportal1.Activities.LoginActivity" />
-        <activity android:name="com.chiranths.jobportal1.Activities.StartingActivity" />
-        <activity android:name="com.chiranths.jobportal1.MainActivity">
+        <activity
+            android:name=".Activities.Propertys.PropertyActivity"
+            android:exported="false" />
+        <activity android:name=".Activities.jobs.JobDetailsActivity" />
+        <activity android:name=".Activities.jobs.AdminActivity" />
+        <activity android:name=".Activities.jobs.RoleActivity" />
+        <activity android:name=".Activities.LoginActivity" />
+        <activity android:name=".Activities.AdminAddNewProductActivity"/>
+        <activity android:name=".Activities.jobs.StartingActivity" />
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,11 +1,8 @@
-package com.chiranths.jobportal1;
+package com.chiranths.jobportal1.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,16 +10,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
-import com.chiranths.jobportal1.Activities.AdminActivity;
-import com.chiranths.jobportal1.Activities.RoleActivity;
-import com.chiranths.jobportal1.Activities.StartingActivity;
-import com.chiranths.jobportal1.Adapters.HomeEventAdapter;
-import com.chiranths.jobportal1.Adapters.HomeNoticeBoardAdapter;
+import com.chiranths.jobportal1.Activities.Propertys.PropertyActivity;
+import com.chiranths.jobportal1.Activities.jobs.AdminActivity;
+import com.chiranths.jobportal1.Activities.jobs.RoleActivity;
+import com.chiranths.jobportal1.Activities.jobs.StartingActivity;
 import com.chiranths.jobportal1.Fragments.DisplayJobFragment;
 import com.chiranths.jobportal1.Fragments.UserDashboardFragment;
 import com.chiranths.jobportal1.Fragments.UserProfileFragment;
-import com.chiranths.jobportal1.Model.NoticeBoard;
-import com.chiranths.jobportal1.Model.UpcomingEvent;
+import com.chiranths.jobportal1.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,9 +27,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -60,16 +52,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavigationMethod);
 
 
-
-
     }
-
-
-
-
-
-
-
 
     private BottomNavigationView.OnNavigationItemSelectedListener bottomNavigationMethod =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -121,13 +104,14 @@ public class MainActivity extends AppCompatActivity {
                     String data=snapshot.getValue().toString();
                     if(data.equals("admin"))
                     {
-                        Intent userintent=new Intent(getApplicationContext(), AdminActivity.class);
+                        Intent userintent=new Intent(getApplicationContext(), PropertyActivity.class);
                         startActivity(userintent);
                         finish();
 
                     }
                     else if(data.equals("empty"))
                     {
+
                         Intent Adminintent=new Intent(getApplicationContext(), RoleActivity.class);
                         startActivity(Adminintent);
                         finish();
@@ -135,8 +119,6 @@ public class MainActivity extends AppCompatActivity {
                     }else{
                         //Do Nothing
                     }
-
-
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {

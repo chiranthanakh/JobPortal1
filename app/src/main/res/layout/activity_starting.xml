@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.StartingActivity">
+    tools:context=".Activities.jobs.StartingActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -140,7 +140,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/GetStartedBtn"
+                    android:id="@+id/cv_jobs"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="5dp"

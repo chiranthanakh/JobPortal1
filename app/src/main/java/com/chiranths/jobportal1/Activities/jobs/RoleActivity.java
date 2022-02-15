@@ -1,4 +1,4 @@
-package com.chiranths.jobportal1.Activities;
+package com.chiranths.jobportal1.Activities.jobs;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.chiranths.jobportal1.MainActivity;
+import com.chiranths.jobportal1.Activities.MainActivity;
 import com.chiranths.jobportal1.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.tasks.OnCompleteListener;

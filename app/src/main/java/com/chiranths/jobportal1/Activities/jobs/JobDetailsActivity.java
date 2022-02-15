@@ -1,4 +1,4 @@
-package com.chiranths.jobportal1.Activities;
+package com.chiranths.jobportal1.Activities.jobs;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

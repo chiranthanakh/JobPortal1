@@ -5,17 +5,19 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.chiranths.jobportal1.Activities.jobs.RoleActivity;
 import com.chiranths.jobportal1.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -117,6 +119,14 @@ public class LoginActivity extends AppCompatActivity {
                                     user_details.put("mail", mail);
                                     user_details.put("profilepic", pic);
                                     user_details.put("role", "empty");
+
+                                    SharedPreferences prefs = getSharedPreferences("myPref", Context.MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = prefs.edit();
+                                    editor.putString("id",id);
+                                    editor.putString("name",name);
+                                    editor.putString("mail",mail);
+                                    editor.putString("pic",pic);
+                                    editor.commit();
 
                                     //updating the user details in firebase
                                     myRef.child(id).updateChildren(user_details).addOnCompleteListener(new OnCompleteListener<Void>() {

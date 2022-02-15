@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.Propertys.PropertyActivity">
+
+    <include
+        layout="@layout/toolbar"
+        android:id="@+id/li"
+        android:layout_width="match_parent"
+        android:layout_height="60dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_add_property"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/li"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/button_capsule_blue"
+        android:text="Add property"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold">
+
+    </androidx.appcompat.widget.AppCompatButton>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/btn_add_property"
+        android:layout_marginTop="10dp"
+        android:scrollbars="vertical">
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+
+
+
+</RelativeLayout>
