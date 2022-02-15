@@ -3,21 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Personal/Documents/Reference/app/src/main/res/drawable-v24/button_capsule_blue.xml" value="0.15625" />
-        <entry key="..\:/Users/Personal/Documents/Reference/app/src/main/res/drawable-v24/buttons.xml" value="0.10208333333333333" />
-        <entry key="..\:/Users/Personal/Documents/Reference/app/src/main/res/drawable-v24/input_design.xml" value="0.16145833333333334" />
-        <entry key="..\:/Users/Personal/Documents/Reference/app/src/main/res/layout/activity_admin_add_new_product.xml" value="0.1453125" />
-        <entry key="..\:/Users/Personal/Documents/Reference/app/src/main/res/layout/activity_job_details.xml" value="0.1453125" />
-        <entry key="..\:/Users/Personal/Documents/Reference/app/src/main/res/layout/activity_login.xml" value="0.1453125" />
-        <entry key="..\:/Users/Personal/Documents/Reference/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Personal/Documents/Reference/app/src/main/res/layout/activity_property.xml" value="0.1453125" />
-        <entry key="..\:/Users/Personal/Documents/Reference/app/src/main/res/layout/activity_role.xml" value="0.1453125" />
-        <entry key="..\:/Users/Personal/Documents/Reference/app/src/main/res/layout/activity_starting.xml" value="0.1453125" />
-        <entry key="..\:/Users/Personal/Documents/Reference/app/src/main/res/layout/fragment_add_job.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Personal/Documents/Reference/app/src/main/res/layout/fragment_admin_all_applications.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Personal/Documents/Reference/app/src/main/res/layout/fragment_admin_dashboard.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Personal/Documents/Reference/app/src/main/res/layout/product_items_layout.xml" value="0.12239583333333333" />
-        <entry key="..\:/Users/Personal/Documents/Reference/app/src/main/res/layout/toolbar.xml" value="0.24189063948100092" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/Reference/app/src/main/res/drawable/card_shadow_back_layout.xml" value="0.20185185185185187" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/Reference/app/src/main/res/drawable/ic_menu.xml" value="0.2203125" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/Reference/app/src/main/res/font/lato.xml" value="0.23076923076923078" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/Reference/app/src/main/res/layout/activity_job_details.xml" value="0.18" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/Reference/app/src/main/res/layout/activity_login.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/Reference/app/src/main/res/layout/activity_main.xml" value="0.17" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/Reference/app/src/main/res/layout/activity_role.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/Reference/app/src/main/res/layout/activity_starting.xml" value="0.19537037037037036" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/Reference/app/src/main/res/layout/admin_job_application_accept_file.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/Reference/app/src/main/res/layout/fragment_add_job.xml" value="0.18" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/Reference/app/src/main/res/layout/fragment_admin_profile.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/Reference/app/src/main/res/layout/fragment_admin_selected.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/Reference/app/src/main/res/layout/fragment_display_job.xml" value="0.2" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/Reference/app/src/main/res/layout/single_data_file.xml" value="0.18" />
       </map>
     </option>
   </component>

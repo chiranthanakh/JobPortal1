@@ -5,7 +5,129 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.jobs.StartingActivity">
+    android:background="@color/white"
+    tools:context=".Activities.StartingActivity">
+
+    <LinearLayout
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/green">
+        <ImageView
+            android:id="@+id/iv_nav_view"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="5dp"
+            android:padding="10dp"
+            android:background="?selectableItemBackground"
+            android:src="@drawable/ic_menu"
+            android:layout_gravity="center_vertical"
+            app:tint="@color/black" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:layout_weight="0.9"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:fontFamily="@font/lato_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"
+                    android:textSize="14sp"
+                    android:text="Welcome to Dashboard"/>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1.5"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/tv_notification"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_notification"
+                        android:layout_weight="1"
+                        android:background="?selectableItemBackground"
+                        android:layout_gravity="center_vertical"
+                        android:padding="12dp"
+                        app:tint="@color/black" />
+                    <TextView
+                        android:id="@+id/tv_notification_count"
+                        android:background="@drawable/ic_circle_primary"
+                        android:text="1"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:backgroundTint="@color/red_color"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:layout_gravity="end"
+                        android:textSize="8sp"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"/>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_notification"
+                        android:layout_weight="1"
+                        android:background="?selectableItemBackground"
+                        android:layout_gravity="center_vertical"
+                        android:padding="12dp"
+                        app:tint="@color/black" />
+                    <TextView
+
+                        android:background="@drawable/ic_circle_primary"
+                        android:text="1"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:backgroundTint="@color/red_color"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:layout_gravity="end"
+                        android:textSize="8sp"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"/>
+                </FrameLayout>
+
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="60dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -24,7 +146,7 @@
                 android:layout_marginLeft="5dp"
                 android:drawablePadding="5dp"
                 android:gravity="center"
-                android:text="Pro-Team Events"
+                android:text="Events"
                 android:textColor="@color/grey"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -50,7 +172,7 @@
                 android:layout_marginLeft="5dp"
                 android:drawablePadding="5dp"
                 android:gravity="center"
-                android:text="Pro-Team Notice"
+                android:text="Notice"
                 android:textColor="@color/grey"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -140,7 +262,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_jobs"
+                    android:id="@+id/GetStartedBtn"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="5dp"
@@ -509,7 +631,7 @@
 
     </androidx.core.widget.NestedScrollView>
 
-
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

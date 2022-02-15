@@ -3,9 +3,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.DisplayJobFragment">
 
+   <LinearLayout
+       android:id="@+id/top_bar"
+       app:layout_constraintTop_toTopOf="parent"
+       android:layout_width="match_parent"
+       android:layout_height="?attr/actionBarSize"
+       android:background="#1A2562FC">
+
+      <ImageView
+          android:id="@+id/back_toolbar"
+          android:layout_width="50dp"
+          android:layout_height="40dp"
+          android:layout_gravity="center_vertical"
+          android:layout_marginStart="5dp"
+          android:background="?selectableItemBackground"
+          android:padding="10dp"
+          android:src="@drawable/back_arrow"
+          app:tint="@color/black" />
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_marginStart="10dp"
+          android:layout_weight="0.9"
+          android:gravity="center"
+          android:orientation="vertical">
+
+         <androidx.appcompat.widget.LinearLayoutCompat
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/lato_bold"
+                android:text="Job Recommendation"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+         </androidx.appcompat.widget.LinearLayoutCompat>
+
+      </LinearLayout>
+
+   </LinearLayout>
+
    <androidx.recyclerview.widget.RecyclerView
+       android:layout_marginTop="55dp"
        android:id="@+id/JobsRecyclerView"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
