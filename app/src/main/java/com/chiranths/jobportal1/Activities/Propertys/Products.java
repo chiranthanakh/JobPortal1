@@ -4,13 +4,14 @@ package com.chiranths.jobportal1.Activities.Propertys;
 
 public class Products {
 
-    public int type;
-    private String pname, description, price, image, category, pid, date, time;
+
+    private String pname, description, price, image, category, pid, date, time,type,size,location,number;
     public Products()
     {
 
     }
-    public Products(String pname, String description, String price, String image, String category, String pid, String date, String time, int type) {
+
+    public Products(String pname, String description, String price, String image, String category, String pid, String date, String time, String type, String size, String location, String number) {
         this.pname = pname;
         this.description = description;
         this.price = price;
@@ -20,7 +21,11 @@ public class Products {
         this.date = date;
         this.time = time;
         this.type = type;
+        this.size = size;
+        this.location = location;
+        this.number = number;
     }
+
     public String getPname() {
         return pname;
     }
@@ -85,12 +90,35 @@ public class Products {
         this.time = time;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
 }

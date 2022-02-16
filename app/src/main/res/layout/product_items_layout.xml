@@ -12,15 +12,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:gravity="center"
         android:orientation="vertical"
         android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
         android:orientation="horizontal"
         android:background="@color/white">
 
@@ -37,13 +34,40 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/product_type1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/product_image"
+                    android:text="Type"
+                    android:layout_marginStart="10dp"
+                    android:textSize="14dp"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/product_size1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Size"
+                    android:textAlignment="textEnd"
+                    android:layout_marginEnd="25dp"
+                    android:textSize="15dp"
+                    android:textColor="#000000" />
+
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/product_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Product Name"
                 android:textAlignment="center"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:textStyle="bold"
                 android:textColor="#000000" />
 
@@ -56,9 +80,39 @@
                 android:text="Product Price"
                 android:textAlignment="center"
                 android:textSize="18dp"
+                android:textStyle="bold"
                 android:textColor="#000000" />
-        </LinearLayout>
 
+
+
+            <TextView
+                android:id="@+id/product_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/product_image"
+                android:text="date"
+                android:textAlignment="center"
+                android:textSize="18dp"
+                android:textColor="#000000" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/product_location1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/product_image"
+                    android:text="Location"
+                    android:layout_marginStart="10dp"
+                    android:textSize="14dp"
+                    android:textColor="#000000" />
+
+
+            </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

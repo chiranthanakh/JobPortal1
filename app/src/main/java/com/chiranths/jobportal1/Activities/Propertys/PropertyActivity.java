@@ -82,7 +82,7 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
                     @Override
                     protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull final Products model)
                     {
-                        if(model.getType()==4){
+                       /* if(model.getType()==4){
                             Picasso.get().load(model.getImage()).into(holder.imageview2);
 
                             holder.imageview2.setOnClickListener(new View.OnClickListener() {
@@ -96,10 +96,13 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
                                 }
                             });
 
-                        }else {
+                        }else {*/
                             holder.txtProductName.setText(model.getPname());
                             // holder.txtProductDescription.setText(model.getDescription());
-                            holder.txtProductPrice.setText("₹ " + model.getPrice() + "/200gm");
+                        holder.type.setText(model.getType());
+                        holder.size.setText(model.getSize());
+                        holder.location.setText(model.getLocation());
+                            holder.txtProductPrice.setText("₹ " + model.getPrice());
                             Picasso.get().load(model.getImage()).into(holder.imageView);
 
                            // progressBar.setVisibility(View.GONE);
@@ -129,7 +132,7 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
                                 }
                             });
 
-                        }
+                       // }
                     }
 
                     @NonNull
@@ -153,15 +156,16 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
 
                     @Override
                     public int getItemViewType(int position) {
-                        Products user = getItem(position);
+                     /* Products user = getItem(position);
                         if(user.getType()==1){
                             return 1;
                         }else if(user.getType()==2) {
                             return 2;
                         }else{
                             return 0;
-                        }
+                        }*/
 
+                        return 1;
                     }
                 };
 

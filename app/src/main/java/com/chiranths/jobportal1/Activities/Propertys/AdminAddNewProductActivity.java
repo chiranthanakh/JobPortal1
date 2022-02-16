@@ -31,11 +31,11 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 public class AdminAddNewProductActivity extends AppCompatActivity {
-    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime;
-    private int type;
+    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,propertysize,location,number;
+    private String type;
     private Button AddNewProductButton;
     private ImageView InputProductImage;
-    private EditText InputProductName, InputProductDescription, InputProductPrice, Inputtype;
+    private EditText InputProductName, InputProductDescription, InputProductPrice, Inputtype,et_size,et_location,et_number;
     private static final int GalleryPick = 1;
     private Uri ImageUri;
     private String productRandomKey, downloadImageUrl;
@@ -58,9 +58,12 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         AddNewProductButton = (Button) findViewById(R.id.add_new_product);
         InputProductImage = (ImageView) findViewById(R.id.select_product_image);
         InputProductName = (EditText) findViewById(R.id.product_name);
-        Inputtype = (EditText)findViewById(R.id.product_type);
+        Inputtype = (EditText)findViewById(R.id.product_type_admin);
         InputProductDescription = (EditText) findViewById(R.id.product_description);
-        InputProductPrice = (EditText) findViewById(R.id.product_price);
+        InputProductPrice = (EditText) findViewById(R.id.product_price_admin);
+        et_size = findViewById(R.id.product_size);
+        et_location = findViewById(R.id.product_location_admin);
+        et_number = findViewById(R.id.contact_number);
         loadingBar = new ProgressDialog(this);
 
 
@@ -106,7 +109,11 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         Description = InputProductDescription.getText().toString();
         Price = InputProductPrice.getText().toString();
         Pname = InputProductName.getText().toString();
-        type = Integer.parseInt(Inputtype.getText().toString());
+        propertysize = et_size.getText().toString();
+        location = et_location.getText().toString();
+        type = Inputtype.getText().toString();
+        number = et_number.getText().toString();
+
         if (ImageUri == null)
         {
             Toast.makeText(this, "Product image is mandatory...", Toast.LENGTH_SHORT).show();
@@ -201,6 +208,9 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         productMap.put("price", Price);
         productMap.put("pname", Pname);
         productMap.put("type",type);
+        productMap.put("propertysize",propertysize);
+        productMap.put("location",location);
+        productMap.put("number",number);
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
