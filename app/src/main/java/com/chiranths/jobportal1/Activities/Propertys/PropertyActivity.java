@@ -178,7 +178,6 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
 
         switch (view.getId())
         {
-
             case R.id.btn_add_property:
                 Intent intent = new Intent(PropertyActivity.this, AdminAddNewProductActivity.class);
                 startActivity(intent);
