@@ -1,4 +1,4 @@
-package com.chiranths.jobportal1.Activities.jobs;
+package com.chiranths.jobportal1.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -13,9 +13,9 @@ import android.view.View;
 
 import com.chiranths.jobportal1.Activities.LoginActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyActivity;
+import com.chiranths.jobportal1.Activities.Servicess.ServicesActivity;
 import com.chiranths.jobportal1.Adapters.HomeEventAdapter;
 import com.chiranths.jobportal1.Adapters.HomeNoticeBoardAdapter;
-import com.chiranths.jobportal1.Activities.AdminAddNewProductActivity;
 import com.chiranths.jobportal1.Model.NoticeBoard;
 import com.chiranths.jobportal1.Model.UpcomingEvent;
 import com.chiranths.jobportal1.R;
@@ -57,7 +57,9 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
     {
 
         cv_jobs =  findViewById(R.id.cv_jobs);
+        cv_servicess = findViewById(R.id.cv_servicess);
         cv_propertys = findViewById(R.id.cv_propertys);
+        cv_propertys.setOnClickListener(this);
         cv_propertys.setOnClickListener(this);
         cv_jobs.setOnClickListener(this);
 
@@ -94,27 +96,12 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
 
     private  void prepareNoticeData()
     {
-        NoticeBoard noticeBoard = new NoticeBoard("Notice 1","It’s your personal HR Management System login. It’s a one stop solution interactive portal to enable you with complete HR related activities.","12 Mar 2020");
+        NoticeBoard noticeBoard = new NoticeBoard("Notice 1","It’s a one stop solution interactive portal","12 Mar 2020");
         noticeBoardList.add(noticeBoard);
 
         noticeBoard = new NoticeBoard("Notice 2","It’s your personal HR Management System login. It’s a one stop solution interactive portal to enable you with complete HR related activities","12 Mar 2020");
         noticeBoardList.add(noticeBoard);
 
-
-        noticeBoard = new NoticeBoard("Notice 3","It’s your personal HR Management System login. It’s a one stop solution interactive portal to enable you with complete HR related activities","12 Mar 2020");
-        noticeBoardList.add(noticeBoard);
-
-        noticeBoard = new NoticeBoard("Notice 4","It’s your personal HR Management System login. It’s a one stop solution interactive portal to enable you with complete HR related activities","12 Mar 2020");
-        noticeBoardList.add(noticeBoard);
-
-        noticeBoard = new NoticeBoard("Notice 5","It’s your personal HR Management System login. It’s a one stop solution interactive portal to enable you with complete HR related activities","12 Mar 2020");
-        noticeBoardList.add(noticeBoard);
-
-        noticeBoard = new NoticeBoard("Notice 6","It’s your personal HR Management System login. It’s a one stop solution interactive portal to enable you with complete HR related activities","12 Mar 2020");
-        noticeBoardList.add(noticeBoard);
-
-        noticeBoard = new NoticeBoard("Notice 7","It’s your personal HR Management System login. It’s a one stop solution interactive portal to enable you with complete HR related activities","12 Mar 2020");
-        noticeBoardList.add(noticeBoard);
 
 
     }
@@ -140,7 +127,6 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
         upcomingEvent = new UpcomingEvent("Event 6","It’s your personal HR Management System login. It’s a one stop solution interactive portal to enable you with complete HR related activities","12 Mar 2020");
         upcomingEventList.add(upcomingEvent);
 
-
         upcomingEvent = new UpcomingEvent("Event 7","It’s your personal HR Management System login. It’s a one stop solution interactive portal to enable you with complete HR related activities","12 Mar 2020");
         upcomingEventList.add(upcomingEvent);
 
@@ -158,7 +144,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
             case R.id.cv_jobs:
 
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-
+                startActivity(intent);
 
                 /*Intent intent;
                 if(name.equals(null)){
@@ -181,6 +167,17 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                 }*/
                 startActivity(intent1);
                 finish();
+                break;
+
+            case R.id.cv_servicess:
+
+                Intent intent2 = new Intent(getApplicationContext(), ServicesActivity.class);
+               /* if(name.equals(null)){
+                    intent1 = new Intent(getApplicationContext(), LoginActivity.class);
+                }else {
+                    intent1 = new Intent(getApplicationContext(), AdminAddNewProductActivity.class);
+                }*/
+                startActivity(intent2);
 
                 break;
 

@@ -36,9 +36,9 @@ public class HomeNoticeBoardAdapter extends RecyclerView.Adapter<HomeNoticeBoard
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         NoticeBoard noticeBoard = noticeBoardList.get(position);
-        holder.tv_notice_Home_title.setText(noticeBoard.getTitle());
+       // holder.tv_notice_Home_title.setText(noticeBoard.getTitle());
         holder.tv_notice_Home_description.setText(noticeBoard.getDesc());
-        holder.tv_notice_home_date.setText(noticeBoard.getDate());
+       // holder.tv_notice_home_date.setText(noticeBoard.getDate());
 
 
     }
@@ -53,9 +53,9 @@ public class HomeNoticeBoardAdapter extends RecyclerView.Adapter<HomeNoticeBoard
         public ConstraintLayout c_layout;
         public MyViewHolder(@NonNull View view) {
             super(view);
-            tv_notice_Home_title = (TextView) view.findViewById(R.id.tv_notice_Home_title);
+            //tv_notice_Home_title = (TextView) view.findViewById(R.id.tv_notice_Home_title);
             tv_notice_Home_description =(TextView) view.findViewById(R.id.tv_notice_Home_description);
-            tv_notice_home_date =(TextView) view.findViewById(R.id.tv_notice_home_date);
+            //tv_notice_home_date =(TextView) view.findViewById(R.id.tv_notice_home_date);
             c_layout = (ConstraintLayout) view.findViewById(R.id.layout_cc);
         }
     }

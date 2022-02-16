@@ -14,9 +14,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.chiranths.jobportal1.Activities.AdminAddNewProductActivity;
 import com.chiranths.jobportal1.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -59,22 +57,8 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
 
         recyclerView = findViewById(R.id.recycler_menu);
         recyclerView.setHasFixedSize(true);
-        GridLayoutManager mgrid = new GridLayoutManager(this,6);
-        mgrid.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
+        GridLayoutManager mgrid = new GridLayoutManager(this,1);
 
-                int at =  adapter.getItemViewType(position);
-                if( at==1 ){
-                    return 6;
-                }else if(at==2 ){
-                    return 2;
-                } else{
-                    return 3;
-                }
-
-            }
-        });
         recyclerView.setLayoutManager(mgrid);
 
     }
@@ -98,9 +82,7 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
                     @Override
                     protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull final Products model)
                     {
-                        if(model.getType()==3){
-                            Picasso.get().load(model.getImage()).into(holder.imageview1);
-                        }else if(model.getType()==4){
+                        if(model.getType()==4){
                             Picasso.get().load(model.getImage()).into(holder.imageview2);
 
                             holder.imageview2.setOnClickListener(new View.OnClickListener() {

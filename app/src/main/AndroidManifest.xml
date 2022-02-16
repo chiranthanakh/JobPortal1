@@ -12,14 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JobPortal">
         <activity
+            android:name=".Activities.Servicess.ServicesActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.Propertys.PropertyActivity"
             android:exported="false" />
         <activity android:name=".Activities.jobs.JobDetailsActivity" />
         <activity android:name=".Activities.jobs.AdminActivity" />
         <activity android:name=".Activities.jobs.RoleActivity" />
         <activity android:name=".Activities.LoginActivity" />
-        <activity android:name=".Activities.AdminAddNewProductActivity"/>
-        <activity android:name=".Activities.jobs.StartingActivity" />
+        <activity android:name=".Activities.Propertys.AdminAddNewProductActivity" />
+        <activity android:name=".Activities.StartingActivity" />
         <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

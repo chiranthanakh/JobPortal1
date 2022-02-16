@@ -11,9 +11,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.chiranths.jobportal1.Activities.Propertys.PropertyActivity;
-import com.chiranths.jobportal1.Activities.jobs.AdminActivity;
 import com.chiranths.jobportal1.Activities.jobs.RoleActivity;
-import com.chiranths.jobportal1.Activities.jobs.StartingActivity;
 import com.chiranths.jobportal1.Fragments.DisplayJobFragment;
 import com.chiranths.jobportal1.Fragments.UserDashboardFragment;
 import com.chiranths.jobportal1.Fragments.UserProfileFragment;
