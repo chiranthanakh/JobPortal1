@@ -283,7 +283,7 @@
                             android:layout_height="40dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="5dp"
-                            android:src="@drawable/job"
+                            android:src="@drawable/ic_job"
                             android:layout_gravity="center_vertical"/>
                         <TextView
                             android:text="Jobs"
@@ -318,10 +318,10 @@
                             android:layout_height="40dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="5dp"
-                            android:src="@drawable/services"
+                            android:src="@drawable/ic_service"
                             android:layout_gravity="center_vertical"/>
                         <TextView
-                            android:text="Servicess"
+                            android:text="Services"
                             android:gravity="center"
                             android:layout_marginEnd="10dp"
                             android:layout_marginStart="10dp"
@@ -352,10 +352,10 @@
                             android:layout_height="40dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="5dp"
-                            android:src="@drawable/property"
+                            android:src="@drawable/ic_property"
                             android:layout_gravity="center_vertical"/>
                         <TextView
-                            android:text="Propertys"
+                            android:text="Properties"
                             android:gravity="center"
                             android:layout_marginEnd="10dp"
                             android:layout_marginStart="10dp"
@@ -389,7 +389,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="5dp"
-                            android:src="@drawable/shop" />
+                            android:src="@drawable/ic_shopping" />
 
                         <TextView
                             android:text="Shopping"
@@ -436,7 +436,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="5dp"
-                            android:src="@drawable/shop" />
+                            android:src="@drawable/ic_transport" />
 
                         <TextView
                             android:text="Transport"
@@ -472,7 +472,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="5dp"
-                            android:src="@drawable/shop" />
+                            android:src="@drawable/ic_loans" />
 
                         <TextView
                             android:text="Loans"
@@ -506,7 +506,7 @@
                             android:layout_height="40dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="5dp"
-                            android:src="@drawable/buy"
+                            android:src="@drawable/ic_construction"
                             android:layout_gravity="center_vertical"/>
 
                         <TextView
@@ -541,7 +541,7 @@
                             android:layout_height="40dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="5dp"
-                            android:src="@drawable/sell"
+                            android:src="@drawable/ic_sell"
                             android:layout_gravity="center_vertical"/>
                         <TextView
                             android:text="Sell"
