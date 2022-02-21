@@ -2,6 +2,7 @@ package com.chiranths.jobportal1.Activities.Propertys;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,6 +35,13 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_property);
+
+          if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.darkTheme);
+            //when dark mode is enabled, we use the dark theme
+        } else {
+            setTheme(R.style.JobPortaltheam); //default app theme
+        }
 
 
         if (Build.VERSION.SDK_INT >= 21) {

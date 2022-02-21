@@ -1,7 +1,9 @@
 package com.chiranths.jobportal1.Fragments;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,7 +43,10 @@ public class DisplayJobFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -54,6 +59,8 @@ public class DisplayJobFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_display_job, container, false);
 
+
+
         //Assigning the Recyclerview to display all jobs
         recyclerView = (RecyclerView) view.findViewById(R.id.JobsRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -63,7 +70,6 @@ public class DisplayJobFragment extends Fragment {
                 new FirebaseRecyclerOptions.Builder<Model>()
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("jobs"), Model.class)
                         .build();
-
 
         jobsAdapter = new JobsAdapter(options);
         recyclerView.setAdapter(jobsAdapter);
@@ -83,4 +89,6 @@ public class DisplayJobFragment extends Fragment {
         //Stops listening for data from firebase
         jobsAdapter.stopListening();
     }
+
+
 }

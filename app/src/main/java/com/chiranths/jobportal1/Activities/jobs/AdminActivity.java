@@ -34,6 +34,7 @@ public class AdminActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.AdminFragmentContainer, new AddJobFragment()).commit();
         //Calling the bottoNavigationMethod when we click on any menu item
         bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavigationMethod);
+
     }
 
 

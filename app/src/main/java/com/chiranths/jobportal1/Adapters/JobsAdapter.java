@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chiranths.jobportal1.Activities.jobs.JobDetailsActivity;
@@ -35,7 +36,7 @@ public class JobsAdapter extends FirebaseRecyclerAdapter<Model, JobsAdapter.View
         //for loading all the job salaries into recyclerview
         holder.txtDesc.setText(model.getJobSalary());
 
-        holder.txtTitle.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -89,6 +90,7 @@ public class JobsAdapter extends FirebaseRecyclerAdapter<Model, JobsAdapter.View
 
         TextView txtTitle;
         TextView txtDesc;
+        CardView cardView;
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
@@ -96,6 +98,7 @@ public class JobsAdapter extends FirebaseRecyclerAdapter<Model, JobsAdapter.View
             //asssiginig the address of the materials to show the available jobs
             txtTitle = (TextView) itemView.findViewById(R.id.Title);
             txtDesc = (TextView) itemView.findViewById(R.id.Desc);
+            cardView = itemView.findViewById(R.id.cv_jobs);
         }
     }
 

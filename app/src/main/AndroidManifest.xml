@@ -10,7 +10,10 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/dataflair"
         android:supportsRtl="true"
-        android:theme="@style/Theme.JobPortal">
+        android:theme="@style/JobPortaltheam">
+        <activity
+            android:name=".Activities.LoanActivity.LoanActivity"
+            android:exported="false" />
         <activity
             android:name=".Activities.Servicess.ServicesActivity"
             android:exported="false" />
