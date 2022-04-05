@@ -1,4 +1,4 @@
-package com.chiranths.jobportal1.Activities;
+package com.chiranths.jobportal1.Activities.BasicActivitys;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -11,7 +11,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
-import com.chiranths.jobportal1.Activities.LoginActivity;
+import com.chiranths.jobportal1.Activities.BasicActivitys.LoginActivity;
+import com.chiranths.jobportal1.Activities.LoanActivity.LoanActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyActivity;
 import com.chiranths.jobportal1.Activities.Servicess.ServicesActivity;
 import com.chiranths.jobportal1.Adapters.HomeEventAdapter;
@@ -25,7 +26,7 @@ import java.util.List;
 
 public class StartingActivity extends AppCompatActivity implements View.OnClickListener {
 
-    CardView cv_jobs,cv_propertys,cv_servicess;
+    CardView cv_jobs,cv_propertys,cv_servicess,cv_loans;
 
     private List<UpcomingEvent> upcomingEventList = new ArrayList<>();
     RecyclerView recyclerViewEvent;
@@ -59,6 +60,8 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
         cv_jobs =  findViewById(R.id.cv_jobs);
         cv_servicess = findViewById(R.id.cv_servicess);
         cv_propertys = findViewById(R.id.cv_propertys);
+        cv_loans = findViewById(R.id.cv_loans);
+        cv_loans.setOnClickListener(this);
         cv_propertys.setOnClickListener(this);
         cv_propertys.setOnClickListener(this);
         cv_jobs.setOnClickListener(this);
@@ -169,9 +172,9 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                 finish();
                 break;
 
-            case R.id.cv_servicess:
+            case R.id.cv_loans:
 
-                Intent intent2 = new Intent(getApplicationContext(), ServicesActivity.class);
+                Intent intent2 = new Intent(getApplicationContext(), LoanActivity.class);
                /* if(name.equals(null)){
                     intent1 = new Intent(getApplicationContext(), LoginActivity.class);
                 }else {

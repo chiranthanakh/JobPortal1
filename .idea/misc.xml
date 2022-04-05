@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Personal/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_loan.xml" value="0.2" />
+        <entry key="..\:/Users/Personal/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_login.xml" value="0.203125" />
+        <entry key="..\:/Users/Personal/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_main.xml" value="0.203125" />
+        <entry key="..\:/Users/Personal/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_starting.xml" value="0.203125" />
         <entry key="..\:/Users/Personal/Documents/Reference/app/src/main/res/drawable-v24/button_capsule_blue.xml" value="0.15625" />
         <entry key="..\:/Users/Personal/Documents/Reference/app/src/main/res/drawable-v24/buttons.xml" value="0.10208333333333333" />
         <entry key="..\:/Users/Personal/Documents/Reference/app/src/main/res/drawable-v24/input_design.xml" value="0.16145833333333334" />

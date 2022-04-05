@@ -1,4 +1,4 @@
-package com.chiranths.jobportal1.Activities;
+package com.chiranths.jobportal1.Activities.jobs;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,8 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.chiranths.jobportal1.Activities.BasicActivitys.StartingActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyActivity;
-import com.chiranths.jobportal1.Activities.jobs.RoleActivity;
 import com.chiranths.jobportal1.Fragments.DisplayJobFragment;
 import com.chiranths.jobportal1.Fragments.UserDashboardFragment;
 import com.chiranths.jobportal1.Fragments.UserProfileFragment;

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Activities.StartingActivity">
+    tools:context=".Activities.BasicActivitys.StartingActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -305,24 +305,26 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_servicess"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    >
+                    android:id="@+id/cv_loans">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:background="@color/white">
+
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
+                            android:layout_gravity="center_vertical"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="5dp"
-                            android:src="@drawable/ic_service"
-                            android:layout_gravity="center_vertical"/>
+                            android:src="@drawable/ic_loans" />
+
                         <TextView
-                            android:text="Services"
+                            android:text="Loans"
                             android:gravity="center"
                             android:layout_marginEnd="10dp"
                             android:layout_marginStart="10dp"
@@ -335,6 +337,7 @@
                             android:layout_height="wrap_content"/>
 
                     </LinearLayout>
+
 
                 </androidx.cardview.widget.CardView>
 
@@ -417,8 +420,44 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 android:gravity="center"
                 app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_servicess"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:background="@color/white">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:src="@drawable/ic_service"
+                            android:layout_gravity="center_vertical"/>
+                        <TextView
+                            android:text="Services"
+                            android:gravity="center"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="10dp"
+                            android:maxLines="2"
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
 
                 <androidx.cardview.widget.CardView
 
@@ -457,41 +496,7 @@
 
                 </androidx.cardview.widget.CardView>
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:background="@color/white">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="5dp"
-                            android:src="@drawable/ic_loans" />
-
-                        <TextView
-                            android:text="Loans"
-                            android:gravity="center"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginStart="10dp"
-                            android:maxLines="2"
-                            android:textStyle="bold"
-                            android:layout_marginTop="10dp"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
-
-                    </LinearLayout>
-
-
-                </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cv_buy"

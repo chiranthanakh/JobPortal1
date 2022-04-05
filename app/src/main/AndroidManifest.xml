@@ -23,10 +23,10 @@
         <activity android:name=".Activities.jobs.JobDetailsActivity" />
         <activity android:name=".Activities.jobs.AdminActivity" />
         <activity android:name=".Activities.jobs.RoleActivity" />
-        <activity android:name=".Activities.LoginActivity" />
+        <activity android:name=".Activities.BasicActivitys.LoginActivity" />
         <activity android:name=".Activities.Propertys.AdminAddNewProductActivity" />
-        <activity android:name=".Activities.StartingActivity" />
-        <activity android:name=".Activities.MainActivity">
+        <activity android:name=".Activities.BasicActivitys.StartingActivity" />
+        <activity android:name=".Activities.jobs.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

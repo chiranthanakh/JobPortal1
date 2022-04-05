@@ -22,10 +22,8 @@ public class JobDetailsActivity extends AppCompatActivity {
 
     TextView companyNameTxt, jobTitleTxt, jobDescriptionTxt, jobSalaryTxt, startDateTxt, lastDateTxt;
     TextView totalOpeningsTxt, requiredSkillsTxt, additionalInfoTxt;
-
     EditText resumeLinkEditTxt;
     Button applyJobBtn;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +72,6 @@ public class JobDetailsActivity extends AppCompatActivity {
         requiredSkillsTxt.setText(requiredSkills);
         additionalInfoTxt.setText(additionalInfo);
 
-
         //On Click implementation to add the job application to the fireabase database
         applyJobBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,8 +86,6 @@ public class JobDetailsActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     private void applyForJob(String jobTitle, String userId, String adminId, String resumeLink, String companyName, String userName) {
@@ -129,7 +124,6 @@ public class JobDetailsActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Successfully Applied For Job", Toast.LENGTH_SHORT).show();
 
                             }
-
                         }
                     });
 
