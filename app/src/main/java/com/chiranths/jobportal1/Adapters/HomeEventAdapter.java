@@ -37,9 +37,9 @@ public class HomeEventAdapter extends RecyclerView.Adapter<HomeEventAdapter.MyVi
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         UpcomingEvent upcomingEvent = upcomingEventList.get(position);
-        holder.tv_event_home_title.setText(upcomingEvent.getTitle());
-        holder.tv_event_Home_description.setText(upcomingEvent.getDesc());
-        holder.tv_event_home_date.setText(upcomingEvent.getDate());
+        //holder.tv_event_home_title.setText(upcomingEvent.getTitle());
+        //holder.tv_event_Home_description.setText(upcomingEvent.getDesc());
+        //holder.tv_event_home_date.setText(upcomingEvent.getDate());
 
 
 
@@ -56,10 +56,10 @@ public class HomeEventAdapter extends RecyclerView.Adapter<HomeEventAdapter.MyVi
         public ConstraintLayout cons_layout;
         public MyViewHolder(@NonNull View view) {
             super(view);
-            tv_event_home_title = (TextView) view.findViewById(R.id.tv_event_home_title);
+           /* tv_event_home_title = (TextView) view.findViewById(R.id.tv_event_home_title);
             tv_event_Home_description = (TextView) view.findViewById(R.id.tv_event_Home_description);
             tv_event_home_date = (TextView) view.findViewById(R.id.tv_event_home_date);
-            cons_layout= (ConstraintLayout) view.findViewById(R.id.cons_layout);
+            cons_layout= (ConstraintLayout) view.findViewById(R.id.cons_layout);*/
         }
     }
 }

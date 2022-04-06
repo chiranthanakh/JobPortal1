@@ -134,9 +134,9 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
                             holder.imageView.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    /*Intent intent =new Intent(HomeActivity.this,ProductDetailsActivity.class);
+                                    Intent intent =new Intent(PropertyActivity.this,PropertyDetailsActivity.class);
                                     intent.putExtra("pid",model.getPid());
-                                    startActivity(intent);*/
+                                    startActivity(intent);
                                 }
                             });
 
