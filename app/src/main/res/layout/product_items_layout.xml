@@ -64,7 +64,7 @@
 
             <TextView
                 android:id="@+id/product_name"
-                android:text="Product Name"
+                android:text="Name"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/black"
@@ -79,7 +79,7 @@
 
             <TextView
                 android:id="@+id/product_price"
-                android:text="Product Price"
+                android:text="Price"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/black"
