@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.chiranths.jobportal1.Activities.jobs.RoleActivity;
 import com.chiranths.jobportal1.R;
@@ -36,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     GoogleSignInClient mSignInClient;
     FirebaseAuth firebaseAuth;
     ProgressDialog progressBar;
-    ImageView signInButton;
+    LinearLayout signInButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
