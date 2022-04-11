@@ -140,7 +140,6 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
                                 }
                             });
 
-                       // }
                     }
 
                     @NonNull

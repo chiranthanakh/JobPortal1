@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.chiranths.jobportal1.Activities"
-        minSdkVersion 18
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -47,9 +47,8 @@ dependencies {
 
     //gmail sign in
     implementation 'com.google.firebase:firebase-auth:21.0.1'
-    implementation 'com.google.android.gms:play-services-auth:20.1.0'
-    implementation platform('com.google.firebase:firebase-bom:27.1.0')
-
+    implementation 'com.google.firebase:firebase-auth'
+    implementation platform('com.google.firebase:firebase-bom:29.3.0')
 
     //Firebase recycler view
     implementation 'com.firebaseui:firebase-ui-database:7.1.1'
@@ -57,6 +56,7 @@ dependencies {
     //Loading image into imageview using url
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
 
     //For Circular ImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'

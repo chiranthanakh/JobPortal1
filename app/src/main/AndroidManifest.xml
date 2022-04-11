@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/JobPortaltheam">
         <activity
+            android:name=".Activities.LoanActivity.LoanForm"
+            android:exported="false" />
+        <activity
             android:name=".Activities.Propertys.PropertyDetailsActivity"
             android:exported="false" />
         <activity
