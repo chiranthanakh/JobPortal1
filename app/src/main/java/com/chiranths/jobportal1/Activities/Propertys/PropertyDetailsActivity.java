@@ -30,7 +30,7 @@ public class PropertyDetailsActivity extends AppCompatActivity {
 
     private Button addToCartButton;
     private ImageView productImage;
-    private TextView productPrice,productDescription,productName;
+    private TextView productPrice,productDescription,productName,tv_topbar_productName;
     private String productID="", state = "Normal";
 
 
@@ -42,6 +42,7 @@ public class PropertyDetailsActivity extends AppCompatActivity {
         addToCartButton =(Button) findViewById(R.id.pd_add_to_cart_button);
         productImage = (ImageView) findViewById(R.id.product_image_details);
         productName = (TextView) findViewById(R.id.product_name_details);
+        tv_topbar_productName = (TextView) findViewById(R.id.tv_topbar_productName);
         productDescription = (TextView) findViewById(R.id.product_description_details);
         productPrice = (TextView) findViewById(R.id.product_price_details);
         getProductDetails(productID);
@@ -75,6 +76,7 @@ public class PropertyDetailsActivity extends AppCompatActivity {
                     productName.setText(products.getPname());
                     productPrice.setText(products.getPrice());
                     productDescription.setText(products.getDescription());
+                    tv_topbar_productName.setText(products.getPname());
                     Picasso.get().load(products.getImage()).into(productImage);
 
                 }

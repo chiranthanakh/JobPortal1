@@ -49,14 +49,21 @@
         <entry key="..\:/Users/Personal/Documents/Reference/app/src/main/res/layout/product_items_layout.xml" value="0.22" />
         <entry key="..\:/Users/Personal/Documents/Reference/app/src/main/res/layout/single_data_file.xml" value="0.22" />
         <entry key="..\:/Users/Personal/Documents/Reference/app/src/main/res/layout/toolbar.xml" value="0.24189063948100092" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/drawable-v24/selected_dot.xml" value="0.1385" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/drawable/button_capsule.xml" value="0.1385" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/drawable/call.xml" value="0.1385" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/drawable/edittext_back.xml" value="0.1385" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/drawable/location.xml" value="0.1385" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/drawable/rating_back.xml" value="0.1385" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/drawable/selected_dot.xml" value="0.1385" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/drawable/share.xml" value="0.1385" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/drawable/star.xml" value="0.1385" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/drawable/tab_selector.xml" value="0.1385" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/layout/activity_job_details.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/layout/activity_loan.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/layout/activity_login.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/layout/activity_property.xml" value="0.2" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/layout/activity_property_details.xml" value="0.22" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/layout/product_items_layout.xml" value="0.25" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/layout/test.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/layout/toolbar.xml" value="0.20416666666666666" />
