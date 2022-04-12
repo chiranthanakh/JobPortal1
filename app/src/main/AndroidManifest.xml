@@ -2,7 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.chiranths.jobportal1">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
 
     <application
         android:allowBackup="true"
@@ -11,6 +17,9 @@
         android:roundIcon="@drawable/dataflair"
         android:supportsRtl="true"
         android:theme="@style/JobPortaltheam">
+        <activity
+            android:name=".Activities.LoanActivity.LoanForm"
+            android:exported="false" />
         <activity
             android:name=".Activities.Propertys.PropertyDetailsActivity"
             android:exported="false" />
@@ -25,6 +34,7 @@
             android:exported="false" />
         <activity android:name=".Activities.jobs.JobDetailsActivity" />
         <activity android:name=".Activities.jobs.AdminActivity" />
+        <activity android:name=".Activities.ExtraClass.Admincoroselimages" />
         <activity android:name=".Activities.jobs.RoleActivity" />
         <activity android:name=".Activities.BasicActivitys.LoginActivity" />
         <activity android:name=".Activities.Propertys.AdminAddNewProductActivity" />

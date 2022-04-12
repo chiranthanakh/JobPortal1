@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cv_layout"
         android:backgroundTint="@color/white"
         android:layout_width="match_parent"
         android:layout_marginStart="5dp"

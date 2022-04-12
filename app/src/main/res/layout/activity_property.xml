@@ -124,8 +124,8 @@
                             android:orientation="vertical">
 
                             <ImageView
-
-                                android:layout_width="wrap_content"
+                                android:id="@+id/iv_sites"
+                                android:layout_width="40dp"
                                 android:layout_height="45dp"
                                 android:adjustViewBounds="true"
                                 android:src="@drawable/travel" />
@@ -147,7 +147,7 @@
                             android:orientation="vertical">
 
                             <ImageView
-
+                                android:id="@+id/iv_green_land"
                                 android:layout_width="wrap_content"
                                 android:layout_height="45dp"
                                 android:adjustViewBounds="true"
@@ -170,8 +170,8 @@
                             android:orientation="vertical">
 
                             <ImageView
-
-                                android:layout_width="wrap_content"
+                                android:id="@+id/iv_home"
+                                android:layout_width="43dp"
                                 android:layout_height="45dp"
                                 android:adjustViewBounds="true"
                                 android:src="@drawable/flight" />
@@ -193,6 +193,7 @@
                             android:orientation="vertical">
 
                             <ImageView
+                                android:id="@+id/iv_commercial"
                                 android:layout_width="wrap_content"
                                 android:layout_height="45dp"
                                 android:adjustViewBounds="true"

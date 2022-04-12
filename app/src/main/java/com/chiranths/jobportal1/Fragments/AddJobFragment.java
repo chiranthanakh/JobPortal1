@@ -16,7 +16,9 @@ import com.chiranths.jobportal1.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.HashMap;
 
@@ -25,7 +27,8 @@ public class AddJobFragment extends Fragment {
     EditText companyNameEditTxt, jobTitleEditTxt, jobSalaryEditTxt, jobStartDateEditTxt, jobLastDateEditTxt;
     EditText totalOpeningsEditTxt, aboutJobEditTxt, skillsRequiredEditTxt, addationalInfoEditTxt;
     Button addJobBtn;
-
+    private StorageReference ProductImagesRef;
+    private DatabaseReference LoanRef;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
