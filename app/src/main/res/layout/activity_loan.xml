@@ -65,7 +65,7 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cv_jobs"
+            android:id="@+id/cv_personal_loan"
             android:layout_width="wrap_content"
             android:elevation="2dp"
             android:layout_weight="1"
@@ -105,7 +105,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cv_servicess"
+            android:id="@+id/cv_business_loan"
             android:layout_width="wrap_content"
             android:elevation="2dp"
             android:layout_weight="1"
@@ -144,7 +144,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cv_propertys"
+            android:id="@+id/cv_home_loan"
             android:layout_width="wrap_content"
             android:elevation="2dp"
             android:layout_weight="1"
@@ -198,6 +198,7 @@
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cv_martgage_loan"
             android:layout_width="wrap_content"
             android:elevation="2dp"
             android:layout_weight="1"
@@ -237,6 +238,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cv_lap"
             android:layout_width="wrap_content"
             android:elevation="2dp"
             android:layout_weight="1"
@@ -276,7 +278,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cv_buy"
+            android:id="@+id/cv_vehicle"
             android:layout_width="wrap_content"
             android:elevation="2dp"
             android:layout_weight="1"
