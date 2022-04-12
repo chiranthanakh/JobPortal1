@@ -58,8 +58,11 @@
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/drawable/button_capsule.xml" value="0.1385" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/drawable/call.xml" value="0.1385" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/drawable/card_shadow_back.xml" value="0.1385" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/drawable/default_dot.xml" value="0.1385" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/drawable/edittext_back.xml" value="0.1385" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/drawable/google_hangouts.xml" value="0.1385" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/drawable/ic_homelo.xml" value="0.11" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/drawable/ic_job.xml" value="0.1385" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/drawable/ifsc.xml" value="0.1385" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/drawable/location.xml" value="0.1385" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/drawable/name.xml" value="0.12" />
@@ -69,14 +72,21 @@
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/drawable/star.xml" value="0.1385" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/drawable/tab_selector.xml" value="0.1385" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/drawable/telephone.xml" value="0.1385" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/layout/activity_admin.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/layout/activity_job_details.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/layout/activity_loan.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/layout/activity_loan.xml" value="0.25" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/layout/activity_login.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/layout/activity_property.xml" value="0.2" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/layout/activity_property_details.xml" value="0.22" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/layout/activity_services.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/layout/activity_starting.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/layout/fragment_user_profile.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/layout/home_event_layout.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/layout/product_items_layout.xml" value="0.25" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/layout/test.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/layout/toolbar.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/portal/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>
