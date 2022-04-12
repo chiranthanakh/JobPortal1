@@ -3,6 +3,7 @@ package com.chiranths.jobportal1.Activities.Propertys;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,6 +31,7 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     Button btn_add;
+    CardView cv_homes, cv_sites, cv_green,cv_comerical;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,5 +1,6 @@
 package com.chiranths.jobportal1.Activities.BasicActivitys;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -10,8 +11,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.chiranths.jobportal1.Activities.BasicActivitys.LoginActivity;
+import com.chiranths.jobportal1.Activities.ExtraClass.Admincoroselimages;
 import com.chiranths.jobportal1.Activities.LoanActivity.LoanActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyActivity;
 import com.chiranths.jobportal1.Activities.Servicess.ServicesActivity;
@@ -20,8 +24,18 @@ import com.chiranths.jobportal1.Adapters.HomeNoticeBoardAdapter;
 import com.chiranths.jobportal1.Model.NoticeBoard;
 import com.chiranths.jobportal1.Model.UpcomingEvent;
 import com.chiranths.jobportal1.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
+
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class StartingActivity extends AppCompatActivity implements View.OnClickListener {
@@ -36,6 +50,11 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
     RecyclerView recyclerView;
     private HomeNoticeBoardAdapter homeNoticeBoardAdapter;
     String id,name,mail,pic;
+    FrameLayout admin_btn;
+    ArrayList coroselimagelist =new ArrayList();
+    private int[] images = {R.drawable.banner1,
+            R.drawable.banner1, R.drawable.banner1};
+    CarouselView carouselView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +80,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
         cv_servicess = findViewById(R.id.cv_servicess);
         cv_propertys = findViewById(R.id.cv_propertys);
         cv_loans = findViewById(R.id.cv_loans);
+        admin_btn = findViewById(R.id.admin_btn);
         cv_loans.setOnClickListener(this);
         cv_propertys.setOnClickListener(this);
         cv_propertys.setOnClickListener(this);
@@ -69,11 +89,19 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
         recyclerView =(RecyclerView)findViewById(R.id.rv_home_notice);
         recyclerViewEvent = (RecyclerView)findViewById(R.id.rv_home_event);
 
-
+        fetchcorosel();
         adapters();
 
-
+        admin_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(StartingActivity.this, Admincoroselimages.class);
+                startActivity(intent);
+            }
+        });
     }
+
+
 
     private void adapters() {
 
@@ -137,6 +165,61 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
         upcomingEventList.add(upcomingEvent);
 
     }
+
+    private void fetchcorosel() {
+
+        DatabaseReference coroselimage = FirebaseDatabase.getInstance().getReference().child("Corosels");
+
+        coroselimage.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (snapshot.exists()){
+
+                    HashMap<String, Object> dataMap = (HashMap<String, Object>) snapshot.getValue();
+                    for (String key : dataMap.keySet()){
+                        Object data = dataMap.get(key);
+                        try{
+
+                            HashMap<String, Object> userData = (HashMap<String, Object>) data;
+
+                            coroselimagelist.add(userData.get("image"));
+
+                        }catch (ClassCastException cce){
+
+                            try{
+                                String mString = String.valueOf(dataMap.get(key));
+                                //addTextToView(mString);
+                            }catch (ClassCastException cce2){
+
+                            }
+                        }
+                    }
+
+                    carouselView = findViewById(R.id.carouselView);
+                    carouselView.setImageListener(imageListener);
+                    carouselView.setPageCount(coroselimagelist.size());
+
+                }
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
+    ImageListener imageListener = new ImageListener() {
+        @Override
+        public void setImageForPosition(int position, ImageView imageView) {
+
+            Picasso.get().load(String.valueOf(coroselimagelist.get(position))).into(imageView);
+        }
+    };
+
 
     @Override
     public void onClick(View view) {

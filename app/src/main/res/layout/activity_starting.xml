@@ -91,10 +91,10 @@
                 </FrameLayout>
 
                 <FrameLayout
+                    android:id="@+id/admin_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <ImageView
-
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:src="@drawable/ic_notification"
@@ -164,13 +164,29 @@
             android:gravity="center"
             android:orientation="vertical">
 
+            <com.synnapps.carouselview.CarouselView
+                android:id="@+id/carouselView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:fillColor="#FFFFFFFF"
+                app:pageColor="#00000000"
+                app:radius="6dp"
+                app:slideInterval="3000"
+                app:strokeColor="#FF777777"
+                app:strokeWidth="1dp"/>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_home_event"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="match_parent"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="2dp" />
+
+
+
+
         </LinearLayout>
 
             <TextView
@@ -430,6 +446,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     >
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
