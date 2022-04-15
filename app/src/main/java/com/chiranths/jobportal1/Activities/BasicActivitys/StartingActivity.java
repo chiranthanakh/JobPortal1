@@ -3,6 +3,8 @@ package com.chiranths.jobportal1.Activities.BasicActivitys;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +15,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.chiranths.jobportal1.Activities.BasicActivitys.LoginActivity;
 import com.chiranths.jobportal1.Activities.ExtraClass.Admincoroselimages;
@@ -40,7 +43,7 @@ import java.util.List;
 
 public class StartingActivity extends AppCompatActivity implements View.OnClickListener {
 
-    CardView cv_jobs,cv_propertys,cv_servicess,cv_loans;
+    LinearLayout cv_jobs,cv_propertys,cv_servicess,cv_loans;
 
     private List<UpcomingEvent> upcomingEventList = new ArrayList<>();
     RecyclerView recyclerViewEvent;
@@ -55,6 +58,8 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
     private int[] images = {R.drawable.banner1,
             R.drawable.banner1, R.drawable.banner1};
     CarouselView carouselView;
+    DrawerLayout drawer_layout;
+    ImageView iv_nav_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +80,11 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
 
     private void initilize()
     {
+
+        drawer_layout = findViewById(R.id.drawer_layout_main);
+        iv_nav_view = findViewById(R.id.iv_nav_view);
+        iv_nav_view.setOnClickListener(this);
+
         cv_jobs =  findViewById(R.id.cv_jobs);
         cv_servicess = findViewById(R.id.cv_servicess);
         cv_propertys = findViewById(R.id.cv_propertys);
@@ -259,6 +269,9 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                 }*/
                 startActivity(intent2);
 
+                break;
+            case R.id.iv_nav_view:
+                drawer_layout.openDrawer(GravityCompat.START);
                 break;
 
 

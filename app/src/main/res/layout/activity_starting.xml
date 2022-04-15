@@ -1,603 +1,252 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<com.mindinventory.midrawer.MIDrawerView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Activities.BasicActivitys.StartingActivity">
+    tools:context=".Activities.BasicActivitys.StartingActivity"
+    android:id="@+id/drawer_layout_main"
+    app:sliderType="slide"
+    tools:openDrawer="start"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
-
-    <LinearLayout
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/toolbar"
+    <include
+        android:id="@+id/in_dashboard_layout"
+        layout="@layout/dashboard_layout"
         android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view_mainA"
+        android:layout_gravity="start"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/purple_500"
-        android:layout_height="?attr/actionBarSize"
-       >
-        <ImageView
-            android:id="@+id/iv_nav_view"
-            android:layout_width="40dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="5dp"
-            android:padding="10dp"
-            android:background="?selectableItemBackground"
-            android:src="@drawable/ic_menu"
-            android:layout_gravity="center_vertical"
-            app:tint="@color/white" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:gravity="center"
-            android:layout_weight="0.9"
-            android:orientation="vertical">
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:fontFamily="@font/lato_bold"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center"
-                    android:textSize="14sp"
-                    android:text="Welcome to Dashboard"/>
-            </androidx.appcompat.widget.LinearLayoutCompat>
+        android:fitsSystemWindows="true">
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_weight="1.5"
-            android:orientation="horizontal">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:id="@+id/tv_notification"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/ic_notification"
-                        android:layout_weight="1"
-                        android:background="?selectableItemBackground"
-                        android:layout_gravity="center_vertical"
-                        android:padding="12dp"
-                        app:tint="@color/white" />
-                    <TextView
-                        android:id="@+id/tv_notification_count"
-                        android:background="@drawable/ic_circle_primary"
-                        android:text="1"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:backgroundTint="@color/red_color"
-                        android:textColor="@color/white"
-                        android:gravity="center"
-                        android:layout_gravity="end"
-                        android:textSize="8sp"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"/>
-                </FrameLayout>
-
-                <FrameLayout
-                    android:id="@+id/admin_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/ic_notification"
-                        android:layout_weight="1"
-                        android:background="?selectableItemBackground"
-                        android:layout_gravity="center_vertical"
-                        android:padding="12dp"
-                        app:tint="@color/white" />
-                    <TextView
-
-                        android:background="@drawable/ic_circle_primary"
-                        android:text="1"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:backgroundTint="@color/red_color"
-                        android:textColor="@color/white"
-                        android:gravity="center"
-                        android:layout_gravity="end"
-                        android:textSize="8sp"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"/>
-                </FrameLayout>
-
-
-
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginTop="55dp"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
-
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/data_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-        <LinearLayout
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:orientation="vertical">
 
-            <com.synnapps.carouselview.CarouselView
-                android:id="@+id/carouselView"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                app:fillColor="#FFFFFFFF"
-                app:pageColor="#00000000"
-                app:radius="6dp"
-                app:slideInterval="3000"
-                app:strokeColor="#FF777777"
-                app:strokeWidth="1dp"/>
+            <ImageView
+                android:id="@+id/iv_nav_image"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:layout_gravity="start"
+                android:layout_marginStart="10dp"
+                android:adjustViewBounds="true"
+                android:padding="10dp"
+                android:src="@drawable/user" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_home_event"
+            <TextView
+                android:id="@+id/iv_nav_name"
                 android:layout_width="match_parent"
-                android:visibility="gone"
                 android:layout_height="match_parent"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="2dp" />
+                android:gravity="start"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:text="Welcome To Dashboard"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:fontFamily="@font/proxima_family"/>
 
+
+
+            <TextView
+                android:id="@+id/tv_nav_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:gravity="start"
+                android:layout_marginStart="20dp"
+                android:text="dashboard.12@gmail.com"
+                android:fontFamily="@font/proxima_nova_bold"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
 
 
         </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="@font/proxima_nova_semi_bold"
-                android:text="Our Services"
-                android:textColor="@color/grey"
-                android:textSize="14sp"
-                />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardMaxElevation="3dp"
-                android:elevation="3dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="3dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="220dp"
+            android:background="@color/white"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_jobs"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:background="@color/white">
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="5dp"
-                            android:src="@drawable/ic_job"
-                            android:layout_gravity="center_vertical"/>
-                        <TextView
-                            android:text="Jobs"
-                            android:gravity="center"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginStart="10dp"
-                            android:maxLines="2"
-                            android:textStyle="bold"
-                            android:layout_marginTop="10dp"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
-
-                    </LinearLayout>
-
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:id="@+id/cv_loans">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:background="@color/white">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="5dp"
-                            android:src="@drawable/ic_loans" />
-
-                        <TextView
-                            android:text="Loans"
-                            android:gravity="center"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginStart="10dp"
-                            android:maxLines="2"
-                            android:textStyle="bold"
-                            android:layout_marginTop="10dp"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
-
-                    </LinearLayout>
-
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_propertys"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:background="@color/white">
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="5dp"
-                            android:src="@drawable/ic_property"
-                            android:layout_gravity="center_vertical"/>
-                        <TextView
-                            android:text="Properties"
-                            android:gravity="center"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginStart="10dp"
-                            android:maxLines="2"
-                            android:textStyle="bold"
-                            android:layout_marginTop="10dp"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
-
-                    </LinearLayout>
-
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_shoping"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:background="@color/white">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="5dp"
-                            android:src="@drawable/ic_shopping" />
-
-                        <TextView
-                            android:text="Shopping"
-                            android:gravity="center"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginStart="10dp"
-                            android:maxLines="2"
-                            android:textStyle="bold"
-                            android:layout_marginTop="10dp"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
-
-                    </LinearLayout>
-
-
-                </androidx.cardview.widget.CardView>
-
-
-            </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="5dp"
-                android:drawablePadding="5dp"
-                android:gravity="center"
-                android:text="Notice"
-                android:textColor="@color/grey"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-            <LinearLayout
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
                 android:orientation="vertical">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_home_notice"
+                <TextView
+                    android:id="@+id/irfc"
+                    android:drawableTint="@color/icon_color"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="2dp" />
-            </LinearLayout>
+                    android:background="?selectableItemBackground"
+                    android:drawablePadding="5dp"
+                    android:paddingLeft="5dp"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="13dp"
+                    android:paddingTop="13dp"
+                    android:fontFamily="@font/proxima_family"
+                    android:text="User"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="13sp"/>
 
-            <LinearLayout
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:visibility="gone"
-                android:orientation="vertical">
-                <androidx.cardview.widget.CardView
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/grey_very_light"/>
+                <TextView
+                    android:id="@+id/tv_irfm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:elevation="3dp"
-                    app:cardCornerRadius="15dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:orientation="horizontal"
-                        android:id="@+id/ll_back"
-                        android:background="@color/grey">
-                        <FrameLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp">
-                            <ImageView
-                                android:layout_width="60dp"
-                                android:layout_height="match_parent"
-                                android:src="@drawable/sound"
-                                />
+                    android:background="?selectableItemBackground"
+                    android:drawablePadding="5dp"
+                    android:paddingLeft="5dp"
+                    android:drawableTint="@color/icon_color"
 
-                        </FrameLayout>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:maxLines="5"
-                            android:gravity="center_vertical"
-                            android:textColor="@color/white"
-                            android:textSize="14sp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="3dp"
-                            android:layout_marginBottom="3dp"
-                            android:textStyle="bold"/>
+                    android:gravity="center_vertical"
+                    android:paddingBottom="13dp"
+                    android:paddingTop="13dp"
+                    android:fontFamily="@font/proxima_family"
+                    android:text="Master"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="13sp"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/grey_very_light"/>
 
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/tv_ctnra"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?selectableItemBackground"
+                    android:drawablePadding="5dp"
+                    android:paddingLeft="5dp"
+                    android:drawableTint="@color/icon_color"
+
+                    android:gravity="center_vertical"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="13dp"
+                    android:fontFamily="@font/proxima_family"
+                    android:text="Mapping"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="13sp"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/grey_very_light"/>
+
+                <TextView
+                    android:id="@+id/tv_verifyBillingInstruction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?selectableItemBackground"
+                    android:drawablePadding="5dp"
+                    android:paddingLeft="5dp"
+                    android:drawableTint="@color/icon_color"
+
+                    android:gravity="center_vertical"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="13dp"
+                    android:fontFamily="@font/proxima_family"
+                    android:text="Transaction"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="13sp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/grey_very_light"/>
+                <TextView
+                    android:id="@+id/tv_verifyCostTransfer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?selectableItemBackground"
+                    android:drawablePadding="5dp"
+                    android:paddingLeft="5dp"
+                    android:drawableTint="@color/icon_color"
+
+                    android:gravity="center_vertical"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="13dp"
+                    android:fontFamily="@font/proxima_family"
+                    android:text="Report"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="13sp"/>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/grey_very_light"/>
+
             </LinearLayout>
-
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:visibility="gone"
-                android:gravity="center"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_servicess"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    >
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:background="@color/white">
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="5dp"
-                            android:src="@drawable/ic_service"
-                            android:layout_gravity="center_vertical"/>
-                        <TextView
-                            android:text="Services"
-                            android:gravity="center"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginStart="10dp"
-                            android:maxLines="2"
-                            android:textStyle="bold"
-                            android:layout_marginTop="10dp"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
-
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
+                android:layout_width="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_height="match_parent">
 
 
-                <androidx.cardview.widget.CardView
+                <Button
+                    android:id="@+id/btn_nav_profile"
+                    android:text="Profile"
 
-                    android:layout_width="100dp"
-                    android:layout_height="100dp">
+                    android:backgroundTint="@color/blue_light"
+                    android:layout_weight="1"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:fontFamily="@font/proxima_nova_bold"
+                    android:textSize="12sp"
+                    android:textColor="@color/white"
+                    />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:background="@color/white">
+                <Button
+                    android:id="@+id/btn_nav_logout"
+                    android:text="Logout"
 
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="5dp"
-                            android:src="@drawable/ic_transport" />
-
-                        <TextView
-                            android:text="Transport"
-                            android:gravity="center"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginStart="10dp"
-                            android:maxLines="2"
-                            android:textStyle="bold"
-                            android:layout_marginTop="10dp"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
-
-                    </LinearLayout>
-
-
-                </androidx.cardview.widget.CardView>
-
-
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_buy"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:background="@color/white">
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="5dp"
-                            android:src="@drawable/ic_construction"
-                            android:layout_gravity="center_vertical"/>
-
-                        <TextView
-                            android:text="Construction"
-                            android:gravity="center"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginStart="10dp"
-                            android:maxLines="2"
-                            android:textStyle="bold"
-                            android:layout_marginTop="10dp"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
-
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_sell"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:background="@color/white">
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="5dp"
-                            android:src="@drawable/ic_sell"
-                            android:layout_gravity="center_vertical"/>
-                        <TextView
-                            android:text="Sell"
-                            android:gravity="center"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginStart="10dp"
-                            android:maxLines="2"
-                            android:textStyle="bold"
-                            android:layout_marginTop="10dp"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
-
-                    </LinearLayout>
-
-
-                </androidx.cardview.widget.CardView>
-
-
+                    android:drawableTint="@color/white"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/proxima_nova_bold"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:backgroundTint="#FF9800"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/white"
+                    />
 
 
             </LinearLayout>
-
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_home_employee_self_service"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="2dp" />
-
 
         </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
 
-    </LinearLayout>
+    </com.google.android.material.navigation.NavigationView>
+</com.mindinventory.midrawer.MIDrawerView>
 
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>

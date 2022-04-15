@@ -8,7 +8,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.chiranths.jobportal1.Activities"
+        applicationId "com.chiranths.jobportal1"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
@@ -66,6 +66,6 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.synnapps:carouselview:0.1.5'
 
-
+    implementation 'com.github.mindinventory:minavdrawer:1.2.2'
 
 }
