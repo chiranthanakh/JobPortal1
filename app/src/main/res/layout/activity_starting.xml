@@ -156,14 +156,14 @@
                 app:radius="6dp"
                 app:slideInterval="3000"
                 app:strokeColor="#FF777777"
-                app:strokeWidth="1dp"/>
+                app:strokeWidth="1dp" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_home_event"
+                android:id="@+id/rv_home_notice"
                 android:layout_width="match_parent"
-                android:visibility="gone"
                 android:layout_height="match_parent"
                 android:layout_marginStart="2dp"
+                android:visibility="gone"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="2dp" />
 
@@ -368,7 +368,7 @@
                 android:orientation="vertical">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_home_notice"
+                    android:id="@+id/rv_home_event"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
