@@ -46,7 +46,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
     RecyclerView recyclerViewEvent;
     private HomeEventAdapter eventHomeAdapter;
 
-    private List<NoticeBoard> noticeBoardList = new ArrayList<>();
+    private ArrayList<NoticeBoard> noticeBoardList = new ArrayList<>();
     RecyclerView recyclerView;
     private HomeNoticeBoardAdapter homeNoticeBoardAdapter;
     String id,name,mail,pic;
@@ -75,7 +75,6 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
 
     private void initilize()
     {
-
         cv_jobs =  findViewById(R.id.cv_jobs);
         cv_servicess = findViewById(R.id.cv_servicess);
         cv_propertys = findViewById(R.id.cv_propertys);
@@ -101,8 +100,6 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
-
-
     private void adapters() {
 
         // Upcoming Event
@@ -113,7 +110,6 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
         recyclerViewEvent.setAdapter(eventHomeAdapter);
         prepareEventData();
 
-
         //Home Notice Board recycler view
         homeNoticeBoardAdapter =new HomeNoticeBoardAdapter(noticeBoardList);
         RecyclerView.LayoutManager nlayoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
@@ -122,7 +118,6 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
         recyclerView.setAdapter(homeNoticeBoardAdapter);
         prepareNoticeData();
 
-
     }
 
     private  void prepareNoticeData()
@@ -130,9 +125,8 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
         NoticeBoard noticeBoard = new NoticeBoard("Notice 1","It’s a one stop solution interactive portal","12 Mar 2020");
         noticeBoardList.add(noticeBoard);
 
-        noticeBoard = new NoticeBoard("Notice 2","It’s your personal HR Management System login. It’s a one stop solution interactive portal to enable you with complete HR related activities","12 Mar 2020");
-        noticeBoardList.add(noticeBoard);
-
+       // noticeBoard = new NoticeBoard("Notice 2","It’s your personal HR Management System login. It’s a one stop solution interactive portal to enable you with complete HR related activities","12 Mar 2020");
+        //noticeBoardList.add(noticeBoard);
 
 
     }

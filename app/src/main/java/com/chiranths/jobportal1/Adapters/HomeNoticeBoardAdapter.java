@@ -13,13 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chiranths.jobportal1.Model.NoticeBoard;
 import com.chiranths.jobportal1.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeNoticeBoardAdapter extends RecyclerView.Adapter<HomeNoticeBoardAdapter.MyViewHolder> {
 
-    private List<NoticeBoard> noticeBoardList;
+   // private List<NoticeBoard> noticeBoardList;
+    private ArrayList<NoticeBoard> noticeBoardList;
 
-    public HomeNoticeBoardAdapter(List<NoticeBoard> noticeBoardList)
+    public HomeNoticeBoardAdapter(ArrayList<NoticeBoard> noticeBoardList)
     {
         this.noticeBoardList = noticeBoardList;
     }

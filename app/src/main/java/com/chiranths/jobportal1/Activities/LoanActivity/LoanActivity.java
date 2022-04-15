@@ -47,23 +47,19 @@ public class LoanActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (view.getId()) {
 
-     case R.id.cv_personal_loan:
-
+            case R.id.cv_personal_loan:
                 Intent intent = new Intent(LoanActivity.this, LoanForm.class);
                 startActivity(intent);
-
                 break;
 
             case R.id.cv_business_loan:
                 Intent intent1 = new Intent(LoanActivity.this, LoanForm.class);
                 startActivity(intent1);
-
                 break;
 
             case R.id.cv_home_loan:
                 Intent intent2 = new Intent(LoanActivity.this, LoanForm.class);
                 startActivity(intent2);
-
                 break;
 
             case R.id.cv_martgage_loan:

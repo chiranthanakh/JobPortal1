@@ -230,7 +230,6 @@
                         android:paddingBottom="45dp"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-
                 </LinearLayout>
 
 

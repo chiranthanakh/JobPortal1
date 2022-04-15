@@ -43,9 +43,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     //implementation 'com.github.jama5262:CarouselView:1.2.2'
-
     implementation 'com.synnapps:carouselview:0.1.5'
-
     //Firebase database
     implementation 'com.google.firebase:firebase-database:20.0.0'
 
@@ -62,8 +60,6 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.google.firebase:firebase-auth:20.0.0'
     implementation 'com.google.firebase:firebase-appcheck-safetynet:16.0.0-beta05'
-
-    //corosel
 
 
     //For Circular ImageView
