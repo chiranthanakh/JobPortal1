@@ -253,7 +253,6 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                     }
 
 
-
                     // Upcoming Event
                     eventHomeAdapter = new HomeEventAdapter(productinfolist);
                     RecyclerView.LayoutManager elayoutManager = new LinearLayoutManager(StartingActivity.this,RecyclerView.VERTICAL,false);
