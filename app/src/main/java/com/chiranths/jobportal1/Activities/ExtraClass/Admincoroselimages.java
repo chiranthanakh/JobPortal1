@@ -32,10 +32,11 @@ import java.util.HashMap;
 public class Admincoroselimages extends AppCompatActivity {
 
     private static final int GalleryPick = 1;
+    private static final int GalleryPick2 = 2;
     private Uri ImageUri;
     private ProgressDialog loadingBar;
-    private StorageReference ProductImagesRef;
-    private DatabaseReference ProductsRef;
+    private StorageReference ProductImagesRef, adsImageRef;
+    private DatabaseReference ProductsRef,adsRef;
     private String productRandomKey, downloadImageUrl;
 
     @Override
@@ -46,9 +47,14 @@ public class Admincoroselimages extends AppCompatActivity {
         ProductImagesRef = FirebaseStorage.getInstance().getReference().child("Corosel");
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Corosels");
 
+        adsImageRef = FirebaseStorage.getInstance().getReference().child("ads");
+        adsRef = FirebaseDatabase.getInstance().getReference().child("adsforyou");
+
+
         loadingBar = new ProgressDialog(this);
 
         Button btn_corosel = findViewById(R.id.btn_corosel);
+        Button btn_ads = findViewById(R.id.btn_ads);
 
         btn_corosel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +65,16 @@ public class Admincoroselimages extends AppCompatActivity {
             }
         });
 
+        btn_ads.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                OpenGallery2();
+
+            }
+        });
+
+
     }
 
     private void OpenGallery(){
@@ -66,6 +82,13 @@ public class Admincoroselimages extends AppCompatActivity {
         galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
         galleryIntent.setType("image/*");
         startActivityForResult(galleryIntent, GalleryPick);
+    }
+
+    private void OpenGallery2(){
+        Intent galleryIntent = new Intent();
+        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+        galleryIntent.setType("image/*");
+        startActivityForResult(galleryIntent, GalleryPick2);
     }
 
     @Override
@@ -78,6 +101,11 @@ public class Admincoroselimages extends AppCompatActivity {
             ImageUri = data.getData();
             //InputProductImage.setImageURI(ImageUri);
             StoreProductInformation();
+        }else  if (requestCode==GalleryPick2  &&  resultCode==RESULT_OK  &&  data!=null)
+        {
+            ImageUri = data.getData();
+            //InputProductImage.setImageURI(ImageUri);
+            Storeadsinfo();
         }
     }
 
@@ -147,6 +175,93 @@ public class Admincoroselimages extends AppCompatActivity {
 
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task)
+                    {
+                        if (task.isSuccessful())
+                        {
+                            Intent intent = new Intent(Admincoroselimages.this, StartingActivity.class);
+                            startActivity(intent);
+                            loadingBar.dismiss();
+                            Toast.makeText(Admincoroselimages.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            loadingBar.dismiss();
+                            String message = task.getException().toString();
+                            Toast.makeText(Admincoroselimages.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    private void Storeadsinfo()
+    {
+        loadingBar.setTitle("Add New Product");
+        loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
+        loadingBar.setCanceledOnTouchOutside(false);
+        loadingBar.show();
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd");
+        String saveCurrentDate = currentDate.format(calendar.getTime());
+
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm a");
+        String saveCurrentTime = currentTime.format(calendar.getTime());
+
+        productRandomKey = saveCurrentTime;
+
+        final StorageReference filePath = adsImageRef.child(ImageUri.getLastPathSegment() + productRandomKey + ".jpg");
+
+        final UploadTask uploadTask = filePath.putFile(ImageUri);
+
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                String message = e.toString();
+                Toast.makeText(Admincoroselimages.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                loadingBar.dismiss();
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Toast.makeText(Admincoroselimages.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
+                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful())
+                        {
+                            throw task.getException();
+
+                        }
+
+                        downloadImageUrl = filePath.getDownloadUrl().toString();
+                        return filePath.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful())
+                        {
+                            downloadImageUrl = task.getResult().toString();
+                            Toast.makeText(Admincoroselimages.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
+                            SaveadsInfoToDatabase();
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    private void SaveadsInfoToDatabase()
+    {
+        HashMap<String, Object> productMap = new HashMap<>();
+
+        productMap.put("image", downloadImageUrl);
+
+
+        adsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task)

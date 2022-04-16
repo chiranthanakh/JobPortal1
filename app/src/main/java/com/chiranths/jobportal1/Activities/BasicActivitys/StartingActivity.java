@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -23,6 +25,8 @@ import com.chiranths.jobportal1.Activities.ExtraClass.Admincoroselimages;
 import com.chiranths.jobportal1.Activities.LoanActivity.LoanActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyActivity;
 import com.chiranths.jobportal1.Activities.Servicess.ServicesActivity;
+import com.chiranths.jobportal1.Adapters.AdsAdaptor;
+import com.chiranths.jobportal1.Adapters.BottomhomeRecyclarviewAdaptor;
 import com.chiranths.jobportal1.Adapters.CoroselListAdaptor;
 import com.chiranths.jobportal1.Adapters.HomeEventAdapter;
 import com.chiranths.jobportal1.Adapters.HomeNoticeBoardAdapter;
@@ -49,20 +53,26 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
 
     private ArrayList<UpcomingEvent> upcomingEventList = new ArrayList<>();
     RecyclerView recyclerViewEvent;
-    private HomeEventAdapter eventHomeAdapter;
+    private BottomhomeRecyclarviewAdaptor bottomhomeRecyclarviewAdaptor;
+
+    final int speedScroll = 150;
+    final Handler handler = new Handler();
 
     private ArrayList<NoticeBoard> noticeBoardList = new ArrayList<>();
-    RecyclerView recyclerView;
+    RecyclerView recyclerView,recyclarviewads;
     private CoroselListAdaptor coroselListAdaptor;
+    AdsAdaptor adsAdaptor;
     String id,name,mail,pic;
     FrameLayout admin_btn;
     ArrayList coroselimagelist =new ArrayList();
+    ArrayList adslist =new ArrayList();
     ArrayList<ProductInfo> productinfolist =new ArrayList();
     private int[] images = {R.drawable.banner1,
             R.drawable.banner1, R.drawable.banner1};
     CarouselView carouselView;
     DrawerLayout drawer_layout;
     ImageView iv_nav_view;
+    Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,10 +109,28 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
         cv_jobs.setOnClickListener(this);
 
         recyclerView =(RecyclerView)findViewById(R.id.rv_home_event);
+        recyclarviewads = findViewById(R.id.rv_adds_layots);
         recyclerViewEvent = (RecyclerView)findViewById(R.id.rv_dash_prop);
 
-        fetchcorosel();
-        fetchdata();
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                fetchcorosel();
+            }
+        });
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                fetchdata();
+            }
+        });
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                fetchads();
+            }
+        });
 
 
         admin_btn.setOnClickListener(new View.OnClickListener() {
@@ -114,62 +142,8 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
-    private void adapters() {
-
-
-
-        //Home Notice Board recycler view
-        /*coroselListAdaptor =new CoroselListAdaptor(coroselimagelist);
-        RecyclerView.LayoutManager nlayoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
-        recyclerView.setLayoutManager(nlayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(coroselListAdaptor);
-        prepareNoticeData();*/
-
-    }
-
-    private  void prepareNoticeData()
-    {
-        NoticeBoard noticeBoard = new NoticeBoard("Notice 1","It’s a one stop solution interactive portal","12 Mar 2020");
-        noticeBoardList.add(noticeBoard);
-
-       // noticeBoard = new NoticeBoard("Notice 2","It’s your personal HR Management System login. It’s a one stop solution interactive portal to enable you with complete HR related activities","12 Mar 2020");
-        //noticeBoardList.add(noticeBoard);
-
-
-    }
-
-
-    private  void prepareEventData()
-    {
-        UpcomingEvent upcomingEvent = new UpcomingEvent("Event 1","It’s your personal HR Management System login. It’s a one stop solution interactive portal to enable you with complete HR related activities.","12 Mar 2020");
-        upcomingEventList.add(upcomingEvent);
-
-        upcomingEvent = new UpcomingEvent("Event 2","It’s your personal HR Management System login. It’s a one stop solution interactive portal to enable you with complete HR related activities","12 Mar 2020");
-        upcomingEventList.add(upcomingEvent);
-
-        upcomingEvent = new UpcomingEvent("Event 3","It’s your personal HR Management System login. It’s a one stop solution interactive portal to enable you with complete HR related activities","12 Mar 2020");
-        upcomingEventList.add(upcomingEvent);
-
-        upcomingEvent = new UpcomingEvent("Event 4","It’s your personal HR Management System login. It’s a one stop solution interactive portal to enable you with complete HR related activities","12 Mar 2020");
-        upcomingEventList.add(upcomingEvent);
-
-        upcomingEvent = new UpcomingEvent("Event 5","It’s your personal HR Management System login. It’s a one stop solution interactive portal to enable you with complete HR related activities","12 Mar 2020");
-        upcomingEventList.add(upcomingEvent);
-
-        upcomingEvent = new UpcomingEvent("Event 6","It’s your personal HR Management System login. It’s a one stop solution interactive portal to enable you with complete HR related activities","12 Mar 2020");
-        upcomingEventList.add(upcomingEvent);
-
-        upcomingEvent = new UpcomingEvent("Event 7","It’s your personal HR Management System login. It’s a one stop solution interactive portal to enable you with complete HR related activities","12 Mar 2020");
-        upcomingEventList.add(upcomingEvent);
-
-        upcomingEvent = new UpcomingEvent("Event 8","It’s your personal HR Management System login. It’s a one stop solution interactive portal to enable you with complete HR related activities","12 Mar 2020");
-        upcomingEventList.add(upcomingEvent);
-
-    }
 
     private void fetchcorosel() {
-
         DatabaseReference coroselimage = FirebaseDatabase.getInstance().getReference().child("Corosels");
 
         coroselimage.addValueEventListener(new ValueEventListener() {
@@ -202,18 +176,69 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                     RecyclerView.LayoutManager nlayoutManager = new LinearLayoutManager(StartingActivity.this, RecyclerView.HORIZONTAL, false);
                     recyclerView.setLayoutManager(nlayoutManager);
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
-                    recyclerView.setAdapter(coroselListAdaptor);
+
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            recyclerView.setAdapter(coroselListAdaptor);
+                        }
+                    });
                     coroselListAdaptor.notifyItemRangeInserted(0, coroselimagelist.size());
-
-
-
-                    //carouselView = findViewById(R.id.carouselView);
-                   // carouselView.setImageListener(imageListener);
-                   // carouselView.setPageCount(coroselimagelist.size());
 
                 }
             }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+    }
+
+    private void fetchads() {
+
+        DatabaseReference adsimage = FirebaseDatabase.getInstance().getReference().child("adsforyou");
+
+        adsimage.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (snapshot.exists()){
+
+                    HashMap<String, Object> dataMap = (HashMap<String, Object>) snapshot.getValue();
+                    for (String key : dataMap.keySet()){
+                        Object data = dataMap.get(key);
+                        try{
+
+                            HashMap<String, Object> userData = (HashMap<String, Object>) data;
+
+                            adslist.add(userData.get("image"));
+
+                        }catch (ClassCastException cce){
+
+                            try{
+                                String mString = String.valueOf(dataMap.get(key));
+                                //addTextToView(mString);
+                            }catch (ClassCastException cce2){
+
+                            }
+                        }
+                    }
+
+                    adsAdaptor =new AdsAdaptor(adslist,StartingActivity.this);
+                    RecyclerView.LayoutManager n1layoutManager = new LinearLayoutManager(StartingActivity.this, RecyclerView.HORIZONTAL, false);
+                    recyclarviewads.setLayoutManager(n1layoutManager);
+                    recyclarviewads.setItemAnimator(new DefaultItemAnimator());
+
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            recyclarviewads.setAdapter(adsAdaptor);
+                        }
+                    });
+                   // recyclarviewads.notifyItemRangeInserted(0, adslist.size());
+
+                }
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -264,11 +289,17 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                     }
 
                     // Upcoming Event
-                    eventHomeAdapter = new HomeEventAdapter(productinfolist);
+                    bottomhomeRecyclarviewAdaptor = new BottomhomeRecyclarviewAdaptor(productinfolist, StartingActivity.this);
                     RecyclerView.LayoutManager elayoutManager = new LinearLayoutManager(StartingActivity.this,RecyclerView.VERTICAL,false);
                     recyclerViewEvent.setLayoutManager(new GridLayoutManager(StartingActivity.this, 2));
                     recyclerViewEvent.setItemAnimator(new DefaultItemAnimator());
-                    recyclerViewEvent.setAdapter(eventHomeAdapter);
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            recyclerViewEvent.setAdapter(bottomhomeRecyclarviewAdaptor);
+
+                        }
+                    });
 
                 }
             }
@@ -315,11 +346,6 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
             case R.id.cv_propertys:
 
                 Intent intent1 = new Intent(getApplicationContext(), PropertyActivity.class);
-               /* if(name.equals(null)){
-                    intent1 = new Intent(getApplicationContext(), LoginActivity.class);
-                }else {
-                    intent1 = new Intent(getApplicationContext(), AdminAddNewProductActivity.class);
-                }*/
                 startActivity(intent1);
                 finish();
                 break;
@@ -327,11 +353,6 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
             case R.id.cv_loans:
 
                 Intent intent2 = new Intent(getApplicationContext(), LoanActivity.class);
-               /* if(name.equals(null)){
-                    intent1 = new Intent(getApplicationContext(), LoginActivity.class);
-                }else {
-                    intent1 = new Intent(getApplicationContext(), AdminAddNewProductActivity.class);
-                }*/
                 startActivity(intent2);
 
                 break;
