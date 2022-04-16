@@ -46,7 +46,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
 
     LinearLayout cv_jobs,cv_propertys,cv_servicess,cv_loans;
 
-    private List<UpcomingEvent> upcomingEventList = new ArrayList<>();
+    private ArrayList<UpcomingEvent> upcomingEventList = new ArrayList<>();
     RecyclerView recyclerViewEvent;
     private HomeEventAdapter eventHomeAdapter;
 
@@ -103,6 +103,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
         fetchcorosel();
         fetchdata();
 
+
         admin_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,7 +118,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
 
 
         //Home Notice Board recycler view
-        homeNoticeBoardAdapter =new HomeNoticeBoardAdapter(noticeBoardList);
+        homeNoticeBoardAdapter =new HomeNoticeBoardAdapter(upcomingEventList);
         RecyclerView.LayoutManager nlayoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         recyclerView.setLayoutManager(nlayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -196,9 +197,17 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                         }
                     }
 
-                    carouselView = findViewById(R.id.carouselView);
-                    carouselView.setImageListener(imageListener);
-                    carouselView.setPageCount(coroselimagelist.size());
+                    homeNoticeBoardAdapter =new HomeNoticeBoardAdapter(coroselimagelist);
+                    RecyclerView.LayoutManager nlayoutManager = new LinearLayoutManager(StartingActivity.this, RecyclerView.HORIZONTAL, false);
+                    recyclerView.setLayoutManager(nlayoutManager);
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    recyclerView.setAdapter(homeNoticeBoardAdapter);
+
+
+
+                    //carouselView = findViewById(R.id.carouselView);
+                   // carouselView.setImageListener(imageListener);
+                   // carouselView.setPageCount(coroselimagelist.size());
 
                 }
             }
@@ -259,7 +268,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                     recyclerViewEvent.setLayoutManager(new GridLayoutManager(StartingActivity.this, 2));
                     recyclerViewEvent.setItemAnimator(new DefaultItemAnimator());
                     recyclerViewEvent.setAdapter(eventHomeAdapter);
-                    prepareEventData();
+
 
                 }
             }
