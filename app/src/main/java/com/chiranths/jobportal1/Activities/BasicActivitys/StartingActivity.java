@@ -3,6 +3,7 @@ package com.chiranths.jobportal1.Activities.BasicActivitys;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -10,8 +11,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,6 +26,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.chiranths.jobportal1.Activities.BasicActivitys.LoginActivity;
 import com.chiranths.jobportal1.Activities.ExtraClass.Admincoroselimages;
@@ -33,6 +41,10 @@ import com.chiranths.jobportal1.Adapters.HomeNoticeBoardAdapter;
 import com.chiranths.jobportal1.Model.NoticeBoard;
 import com.chiranths.jobportal1.Model.UpcomingEvent;
 import com.chiranths.jobportal1.R;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,9 +55,11 @@ import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class StartingActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -54,6 +68,8 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
     private ArrayList<UpcomingEvent> upcomingEventList = new ArrayList<>();
     RecyclerView recyclerViewEvent;
     private BottomhomeRecyclarviewAdaptor bottomhomeRecyclarviewAdaptor;
+    FusedLocationProviderClient fusedLocationProviderClient;
+    List<Address> addresses;
 
     final int speedScroll = 150;
     final Handler handler = new Handler();
@@ -73,6 +89,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
     DrawerLayout drawer_layout;
     ImageView iv_nav_view;
     Handler mHandler = new Handler();
+    TextView tv_location,tv_pincode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +103,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
         mail = sh.getString("mail",null);
         pic = sh.getString("pic",null);
 
+        displayLocationSettingsRequest(this);
 
         initilize();
 
@@ -102,6 +120,8 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
         cv_servicess = findViewById(R.id.cv_servicess);
         cv_propertys = findViewById(R.id.cv_propertys);
         cv_loans = findViewById(R.id.cv_loans);
+        tv_location = findViewById(R.id.tv_location);
+        tv_pincode = findViewById(R.id.tv_pincode);
         admin_btn = findViewById(R.id.admin_btn);
         cv_loans.setOnClickListener(this);
         cv_propertys.setOnClickListener(this);
@@ -362,7 +382,35 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
 
 
         }
+    }
 
+    //location fetch
+    private void displayLocationSettingsRequest(Context context) {
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            return;
+        }else{
+            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+            fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+                @Override
+                public void onComplete(@NonNull Task<Location> task) {
+
+                    Location location = task.getResult();
+                    if(location !=null){
+                        Geocoder geocoder = new Geocoder(StartingActivity.this, Locale.getDefault());
+
+                        try {
+                            addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(),1);
+                            // textView.setText(addresses.get(0).getLocality() + addresses.get(0).getPostalCode() + addresses.get(0).getThoroughfare() + addresses.get(0).getSubLocality() + addresses.get(0).getSubLocality());
+                            tv_location.setText(addresses.get(0).getLocality());
+                            tv_pincode.setText(addresses.get(0).getSubLocality()+" - "+addresses.get(0).getPostalCode());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+        }
     }
 }
