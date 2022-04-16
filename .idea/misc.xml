@@ -16,6 +16,7 @@
         <entry key="..\:/Users/Personal/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_property_details.xml" value="0.134375" />
         <entry key="..\:/Users/Personal/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_starting.xml" value="0.203125" />
         <entry key="..\:/Users/Personal/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/center_carousel_item.xml" value="0.11458333333333333" />
+        <entry key="..\:/Users/Personal/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/dashboard_layout.xml" value="0.15" />
         <entry key="..\:/Users/Personal/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/fragment_admin_selected.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Personal/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/home_event_layout.xml" value="0.19947916666666668" />
         <entry key="..\:/Users/Personal/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/image_carousel_item.xml" value="0.60625" />
@@ -59,14 +60,6 @@
         <entry key="..\:/Users/Personal/Documents/Reference/app/src/main/res/layout/product_items_layout.xml" value="0.22" />
         <entry key="..\:/Users/Personal/Documents/Reference/app/src/main/res/layout/single_data_file.xml" value="0.22" />
         <entry key="..\:/Users/Personal/Documents/Reference/app/src/main/res/layout/toolbar.xml" value="0.24189063948100092" />
-        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/ic_home.xml" value="0.139" />
-        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/ic_menu.xml" value="0.139" />
-        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/ic_profile.xml" value="0.139" />
-        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/ic_property_menu.xml" value="0.139" />
-        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_starting.xml" value="0.18" />
-        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/dashboard_layout.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/home_event_layout.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/JobPortal1/app/src/main/res/menu/menu_items.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>

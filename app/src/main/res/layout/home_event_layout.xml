@@ -15,10 +15,11 @@
         android:elevation="3dp"
         android:background="@color/white"
         app:cardCornerRadius="20dp">
+
         <ImageView
-            android:id="@+id/iv_corosel"
+            android:id="@+id/iv_location_image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="157dp"
             android:layout_margin="10dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"

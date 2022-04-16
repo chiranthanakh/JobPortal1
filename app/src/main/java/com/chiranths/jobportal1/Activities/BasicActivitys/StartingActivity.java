@@ -97,8 +97,8 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
         cv_propertys.setOnClickListener(this);
         cv_jobs.setOnClickListener(this);
 
-        recyclerView =(RecyclerView)findViewById(R.id.rv_home_notice);
-        recyclerViewEvent = (RecyclerView)findViewById(R.id.rv_home_event);
+        recyclerView =(RecyclerView)findViewById(R.id.rv_home_event);
+        recyclerViewEvent = (RecyclerView)findViewById(R.id.rv_dash_prop);
 
         fetchcorosel();
         fetchdata();
