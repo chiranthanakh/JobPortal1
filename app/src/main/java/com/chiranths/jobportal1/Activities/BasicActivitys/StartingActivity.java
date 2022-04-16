@@ -6,6 +6,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -55,6 +56,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
     String id,name,mail,pic;
     FrameLayout admin_btn;
     ArrayList coroselimagelist =new ArrayList();
+    ArrayList<ProductInfo> productinfolist =new ArrayList();
     private int[] images = {R.drawable.banner1,
             R.drawable.banner1, R.drawable.banner1};
     CarouselView carouselView;
@@ -99,7 +101,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
         recyclerViewEvent = (RecyclerView)findViewById(R.id.rv_home_event);
 
         fetchcorosel();
-        adapters();
+        fetchdata();
 
         admin_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,13 +114,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
 
     private void adapters() {
 
-        // Upcoming Event
-        eventHomeAdapter = new HomeEventAdapter(upcomingEventList);
-        RecyclerView.LayoutManager elayoutManager = new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
-        recyclerViewEvent.setLayoutManager(elayoutManager);
-        recyclerViewEvent.setItemAnimator(new DefaultItemAnimator());
-        recyclerViewEvent.setAdapter(eventHomeAdapter);
-        prepareEventData();
+
 
         //Home Notice Board recycler view
         homeNoticeBoardAdapter =new HomeNoticeBoardAdapter(noticeBoardList);
@@ -210,6 +206,67 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void fetchdata() {
+
+        DatabaseReference productsinfo = FirebaseDatabase.getInstance().getReference().child("Products");
+
+        productsinfo.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.exists()){
+                    HashMap<String, Object> dataMap = (HashMap<String, Object>) dataSnapshot.getValue();
+
+                    for (String key : dataMap.keySet()){
+                        Object data = dataMap.get(key);
+                        try{
+
+                            HashMap<String, Object> userData = (HashMap<String, Object>) data;
+
+                            productinfolist.add(new ProductInfo(String.valueOf(userData.get("category")),
+                                    String.valueOf(userData.get("date")),
+                                    String.valueOf(userData.get("description")),
+                                    String.valueOf(userData.get("image")),
+                                    String.valueOf(userData.get("location")),
+                                    String.valueOf(userData.get("number")),
+                                    String.valueOf(userData.get("pid")),
+                                    String.valueOf(userData.get("pname")),
+                                    String.valueOf(userData.get("price")),
+                                    String.valueOf(userData.get("propertysize")),
+                                    String.valueOf(userData.get("time")),
+                                    String.valueOf(userData.get("type"))));
+
+                        }catch (ClassCastException cce){
+
+                            try{
+                                String mString = String.valueOf(dataMap.get(key));
+                                //addTextToView(mString);
+                            }catch (ClassCastException cce2){
+
+                            }
+                        }
+                    }
+
+
+
+                    // Upcoming Event
+                    eventHomeAdapter = new HomeEventAdapter(productinfolist);
+                    RecyclerView.LayoutManager elayoutManager = new LinearLayoutManager(StartingActivity.this,RecyclerView.VERTICAL,false);
+                    recyclerViewEvent.setLayoutManager(new GridLayoutManager(StartingActivity.this, 2));
+                    recyclerViewEvent.setItemAnimator(new DefaultItemAnimator());
+                    recyclerViewEvent.setAdapter(eventHomeAdapter);
+                    prepareEventData();
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });

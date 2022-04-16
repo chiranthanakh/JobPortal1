@@ -42,7 +42,6 @@ public class HomeNoticeBoardAdapter extends RecyclerView.Adapter<HomeNoticeBoard
         holder.tv_notice_Home_description.setText(noticeBoard.getDesc());
        // holder.tv_notice_home_date.setText(noticeBoard.getDate());
 
-
     }
 
     @Override
