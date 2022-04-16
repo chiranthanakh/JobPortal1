@@ -2,7 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#f1e6f7"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -206,9 +206,9 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="5dp"
                             android:layout_marginStart="10dp"
-                            android:layout_marginBottom="15dp"
+                            android:layout_marginBottom="10dp"
                             android:fontFamily="@font/proxima_nova_semi_bold"
                             android:text="Our Services"
                             android:textColor="@color/black"
@@ -233,8 +233,8 @@
                                     android:background="@color/white">
                                     <ImageView
                                         android:layout_width="match_parent"
-                                        android:layout_height="40dp"
-                                        android:layout_marginTop="10dp"
+                                        android:layout_height="35dp"
+                                        android:layout_marginTop="5dp"
                                         android:layout_marginBottom="5dp"
                                         android:src="@drawable/ic_job"
                                         android:layout_gravity="center_vertical"/>
@@ -264,9 +264,9 @@
 
                                     <ImageView
                                         android:layout_width="match_parent"
-                                        android:layout_height="40dp"
+                                        android:layout_height="35dp"
                                         android:layout_gravity="center_vertical"
-                                        android:layout_marginTop="10dp"
+                                        android:layout_marginTop="5dp"
                                         android:layout_marginBottom="5dp"
                                         android:src="@drawable/ic_loans" />
 
@@ -295,8 +295,8 @@
                                     android:background="@color/white">
                                     <ImageView
                                         android:layout_width="match_parent"
-                                        android:layout_height="40dp"
-                                        android:layout_marginTop="10dp"
+                                        android:layout_height="35dp"
+                                        android:layout_marginTop="5dp"
                                         android:layout_marginBottom="5dp"
                                         android:src="@drawable/ic_property"
                                         android:layout_gravity="center_vertical"/>
@@ -326,9 +326,9 @@
 
                                     <ImageView
                                         android:layout_width="match_parent"
-                                        android:layout_height="40dp"
+                                        android:layout_height="35dp"
                                         android:layout_gravity="center_vertical"
-                                        android:layout_marginTop="10dp"
+                                        android:layout_marginTop="5dp"
                                         android:layout_marginBottom="5dp"
                                         android:src="@drawable/ic_shopping" />
 
