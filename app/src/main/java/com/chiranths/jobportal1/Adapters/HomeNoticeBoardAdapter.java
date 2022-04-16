@@ -31,7 +31,6 @@ public class HomeNoticeBoardAdapter extends RecyclerView.Adapter<HomeNoticeBoard
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_event_layout,parent,false);
-
         return new MyViewHolder(itemView);
     }
 

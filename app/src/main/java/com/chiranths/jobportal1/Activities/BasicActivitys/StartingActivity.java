@@ -23,6 +23,7 @@ import com.chiranths.jobportal1.Activities.ExtraClass.Admincoroselimages;
 import com.chiranths.jobportal1.Activities.LoanActivity.LoanActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyActivity;
 import com.chiranths.jobportal1.Activities.Servicess.ServicesActivity;
+import com.chiranths.jobportal1.Adapters.CoroselListAdaptor;
 import com.chiranths.jobportal1.Adapters.HomeEventAdapter;
 import com.chiranths.jobportal1.Adapters.HomeNoticeBoardAdapter;
 import com.chiranths.jobportal1.Model.NoticeBoard;
@@ -52,7 +53,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
 
     private ArrayList<NoticeBoard> noticeBoardList = new ArrayList<>();
     RecyclerView recyclerView;
-    private HomeNoticeBoardAdapter homeNoticeBoardAdapter;
+    private CoroselListAdaptor coroselListAdaptor;
     String id,name,mail,pic;
     FrameLayout admin_btn;
     ArrayList coroselimagelist =new ArrayList();
@@ -118,12 +119,12 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
 
 
         //Home Notice Board recycler view
-        homeNoticeBoardAdapter =new HomeNoticeBoardAdapter(upcomingEventList);
+        /*coroselListAdaptor =new CoroselListAdaptor(coroselimagelist);
         RecyclerView.LayoutManager nlayoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         recyclerView.setLayoutManager(nlayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(homeNoticeBoardAdapter);
-        prepareNoticeData();
+        recyclerView.setAdapter(coroselListAdaptor);
+        prepareNoticeData();*/
 
     }
 
@@ -197,11 +198,12 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                         }
                     }
 
-                    homeNoticeBoardAdapter =new HomeNoticeBoardAdapter(coroselimagelist);
+                    coroselListAdaptor =new CoroselListAdaptor(coroselimagelist,StartingActivity.this);
                     RecyclerView.LayoutManager nlayoutManager = new LinearLayoutManager(StartingActivity.this, RecyclerView.HORIZONTAL, false);
                     recyclerView.setLayoutManager(nlayoutManager);
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
-                    recyclerView.setAdapter(homeNoticeBoardAdapter);
+                    recyclerView.setAdapter(coroselListAdaptor);
+                    coroselListAdaptor.notifyItemRangeInserted(0, coroselimagelist.size());
 
 
 
@@ -261,14 +263,12 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                         }
                     }
 
-
                     // Upcoming Event
                     eventHomeAdapter = new HomeEventAdapter(productinfolist);
                     RecyclerView.LayoutManager elayoutManager = new LinearLayoutManager(StartingActivity.this,RecyclerView.VERTICAL,false);
                     recyclerViewEvent.setLayoutManager(new GridLayoutManager(StartingActivity.this, 2));
                     recyclerViewEvent.setItemAnimator(new DefaultItemAnimator());
                     recyclerViewEvent.setAdapter(eventHomeAdapter);
-
 
                 }
             }

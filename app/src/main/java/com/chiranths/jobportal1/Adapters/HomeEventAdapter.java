@@ -39,7 +39,7 @@ public class HomeEventAdapter extends RecyclerView.Adapter<HomeEventAdapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        ProductInfo productInfo = productInfos.get(position);
+        ProductInfo productInfo = productInfos.get(position/1);
 
         Picasso.get().load(productInfo.getImage()).into(holder.iv_image);
         //holder.tv_event_home_title.setText(upcomingEvent.getTitle());
