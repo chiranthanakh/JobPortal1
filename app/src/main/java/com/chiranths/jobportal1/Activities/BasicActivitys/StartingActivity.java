@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -90,6 +91,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
     ImageView iv_nav_view;
     Handler mHandler = new Handler();
     TextView tv_location,tv_pincode;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +106,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
         pic = sh.getString("pic",null);
 
         displayLocationSettingsRequest(this);
+        progressDialog=new ProgressDialog(this);
 
         initilize();
 
@@ -115,7 +118,6 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
         drawer_layout = findViewById(R.id.drawer_layout_main);
         iv_nav_view = findViewById(R.id.iv_nav_view);
         iv_nav_view.setOnClickListener(this);
-
         cv_jobs =  findViewById(R.id.cv_jobs);
         cv_servicess = findViewById(R.id.cv_servicess);
         cv_propertys = findViewById(R.id.cv_propertys);
@@ -151,6 +153,23 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                 fetchads();
             }
         });
+
+        if(progressDialog!=null)
+        {
+            if(!progressDialog.isShowing()) {
+
+                progressDialog.setCancelable(false);
+                progressDialog.setMessage("Please wait...");
+                progressDialog.show();
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        fetchads();
+                    }
+                });
+            }
+
+        }
 
 
         admin_btn.setOnClickListener(new View.OnClickListener() {
@@ -252,6 +271,15 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
+
+                            if(progressDialog!=null)
+                            {
+                                if(progressDialog.isShowing())
+                                {
+                                    progressDialog.dismiss();
+                                }
+                            }
+
                             recyclarviewads.setAdapter(adsAdaptor);
                         }
                     });
