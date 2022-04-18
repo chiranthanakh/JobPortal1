@@ -162,10 +162,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginStart="5dp"
                         android:orientation="vertical">
 
                        <!-- <androidx.cardview.widget.CardView
@@ -193,11 +193,9 @@
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_home_event"
+                            android:layout_gravity="center"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginEnd="5dp" />
+                            android:layout_height="match_parent"/>
 
                       <!--  </androidx.cardview.widget.CardView>-->
 
@@ -215,7 +213,7 @@
                         android:backgroundTint="@color/white"
                         app:cardElevation="3dp">
 
-                        <TextView
+                     <!--   <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
@@ -224,10 +222,10 @@
                             android:fontFamily="@font/proxima_nova_semi_bold"
                             android:text="Our Services"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="14sp" />-->
 
                         <LinearLayout
-                            android:layout_marginTop="30dp"
+                            android:layout_marginTop="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
@@ -367,33 +365,31 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:layout_marginLeft="5dp"
-                        android:drawablePadding="5dp"
+                        android:fontFamily="@font/proxima_nova_semi_bold"
                         android:gravity="center"
-                        android:text="Upcomming Projects"
+                        android:text="Upcoming Projects"
                         android:textColor="@color/grey"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textSize="15sp" />
                     <LinearLayout
                         app:layout_constraintTop_toTopOf="parent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginStart="5dp"
                         android:orientation="vertical">
 
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_adds_layots"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginEnd="5dp" />
+                            android:layout_marginStart="3dp"
+                            android:layout_marginEnd="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:layout_height="match_parent" />
 
                         <!--  </androidx.cardview.widget.CardView>-->
 
