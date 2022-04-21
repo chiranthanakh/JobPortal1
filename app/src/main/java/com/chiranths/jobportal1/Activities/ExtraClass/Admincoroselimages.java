@@ -81,6 +81,7 @@ public class Admincoroselimages extends AppCompatActivity {
         Intent galleryIntent = new Intent();
         galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
         galleryIntent.setType("image/*");
+        galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         startActivityForResult(galleryIntent, GalleryPick);
     }
 
@@ -88,6 +89,7 @@ public class Admincoroselimages extends AppCompatActivity {
         Intent galleryIntent = new Intent();
         galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
         galleryIntent.setType("image/*");
+        galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         startActivityForResult(galleryIntent, GalleryPick2);
     }
 
@@ -146,7 +148,6 @@ public class Admincoroselimages extends AppCompatActivity {
                         if (!task.isSuccessful())
                         {
                             throw task.getException();
-
                         }
 
                         downloadImageUrl = filePath.getDownloadUrl().toString();
