@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/dataflair"
@@ -39,10 +38,11 @@
         <activity android:name=".Activities.BasicActivitys.LoginActivity" />
         <activity android:name=".Activities.Propertys.AdminAddNewProductActivity" />
         <activity android:name=".Activities.BasicActivitys.StartingActivity" />
+        <activity android:name=".Activities.BasicActivitys.AdsDetailsActivity"/>
+        <activity android:name=".Activities.HotDealsactivity.HotDealsDetailsActivity"/>
         <activity android:name=".Activities.jobs.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

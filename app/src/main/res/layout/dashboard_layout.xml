@@ -13,8 +13,6 @@
         android:animateLayoutChanges="true"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-
-
         <LinearLayout
             app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/toolbar"
@@ -69,38 +67,21 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:layout_weight="1.5"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content">
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <ImageView
-                            android:id="@+id/tv_notification"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/ic_notification"
-                            android:layout_weight="1"
-                            android:background="?selectableItemBackground"
-                            android:layout_gravity="center_vertical"
-                            android:padding="12dp"
-                            app:tint="@color/white" />
+
+
                         <TextView
                             android:id="@+id/tv_notification_count"
-                            android:background="@drawable/ic_circle_primary"
-                            android:text="1"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:backgroundTint="@color/red_color"
+                            android:text="Post+"
                             android:textColor="@color/white"
                             android:gravity="center"
-                            android:layout_gravity="end"
-                            android:textSize="8sp"
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"/>
-                    </FrameLayout>
+                            android:layout_gravity="center"
+                            android:textSize="15sp"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"/>
+
 
                     <FrameLayout
                         android:id="@+id/admin_btn"
@@ -133,7 +114,7 @@
 
 
 
-                </LinearLayout>
+
 
 
             </LinearLayout>
@@ -356,8 +337,6 @@
                                         android:layout_height="wrap_content"/>
 
                                 </LinearLayout>
-
-
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 

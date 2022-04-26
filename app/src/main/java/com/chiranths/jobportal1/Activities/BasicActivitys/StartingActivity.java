@@ -250,7 +250,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
 
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
 
-                            adslist.add(userData.get("image"));
+                            adslist.add(userData.get("image")+"---"+userData.get("pid")+"---"+userData.get("category")+"---"+userData.get("price")+"---"+userData.get("propertysize")+"---"+userData.get("number"));
 
                         }catch (ClassCastException cce){
 
@@ -262,7 +262,6 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                             }
                         }
                     }
-
                     adsAdaptor =new AdsAdaptor(adslist,StartingActivity.this);
                     RecyclerView.LayoutManager n1layoutManager = new LinearLayoutManager(StartingActivity.this, RecyclerView.HORIZONTAL, false);
                     recyclarviewads.setLayoutManager(n1layoutManager);
@@ -297,7 +296,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
 
     private void fetchdata() {
 
-        DatabaseReference productsinfo = FirebaseDatabase.getInstance().getReference().child("Products");
+        DatabaseReference productsinfo = FirebaseDatabase.getInstance().getReference().child("hotforyou");
 
         productsinfo.addValueEventListener(new ValueEventListener() {
             @Override

@@ -13,9 +13,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chiranths.jobportal1.Activities.BasicActivitys.AdsDetailsActivity;
 import com.chiranths.jobportal1.Activities.BasicActivitys.ProductInfo;
+import com.chiranths.jobportal1.Activities.HotDealsactivity.HotDealsDetailsActivity;
 import com.chiranths.jobportal1.R;
 import com.squareup.picasso.Picasso;
 
@@ -55,9 +58,15 @@ public class BottomhomeRecyclarviewAdaptor extends RecyclerView.Adapter<Bottomho
 
         Picasso.get().load(productInfo.getImage()).into(holder.iv_image);
 
+        holder.cv_deals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(context, HotDealsDetailsActivity.class);
+                intent.putExtra("pid",productInfo.getPid());
+                context.startActivity(intent);
+            }
+        });
     }
-
-
 
     @Override
     public int getItemCount() {
@@ -67,13 +76,13 @@ public class BottomhomeRecyclarviewAdaptor extends RecyclerView.Adapter<Bottomho
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView iv_image;
-
+        CardView cv_deals;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             iv_image = itemView.findViewById(R.id.iv_location_image);
-
+            cv_deals = itemView.findViewById(R.id.cv_card_deals);
         }
     }
 }

@@ -33,10 +33,11 @@ public class Admincoroselimages extends AppCompatActivity {
 
     private static final int GalleryPick = 1;
     private static final int GalleryPick2 = 2;
+    private static final int GalleryPick3 = 3;
     private Uri ImageUri;
     private ProgressDialog loadingBar;
-    private StorageReference ProductImagesRef, adsImageRef;
-    private DatabaseReference ProductsRef,adsRef;
+    private StorageReference ProductImagesRef, adsImageRef, hotImageRef;
+    private DatabaseReference ProductsRef,adsRef, hotRef;
     private String productRandomKey, downloadImageUrl;
 
     @Override
@@ -50,11 +51,21 @@ public class Admincoroselimages extends AppCompatActivity {
         adsImageRef = FirebaseStorage.getInstance().getReference().child("ads");
         adsRef = FirebaseDatabase.getInstance().getReference().child("adsforyou");
 
+        hotImageRef = FirebaseStorage.getInstance().getReference().child("hot");
+        hotRef = FirebaseDatabase.getInstance().getReference().child("hotforyou");
 
         loadingBar = new ProgressDialog(this);
 
         Button btn_corosel = findViewById(R.id.btn_corosel);
         Button btn_ads = findViewById(R.id.btn_ads);
+        Button btn_hot_deals = findViewById(R.id.btn_hot_deals);
+
+        btn_hot_deals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OpenGallery3();
+            }
+        });
 
         btn_corosel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,8 +84,6 @@ public class Admincoroselimages extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     private void OpenGallery(){
@@ -93,6 +102,14 @@ public class Admincoroselimages extends AppCompatActivity {
         startActivityForResult(galleryIntent, GalleryPick2);
     }
 
+    private void OpenGallery3(){
+        Intent galleryIntent = new Intent();
+        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+        galleryIntent.setType("image/*");
+        galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        startActivityForResult(galleryIntent, GalleryPick3);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -103,11 +120,14 @@ public class Admincoroselimages extends AppCompatActivity {
             ImageUri = data.getData();
             //InputProductImage.setImageURI(ImageUri);
             StoreProductInformation();
-        }else  if (requestCode==GalleryPick2  &&  resultCode==RESULT_OK  &&  data!=null)
-        {
+        }else  if (requestCode==GalleryPick2  &&  resultCode==RESULT_OK  &&  data!=null) {
             ImageUri = data.getData();
             //InputProductImage.setImageURI(ImageUri);
             Storeadsinfo();
+        }else  if (requestCode==GalleryPick3  &&  resultCode==RESULT_OK  &&  data!=null) {
+            ImageUri = data.getData();
+            //InputProductImage.setImageURI(ImageUri);
+            Storehotinfo();
         }
     }
 
@@ -259,8 +279,19 @@ public class Admincoroselimages extends AppCompatActivity {
     {
         HashMap<String, Object> productMap = new HashMap<>();
 
-        productMap.put("image", downloadImageUrl);
 
+        productMap.put("pid", productRandomKey);
+        productMap.put("date", "today");
+        productMap.put("time", "time");
+        productMap.put("description", "better places in haven");
+        productMap.put("image", downloadImageUrl);
+        productMap.put("category", "flats");
+        productMap.put("price", "50000");
+        productMap.put("pname", "flats");
+        productMap.put("type","flat");
+        productMap.put("propertysize",4000*500);
+        productMap.put("location","location");
+        productMap.put("number","12345567");
 
         adsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -283,4 +314,103 @@ public class Admincoroselimages extends AppCompatActivity {
                     }
                 });
     }
+
+
+    private void Storehotinfo()
+    {
+        loadingBar.setTitle("Add New Product");
+        loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
+        loadingBar.setCanceledOnTouchOutside(false);
+        loadingBar.show();
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd");
+        String saveCurrentDate = currentDate.format(calendar.getTime());
+
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm a");
+        String saveCurrentTime = currentTime.format(calendar.getTime());
+
+        productRandomKey = saveCurrentTime;
+
+        final StorageReference filePath = hotImageRef.child(ImageUri.getLastPathSegment() + productRandomKey + ".jpg");
+
+        final UploadTask uploadTask = filePath.putFile(ImageUri);
+
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                String message = e.toString();
+                Toast.makeText(Admincoroselimages.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                loadingBar.dismiss();
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Toast.makeText(Admincoroselimages.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
+                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful())
+                        {
+                            throw task.getException();
+
+                        }
+
+                        downloadImageUrl = filePath.getDownloadUrl().toString();
+                        return filePath.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful())
+                        {
+                            downloadImageUrl = task.getResult().toString();
+                            Toast.makeText(Admincoroselimages.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
+                            SavehotInfoToDatabase();
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    private void SavehotInfoToDatabase()
+    {
+        HashMap<String, Object> productMap = new HashMap<>();
+
+        productMap.put("pid", productRandomKey);
+        productMap.put("date", "today");
+        productMap.put("time", "time");
+        productMap.put("description", "better places in haven");
+        productMap.put("image", downloadImageUrl);
+        productMap.put("category", "flats");
+        productMap.put("price", "50000");
+        productMap.put("pname", "flats");
+        productMap.put("type","flat");
+        productMap.put("propertysize",4000*500);
+        productMap.put("location","location");
+        productMap.put("number","12345567");
+
+        hotRef.child(productRandomKey).updateChildren(productMap)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task)
+                    {
+                        if (task.isSuccessful())
+                        {
+                            Intent intent = new Intent(Admincoroselimages.this, StartingActivity.class);
+                            startActivity(intent);
+                            loadingBar.dismiss();
+                            Toast.makeText(Admincoroselimages.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            loadingBar.dismiss();
+                            String message = task.getException().toString();
+                            Toast.makeText(Admincoroselimages.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
 }

@@ -21,6 +21,12 @@
         android:id="@+id/btn_ads"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:text="add category image"/>
+        android:text="add ads image"/>
+
+    <Button
+        android:id="@+id/btn_hot_deals"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="add hot deals"/>
 
 </LinearLayout>

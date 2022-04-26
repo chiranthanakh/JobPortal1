@@ -2,8 +2,10 @@ package com.chiranths.jobportal1.Activities.Propertys;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +29,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -42,6 +45,8 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
     private StorageReference ProductImagesRef;
     private DatabaseReference ProductsRef;
     private ProgressDialog loadingBar;
+    ArrayList fileNameList = new ArrayList<>();
+    ArrayList fileDoneList = new ArrayList<>();
 
 
     @Override
@@ -87,10 +92,12 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
 
 
     private void OpenGallery(){
-        Intent galleryIntent = new Intent();
-        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-        galleryIntent.setType("image/*");
-        startActivityForResult(galleryIntent, GalleryPick);
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,"Select Picture"),1);
+
     }
 
     @Override
@@ -98,11 +105,29 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
     {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode==GalleryPick  &&  resultCode==RESULT_OK  &&  data!=null)
+        if (requestCode==1  &&  resultCode==RESULT_OK  &&  data!=null)
         {
-            ImageUri = data.getData();
-            InputProductImage.setImageURI(ImageUri);
+            /*ImageUri = data.getData();
+            InputProductImage.setImageURI(ImageUri);*/
+            StoreProductInformation(data);
         }
+
+        /*if (requestCode == 1 && resultCode == RESULT_OK){
+            if (data.getClipData() != null){
+                //Toast.makeText(this, "Selected Multiple Files", Toast.LENGTH_SHORT).show();
+                int totalItems = data.getClipData().getItemCount();
+                for (int i = 0;i < totalItems; i++){
+                    Uri fileUri = data.getClipData().getItemAt(i).getUri();
+                    String fileName = getFileName(fileUri);
+                    fileNameList.add(fileName);
+                    fileDoneList.add("Uploading");
+
+                    StoreProductInformation(data);
+                }
+            } else if (data.getData() != null){
+                Toast.makeText(this, "Selected Single File", Toast.LENGTH_SHORT).show();
+            }
+        }*/
     }
 
     private void ValidateProductData() {
@@ -132,16 +157,22 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         }
         else
         {
-            StoreProductInformation();
+            //StoreProductInformation();
         }
     }
 
-    private void StoreProductInformation()
-    {
+    private void StoreProductInformation(Intent data) {
         loadingBar.setTitle("Add New Product");
         loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
+
+        int totalItems = data.getClipData().getItemCount();
+        for (int i = 0; i < totalItems; i++) {
+            Uri fileUri = data.getClipData().getItemAt(i).getUri();
+            String fileName = getFileName(fileUri);
+            fileNameList.add(fileName);
+            fileDoneList.add("Uploading");
 
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd");
@@ -152,9 +183,9 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
 
         productRandomKey = saveCurrentDate + saveCurrentTime;
 
-        final StorageReference filePath = ProductImagesRef.child(ImageUri.getLastPathSegment() + productRandomKey + ".jpg");
+        final StorageReference filePath = ProductImagesRef.child(fileUri.getLastPathSegment() + productRandomKey + ".jpg");
 
-        final UploadTask uploadTask = filePath.putFile(ImageUri);
+        final UploadTask uploadTask = filePath.putFile(fileUri);
 
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
@@ -170,24 +201,22 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
                 Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
                     public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        if (!task.isSuccessful())
-                        {
+                        if (!task.isSuccessful()) {
                             throw task.getException();
 
                         }
 
-                        downloadImageUrl = filePath.getDownloadUrl().toString();
+                        downloadImageUrl = downloadImageUrl+"---"+ filePath.getDownloadUrl().toString();
                         return filePath.getDownloadUrl();
                     }
                 }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                     @Override
                     public void onComplete(@NonNull Task<Uri> task) {
-                        if (task.isSuccessful())
-                        {
+                        if (task.isSuccessful()) {
 
-                            downloadImageUrl = task.getResult().toString();
+                            downloadImageUrl = downloadImageUrl+"---"+task.getResult().toString();
                             Toast.makeText(AdminAddNewProductActivity.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
-                            SaveProductInfoToDatabase();
+
 
                         }
                     }
@@ -195,22 +224,24 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
             }
         });
     }
+        SaveProductInfoToDatabase();
+    }
 
     private void SaveProductInfoToDatabase()
     {
         HashMap<String, Object> productMap = new HashMap<>();
-        productMap.put("pid", productRandomKey);
-        productMap.put("date", saveCurrentDate);
-        productMap.put("time", saveCurrentTime);
-        productMap.put("description", Description);
+       // productMap.put("pid", productRandomKey);
+        //productMap.put("date", saveCurrentDate);
+        //productMap.put("time", saveCurrentTime);
+        //productMap.put("description", Description);
         productMap.put("image", downloadImageUrl);
-        productMap.put("category", CategoryName);
-        productMap.put("price", Price);
-        productMap.put("pname", Pname);
-        productMap.put("type",type);
-        productMap.put("propertysize",propertysize);
-        productMap.put("location",location);
-        productMap.put("number",number);
+        //productMap.put("category", CategoryName);
+        //productMap.put("price", Price);
+        //productMap.put("pname", Pname);
+        //productMap.put("type",type);
+        //productMap.put("propertysize",propertysize);
+        //productMap.put("location",location);
+        //productMap.put("number",number);
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -232,5 +263,26 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public String getFileName(Uri uri){
+        String result = null;
+        if (uri.getScheme().equals("content")){
+            Cursor cursor = getContentResolver().query(uri,null,null,null,null);
+            try {
+                if (cursor != null && cursor.moveToFirst()){
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } finally {
+                cursor.close();
+            }
+        } if (result == null){
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1){
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
     }
 }

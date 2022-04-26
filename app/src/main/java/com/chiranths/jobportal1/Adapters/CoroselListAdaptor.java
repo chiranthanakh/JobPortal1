@@ -43,7 +43,7 @@ public class CoroselListAdaptor extends RecyclerView.Adapter<CoroselListAdaptor.
     public CoroselListAdaptor.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         context = parent.getContext();
-        View listItem= layoutInflater.inflate(R.layout.home_event_layout, parent, false);
+        View listItem= layoutInflater.inflate(R.layout.home_colorsel_layout, parent, false);
         CoroselListAdaptor.ViewHolder viewHolder = new CoroselListAdaptor.ViewHolder(listItem);
         return viewHolder;
     }
@@ -70,7 +70,7 @@ public class CoroselListAdaptor extends RecyclerView.Adapter<CoroselListAdaptor.
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            this.iv_corosel_image=itemView.findViewById(R.id.iv_location_image);
+            this.iv_corosel_image=itemView.findViewById(R.id.iv_corosel_image);
 
 
         }
