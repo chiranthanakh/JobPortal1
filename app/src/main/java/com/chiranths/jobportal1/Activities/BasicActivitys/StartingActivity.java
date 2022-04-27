@@ -80,7 +80,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
     private CoroselListAdaptor coroselListAdaptor;
     AdsAdaptor adsAdaptor;
     String id,name,mail,pic;
-    FrameLayout admin_btn;
+
     ArrayList coroselimagelist =new ArrayList();
     ArrayList adslist =new ArrayList();
     ArrayList<ProductInfo> productinfolist =new ArrayList();
@@ -92,6 +92,8 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
     Handler mHandler = new Handler();
     TextView tv_location,tv_pincode;
     ProgressDialog progressDialog;
+
+    TextView admin_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
