@@ -139,7 +139,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         type = Inputtype.getText().toString();
         number = et_number.getText().toString();
 
-        if (ImageUri == null)
+        if (TextUtils.isEmpty(downloadImageUrl))
         {
             Toast.makeText(this, "Product image is mandatory...", Toast.LENGTH_SHORT).show();
         }
@@ -157,16 +157,17 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         }
         else
         {
-            //StoreProductInformation();
+            SaveProductInfoToDatabase();
         }
     }
 
     private void StoreProductInformation(Intent data) {
-        loadingBar.setTitle("Add New Product");
+        /*loadingBar.setTitle("Add New Product");
         loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
         loadingBar.setCanceledOnTouchOutside(false);
-        loadingBar.show();
-
+        loadingBar.show();*/
+        downloadImageUrl ="";
+        System.out.println("image5---"+downloadImageUrl);
         int totalItems = data.getClipData().getItemCount();
         for (int i = 0; i < totalItems; i++) {
             Uri fileUri = data.getClipData().getItemAt(i).getUri();
@@ -174,7 +175,11 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
             fileNameList.add(fileName);
             fileDoneList.add("Uploading");
 
-        Calendar calendar = Calendar.getInstance();
+            System.out.println("image1---"+fileName);
+            System.out.println("count---"+totalItems);
+
+
+            Calendar calendar = Calendar.getInstance();
         SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd");
         saveCurrentDate = currentDate.format(calendar.getTime());
 
@@ -206,7 +211,9 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
 
                         }
 
+                        System.out.println("url3---"+downloadImageUrl);
                         downloadImageUrl = downloadImageUrl+"---"+ filePath.getDownloadUrl().toString();
+                        System.out.println("url1---"+downloadImageUrl);
                         return filePath.getDownloadUrl();
                     }
                 }).addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -215,6 +222,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             downloadImageUrl = downloadImageUrl+"---"+task.getResult().toString();
+                            System.out.println("url2---"+downloadImageUrl);
                             Toast.makeText(AdminAddNewProductActivity.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
 
 
@@ -223,25 +231,30 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
                 });
             }
         });
+
+        if(i==totalItems-1){
+            System.out.println("downloadurl--"+downloadImageUrl);
+           // SaveProductInfoToDatabase();
+        }
     }
-        SaveProductInfoToDatabase();
+
     }
 
     private void SaveProductInfoToDatabase()
     {
         HashMap<String, Object> productMap = new HashMap<>();
-       // productMap.put("pid", productRandomKey);
-        //productMap.put("date", saveCurrentDate);
-        //productMap.put("time", saveCurrentTime);
-        //productMap.put("description", Description);
+        productMap.put("pid", productRandomKey);
+        productMap.put("date", saveCurrentDate);
+        productMap.put("time", saveCurrentTime);
+        productMap.put("description", Description);
         productMap.put("image", downloadImageUrl);
-        //productMap.put("category", CategoryName);
-        //productMap.put("price", Price);
-        //productMap.put("pname", Pname);
-        //productMap.put("type",type);
-        //productMap.put("propertysize",propertysize);
-        //productMap.put("location",location);
-        //productMap.put("number",number);
+        productMap.put("category", CategoryName);
+        productMap.put("price", Price);
+        productMap.put("pname", Pname);
+        productMap.put("type",type);
+        productMap.put("propertysize",propertysize);
+        productMap.put("location",location);
+        productMap.put("number",number);
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
