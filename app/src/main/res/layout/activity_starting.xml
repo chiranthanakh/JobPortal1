@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
-                    android:id="@+id/irfc"
+                    android:id="@+id/admin_btn"
                     android:drawableTint="@color/icon_color"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
                     android:paddingBottom="13dp"
                     android:paddingTop="13dp"
                     android:fontFamily="@font/proxima_family"
-                    android:text="User"
+                    android:text="Add Image"
                     android:textColor="@color/grey_dark"
                     android:textSize="13sp"/>
 
