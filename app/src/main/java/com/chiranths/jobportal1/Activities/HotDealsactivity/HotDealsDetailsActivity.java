@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+import com.synnapps.carouselview.CarouselView;
 
 public class HotDealsDetailsActivity extends AppCompatActivity {
 
@@ -24,13 +25,14 @@ public class HotDealsDetailsActivity extends AppCompatActivity {
     private ImageView productImage;
     private TextView productPrice,productDescription,productName,tv_topbar_productName;
     private String productID="", state = "Normal";
+    CarouselView carouselView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_property_details);
         productID = getIntent().getStringExtra("pid");
         addToCartButton =(Button) findViewById(R.id.pd_add_to_cart_button);
-        productImage = (ImageView) findViewById(R.id.product_image_details);
+        carouselView =  findViewById(R.id.carouselView);
         productName = (TextView) findViewById(R.id.product_name_details);
         tv_topbar_productName = (TextView) findViewById(R.id.tv_topbar_productName);
         productDescription = (TextView) findViewById(R.id.product_description_details);

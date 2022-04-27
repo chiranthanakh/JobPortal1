@@ -21,6 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -32,6 +34,8 @@ public class PropertyDetailsActivity extends AppCompatActivity {
     private ImageView productImage;
     private TextView productPrice,productDescription,productName,tv_topbar_productName;
     private String productID="", state = "Normal";
+    CarouselView carouselView;
+    String[] url;
 
 
     @Override
@@ -40,12 +44,15 @@ public class PropertyDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_property_details);
         productID = getIntent().getStringExtra("pid");
         addToCartButton =(Button) findViewById(R.id.pd_add_to_cart_button);
-        productImage = (ImageView) findViewById(R.id.product_image_details);
+        carouselView =  findViewById(R.id.carouselView);
         productName = (TextView) findViewById(R.id.product_name_details);
         tv_topbar_productName = (TextView) findViewById(R.id.tv_topbar_productName);
         productDescription = (TextView) findViewById(R.id.product_description_details);
         productPrice = (TextView) findViewById(R.id.product_price_details);
+
         getProductDetails(productID);
+
+
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,8 +84,11 @@ public class PropertyDetailsActivity extends AppCompatActivity {
                     productPrice.setText(products.getPrice());
                     productDescription.setText(products.getDescription());
                     tv_topbar_productName.setText(products.getPname());
-                    Picasso.get().load(products.getImage()).into(productImage);
+                    //Picasso.get().load(products.getImage()).into(productImage);
+                    url = products.getImage().split("---");
 
+                    carouselView.setPageCount(url.length);
+                    carouselView.setImageListener(imageListener);
                 }
             }
 
@@ -88,6 +98,12 @@ public class PropertyDetailsActivity extends AppCompatActivity {
             }
         });
     }
+    ImageListener imageListener = new ImageListener() {
+        @Override
+        public void setImageForPosition(int position, ImageView imageView) {
+          Picasso.get().load(url[position]).into(imageView);
 
+        }
+    };
 
 }

@@ -92,34 +92,19 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
                     @Override
                     protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull final Products model)
                     {
-                       /* if(model.getType()==4){
-                            Picasso.get().load(model.getImage()).into(holder.imageview2);
 
-                            holder.imageview2.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-
-                                    //Intent intent =new Intent(HomeActivity.this,ItemsCartActivity.class);
-                                    // intent.putExtra("pid",model.getPid());
-                                    //intent.putExtra("ctype", model.getCategory());
-                                    //startActivity(intent);
-                                }
-                            });
-
-                        }else {*/
-                            holder.txtProductName.setText(model.getPname());
-                            // holder.txtProductDescription.setText(model.getDescription());
+                        holder.txtProductName.setText(model.getPname());
                         holder.type.setText(model.getType());
                         holder.size.setText(model.getSize());
                         holder.location.setText(model.getLocation());
-                            holder.txtProductPrice.setText("₹ " + model.getPrice());
-                            String[] url = model.getImage().split("---");
-                            Picasso.get().load(url[0]).into(holder.imageView);
+                        holder.txtProductPrice.setText("₹ " + model.getPrice());
+                        String[] url = model.getImage().split("---");
+                        Picasso.get().load(url[0]).into(holder.imageView);
 
                            // progressBar.setVisibility(View.GONE);
 
                             //add button function
-                            holder.btn_add.setOnClickListener(new View.OnClickListener() {
+                        holder.btn_add.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                   //  String num = holder.numberButton1.getNumber();
