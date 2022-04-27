@@ -175,7 +175,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
             fileNameList.add(fileName);
             fileDoneList.add("Uploading");
 
-            System.out.println("image1---"+fileName);
+            System.out.println("image1---"+downloadImageUrl);
             System.out.println("count---"+totalItems);
 
 
@@ -212,7 +212,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
                         }
 
                         System.out.println("url3---"+downloadImageUrl);
-                        downloadImageUrl = downloadImageUrl+"---"+ filePath.getDownloadUrl().toString();
+                       // downloadImageUrl = downloadImageUrl+"---"+ filePath.getDownloadUrl().toString();
                         System.out.println("url1---"+downloadImageUrl);
                         return filePath.getDownloadUrl();
                     }
@@ -221,7 +221,12 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Uri> task) {
                         if (task.isSuccessful()) {
 
-                            downloadImageUrl = downloadImageUrl+"---"+task.getResult().toString();
+                            if(downloadImageUrl.equals("")){
+                                downloadImageUrl =task.getResult().toString();
+                            }else {
+                                downloadImageUrl = downloadImageUrl+"---"+task.getResult().toString();
+                            }
+
                             System.out.println("url2---"+downloadImageUrl);
                             Toast.makeText(AdminAddNewProductActivity.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
 

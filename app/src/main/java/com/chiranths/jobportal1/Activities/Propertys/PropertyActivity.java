@@ -113,7 +113,8 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
                         holder.size.setText(model.getSize());
                         holder.location.setText(model.getLocation());
                             holder.txtProductPrice.setText("₹ " + model.getPrice());
-                            Picasso.get().load(model.getImage()).into(holder.imageView);
+                            String[] url = model.getImage().split("---");
+                            Picasso.get().load(url[0]).into(holder.imageView);
 
                            // progressBar.setVisibility(View.GONE);
 
