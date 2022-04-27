@@ -147,7 +147,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardMaxElevation="3dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
                         android:elevation="3dp"
                         android:backgroundTint="@color/white"
                         app:cardElevation="3dp">
@@ -302,7 +304,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="10dp"
                         android:fontFamily="@font/proxima_nova_semi_bold"
                         android:gravity="center"
                         android:text="Upcoming Projects"
@@ -313,7 +315,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:layout_marginTop="5dp"
                         android:layout_marginEnd="5dp"
                         android:layout_marginStart="5dp"
                         android:orientation="vertical">
@@ -324,7 +325,6 @@
                             android:layout_width="match_parent"
                             android:layout_marginStart="3dp"
                             android:layout_marginEnd="3dp"
-                            android:layout_marginTop="10dp"
                             android:layout_height="match_parent" />
 
                         <!--  </androidx.cardview.widget.CardView>-->
