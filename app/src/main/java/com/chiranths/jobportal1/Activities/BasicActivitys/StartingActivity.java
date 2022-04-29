@@ -432,8 +432,8 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                         try {
                             addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(),1);
                             // textView.setText(addresses.get(0).getLocality() + addresses.get(0).getPostalCode() + addresses.get(0).getThoroughfare() + addresses.get(0).getSubLocality() + addresses.get(0).getSubLocality());
-                            tv_location.setText(addresses.get(0).getLocality());
-                            tv_pincode.setText(addresses.get(0).getSubLocality()+" - "+addresses.get(0).getPostalCode());
+                          //  tv_location.setText(addresses.get(0).getLocality());
+                          //  tv_pincode.setText(addresses.get(0).getSubLocality()+" - "+addresses.get(0).getPostalCode());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
