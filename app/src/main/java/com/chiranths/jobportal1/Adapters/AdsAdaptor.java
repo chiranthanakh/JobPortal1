@@ -89,7 +89,7 @@ public class AdsAdaptor extends RecyclerView.Adapter<AdsAdaptor.ViewHolder> {
             this.tv_heading=itemView.findViewById(R.id.tv_ads_heading);
             this.tv_amount = itemView.findViewById(R.id.tv_ads_amount);
             this.tv_space = itemView.findViewById(R.id.tv_ads_spaces);
-            this.ll_enquiry = itemView.findViewById(R.id.ll_enquiry);
+           /// this.ll_enquiry = itemView.findViewById(R.id.ll_enquiry);
 
         }
     }

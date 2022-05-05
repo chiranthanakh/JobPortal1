@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cons_layout"
-    android:layout_width="180dp"
+    android:layout_width="150dp"
     android:layout_height="wrap_content"
     android:layout_marginStart="3dp"
     android:layout_marginEnd="3dp"
@@ -10,8 +10,8 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="180dp"
-        android:layout_height="220dp"
+        android:layout_width="150dp"
+        android:layout_height="180dp"
         android:elevation="3dp"
         android:id="@+id/cv_card"
         android:layout_marginTop="5dp"
@@ -26,12 +26,12 @@
 
         <ImageView
             android:id="@+id/iv_ads_image"
-            android:layout_width="180dp"
-            android:layout_height="140dp"
+            android:layout_width="150dp"
+            android:layout_height="120dp"
             android:src="@drawable/aaimage" />
 
         <LinearLayout
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="120dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -87,41 +87,7 @@
                     android:layout_height="wrap_content"/>
 
             </LinearLayout>
-            <LinearLayout
-                android:id="@+id/ll_enquiry"
-                android:layout_marginTop="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:background="#DAF7A6"
-                android:orientation="horizontal">
-                <LinearLayout
-                  android:padding="7dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
 
-                <ImageView
-                    android:layout_marginStart="30dp"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:padding="1dp"
-                    android:src="@drawable/bell"
-                    android:layout_gravity="center_vertical"
-                    app:tint="@color/electric_blue" />
-                <TextView
-                    android:text="Enquire"
-                    android:gravity="start|center"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="10dp"
-                    android:fontFamily="@font/proxima_nova_semi_bold"
-                    android:textColor="@color/electric_blue"
-                    android:textSize="14sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                </LinearLayout>
-
-            </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

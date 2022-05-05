@@ -88,7 +88,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
             R.drawable.banner1, R.drawable.banner1};
     CarouselView carouselView;
     DrawerLayout drawer_layout;
-    ImageView iv_nav_view;
+    ImageView iv_nav_view,iv_bell;
     Handler mHandler = new Handler();
     TextView tv_location,tv_pincode;
     ProgressDialog progressDialog;
@@ -119,6 +119,8 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
 
         drawer_layout = findViewById(R.id.drawer_layout_main);
         iv_nav_view = findViewById(R.id.iv_nav_view);
+        iv_bell = findViewById(R.id.iv_bell);
+        iv_bell.setOnClickListener(this);
         iv_nav_view.setOnClickListener(this);
         cv_jobs =  findViewById(R.id.cv_jobs);
         cv_servicess = findViewById(R.id.cv_servicess);
@@ -174,7 +176,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
         }
 
 
-        admin_btn.setOnClickListener(new View.OnClickListener() {
+        iv_bell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(StartingActivity.this, Admincoroselimages.class);
@@ -199,7 +201,6 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                         try{
 
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
-
                             coroselimagelist.add(userData.get("image"));
 
                         }catch (ClassCastException cce){
