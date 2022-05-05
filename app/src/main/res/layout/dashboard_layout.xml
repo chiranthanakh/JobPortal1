@@ -356,7 +356,7 @@
                         android:fontFamily="@font/proxima_nova_semi_bold"
                         android:gravity="center"
                         android:text="Upcoming Projects"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/black"
                         android:textSize="15sp" />
                     <LinearLayout
                         app:layout_constraintTop_toTopOf="parent"
@@ -369,7 +369,7 @@
 
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rv_adds_layots"
+                            android:id="@+id/rv_adds_layots1"
                             android:layout_width="match_parent"
                             android:layout_marginStart="3dp"
                             android:layout_marginEnd="3dp"
@@ -386,7 +386,7 @@
                         android:layout_marginStart="10dp"
                         android:gravity="center"
                         android:text="Hot Deals for you"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/black"
                         android:textSize="15sp"
                         android:fontFamily="@font/proxima_nova_semi_bold" />
                     <LinearLayout

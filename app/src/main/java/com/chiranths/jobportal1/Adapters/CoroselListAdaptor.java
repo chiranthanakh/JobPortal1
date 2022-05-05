@@ -52,7 +52,10 @@ public class CoroselListAdaptor extends RecyclerView.Adapter<CoroselListAdaptor.
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         final String noticeimage = String.valueOf(noticeBoardList.get(position));
 
-        Picasso.get().load(noticeimage).into(holder.iv_corosel_image);
+        Picasso.get().load(noticeimage)
+                .centerCrop()
+                .resize(350,140)
+                .into(holder.iv_corosel_image);
     }
 
 

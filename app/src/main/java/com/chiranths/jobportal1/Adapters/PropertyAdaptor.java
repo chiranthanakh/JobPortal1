@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chiranths.jobportal1.Activities.BasicActivitys.ProductInfo;
 import com.chiranths.jobportal1.Activities.HotDealsactivity.HotDealsDetailsActivity;
+import com.chiranths.jobportal1.Activities.Propertys.PropertyDetailsActivity;
 import com.chiranths.jobportal1.R;
 import com.squareup.picasso.Picasso;
 
@@ -47,13 +48,30 @@ public class PropertyAdaptor extends RecyclerView.Adapter<PropertyAdaptor.ViewHo
 
         String propertyinfo = String.valueOf(productInfos.get(position));
 
-        String[] data = propertyinfo.split("---");
-        Picasso.get().load(data[1]).into(holder.iv_image);
-        holder.product_type1.setText(data[3]);
-        holder.product_location1.setText(data[7]);
-        holder.product_price.setText(data[4]);
-        holder.product_size1.setText(data[6]);
-        holder.product_name.setText(data[5]);
+        String[] imagesdata = propertyinfo.split("!!");
+        String[] data = imagesdata[1].split("---");
+        String[] imageurl = imagesdata[0].split("---");
+
+        Picasso.get()
+                .load(imageurl[0])
+                .centerCrop()
+                .resize(130,130)
+                .into(holder.iv_image);
+
+        holder.product_type1.setText(data[2]);
+        holder.product_location1.setText(data[6]);
+        holder.product_price.setText(data[3]);
+        holder.product_size1.setText(data[5]);
+        holder.product_name.setText(data[4]);
+
+        holder.cv_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(context, PropertyDetailsActivity.class);
+                intent.putExtra("pid",data[0]);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -64,7 +82,7 @@ public class PropertyAdaptor extends RecyclerView.Adapter<PropertyAdaptor.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView iv_image;
-
+        CardView cv_layout;
         TextView product_name,product_price,product_size1,product_location1,product_type1;
 
         public ViewHolder(@NonNull View itemView) {
@@ -76,6 +94,7 @@ public class PropertyAdaptor extends RecyclerView.Adapter<PropertyAdaptor.ViewHo
             product_size1 = itemView.findViewById(R.id.product_size1);
             product_location1 = itemView.findViewById(R.id.product_location1);
             product_type1 = itemView.findViewById(R.id.product_type1);
+            cv_layout = itemView.findViewById(R.id.cv_layout);
         }
     }
 }

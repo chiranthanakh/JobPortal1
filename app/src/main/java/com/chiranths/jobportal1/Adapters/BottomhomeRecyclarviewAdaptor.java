@@ -56,7 +56,11 @@ public class BottomhomeRecyclarviewAdaptor extends RecyclerView.Adapter<Bottomho
 
         ProductInfo productInfo = productInfos.get(position);
 
-        Picasso.get().load(productInfo.getImage()).into(holder.iv_image);
+        Picasso.get()
+                .load(productInfo.getImage())
+                .centerCrop()
+                .resize(120,140)
+                .into(holder.iv_image);
 
         holder.cv_deals.setOnClickListener(new View.OnClickListener() {
             @Override

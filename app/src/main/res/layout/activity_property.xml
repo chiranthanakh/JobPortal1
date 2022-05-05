@@ -134,7 +134,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:fontFamily="@font/proxima_family"
-                                android:text="Trips"
+                                android:text="Sites"
                                 android:textColor="@color/grey"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -157,7 +157,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:fontFamily="@font/proxima_family"
-                                android:text="Hotels"
+                                android:text="Green land"
                                 android:textColor="@color/grey"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -180,7 +180,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:fontFamily="@font/proxima_family"
-                                android:text="Flights"
+                                android:text="Homes"
                                 android:textColor="@color/grey"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -203,7 +203,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:fontFamily="@font/proxima_nova_semi_bold"
-                                android:text="Offers"
+                                android:text="Rent"
                                 android:textColor="@color/grey"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -211,22 +211,13 @@
                     </LinearLayout>
 
 
-                    <TextView
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="2dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/proxima_nova_semi_bold"
-                        android:text="Great deals for you"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_menu"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:clipToPadding="false"
+                        android:layout_marginTop="25dp"
                         android:paddingBottom="45dp"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 

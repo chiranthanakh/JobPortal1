@@ -51,7 +51,13 @@ public class AdsAdaptor extends RecyclerView.Adapter<AdsAdaptor.ViewHolder> {
 
         String[] data = noticeimage.split("---");
 
-        Picasso.get().load(data[0]).into(holder.iv_corosel_image);
+        Picasso.get()
+                .load(data[0])
+                .centerCrop()
+                .resize(150,120)
+                .into(holder.iv_corosel_image);
+
+
         holder.tv_heading.setText(data[2]);
         holder.tv_amount.setText(data[3]);
         holder.tv_space.setText(data[4]);

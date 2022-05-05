@@ -135,7 +135,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
         cv_jobs.setOnClickListener(this);
 
         recyclerView =(RecyclerView)findViewById(R.id.rv_home_event);
-        recyclarviewads = findViewById(R.id.rv_adds_layots);
+        recyclarviewads = findViewById(R.id.rv_adds_layots1);
         recyclerViewEvent = (RecyclerView)findViewById(R.id.rv_dash_prop);
 
         AsyncTask.execute(new Runnable() {
@@ -283,9 +283,10 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                             }
 
                             recyclarviewads.setAdapter(adsAdaptor);
+
                         }
                     });
-                   // recyclarviewads.notifyItemRangeInserted(0, adslist.size());
+                    adsAdaptor.notifyItemRangeInserted(0, adslist.size());
 
                 }
             }

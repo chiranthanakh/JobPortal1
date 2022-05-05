@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.chiranths.jobportal1.Activities.BasicActivitys.StartingActivity;
 import com.chiranths.jobportal1.Adapters.CoroselListAdaptor;
@@ -43,8 +44,13 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     Button btn_add;
+    ImageView iv_sites,iv_green_land,iv_home,iv_commercial;
     Handler mHandler = new Handler();
     ArrayList propertylist =new ArrayList();
+    ArrayList greenlandlist =new ArrayList();
+    ArrayList siteslist =new ArrayList();
+    ArrayList Homeslist =new ArrayList();
+    ArrayList Rentallist =new ArrayList();
     PropertyAdaptor propertyAdaptor;
     CardView cv_homes, cv_sites, cv_green,cv_comerical;
 
@@ -80,6 +86,15 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
 
         btn_add = findViewById(R.id.btn_add_property);
         btn_add.setOnClickListener(this);
+        iv_sites = findViewById(R.id.iv_sites);
+        iv_commercial = findViewById(R.id.iv_commercial);
+        iv_green_land = findViewById(R.id.iv_green_land);
+        iv_home = findViewById(R.id.iv_home);
+
+        iv_sites.setOnClickListener(this);
+        iv_green_land.setOnClickListener(this);
+        iv_commercial.setOnClickListener(this);
+        iv_home.setOnClickListener(this);
 
         recyclerView = findViewById(R.id.recycler_menu);
         recyclerView.setHasFixedSize(true);
@@ -111,9 +126,37 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
 
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
 
-                            propertylist.add(userData.get("pid")+"---"+userData.get("image")+"---"+userData.get("description")+"---"+
+                            propertylist.add(userData.get("image")+"!!"+userData.get("pid")+"---"+userData.get("description")+"---"+
                                     userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
                                     +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type"));
+
+                            if(userData.get("type").equals("sites")){
+
+                                siteslist.add(userData.get("type")+"!!"+userData.get("pid")+"---"+userData.get("description")+"---"+
+                                        userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
+                                        +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type"));
+
+                            }else if(userData.get("type").equals("homes")){
+
+                                Homeslist.add(userData.get("image")+"!!"+userData.get("pid")+"---"+userData.get("description")+"---"+
+                                        userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
+                                        +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type"));
+
+
+                            }else if(userData.get("type").equals("greenland")){
+
+                                greenlandlist.add(userData.get("image")+"!!"+userData.get("pid")+"---"+userData.get("description")+"---"+
+                                        userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
+                                        +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type"));
+
+
+                            }else if(userData.get("type").equals("rental")){
+
+                                Rentallist.add(userData.get("image")+"!!"+userData.get("pid")+"---"+userData.get("description")+"---"+
+                                        userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
+                                        +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type"));
+
+                            };
 
                         }catch (ClassCastException cce){
 
@@ -248,6 +291,73 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
                 startActivity(intent);
                 break;
 
+            case R.id.iv_sites:
+
+                propertyAdaptor =new PropertyAdaptor(siteslist, PropertyActivity.this);
+                RecyclerView.LayoutManager nlayoutManager = new LinearLayoutManager(PropertyActivity.this, RecyclerView.VERTICAL, false);
+                recyclerView.setLayoutManager(nlayoutManager);
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        recyclerView.setAdapter(propertyAdaptor);
+                    }
+                });
+                propertyAdaptor.notifyItemRangeInserted(0, siteslist.size());
+
+                break;
+
+            case R.id.iv_home:
+
+                propertyAdaptor =new PropertyAdaptor(Homeslist, PropertyActivity.this);
+                RecyclerView.LayoutManager nlayoutManager1 = new LinearLayoutManager(PropertyActivity.this, RecyclerView.VERTICAL, false);
+                recyclerView.setLayoutManager(nlayoutManager1);
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        recyclerView.setAdapter(propertyAdaptor);
+                    }
+                });
+                propertyAdaptor.notifyItemRangeInserted(0, Homeslist.size());
+
+                break;
+
+            case R.id.iv_commercial:
+
+                propertyAdaptor =new PropertyAdaptor(Rentallist, PropertyActivity.this);
+                RecyclerView.LayoutManager nlayoutManager2 = new LinearLayoutManager(PropertyActivity.this, RecyclerView.VERTICAL, false);
+                recyclerView.setLayoutManager(nlayoutManager2);
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        recyclerView.setAdapter(propertyAdaptor);
+                    }
+                });
+                propertyAdaptor.notifyItemRangeInserted(0, Rentallist.size());
+
+                break;
+
+            case R.id.iv_green_land:
+
+                propertyAdaptor =new PropertyAdaptor(greenlandlist, PropertyActivity.this);
+                RecyclerView.LayoutManager nlayoutManager3 = new LinearLayoutManager(PropertyActivity.this, RecyclerView.VERTICAL, false);
+                recyclerView.setLayoutManager(nlayoutManager3);
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        recyclerView.setAdapter(propertyAdaptor);
+                    }
+                });
+                propertyAdaptor.notifyItemRangeInserted(0, greenlandlist.size());
+
+                break;
         }
 
     }
