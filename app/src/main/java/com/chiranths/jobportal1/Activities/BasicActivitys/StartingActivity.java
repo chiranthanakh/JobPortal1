@@ -30,6 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chiranths.jobportal1.Activities.BasicActivitys.LoginActivity;
+import com.chiranths.jobportal1.Activities.Businesthings.BusinessActivity;
 import com.chiranths.jobportal1.Activities.ExtraClass.Admincoroselimages;
 import com.chiranths.jobportal1.Activities.LoanActivity.LoanActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyActivity;
@@ -407,6 +408,14 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                 startActivity(intent2);
 
                 break;
+
+            case R.id.cv_servicess:
+
+                Intent intent3 = new Intent(getApplicationContext(), BusinessActivity.class);
+                startActivity(intent3);
+
+                break;
+
             case R.id.iv_nav_view:
                 drawer_layout.openDrawer(GravityCompat.START);
                 break;

@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/JobPortaltheam">
         <activity
+            android:name=".Activities.Businesthings.BusinessActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.LoanActivity.LoanForm"
             android:exported="false" />
         <activity
@@ -38,11 +41,12 @@
         <activity android:name=".Activities.BasicActivitys.LoginActivity" />
         <activity android:name=".Activities.Propertys.AdminAddNewProductActivity" />
         <activity android:name=".Activities.BasicActivitys.StartingActivity" />
-        <activity android:name=".Activities.BasicActivitys.AdsDetailsActivity"/>
-        <activity android:name=".Activities.HotDealsactivity.HotDealsDetailsActivity"/>
+        <activity android:name=".Activities.BasicActivitys.AdsDetailsActivity" />
+        <activity android:name=".Activities.HotDealsactivity.HotDealsDetailsActivity" />
         <activity android:name=".Activities.jobs.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
