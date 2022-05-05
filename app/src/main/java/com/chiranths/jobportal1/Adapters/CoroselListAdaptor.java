@@ -53,8 +53,8 @@ public class CoroselListAdaptor extends RecyclerView.Adapter<CoroselListAdaptor.
         final String noticeimage = String.valueOf(noticeBoardList.get(position));
 
         Picasso.get().load(noticeimage)
-                .centerCrop()
-                .resize(350,140)
+                //.centerCrop()
+                //.resize(350,140)
                 .into(holder.iv_corosel_image);
     }
 
