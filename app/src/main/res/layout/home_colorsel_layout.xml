@@ -24,7 +24,6 @@
             android:layout_height="match_parent"
             android:src="@drawable/aaimage" />
 
-
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>

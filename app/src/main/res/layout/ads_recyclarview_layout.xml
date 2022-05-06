@@ -19,7 +19,7 @@
         android:layout_marginEnd="5dp"
         android:layout_marginStart="5dp"
         android:layout_marginBottom="5dp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/green_light"
         app:cardCornerRadius="5dp">
 
 
@@ -65,14 +65,9 @@
                     android:fontFamily="@font/lato_semibold"
                     android:textColor="@color/black"
                     android:textSize="15sp"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
-                <View
-                    android:layout_marginStart="0dp"
-                    android:layout_width="1dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_height="14dp"
-                    android:background="@color/black"/>
+
                 <TextView
                     android:id="@+id/tv_ads_spaces"
                     android:layout_weight="1"
@@ -83,7 +78,7 @@
                     android:fontFamily="@font/lato_semibold"
                     android:textColor="@color/black"
                     android:textSize="15sp"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
             </LinearLayout>

@@ -124,7 +124,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
         iv_bell.setOnClickListener(this);
         iv_nav_view.setOnClickListener(this);
         cv_jobs =  findViewById(R.id.cv_jobs);
-        cv_servicess = findViewById(R.id.cv_servicess);
+        cv_servicess = findViewById(R.id.cv_servicess1);
         cv_propertys = findViewById(R.id.cv_propertys);
         cv_loans = findViewById(R.id.cv_loans);
         tv_location = findViewById(R.id.tv_location);
@@ -132,7 +132,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
         admin_btn = findViewById(R.id.admin_btn);
         cv_loans.setOnClickListener(this);
         cv_propertys.setOnClickListener(this);
-        cv_propertys.setOnClickListener(this);
+        cv_servicess.setOnClickListener(this);
         cv_jobs.setOnClickListener(this);
 
         recyclerView =(RecyclerView)findViewById(R.id.rv_home_event);
@@ -159,7 +159,9 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-        if(progressDialog!=null)
+
+
+        /*if(progressDialog!=null)
         {
             if(!progressDialog.isShowing()) {
 
@@ -174,7 +176,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                 });
             }
 
-        }
+        }*/
 
 
         iv_bell.setOnClickListener(new View.OnClickListener() {
@@ -409,7 +411,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
 
                 break;
 
-            case R.id.cv_servicess:
+            case R.id.cv_servicess1:
 
                 Intent intent3 = new Intent(getApplicationContext(), BusinessActivity.class);
                 startActivity(intent3);

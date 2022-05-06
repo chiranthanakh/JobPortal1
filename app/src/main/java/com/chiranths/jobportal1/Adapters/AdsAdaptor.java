@@ -53,8 +53,8 @@ public class AdsAdaptor extends RecyclerView.Adapter<AdsAdaptor.ViewHolder> {
 
         Picasso.get()
                 .load(data[0])
-                .centerCrop()
-                .resize(150,120)
+                //.centerCrop()
+                //.resize(150,120)
                 .into(holder.iv_corosel_image);
 
 

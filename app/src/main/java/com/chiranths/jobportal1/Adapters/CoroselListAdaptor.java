@@ -27,7 +27,6 @@ import java.util.Map;
 
 public class CoroselListAdaptor extends RecyclerView.Adapter<CoroselListAdaptor.ViewHolder> {
 
-
     private ArrayList noticeBoardList;
     private Context context;
 
