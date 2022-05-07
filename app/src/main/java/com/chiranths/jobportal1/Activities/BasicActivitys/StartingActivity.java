@@ -9,7 +9,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -23,6 +25,7 @@ import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -81,6 +84,9 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
     private CoroselListAdaptor coroselListAdaptor;
     AdsAdaptor adsAdaptor;
     String id,name,mail,pic;
+    final int duration = 50;
+    final int pixelsToMove = 5;
+    private final Handler mHandler2 = new Handler(Looper.getMainLooper());
 
     ArrayList coroselimagelist =new ArrayList();
     ArrayList adslist =new ArrayList();
@@ -139,6 +145,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
         recyclarviewads = findViewById(R.id.rv_adds_layots1);
         recyclerViewEvent = (RecyclerView)findViewById(R.id.rv_dash_prop);
 
+        //fetchcorosel();
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -187,6 +194,14 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
             }
         });
     }
+    private final Runnable SCROLLING_RUNNABLE = new Runnable() {
+
+        @Override
+        public void run() {
+            recyclerView.smoothScrollBy(pixelsToMove, 0);
+            mHandler2.postDelayed(this, duration);
+        }
+    };
 
 
     private void fetchcorosel() {
@@ -221,15 +236,40 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                     RecyclerView.LayoutManager nlayoutManager = new LinearLayoutManager(StartingActivity.this, RecyclerView.HORIZONTAL, false);
                     recyclerView.setLayoutManager(nlayoutManager);
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    SnapHelper snapHelper = new PagerSnapHelper();
+                    snapHelper.attachToRecyclerView(recyclerView);
+                    snapHelper.onFling(20,20);
 
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
                             recyclerView.setAdapter(coroselListAdaptor);
+
                         }
                     });
                     coroselListAdaptor.notifyItemRangeInserted(0, coroselimagelist.size());
 
+                   /* recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                        @Override
+                        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                            super.onScrolled(recyclerView, dx, dy);
+
+                                mHandler2.removeCallbacks(SCROLLING_RUNNABLE);
+                                Handler postHandler = new Handler();
+                                postHandler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        recyclerView.setAdapter(coroselListAdaptor);
+                                        recyclerView.smoothScrollBy(pixelsToMove, 0);
+
+                                        mHandler2.postDelayed(SCROLLING_RUNNABLE, 200);
+                                    }
+                                }, 2000);
+
+                        }
+                    });
+
+                    mHandler.postDelayed(SCROLLING_RUNNABLE, 200);*/
                 }
             }
             @Override
@@ -237,6 +277,8 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
 
             }
         });
+
+
     }
 
     private void fetchads() {

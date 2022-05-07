@@ -421,7 +421,6 @@
                             android:gravity="end"
                             android:layout_marginLeft="300dp"
                             android:text="See all"
-                            android:drawableLeft="@drawable/bell"
                             android:textColor="@color/red"
                             android:textSize="15sp" />
 
