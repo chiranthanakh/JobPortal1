@@ -134,7 +134,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
         cv_propertys = findViewById(R.id.cv_propertys);
         cv_loans = findViewById(R.id.cv_loans);
         tv_location = findViewById(R.id.tv_location);
-        tv_pincode = findViewById(R.id.tv_pincode);
+      //  tv_pincode = findViewById(R.id.tv_pincode);
         admin_btn = findViewById(R.id.admin_btn);
         cv_loans.setOnClickListener(this);
         cv_propertys.setOnClickListener(this);
