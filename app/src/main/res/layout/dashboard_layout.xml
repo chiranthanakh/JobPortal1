@@ -100,7 +100,7 @@
                             android:layout_gravity="center"
                             android:layout_marginTop="2dp"
                             android:background="?selectableItemBackground"
-                            android:src="@drawable/off" />
+                            android:src="@drawable/sales" />
 
 
                     </LinearLayout>
