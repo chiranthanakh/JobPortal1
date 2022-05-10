@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <FrameLayout
         android:id="@+id/fragment_container"
@@ -20,41 +20,41 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
-                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="10dp">
 
                 <ImageView
                     android:id="@+id/iv_nav_view"
                     android:layout_width="40dp"
                     android:layout_height="35dp"
-                    android:layout_marginTop="3dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="5dp"
+                    android:layout_marginTop="3dp"
                     android:background="?selectableItemBackground"
                     android:padding="5dp"
                     android:src="@drawable/ic_menu"
                     app:tint="@color/white" />
 
                 <LinearLayout
-                    android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="0dp"
                     android:layout_weight="0.9"
-                    android:layout_gravity="center"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/tv_location"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="15dp"
-                        android:gravity="start"
                         android:layout_gravity="start"
                         android:fontFamily="@font/lato_bold"
+                        android:gravity="start"
+                        android:paddingLeft="15dp"
                         android:text="GBD"
                         android:textColor="@color/white"
                         android:textSize="20sp" />
@@ -64,26 +64,25 @@
 
 
                 <LinearLayout
-                    android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="0dp"
                     android:layout_weight="0.9"
-                    android:layout_gravity="center"
                     android:gravity="end"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:background="?selectableItemBackground"
                         android:id="@+id/iv_bell"
-                        android:src="@drawable/bell"
                         android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="2dp"
-                        android:layout_height="50dp"
+                        android:background="?selectableItemBackground"
                         android:padding="12dp"
-                        />
+                        android:src="@drawable/bell" />
 
                     <LinearLayout
                         android:id="@+id/synclayout"
@@ -124,11 +123,11 @@
                     app:contentInsetStartWithNavigation="0dp">
 
                     <LinearLayout
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
+                        android:layout_marginStart="10dp"
                         android:layout_marginTop="3dp"
+                        android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
                         android:background="@drawable/edittext_back"
                         android:orientation="horizontal">
@@ -156,15 +155,15 @@
                             app:layout_constraintStart_toEndOf="@id/iv_search" />
 
                         <ImageView
-                            android:background="@drawable/thumb"
-                            android:backgroundTint="@color/black"
-                            android:layout_marginEnd="3dp"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_marginTop="3dp"
+                            android:layout_marginEnd="3dp"
+                            android:background="@drawable/thumb"
+                            android:backgroundTint="@color/purple_500"
                             android:padding="12dp"
                             android:src="@drawable/search_hallow"
-                            app:tint="@color/grey" />
+                            app:tint="@color/white" />
 
                     </LinearLayout>
                 </androidx.appcompat.widget.Toolbar>
@@ -175,15 +174,12 @@
         </LinearLayout>
 
 
-
-
-
         <LinearLayout
-            android:layout_marginTop="120dp"
-            app:layout_constraintTop_toBottomOf="@id/toolbar"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="120dp"
             android:orientation="vertical"
-            android:layout_height="match_parent">
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
 
 
             <androidx.core.widget.NestedScrollView
@@ -205,48 +201,50 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
+                            android:layout_marginTop="15dp"
                             android:gravity="center"
 
-                            android:layout_marginTop="15dp"
+                            android:orientation="horizontal"
                             app:layout_constraintTop_toTopOf="parent">
 
                             <LinearLayout
                                 android:id="@+id/cv_jobs"
-                                android:layout_weight="1"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:layout_weight="1"
                                 android:orientation="vertical"
                                 android:paddingBottom="8dp">
+
                                 <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical"
                                     android:layout_marginTop="5dp"
                                     android:layout_marginBottom="5dp"
-                                    android:src="@drawable/ic_job"
-                                    android:layout_gravity="center_vertical"/>
+                                    android:src="@drawable/ic_job" />
+
                                 <TextView
-                                    android:text="Jobs"
-                                    android:gravity="center"
-                                    android:layout_marginEnd="10dp"
-                                    android:layout_marginStart="10dp"
-                                    android:maxLines="2"
-                                    android:fontFamily="@font/proxima_nova_semi_bold"
-                                    android:layout_marginTop="2dp"
-                                    android:textColor="@color/white"
-                                    android:textSize="14sp"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"/>
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:fontFamily="@font/proxima_nova_semi_bold"
+                                    android:gravity="center"
+                                    android:maxLines="2"
+                                    android:text="Jobs"
+                                    android:textColor="@color/white"
+                                    android:textSize="14sp" />
 
                             </LinearLayout>
 
                             <LinearLayout
                                 android:id="@+id/cv_loans"
-                                android:paddingBottom="8dp"
-                                android:layout_weight="1"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:orientation="vertical">
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:paddingBottom="8dp">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -257,57 +255,58 @@
                                     android:src="@drawable/ic_loans" />
 
                                 <TextView
-                                    android:text="Loans"
-                                    android:gravity="center"
-                                    android:layout_marginEnd="10dp"
-                                    android:layout_marginStart="10dp"
-                                    android:maxLines="2"
-                                    android:fontFamily="@font/proxima_nova_semi_bold"
-                                    android:layout_marginTop="2dp"
-                                    android:textColor="@color/white"
-                                    android:textSize="14sp"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"/>
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:fontFamily="@font/proxima_nova_semi_bold"
+                                    android:gravity="center"
+                                    android:maxLines="2"
+                                    android:text="Loans"
+                                    android:textColor="@color/white"
+                                    android:textSize="14sp" />
 
                             </LinearLayout>
 
                             <LinearLayout
                                 android:id="@+id/cv_propertys"
-                                android:paddingBottom="8dp"
-                                android:layout_weight="1"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:layout_weight="1"
                                 android:orientation="vertical"
-                                >
+                                android:paddingBottom="8dp">
+
                                 <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical"
                                     android:layout_marginTop="5dp"
                                     android:layout_marginBottom="5dp"
-                                    android:src="@drawable/ic_property"
-                                    android:layout_gravity="center_vertical"/>
+                                    android:src="@drawable/ic_property" />
+
                                 <TextView
-                                    android:text="Properties"
-                                    android:gravity="center"
-                                    android:layout_marginEnd="10dp"
-                                    android:layout_marginStart="10dp"
-                                    android:maxLines="2"
-                                    android:fontFamily="@font/proxima_nova_semi_bold"
-                                    android:layout_marginTop="2dp"
-                                    android:textColor="@color/white"
-                                    android:textSize="14sp"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"/>
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:fontFamily="@font/proxima_nova_semi_bold"
+                                    android:gravity="center"
+                                    android:maxLines="2"
+                                    android:text="Properties"
+                                    android:textColor="@color/white"
+                                    android:textSize="14sp" />
 
                             </LinearLayout>
 
                             <LinearLayout
                                 android:id="@+id/cv_servicess1"
-                                android:paddingBottom="8dp"
-                                android:layout_weight="1"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:orientation="vertical">
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:paddingBottom="8dp">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -318,219 +317,356 @@
                                     android:src="@drawable/ic_shopping" />
 
                                 <TextView
-                                    android:text="Servicess"
-                                    android:gravity="center"
-                                    android:layout_marginEnd="10dp"
-                                    android:layout_marginStart="10dp"
-                                    android:maxLines="2"
-                                    android:fontFamily="@font/proxima_nova_semi_bold"
-                                    android:layout_marginTop="2dp"
-                                    android:textColor="@color/white"
-                                    android:textSize="14sp"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"/>
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:fontFamily="@font/proxima_nova_semi_bold"
+                                    android:gravity="center"
+                                    android:maxLines="2"
+                                    android:text="Servicess"
+                                    android:textColor="@color/white"
+                                    android:textSize="14sp" />
 
                             </LinearLayout>
                         </LinearLayout>
 
                     </LinearLayout>
 
-                <LinearLayout
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:layout_marginTop="5dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:fontFamily="@font/proxima_nova_semi_bold"
-                        android:layout_marginTop="10dp"
-                        android:text="Continue Your Search"
-                        android:textColor="@color/black"
-                        android:textSize="15dp" />
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:gravity="center"
+                        android:layout_marginTop="5dp"
                         android:background="@color/white"
                         android:orientation="vertical"
                         app:layout_constraintTop_toTopOf="parent">
-
-                        <!-- <androidx.cardview.widget.CardView
-                             android:layout_width="match_parent"
-                             android:layout_height="wrap_content"
-                             android:layout_marginEnd="10dp"
-                             android:layout_marginStart="10dp"
-                             android:layout_marginTop="10dp"
-                             android:layout_marginBottom="10dp"
-                             android:elevation="3dp"
-                             android:background="@color/white"
-                             app:cardCornerRadius="10dp">-->
-
-
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rv_home_event"
-                            android:layout_width="370dp"
-                            android:layout_height="160dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_gravity="center" />
-
-                        <!--  </androidx.cardview.widget.CardView>-->
-
-                    </LinearLayout>
-                    </LinearLayout>
-
-                <LinearLayout
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:layout_marginTop="5dp"
-                    android:orientation="vertical">
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:fontFamily="@font/proxima_nova_semi_bold"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/lato"
+                            android:text="Continue Your Search"
+                            android:textColor="@color/black"
+                            android:textSize="15dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="Upcoming Projects"
+                            android:background="@color/white"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rv_home_event"
+                                android:layout_width="370dp"
+                                android:layout_height="160dp"
+                                android:layout_gravity="center" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:background="@drawable/card_shadow_back_login"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:outlineSpotShadowColor="@color/red"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/proxima_nova_semi_bold"
+                            android:text="Deals of the day"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
-                        <TextView
+
+                        <LinearLayout
                             android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <LinearLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:paddingBottom="8dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:src="@drawable/ic_rent_icon" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="@font/lato"
+                                    android:gravity="center"
+                                    android:maxLines="2"
+                                    android:text="House For \n Rent"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:paddingBottom="8dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:src="@drawable/ic_rent_icon" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="@font/lato"
+                                    android:gravity="center"
+                                    android:maxLines="2"
+                                    android:text="House for \n lease"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:paddingBottom="8dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:src="@drawable/ic_rent_icon" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="@font/lato"
+                                    android:gravity="center"
+                                    android:maxLines="2"
+                                    android:text="Buy your new house"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:paddingBottom="8dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:src="@drawable/ic_rent_icon" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="@font/lato"
+                                    android:gravity="center"
+                                    android:maxLines="2"
+                                    android:text="Commercial for Rent "
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <LinearLayout
+                            android:layout_marginTop="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:gravity="start|center"
+                                android:layout_weight="1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:fontFamily="@font/proxima_nova_semi_bold"
+                                android:text="Upcoming Projects"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="20dp"
+                                android:fontFamily="@font/proxima_nova_semi_bold"
+                                android:text="See All"
+                                android:textColor="@color/red"
+                                android:textSize="15sp" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_marginTop="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:background="@color/white"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            app:layout_constraintTop_toTopOf="parent">
+
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rv_adds_layots1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="3dp"
+                                android:layout_marginEnd="3dp" />
+
+                            <!--  </androidx.cardview.widget.CardView>-->
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:fontFamily="@font/proxima_nova_semi_bold"
                             android:layout_marginTop="10dp"
-                            android:gravity="end"
-                            android:layout_marginLeft="300dp"
-                            android:text="See all"
-                            android:textColor="@color/red"
+                            android:fontFamily="@font/proxima_nova_semi_bold"
+                            android:gravity="center"
+                            android:text="Hot Deals for you"
+                            android:textColor="@color/black"
                             android:textSize="15sp" />
 
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:background="@color/white"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginStart="5dp"
-                        android:orientation="vertical">
-
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rv_adds_layots1"
-                            android:layout_width="match_parent"
-                            android:layout_marginStart="3dp"
-                            android:layout_marginEnd="3dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_height="match_parent" />
-
-                        <!--  </androidx.cardview.widget.CardView>-->
-
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:layout_marginTop="5dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:gravity="center"
-                        android:text="Hot Deals for you"
-                        android:layout_marginTop="10dp"
-                        android:textColor="@color/black"
-                        android:textSize="15sp"
-                        android:fontFamily="@font/proxima_nova_semi_bold" />
-
-                    <LinearLayout
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rv_dash_prop"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="2dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginEnd="2dp" />
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rv_dash_prop"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="2dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="2dp" />
+                        </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
 
                     <LinearLayout
-                        app:layout_constraintTop_toTopOf="parent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:orientation="vertical"
                         android:visibility="gone"
-                        android:orientation="vertical">
+                        app:layout_constraintTop_toTopOf="parent">
+
                         <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
                             android:elevation="3dp"
                             app:cardCornerRadius="15dp">
+
                             <LinearLayout
+                                android:id="@+id/ll_back"
                                 android:layout_width="match_parent"
                                 android:layout_height="100dp"
-                                android:orientation="horizontal"
-                                android:id="@+id/ll_back"
-                                android:background="@color/grey">
+                                android:background="@color/grey"
+                                android:orientation="horizontal">
+
                                 <FrameLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="5dp">
+
                                     <ImageView
                                         android:layout_width="60dp"
                                         android:layout_height="match_parent"
-                                        android:src="@drawable/sound"
-                                        />
+                                        android:src="@drawable/sound" />
 
                                 </FrameLayout>
+
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:maxLines="5"
-                                    android:gravity="center_vertical"
-                                    android:textColor="@color/white"
-                                    android:textSize="14sp"
                                     android:layout_marginStart="10dp"
                                     android:layout_marginTop="3dp"
                                     android:layout_marginBottom="3dp"
-                                    android:textStyle="bold"/>
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:maxLines="5"
+                                    android:textColor="@color/white"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
 
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
@@ -540,9 +676,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:orientation="horizontal"
                         android:visibility="gone"
-                        android:gravity="center"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <androidx.cardview.widget.CardView
@@ -552,27 +688,29 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:background="@color/white">
+                                android:background="@color/white"
+                                android:orientation="vertical">
+
                                 <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
+                                    android:layout_gravity="center_vertical"
                                     android:layout_marginTop="10dp"
                                     android:layout_marginBottom="5dp"
-                                    android:src="@drawable/ic_service"
-                                    android:layout_gravity="center_vertical"/>
+                                    android:src="@drawable/ic_service" />
+
                                 <TextView
-                                    android:text="Services"
-                                    android:gravity="center"
-                                    android:layout_marginEnd="10dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
                                     android:layout_marginStart="10dp"
-                                    android:maxLines="2"
-                                    android:textStyle="bold"
                                     android:layout_marginTop="10dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:gravity="center"
+                                    android:maxLines="2"
+                                    android:text="Services"
                                     android:textColor="@color/black"
                                     android:textSize="14sp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"/>
+                                    android:textStyle="bold" />
 
                             </LinearLayout>
 
@@ -587,8 +725,8 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:background="@color/white">
+                                android:background="@color/white"
+                                android:orientation="vertical">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -599,17 +737,17 @@
                                     android:src="@drawable/ic_transport" />
 
                                 <TextView
-                                    android:text="Transport"
-                                    android:gravity="center"
-                                    android:layout_marginEnd="10dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
                                     android:layout_marginStart="10dp"
-                                    android:maxLines="2"
-                                    android:textStyle="bold"
                                     android:layout_marginTop="10dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:gravity="center"
+                                    android:maxLines="2"
+                                    android:text="Transport"
                                     android:textColor="@color/black"
                                     android:textSize="14sp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"/>
+                                    android:textStyle="bold" />
 
                             </LinearLayout>
 
@@ -617,36 +755,37 @@
                         </androidx.cardview.widget.CardView>
 
 
-
                         <androidx.cardview.widget.CardView
                             android:id="@+id/cv_buy"
                             android:layout_width="100dp"
                             android:layout_height="100dp">
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:background="@color/white">
+                                android:background="@color/white"
+                                android:orientation="vertical">
+
                                 <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
+                                    android:layout_gravity="center_vertical"
                                     android:layout_marginTop="10dp"
                                     android:layout_marginBottom="5dp"
-                                    android:src="@drawable/ic_construction"
-                                    android:layout_gravity="center_vertical"/>
+                                    android:src="@drawable/ic_construction" />
 
                                 <TextView
-                                    android:text="Construction"
-                                    android:gravity="center"
-                                    android:layout_marginEnd="10dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
                                     android:layout_marginStart="10dp"
-                                    android:maxLines="2"
-                                    android:textStyle="bold"
                                     android:layout_marginTop="10dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:gravity="center"
+                                    android:maxLines="2"
+                                    android:text="Construction"
                                     android:textColor="@color/black"
                                     android:textSize="14sp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"/>
+                                    android:textStyle="bold" />
 
                             </LinearLayout>
 
@@ -660,27 +799,29 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:background="@color/white">
+                                android:background="@color/white"
+                                android:orientation="vertical">
+
                                 <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
+                                    android:layout_gravity="center_vertical"
                                     android:layout_marginTop="10dp"
                                     android:layout_marginBottom="5dp"
-                                    android:src="@drawable/ic_sell"
-                                    android:layout_gravity="center_vertical"/>
+                                    android:src="@drawable/ic_sell" />
+
                                 <TextView
-                                    android:text="Sell"
-                                    android:gravity="center"
-                                    android:layout_marginEnd="10dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
                                     android:layout_marginStart="10dp"
-                                    android:maxLines="2"
-                                    android:textStyle="bold"
                                     android:layout_marginTop="10dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:gravity="center"
+                                    android:maxLines="2"
+                                    android:text="Sell"
                                     android:textColor="@color/black"
                                     android:textSize="14sp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"/>
+                                    android:textStyle="bold" />
 
                             </LinearLayout>
 
@@ -688,10 +829,7 @@
                         </androidx.cardview.widget.CardView>
 
 
-
-
                     </LinearLayout>
-
 
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -723,7 +861,6 @@
         app:menu="@menu/menu_items">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
-
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

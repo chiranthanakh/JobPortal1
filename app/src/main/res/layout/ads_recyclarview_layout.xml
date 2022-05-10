@@ -11,7 +11,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="150dp"
-        android:layout_height="180dp"
+        android:layout_height="185dp"
         android:elevation="3dp"
         android:id="@+id/cv_card"
         android:layout_marginTop="5dp"
@@ -35,31 +35,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:layout_marginTop="3dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
             <TextView
                 android:id="@+id/tv_ads_heading"
                 android:text="1 BHK Flat"
-                android:gravity="start"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/proxima_nova_semi_bold"
-                android:layout_marginTop="5dp"
+                android:drawableTint="@color/black"
+                android:drawableStart="@drawable/ic_home_ads"
+                android:gravity="start|center"
+                android:fontFamily="@font/lato"
                 android:textColor="@color/grey"
-                android:textSize="11sp"
+                android:textSize="12sp"
+                android:drawablePadding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+        </LinearLayout>
             <LinearLayout
+                android:layout_marginTop="3dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginEnd="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
                 android:orientation="horizontal">
                 <TextView
                     android:id="@+id/tv_ads_amount"
                     android:layout_weight="2"
                     android:text="23 Lac"
-                    android:gravity="start"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginStart="10dp"
+                    android:gravity="start|center"
+                    android:drawablePadding="5dp"
+                    android:drawableStart="@drawable/ic_rupees_ads"
                     android:fontFamily="@font/lato_semibold"
                     android:textColor="@color/black"
                     android:textSize="12sp"
@@ -82,27 +93,23 @@
 
             </LinearLayout>
             <LinearLayout
-                android:layout_marginStart="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="7dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <ImageView
-                    android:src="@drawable/location"
-                    android:layout_width="25dp"
-                    android:gravity="center"
-                    android:padding="6dp"
-                    android:layout_height="25dp"
-                    app:tint="#E50027" />
-
+                android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/product_location1"
-                    android:text="RT Nagar Hmt Layout "
+                    android:text="RT Nagar Hmt Layout"
                     app:layout_constraintStart_toStartOf="@+id/iv_product"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:textSize="9dp"
+                    android:textSize="11dp"
+                    android:drawableTint="@color/red"
+                    android:drawableStart="@drawable/location_ads"
                     android:layout_gravity="center"
+                    android:gravity="start|center"
+                    android:drawablePadding="5dp"
                     android:fontFamily="@font/proxima_family"
-                    android:layout_marginEnd="10dp"
                     android:textColor="@color/grey"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
