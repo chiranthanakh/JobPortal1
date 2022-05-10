@@ -80,7 +80,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-
         //Intent intent = new Intent(getApplicationContext(), RoleActivity.class);
         //startActivity(intent);
 
