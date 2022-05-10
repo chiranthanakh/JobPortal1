@@ -237,7 +237,7 @@
                         android:layout_gravity="center"
                         android:adjustViewBounds="true"
                         android:padding="10dp"
-                        android:src="@drawable/logo" />
+                        android:src="@drawable/call" />
 
                 </LinearLayout>
 
