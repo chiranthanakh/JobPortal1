@@ -5,13 +5,13 @@ package com.chiranths.jobportal1.Activities.Propertys;
 public class Products {
 
 
-    private String pname, description, price, image, category, pid, date, time,type,size,location,number;
+    private String pname, description, price, image, category, pid, date, time,type,size,location,number,image2;
     public Products()
     {
 
     }
 
-    public Products(String pname, String description, String price, String image, String category, String pid, String date, String time, String type, String size, String location, String number) {
+    public Products(String pname, String description, String price, String image, String category, String pid, String date, String time, String type, String size, String location, String number, String image2) {
         this.pname = pname;
         this.description = description;
         this.price = price;
@@ -24,6 +24,15 @@ public class Products {
         this.size = size;
         this.location = location;
         this.number = number;
+        this.image2 = image2;
+    }
+
+    public String getImage2() {
+        return image2;
+    }
+
+    public void setImage2(String image2) {
+        this.image2 = image2;
     }
 
     public String getPname() {

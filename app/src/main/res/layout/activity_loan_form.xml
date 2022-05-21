@@ -4,346 +4,245 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Activities.LoanActivity.LoanForm">
 
+
     <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/purple_500"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+
+            android:id="@+id/iv_nav_view"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:background="?selectableItemBackground"
+            android:padding="10dp"
+            android:src="@drawable/ic_menu"
+            app:tint="@color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_weight="0.9"
+            android:layout_marginTop="@dimen/margin_10_dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="GBD loans"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_loan_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_15_dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_loantype"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/dp_20"
+                android:fontFamily="@font/lato_bold"
+                android:text="Personal loan"
+                android:textColor="@color/purple_700"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="100dp"
+                android:layout_height="5dp"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_marginStart="@dimen/dp_30"
+                android:background="@color/purple_700" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_20"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/dp_20"
+                android:fontFamily="@font/lato_bold"
+                android:layout_marginTop="@dimen/dp_5"
+                android:text="Their is only few steps to get loan"
+                android:textColor="@color/grey"
+                android:textSize="15sp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_reqamount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_loan_name"
+        android:layout_marginVertical="@dimen/dp_20"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_width="match_parent"
-        android:id="@+id/ll_name"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/margin_10_dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/lato"
-            android:text="Name"
-            android:textColor="@color/grey"
-            android:textSize="12sp" />
-        <androidx.constraintlayout.widget.ConstraintLayout
+            android:text="Required amount*"
+            android:textColor="@color/purple_500"
+            android:textSize="18sp" />
+
+
+        <!--this is the actual edit text which takes the input-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_loan_amoutnt"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_10_dp"
+            android:backgroundTint="@color/app_blue"
+            android:hint="Enter Your name"
+            android:textColorHint="@color/profile_textHint" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColorHint="@color/grey_dark"
-                app:boxStrokeColor="@color/grey"
-                app:boxStrokeWidth="0.5dp"
-                app:boxStrokeWidthFocused="0.9dp"
-                app:hintTextColor="@color/grey_dark"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:startIconTint="@color/grey_light">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:fontFamily="@font/proxima_family"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
-
     <LinearLayout
+        android:id="@+id/ll_monthly_income1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_reqamount"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_width="match_parent"
-        android:id="@+id/ll_name_seckond"
-        android:layout_below="@id/ll_name"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/margin_10_dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/lato"
-            android:text="Seckond name"
-            android:textColor="@color/grey"
-            android:textSize="12sp" />
-        <androidx.constraintlayout.widget.ConstraintLayout
+            android:text="Monthly Income*"
+            android:textColor="@color/purple_500"
+            android:textSize="18sp" />
+
+
+        <!--this is the actual edit text which takes the input-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_monthly_income1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_10_dp"
+            android:backgroundTint="@color/app_blue"
+            android:hint="Enter monthly income"
+            android:textColorHint="@color/profile_textHint" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColorHint="@color/grey_dark"
-                app:boxStrokeColor="@color/grey"
-                app:boxStrokeWidth="0.5dp"
-                app:boxStrokeWidthFocused="0.9dp"
-                app:hintTextColor="@color/grey_dark"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:startIconTint="@color/grey_light">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_seckond_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:fontFamily="@font/proxima_family"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        android:id="@+id/ll_type_emp"
         android:layout_width="match_parent"
-        android:id="@+id/ll_number"
-        android:layout_below="@id/ll_name_seckond"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_below="@+id/ll_monthly_income1"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="@dimen/margin_20_dp"
+        android:layout_marginEnd="10dp"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/margin_10_dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/lato"
-            android:text="Phone Number"
-            android:inputType="number"
-            android:textColor="@color/grey"
-            android:textSize="12sp" />
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:text="Employment Type*"
+            android:textColor="@color/purple_500"
+            android:textSize="18sp" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColorHint="@color/grey_dark"
-                app:boxStrokeColor="@color/grey"
-                app:boxStrokeWidth="0.5dp"
-                app:boxStrokeWidthFocused="0.9dp"
-                app:hintTextColor="@color/grey_dark"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:startIconTint="@color/grey_light">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_number"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:fontFamily="@font/proxima_family"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--this is the actual edit text which takes the input-->
+
+        <Spinner
+            android:id="@+id/edt_emp_type"
+            android:layout_width="fill_parent"
+            android:layout_marginStart="@dimen/margin_10_dp"
+            android:backgroundTint="@color/app_blue"
+            android:hint="Select employment type"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 
-
     <LinearLayout
+        android:id="@+id/ll_current_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_type_emp"
+        android:layout_marginTop="@dimen/margin_20_dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_width="match_parent"
-        android:layout_below="@+id/ll_number"
-        android:id="@+id/ll_amount"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/margin_10_dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/lato"
-            android:text="Required loan amount"
-            android:textColor="@color/grey"
-            android:textSize="12sp" />
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColorHint="@color/grey_dark"
-                app:boxStrokeColor="@color/grey"
-                app:boxStrokeWidth="0.5dp"
-                app:boxStrokeWidthFocused="0.9dp"
-                app:hintTextColor="@color/grey_dark"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:startIconTint="@color/grey_light">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_loan_amoutnt"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:fontFamily="@font/proxima_family"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
+            android:text="Pan card*"
+            android:textColor="@color/purple_500"
+            android:textSize="18sp" />
 
 
-
-    <LinearLayout
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_width="match_parent"
-        android:layout_below="@+id/ll_amount"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical">
-        <TextView
+        <!--this is the actual edit text which takes the input-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_pancard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/lato"
-            android:text="CTN#"
-            android:textColor="@color/grey"
-            android:textSize="12sp" />
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_marginStart="@dimen/margin_10_dp"
+            android:backgroundTint="@color/app_blue"
+            android:hint="Enter pan card number"
+            android:textColorHint="@color/profile_textHint" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColorHint="@color/grey_dark"
-                app:boxStrokeColor="@color/grey"
-                app:boxStrokeWidth="0.5dp"
-                app:boxStrokeWidthFocused="0.9dp"
-                app:hintTextColor="@color/grey_dark"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:startIconTint="@color/grey_light">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_edit_ctn"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:fontFamily="@font/proxima_family"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_width="match_parent"
-        android:layout_below="@+id/ll_amount"
-        android:id="@+id/ll_monthly_income"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/lato"
-            android:text="Monthly Income"
-            android:textColor="@color/grey"
-            android:textSize="12sp" />
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColorHint="@color/grey_dark"
-                app:boxStrokeColor="@color/grey"
-                app:boxStrokeWidth="0.5dp"
-                app:boxStrokeWidthFocused="0.9dp"
-                app:hintTextColor="@color/grey_dark"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:startIconTint="@color/grey_light">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_monthly_income"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:fontFamily="@font/proxima_family"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_width="match_parent"
-        android:layout_below="@+id/ll_monthly_income"
-        android:id="@+id/ll_resident"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/lato"
-            android:text="Residing City"
-            android:textColor="@color/grey"
-            android:textSize="12sp" />
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColorHint="@color/grey_dark"
-                app:boxStrokeColor="@color/grey"
-                app:boxStrokeWidth="0.5dp"
-                app:boxStrokeWidthFocused="0.9dp"
-                app:hintTextColor="@color/grey_dark"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:startIconTint="@color/grey_light">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_city"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:fontFamily="@font/proxima_family"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
-                    android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
-
 
     <Button
-        android:id="@+id/btn_next"
+        android:id="@+id/btn_next_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_resident"
+        android:layout_below="@+id/ll_current_city"
         android:layout_marginLeft="45dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="45dp"

@@ -30,24 +30,26 @@ public class RoleActivity extends AppCompatActivity {
         jobSeekerBtn = (Button) findViewById(R.id.JobSeekerBtn);
         adminBtn = (Button) findViewById(R.id.AdminBtn);
 
+        FirebaseDatabase.getInstance().getReference().child("users")
+                .child(userId)
+                .child("role")
+                .setValue("jobseeker").addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
+
         //Implementing on clickListener to save the current users role
         jobSeekerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                FirebaseDatabase.getInstance().getReference().child("users")
-                        .child(userId)
-                        .child("role")
-                        .setValue("jobseeker").addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull @NotNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                    }
-                });
+
 
             }
         });

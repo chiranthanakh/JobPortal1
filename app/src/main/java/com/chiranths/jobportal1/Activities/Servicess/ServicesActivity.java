@@ -14,6 +14,5 @@ public class ServicesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_services);
 
 
-
     }
 }

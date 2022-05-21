@@ -1,4 +1,4 @@
-package com.chiranths.jobportal1.Activities.ExtraClass;
+package com.chiranths.jobportal1.Activities.Admin;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -11,7 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.chiranths.jobportal1.Activities.BasicActivitys.StartingActivity;
+import com.chiranths.jobportal1.Activities.Dashboard.StartingActivity;
 import com.chiranths.jobportal1.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,8 +37,8 @@ public class Admincoroselimages extends AppCompatActivity {
     private static final int GalleryPick4 = 4;
     private Uri ImageUri;
     private ProgressDialog loadingBar;
-    private StorageReference ProductImagesRef, adsImageRef, hotImageRef, businessImageRef;
-    private DatabaseReference ProductsRef,adsRef, hotRef, businessRef;
+    private StorageReference ProductImagesRef, adsImageRef, hotImageRef, businessImageRef, layoutsImagesRef;
+    private DatabaseReference ProductsRef,adsRef, hotRef, businessRef, layoutRef;
     private String productRandomKey, downloadImageUrl;
 
     @Override
@@ -58,26 +58,43 @@ public class Admincoroselimages extends AppCompatActivity {
         businessImageRef = FirebaseStorage.getInstance().getReference().child("business");
         businessRef = FirebaseDatabase.getInstance().getReference().child("BusinessListing");
 
+        layoutsImagesRef = FirebaseStorage.getInstance().getReference().child("layouts");
+        layoutRef = FirebaseDatabase.getInstance().getReference().child("layoutsforyou");
+
+
         loadingBar = new ProgressDialog(this);
 
         Button btn_corosel = findViewById(R.id.btn_corosel);
         Button btn_ads = findViewById(R.id.btn_ads);
         Button btn_hot_deals = findViewById(R.id.btn_hot_deals);
         Button btn_business_listing = findViewById(R.id.btn_business_listing);
+        Button btn_layouts = findViewById(R.id.btn_layouts);
 
         btn_hot_deals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OpenGallery3();
+
+                Intent intent = new Intent(Admincoroselimages.this,Admin_hotdeals.class);
+                startActivity(intent);
             }
         });
+
+        btn_layouts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Admincoroselimages.this,Admin_layouts.class);
+                startActivity(intent);
+            }
+        });
+
 
         btn_corosel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                OpenGallery();
-
+                Intent intent = new Intent(Admincoroselimages.this,Admin_corosel.class);
+                startActivity(intent);
             }
         });
 
@@ -85,50 +102,22 @@ public class Admincoroselimages extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                OpenGallery2();
-
+                Intent intent = new Intent(Admincoroselimages.this,Admin_ads.class);
+                startActivity(intent);
             }
         });
 
         btn_business_listing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OpenGallery4();
+
+                Intent intent = new Intent(Admincoroselimages.this,Admin_hotdeals.class);
+                startActivity(intent);
             }
         });
     }
 
-    private void OpenGallery(){
-        Intent galleryIntent = new Intent();
-        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-        galleryIntent.setType("image/*");
-        galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        startActivityForResult(galleryIntent, GalleryPick);
-    }
 
-    private void OpenGallery2(){
-        Intent galleryIntent = new Intent();
-        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-        galleryIntent.setType("image/*");
-        galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        startActivityForResult(galleryIntent, GalleryPick2);
-    }
-
-    private void OpenGallery3(){
-        Intent galleryIntent = new Intent();
-        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-        galleryIntent.setType("image/*");
-        galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        startActivityForResult(galleryIntent, GalleryPick3);
-    }
-
-    private void OpenGallery4(){
-        Intent galleryIntent = new Intent();
-        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-        galleryIntent.setType("image/*");
-        galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        startActivityForResult(galleryIntent, GalleryPick4);
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
@@ -153,8 +142,6 @@ public class Admincoroselimages extends AppCompatActivity {
             //InputProductImage.setImageURI(ImageUri);
             StoreBusiness();
         }
-
-
     }
 
     private void StoreProductInformation()

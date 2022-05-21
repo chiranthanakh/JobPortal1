@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.chiranths.jobportal1.Activities.BasicActivitys.AdsDetailsActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyDetailsActivity;
@@ -51,16 +52,20 @@ public class AdsAdaptor extends RecyclerView.Adapter<AdsAdaptor.ViewHolder> {
 
         String[] data = noticeimage.split("---");
 
-        Picasso.get()
+        /*Picasso.get()
                 .load(data[0])
                 //.centerCrop()
                 //.resize(150,120)
+                .into(holder.iv_corosel_image);*/
+
+        Glide.with(context)
+                .load(data[0])
                 .into(holder.iv_corosel_image);
 
-
-        holder.tv_heading.setText(data[2]);
+        holder.tv_ads_category.setText(data[2]);
         holder.tv_amount.setText(data[3]);
         holder.tv_space.setText(data[4]);
+        holder.ads_location_adaptor.setText(data[6]);
 
         holder.cv_card.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +78,6 @@ public class AdsAdaptor extends RecyclerView.Adapter<AdsAdaptor.ViewHolder> {
     }
 
 
-
     @Override
     public int getItemCount() {
         return noticeBoardList.size();
@@ -82,19 +86,19 @@ public class AdsAdaptor extends RecyclerView.Adapter<AdsAdaptor.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView iv_corosel_image;
-        TextView tv_heading,tv_amount,tv_space;
+        TextView tv_ads_category,tv_amount,tv_space,ads_location_adaptor;
         CardView cv_card;
         LinearLayout ll_enquiry;
-
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             this.iv_corosel_image=itemView.findViewById(R.id.iv_ads_image);
             this.cv_card = itemView.findViewById(R.id.cv_card);
-            this.tv_heading=itemView.findViewById(R.id.tv_ads_heading);
+            this.tv_ads_category=itemView.findViewById(R.id.tv_ads_category);
             this.tv_amount = itemView.findViewById(R.id.tv_ads_amount);
             this.tv_space = itemView.findViewById(R.id.tv_ads_spaces);
+            this.ads_location_adaptor = itemView.findViewById(R.id.ads_location_adaptor);
            /// this.ll_enquiry = itemView.findViewById(R.id.ll_enquiry);
 
         }

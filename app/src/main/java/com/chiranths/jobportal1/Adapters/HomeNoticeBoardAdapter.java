@@ -39,6 +39,7 @@ public class HomeNoticeBoardAdapter extends RecyclerView.Adapter<HomeNoticeBoard
         String noticeimage = String.valueOf(noticeBoardList.get(position));
 
         Picasso.get().load(noticeimage).into(holder.iv_corosel_image);
+
        // holder.tv_notice_Home_title.setText(noticeBoard.getTitle());
       //  holder.tv_notice_Home_description.setText(noticeBoard.getDesc());
        // holder.tv_notice_home_date.setText(noticeBoard.getDate());

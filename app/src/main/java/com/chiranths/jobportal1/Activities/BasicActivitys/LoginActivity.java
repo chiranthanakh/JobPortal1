@@ -32,7 +32,7 @@ import com.google.firebase.database.annotations.NotNull;
 
 import java.util.HashMap;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     GoogleSignInClient mSignInClient;
     FirebaseAuth firebaseAuth;
@@ -52,7 +52,6 @@ public class LoginActivity extends AppCompatActivity {
         progressBar.setTitle("Please Wait...");
         progressBar.setMessage("We are setting Everything for you...");
         progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-
 
         signInButton =  findViewById(R.id.GoogleSignInBtn);
 
@@ -74,7 +73,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -137,12 +135,11 @@ public class LoginActivity extends AppCompatActivity {
                                                 //navigating to the main activity after user successfully registers
                                                 Intent intent = new Intent(getApplicationContext(), RoleActivity.class);
                                                 //Clears older activities and tasks
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                               // intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                 startActivity(intent);
                                             }
                                         }
                                     });
-
                                 }
                             }
                         });
@@ -153,6 +150,11 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         }
+
+    }
+
+    @Override
+    public void onClick(View view) {
 
     }
 }

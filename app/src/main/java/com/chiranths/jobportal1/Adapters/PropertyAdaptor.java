@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.chiranths.jobportal1.Activities.BasicActivitys.ProductInfo;
 import com.chiranths.jobportal1.Activities.HotDealsactivity.HotDealsDetailsActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyDetailsActivity;
@@ -52,10 +53,14 @@ public class PropertyAdaptor extends RecyclerView.Adapter<PropertyAdaptor.ViewHo
         String[] data = imagesdata[1].split("---");
         String[] imageurl = imagesdata[0].split("---");
 
-        Picasso.get()
+        /*Picasso.get()
                 .load(imageurl[0])
                 .centerCrop()
                 .resize(130,130)
+                .into(holder.iv_image);*/
+
+        Glide.with(context)
+                .load(imageurl[0])
                 .into(holder.iv_image);
 
         holder.product_type1.setText(data[2]);

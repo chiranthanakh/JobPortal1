@@ -11,7 +11,6 @@ public class SqlDb extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "Student.db";
     public static final String TABLE_NAME = "cart_table";
-
     public static final String COL_1 = "ID";
     public static final String COL_2 = "productid";
     public static final String COL_3 = "productname";

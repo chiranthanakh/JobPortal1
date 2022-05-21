@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
+        android:background="@color/white"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <LinearLayout
@@ -94,6 +95,7 @@
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:id="@+id/iv_sell"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_gravity="center"
@@ -101,9 +103,7 @@
                             android:background="?selectableItemBackground"
                             android:src="@drawable/sales" />
 
-
                     </LinearLayout>
-
 
                 </LinearLayout>
 
@@ -123,6 +123,7 @@
                     app:contentInsetStartWithNavigation="0dp">
 
                     <LinearLayout
+                        android:id="@+id/search_layout"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:layout_marginStart="10dp"
@@ -141,16 +142,17 @@
                             app:tint="@color/grey" />
 
                         <EditText
-                            android:id="@+id/edt_search2"
+                            android:id="@+id/main_edt_search2"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@null"
                             android:gravity="center_vertical"
-                            android:hint="Search by Project..."
+                            android:hint="Search by Location..."
                             android:textColor="@color/black"
                             android:textColorHint="@color/grey_light"
                             android:textSize="18sp"
+                            android:cursorVisible="false"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/iv_search" />
 
@@ -203,7 +205,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
                             android:gravity="center"
-
                             android:orientation="horizontal"
                             app:layout_constraintTop_toTopOf="parent">
 
@@ -212,6 +213,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
+                                android:visibility="gone"
                                 android:orientation="vertical"
                                 android:paddingBottom="8dp">
 
@@ -237,7 +239,7 @@
                                     android:textSize="14sp" />
 
                             </LinearLayout>
-
+>
                             <LinearLayout
                                 android:id="@+id/cv_loans"
                                 android:layout_width="match_parent"
@@ -331,8 +333,8 @@
 
                             </LinearLayout>
                         </LinearLayout>
-
                     </LinearLayout>
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -342,15 +344,6 @@
                         android:orientation="vertical"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:fontFamily="@font/lato"
-                            android:text="Continue Your Search"
-                            android:textColor="@color/black"
-                            android:textSize="15dp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -387,7 +380,7 @@
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
                             android:fontFamily="@font/proxima_nova_semi_bold"
-                            android:text="Deals of the day"
+                            android:text="What you looking for"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
@@ -401,7 +394,7 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <LinearLayout
-
+                                android:id="@+id/ll_rent"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -414,7 +407,7 @@
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginTop="5dp"
                                     android:layout_marginBottom="5dp"
-                                    android:src="@drawable/ic_rent_icon" />
+                                    android:src="@drawable/rent" />
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -426,11 +419,68 @@
                                     android:text="House For \n Rent"
                                     android:textColor="@color/black"
                                     android:textSize="12sp" />
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/ll_commercial_rent"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:paddingBottom="8dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:src="@drawable/building" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="@font/lato"
+                                    android:gravity="center"
+                                    android:maxLines="2"
+                                    android:text="Commercial Space rent"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp" />
 
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/ll_hotel"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:paddingBottom="8dp">
 
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:src="@drawable/hotel" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="@font/lato"
+                                    android:gravity="center"
+                                    android:maxLines="2"
+                                    android:text="Hotels"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -452,79 +502,19 @@
                                     android:fontFamily="@font/lato"
                                     android:gravity="center"
                                     android:maxLines="2"
-                                    android:text="House for \n lease"
+                                    android:text="PG or Co-workspace"
                                     android:textColor="@color/black"
                                     android:textSize="12sp" />
 
                             </LinearLayout>
-
-                            <LinearLayout
-
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                android:paddingBottom="8dp">
-
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="30dp"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginBottom="5dp"
-                                    android:src="@drawable/ic_rent_icon" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:fontFamily="@font/lato"
-                                    android:gravity="center"
-                                    android:maxLines="2"
-                                    android:text="Buy your new house"
-                                    android:textColor="@color/black"
-                                    android:textSize="12sp" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                android:paddingBottom="8dp">
-
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="30dp"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginBottom="5dp"
-                                    android:src="@drawable/ic_rent_icon" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:fontFamily="@font/lato"
-                                    android:gravity="center"
-                                    android:maxLines="2"
-                                    android:text="Commercial for Rent "
-                                    android:textColor="@color/black"
-                                    android:textSize="12sp" />
-
-                            </LinearLayout>
-
                         </LinearLayout>
-
-
                     </LinearLayout>
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="20dp"
                         android:background="@color/white"
                         android:orientation="vertical"
                         app:layout_constraintTop_toTopOf="parent">
@@ -583,6 +573,221 @@
 
 
                         </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <LinearLayout
+                            android:layout_marginTop="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:gravity="start|center"
+                                android:layout_weight="1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:fontFamily="@font/proxima_nova_semi_bold"
+                                android:text="Layouts"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="20dp"
+                                android:fontFamily="@font/proxima_nova_semi_bold"
+                                android:text="See All"
+                                android:textColor="@color/red"
+                                android:textSize="15sp" />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_marginTop="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:background="@color/white"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            app:layout_constraintTop_toTopOf="parent">
+
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rv_Layouts"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="3dp"
+                                android:layout_marginEnd="3dp" />
+
+                            <!--  </androidx.cardview.widget.CardView>-->
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:background="@drawable/card_shadow_back_login"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:visibility="gone"
+                        android:outlineSpotShadowColor="@color/red"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/proxima_nova_semi_bold"
+                            android:text="Loans"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <LinearLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:paddingBottom="8dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:src="@drawable/ic_rent_icon" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="@font/lato"
+                                    android:gravity="center"
+                                    android:maxLines="2"
+                                    android:text="Personal loan"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:paddingBottom="8dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:src="@drawable/ic_rent_icon" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="@font/lato"
+                                    android:gravity="center"
+                                    android:maxLines="2"
+                                    android:text="Business loan"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:paddingBottom="8dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:src="@drawable/ic_rent_icon" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="@font/lato"
+                                    android:gravity="center"
+                                    android:maxLines="2"
+                                    android:text="Home loan"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:paddingBottom="8dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:src="@drawable/ic_rent_icon" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="@font/lato"
+                                    android:gravity="center"
+                                    android:maxLines="2"
+                                    android:text="Martgage loan "
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
                     </LinearLayout>
 
                     <LinearLayout

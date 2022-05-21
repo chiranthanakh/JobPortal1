@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.chiranths.jobportal1.Activities.Businesthings.BusinessDetailsActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyDetailsActivity;
 import com.chiranths.jobportal1.R;
 import com.squareup.picasso.Picasso;
@@ -49,7 +51,11 @@ public class BusinessAdaptor extends RecyclerView.Adapter<BusinessAdaptor.ViewHo
         String[] data = imagesdata[1].split("---");
         String[] imageurl = imagesdata[0].split("---");
 
-        Picasso.get()
+        /*Picasso.get()
+                .load(imageurl[0])
+                .into(holder.business_image);*/
+
+        Glide.with(context)
                 .load(imageurl[0])
                 .into(holder.business_image);
 
@@ -61,12 +67,11 @@ public class BusinessAdaptor extends RecyclerView.Adapter<BusinessAdaptor.ViewHo
         holder.cv_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =new Intent(context, PropertyDetailsActivity.class);
+                Intent intent =new Intent(context, BusinessDetailsActivity.class);
                 intent.putExtra("pid",data[7]);
                 context.startActivity(intent);
             }
         });
-
     }
 
     @Override

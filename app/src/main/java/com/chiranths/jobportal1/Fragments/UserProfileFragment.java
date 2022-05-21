@@ -3,7 +3,6 @@ package com.chiranths.jobportal1.Fragments;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -12,15 +11,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.chiranths.jobportal1.Activities.BasicActivitys.StartingActivity;
+import com.chiranths.jobportal1.Activities.Dashboard.StartingActivity;
 import com.chiranths.jobportal1.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -77,9 +71,17 @@ public class UserProfileFragment extends Fragment {
             Picasso.get().load(acct.getPhotoUrl()).into(imageView);
         }
 
+        signOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), StartingActivity.class);
+               // intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
 
         //implementing onClickListener to make the user signOut
-        signOutBtn.setOnClickListener(new View.OnClickListener() {
+        /*signOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 GoogleSignInOptions gso = new GoogleSignInOptions.
@@ -106,7 +108,7 @@ public class UserProfileFragment extends Fragment {
                 });
 
             }
-        });
+        });*/
 
 
         return view;

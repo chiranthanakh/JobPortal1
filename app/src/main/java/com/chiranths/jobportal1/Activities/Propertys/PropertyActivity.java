@@ -10,29 +10,25 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.chiranths.jobportal1.Activities.BasicActivitys.StartingActivity;
-import com.chiranths.jobportal1.Adapters.CoroselListAdaptor;
+import com.chiranths.jobportal1.Adapters.AdsAdaptor;
 import com.chiranths.jobportal1.Adapters.PropertyAdaptor;
 import com.chiranths.jobportal1.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,7 +47,10 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
     ArrayList siteslist =new ArrayList();
     ArrayList Homeslist =new ArrayList();
     ArrayList Rentallist =new ArrayList();
+    ArrayList adslist =new ArrayList();
     PropertyAdaptor propertyAdaptor;
+    AdsAdaptor adsAdaptor;
+    RecyclerView recyclarviewads;
     CardView cv_homes, cv_sites, cv_green,cv_comerical;
 
     @Override
@@ -79,6 +78,13 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
         initilize();
 
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                fetchads();
+            }
+        });
+
 
     }
 
@@ -96,6 +102,7 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
         iv_commercial.setOnClickListener(this);
         iv_home.setOnClickListener(this);
 
+        recyclarviewads = findViewById(R.id.rv_adds_layots2);
         recyclerView = findViewById(R.id.recycler_menu);
         recyclerView.setHasFixedSize(true);
         GridLayoutManager mgrid = new GridLayoutManager(this,1);
@@ -109,6 +116,59 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
         super.onResume();
 
     }
+
+    private void fetchads() {
+
+        DatabaseReference adsimage = FirebaseDatabase.getInstance().getReference().child("adsforyou");
+
+        adsimage.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (snapshot.exists()){
+
+                    HashMap<String, Object> dataMap = (HashMap<String, Object>) snapshot.getValue();
+                    for (String key : dataMap.keySet()){
+                        Object data = dataMap.get(key);
+                        try{
+
+                            HashMap<String, Object> userData = (HashMap<String, Object>) data;
+
+                            adslist.add(userData.get("image")+"---"+userData.get("pid")+"---"+userData.get("category")+"---"+userData.get("price")+"---"+userData.get("propertysize")+"---"+userData.get("number")+"---"+userData.get("location"));
+
+                        }catch (ClassCastException cce){
+
+                            try{
+                                String mString = String.valueOf(dataMap.get(key));
+                                //addTextToView(mString);
+                            }catch (ClassCastException cce2){
+
+                            }
+                        }
+                    }
+                    adsAdaptor =new AdsAdaptor(adslist,PropertyActivity.this);
+                    RecyclerView.LayoutManager n1layoutManager = new LinearLayoutManager(PropertyActivity.this, RecyclerView.HORIZONTAL, false);
+                    recyclarviewads.setLayoutManager(n1layoutManager);
+                    recyclarviewads.setItemAnimator(new DefaultItemAnimator());
+
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            recyclarviewads.setAdapter(adsAdaptor);
+                        }
+                    });
+                    adsAdaptor.notifyItemRangeInserted(0, adslist.size());
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 
     private void fetchcorosel() {
         DatabaseReference coroselimage = FirebaseDatabase.getInstance().getReference().child("Products");

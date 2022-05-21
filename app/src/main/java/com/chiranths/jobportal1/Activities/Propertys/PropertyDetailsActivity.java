@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.chiranths.jobportal1.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -43,7 +44,7 @@ public class PropertyDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_property_details);
         productID = getIntent().getStringExtra("pid");
-        addToCartButton =(Button) findViewById(R.id.pd_add_to_cart_button);
+       // addToCartButton =(Button) findViewById(R.id.property_call_btn);
         carouselView =  findViewById(R.id.carouselView);
         productName = (TextView) findViewById(R.id.product_name_details);
         tv_topbar_productName = (TextView) findViewById(R.id.tv_topbar_productName);
@@ -53,7 +54,7 @@ public class PropertyDetailsActivity extends AppCompatActivity {
         getProductDetails(productID);
 
 
-        addToCartButton.setOnClickListener(new View.OnClickListener() {
+        /*addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -64,7 +65,7 @@ public class PropertyDetailsActivity extends AppCompatActivity {
                 {
                 }
             }
-        });
+        });*/
     }
 
     @Override
@@ -101,7 +102,11 @@ public class PropertyDetailsActivity extends AppCompatActivity {
     ImageListener imageListener = new ImageListener() {
         @Override
         public void setImageForPosition(int position, ImageView imageView) {
-          Picasso.get().load(url[position]).into(imageView);
+         // Picasso.get().load(url[position]).into(imageView);
+
+            Glide.with(PropertyDetailsActivity.this)
+                    .load(url[position])
+                    .into(imageView);
 
         }
     };

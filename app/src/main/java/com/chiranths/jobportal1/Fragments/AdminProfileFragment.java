@@ -12,7 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.chiranths.jobportal1.Activities.BasicActivitys.StartingActivity;
+import com.bumptech.glide.Glide;
+import com.chiranths.jobportal1.Activities.Dashboard.StartingActivity;
 import com.chiranths.jobportal1.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -21,7 +22,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -75,7 +75,10 @@ public class AdminProfileFragment extends Fragment {
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getActivity());
         if (acct != null) {
             userName.setText(acct.getDisplayName());
-            Picasso.get().load(acct.getPhotoUrl()).into(imageView);
+            //Picasso.get().load(acct.getPhotoUrl()).into(imageView);
+            Glide.with(getContext())
+                    .load(acct.getPhotoUrl())
+                    .into(imageView);
         }
 
 
@@ -98,7 +101,7 @@ public class AdminProfileFragment extends Fragment {
 
                             //Redirecting to Starting activity
                             Intent intent = new Intent(getContext(), StartingActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                          //  intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
 
                         }

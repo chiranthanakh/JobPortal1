@@ -31,7 +31,7 @@ public class LoanForm extends AppCompatActivity {
 
     private StorageReference ProductImagesRef;
     private DatabaseReference ProductsRef;
-    private EditText et_name,et_seckond_name,et_amount,et_residence,et_monthly_income,et_number;
+    private EditText et_name,et_address,edt_email,et_number,et_dob;
     private Button btn_next;
     private ProgressDialog loadingBar;
     private FirebaseAuth mAuth;
@@ -40,7 +40,7 @@ public class LoanForm extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_loan_form);
+        setContentView(R.layout.activity_loan_form2);
 
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Loans");
         mAuth = FirebaseAuth.getInstance();
@@ -53,12 +53,13 @@ public class LoanForm extends AppCompatActivity {
     private void initilize() {
 
         et_name = findViewById(R.id.edt_name);
-        et_seckond_name = findViewById(R.id.edt_seckond_name);
-        et_amount = findViewById(R.id.edt_loan_amoutnt);
-        et_residence = findViewById(R.id.edt_city);
-        et_monthly_income = findViewById(R.id.edt_monthly_income);
+        edt_email = findViewById(R.id.edt_email);
+       // et_residence = findViewById(R.id.et_address);
+       // et_monthly_income = findViewById(R.id.edt_monthly_income);
         btn_next = findViewById(R.id.btn_next);
         et_number = findViewById(R.id.edt_number);
+        et_dob = findViewById(R.id.edt_dob);
+        et_address =findViewById(R.id.edt_address);
 
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,14 +74,15 @@ public class LoanForm extends AppCompatActivity {
                     // if the text field is not empty we are calling our
                     // send OTP method for getting OTP from Firebase.
                     String phone = "+91" + et_number.getText().toString();
-                    sendVerificationCode(phone);
+                    //sendVerificationCode(phone);
+                    SaveUserDetails();
                 }
             }
         });
 
     }
 
-    private void SaveProductInfoToDatabase()
+    private void SaveUserDetails()
     {
 
         loadingBar.setTitle("Add New Product");
@@ -88,15 +90,26 @@ public class LoanForm extends AppCompatActivity {
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
 
+        Bundle bundle = getIntent().getExtras();
+        String amount = bundle.getString("amount", "50000");
+        String income = bundle.getString("income", "50000");
+        String emptype = bundle.getString("emptype", "salaried");
+        String pancard = bundle.getString("pancard", "");
+
+
         HashMap<String, Object> LoanMap = new HashMap<>();
         LoanMap.put("name", et_name.getText().toString());
-        LoanMap.put("seckond", et_seckond_name.getText().toString());
         LoanMap.put("number",et_number.getText().toString());
-        LoanMap.put("amount", et_amount.getText().toString());
-        LoanMap.put("resident", et_residence.getText().toString());
-        LoanMap.put("monthincome", et_monthly_income.getText().toString());
+        LoanMap.put("email",edt_email.getText().toString());
 
-        ProductsRef.child("7338010153").updateChildren(LoanMap)
+        LoanMap.put("dob", et_dob.getText().toString());
+        LoanMap.put("address", et_address.getText().toString());
+        LoanMap.put("reqAmount", amount);
+        LoanMap.put("monthincome", income);
+        LoanMap.put("emptype", emptype);
+        LoanMap.put("pancard",pancard);
+
+        ProductsRef.child(et_number.getText().toString()).updateChildren(LoanMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task)

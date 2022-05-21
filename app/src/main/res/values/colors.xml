@@ -27,8 +27,16 @@
     <color name="grey_silver_icon">#19000000</color>
     <color name="green">#0dba43</color>
     <color name="yellow">#ffab0d</color>
+    <color name="background_image_color">#E4E4E4</color>
     <color name="pink">#f22d7e</color>
+    <color name="radio_group_color">#3c8ef9</color>
     <color name="pink_skin">#fce1d1</color>
+    <color name="black90per">#e6000000</color>
+    <color name="profile_textHint">#7f253248</color>
+    <color name="black40per">#66000000</color>
+    <color name="transparent1">#2F000000</color>
+    <color name="black50per">#7f000000</color>
+    <color name="black20per">#34000000</color>
     <color name="accepted_color">#03bbd5</color>
     <color name="orange">#ff7f00</color>
     <color name="grey_shimmer">#E1E7ED</color>

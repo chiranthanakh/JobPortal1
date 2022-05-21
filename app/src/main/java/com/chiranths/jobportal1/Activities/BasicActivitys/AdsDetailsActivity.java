@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+import com.chiranths.jobportal1.Activities.HotDealsactivity.HotDealsDetailsActivity;
 import com.chiranths.jobportal1.Activities.Propertys.Products;
 import com.chiranths.jobportal1.R;
 import com.google.firebase.database.DataSnapshot;
@@ -18,22 +20,26 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
 
 public class AdsDetailsActivity extends AppCompatActivity {
 
     private Button addToCartButton;
     CarouselView carouselView;
-    private TextView productPrice,productDescription,productName,tv_topbar_productName;
+    private TextView productPrice,productDescription,productName,tv_topbar_productName,tv_place_location,tv_size_details,tv_prop_type;
     private String productID="", state = "Normal";
-
+    private String[] url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_property_details);
+        setContentView(R.layout.activity_ads_details);
         productID = getIntent().getStringExtra("pid");
-        addToCartButton =(Button) findViewById(R.id.pd_add_to_cart_button);
-        carouselView =  findViewById(R.id.carouselView);
+        addToCartButton =(Button) findViewById(R.id.ads_cl_btn);
+        carouselView =  findViewById(R.id.ads_details_carouselView);
+        tv_prop_type = findViewById(R.id.tv_prop_type);
+        tv_place_location = findViewById(R.id.ads_place_location);
+        tv_size_details = findViewById(R.id.ads_size_details);
         productName = (TextView) findViewById(R.id.product_name_details);
         tv_topbar_productName = (TextView) findViewById(R.id.tv_topbar_productName);
         productDescription = (TextView) findViewById(R.id.product_description_details);
@@ -71,6 +77,12 @@ public class AdsDetailsActivity extends AppCompatActivity {
                     productPrice.setText(products.getPrice());
                     productDescription.setText(products.getDescription());
                     tv_topbar_productName.setText(products.getPname());
+                    tv_place_location.setText(products.getLocation());
+                    tv_size_details.setText(products.getSize());
+                    tv_prop_type.setText(products.getCategory());
+                    url = products.getImage2().split("---");
+                    carouselView.setPageCount(url.length);
+                    carouselView.setImageListener(imageListener);
                    // Picasso.get().load(products.getImage()).into(productImage);
 
                 }
@@ -82,4 +94,15 @@ public class AdsDetailsActivity extends AppCompatActivity {
             }
         });
     }
+
+    ImageListener imageListener = new ImageListener() {
+        @Override
+        public void setImageForPosition(int position, ImageView imageView) {
+
+            Glide.with(AdsDetailsActivity.this)
+                    .load(url[position])
+                    .into(imageView);
+
+        }
+    };
 }
