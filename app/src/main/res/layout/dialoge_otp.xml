@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+            <LinearLayout
+                android:layout_width="350dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_30"
+                android:orientation="vertical"
+                android:animateLayoutChanges="true">
+
+
+                <in.aabhasjindal.otptextview.OtpTextView
+                    android:id="@+id/otp_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    app:bar_active_color="@color/white"
+                    app:bar_enabled="true"
+                    app:bar_error_color="@color/red"
+                    app:bar_height="1.5dp"
+                    app:bar_inactive_color="@color/white"
+                    app:bar_margin_bottom="0dp"
+                    app:bar_margin_left="2dp"
+                    app:bar_margin_right="2dp"
+                    app:bar_success_color="@color/green"
+                    app:box_margin="0dp"
+                    app:height="40dp"
+                    app:hide_otp="true"
+                    app:length="6"
+                    app:otp=""
+                    app:otp_text_size="0dp"
+                    app:width="40dp" />
+
+
+                <Button
+                    android:id="@+id/btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="Submit"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
+
+
+            </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>

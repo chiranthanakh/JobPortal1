@@ -98,7 +98,7 @@ public class AdminProfileFragment extends Fragment {
 
                             //Redirecting to Starting activity
                             Intent intent = new Intent(getContext(), StartingActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                          //  intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
 
                         }

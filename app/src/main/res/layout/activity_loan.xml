@@ -54,6 +54,54 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/loan_corosel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_loan_event"
+                android:layout_width="370dp"
+                android:layout_height="160dp"
+                android:layout_gravity="center" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintTop_toBottomOf="@id/loan_corosel">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_20"
+            android:textSize="15dp"
+            android:textColor="@color/purple_700"
+            android:textStyle="italic"
+            android:text="Loans--------"/>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/loan1"
@@ -62,8 +110,8 @@
         android:orientation="horizontal"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@id/text">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_personal_loan"
@@ -87,7 +135,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_job" />
+                    android:src="@drawable/personalloan" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -127,7 +175,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_service" />
+                    android:src="@drawable/businessloan" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -166,7 +214,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_homelo" />
+                    android:src="@drawable/homeloan" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -220,7 +268,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_transport" />
+                    android:src="@drawable/martgage" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -260,7 +308,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_loans" />
+                    android:src="@drawable/propertyloan" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -300,7 +348,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_construction" />
+                    android:src="@drawable/carloan" />
 
                 <TextView
                     android:layout_width="match_parent"

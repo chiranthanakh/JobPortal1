@@ -88,4 +88,5 @@ public class UserAllApplicationsFragment extends Fragment {
         //Stops listening for data from firebase
         adapter.stopListening();
     }
+
 }

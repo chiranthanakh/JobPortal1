@@ -17,7 +17,7 @@
         app:cardCornerRadius="5dp"
         app:cardElevation="3dp"
         android:elevation="3dp"
-        android:layout_height="140dp">
+        android:layout_height="wrap_content">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -130,25 +130,49 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:backgroundTint="#0D000000"
+                        android:layout_marginTop="15dp"
                         android:layout_marginStart="10dp"
-                        android:background="@drawable/button_capsule"
+                        android:orientation="horizontal"
+                        android:background="@drawable/customborder"
+                        android:layout_gravity="end"
+                        android:gravity="center"
                         android:layout_marginEnd="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Contact:"
+                            android:layout_marginRight="@dimen/dp_30"
+                            />
 
 
                         <ImageView
-                            android:src="@drawable/call"
-                            android:layout_width="match_parent"
+                            android:id="@+id/iv_call_bottom"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="15dp"
+                            android:src="@drawable/ic_call"/>
+
+
+                        <ImageView
+                            android:id="@+id/iv_whatsapp_bottom"
+                            android:text="Call Us"
+                            android:visibility="visible"
+                            android:textColor="@color/white"
+                            android:src="@drawable/whatsapp"
+                            android:layout_width="wrap_content"
+                            android:textStyle="bold"
                             android:gravity="center"
-                            android:padding="4dp"
-                            android:layout_height="30dp"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"/>
 
                     </LinearLayout>
+
 
                 </LinearLayout>
 

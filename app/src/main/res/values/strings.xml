@@ -1,5 +1,53 @@
 <resources>
-    <string name="app_name">JobPortal</string>
+    <string name="app_name">Solution.com</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="lunch_time_array">
+        <item>Select Time</item>
+        <item>10:00 AM</item>
+        <item>10:30 AM</item>
+        <item>11:00 AM</item>
+        <item>11:30 AM</item>
+        <item>12:00 PM</item>
+        <item>12:30 PM</item>
+        <item>01:00 PM</item>
+        <item>01:30 PM</item>
+        <item>02:00 PM</item>
+        <item>02:30 PM</item>
+        <item>03:00 PM</item>
+        <item>03:30 PM</item>
+        <item>04:00 PM</item>
+        <item>04:30 PM</item>
+        <item>05:00 PM</item>
+        <item>05:30 PM</item>
+        <item>06:00 PM</item>
+    </string-array>
+
+    <string-array name="gender">
+        <item>Select</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="test_array_delete_after_test">
+        <item>Select</item>
+        <item>Select item 1</item>
+        <item>Select item 2</item>
+        <item>Select item 3</item>
+        <item>Select item 4</item>
+        <item>Select item 5</item>
+        <item>Select item 6</item>
+    </string-array>
+    <string-array name="language">
+        <item>English</item>
+        <item>Hindi</item>
+        <item>Marati</item>
+        <item>Gujurati</item>
+        <item>Odia</item>
+        <item>Punjabi</item>
+        <item>Tamil</item>
+        <item>Telugu</item>
+        <item>Urdu</item>
+    </string-array>
 </resources>

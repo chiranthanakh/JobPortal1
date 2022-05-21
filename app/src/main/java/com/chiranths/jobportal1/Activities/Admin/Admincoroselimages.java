@@ -1,4 +1,4 @@
-package com.chiranths.jobportal1.Activities.ExtraClass;
+package com.chiranths.jobportal1.Activities.Admin;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -68,7 +68,9 @@ public class Admincoroselimages extends AppCompatActivity {
         btn_hot_deals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OpenGallery3();
+
+                Intent intent = new Intent(Admincoroselimages.this,Admin_hotdeals.class);
+                startActivity(intent);
             }
         });
 
@@ -76,8 +78,8 @@ public class Admincoroselimages extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                OpenGallery();
-
+                Intent intent = new Intent(Admincoroselimages.this,Admin_corosel.class);
+                startActivity(intent);
             }
         });
 
@@ -85,50 +87,22 @@ public class Admincoroselimages extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                OpenGallery2();
-
+                Intent intent = new Intent(Admincoroselimages.this,Admin_ads.class);
+                startActivity(intent);
             }
         });
 
         btn_business_listing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OpenGallery4();
+
+                Intent intent = new Intent(Admincoroselimages.this,Admin_hotdeals.class);
+                startActivity(intent);
             }
         });
     }
 
-    private void OpenGallery(){
-        Intent galleryIntent = new Intent();
-        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-        galleryIntent.setType("image/*");
-        galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        startActivityForResult(galleryIntent, GalleryPick);
-    }
 
-    private void OpenGallery2(){
-        Intent galleryIntent = new Intent();
-        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-        galleryIntent.setType("image/*");
-        galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        startActivityForResult(galleryIntent, GalleryPick2);
-    }
-
-    private void OpenGallery3(){
-        Intent galleryIntent = new Intent();
-        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-        galleryIntent.setType("image/*");
-        galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        startActivityForResult(galleryIntent, GalleryPick3);
-    }
-
-    private void OpenGallery4(){
-        Intent galleryIntent = new Intent();
-        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-        galleryIntent.setType("image/*");
-        galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        startActivityForResult(galleryIntent, GalleryPick4);
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)

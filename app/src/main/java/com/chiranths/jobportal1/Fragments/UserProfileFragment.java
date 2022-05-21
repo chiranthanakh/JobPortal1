@@ -77,9 +77,17 @@ public class UserProfileFragment extends Fragment {
             Picasso.get().load(acct.getPhotoUrl()).into(imageView);
         }
 
+        signOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), StartingActivity.class);
+               // intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
 
         //implementing onClickListener to make the user signOut
-        signOutBtn.setOnClickListener(new View.OnClickListener() {
+        /*signOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 GoogleSignInOptions gso = new GoogleSignInOptions.
@@ -106,7 +114,7 @@ public class UserProfileFragment extends Fragment {
                 });
 
             }
-        });
+        });*/
 
 
         return view;

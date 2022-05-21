@@ -56,16 +56,12 @@ public class BusinessActivity extends AppCompatActivity {
             window.setStatusBarColor(this.getResources().getColor(R.color.app_blue));
         }
 
-
-
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
         initilize();
-
 
     }
 
     private void initilize() {
-
 
         recyclerView = findViewById(R.id.recycler_business);
         recyclerView.setHasFixedSize(true);

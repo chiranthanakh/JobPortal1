@@ -43,7 +43,7 @@ public class PropertyDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_property_details);
         productID = getIntent().getStringExtra("pid");
-        addToCartButton =(Button) findViewById(R.id.pd_add_to_cart_button);
+       // addToCartButton =(Button) findViewById(R.id.property_call_btn);
         carouselView =  findViewById(R.id.carouselView);
         productName = (TextView) findViewById(R.id.product_name_details);
         tv_topbar_productName = (TextView) findViewById(R.id.tv_topbar_productName);
@@ -53,7 +53,7 @@ public class PropertyDetailsActivity extends AppCompatActivity {
         getProductDetails(productID);
 
 
-        addToCartButton.setOnClickListener(new View.OnClickListener() {
+        /*addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -64,7 +64,7 @@ public class PropertyDetailsActivity extends AppCompatActivity {
                 {
                 }
             }
-        });
+        });*/
     }
 
     @Override

@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -16,6 +18,33 @@
         android:roundIcon="@drawable/dataflair"
         android:supportsRtl="true"
         android:theme="@style/JobPortaltheam">
+        <activity
+            android:name=".Activities.BasicActivitys.UserDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Businesthings.BusinessDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.BasicActivitys.CenterHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.BasicActivitys.SearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Admin.Admin_ads"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Admin.Admin_hotdeals"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Admin.Business.Admin_business_listings"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Sell.SellActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.BasicActivitys.CoroselDetailsActivity"
+            android:exported="false" />
         <activity
             android:name=".Activities.Businesthings.BusinessActivity"
             android:exported="false" />
@@ -36,14 +65,15 @@
             android:exported="false" />
         <activity android:name=".Activities.jobs.JobDetailsActivity" />
         <activity android:name=".Activities.jobs.AdminActivity" />
-        <activity android:name=".Activities.ExtraClass.Admincoroselimages" />
+        <activity android:name=".Activities.Admin.Admincoroselimages" />
         <activity android:name=".Activities.jobs.RoleActivity" />
         <activity android:name=".Activities.BasicActivitys.LoginActivity" />
         <activity android:name=".Activities.Propertys.AdminAddNewProductActivity" />
-        <activity android:name=".Activities.BasicActivitys.StartingActivity" />
+        <activity android:name=".Activities.jobs.MainActivity" />
         <activity android:name=".Activities.BasicActivitys.AdsDetailsActivity" />
         <activity android:name=".Activities.HotDealsactivity.HotDealsDetailsActivity" />
-        <activity android:name=".Activities.jobs.MainActivity">
+        <activity android:name=".Activities.Admin.Admin_corosel" />
+        <activity android:name=".Activities.BasicActivitys.StartingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

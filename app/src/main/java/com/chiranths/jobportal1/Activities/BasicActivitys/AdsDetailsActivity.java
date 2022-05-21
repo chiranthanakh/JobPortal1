@@ -30,9 +30,9 @@ public class AdsDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_property_details);
+        setContentView(R.layout.activity_ads_details);
         productID = getIntent().getStringExtra("pid");
-        addToCartButton =(Button) findViewById(R.id.pd_add_to_cart_button);
+        addToCartButton =(Button) findViewById(R.id.ads_cl_btn);
         carouselView =  findViewById(R.id.carouselView);
         productName = (TextView) findViewById(R.id.product_name_details);
         tv_topbar_productName = (TextView) findViewById(R.id.tv_topbar_productName);

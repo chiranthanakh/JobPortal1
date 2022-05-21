@@ -183,7 +183,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/proxima_nova_semi_bold"
-                                android:text="The Taj hotel bangalore Rt Nagar Karnataka"
                                 android:textColor="@color/black"
                                 android:textSize="16sp" />
                         </LinearLayout>
@@ -201,13 +200,14 @@
                                 android:layout_marginTop="5dp"
                                 android:layout_marginEnd="5dp"
                                 android:fontFamily="@font/proxima_nova_semi_bold"
-                                android:text="Rs 64,575,000.00"
+                                android:text=""
                                 android:textColor="@color/black"
                                 android:textSize="15sp"
                                 app:layout_constraintStart_toStartOf="@+id/iv_product"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
+                                android:id="@+id/tv_posted_date"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
@@ -225,6 +225,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/tv_hot_location"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/proxima_nova_semi_bold"
@@ -300,25 +301,54 @@
 
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/pd_add_to_cart_button"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/button_capsule_blue"
-            android:text="Call us"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="10dp"
+            android:orientation="horizontal"
+            android:background="@drawable/customborder"
+            android:layout_gravity="end"
+            android:gravity="center"
+            android:layout_marginEnd="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Contact: Owner"
+                android:layout_marginRight="@dimen/dp_30" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="@dimen/dp_30"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/ic_call"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:text="Call Us"
+                android:visibility="visible"
+                android:textColor="@color/white"
+                android:src="@drawable/whatsapp"
+                android:layout_width="@dimen/dp_30"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"/>
+
+        </LinearLayout>
+
 
 
     </LinearLayout>
