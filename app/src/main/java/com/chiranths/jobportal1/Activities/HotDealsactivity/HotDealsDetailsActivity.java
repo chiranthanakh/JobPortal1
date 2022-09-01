@@ -131,7 +131,7 @@ public class HotDealsDetailsActivity extends AppCompatActivity {
                     productPrice.setText(products.getPrice());
                     productDescription.setText(products.getDescription());
                     tv_topbar_productName.setText(products.getPname());
-                    tv_size.setText(products.getSize());
+                    tv_size.setText(products.getPropertysize());
                     tv_hot_location.setText(products.getLocation());
                     url = products.getImage2().split("---");
                     carouselView.setPageCount(url.length);
@@ -158,7 +158,4 @@ public class HotDealsDetailsActivity extends AppCompatActivity {
 
         }
     };
-
-
-
 }
