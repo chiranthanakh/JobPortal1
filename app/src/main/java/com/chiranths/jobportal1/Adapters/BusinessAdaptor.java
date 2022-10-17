@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.chiranths.jobportal1.Activities.Businesthings.BusinessDetailsActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyDetailsActivity;
+import com.chiranths.jobportal1.Model.BusinessModel;
 import com.chiranths.jobportal1.R;
 import com.squareup.picasso.Picasso;
 
@@ -24,10 +25,10 @@ import java.util.List;
 public class BusinessAdaptor extends RecyclerView.Adapter<BusinessAdaptor.ViewHolder> {
 
 
-    private List productInfos;
+    private List<BusinessModel> productInfos;
     private Context context;
 
-    public BusinessAdaptor(List productInfos, Context context) {
+    public BusinessAdaptor(List<BusinessModel> productInfos, Context context) {
         this.productInfos = productInfos;
         this.context = context;
     }
@@ -45,30 +46,22 @@ public class BusinessAdaptor extends RecyclerView.Adapter<BusinessAdaptor.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        String propertyinfo = String.valueOf(productInfos.get(position));
-
-        String[] imagesdata = propertyinfo.split("!!");
-        String[] data = imagesdata[1].split("---");
-        String[] imageurl = imagesdata[0].split("---");
-
-        /*Picasso.get()
-                .load(imageurl[0])
-                .into(holder.business_image);*/
+        BusinessModel propertyinfo = productInfos.get(position);
 
         Glide.with(context)
-                .load(imageurl[0])
+                .load(propertyinfo.getImage())
                 .into(holder.business_image);
 
-        holder.tv_business_type.setText(data[0]);
-        holder.tv_business_locatin.setText(data[5]);
-        holder.tv_business_name.setText(data[1]);
-        holder.tv_business_servicess.setText(data[3]);
+        holder.tv_business_type.setText(propertyinfo.getBusiness_category());
+        holder.tv_business_locatin.setText(propertyinfo.getLocation());
+        holder.tv_business_name.setText(propertyinfo.getBusinessname());
+        holder.tv_business_servicess.setText(propertyinfo.getDescription());
 
         holder.cv_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent =new Intent(context, BusinessDetailsActivity.class);
-                intent.putExtra("pid",data[7]);
+                intent.putExtra("pid",propertyinfo.getPid());
                 context.startActivity(intent);
             }
         });

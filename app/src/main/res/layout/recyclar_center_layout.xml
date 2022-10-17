@@ -18,39 +18,38 @@
         app:cardElevation="3dp"
         android:outlineAmbientShadowColor="@color/purple_500"
         android:backgroundTint="@color/white"
-        android:layout_height="wrap_content">
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:layout_height="180dp">
+
+
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-            <LinearLayout
-                android:gravity="center"
-                android:layout_weight="2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="5dp"
-                    android:id="@+id/iv_location_image_center"
-                    android:src="@drawable/aaimage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
 
                 <LinearLayout
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="@dimen/dp_5"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/iv_location_image_center"
+                            android:src="@drawable/aaimage"
+                            android:layout_width="@dimen/dp_150"
+                            android:layout_height="@dimen/dp_150" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
                     <TextView
                         android:id="@+id/tv_name_hot_center"
                         android:text="The Taj Hotel Bangalore"
@@ -86,7 +85,27 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp">
+                            <TextView
+                                android:id="@+id/tv_home_advance"
+                                android:text="50,000,00"
+                                android:drawableStart="@drawable/ic_rupees_ads"
+                                android:layout_marginTop="5dp"
+                                android:drawablePadding="3dp"
+                                app:layout_constraintStart_toStartOf="@+id/iv_product"
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:layout_marginEnd="5dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp">
@@ -120,7 +139,6 @@
 
                         </LinearLayout>
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -156,53 +174,12 @@
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginStart="10dp"
-                        android:orientation="horizontal"
-                        android:background="@drawable/customborder"
-                        android:layout_gravity="end"
-                        android:layout_marginBottom="@dimen/margin_10dp"
-                        android:gravity="center"
-                        android:layout_marginEnd="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="Contact: Owner"
-                            android:layout_marginRight="@dimen/dp_30"
-                            />
 
 
-                        <ImageView
-                            android:id="@+id/iv_call_bottom_center"
-                            android:layout_width="@dimen/dp_30"
-                            android:layout_height="@dimen/dp_30"
-                            android:layout_marginRight="15dp"
-                            android:src="@drawable/ic_call"/>
-
-
-                        <ImageView
-                            android:id="@+id/iv_whatsapp_bottom_center"
-                                android:text="Call Us"
-                                android:visibility="visible"
-                                android:textColor="@color/white"
-                                android:src="@drawable/whatsapp"
-                                android:layout_width="@dimen/dp_30"
-                                android:textStyle="bold"
-                                android:gravity="center"
-                                android:layout_height="30dp"
-                                android:layout_gravity="center_vertical"/>
-
-                    </LinearLayout>
-
+                </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 

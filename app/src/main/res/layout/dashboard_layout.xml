@@ -538,6 +538,7 @@
                                 android:textSize="15sp" />
 
                             <TextView
+                                android:id="@+id/tv_seeall_upcomming"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
@@ -602,6 +603,7 @@
                                 android:textSize="15sp" />
 
                             <TextView
+                                android:id="@+id/tv_seeall_layouts"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"

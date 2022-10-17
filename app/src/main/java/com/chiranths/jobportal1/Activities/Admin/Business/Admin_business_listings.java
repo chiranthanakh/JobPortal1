@@ -1,5 +1,6 @@
 package com.chiranths.jobportal1.Activities.Admin.Business;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -34,10 +35,10 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 public class Admin_business_listings extends AppCompatActivity {
-
     private static final int GalleryPick = 1;
-    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,propertysize,location,number;
-    private EditText InputProductName,Inputtype,InputProductDescription,InputProductPrice,et_size,et_location,et_number;
+    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,propertysize,location,number,owner,rating,email;
+    private EditText InputProductName,Inputtype,InputProductDescription,InputProductPrice,et_sell_name,et_location,
+            et_number,et_ownername,et_email,et_rating;
     private Uri ImageUri;
     private String productRandomKey, downloadImageUrl,MainimageUrl;
     private StorageReference ProductImagesRef;
@@ -50,21 +51,22 @@ public class Admin_business_listings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_business_listings);
-
         CategoryName = "cqat";
         ProductImagesRef = FirebaseStorage.getInstance().getReference().child("business");
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("BusinessListing");
 
         ImageView btn_corosel = findViewById(R.id.select_business_image);
         Button add_new_corosel = findViewById(R.id.add_new_Business);
-
         InputProductName = (EditText) findViewById(R.id.Business_name);
         Inputtype = (EditText)findViewById(R.id.Business_type_admin);
         InputProductDescription = (EditText) findViewById(R.id.Business_description);
         InputProductPrice = (EditText) findViewById(R.id.Business_price_admin);
-        et_size = findViewById(R.id.Business_size);
+        et_sell_name = findViewById(R.id.Business_size);
         et_location = findViewById(R.id.Business_location_admin);
         et_number = findViewById(R.id.Business_number1);
+        et_ownername = findViewById(R.id.Business_owner_name);
+        et_email = findViewById(R.id.Business_email);
+        et_rating = findViewById(R.id.Business_rating);
         loadingBar = new ProgressDialog(this);
 
         btn_corosel.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +84,6 @@ public class Admin_business_listings extends AppCompatActivity {
                 ValidateProductData();
             }
         });
-
     }
 
     private void OpenGallery(){
@@ -111,9 +112,12 @@ public class Admin_business_listings extends AppCompatActivity {
         Description = InputProductDescription.getText().toString();
         Price = InputProductPrice.getText().toString();
         Pname = InputProductName.getText().toString();
-        propertysize = et_size.getText().toString();
+        propertysize = et_sell_name.getText().toString();
         location = et_location.getText().toString();
         number = et_number.getText().toString();
+        owner = et_ownername.getText().toString();
+        email = et_email.getText().toString();
+        rating = et_rating.getText().toString();
 
         if (TextUtils.isEmpty(downloadImageUrl))
         {
@@ -191,7 +195,6 @@ public class Admin_business_listings extends AppCompatActivity {
                             System.out.println("url3---"+downloadImageUrl);
                             // downloadImageUrl = downloadImageUrl+"---"+ filePath.getDownloadUrl().toString();
                             System.out.println("url1---"+downloadImageUrl);
-
                             return filePath.getDownloadUrl();
                         }
                     }).addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -209,7 +212,6 @@ public class Admin_business_listings extends AppCompatActivity {
                                 System.out.println("url2---"+downloadImageUrl);
                                 Toast.makeText(Admin_business_listings.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
 
-
                             }
                         }
                     });
@@ -223,8 +225,7 @@ public class Admin_business_listings extends AppCompatActivity {
         }
     }
 
-    private void SaveProductInfoToDatabase()
-    {
+    private void SaveProductInfoToDatabase() {
         HashMap<String, Object> productMap = new HashMap<>();
         productMap.put("pid", productRandomKey);
         productMap.put("date", saveCurrentDate);
@@ -234,10 +235,13 @@ public class Admin_business_listings extends AppCompatActivity {
         productMap.put("image", MainimageUrl);
         productMap.put("category", CategoryName);
         productMap.put("price", Price);
-        productMap.put("pname", Pname);
-        productMap.put("propertysize",propertysize);
+        productMap.put("Businessname", Pname);
+        productMap.put("Business_category",propertysize);
         productMap.put("location",location);
         productMap.put("number",number);
+        productMap.put("owner", owner);
+        productMap.put("email",email);
+        productMap.put("rating", rating);
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -261,8 +265,7 @@ public class Admin_business_listings extends AppCompatActivity {
                 });
     }
 
-
-
+    @SuppressLint("Range")
     public String getFileName(Uri uri){
         String result = null;
         if (uri.getScheme().equals("content")){

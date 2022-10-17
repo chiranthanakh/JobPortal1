@@ -2,7 +2,9 @@ package com.chiranths.jobportal1.Adapters;
 
 import static android.Manifest.permission.CALL_PHONE;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,6 +28,8 @@ import com.bumptech.glide.Glide;
 import com.chiranths.jobportal1.Activities.BasicActivitys.AdsDetailsActivity;
 import com.chiranths.jobportal1.Activities.BasicActivitys.ProductInfo;
 import com.chiranths.jobportal1.Activities.BasicActivitys.UserDetailsActivity;
+import com.chiranths.jobportal1.Activities.Dashboard.Calldetails;
+import com.chiranths.jobportal1.Activities.Dashboard.StartingActivity;
 import com.chiranths.jobportal1.Activities.HotDealsactivity.HotDealsDetailsActivity;
 import com.chiranths.jobportal1.R;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
@@ -43,7 +48,7 @@ public class BottomhomeRecyclarviewAdaptor extends RecyclerView.Adapter<Bottomho
     private List<ProductInfo> productInfos;
     private Context context;
     private String number, name;
-
+    StartingActivity calldetails = new StartingActivity() ;
 
     public BottomhomeRecyclarviewAdaptor(List<ProductInfo> productInfos,Context context, String number, String name) {
         this.productInfos = productInfos;
@@ -95,12 +100,13 @@ public class BottomhomeRecyclarviewAdaptor extends RecyclerView.Adapter<Bottomho
                 String userNumber = sh.getString("number","");
                 String useremail = sh.getString("email","");
 
+                String cnumber = productInfo.getNumber();
+                String cname = productInfo.getPname();
                 if(!userNumber.equals("")){
-
+                    calldetails.callinfo(userNumber,nameofuser,cnumber,cname);
                     Intent callIntent = new Intent(Intent.ACTION_CALL);
                     callIntent.setData(Uri.parse("tel:"+productInfo.getNumber()));
                     context.startActivity(callIntent);
-
                 }else {
                     Intent intent = new Intent(context, UserDetailsActivity.class);
                     context.startActivity(intent);
@@ -123,10 +129,19 @@ public class BottomhomeRecyclarviewAdaptor extends RecyclerView.Adapter<Bottomho
                     Intent i = new Intent(Intent.ACTION_VIEW);
                     i.setData(Uri.parse(url));
                     context.startActivity(i);
+                    calldetails.callinfo(userNumber,nameofuser,productInfo.getNumber(),productInfo.getPname());
 
                 }else {
-                    Intent intent = new Intent(context, UserDetailsActivity.class);
-                    context.startActivity(intent);
+                    if (ContextCompat.checkSelfPermission(context, CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                        Intent intent = new Intent(context, UserDetailsActivity.class);
+                        context.startActivity(intent);
+                    } else {
+
+                        ActivityCompat.requestPermissions((Activity) context,
+                                new String[]{Manifest.permission.CALL_PHONE},
+                                1);
+
+                    }
                 }
             }
         });

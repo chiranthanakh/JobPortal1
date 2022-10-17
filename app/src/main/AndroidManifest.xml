@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.chiranths.jobportal1">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -19,10 +19,25 @@
         android:supportsRtl="true"
         android:theme="@style/JobPortaltheam">
         <activity
+            android:name=".AdminBusinessCategorys"
+            android:exported="false" />
+        <activity
+            android:name=".Admin_loanoffers"
+            android:exported="false" />
+        <activity
             android:name=".Activities.LoanActivity.LoanFormfirst"
             android:exported="false" />
         <activity
+            android:name=".Activities.Admin.Business.AdminBusinessCategorys"
+            android:exported="false"/>
+        <activity
             android:name=".Activities.BasicActivitys.UserDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.BasicActivitys.SeeAllLayoutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.BasicActivitys.UpcommingProjects"
             android:exported="false" />
         <activity
             android:name=".Activities.Businesthings.BusinessDetailsActivity"
@@ -41,6 +56,9 @@
             android:exported="false" />
         <activity
             android:name=".Activities.Admin.Business.Admin_business_listings"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Admin.loan.AdminloanOffers"
             android:exported="false" />
         <activity
             android:name=".Activities.Sell.SellActivity"
@@ -77,7 +95,9 @@
         <activity android:name=".Activities.HotDealsactivity.HotDealsDetailsActivity" />
         <activity android:name=".Activities.Admin.Admin_corosel" />
         <activity android:name=".Activities.Admin.Admin_layouts" />
-        <activity android:name=".Activities.Dashboard.StartingActivity">
+        <activity
+            android:name=".Activities.Dashboard.StartingActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

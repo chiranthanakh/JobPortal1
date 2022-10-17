@@ -91,9 +91,9 @@ public class LoanForm extends AppCompatActivity {
         loadingBar.show();
 
         Bundle bundle = getIntent().getExtras();
-        String amount = bundle.getString("amount", "50000");
-        String income = bundle.getString("income", "50000");
-        String emptype = bundle.getString("emptype", "salaried");
+        String amount = bundle.getString("amount", "0");
+        String income = bundle.getString("income", "0");
+        String emptype = bundle.getString("emptype", "");
         String pancard = bundle.getString("pancard", "");
 
 
@@ -116,7 +116,6 @@ public class LoanForm extends AppCompatActivity {
                     {
                         if (task.isSuccessful())
                         {
-
                             loadingBar.dismiss();
                             Toast.makeText(LoanForm.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
                         }

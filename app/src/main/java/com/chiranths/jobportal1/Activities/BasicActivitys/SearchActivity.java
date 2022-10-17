@@ -24,12 +24,15 @@ import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.ImageView;
 
+import com.chiranths.jobportal1.Activities.Businesthings.BusinessActivity;
 import com.chiranths.jobportal1.Activities.Propertys.AdminAddNewProductActivity;
 import com.chiranths.jobportal1.Activities.Propertys.ProductViewHolder;
 import com.chiranths.jobportal1.Activities.Propertys.Products;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyActivity;
 import com.chiranths.jobportal1.Adapters.AdsAdaptor;
+import com.chiranths.jobportal1.Adapters.BusinessAdaptor;
 import com.chiranths.jobportal1.Adapters.PropertyAdaptor;
+import com.chiranths.jobportal1.Model.BusinessModel;
 import com.chiranths.jobportal1.Model.FilterModel;
 import com.chiranths.jobportal1.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -58,14 +61,15 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     ArrayList Homeslist =new ArrayList();
     ArrayList Rentallist =new ArrayList();
     ArrayList adslist =new ArrayList();
+    ArrayList<BusinessModel> businesslist =new ArrayList<BusinessModel>();
     PropertyAdaptor propertyAdaptor;
+    BusinessAdaptor businessAdaptor;
     AdsAdaptor adsAdaptor;
     RecyclerView recyclarviewads;
     CardView cv_homes, cv_sites, cv_green,cv_comerical;
     EditText edt_filter;
     ArrayList filterarraylist = new ArrayList();
-
-
+    String type="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,19 +90,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(this.getResources().getColor(R.color.app_blue));
         }
-
-
-
-        ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
-        initilize();
-
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                fetchads();
-            }
-        });
-
 
     }
 
@@ -123,14 +114,35 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         GridLayoutManager mgrid = new GridLayoutManager(this,1);
 
         recyclerView.setLayoutManager(mgrid);
-        fetchcorosel();
-        finterAdaptor();
-    }
 
+         if(type.equals("business")){
+             AsyncTask.execute(new Runnable() {
+                 @Override
+                 public void run() {
+                     fetchbusiness();
+                 }
+             });
+
+         }else if(type.equals("property")) {
+             //finterAdaptor();
+             AsyncTask.execute(new Runnable() {
+                 @Override
+                 public void run() {
+                     fetchcorosel();
+                 }
+             });
+         }
+    }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        Bundle bundle = getIntent().getExtras();
+        type = bundle.getString("searchtype");
+        ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
+        initilize();
+
 
         edt_filter.addTextChangedListener(new TextWatcher() {
             @Override
@@ -181,6 +193,19 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                             }
                         }
                     }
+
+                    propertyAdaptor =new PropertyAdaptor(propertylist, SearchActivity.this);
+                    RecyclerView.LayoutManager nlayoutManager = new LinearLayoutManager(SearchActivity.this, RecyclerView.VERTICAL, false);
+                    recyclerView.setLayoutManager(nlayoutManager);
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            recyclerView.setAdapter(propertyAdaptor);
+                        }
+                    });
+                    propertyAdaptor.notifyItemRangeInserted(0, propertylist.size());
 
                 }
             }
@@ -269,6 +294,60 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                     });
                     propertyAdaptor.notifyItemRangeInserted(0, propertylist.size());
 
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void fetchbusiness() {
+        DatabaseReference coroselimage = FirebaseDatabase.getInstance().getReference().child("BusinessListing");
+
+        coroselimage.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (snapshot.exists()){
+
+                    HashMap<String, Object> dataMap = (HashMap<String, Object>) snapshot.getValue();
+                    for (String key : dataMap.keySet()){
+                        Object data = dataMap.get(key);
+                        try{
+
+                            HashMap<String, Object> userData = (HashMap<String, Object>) data;
+
+                            businesslist.add(new BusinessModel(String.valueOf(userData.get("pid")),String.valueOf(userData.get("date")),String.valueOf(userData.get("time")),
+                                    String.valueOf(userData.get("Businessname")),String.valueOf(userData.get("Business_category")),String.valueOf(userData.get("description")),
+                                    String.valueOf(userData.get("price")),String.valueOf(userData.get("location")),String.valueOf(userData.get("number")),String.valueOf(userData.get("owner")),String.valueOf(userData.get("email")),String.valueOf(userData.get("rating")),
+                                    String.valueOf(userData.get("image")),String.valueOf(userData.get("image2"))));
+
+
+                        }catch (ClassCastException cce){
+
+                            try{
+                                String mString = String.valueOf(dataMap.get(key));
+                                //addTextToView(mString);
+                            }catch (ClassCastException cce2){
+
+                            }
+                        }
+                    }
+
+                    businessAdaptor =new BusinessAdaptor(businesslist, SearchActivity.this);
+                    RecyclerView.LayoutManager nlayoutManager = new LinearLayoutManager(SearchActivity.this, RecyclerView.VERTICAL, false);
+                    recyclerView.setLayoutManager(nlayoutManager);
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            recyclerView.setAdapter(businessAdaptor);
+                        }
+                    });
+                    businessAdaptor.notifyItemRangeInserted(0, businesslist.size());
                 }
             }
             @Override

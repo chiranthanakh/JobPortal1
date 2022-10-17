@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.chiranths.jobportal1.Activities.BasicActivitys.CoroselDetailsActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyDetailsActivity;
+import com.chiranths.jobportal1.Model.Corosolmodel;
 import com.chiranths.jobportal1.R;
 import com.squareup.picasso.Picasso;
 
@@ -30,10 +31,10 @@ import java.util.Map;
 
 public class CoroselListAdaptor extends RecyclerView.Adapter<CoroselListAdaptor.ViewHolder> {
 
-    private ArrayList noticeBoardList;
+    private ArrayList<Corosolmodel> noticeBoardList;
     private Context context;
 
-    public CoroselListAdaptor(ArrayList noticeBoardList, Context context) {
+    public CoroselListAdaptor(ArrayList<Corosolmodel> noticeBoardList, Context context) {
         this.noticeBoardList = noticeBoardList;
         this.context = context;
 
@@ -51,24 +52,27 @@ public class CoroselListAdaptor extends RecyclerView.Adapter<CoroselListAdaptor.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        final String noticeimage = String.valueOf(noticeBoardList.get(position));
+         Corosolmodel noticeimage = noticeBoardList.get(position);
 
-        /*Picasso.get().load(noticeimage)
-                //.centerCrop()
-                //.resize(350,140)
-                .into(holder.iv_corosel_image);*/
         Glide.with(context)
-                .load(noticeimage)
+                .load(noticeimage.getImageurl())
                 .into(holder.iv_corosel_image);
 
         holder.iv_corosel_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, CoroselDetailsActivity.class);
-                context.startActivity(intent);
+
+                if(noticeimage.getType().equals("2")){
+                    Uri uri = Uri.parse("http://www.google.com"); // missing 'http://' will cause crashed
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    context.startActivity(intent);
+                }else {
+                    Intent intent = new Intent(context, CoroselDetailsActivity.class);
+                    context.startActivity(intent);
+                }
+
             }
         });
-
     }
 
 

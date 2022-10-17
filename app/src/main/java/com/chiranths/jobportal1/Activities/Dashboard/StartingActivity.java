@@ -30,12 +30,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.chiranths.jobportal1.Activities.Admin.Admin_corosel;
 import com.chiranths.jobportal1.Activities.BasicActivitys.CenterHomeActivity;
 import com.chiranths.jobportal1.Activities.BasicActivitys.LoginActivity;
 import com.chiranths.jobportal1.Activities.BasicActivitys.ProductInfo;
 import com.chiranths.jobportal1.Activities.BasicActivitys.SearchActivity;
+import com.chiranths.jobportal1.Activities.BasicActivitys.SeeAllLayoutActivity;
+import com.chiranths.jobportal1.Activities.BasicActivitys.UpcommingProjects;
 import com.chiranths.jobportal1.Activities.Businesthings.BusinessActivity;
 import com.chiranths.jobportal1.Activities.Admin.Admincoroselimages;
 import com.chiranths.jobportal1.Activities.LoanActivity.LoanActivity;
@@ -46,6 +50,7 @@ import com.chiranths.jobportal1.Adapters.AdsAdaptor;
 import com.chiranths.jobportal1.Adapters.BottomhomeRecyclarviewAdaptor;
 import com.chiranths.jobportal1.Adapters.CoroselListAdaptor;
 import com.chiranths.jobportal1.Adapters.LayoutsAdaptor;
+import com.chiranths.jobportal1.Model.Corosolmodel;
 import com.chiranths.jobportal1.Model.NoticeBoard;
 import com.chiranths.jobportal1.Model.UpcomingEvent;
 import com.chiranths.jobportal1.R;
@@ -65,24 +70,29 @@ import com.synnapps.carouselview.ImageListener;
 
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-public class StartingActivity extends AppCompatActivity implements View.OnClickListener {
+public class StartingActivity extends AppCompatActivity implements View.OnClickListener,Calldetails {
 
     LinearLayout cv_jobs,cv_propertys,cv_servicess,cv_loans;
     ImageView iv_sell;
     LinearLayout search_layout,ll_rent,ll_commercial_rent,ll_hotel;
     EditText search;
+    TextView tv_seeall_upcooming, tv_seeall_layouts;
 
     private ArrayList<UpcomingEvent> upcomingEventList = new ArrayList<>();
     RecyclerView recyclerViewEvent;
     private BottomhomeRecyclarviewAdaptor bottomhomeRecyclarviewAdaptor;
     FusedLocationProviderClient fusedLocationProviderClient;
     List<Address> addresses;
-
+    private String productRandomKey;
+    private DatabaseReference CallerRef;
     final int speedScroll = 150;
     final Handler handler = new Handler();
 
@@ -97,7 +107,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
     final int pixelsToMove = 5;
     private final Handler mHandler2 = new Handler(Looper.getMainLooper());
 
-    ArrayList coroselimagelist =new ArrayList();
+    ArrayList<Corosolmodel> coroselimagelist =new ArrayList<Corosolmodel>();
     ArrayList adslist =new ArrayList();
     ArrayList layoutslists =new ArrayList();
     ArrayList<ProductInfo> productinfolist =new ArrayList();
@@ -150,6 +160,11 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
         tv_location = findViewById(R.id.tv_location);
         search_layout = findViewById(R.id.search_layout);
         search = findViewById(R.id.main_edt_search2);
+        tv_seeall_upcooming = findViewById(R.id.tv_seeall_upcomming);
+        tv_seeall_layouts = findViewById(R.id.tv_seeall_layouts);
+        tv_seeall_layouts.setOnClickListener(this);
+        tv_seeall_upcooming.setOnClickListener(this);
+
         search.setOnClickListener(this);
         search_layout.setOnClickListener(this);
       //  tv_pincode = findViewById(R.id.tv_pincode);
@@ -251,7 +266,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                         try{
 
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
-                            coroselimagelist.add(userData.get("image"));
+                            coroselimagelist.add(new Corosolmodel(String.valueOf(userData.get("image")),String.valueOf(userData.get("type"))));
 
                         }catch (ClassCastException cce){
 
@@ -340,6 +355,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                             }
                         }
                     }
+                    Collections.shuffle(adslist);
                     adsAdaptor =new AdsAdaptor(adslist,StartingActivity.this);
                     RecyclerView.LayoutManager n1layoutManager = new LinearLayoutManager(StartingActivity.this, RecyclerView.HORIZONTAL, false);
                     recyclarviewads.setLayoutManager(n1layoutManager);
@@ -402,6 +418,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                             }
                         }
                     }
+                    Collections.shuffle(layoutslists);
                     layoutsAdaptor =new LayoutsAdaptor(layoutslists,StartingActivity.this);
                     RecyclerView.LayoutManager n1layoutManager = new LinearLayoutManager(StartingActivity.this, RecyclerView.HORIZONTAL, false);
                     recyclar_Layouts.setLayoutManager(n1layoutManager);
@@ -418,7 +435,6 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                                     progressDialog.dismiss();
                                 }
                             }
-
                             recyclar_Layouts.setAdapter(layoutsAdaptor);
                             layoutsAdaptor.notifyItemRangeInserted(0, adslist.size());
                         }
@@ -605,6 +621,19 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                 intent9.putExtras(bundle);
                 startActivity(intent9);
                 break;
+
+            case R.id.tv_seeall_upcomming:
+                Intent intent10 = new Intent(getApplicationContext(), UpcommingProjects.class);
+                intent10.putExtras(bundle);
+                startActivity(intent10);
+                break;
+
+            case R.id.tv_seeall_layouts:
+                Intent intent11 = new Intent(getApplicationContext(), SeeAllLayoutActivity.class);
+                intent11.putExtras(bundle);
+                startActivity(intent11);
+
+                break;
         }
     }
 
@@ -637,4 +666,41 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
             });
         }
     }
+
+    @Override
+    public void callinfo(String number, String name, String caller_name,String caller_number) {
+        CallerRef = FirebaseDatabase.getInstance().getReference().child("callDetails");
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd");
+        String saveCurrentDate = currentDate.format(calendar.getTime());
+
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm a");
+        String saveCurrentTime = currentTime.format(calendar.getTime());
+
+        productRandomKey = saveCurrentDate + saveCurrentTime;
+
+            HashMap<String, Object> productMap = new HashMap<>();
+            productMap.put("date", saveCurrentDate);
+            productMap.put("time", saveCurrentTime);
+            productMap.put("called_name",name);
+            productMap.put("called_number",number);
+            productMap.put("caller_name", caller_name);
+            productMap.put("caller_number",caller_number);
+
+        CallerRef.child(productRandomKey).updateChildren(productMap)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task)
+                        {
+                            if (task.isSuccessful())
+                            {
+                            }
+                            else
+                            {
+                            }
+                        }
+                    });
+        }
+
 }

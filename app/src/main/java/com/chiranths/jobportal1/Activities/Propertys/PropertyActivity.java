@@ -19,7 +19,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
+import com.chiranths.jobportal1.Activities.BasicActivitys.SearchActivity;
+import com.chiranths.jobportal1.Activities.Businesthings.BusinessActivity;
 import com.chiranths.jobportal1.Adapters.AdsAdaptor;
 import com.chiranths.jobportal1.Adapters.PropertyAdaptor;
 import com.chiranths.jobportal1.R;
@@ -40,6 +43,8 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     Button btn_add;
+    LinearLayout search;
+    ImageView iv_back_toolbar;
     ImageView iv_sites,iv_green_land,iv_home,iv_commercial;
     Handler mHandler = new Handler();
     ArrayList propertylist =new ArrayList();
@@ -52,6 +57,7 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
     AdsAdaptor adsAdaptor;
     RecyclerView recyclarviewads;
     CardView cv_homes, cv_sites, cv_green,cv_comerical;
+    Bundle bundle = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,11 +102,13 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
         iv_commercial = findViewById(R.id.iv_commercial);
         iv_green_land = findViewById(R.id.iv_green_land);
         iv_home = findViewById(R.id.iv_home);
-
+        search = findViewById(R.id.llsearch_property);
         iv_sites.setOnClickListener(this);
         iv_green_land.setOnClickListener(this);
         iv_commercial.setOnClickListener(this);
         iv_home.setOnClickListener(this);
+        iv_back_toolbar = findViewById(R.id.iv_back_toolbar);
+        iv_back_toolbar.setOnClickListener(this);
 
         recyclarviewads = findViewById(R.id.rv_adds_layots2);
         recyclerView = findViewById(R.id.recycler_menu);
@@ -109,6 +117,16 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
 
         recyclerView.setLayoutManager(mgrid);
         fetchcorosel();
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PropertyActivity.this, SearchActivity.class);
+                bundle.putString("searchtype","property");
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -327,6 +345,10 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
                 });
                 propertyAdaptor.notifyItemRangeInserted(0, greenlandlist.size());
 
+                break;
+
+            case R.id.iv_back_toolbar:
+                finish();
                 break;
         }
 

@@ -17,6 +17,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.chiranths.jobportal1.Adapters.LoanCoroselListAdaptor;
+import com.chiranths.jobportal1.Adapters.LoanoffersAdaptor;
+import com.chiranths.jobportal1.Model.LoanOffersModel;
 import com.chiranths.jobportal1.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,9 +34,11 @@ public class LoanActivity extends AppCompatActivity implements View.OnClickListe
     CardView cv_PL,cv_BL,cv_HL,cv_ML,cv_LAP,cv_VL;
     Button btn_next;
     ArrayList coroselimagelist =new ArrayList();
+    ArrayList<LoanOffersModel> bankadslist =new ArrayList<LoanOffersModel>();
 
-    RecyclerView recyclerView,recyclarviewads;
+    RecyclerView recyclerView,recyclarviewloanads;
     private LoanCoroselListAdaptor coroselListAdaptor;
+    private LoanoffersAdaptor loanoffersAdaptor;
     Handler mHandler = new Handler();
 
     @Override
@@ -54,6 +58,7 @@ public class LoanActivity extends AppCompatActivity implements View.OnClickListe
         cv_LAP = findViewById(R.id.cv_lap);
         cv_VL = findViewById(R.id.cv_vehicle);
         recyclerView =(RecyclerView)findViewById(R.id.rv_loan_event);
+        recyclarviewloanads = findViewById(R.id.recycler_loanoffers);
         //btn_next = findViewById(R.id.add_new_product);
         //btn_next.setOnClickListener(this);
         cv_PL.setOnClickListener(this);
@@ -67,6 +72,7 @@ public class LoanActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void run() {
                 fetchcorosel();
+                fetchbankads();
             }
         });
 
@@ -148,6 +154,84 @@ public class LoanActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
+
+    private void fetchbankads() {
+        DatabaseReference coroselimage = FirebaseDatabase.getInstance().getReference().child("banksadsforyou");
+
+        coroselimage.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (snapshot.exists()){
+
+                    HashMap<String, Object> dataMap = (HashMap<String, Object>) snapshot.getValue();
+                    for (String key : dataMap.keySet()){
+                        Object data = dataMap.get(key);
+                        try{
+
+                            HashMap<String, Object> userData = (HashMap<String, Object>) data;
+                            bankadslist.add(new LoanOffersModel(String.valueOf(userData.get("pid")),String.valueOf(userData.get("bankName")),String.valueOf(userData.get("intrestrate")),String.valueOf(userData.get("loanamount")),String.valueOf(userData.get("loantype")),String.valueOf(userData.get("description")),String.valueOf(userData.get("image"))));
+
+                        }catch (ClassCastException cce){
+
+                            try{
+                                String mString = String.valueOf(dataMap.get(key));
+                                //addTextToView(mString);
+                            }catch (ClassCastException cce2){
+
+                            }
+                        }
+                    }
+
+                    loanoffersAdaptor =new LoanoffersAdaptor(bankadslist,LoanActivity.this);
+                    RecyclerView.LayoutManager nlayoutManager = new LinearLayoutManager(LoanActivity.this, RecyclerView.VERTICAL, false);
+                    recyclarviewloanads.setLayoutManager(nlayoutManager);
+                    recyclarviewloanads.setItemAnimator(new DefaultItemAnimator());
+                    SnapHelper snapHelper = new PagerSnapHelper();
+                    snapHelper.attachToRecyclerView(recyclarviewloanads);
+                    snapHelper.onFling(20,20);
+
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            recyclarviewloanads.setAdapter(loanoffersAdaptor);
+
+                        }
+                    });
+                    loanoffersAdaptor.notifyItemRangeInserted(0, bankadslist.size());
+
+                   /* recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                        @Override
+                        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                            super.onScrolled(recyclerView, dx, dy);
+
+                                mHandler2.removeCallbacks(SCROLLING_RUNNABLE);
+                                Handler postHandler = new Handler();
+                                postHandler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        recyclerView.setAdapter(coroselListAdaptor);
+                                        recyclerView.smoothScrollBy(pixelsToMove, 0);
+
+                                        mHandler2.postDelayed(SCROLLING_RUNNABLE, 200);
+                                    }
+                                }, 2000);
+
+                        }
+                    });
+
+                    mHandler.postDelayed(SCROLLING_RUNNABLE, 200);*/
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
+
 
     @Override
     public void onClick(View view) {

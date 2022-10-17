@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/back_toolbar"
+            android:id="@+id/iv_back_toolbar"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_gravity="center"
@@ -41,6 +41,7 @@
                 app:contentInsetStartWithNavigation="0dp">
 
                 <LinearLayout
+                    android:id="@+id/llsearch_property"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -59,7 +60,7 @@
                         app:tint="@color/grey" />
 
                     <EditText
-                        android:id="@+id/edt_search_vct"
+                        android:id="@+id/edt_search_property"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"

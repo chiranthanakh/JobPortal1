@@ -54,7 +54,7 @@
         android:layout_marginLeft="45dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="45dp"
-        android:hint="Property name"
+        android:hint="name"
         android:inputType="textMultiLine"
         android:padding="20dp"
         android:textColor="#000000"
@@ -75,18 +75,19 @@
         android:textColor="#000000"
         android:textColorHint="#000000" />
 
+
     <EditText
         android:id="@+id/corosel_size"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/corosel_type_admin"
         android:layout_marginLeft="45dp"
+        android:layout_marginTop="0dp"
         android:layout_marginRight="45dp"
-        android:hint="size"
+        android:hint="URL"
         android:padding="20dp"
         android:textColor="#000000"
         android:textColorHint="#000000" />
-
 
     <EditText
         android:id="@+id/corosel_description"
@@ -123,31 +124,20 @@
         android:layout_below="@+id/corosel_price_admin"
         android:layout_marginLeft="45dp"
         android:layout_marginRight="45dp"
-        android:hint="location"
+        android:hint="Type 1 0r 2"
         android:inputType="textMultiLine"
         android:padding="20dp"
         android:textColor="#000000"
         android:textColorHint="#000000" />
 
-    <EditText
-        android:id="@+id/product_discription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/corosel_location_admin"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp"
-        android:hint="discription"
-        android:inputType="textMultiLine"
-        android:padding="20dp"
-        android:textColor="#000000"
-        android:textColorHint="#000000" />
 
     <EditText
         android:id="@+id/contact_number1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/product_discription"
+        android:layout_below="@+id/corosel_location_admin"
         android:layout_marginLeft="45dp"
+        android:layout_marginTop="1dp"
         android:layout_marginRight="45dp"
         android:hint="contact number"
         android:inputType="textMultiLine"

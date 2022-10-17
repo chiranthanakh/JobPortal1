@@ -3,6 +3,7 @@ package com.chiranths.jobportal1.Activities.Admin;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -37,7 +38,7 @@ import java.util.HashMap;
 public class Admin_corosel extends AppCompatActivity {
 
     private static final int GalleryPick = 1;
-    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,propertysize,location,number;
+    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,propertysize,type,number;
     private  EditText InputProductName,Inputtype,InputProductDescription,InputProductPrice,et_size,et_location,et_number;
     private Uri ImageUri;
     private String productRandomKey, downloadImageUrl,MainimageUrl;
@@ -58,7 +59,6 @@ public class Admin_corosel extends AppCompatActivity {
 
         ImageView btn_corosel = findViewById(R.id.select_corosel_image);
         Button add_new_corosel = findViewById(R.id.add_new_corosel);
-
         InputProductName = (EditText) findViewById(R.id.corosel_name);
         Inputtype = (EditText)findViewById(R.id.corosel_type_admin);
         InputProductDescription = (EditText) findViewById(R.id.corosel_description);
@@ -113,7 +113,7 @@ public class Admin_corosel extends AppCompatActivity {
         Price = InputProductPrice.getText().toString();
         Pname = InputProductName.getText().toString();
         propertysize = et_size.getText().toString();
-        location = et_location.getText().toString();
+        type = et_location.getText().toString();
         number = et_number.getText().toString();
 
         if (TextUtils.isEmpty(downloadImageUrl))
@@ -232,8 +232,8 @@ public class Admin_corosel extends AppCompatActivity {
         productMap.put("category", CategoryName);
         productMap.put("price", Price);
         productMap.put("pname", Pname);
-        productMap.put("propertysize",propertysize);
-        productMap.put("location",location);
+        productMap.put("url",propertysize);
+        productMap.put("type",type);
         productMap.put("number",number);
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
@@ -260,6 +260,7 @@ public class Admin_corosel extends AppCompatActivity {
 
 
 
+    @SuppressLint("Range")
     public String getFileName(Uri uri){
         String result = null;
         if (uri.getScheme().equals("content")){

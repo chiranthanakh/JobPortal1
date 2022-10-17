@@ -28,7 +28,6 @@ public class PropertyAdaptor extends RecyclerView.Adapter<PropertyAdaptor.ViewHo
     private List productInfos;
     private Context context;
 
-
     public PropertyAdaptor(List productInfos, Context context) {
         this.productInfos = productInfos;
         this.context = context;

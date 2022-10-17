@@ -35,6 +35,16 @@
 
     </LinearLayout>
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
     <ImageView
         android:id="@+id/select_business_image"
@@ -54,7 +64,7 @@
         android:layout_marginLeft="45dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="45dp"
-        android:hint="Property name"
+        android:hint="Business title"
         android:inputType="textMultiLine"
         android:padding="20dp"
         android:textColor="#000000"
@@ -69,23 +79,23 @@
         android:layout_marginLeft="45dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="45dp"
-        android:hint="Property Type"
+        android:hint="Business category"
         android:inputType="textMultiLine"
         android:padding="20dp"
         android:textColor="#000000"
         android:textColorHint="#000000" />
 
-    <EditText
-        android:id="@+id/Business_size"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Business_type_admin"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp"
-        android:hint="size"
-        android:padding="20dp"
-        android:textColor="#000000"
-        android:textColorHint="#000000" />
+            <EditText
+                android:id="@+id/Business_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Business_type_admin"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:hint="what they sell"
+                android:padding="20dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000" />
 
 
     <EditText
@@ -155,6 +165,46 @@
         android:textColor="#000000"
         android:textColorHint="#000000" />
 
+
+            <EditText
+            android:id="@+id/Business_owner_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Business_number1"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:hint="Owner name"
+            android:inputType="textMultiLine"
+            android:padding="20dp"
+            android:textColor="#000000"
+            android:textColorHint="#000000" />
+
+        <EditText
+            android:id="@+id/Business_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Business_owner_name"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:hint="Email"
+            android:inputType="textMultiLine"
+            android:padding="20dp"
+            android:textColor="#000000"
+            android:textColorHint="#000000" />
+
+            <EditText
+                android:id="@+id/Business_rating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Business_email"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:hint="ratings"
+                android:inputType="textMultiLine"
+                android:padding="20dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000" />
+
     <Button
         android:id="@+id/add_new_Business"
         android:layout_width="match_parent"
@@ -170,4 +220,6 @@
         android:textColor="@android:color/white"
         android:textSize="18sp" />
 
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </RelativeLayout>

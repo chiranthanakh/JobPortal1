@@ -11,6 +11,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.chiranths.jobportal1.Activities.Admin.Business.AdminBusinessCategorys;
+import com.chiranths.jobportal1.Activities.Admin.Business.Admin_business_listings;
+import com.chiranths.jobportal1.Activities.Admin.loan.AdminloanOffers;
 import com.chiranths.jobportal1.Activities.Dashboard.StartingActivity;
 import com.chiranths.jobportal1.R;
 import com.google.android.gms.tasks.Continuation;
@@ -37,8 +40,8 @@ public class Admincoroselimages extends AppCompatActivity {
     private static final int GalleryPick4 = 4;
     private Uri ImageUri;
     private ProgressDialog loadingBar;
-    private StorageReference ProductImagesRef, adsImageRef, hotImageRef, businessImageRef, layoutsImagesRef;
-    private DatabaseReference ProductsRef,adsRef, hotRef, businessRef, layoutRef;
+    private StorageReference ProductImagesRef, adsImageRef, hotImageRef, businessImageRef, layoutsImagesRef,loanImageRef;
+    private DatabaseReference ProductsRef,adsRef, hotRef, businessRef, layoutRef, loanRef;
     private String productRandomKey, downloadImageUrl;
 
     @Override
@@ -61,6 +64,8 @@ public class Admincoroselimages extends AppCompatActivity {
         layoutsImagesRef = FirebaseStorage.getInstance().getReference().child("layouts");
         layoutRef = FirebaseDatabase.getInstance().getReference().child("layoutsforyou");
 
+        loanImageRef = FirebaseStorage.getInstance().getReference().child("loanoffers");
+        loanRef = FirebaseDatabase.getInstance().getReference().child("loanoffersforyou");
 
         loadingBar = new ProgressDialog(this);
 
@@ -69,7 +74,24 @@ public class Admincoroselimages extends AppCompatActivity {
         Button btn_hot_deals = findViewById(R.id.btn_hot_deals);
         Button btn_business_listing = findViewById(R.id.btn_business_listing);
         Button btn_layouts = findViewById(R.id.btn_layouts);
+        Button btn_loan_offers = findViewById(R.id.btn_loan_offers);
+        Button btn_business_category = findViewById(R.id.btn_business_category);
 
+        btn_business_category.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Admincoroselimages.this, AdminBusinessCategorys.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_loan_offers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Admincoroselimages.this, AdminloanOffers.class);
+                startActivity(intent);
+            }
+        });
         btn_hot_deals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,7 +133,7 @@ public class Admincoroselimages extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(Admincoroselimages.this,Admin_hotdeals.class);
+                Intent intent = new Intent(Admincoroselimages.this, Admin_business_listings.class);
                 startActivity(intent);
             }
         });

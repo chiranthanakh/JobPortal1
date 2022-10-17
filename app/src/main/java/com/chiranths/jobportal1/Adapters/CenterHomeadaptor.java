@@ -49,21 +49,15 @@ public class CenterHomeadaptor extends RecyclerView.Adapter<CenterHomeadaptor.Vi
 
         ProductInfo productInfo = productInfos.get(position);
 
-       /* Picasso.get()
-                .load(productInfo.getImage())
-                //.centerCrop()
-                //.resize(120,140)
-                .into(holder.iv_image);*/
-
         Glide.with(context)
                 .load(productInfo.getImage())
                 .into(holder.iv_image);
 
         holder.tv_name_hot.setText(productInfo.getPname());
-        holder.tv_final_price_hot.setText(productInfo.getPrice());
+        holder.tv_final_price_hot.setText("Rent: "+productInfo.getPrice());
         holder.tv_hot_sqft.setText(productInfo.getPropertysize());
+        holder.tv_advance.setText("Advance: ");
         holder.tv_loaction_hot.setText(productInfo.getLocation());
-        //holder.tv_btn_call_hot.setText("");
 
         holder.cv_deals.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,27 +68,6 @@ public class CenterHomeadaptor extends RecyclerView.Adapter<CenterHomeadaptor.Vi
             }
         });
 
-        holder.iv_call_bottom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:"+productInfo.getNumber()));
-                context.startActivity(callIntent);
-
-            }
-        });
-
-        holder.iv_whatsapp_bottom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String url = "https://api.whatsapp.com/send?phone="+"91"+productInfo.getNumber();
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                context.startActivity(i);
-
-            }
-        });
     }
 
     @Override
@@ -106,24 +79,17 @@ public class CenterHomeadaptor extends RecyclerView.Adapter<CenterHomeadaptor.Vi
 
         ImageView iv_image,iv_call_bottom,iv_whatsapp_bottom;
         CardView cv_deals;
-        TextView tv_name_hot,tv_final_price_hot,tv_hot_sqft,tv_loaction_hot,tv_btn_call_hot;
+        TextView tv_name_hot,tv_final_price_hot,tv_hot_sqft,tv_loaction_hot,tv_advance;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             iv_image = itemView.findViewById(R.id.iv_location_image_center);
             cv_deals = itemView.findViewById(R.id.cv_card_deals_center);
-
             tv_name_hot = itemView.findViewById(R.id.tv_name_hot_center);
             tv_final_price_hot = itemView.findViewById(R.id.tv_final_price_hot_center);
             tv_hot_sqft = itemView.findViewById(R.id.tv_hot_sqft_center);
             tv_loaction_hot = itemView.findViewById(R.id.tv_loaction_hot_center);
-            iv_call_bottom = itemView.findViewById(R.id.iv_call_bottom_center);
-            iv_whatsapp_bottom = itemView.findViewById(R.id.iv_whatsapp_bottom_center);
-            //tv_btn_call_hot = itemView.findViewById(R.id.tv_btn_call_hot);
-
-
+            tv_advance = itemView.findViewById(R.id.tv_home_advance);
         }
     }
-
 }
