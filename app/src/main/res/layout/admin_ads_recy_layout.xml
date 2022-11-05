@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cons_layout"
+    android:layout_width="150dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="3dp"
+    android:layout_marginEnd="3dp"
+    android:layout_marginBottom="3dp"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:elevation="3dp"
+        android:id="@+id/cv_admin_card_ads"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"
+        app:cardCornerRadius="5dp">
+
+
+        <ImageView
+            android:id="@+id/iv_ads_image"
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            android:src="@drawable/aaimage" />
+
+        <LinearLayout
+            android:layout_marginTop="120dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_marginTop="3dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginEnd="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_ads_status"
+                    android:drawableTint="@color/black"
+                    android:gravity="start|center"
+                    android:fontFamily="@font/lato"
+                    android:textColor="@color/grey"
+                    android:textSize="12sp"
+                    android:drawablePadding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_marginTop="3dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginEnd="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_ads_category"
+                    android:drawableTint="@color/black"
+                    android:drawableStart="@drawable/ic_home_ads"
+                    android:gravity="start|center"
+                    android:fontFamily="@font/lato"
+                    android:textColor="@color/grey"
+                    android:textSize="12sp"
+                    android:drawablePadding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="3dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginEnd="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_ads_amount"
+                    android:layout_weight="2"
+                    android:text="23 Lac"
+                    android:gravity="start|center"
+                    android:drawablePadding="5dp"
+                    android:drawableStart="@drawable/ic_rupees_ads"
+                    android:fontFamily="@font/lato_semibold"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_ads_spaces"
+                    android:layout_weight="1"
+                    android:text="330 sqft."
+                    android:gravity="start"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="10dp"
+                    android:fontFamily="@font/lato_semibold"
+                    android:textColor="@color/black"
+                    android:visibility="gone"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/ads_location_adaptor"
+                    android:text="RT Nagar Hmt Layout"
+                    app:layout_constraintStart_toStartOf="@+id/iv_product"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:textSize="11dp"
+                    android:drawableTint="@color/red"
+                    android:drawableStart="@drawable/location_ads"
+                    android:layout_gravity="center"
+                    android:gravity="start|center"
+                    android:drawablePadding="5dp"
+                    android:fontFamily="@font/proxima_family"
+                    android:textColor="@color/grey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_admin_aprove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:background="@drawable/button_capsule_blue"
+                    android:text="approve"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:textColor="@color/white"
+                    android:textSize="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent">
+                </androidx.appcompat.widget.AppCompatButton>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_admin_pending"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/button_capsule_blue"
+                    android:text="Remove"
+                    android:layout_marginTop="@dimen/margin_10dp"
+                    android:textColor="@color/white"
+                    android:textSize="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent">
+                </androidx.appcompat.widget.AppCompatButton>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

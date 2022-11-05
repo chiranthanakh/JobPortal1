@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".Activities.Admin.Admincoroselimages">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:paddingBottom="@dimen/dp_20"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_ads"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="propertys"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:paddingBottom="@dimen/dp_20"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_hot_deals"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="business"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:paddingBottom="@dimen/dp_20"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_loan_offers"
+            android:layout_width="@dimen/margin_100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="@dimen/dp_20"
+            android:text="Add Loan offers"/>
+
+        <Button
+            android:id="@+id/btn_layouts"
+            android:layout_width="@dimen/margin_100dp"
+            android:layout_height="100dp"
+            android:text="add Layouts"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:paddingBottom="@dimen/dp_20"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_business_category"
+            android:layout_width="@dimen/margin_100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="@dimen/dp_20"
+            android:text="Add Loan offers"/>
+    </LinearLayout>
+
+
+</LinearLayout>
