@@ -85,6 +85,8 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
         gridView = findViewById(R.id.id_gridview);
         //recyclerView.setHasFixedSize(true);
        // GridLayoutManager mgrid = new GridLayoutManager(this,2);
+
+        //code for filter cat recyclar view
         fetchbusiness("");
         fetchbusinessCategorys();
 
@@ -147,8 +149,8 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
                             }
                         }
                     }
-
-                    RecyclerView.LayoutManager nlayoutManager1 = new LinearLayoutManager(BusinessActivity.this, RecyclerView.VERTICAL, false);
+                   // RecyclerView.LayoutManager nlayoutManager1 = new LinearLayoutManager(BusinessActivity.this, RecyclerView.VERTICAL, false);
+                    GridLayoutManager nlayoutManager1=new GridLayoutManager(BusinessActivity.this,5);
                     gridView.setLayoutManager(nlayoutManager1);
                     gridView.setItemAnimator(new DefaultItemAnimator());
                     businesscatAdaptor =new BusinessCategoryAdaptor(categorylists, BusinessActivity.this);
@@ -213,7 +215,6 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
                         recyadaptor(filterbusinesslist);
                     }else {
                         recyadaptor(filterbusinesslist);
-
                     }
                 }
             }

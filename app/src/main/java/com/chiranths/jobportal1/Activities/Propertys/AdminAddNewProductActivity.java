@@ -257,6 +257,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         productMap.put("price", Price);
         productMap.put("pname", Pname);
         productMap.put("type",type);
+        productMap.put("Approval",1);
         productMap.put("propertysize",propertysize);
         productMap.put("location",location);
         productMap.put("number",number);

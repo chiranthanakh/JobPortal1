@@ -236,6 +236,7 @@ public class Admin_hotdeals extends AppCompatActivity {
         productMap.put("category", CategoryName);
         productMap.put("price", Price);
         productMap.put("pname", Pname);
+        productMap.put("Approval",1);
         productMap.put("propertysize",propertysize);
         productMap.put("location",location);
         productMap.put("number",number);

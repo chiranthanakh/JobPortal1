@@ -152,7 +152,7 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
 
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
 
-                            adslist.add(userData.get("image")+"---"+userData.get("pid")+"---"+userData.get("category")+"---"+userData.get("price")+"---"+userData.get("propertysize")+"---"+userData.get("number")+"---"+userData.get("location"));
+                            adslist.add(userData.get("image")+"---"+userData.get("pid")+"---"+userData.get("category")+"---"+userData.get("price")+"---"+userData.get("propertysize")+"---"+userData.get("number")+"---"+userData.get("location")+"---"+userData.get("Approval"));
 
                         }catch (ClassCastException cce){
 

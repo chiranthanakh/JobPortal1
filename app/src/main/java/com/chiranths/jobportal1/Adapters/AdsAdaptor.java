@@ -3,6 +3,7 @@ package com.chiranths.jobportal1.Adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.chiranths.jobportal1.Activities.BasicActivitys.AdsDetailsActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyDetailsActivity;
@@ -52,20 +54,24 @@ public class AdsAdaptor extends RecyclerView.Adapter<AdsAdaptor.ViewHolder> {
 
         String[] data = noticeimage.split("---");
 
-        /*Picasso.get()
-                .load(data[0])
-                //.centerCrop()
-                //.resize(150,120)
-                .into(holder.iv_corosel_image);*/
-
         Glide.with(context)
                 .load(data[0])
+                .apply(new RequestOptions().override(500, 500))
                 .into(holder.iv_corosel_image);
 
         holder.tv_ads_category.setText(data[2]);
         holder.tv_amount.setText(data[3]);
         holder.tv_space.setText(data[4]);
         holder.ads_location_adaptor.setText(data[6]);
+
+
+        if(data[7].equals("1")){
+            holder.tv_ads_verification.setText("Not Verified");
+            holder.tv_ads_verification.setTextColor(Color.parseColor("#FDDA0D"));
+        }else if(data[7].equals("2")){
+            holder.tv_ads_verification.setText("Verified Property");
+            holder.tv_ads_verification.setTextColor(Color.parseColor("#228B22"));
+        }
 
         holder.cv_card.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +92,7 @@ public class AdsAdaptor extends RecyclerView.Adapter<AdsAdaptor.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView iv_corosel_image;
-        TextView tv_ads_category,tv_amount,tv_space,ads_location_adaptor;
+        TextView tv_ads_category,tv_amount,tv_space,ads_location_adaptor,tv_ads_verification;
         CardView cv_card;
         LinearLayout ll_enquiry;
 
@@ -99,6 +105,7 @@ public class AdsAdaptor extends RecyclerView.Adapter<AdsAdaptor.ViewHolder> {
             this.tv_amount = itemView.findViewById(R.id.tv_ads_amount);
             this.tv_space = itemView.findViewById(R.id.tv_ads_spaces);
             this.ads_location_adaptor = itemView.findViewById(R.id.ads_location_adaptor);
+            this.tv_ads_verification = itemView.findViewById(R.id.tv_ads_verification);
            /// this.ll_enquiry = itemView.findViewById(R.id.ll_enquiry);
 
         }

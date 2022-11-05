@@ -15,6 +15,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.chiranths.jobportal1.Activities.BasicActivitys.AdsDetailsActivity;
 import com.chiranths.jobportal1.R;
 
@@ -57,6 +58,7 @@ public class LayoutsAdaptor extends RecyclerView.Adapter<LayoutsAdaptor.ViewHold
 
         Glide.with(context)
                 .load(data[0])
+                .apply(new RequestOptions().override(500, 500))
                 .into(holder.iv_corosel_image);
 
         holder.tv_ads_category.setText(data[2]);

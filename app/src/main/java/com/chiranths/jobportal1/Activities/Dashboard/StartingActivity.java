@@ -264,10 +264,8 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                     for (String key : dataMap.keySet()){
                         Object data = dataMap.get(key);
                         try{
-
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
                             coroselimagelist.add(new Corosolmodel(String.valueOf(userData.get("image")),String.valueOf(userData.get("type"))));
-
                         }catch (ClassCastException cce){
 
                             try{
@@ -312,7 +310,6 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
                                         mHandler2.postDelayed(SCROLLING_RUNNABLE, 200);
                                     }
                                 }, 2000);
-
                         }
                     });
 
@@ -327,9 +324,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void fetchads() {
-
         DatabaseReference adsimage = FirebaseDatabase.getInstance().getReference().child("adsforyou");
-
         adsimage.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -343,7 +338,7 @@ public class StartingActivity extends AppCompatActivity implements View.OnClickL
 
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
 
-                            adslist.add(userData.get("image")+"---"+userData.get("pid")+"---"+userData.get("category")+"---"+userData.get("price")+"---"+userData.get("propertysize")+"---"+userData.get("number")+"---"+userData.get("location"));
+                            adslist.add(userData.get("image")+"---"+userData.get("pid")+"---"+userData.get("category")+"---"+userData.get("price")+"---"+userData.get("propertysize")+"---"+userData.get("number")+"---"+userData.get("location")+"---"+userData.get("Approval"));
 
                         }catch (ClassCastException cce){
 

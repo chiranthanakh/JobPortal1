@@ -232,6 +232,7 @@ public class Admin_corosel extends AppCompatActivity {
         productMap.put("category", CategoryName);
         productMap.put("price", Price);
         productMap.put("pname", Pname);
+        productMap.put("Approval",1);
         productMap.put("url",propertysize);
         productMap.put("type",type);
         productMap.put("number",number);

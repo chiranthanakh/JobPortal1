@@ -24,7 +24,6 @@ import java.util.List;
 
 public class BusinessAdaptor extends RecyclerView.Adapter<BusinessAdaptor.ViewHolder> {
 
-
     private List<BusinessModel> productInfos;
     private Context context;
 

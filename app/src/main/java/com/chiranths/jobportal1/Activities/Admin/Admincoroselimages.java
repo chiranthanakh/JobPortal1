@@ -15,6 +15,7 @@ import com.chiranths.jobportal1.Activities.Admin.Business.AdminBusinessCategorys
 import com.chiranths.jobportal1.Activities.Admin.Business.Admin_business_listings;
 import com.chiranths.jobportal1.Activities.Admin.loan.AdminloanOffers;
 import com.chiranths.jobportal1.Activities.Dashboard.StartingActivity;
+import com.chiranths.jobportal1.Activities.Propertys.PropertyActivity;
 import com.chiranths.jobportal1.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -76,66 +77,60 @@ public class Admincoroselimages extends AppCompatActivity {
         Button btn_layouts = findViewById(R.id.btn_layouts);
         Button btn_loan_offers = findViewById(R.id.btn_loan_offers);
         Button btn_business_category = findViewById(R.id.btn_business_category);
+        Button btn_propertys_approval = findViewById(R.id.propertys_for_approval);
+        Button btn_business_approval = findViewById(R.id.business_for_approval);
 
-        btn_business_category.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Admincoroselimages.this, AdminBusinessCategorys.class);
-                startActivity(intent);
-            }
+
+
+        btn_propertys_approval.setOnClickListener(view -> {
+            Intent intent = new Intent(Admincoroselimages.this, AdminPropertyApproval.class);
+            startActivity(intent);
         });
 
-        btn_loan_offers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Admincoroselimages.this, AdminloanOffers.class);
-                startActivity(intent);
-            }
-        });
-        btn_hot_deals.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(Admincoroselimages.this,Admin_hotdeals.class);
-                startActivity(intent);
-            }
+        btn_business_approval.setOnClickListener(view -> {
+            Intent intent = new Intent(Admincoroselimages.this, AdminBusinessCategorys.class);
+            startActivity(intent);
         });
 
-        btn_layouts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        btn_business_category.setOnClickListener(view -> {
+            Intent intent = new Intent(Admincoroselimages.this, AdminBusinessCategorys.class);
+            startActivity(intent);
+        });
 
-                Intent intent = new Intent(Admincoroselimages.this,Admin_layouts.class);
-                startActivity(intent);
-            }
+        btn_loan_offers.setOnClickListener(view -> {
+            Intent intent = new Intent(Admincoroselimages.this, AdminloanOffers.class);
+            startActivity(intent);
+        });
+
+        btn_hot_deals.setOnClickListener(view -> {
+
+            Intent intent = new Intent(Admincoroselimages.this,Admin_hotdeals.class);
+            startActivity(intent);
+        });
+
+        btn_layouts.setOnClickListener(view -> {
+
+            Intent intent = new Intent(Admincoroselimages.this,Admin_layouts.class);
+            startActivity(intent);
         });
 
 
-        btn_corosel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        btn_corosel.setOnClickListener(view -> {
 
-                Intent intent = new Intent(Admincoroselimages.this,Admin_corosel.class);
-                startActivity(intent);
-            }
+            Intent intent = new Intent(Admincoroselimages.this,Admin_corosel.class);
+            startActivity(intent);
         });
 
-        btn_ads.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        btn_ads.setOnClickListener(view -> {
 
-                Intent intent = new Intent(Admincoroselimages.this,Admin_ads.class);
-                startActivity(intent);
-            }
+            Intent intent = new Intent(Admincoroselimages.this,Admin_ads.class);
+            startActivity(intent);
         });
 
-        btn_business_listing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        btn_business_listing.setOnClickListener(view -> {
 
-                Intent intent = new Intent(Admincoroselimages.this, Admin_business_listings.class);
-                startActivity(intent);
-            }
+            Intent intent = new Intent(Admincoroselimages.this, Admin_business_listings.class);
+            startActivity(intent);
         });
     }
 

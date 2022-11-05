@@ -254,6 +254,8 @@ public class Admin_ads extends AppCompatActivity {
         productMap.put("number",number);
         productMap.put("verified",et_verified.getText().toString());
         productMap.put("postedOn", saveCurrentDate);
+        productMap.put("Approval",1);
+        productMap.put("payment","");
         productMap.put("text1", et_text1.getText().toString());
         productMap.put("text2", et_text2.getText().toString());
         productMap.put("text3", et_text3.getText().toString());

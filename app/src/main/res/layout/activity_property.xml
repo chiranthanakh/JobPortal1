@@ -321,7 +321,6 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent">
-
     </androidx.appcompat.widget.AppCompatButton>
 
 
