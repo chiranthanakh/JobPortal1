@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/music"
+        android:id="@+id/Home"
         android:icon="@drawable/ic_home"
         android:title="Home" />
 
@@ -17,7 +17,7 @@
         android:title="Property" />
 
     <item
-        android:id="@+id/books"
+        android:id="@+id/profile"
         android:icon="@drawable/ic_profile"
         android:title="Profile" />
 

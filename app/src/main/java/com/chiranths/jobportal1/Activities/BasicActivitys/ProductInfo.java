@@ -2,9 +2,9 @@ package com.chiranths.jobportal1.Activities.BasicActivitys;
 
 public class ProductInfo {
 
-    String category,date,description,image,location,number,pid,pname,price,propertysize,time,type;
+    String category,date,description,image,location,number,pid,pname,price,propertysize,time,type,posted;
 
-    public ProductInfo(String category, String date, String description, String image, String location, String number, String pid, String pname, String price, String propertysize, String time, String type) {
+    public ProductInfo(String category, String date, String description, String image, String location, String number, String pid, String pname, String price, String propertysize, String time, String type, String posted) {
         this.category = category;
         this.date = date;
         this.description = description;
@@ -17,6 +17,15 @@ public class ProductInfo {
         this.propertysize = propertysize;
         this.time = time;
         this.type = type;
+        this.posted = posted;
+    }
+
+    public String getPosted() {
+        return posted;
+    }
+
+    public void setPosted(String posted) {
+        this.posted = posted;
     }
 
     public String getCategory() {

@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -12,10 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.chiranths.jobportal1.Activities.Admin.Business.AdminBusinessCategorys;
-import com.chiranths.jobportal1.Activities.Admin.Business.Admin_business_listings;
+import com.chiranths.jobportal1.Activities.Admin.Business.AdminBusinessListings;
 import com.chiranths.jobportal1.Activities.Admin.loan.AdminloanOffers;
 import com.chiranths.jobportal1.Activities.Dashboard.StartingActivity;
-import com.chiranths.jobportal1.Activities.Propertys.PropertyActivity;
 import com.chiranths.jobportal1.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -129,7 +127,7 @@ public class Admincoroselimages extends AppCompatActivity {
 
         btn_business_listing.setOnClickListener(view -> {
 
-            Intent intent = new Intent(Admincoroselimages.this, Admin_business_listings.class);
+            Intent intent = new Intent(Admincoroselimages.this, AdminBusinessListings.class);
             startActivity(intent);
         });
     }

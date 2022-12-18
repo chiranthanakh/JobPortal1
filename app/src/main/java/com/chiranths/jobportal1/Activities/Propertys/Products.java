@@ -6,13 +6,16 @@ public class Products {
 
 
     private String pname, description, price, image, category, pid, date, time,type,propertysize
-            ,location,number,image2,text1,text2,text3,text4;
+            ,location,number,image2,text1,text2,text3,text4,Postedby,postedOn;
+
+    int Approval;
     public Products()
     {
 
     }
 
-    public Products(String pname, String description, String price, String image, String category, String pid, String date, String time, String type, String propertysize, String location, String number, String image2, String text1, String text2, String text3, String text4) {
+    public Products(String postedOn,String pname, String description, String price, String image, String category, String pid, String date, String time, String type, String propertysize, String location, String number, String image2, String text1, String text2, String text3, String text4, String postedby, int approval) {
+        this.postedOn = postedOn;
         this.pname = pname;
         this.description = description;
         this.price = price;
@@ -30,6 +33,16 @@ public class Products {
         this.text2 = text2;
         this.text3 = text3;
         this.text4 = text4;
+        this.Postedby = postedby;
+        this.Approval = approval;
+    }
+
+    public String getPostedOn() {
+        return postedOn;
+    }
+
+    public void setPostedOn(String postedOn) {
+        this.postedOn = postedOn;
     }
 
     public String getPname() {
@@ -66,6 +79,13 @@ public class Products {
 
     public String getCategory() {
         return category;
+    }
+
+    public int getApproval() {
+        return Approval;
+    }
+    public void setApproval(int approval) {
+        this.Approval = approval;
     }
 
     public void setCategory(String category) {
@@ -166,5 +186,13 @@ public class Products {
 
     public void setText4(String text4) {
         this.text4 = text4;
+    }
+
+    public String getPostedby() {
+        return Postedby;
+    }
+
+    public void setPostedby(String postedby) {
+        this.Postedby = postedby;
     }
 }

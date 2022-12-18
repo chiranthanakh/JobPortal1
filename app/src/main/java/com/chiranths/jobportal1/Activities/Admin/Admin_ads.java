@@ -3,6 +3,7 @@ package com.chiranths.jobportal1.Activities.Admin;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -38,7 +39,7 @@ public class Admin_ads extends AppCompatActivity {
     private static final int GalleryPick = 1;
     private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,propertysize,location,number;
     private EditText InputProductName,Inputtype,InputProductDescription
-            ,InputProductPrice,et_size,et_location,et_number,et_verified,et_text1, et_text2,et_text3,et_text4;
+            ,InputProductPrice,et_size,et_location,et_number,et_verified,et_text1, et_text2,et_text3,et_text4,et_posted_by;
     private Uri ImageUri;
     private String productRandomKey, downloadImageUrl,MainimageUrl;
     private StorageReference ProductImagesRef;
@@ -70,6 +71,7 @@ public class Admin_ads extends AppCompatActivity {
         et_text2 = findViewById(R.id.ads_text2);
         et_text3 = findViewById(R.id.ads_text3);
         et_text4 = findViewById(R.id.ads_text4);
+        et_posted_by= findViewById(R.id.ads_posted_by);
         et_location = findViewById(R.id.ads_location_admin);
         et_number = findViewById(R.id.ads_contact_number);
         et_verified = findViewById(R.id.ads_verify_or_nt);
@@ -254,6 +256,7 @@ public class Admin_ads extends AppCompatActivity {
         productMap.put("number",number);
         productMap.put("verified",et_verified.getText().toString());
         productMap.put("postedOn", saveCurrentDate);
+        productMap.put("Postedby",et_posted_by.getText().toString());
         productMap.put("Approval",1);
         productMap.put("payment","");
         productMap.put("text1", et_text1.getText().toString());
@@ -286,6 +289,7 @@ public class Admin_ads extends AppCompatActivity {
 
 
 
+    @SuppressLint("Range")
     public String getFileName(Uri uri){
         String result = null;
         if (uri.getScheme().equals("content")){

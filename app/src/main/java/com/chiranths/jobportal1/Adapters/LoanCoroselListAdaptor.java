@@ -44,11 +44,6 @@ public class LoanCoroselListAdaptor extends RecyclerView.Adapter<LoanCoroselList
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         final String noticeimage = String.valueOf(noticeBoardList.get(position));
 
-        /*Picasso.get().load(noticeimage)
-                //.centerCrop()
-                //.resize(350,140)
-                .into(holder.iv_corosel_image);*/
-
         Glide.with(context)
                 .load(noticeimage)
                 .into(holder.iv_corosel_image);

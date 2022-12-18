@@ -78,6 +78,7 @@ public class AdsAdaptor extends RecyclerView.Adapter<AdsAdaptor.ViewHolder> {
             public void onClick(View view) {
                 Intent intent =new Intent(context, AdsDetailsActivity.class);
                 intent.putExtra("pid",data[1]);
+                intent.putExtra("page","1");
                 context.startActivity(intent);
             }
         });

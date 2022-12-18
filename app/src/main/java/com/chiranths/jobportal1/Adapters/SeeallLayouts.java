@@ -46,12 +46,6 @@ public class SeeallLayouts extends RecyclerView.Adapter<SeeallLayouts.ViewHolder
         String[] data = imagesdata[1].split("---");
         String[] imageurl = imagesdata[0].split("---");
 
-        /*Picasso.get()
-                .load(imageurl[0])
-                .centerCrop()
-                .resize(130,130)
-                .into(holder.iv_image);*/
-
         Glide.with(context)
                 .load(imageurl[0])
                 .into(holder.iv_image);

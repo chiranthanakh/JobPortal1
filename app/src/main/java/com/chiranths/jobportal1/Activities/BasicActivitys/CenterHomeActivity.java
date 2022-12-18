@@ -77,7 +77,8 @@ public class CenterHomeActivity extends AppCompatActivity {
                                     String.valueOf(userData.get("price")),
                                     String.valueOf(userData.get("propertysize")),
                                     String.valueOf(userData.get("time")),
-                                    String.valueOf(userData.get("type"))));
+                                    String.valueOf(userData.get("type")),
+                                    String.valueOf(userData.get("postedby"))));
 
                         }catch (ClassCastException cce){
 

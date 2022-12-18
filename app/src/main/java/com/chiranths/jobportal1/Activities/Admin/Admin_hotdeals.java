@@ -1,5 +1,6 @@
 package com.chiranths.jobportal1.Activities.Admin;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -37,7 +38,8 @@ public class Admin_hotdeals extends AppCompatActivity {
 
     private static final int GalleryPick = 1;
     private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,propertysize,location,number;
-    private EditText InputProductName,Inputtype,InputProductDescription,InputProductPrice,et_size,et_location,et_number;
+    private EditText InputProductName,Inputtype,InputProductDescription,
+            InputProductPrice,et_size,et_location,et_number,et_posted_by,et_hot_text1,et_hot_text2;
     private Uri ImageUri;
     private String productRandomKey, downloadImageUrl,MainimageUrl;
     private StorageReference ProductImagesRef;
@@ -57,7 +59,6 @@ public class Admin_hotdeals extends AppCompatActivity {
 
         ImageView btn_corosel = findViewById(R.id.select_hot_image);
         Button add_new_corosel = findViewById(R.id.add_new_hot);
-
         InputProductName = (EditText) findViewById(R.id.hot_name);
         Inputtype = (EditText)findViewById(R.id.hot_type_admin);
         InputProductDescription = (EditText) findViewById(R.id.hot_description);
@@ -65,7 +66,10 @@ public class Admin_hotdeals extends AppCompatActivity {
         et_size = findViewById(R.id.hot_size);
         et_location = findViewById(R.id.hot_location_admin);
         et_number = findViewById(R.id.contact_number3);
+        et_posted_by = findViewById(R.id.et_owner_broker);
         loadingBar = new ProgressDialog(this);
+        et_hot_text1 = findViewById(R.id.et_hot_text1);
+        et_hot_text2 = findViewById(R.id.et_hot_text2);
 
         btn_corosel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -240,6 +244,10 @@ public class Admin_hotdeals extends AppCompatActivity {
         productMap.put("propertysize",propertysize);
         productMap.put("location",location);
         productMap.put("number",number);
+        productMap.put("type",Inputtype.getText().toString());
+        productMap.put("postedby",et_posted_by.getText().toString());
+        productMap.put("text1",et_hot_text1.getText().toString());
+        productMap.put("text2",et_hot_text2.getText().toString());
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -265,6 +273,7 @@ public class Admin_hotdeals extends AppCompatActivity {
 
 
 
+    @SuppressLint("Range")
     public String getFileName(Uri uri){
         String result = null;
         if (uri.getScheme().equals("content")){

@@ -31,7 +31,9 @@ import com.chiranths.jobportal1.Activities.BasicActivitys.UserDetailsActivity;
 import com.chiranths.jobportal1.Activities.Dashboard.Calldetails;
 import com.chiranths.jobportal1.Activities.Dashboard.StartingActivity;
 import com.chiranths.jobportal1.Activities.HotDealsactivity.HotDealsDetailsActivity;
+import com.chiranths.jobportal1.CalldetailsRecords;
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.squareup.picasso.Picasso;
 
@@ -48,7 +50,8 @@ public class BottomhomeRecyclarviewAdaptor extends RecyclerView.Adapter<Bottomho
     private List<ProductInfo> productInfos;
     private Context context;
     private String number, name;
-    StartingActivity calldetails = new StartingActivity() ;
+    CalldetailsRecords calldetails = new CalldetailsRecords() ;
+    Utilitys utilitys = new Utilitys();
 
     public BottomhomeRecyclarviewAdaptor(List<ProductInfo> productInfos,Context context, String number, String name) {
         this.productInfos = productInfos;
@@ -80,6 +83,8 @@ public class BottomhomeRecyclarviewAdaptor extends RecyclerView.Adapter<Bottomho
         holder.tv_final_price_hot.setText(productInfo.getPrice());
         holder.tv_hot_sqft.setText(productInfo.getPropertysize());
         holder.tv_loaction_hot.setText(productInfo.getLocation());
+        holder.tv_contect_whome.setText("Contact: "+productInfo.getPosted());
+
         //holder.tv_btn_call_hot.setText("");
 
         holder.cv_deals.setOnClickListener(new View.OnClickListener() {
@@ -91,56 +96,63 @@ public class BottomhomeRecyclarviewAdaptor extends RecyclerView.Adapter<Bottomho
             }
         });
 
+        //calling function
         holder.iv_call_bottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                //check permition
+                String permission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+                int res = context.checkCallingOrSelfPermission(permission);
+                if (res == PackageManager.PERMISSION_GRANTED) {
                 SharedPreferences sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
                 String nameofuser = sh.getString("name", "");
-                String userNumber = sh.getString("number","");
-                String useremail = sh.getString("email","");
+                String userNumber = sh.getString("number", "");
+                String useremail = sh.getString("email", "");
 
                 String cnumber = productInfo.getNumber();
                 String cname = productInfo.getPname();
-                if(!userNumber.equals("")){
-                    calldetails.callinfo(userNumber,nameofuser,cnumber,cname);
+                if (!userNumber.equals("")) {
+                    calldetails.callinfo(userNumber, nameofuser, cnumber, cname);
                     Intent callIntent = new Intent(Intent.ACTION_CALL);
-                    callIntent.setData(Uri.parse("tel:"+productInfo.getNumber()));
+                    callIntent.setData(Uri.parse("tel:" + productInfo.getNumber()));
                     context.startActivity(callIntent);
-                }else {
+                } else {
                     Intent intent = new Intent(context, UserDetailsActivity.class);
                     context.startActivity(intent);
                 }
             }
+            }
         });
 
+        //whatsapp function
         holder.iv_whatsapp_bottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                SharedPreferences sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-                String nameofuser = sh.getString("name", "");
-                String userNumber = sh.getString("number","");
-                String useremail = sh.getString("email","");
+                String permission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+                int res = context.checkCallingOrSelfPermission(permission);
+                if (res == PackageManager.PERMISSION_GRANTED) {
+                    SharedPreferences sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+                    String nameofuser = sh.getString("name", "");
+                    String userNumber = sh.getString("number", "");
+                    String useremail = sh.getString("email", "");
 
-                if(!userNumber.equals("")){
-
-                    String url = "https://api.whatsapp.com/send?phone="+"91"+productInfo.getNumber();
-                    Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse(url));
-                    context.startActivity(i);
-                    calldetails.callinfo(userNumber,nameofuser,productInfo.getNumber(),productInfo.getPname());
-
-                }else {
-                    if (ContextCompat.checkSelfPermission(context, CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-                        Intent intent = new Intent(context, UserDetailsActivity.class);
-                        context.startActivity(intent);
+                    if (!userNumber.equals("")) {
+                        String url = "https://api.whatsapp.com/send?phone=" + "91" + productInfo.getNumber();
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(url));
+                        context.startActivity(i);
+                        calldetails.callinfo(userNumber, nameofuser, productInfo.getNumber(), productInfo.getPname());
                     } else {
-
-                        ActivityCompat.requestPermissions((Activity) context,
-                                new String[]{Manifest.permission.CALL_PHONE},
-                                1);
-
+                        if (ContextCompat.checkSelfPermission(context, CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                            Intent intent = new Intent(context, UserDetailsActivity.class);
+                            context.startActivity(intent);
+                        } else {
+                            ActivityCompat.requestPermissions((Activity) context,
+                                    new String[]{Manifest.permission.CALL_PHONE},
+                                    1);
+                        }
                     }
                 }
             }
@@ -156,23 +168,21 @@ public class BottomhomeRecyclarviewAdaptor extends RecyclerView.Adapter<Bottomho
 
         ImageView iv_image,iv_call_bottom,iv_whatsapp_bottom;
         CardView cv_deals;
-        TextView tv_name_hot,tv_final_price_hot,tv_hot_sqft,tv_loaction_hot,tv_btn_call_hot;
+        TextView tv_name_hot,tv_final_price_hot,tv_hot_sqft,tv_loaction_hot,tv_btn_call_hot,tv_contect_whome;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             iv_image = itemView.findViewById(R.id.iv_location_image);
             cv_deals = itemView.findViewById(R.id.cv_card_deals);
-
             tv_name_hot = itemView.findViewById(R.id.tv_name_hot);
             tv_final_price_hot = itemView.findViewById(R.id.tv_final_price_hot);
             tv_hot_sqft = itemView.findViewById(R.id.tv_hot_sqft);
             tv_loaction_hot = itemView.findViewById(R.id.tv_loaction_hot);
             iv_call_bottom = itemView.findViewById(R.id.iv_call_bottom);
             iv_whatsapp_bottom = itemView.findViewById(R.id.iv_whatsapp_bottom);
+            tv_contect_whome = itemView.findViewById(R.id.tv_contect_whome);
             //tv_btn_call_hot = itemView.findViewById(R.id.tv_btn_call_hot);
-
-
         }
     }
 

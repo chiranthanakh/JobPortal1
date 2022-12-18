@@ -41,14 +41,6 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/share"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_vertical"
-                android:background="?selectableItemBackground"
-                android:padding="15dp"
-                android:src="@drawable/share" />
 
         </LinearLayout>
 
@@ -116,18 +108,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/white"
+                        android:layout_marginStart="@dimen/margin_20_dp"
                         android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawableStart="@drawable/approved"
-                            android:drawablePadding="2dp"
-                            android:fontFamily="@font/proxima_nova_semi_bold"
-                            android:gravity="center"
-                            android:text="VERIFIED PROPERTY"
-                            android:textColor="#0dba43"
-                            android:textSize="10sp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -146,17 +128,9 @@
                                 <ImageView
                                     android:layout_width="10dp"
                                     android:layout_height="10dp"
-                                    android:src="@drawable/star"
+                                    android:src="@drawable/ic_home_ads"
                                     app:tint="@color/white" />
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="20dp"
-                                    android:layout_marginStart="5dp"
-                                    android:text="4.5"
-                                    android:gravity="center"
-                                    android:textColor="@color/white"
-                                    android:textSize="10sp" />
                             </LinearLayout>
 
                             <TextView
@@ -167,11 +141,70 @@
                                 android:layout_marginStart="5dp"
                                 android:layout_marginEnd="10dp"
                                 android:fontFamily="@font/proxima_family"
-                                android:text="375 Ratings"
+                                android:text="Category"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/tv_ads_posted_on"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:gravity="end"
+                                android:layout_marginStart="150dp"
+                                android:layout_marginEnd="10dp"
+                                android:fontFamily="@font/proxima_family"
+                                android:text="Category"
                                 android:textColor="@color/black"
                                 android:textSize="12sp"
                                 app:layout_constraintTop_toTopOf="parent" />
                         </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:background="@drawable/rating_back"
+                        android:padding="3dp">
+
+                        <TextView
+                            android:id="@+id/ads_details_verifyed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/approved"
+                            android:drawablePadding="2dp"
+                            android:fontFamily="@font/proxima_nova_semi_bold"
+                            android:gravity="center"
+                            android:text="VERIFIED PROPERTY"
+                            android:textColor="#0dba43"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:id="@+id/ads_details_not_verified"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/approved"
+                            android:drawablePadding="2dp"
+                            android:fontFamily="@font/proxima_nova_semi_bold"
+                            android:gravity="center"
+                            android:text=" Not Verified Property"
+                            android:textColor="#ebe534"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:id="@+id/tv_ads_posted"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="2dp"
+                            android:layout_marginLeft="80dp"
+                            android:fontFamily="@font/proxima_nova_semi_bold"
+                            android:gravity="center"
+                            android:text="VERIFIED PROPERTY"
+                            android:textColor="#eb8634" />
+
+                    </LinearLayout>
+
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -194,6 +227,10 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#E91E63"/>
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -205,7 +242,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:background="@color/grey_light"
                                     android:gravity="center"
                                     android:orientation="vertical"
                                     android:padding="3dp">
@@ -238,7 +274,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:background="@color/grey_light"
                                     android:gravity="center"
                                     android:layout_marginLeft="@dimen/dp_20"
                                     android:orientation="vertical"
@@ -270,6 +305,11 @@
 
                             </LinearLayout>
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#E91E63"/>
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -299,7 +339,7 @@
                                     android:layout_marginTop="@dimen/margin_10_dp"
                                     android:textSize="14dp"
                                     android:textStyle="bold"
-                                    app:tint="@color/white" />
+                                    android:textColor="@color/black"/>
 
                                 <TextView
                                     android:id="@+id/tv_posted_date"
@@ -432,7 +472,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_60"
+            android:layout_height="@dimen/dp_50"
             android:layout_marginTop="15dp"
             android:layout_marginStart="10dp"
             android:orientation="horizontal"
@@ -442,10 +482,12 @@
             android:layout_marginEnd="10dp">
 
             <TextView
+                android:id="@+id/tv_contact_who"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="Contact:"
+                android:textColor="@color/black"
                 android:layout_marginRight="@dimen/dp_30"
                 />
 

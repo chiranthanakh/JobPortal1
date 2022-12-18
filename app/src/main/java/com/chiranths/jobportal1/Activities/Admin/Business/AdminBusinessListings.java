@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class Admin_business_listings extends AppCompatActivity {
+public class AdminBusinessListings extends AppCompatActivity {
     private static final int GalleryPick = 1;
     private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,propertysize,location,number,owner,rating,email;
     private EditText InputProductName,Inputtype,InputProductDescription,InputProductPrice,et_sell_name,et_location,
@@ -177,13 +177,13 @@ public class Admin_business_listings extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     String message = e.toString();
-                    Toast.makeText(Admin_business_listings.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AdminBusinessListings.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
                 }
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(Admin_business_listings.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AdminBusinessListings.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
                     Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                         @Override
                         public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -210,7 +210,7 @@ public class Admin_business_listings extends AppCompatActivity {
                                 }
 
                                 System.out.println("url2---"+downloadImageUrl);
-                                Toast.makeText(Admin_business_listings.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AdminBusinessListings.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
 
                             }
                         }
@@ -253,13 +253,13 @@ public class Admin_business_listings extends AppCompatActivity {
                             // Intent intent = new Intent(AdminAddNewProductActivity.this, .class);
                             //startActivity(intent);
                             loadingBar.dismiss();
-                            Toast.makeText(Admin_business_listings.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminBusinessListings.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
                             loadingBar.dismiss();
                             String message = task.getException().toString();
-                            Toast.makeText(Admin_business_listings.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminBusinessListings.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

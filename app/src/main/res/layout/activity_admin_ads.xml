@@ -215,11 +215,24 @@
                 android:textColor="#000000"
                 android:textColorHint="#000000" />
 
+            <EditText
+                android:id="@+id/ads_posted_by"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ads_text4"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:hint="posted by"
+                android:inputType="textMultiLine"
+                android:padding="20dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000" />
+
     <Button
         android:id="@+id/add_new_ads"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ads_text4"
+        android:layout_below="@+id/ads_posted_by"
         android:layout_marginLeft="45dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="45dp"
