@@ -55,10 +55,12 @@ public class LayoutsAdaptor extends RecyclerView.Adapter<LayoutsAdaptor.ViewHold
                 //.centerCrop()
                 //.resize(150,120)
                 .into(holder.iv_corosel_image);*/
+        RequestOptions options = new RequestOptions();
+        options.fitCenter();
 
         Glide.with(context)
                 .load(data[0])
-                .apply(new RequestOptions().override(500, 500))
+                .apply(options)
                 .into(holder.iv_corosel_image);
 
         holder.tv_ads_category.setText(data[2]);
@@ -71,6 +73,7 @@ public class LayoutsAdaptor extends RecyclerView.Adapter<LayoutsAdaptor.ViewHold
             public void onClick(View view) {
                 Intent intent =new Intent(context, AdsDetailsActivity.class);
                 intent.putExtra("pid",data[1]);
+                intent.putExtra("page","2");
                 context.startActivity(intent);
             }
         });

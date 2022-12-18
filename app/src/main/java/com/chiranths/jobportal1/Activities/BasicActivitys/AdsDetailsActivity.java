@@ -1,8 +1,13 @@
 package com.chiranths.jobportal1.Activities.BasicActivitys;
 
+import static android.Manifest.permission.CALL_PHONE;
+
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -12,10 +17,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.chiranths.jobportal1.Activities.HotDealsactivity.HotDealsDetailsActivity;
 import com.chiranths.jobportal1.Activities.Propertys.Products;
+import com.chiranths.jobportal1.CalldetailsRecords;
 import com.chiranths.jobportal1.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,25 +38,32 @@ public class AdsDetailsActivity extends AppCompatActivity {
 
     private ImageView ads_cl_btn, ads_whatsapp_btn,iv_back_ads;
     CarouselView carouselView;
-    private TextView productPrice,productDescription,productName,tv_topbar_productName,
-            tv_place_location,tv_size_details,tv_prop_type,tv_future1,tv_future2,tv_future3,tv_future4;
-    private String productID="", state = "Normal",number;
+    private TextView productPrice,productDescription,productName,tv_topbar_productName,tv_ads_details_verify,
+            tv_place_location,tv_size_details,tv_prop_type,tv_future1,tv_future2,tv_future3,tv_future4,tv_contact_type,tv_ads_posted_on,tv_ads_posted,ads_details_not_verified;
+    private String productID="", state = "Normal",number,page;
     private String[] url;
+    CalldetailsRecords calldetails = new CalldetailsRecords() ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ads_details);
         productID = getIntent().getStringExtra("pid");
+        page = getIntent().getStringExtra("page");
         ads_cl_btn = findViewById(R.id.ads_cl_btn);
         ads_whatsapp_btn = findViewById(R.id.ads_whtsapp_btn);
         carouselView =  findViewById(R.id.ads_details_carouselView);
         tv_prop_type = findViewById(R.id.tv_prop_type);
         iv_back_ads = findViewById(R.id.iv_back_ads);
+        tv_ads_posted = findViewById(R.id.tv_ads_posted);
         tv_future1 = findViewById(R.id.tv_futures1);
         tv_future2 = findViewById(R.id.tv_futures2);
         tv_future3 = findViewById(R.id.tv_futures3);
         tv_future4 = findViewById(R.id.tv_futures4);
+        tv_ads_details_verify = findViewById(R.id.ads_details_verifyed);
+        ads_details_not_verified = findViewById(R.id.ads_details_not_verified);
+        tv_ads_posted_on = findViewById(R.id.tv_ads_posted_on);
+        tv_contact_type = findViewById(R.id.tv_contact_who);
         tv_place_location = findViewById(R.id.ads_place_location);
         tv_size_details = findViewById(R.id.ads_size_details);
         productName = (TextView) findViewById(R.id.product_name_details);
@@ -60,21 +75,26 @@ public class AdsDetailsActivity extends AppCompatActivity {
         ads_cl_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //check permition
+                String permission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+                int res = checkCallingOrSelfPermission(permission);
+                if (res == PackageManager.PERMISSION_GRANTED) {
+                    SharedPreferences sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+                    String nameofuser = sh.getString("name", "");
+                    String userNumber = sh.getString("number", "");
+                    String useremail = sh.getString("email", "");
 
-                SharedPreferences sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-                String nameofuser = sh.getString("name", "");
-                String userNumber = sh.getString("number","");
-                String useremail = sh.getString("email","");
-
-                if(!userNumber.equals("")){
-
-                    Intent callIntent = new Intent(Intent.ACTION_CALL);
-                    callIntent.setData(Uri.parse("tel:"+ number));
-                    startActivity(callIntent);
-
-                }else {
-                    Intent intent = new Intent(AdsDetailsActivity.this, UserDetailsActivity.class);
-                    startActivity(intent);
+                    String cnumber = number;
+                    String cname = productName.getText().toString();
+                    if (!userNumber.equals("")) {
+                        calldetails.callinfo(userNumber, nameofuser, cnumber, cname);
+                        Intent callIntent = new Intent(Intent.ACTION_CALL);
+                        callIntent.setData(Uri.parse("tel:" + number));
+                        startActivity(callIntent);
+                    } else {
+                        Intent intent = new Intent(AdsDetailsActivity.this, UserDetailsActivity.class);
+                        startActivity(intent);
+                    }
                 }
             }
         });
@@ -83,23 +103,33 @@ public class AdsDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                SharedPreferences sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-                String nameofuser = sh.getString("name", "");
-                String userNumber = sh.getString("number","");
-                String useremail = sh.getString("email","");
+                String permission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+                int res = checkCallingOrSelfPermission(permission);
+                if (res == PackageManager.PERMISSION_GRANTED) {
+                    SharedPreferences sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+                    String nameofuser = sh.getString("name", "");
+                    String userNumber = sh.getString("number", "");
+                    String useremail = sh.getString("email", "");
 
-                if(!userNumber.equals("")){
+                    String cnumber = number;
+                    String cname = productName.getText().toString();
+                    if (!userNumber.equals("")) {
+                        String url = "https://api.whatsapp.com/send?phone=" + "91" + number;
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(url));
+                        startActivity(i);
+                        calldetails.callinfo(userNumber, nameofuser, number,cname );
 
-                    String url = "https://api.whatsapp.com/send?phone="+"91"+number;
-                    Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse(url));
-                    startActivity(i);
-
-                }else {
-                    Intent intent = new Intent(AdsDetailsActivity.this, UserDetailsActivity.class);
-                    startActivity(intent);
+                    } else {
+                        if (ContextCompat.checkSelfPermission(AdsDetailsActivity.this, CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                            Intent intent = new Intent(AdsDetailsActivity.this, UserDetailsActivity.class);
+                            startActivity(intent);
+                        } else {
+                            ActivityCompat.requestPermissions((Activity) AdsDetailsActivity.this,
+                                    new String[]{Manifest.permission.CALL_PHONE}, 1);
+                        }
+                    }
                 }
-
             }
         });
 
@@ -118,11 +148,16 @@ public class AdsDetailsActivity extends AppCompatActivity {
     }
 
     private void getProductDetails(String productID) {
-        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("adsforyou");
+        DatabaseReference productsRef;
+        if(page.equals("1")){
+            productsRef = FirebaseDatabase.getInstance().getReference().child("adsforyou");
+        }else  {
+             productsRef = FirebaseDatabase.getInstance().getReference().child("layoutsforyou");
+        }
         productsRef.child(productID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
+                if (dataSnapshot.exists() && dataSnapshot.getValue(Products.class) != null){
                     Products products=dataSnapshot.getValue(Products.class);
                     productName.setText(products.getPname());
                     productPrice.setText(products.getPrice());
@@ -131,20 +166,29 @@ public class AdsDetailsActivity extends AppCompatActivity {
                     tv_place_location.setText(products.getLocation());
                     tv_size_details.setText(products.getPropertysize());
                     tv_prop_type.setText(products.getCategory());
+                    tv_ads_posted.setText("Posted by : "+products.getPostedby());
+                    if(products.getPostedOn()==null){
+                        tv_ads_posted_on.setVisibility(View.GONE);
+                    }else {
+                        tv_ads_posted_on.setText("Posted on "+products.getPostedOn());
+                    }
                     url = products.getImage2().split("---");
                     carouselView.setPageCount(url.length);
+                    int test = products.getApproval();
+                    if(test == 1){
+                        tv_ads_details_verify.setVisibility(View.GONE);
+                    }else {
+                        ads_details_not_verified.setVisibility(View.GONE);
+                    }
                     carouselView.setImageListener(imageListener);
                     number = products.getNumber();
+                    tv_contact_type.setText("Context "+products.getPostedby());
                     if(products.getText1()!=null){
-
                         tv_future1.setText(products.getText1());
                         tv_future2.setText(products.getText2());
                         tv_future3.setText(products.getText3());
                         tv_future4.setText(products.getText4());
-
                     }
-                   // Picasso.get().load(products.getImage()).into(productImage);
-
                 }
             }
 
@@ -158,7 +202,6 @@ public class AdsDetailsActivity extends AppCompatActivity {
     ImageListener imageListener = new ImageListener() {
         @Override
         public void setImageForPosition(int position, ImageView imageView) {
-
             Glide.with(AdsDetailsActivity.this)
                     .load(url[position])
                     .into(imageView);

@@ -35,6 +35,13 @@
 
     </LinearLayout>
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/select_hot_image"
@@ -61,19 +68,19 @@
         android:textColorHint="#000000" />
 
 
-    <EditText
-        android:id="@+id/hot_type_admin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/hot_name"
-        android:layout_marginLeft="45dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="45dp"
-        android:hint="Property Type"
-        android:inputType="textMultiLine"
-        android:padding="20dp"
-        android:textColor="#000000"
-        android:textColorHint="#000000" />
+        <EditText
+            android:id="@+id/hot_type_admin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hot_name"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="45dp"
+            android:hint="Property Type"
+            android:inputType="textMultiLine"
+            android:padding="20dp"
+            android:textColor="#000000"
+            android:textColorHint="#000000" />
 
     <EditText
         android:id="@+id/hot_size"
@@ -142,24 +149,63 @@
         android:textColor="#000000"
         android:textColorHint="#000000" />
 
-    <EditText
-        android:id="@+id/contact_number3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/hot_discription"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp"
-        android:hint="contact number"
-        android:inputType="textMultiLine"
-        android:padding="20dp"
-        android:textColor="#000000"
-        android:textColorHint="#000000" />
+        <EditText
+            android:id="@+id/contact_number3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hot_discription"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:hint="contact number"
+            android:inputType="textMultiLine"
+            android:padding="20dp"
+            android:textColor="#000000"
+            android:textColorHint="#000000" />
+
+        <EditText
+            android:id="@+id/et_owner_broker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/contact_number3"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:hint="posted by"
+            android:inputType="textMultiLine"
+            android:padding="20dp"
+            android:textColor="#000000"
+            android:textColorHint="#000000" />
+
+        <EditText
+            android:id="@+id/et_hot_text1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_owner_broker"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:hint="hot text 1"
+            android:inputType="textMultiLine"
+            android:padding="20dp"
+            android:textColor="#000000"
+            android:textColorHint="#000000" />
+
+        <EditText
+            android:id="@+id/et_hot_text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_hot_text1"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:hint="hot text 2"
+            android:inputType="textMultiLine"
+            android:padding="20dp"
+            android:textColor="#000000"
+            android:textColorHint="#000000" />
 
     <Button
         android:id="@+id/add_new_hot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/contact_number3"
+        android:layout_below="@+id/et_hot_text2"
         android:layout_marginLeft="45dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="45dp"
@@ -170,4 +216,6 @@
         android:textColor="@android:color/white"
         android:textSize="18sp" />
 
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>
 </RelativeLayout>

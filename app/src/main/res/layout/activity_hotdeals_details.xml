@@ -21,7 +21,7 @@
 
 
             <ImageView
-                android:id="@+id/iv_menu"
+                android:id="@+id/iv_hot_back"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
@@ -40,15 +40,6 @@
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/share"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_vertical"
-                android:background="?selectableItemBackground"
-                android:padding="15dp"
-                android:src="@drawable/share" />
 
         </LinearLayout>
 
@@ -74,36 +65,6 @@
                     app:strokeColor="#FF777777"
                     app:strokeWidth="1dp" />
 
-                <!--  <FrameLayout
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:background="@color/white"
-                      android:paddingBottom="5dp">
-                      <LinearLayout
-                          android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:orientation="vertical">
-
-                          <androidx.viewpager.widget.ViewPager
-                              android:id="@+id/product_viewpager"
-                              android:layout_width="match_parent"
-                              android:layout_height="240dp">
-                              <com.google.android.material.tabs.TabLayout
-                                  android:id="@+id/tab_layout"
-                                  android:layout_gravity="center_horizontal|bottom"
-                                  app:tabBackground="@drawable/tab_selector"
-                                  app:tabIndicatorHeight="0dp"
-                                  app:tabGravity="center"
-                                  app:tabPaddingStart="5dp"
-                                  app:tabPaddingEnd="5dp"
-                                  android:clipToPadding="false"
-                                  app:tabIndicatorFullWidth="false"
-                                  android:layout_width="wrap_content"
-                                  android:layout_height="20dp"/>
-                          </androidx.viewpager.widget.ViewPager>
-                      </LinearLayout>
-                  </FrameLayout>-->
-
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -115,10 +76,22 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
                         android:background="@color/white"
                         android:orientation="vertical">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
                         <TextView
+                            android:id="@+id/tv_approval_hotdeal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:drawableStart="@drawable/approved"
@@ -130,17 +103,16 @@
                             android:textSize="10sp" />
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-
                             android:layout_marginBottom="5dp">
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="bottom"
                                 android:background="@drawable/rating_back"
+                                android:layout_gravity="center_vertical"
                                 android:gravity="center"
                                 android:padding="3dp">
 
@@ -158,21 +130,87 @@
                                     android:gravity="center"
                                     android:textColor="@color/white"
                                     android:textSize="10sp" />
+
+
                             </LinearLayout>
 
                             <TextView
+                                android:id="@+id/tv_typeof_post"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginStart="5dp"
                                 android:layout_marginEnd="10dp"
                                 android:fontFamily="@font/proxima_family"
-                                android:text="375 Ratings"
+                                android:text="TYPE"
                                 android:textColor="@color/black"
                                 android:textSize="12sp"
                                 app:layout_constraintTop_toTopOf="parent" />
                         </LinearLayout>
 
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_owner_broker"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="30dp"
+                                android:layout_gravity="end"
+                                android:fontFamily="@font/proxima_family"
+                                android:text="Owner"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:gravity="center"
+                            android:layout_marginTop="@dimen/dp_5"
+                            android:layout_marginLeft="@dimen/dp_50"
+                            android:padding="3dp">
+
+                            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                android:id="@+id/hd_cl_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_baseline_call_24"
+                                android:contentDescription="@string/app_name"
+                                app:backgroundTint="@color/colorPrimary"
+                                app:layout_anchor="@+id/bottomAppBar"/>
+
+
+                            <ImageView
+                                android:id="@+id/hd_whtsapp_btn"
+                                android:visibility="visible"
+                                android:textColor="@color/white"
+                                android:src="@drawable/whatsapp"
+                                android:layout_marginLeft="@dimen/margin_30_dp"
+                                android:layout_width="@dimen/margin_40_dp"
+                                android:textStyle="bold"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center_vertical"/>
+
+                        </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_hot_posted_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/proxima_family"
+                            android:gravity="center"
+                            android:text="Posted on May 07,22"
+                            android:textColor="@color/grey"
+                            android:textSize="11sp" />
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -187,6 +225,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/proxima_nova_semi_bold"
                                 android:textColor="@color/black"
+                                android:text="Property name"
                                 android:textStyle="bold"
                                 android:textSize="18sp" />
                         </LinearLayout>
@@ -200,22 +239,19 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:gravity="center"
                                 android:orientation="horizontal">
+
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:background="@color/grey_light"
-                                android:gravity="center"
+                                android:background="@drawable/info_option_bg"
                                 android:orientation="vertical"
                                 android:padding="3dp">
 
                                 <TextView
-                                    android:layout_width="150dp"
-                                    android:layout_height="15dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:src="@drawable/star"
                                     android:text="Price"
                                     android:layout_gravity="center"
@@ -241,14 +277,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:background="@color/grey_light"
+                                    android:background="@drawable/info_option_bg"
                                     android:gravity="center"
                                     android:layout_marginLeft="@dimen/dp_20"
                                     android:orientation="vertical"
                                     android:padding="3dp">
 
                                     <TextView
-                                        android:layout_width="150dp"
+                                        android:layout_width="100dp"
                                         android:layout_height="15dp"
                                         android:src="@drawable/star"
                                         android:text="Size"
@@ -268,7 +304,7 @@
                                         android:layout_marginTop="@dimen/margin_10_dp"
                                         android:gravity="center"
                                         android:textColor="@color/black"
-                                        android:textSize="14sp" />
+                                        android:textSize="18sp" />
                                 </LinearLayout>
 
                         </LinearLayout>
@@ -276,7 +312,6 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/dp_20"
                                 android:orientation="vertical">
 
                             <TextView
@@ -294,27 +329,16 @@
 
                             <TextView
                                 android:id="@+id/tv_hot_location"
-                                android:layout_width="150dp"
-                                android:layout_height="15dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:src="@drawable/star"
-                                android:text="Size"
+                                android:text="Location"
                                 android:layout_marginStart="@dimen/dp_20"
                                 android:layout_marginTop="@dimen/margin_10_dp"
                                 android:textSize="14dp"
                                 android:textStyle="bold"
-                                app:tint="@color/white" />
+                                android:textColor="@color/black"/>
 
-                            <TextView
-                                android:id="@+id/tv_posted_date"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginStart="@dimen/dp_20"
-                                android:fontFamily="@font/proxima_family"
-                                android:gravity="center"
-                                android:text="Posted on May 07,22"
-                                android:textColor="@color/grey"
-                                android:textSize="11sp" />
 
                             </LinearLayout>
 
@@ -327,6 +351,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/tv_special_option1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:drawableStart="@drawable/check"
@@ -338,6 +363,7 @@
                                 android:textSize="12sp" />
 
                             <TextView
+                                android:id="@+id/tv_special_option2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:drawableStart="@drawable/check"
@@ -373,72 +399,6 @@
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
-
-
     </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_60"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="10dp"
-            android:orientation="horizontal"
-            android:background="@drawable/customborder"
-            android:layout_gravity="end"
-            android:gravity="center"
-            android:layout_marginEnd="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="Contact:"
-                android:layout_marginRight="@dimen/dp_30"
-                />
-
-            <ImageView
-                android:id="@+id/hd_cl_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:src="@drawable/ic_call"/>
-
-            <ImageView
-                android:id="@+id/hd_whtsapp_btn"
-                android:text="Call Us"
-                android:visibility="visible"
-                android:textColor="@color/white"
-                android:src="@drawable/whatsapp"
-                android:layout_width="wrap_content"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"/>
-        </LinearLayout>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/tv_btn_call_hot"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/button_capsule_blue"
-            android:text="Call us"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-
-    </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

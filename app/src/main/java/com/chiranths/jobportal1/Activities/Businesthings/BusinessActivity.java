@@ -15,18 +15,13 @@ import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.chiranths.jobportal1.Activities.Admin.Business.Admin_business_listings;
 import com.chiranths.jobportal1.Activities.BasicActivitys.SearchActivity;
-import com.chiranths.jobportal1.Activities.Dashboard.StartingActivity;
-import com.chiranths.jobportal1.Activities.Propertys.PropertyActivity;
 import com.chiranths.jobportal1.Adapters.BusinessAdaptor;
 import com.chiranths.jobportal1.Adapters.BusinessCategoryAdaptor;
 
-import com.chiranths.jobportal1.Adapters.PropertyAdaptor;
 import com.chiranths.jobportal1.Model.BusinessModel;
 import com.chiranths.jobportal1.Model.Categorymmodel;
 import com.chiranths.jobportal1.R;

@@ -1,8 +1,15 @@
 package com.chiranths.jobportal1.Adapters;
 
+import static android.Manifest.permission.CALL_PHONE;
+
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +18,16 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.chiranths.jobportal1.Activities.BasicActivitys.ProductInfo;
+import com.chiranths.jobportal1.Activities.BasicActivitys.UserDetailsActivity;
 import com.chiranths.jobportal1.Activities.HotDealsactivity.HotDealsDetailsActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyDetailsActivity;
+import com.chiranths.jobportal1.CalldetailsRecords;
 import com.chiranths.jobportal1.R;
 import com.squareup.picasso.Picasso;
 
@@ -27,6 +38,7 @@ public class PropertyAdaptor extends RecyclerView.Adapter<PropertyAdaptor.ViewHo
 
     private List productInfos;
     private Context context;
+    CalldetailsRecords calldetails = new CalldetailsRecords() ;
 
     public PropertyAdaptor(List productInfos, Context context) {
         this.productInfos = productInfos;
@@ -52,12 +64,6 @@ public class PropertyAdaptor extends RecyclerView.Adapter<PropertyAdaptor.ViewHo
         String[] data = imagesdata[1].split("---");
         String[] imageurl = imagesdata[0].split("---");
 
-        /*Picasso.get()
-                .load(imageurl[0])
-                .centerCrop()
-                .resize(130,130)
-                .into(holder.iv_image);*/
-
         Glide.with(context)
                 .load(imageurl[0])
                 .into(holder.iv_image);
@@ -76,6 +82,58 @@ public class PropertyAdaptor extends RecyclerView.Adapter<PropertyAdaptor.ViewHo
                 context.startActivity(intent);
             }
         });
+
+        holder.property_btn_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                SharedPreferences sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+                String nameofuser = sh.getString("name", "");
+                String userNumber = sh.getString("number","");
+                String useremail = sh.getString("email","");
+
+                String cnumber = data[7];
+                String cname = data[0];
+                if(!userNumber.equals("")){
+                    calldetails.callinfo(userNumber,nameofuser,cnumber,cname);
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse("tel:"+ data[7]));
+                    context.startActivity(callIntent);
+                }else {
+                    Intent intent = new Intent(context, UserDetailsActivity.class);
+                    context.startActivity(intent);
+                }
+            }
+        });
+
+        holder.property_btn_whatsapp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                SharedPreferences sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+                String nameofuser = sh.getString("name", "");
+                String userNumber = sh.getString("number","");
+                String useremail = sh.getString("email","");
+
+                if(!userNumber.equals("")){
+                    String url = "https://api.whatsapp.com/send?phone="+"91"+data[7];
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    context.startActivity(i);
+                    calldetails.callinfo(userNumber,nameofuser,data[7],data[4]);
+                }else {
+                    if (ContextCompat.checkSelfPermission(context, CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                        Intent intent = new Intent(context, UserDetailsActivity.class);
+                        context.startActivity(intent);
+                    } else {
+                        ActivityCompat.requestPermissions((Activity) context,
+                                new String[]{Manifest.permission.CALL_PHONE},
+                                1);
+                    }
+                }
+            }
+        });
+
     }
 
     @Override
@@ -85,13 +143,14 @@ public class PropertyAdaptor extends RecyclerView.Adapter<PropertyAdaptor.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView iv_image;
+        ImageView iv_image,property_btn_whatsapp,property_btn_call;
         CardView cv_layout;
         TextView product_name,product_price,product_size1,product_location1,product_type1;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            property_btn_whatsapp = itemView.findViewById(R.id.property_btn_whatsapp);
+            property_btn_call = itemView.findViewById(R.id.property_btn_call);
             iv_image = itemView.findViewById(R.id.product_image);
             product_name = itemView.findViewById(R.id.product_name1);
             product_price = itemView.findViewById(R.id.product_price);

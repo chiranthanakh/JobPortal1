@@ -174,6 +174,7 @@
 
 
                         <ImageView
+                            android:id="@+id/property_btn_call"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="15dp"
@@ -181,7 +182,7 @@
 
 
                         <ImageView
-                            android:id="@+id/tv_btn_call_hot"
+                            android:id="@+id/property_btn_whatsapp"
                             android:text="Call Us"
                             android:visibility="visible"
                             android:textColor="@color/white"

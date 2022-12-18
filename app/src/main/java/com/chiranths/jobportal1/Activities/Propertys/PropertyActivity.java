@@ -203,33 +203,26 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
                         try{
 
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
-
                             propertylist.add(userData.get("image")+"!!"+userData.get("pid")+"---"+userData.get("description")+"---"+
                                     userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
                                     +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type"));
 
                             if(userData.get("type").equals("sites")){
-
                                 siteslist.add(userData.get("type")+"!!"+userData.get("pid")+"---"+userData.get("description")+"---"+
                                         userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
                                         +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type"));
 
                             }else if(userData.get("type").equals("homes")){
-
                                 Homeslist.add(userData.get("image")+"!!"+userData.get("pid")+"---"+userData.get("description")+"---"+
                                         userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
                                         +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type"));
 
-
                             }else if(userData.get("type").equals("greenland")){
-
                                 greenlandlist.add(userData.get("image")+"!!"+userData.get("pid")+"---"+userData.get("description")+"---"+
                                         userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
                                         +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type"));
 
-
                             }else if(userData.get("type").equals("rental")){
-
                                 Rentallist.add(userData.get("image")+"!!"+userData.get("pid")+"---"+userData.get("description")+"---"+
                                         userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
                                         +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type"));

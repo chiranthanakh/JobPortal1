@@ -227,7 +227,6 @@
                 <Button
                     android:id="@+id/btn_nav_logout"
                     android:text="Logout"
-
                     android:drawableTint="@color/white"
                     android:layout_weight="1"
                     android:fontFamily="@font/proxima_nova_bold"

@@ -1,8 +1,15 @@
 package com.chiranths.jobportal1.Adapters;
 
+import static android.Manifest.permission.CALL_PHONE;
+
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +18,15 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.chiranths.jobportal1.Activities.BasicActivitys.UserDetailsActivity;
 import com.chiranths.jobportal1.Activities.Businesthings.BusinessDetailsActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyDetailsActivity;
+import com.chiranths.jobportal1.CalldetailsRecords;
 import com.chiranths.jobportal1.Model.BusinessModel;
 import com.chiranths.jobportal1.R;
 import com.squareup.picasso.Picasso;
@@ -26,6 +37,7 @@ public class BusinessAdaptor extends RecyclerView.Adapter<BusinessAdaptor.ViewHo
 
     private List<BusinessModel> productInfos;
     private Context context;
+    CalldetailsRecords calldetailsRecords = new CalldetailsRecords();
 
     public BusinessAdaptor(List<BusinessModel> productInfos, Context context) {
         this.productInfos = productInfos;
@@ -64,6 +76,68 @@ public class BusinessAdaptor extends RecyclerView.Adapter<BusinessAdaptor.ViewHo
                 context.startActivity(intent);
             }
         });
+
+        //calling function
+        holder.iv_call_business.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //check permition
+                String permission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+                int res = context.checkCallingOrSelfPermission(permission);
+                if (res == PackageManager.PERMISSION_GRANTED) {
+                    SharedPreferences sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+                    String nameofuser = sh.getString("name", "");
+                    String userNumber = sh.getString("number", "");
+                    String useremail = sh.getString("email", "");
+
+                    String cnumber = propertyinfo.getNumber();
+                    String cname = propertyinfo.getPid();
+                    if (!userNumber.equals("")) {
+                        calldetailsRecords.callinfo(userNumber, nameofuser, cnumber, cname);
+                        Intent callIntent = new Intent(Intent.ACTION_CALL);
+                        callIntent.setData(Uri.parse("tel:" + propertyinfo.getNumber()));
+                        context.startActivity(callIntent);
+                    } else {
+                        Intent intent = new Intent(context, UserDetailsActivity.class);
+                        context.startActivity(intent);
+                    }
+                }
+            }
+        });
+
+        //whatsapp function
+        holder.iv_whatsup_business.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String permission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+                int res = context.checkCallingOrSelfPermission(permission);
+                if (res == PackageManager.PERMISSION_GRANTED) {
+                    SharedPreferences sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+                    String nameofuser = sh.getString("name", "");
+                    String userNumber = sh.getString("number", "");
+                    String useremail = sh.getString("email", "");
+
+                    if (!userNumber.equals("")) {
+                        String url = "https://api.whatsapp.com/send?phone=" + "91" + propertyinfo.getNumber();
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(url));
+                        context.startActivity(i);
+                        calldetailsRecords.callinfo(userNumber, nameofuser, propertyinfo.getNumber(), propertyinfo.getPid());
+                    } else {
+                        if (ContextCompat.checkSelfPermission(context, CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                            Intent intent = new Intent(context, UserDetailsActivity.class);
+                            context.startActivity(intent);
+                        } else {
+                            ActivityCompat.requestPermissions((Activity) context,
+                                    new String[]{Manifest.permission.CALL_PHONE},
+                                    1);
+                        }
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -73,7 +147,7 @@ public class BusinessAdaptor extends RecyclerView.Adapter<BusinessAdaptor.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView business_image;
+        ImageView business_image,iv_call_business,iv_whatsup_business;
         CardView cv_layout;
         TextView tv_business_locatin,tv_business_name,tv_business_type,tv_business_servicess;
 
@@ -86,6 +160,8 @@ public class BusinessAdaptor extends RecyclerView.Adapter<BusinessAdaptor.ViewHo
             cv_layout = itemView.findViewById(R.id.cv_layout2);
             business_image = itemView.findViewById(R.id.business_image);
             tv_business_servicess = itemView.findViewById(R.id.business_servicess);
+            iv_call_business = itemView.findViewById(R.id.iv_call_bottom_business);
+            iv_whatsup_business = itemView.findViewById(R.id.iv_whatsapp_bottom_business);
         }
     }
 }
