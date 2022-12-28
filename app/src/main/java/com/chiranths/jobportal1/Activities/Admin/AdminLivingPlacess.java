@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -34,50 +33,51 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class Admin_ads extends AppCompatActivity {
+public class AdminLivingPlacess extends AppCompatActivity {
 
     private static final int GalleryPick = 1;
-    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,propertysize,location,number;
-    private EditText InputProductName,Inputtype,InputProductDescription
-            ,InputProductPrice,et_size,et_location,et_number,et_verified,et_text1, et_text2,et_text3,et_text4,et_posted_by;
+    String  saveCurrentDate, saveCurrentTime,title,category,rent_lease,floore,rentamount,location,contactNumber,verified,nuBHK,sqft,water,parking,postedBY,discription;
+    private EditText livingplace_name,livingplace_category,livingplace_rent_lease,livingplace_flore,livingplace_rent_advance,livingplace_rent_amount,
+    livingplace_location,livingplace_contact_number,leavingplace_verify_or_nt,livingplace_number_of_bhk,livingplace_sqft,livingplace_water_facility,
+    livingplace_vehicle_parking,livingplace_posted_by,livingplace_discription;
     private Uri ImageUri;
     private String productRandomKey, downloadImageUrl,MainimageUrl;
     private StorageReference ProductImagesRef;
     private DatabaseReference ProductsRef;
-    private ProgressDialog loadingBar;
     ArrayList fileNameList = new ArrayList<>();
     ArrayList fileDoneList = new ArrayList<>();
     EditText ads_name;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_ads);
+        setContentView(R.layout.activity_admin_living_placess);
 
-        //CategoryName = "cqat";
-        ProductImagesRef = FirebaseStorage.getInstance().getReference().child("ads");
-        ProductsRef = FirebaseDatabase.getInstance().getReference().child("adsforyou");
+        ProductImagesRef = FirebaseStorage.getInstance().getReference().child("livingplace");
+        ProductsRef = FirebaseDatabase.getInstance().getReference().child("livingplaceforyou");
 
-        ImageView btn_corosel = findViewById(R.id.select_corosel_image);
-        Button add_new_corosel = findViewById(R.id.add_new_ads);
+        initilize();
+    }
 
-        InputProductName = (EditText) findViewById(R.id.ads_name);
-        Inputtype = (EditText)findViewById(R.id.ads_type_admin);
-        InputProductDescription = (EditText) findViewById(R.id.ads_description);
-        InputProductPrice = (EditText) findViewById(R.id.ads_price_admin);
-        ads_name = findViewById(R.id.ads_name);
-        et_size = findViewById(R.id.ads_size);
-        et_text1 = findViewById(R.id.ads_text1);
-        et_text2 = findViewById(R.id.ads_text2);
-        et_text3 = findViewById(R.id.ads_text3);
-        et_text4 = findViewById(R.id.ads_text4);
-        et_posted_by= findViewById(R.id.ads_posted_by);
-        et_location = findViewById(R.id.ads_location_admin);
-        et_number = findViewById(R.id.ads_contact_number);
-        et_verified = findViewById(R.id.ads_verify_or_nt);
-        loadingBar = new ProgressDialog(this);
+    private void initilize() {
+        ImageView add_images = findViewById(R.id.select_livingplace_image);
+        Button btn_add_livingplace = findViewById(R.id.livingplace_submit);
 
-        btn_corosel.setOnClickListener(new View.OnClickListener() {
+        livingplace_name = findViewById(R.id.livingplace_name);
+        livingplace_category = findViewById(R.id.livingplace_type);
+        livingplace_rent_lease = findViewById(R.id.livingplace_rent_lease);
+        livingplace_flore = findViewById(R.id.livingplace_flore);
+        livingplace_rent_amount = findViewById(R.id.livingplace_rent_amount);
+        livingplace_location = findViewById(R.id.livingplace_location);
+        livingplace_contact_number = findViewById(R.id.livingplace_contact_number);
+        leavingplace_verify_or_nt = findViewById(R.id.leavingplace_verify_or_nt);
+        livingplace_number_of_bhk = findViewById(R.id.livingplace_number_of_bhk);
+        livingplace_sqft = findViewById(R.id.livingplace_sqft);
+        livingplace_water_facility = findViewById(R.id.livingplace_water_facility);
+        livingplace_vehicle_parking = findViewById(R.id.livingplace_vehicle_parking);
+        livingplace_posted_by = findViewById(R.id.livingplace_posted_by);
+        livingplace_discription = findViewById(R.id.livingplace_discription);
+
+        add_images.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -86,21 +86,12 @@ public class Admin_ads extends AppCompatActivity {
             }
         });
 
-        add_new_corosel.setOnClickListener(new View.OnClickListener() {
+        btn_add_livingplace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ValidateProductData();
             }
         });
-
-    }
-
-    private void OpenGallery(){
-        Intent galleryIntent = new Intent();
-        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-        galleryIntent.setType("image/*");
-        galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        startActivityForResult(galleryIntent, GalleryPick);
     }
 
     @Override
@@ -116,35 +107,48 @@ public class Admin_ads extends AppCompatActivity {
         }
     }
 
-    private void ValidateProductData() {
+    private void OpenGallery(){
+        Intent galleryIntent = new Intent();
+        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+        galleryIntent.setType("image/*");
+        galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        startActivityForResult(galleryIntent, GalleryPick);
+    }
 
-        Description = InputProductDescription.getText().toString();
-        Price = InputProductPrice.getText().toString();
-        Pname = InputProductName.getText().toString();
-        propertysize = et_size.getText().toString();
-        location = et_location.getText().toString();
-        number = et_number.getText().toString();
-        CategoryName = Inputtype.getText().toString();
+    private void ValidateProductData() {
+        title = livingplace_name.getText().toString();
+        category = livingplace_category.getText().toString();
+        rent_lease = livingplace_rent_lease.getText().toString();
+        floore = livingplace_flore.getText().toString();
+        location = livingplace_location.getText().toString();
+        rentamount = livingplace_rent_amount.getText().toString();
+        contactNumber = livingplace_contact_number.getText().toString();
+        nuBHK = livingplace_number_of_bhk.getText().toString();
+        sqft = livingplace_sqft.getText().toString();
+        water = livingplace_water_facility.getText().toString();
+        parking = livingplace_vehicle_parking.getText().toString();
+        postedBY = livingplace_posted_by.getText().toString();
+        discription = livingplace_discription.getText().toString();
 
         if (TextUtils.isEmpty(downloadImageUrl))
         {
             Toast.makeText(this, "Product image is mandatory...", Toast.LENGTH_SHORT).show();
         }
-        else if (TextUtils.isEmpty(Description))
+        else if (TextUtils.isEmpty(title))
         {
-            Toast.makeText(this, "Please write product description...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please write product title...", Toast.LENGTH_SHORT).show();
         }
-        else if (TextUtils.isEmpty(Price))
+        else if (TextUtils.isEmpty(rent_lease))
         {
-            Toast.makeText(this, "Please write product Price...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please write product rent_lease...", Toast.LENGTH_SHORT).show();
         }
-        else if (TextUtils.isEmpty(Pname))
+        else if (TextUtils.isEmpty(location))
         {
-            Toast.makeText(this, "Please write product name...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please write location...", Toast.LENGTH_SHORT).show();
         }
-        else if (TextUtils.isEmpty(CategoryName))
+        else if (TextUtils.isEmpty(rentamount))
         {
-            Toast.makeText(this, "Please enter category", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter rentamount", Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -153,11 +157,6 @@ public class Admin_ads extends AppCompatActivity {
     }
 
     private void StoreProductInformation(Intent data) {
-
-        /*loadingBar.setTitle("Add New Product");
-        loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
-        loadingBar.setCanceledOnTouchOutside(false);
-        loadingBar.show();*/
 
         downloadImageUrl ="";
         System.out.println("image5---"+downloadImageUrl);
@@ -188,13 +187,12 @@ public class Admin_ads extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     String message = e.toString();
-                    Toast.makeText(Admin_ads.this, "Error: " + message, Toast.LENGTH_SHORT).show();
-                    loadingBar.dismiss();
+                    Toast.makeText(AdminLivingPlacess.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                 }
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(Admin_ads.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AdminLivingPlacess.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
                     Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                         @Override
                         public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -222,7 +220,7 @@ public class Admin_ads extends AppCompatActivity {
                                 }
 
                                 System.out.println("url2---"+downloadImageUrl);
-                                Toast.makeText(Admin_ads.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AdminLivingPlacess.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
 
 
                             }
@@ -238,31 +236,28 @@ public class Admin_ads extends AppCompatActivity {
         }
     }
 
-    private void SaveProductInfoToDatabase()
-    {
-
+    private void SaveProductInfoToDatabase() {
         HashMap<String, Object> productMap = new HashMap<>();
         productMap.put("pid", productRandomKey);
-        productMap.put("date", saveCurrentDate);
-        productMap.put("time", saveCurrentTime);
-        productMap.put("description", Description);
+        productMap.put("title", title);
+        productMap.put("category", category);
+        productMap.put("rent_lease", rent_lease);
+        productMap.put("floore", floore);
         productMap.put("image2", downloadImageUrl);
         productMap.put("image", MainimageUrl);
-        productMap.put("category", CategoryName);
-        productMap.put("price", Price);
-        productMap.put("pname", Pname);
-        productMap.put("propertysize",propertysize);
-        productMap.put("location",location);
-        productMap.put("number",number);
-        productMap.put("verified",et_verified.getText().toString());
+        productMap.put("location", location);
+        productMap.put("rentamount", rentamount);
+        productMap.put("contactNumber", contactNumber);
+        productMap.put("nuBHK",nuBHK);
+        productMap.put("sqft",sqft);
+        productMap.put("water",water);
         productMap.put("postedOn", saveCurrentDate);
-        productMap.put("Postedby",et_posted_by.getText().toString());
         productMap.put("Approval",1);
-        productMap.put("payment","");
-        productMap.put("text1", et_text1.getText().toString());
-        productMap.put("text2", et_text2.getText().toString());
-        productMap.put("text3", et_text3.getText().toString());
-        productMap.put("text4", et_text4.getText().toString());
+        productMap.put("parking",parking);
+        productMap.put("postedBY", postedBY);
+        productMap.put("discription", discription);
+        productMap.put("Status", 1);
+
 
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
@@ -274,14 +269,12 @@ public class Admin_ads extends AppCompatActivity {
                         {
                             // Intent intent = new Intent(AdminAddNewProductActivity.this, .class);
                             //startActivity(intent);
-                            loadingBar.dismiss();
-                            Toast.makeText(Admin_ads.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminLivingPlacess.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
-                            loadingBar.dismiss();
                             String message = task.getException().toString();
-                            Toast.makeText(Admin_ads.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminLivingPlacess.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -310,4 +303,7 @@ public class Admin_ads extends AppCompatActivity {
         }
         return result;
     }
+
+
+
 }

@@ -23,13 +23,10 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.chiranths.jobportal1.Activities.BasicActivitys.ProductInfo;
 import com.chiranths.jobportal1.Activities.BasicActivitys.UserDetailsActivity;
-import com.chiranths.jobportal1.Activities.HotDealsactivity.HotDealsDetailsActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyDetailsActivity;
 import com.chiranths.jobportal1.CalldetailsRecords;
 import com.chiranths.jobportal1.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 

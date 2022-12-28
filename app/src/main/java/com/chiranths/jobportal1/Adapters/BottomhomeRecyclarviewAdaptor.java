@@ -13,8 +13,6 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,24 +23,14 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.chiranths.jobportal1.Activities.BasicActivitys.AdsDetailsActivity;
-import com.chiranths.jobportal1.Activities.BasicActivitys.ProductInfo;
+import com.chiranths.jobportal1.Model.ProductInfo;
 import com.chiranths.jobportal1.Activities.BasicActivitys.UserDetailsActivity;
-import com.chiranths.jobportal1.Activities.Dashboard.Calldetails;
-import com.chiranths.jobportal1.Activities.Dashboard.StartingActivity;
 import com.chiranths.jobportal1.Activities.HotDealsactivity.HotDealsDetailsActivity;
 import com.chiranths.jobportal1.CalldetailsRecords;
 import com.chiranths.jobportal1.R;
 import com.chiranths.jobportal1.Utilitys;
-import com.firebase.ui.storage.images.FirebaseImageLoader;
-import com.squareup.picasso.Picasso;
 
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 public class BottomhomeRecyclarviewAdaptor extends RecyclerView.Adapter<BottomhomeRecyclarviewAdaptor.ViewHolder> {
 

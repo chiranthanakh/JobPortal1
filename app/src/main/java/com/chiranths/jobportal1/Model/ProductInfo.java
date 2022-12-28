@@ -1,4 +1,4 @@
-package com.chiranths.jobportal1.Activities.BasicActivitys;
+package com.chiranths.jobportal1.Model;
 
 public class ProductInfo {
 

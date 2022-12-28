@@ -34,12 +34,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class Admin_hotdeals extends AppCompatActivity {
+public class Admin_travels extends AppCompatActivity {
 
     private static final int GalleryPick = 1;
-    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,propertysize,location,number;
-    private EditText InputProductName,Inputtype,InputProductDescription,
-            InputProductPrice,et_size,et_location,et_number,et_posted_by,et_hot_text1,et_hot_text2;
+    String vehicleName,category,VehicleNumber,costperKM,contactDetails,vehiclemodel,ownerName,saveCurrentDate,saveCurrentTime,discription,vehicleNumber;
+    private EditText edt_vehicle_name,edt_travel_category,edt_travel_vehicle_number,edt_rupes_for_km,edt_travel_contact,edt_travel_vehicle_model,edt_owner_name,
+            edt_travel_verified_not,edt_travel_discription;
     private Uri ImageUri;
     private String productRandomKey, downloadImageUrl,MainimageUrl;
     private StorageReference ProductImagesRef;
@@ -47,31 +47,32 @@ public class Admin_hotdeals extends AppCompatActivity {
     private ProgressDialog loadingBar;
     ArrayList fileNameList = new ArrayList<>();
     ArrayList fileDoneList = new ArrayList<>();
+    EditText ads_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_hotdeals);
+        setContentView(R.layout.admin_travel);
 
-        CategoryName = "cqat";
-        ProductImagesRef = FirebaseStorage.getInstance().getReference().child("hot");
-        ProductsRef = FirebaseDatabase.getInstance().getReference().child("hotforyou");
+        //CategoryName = "cqat";
+        ProductImagesRef = FirebaseStorage.getInstance().getReference().child("travels");
+        ProductsRef = FirebaseDatabase.getInstance().getReference().child("travelsforyou");
 
-        ImageView btn_corosel = findViewById(R.id.select_hot_image);
-        Button add_new_corosel = findViewById(R.id.add_new_hot);
-        InputProductName = (EditText) findViewById(R.id.hot_name);
-        Inputtype = (EditText)findViewById(R.id.hot_type_admin);
-        InputProductDescription = (EditText) findViewById(R.id.hot_description);
-        InputProductPrice = (EditText) findViewById(R.id.hot_price_admin);
-        et_size = findViewById(R.id.hot_size);
-        et_location = findViewById(R.id.hot_location_admin);
-        et_number = findViewById(R.id.contact_number3);
-        et_posted_by = findViewById(R.id.et_owner_broker);
+        ImageView btn_add_image = findViewById(R.id.select_vehicle_images);
+        Button add_new_vehicle = findViewById(R.id.add_new_vehicle);
+
+        edt_vehicle_name = (EditText) findViewById(R.id.edt_vehicle_name);
+        edt_travel_category = (EditText)findViewById(R.id.edt_travel_category);
+        edt_travel_vehicle_number = (EditText) findViewById(R.id.edt_travel_vehicle_number);
+        edt_rupes_for_km = (EditText) findViewById(R.id.edt_rupes_for_km);
+        edt_travel_contact = findViewById(R.id.edt_travel_contact);
+        edt_travel_vehicle_model = findViewById(R.id.edt_travel_vehicle_model);
+        edt_owner_name = findViewById(R.id.edt_owner_name);
+        edt_travel_verified_not = findViewById(R.id.edt_travel_verified_not);
+        edt_travel_discription = findViewById(R.id.edt_travel_discription);
         loadingBar = new ProgressDialog(this);
-        et_hot_text1 = findViewById(R.id.et_hot_text1);
-        et_hot_text2 = findViewById(R.id.et_hot_text2);
 
-        btn_corosel.setOnClickListener(new View.OnClickListener() {
+        btn_add_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -80,7 +81,7 @@ public class Admin_hotdeals extends AppCompatActivity {
             }
         });
 
-        add_new_corosel.setOnClickListener(new View.OnClickListener() {
+        add_new_vehicle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ValidateProductData();
@@ -112,28 +113,35 @@ public class Admin_hotdeals extends AppCompatActivity {
 
     private void ValidateProductData() {
 
-        Description = InputProductDescription.getText().toString();
-        Price = InputProductPrice.getText().toString();
-        Pname = InputProductName.getText().toString();
-        propertysize = et_size.getText().toString();
-        location = et_location.getText().toString();
-        number = et_number.getText().toString();
+        vehicleName = edt_vehicle_name.getText().toString();
+        category = edt_travel_category.getText().toString();
+        VehicleNumber = edt_travel_vehicle_number.getText().toString();
+        costperKM = edt_rupes_for_km.getText().toString();
+        contactDetails = edt_travel_contact.getText().toString();
+        vehiclemodel = edt_travel_vehicle_model.getText().toString();
+        ownerName = edt_owner_name.getText().toString();
+        discription = edt_travel_discription.getText().toString();
+        vehicleNumber = edt_travel_vehicle_number.getText().toString();
 
         if (TextUtils.isEmpty(downloadImageUrl))
         {
             Toast.makeText(this, "Product image is mandatory...", Toast.LENGTH_SHORT).show();
         }
-        else if (TextUtils.isEmpty(Description))
+        else if (TextUtils.isEmpty(vehicleName))
         {
-            Toast.makeText(this, "Please write product description...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter vehicle name...", Toast.LENGTH_SHORT).show();
         }
-        else if (TextUtils.isEmpty(Price))
+        else if (TextUtils.isEmpty(costperKM))
         {
-            Toast.makeText(this, "Please write product Price...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please write Price/KM...", Toast.LENGTH_SHORT).show();
         }
-        else if (TextUtils.isEmpty(Pname))
+        else if (TextUtils.isEmpty(contactDetails))
         {
-            Toast.makeText(this, "Please write product name...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter contact details...", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(category))
+        {
+            Toast.makeText(this, "Please enter category", Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -156,15 +164,11 @@ public class Admin_hotdeals extends AppCompatActivity {
             String fileName = getFileName(fileUri);
             fileNameList.add(fileName);
             fileDoneList.add("Uploading");
-
             System.out.println("image1---"+downloadImageUrl);
             System.out.println("count---"+totalItems);
-
-
             Calendar calendar = Calendar.getInstance();
             SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd");
             saveCurrentDate = currentDate.format(calendar.getTime());
-
             SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm a");
             saveCurrentTime = currentTime.format(calendar.getTime());
 
@@ -178,19 +182,18 @@ public class Admin_hotdeals extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     String message = e.toString();
-                    Toast.makeText(Admin_hotdeals.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Admin_travels.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
                 }
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(Admin_hotdeals.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Admin_travels.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
                     Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                         @Override
                         public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                             if (!task.isSuccessful()) {
                                 throw task.getException();
-
                             }
 
                             System.out.println("url3---"+downloadImageUrl);
@@ -212,7 +215,7 @@ public class Admin_hotdeals extends AppCompatActivity {
                                 }
 
                                 System.out.println("url2---"+downloadImageUrl);
-                                Toast.makeText(Admin_hotdeals.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Admin_travels.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
 
 
                             }
@@ -231,23 +234,22 @@ public class Admin_hotdeals extends AppCompatActivity {
     private void SaveProductInfoToDatabase()
     {
         HashMap<String, Object> productMap = new HashMap<>();
-        productMap.put("pid", productRandomKey);
+        productMap.put("pid", productRandomKey+"_travel");
         productMap.put("date", saveCurrentDate);
         productMap.put("time", saveCurrentTime);
-        productMap.put("description", Description);
+        productMap.put("description", discription);
         productMap.put("image2", downloadImageUrl);
         productMap.put("image", MainimageUrl);
-        productMap.put("category", CategoryName);
-        productMap.put("price", Price);
-        productMap.put("pname", Pname);
-        productMap.put("Approval",1);
-        productMap.put("propertysize",propertysize);
-        productMap.put("location",location);
-        productMap.put("number",number);
-        productMap.put("type",Inputtype.getText().toString());
-        productMap.put("postedby",et_posted_by.getText().toString());
-        productMap.put("text1",et_hot_text1.getText().toString());
-        productMap.put("text2",et_hot_text2.getText().toString());
+        productMap.put("category", category);
+        productMap.put("costperkm", costperKM);
+        productMap.put("vehiclename", vehicleName);
+        productMap.put("vehiclenumber",vehicleNumber);
+        productMap.put("contactnumber",contactDetails);
+        productMap.put("model",vehiclemodel);
+        productMap.put("ownerNmae",ownerName);
+        productMap.put("verified", 1);
+        productMap.put("Status", 1);
+
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -259,13 +261,13 @@ public class Admin_hotdeals extends AppCompatActivity {
                             // Intent intent = new Intent(AdminAddNewProductActivity.this, .class);
                             //startActivity(intent);
                             loadingBar.dismiss();
-                            Toast.makeText(Admin_hotdeals.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Admin_travels.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
                             loadingBar.dismiss();
                             String message = task.getException().toString();
-                            Toast.makeText(Admin_hotdeals.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Admin_travels.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

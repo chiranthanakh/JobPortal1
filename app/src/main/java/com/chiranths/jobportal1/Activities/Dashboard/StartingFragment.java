@@ -16,7 +16,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -27,10 +26,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -39,16 +35,18 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
-import com.chiranths.jobportal1.Activities.Admin.Admincoroselimages;
+import com.chiranths.jobportal1.Activities.Admin.AdminDashboard;
 import com.chiranths.jobportal1.Activities.BasicActivitys.CenterHomeActivity;
+import com.chiranths.jobportal1.Activities.BasicActivitys.ConstructionActivity;
+import com.chiranths.jobportal1.Activities.BasicActivitys.LivingPlaceActivity;
 import com.chiranths.jobportal1.Activities.BasicActivitys.LoginActivity;
-import com.chiranths.jobportal1.Activities.BasicActivitys.ProductInfo;
+import com.chiranths.jobportal1.Activities.BasicActivitys.Travelsactivity;
+import com.chiranths.jobportal1.Model.ProductInfo;
 import com.chiranths.jobportal1.Activities.BasicActivitys.SearchActivity;
 import com.chiranths.jobportal1.Activities.BasicActivitys.SeeAllLayoutActivity;
 import com.chiranths.jobportal1.Activities.BasicActivitys.UpcommingProjects;
 import com.chiranths.jobportal1.Activities.Businesthings.BusinessActivity;
 import com.chiranths.jobportal1.Activities.LoanActivity.LoanActivity;
-import com.chiranths.jobportal1.Activities.Profile.ProfileFragment;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyActivity;
 import com.chiranths.jobportal1.Activities.Sell.SellActivity;
 import com.chiranths.jobportal1.Activities.jobs.MainActivity;
@@ -65,8 +63,6 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -87,7 +83,7 @@ public class StartingFragment extends Fragment implements View.OnClickListener {
         String id,name ="",mail,pic;
         LinearLayout cv_jobs,cv_propertys,cv_servicess,cv_loans;
         ImageView iv_sell;
-        LinearLayout search_layout,ll_rent,ll_commercial_rent,ll_hotel;
+        LinearLayout search_layout,ll_rent,ll_commercial_rent,ll_hotel,ll_travels,ll_construction;
         EditText search;
         TextView tv_seeall_upcooming, tv_seeall_layouts;
 
@@ -177,11 +173,13 @@ public class StartingFragment extends Fragment implements View.OnClickListener {
                 cv_propertys.setOnClickListener(this);
                 cv_servicess.setOnClickListener(this);
                 cv_jobs.setOnClickListener(this);
-                ll_rent= view.findViewById(R.id.ll_rent);
+                ll_rent= view.findViewById(R.id.ll_home_rent);
                 ll_commercial_rent = view.findViewById(R.id.ll_commercial_rent);
-                ll_hotel =view.findViewById(R.id.ll_hotel);
+                ll_travels =view.findViewById(R.id.ll_travels);
+                ll_construction = view.findViewById(R.id.ll_constructions);
+                ll_construction.setOnClickListener(this);
                 ll_rent.setOnClickListener(this);
-                ll_hotel.setOnClickListener(this);
+                ll_travels.setOnClickListener(this);
                 ll_commercial_rent.setOnClickListener(this);
 
                 recyclerView =view.findViewById(R.id.rv_home_event);
@@ -237,7 +235,7 @@ public class StartingFragment extends Fragment implements View.OnClickListener {
                 iv_bell.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                                Intent intent = new Intent(getContext(), Admincoroselimages.class);
+                                Intent intent = new Intent(getContext(), AdminDashboard.class);
                                 startActivity(intent);
                         }
                 });
@@ -408,7 +406,6 @@ public class StartingFragment extends Fragment implements View.OnClickListener {
         private void fetchdata() {
 
                 DatabaseReference productsinfo = FirebaseDatabase.getInstance().getReference().child("hotforyou");
-
                 productsinfo.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -421,7 +418,6 @@ public class StartingFragment extends Fragment implements View.OnClickListener {
                                                 try{
 
                                                         HashMap<String, Object> userData = (HashMap<String, Object>) data;
-
                                                         productinfolist.add(new ProductInfo(String.valueOf(userData.get("category")),
                                                                 String.valueOf(userData.get("date")),
                                                                 String.valueOf(userData.get("description")),
@@ -437,7 +433,6 @@ public class StartingFragment extends Fragment implements View.OnClickListener {
                                                                 String.valueOf(userData.get("postedby"))));
 
                                                 }catch (ClassCastException cce){
-
                                                         try{
                                                                 String mString = String.valueOf(dataMap.get(key));
                                                                 //addTextToView(mString);
@@ -531,8 +526,8 @@ public class StartingFragment extends Fragment implements View.OnClickListener {
                                 startActivity(intent6);
                                 break;
 
-                        case R.id.ll_rent:
-                                Intent intent7 = new Intent(getContext(), CenterHomeActivity.class);
+                        case R.id.ll_home_rent:
+                                Intent intent7 = new Intent(getContext(), LivingPlaceActivity.class);
                                 bundle.putString("center","hotel");
                                 intent7.putExtras(bundle);
                                 startActivity(intent7);
@@ -545,8 +540,8 @@ public class StartingFragment extends Fragment implements View.OnClickListener {
                                 startActivity(intent8);
                                 break;
 
-                        case R.id.ll_hotel:
-                                Intent intent9 = new Intent(getContext(), CenterHomeActivity.class);
+                        case R.id.ll_travels:
+                                Intent intent9 = new Intent(getContext(), Travelsactivity.class);
                                 bundle.putString("center","hotel");
                                 intent9.putExtras(bundle);
                                 startActivity(intent9);
@@ -562,7 +557,12 @@ public class StartingFragment extends Fragment implements View.OnClickListener {
                                 Intent intent11 = new Intent(getContext(), SeeAllLayoutActivity.class);
                                 intent11.putExtras(bundle);
                                 startActivity(intent11);
+                                break;
 
+                        case R.id.ll_constructions:
+                                Intent intent12 = new Intent(getContext(), ConstructionActivity.class);
+                                intent12.putExtras(bundle);
+                                startActivity(intent12);
                                 break;
                 }
         }
