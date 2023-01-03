@@ -1,33 +1,20 @@
 package com.chiranths.jobportal1.Adapters;
 
-import static android.Manifest.permission.CALL_PHONE;
-
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.chiranths.jobportal1.Activities.BasicActivitys.ProductInfo;
-import com.chiranths.jobportal1.Activities.BasicActivitys.UserDetailsActivity;
-import com.chiranths.jobportal1.Activities.HotDealsactivity.HotDealsDetailsActivity;
 import com.chiranths.jobportal1.Activities.LoanActivity.LoanForm;
 import com.chiranths.jobportal1.Model.LoanOffersModel;
 import com.chiranths.jobportal1.R;

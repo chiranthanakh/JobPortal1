@@ -19,6 +19,33 @@
         android:supportsRtl="true"
         android:theme="@style/JobPortaltheam">
         <activity
+            android:name=".ConstructionAdaptor"
+            android:exported="false" />
+        <activity
+            android:name=".AdminConstruction"
+            android:exported="false" />
+        <activity
+            android:name=".ConstructionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TravelsAdaptor"
+            android:exported="false" />
+        <activity
+            android:name=".TravelsListactivity"
+            android:exported="false" />
+        <activity
+            android:name=".Travelsactivity"
+            android:exported="false" />
+        <activity
+            android:name=".TravelsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LivingPlaceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminLivingPlacess"
+            android:exported="false" />
+        <activity
             android:name=".ProfileActivity"
             android:exported="false"
             android:label="@string/title_activity_profile"
@@ -39,16 +66,37 @@
             android:name=".Activities.Admin.Business.AdminBusinessCategorys"
             android:exported="false" />
         <activity
+            android:name=".Activities.Admin.Admin_Construction"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Admin.Admin_travels"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.BasicActivitys.ConstructionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.BasicActivitys.Travelsactivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.BasicActivitys.TravelsListactivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.BasicActivitys.UserDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.BasicActivitys.SeeAllLayoutActivity"
             android:exported="false" />
         <activity
+            android:name=".Activities.BasicActivitys.LivingPlaceActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.BasicActivitys.UpcommingProjects"
             android:exported="false" />
         <activity
             android:name=".Activities.Businesthings.BusinessDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Admin.AdminLivingPlacess"
             android:exported="false" />
         <activity
             android:name=".Activities.BasicActivitys.CenterHomeActivity"
@@ -60,10 +108,10 @@
             android:name=".Activities.BasicActivitys.SearchActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.Admin.Admin_ads"
+            android:name=".Activities.Admin.Admin_ads_dashboard"
             android:exported="false" />
         <activity
-            android:name=".Activities.Admin.Admin_hotdeals"
+            android:name=".Activities.Admin.Admin_hotdeals_dashboard"
             android:exported="false" />
         <activity
             android:name=".Activities.Admin.Business.AdminBusinessListings"
@@ -97,15 +145,15 @@
             android:exported="false" />
         <activity android:name=".Activities.jobs.JobDetailsActivity" />
         <activity android:name=".Activities.jobs.AdminActivity" />
-        <activity android:name=".Activities.Admin.Admincoroselimages" />
+        <activity android:name=".Activities.Admin.AdminDashboard" />
         <activity android:name=".Activities.jobs.RoleActivity" />
         <activity android:name=".Activities.BasicActivitys.LoginActivity" />
         <activity android:name=".Activities.Propertys.AdminAddNewProductActivity" />
         <activity android:name=".Activities.jobs.MainActivity" />
         <activity android:name=".Activities.BasicActivitys.AdsDetailsActivity" />
         <activity android:name=".Activities.HotDealsactivity.HotDealsDetailsActivity" />
-        <activity android:name=".Activities.Admin.Admin_corosel" />
-        <activity android:name=".Activities.Admin.Admin_layouts" />
+        <activity android:name=".Activities.Admin.Admin_corosel_dashboard" />
+        <activity android:name=".Activities.Admin.Admin_layouts_dashboard" />
         <activity
             android:name=".Activities.Dashboard.StartingActivity"
             android:exported="true">

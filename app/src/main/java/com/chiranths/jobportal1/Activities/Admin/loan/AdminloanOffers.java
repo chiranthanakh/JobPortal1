@@ -17,7 +17,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.chiranths.jobportal1.Activities.Admin.Admin_ads;
 import com.chiranths.jobportal1.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -243,6 +242,8 @@ public class AdminloanOffers extends AppCompatActivity {
         productMap.put("loanamount", BankLoanamount);
         productMap.put("intrestrate",BankIntrestRate);
         productMap.put("description", BankLOanDiscription);
+        productMap.put("Status", 1);
+
 
         loanRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

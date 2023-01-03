@@ -3,7 +3,6 @@ package com.chiranths.jobportal1.Adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +14,10 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.chiranths.jobportal1.Activities.BasicActivitys.ProductInfo;
+import com.chiranths.jobportal1.Model.LivingPlaceModel;
+import com.chiranths.jobportal1.Model.ProductInfo;
 import com.chiranths.jobportal1.Activities.HotDealsactivity.HotDealsDetailsActivity;
 import com.chiranths.jobportal1.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 

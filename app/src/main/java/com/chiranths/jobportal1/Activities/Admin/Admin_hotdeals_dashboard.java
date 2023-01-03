@@ -1,8 +1,5 @@
 package com.chiranths.jobportal1.Activities.Admin;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -17,7 +14,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.chiranths.jobportal1.Activities.Propertys.AdminAddNewProductActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.chiranths.jobportal1.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,11 +34,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class Admin_corosel extends AppCompatActivity {
+public class Admin_hotdeals_dashboard extends AppCompatActivity {
 
     private static final int GalleryPick = 1;
-    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,propertysize,type,number;
-    private  EditText InputProductName,Inputtype,InputProductDescription,InputProductPrice,et_size,et_location,et_number;
+    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,propertysize,location,number;
+    private EditText InputProductName,Inputtype,InputProductDescription,
+            InputProductPrice,et_size,et_location,et_number,et_posted_by,et_hot_text1,et_hot_text2;
     private Uri ImageUri;
     private String productRandomKey, downloadImageUrl,MainimageUrl;
     private StorageReference ProductImagesRef;
@@ -51,22 +51,25 @@ public class Admin_corosel extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_corosel);
+        setContentView(R.layout.activity_admin_hotdeals);
 
         CategoryName = "cqat";
-        ProductImagesRef = FirebaseStorage.getInstance().getReference().child("Corosel");
-        ProductsRef = FirebaseDatabase.getInstance().getReference().child("Corosels");
+        ProductImagesRef = FirebaseStorage.getInstance().getReference().child("hot");
+        ProductsRef = FirebaseDatabase.getInstance().getReference().child("hotforyou");
 
-        ImageView btn_corosel = findViewById(R.id.select_corosel_image);
-        Button add_new_corosel = findViewById(R.id.add_new_corosel);
-        InputProductName = (EditText) findViewById(R.id.corosel_name);
-        Inputtype = (EditText)findViewById(R.id.corosel_type_admin);
-        InputProductDescription = (EditText) findViewById(R.id.corosel_description);
-        InputProductPrice = (EditText) findViewById(R.id.corosel_price_admin);
-        et_size = findViewById(R.id.corosel_size);
-        et_location = findViewById(R.id.corosel_location_admin);
-        et_number = findViewById(R.id.contact_number1);
+        ImageView btn_corosel = findViewById(R.id.select_hot_image);
+        Button add_new_corosel = findViewById(R.id.add_new_hot);
+        InputProductName = (EditText) findViewById(R.id.hot_name);
+        Inputtype = (EditText)findViewById(R.id.hot_type_admin);
+        InputProductDescription = (EditText) findViewById(R.id.hot_description);
+        InputProductPrice = (EditText) findViewById(R.id.hot_price_admin);
+        et_size = findViewById(R.id.hot_size);
+        et_location = findViewById(R.id.hot_location_admin);
+        et_number = findViewById(R.id.contact_number3);
+        et_posted_by = findViewById(R.id.et_owner_broker);
         loadingBar = new ProgressDialog(this);
+        et_hot_text1 = findViewById(R.id.et_hot_text1);
+        et_hot_text2 = findViewById(R.id.et_hot_text2);
 
         btn_corosel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +97,6 @@ public class Admin_corosel extends AppCompatActivity {
         startActivityForResult(galleryIntent, GalleryPick);
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -109,11 +111,12 @@ public class Admin_corosel extends AppCompatActivity {
     }
 
     private void ValidateProductData() {
+
         Description = InputProductDescription.getText().toString();
         Price = InputProductPrice.getText().toString();
         Pname = InputProductName.getText().toString();
         propertysize = et_size.getText().toString();
-        type = et_location.getText().toString();
+        location = et_location.getText().toString();
         number = et_number.getText().toString();
 
         if (TextUtils.isEmpty(downloadImageUrl))
@@ -139,11 +142,16 @@ public class Admin_corosel extends AppCompatActivity {
     }
 
     private void StoreProductInformation(Intent data) {
+
+        /*loadingBar.setTitle("Add New Product");
+        loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
+        loadingBar.setCanceledOnTouchOutside(false);
+        loadingBar.show();*/
+
         downloadImageUrl ="";
         System.out.println("image5---"+downloadImageUrl);
         int totalItems = data.getClipData().getItemCount();
-        int i;
-        for ( i = 0; i < totalItems; i++) {
+        for (int i = 0; i < totalItems; i++) {
             Uri fileUri = data.getClipData().getItemAt(i).getUri();
             String fileName = getFileName(fileUri);
             fileNameList.add(fileName);
@@ -170,13 +178,13 @@ public class Admin_corosel extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     String message = e.toString();
-                    Toast.makeText(Admin_corosel.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Admin_hotdeals_dashboard.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
                 }
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(Admin_corosel.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Admin_hotdeals_dashboard.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
                     Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                         @Override
                         public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -204,7 +212,7 @@ public class Admin_corosel extends AppCompatActivity {
                                 }
 
                                 System.out.println("url2---"+downloadImageUrl);
-                                Toast.makeText(Admin_corosel.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Admin_hotdeals_dashboard.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
 
 
                             }
@@ -233,9 +241,15 @@ public class Admin_corosel extends AppCompatActivity {
         productMap.put("price", Price);
         productMap.put("pname", Pname);
         productMap.put("Approval",1);
-        productMap.put("url",propertysize);
-        productMap.put("type",type);
+        productMap.put("propertysize",propertysize);
+        productMap.put("location",location);
         productMap.put("number",number);
+        productMap.put("type",Inputtype.getText().toString());
+        productMap.put("postedby",et_posted_by.getText().toString());
+        productMap.put("text1",et_hot_text1.getText().toString());
+        productMap.put("text2",et_hot_text2.getText().toString());
+        productMap.put("Status", 1);
+
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -247,13 +261,13 @@ public class Admin_corosel extends AppCompatActivity {
                             // Intent intent = new Intent(AdminAddNewProductActivity.this, .class);
                             //startActivity(intent);
                             loadingBar.dismiss();
-                            Toast.makeText(Admin_corosel.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Admin_hotdeals_dashboard.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
                             loadingBar.dismiss();
                             String message = task.getException().toString();
-                            Toast.makeText(Admin_corosel.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Admin_hotdeals_dashboard.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -282,5 +296,4 @@ public class Admin_corosel extends AppCompatActivity {
         }
         return result;
     }
-
 }

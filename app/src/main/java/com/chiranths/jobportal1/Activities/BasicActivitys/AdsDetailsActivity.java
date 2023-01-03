@@ -173,6 +173,7 @@ public class AdsDetailsActivity extends AppCompatActivity {
                         tv_ads_posted_on.setText("Posted on "+products.getPostedOn());
                     }
                     url = products.getImage2().split("---");
+                    carouselView.setImageListener(imageListener);
                     carouselView.setPageCount(url.length);
                     int test = products.getApproval();
                     if(test == 1){
@@ -180,7 +181,6 @@ public class AdsDetailsActivity extends AppCompatActivity {
                     }else {
                         ads_details_not_verified.setVisibility(View.GONE);
                     }
-                    carouselView.setImageListener(imageListener);
                     number = products.getNumber();
                     tv_contact_type.setText("Context "+products.getPostedby());
                     if(products.getText1()!=null){

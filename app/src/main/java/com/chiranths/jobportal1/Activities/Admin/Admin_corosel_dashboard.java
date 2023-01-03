@@ -1,8 +1,9 @@
-package com.chiranths.jobportal1.Activities.Admin.loan;
+package com.chiranths.jobportal1.Activities.Admin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -33,11 +34,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class Admin_loan_corosel extends AppCompatActivity {
+public class Admin_corosel_dashboard extends AppCompatActivity {
 
     private static final int GalleryPick = 1;
-    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,propertysize,location,number;
-    private EditText InputProductName,Inputtype,InputProductDescription,InputProductPrice,et_size,et_location,et_number;
+    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,propertysize,type,number;
+    private  EditText InputProductName,Inputtype,InputProductDescription,InputProductPrice,et_size,et_location,et_number;
     private Uri ImageUri;
     private String productRandomKey, downloadImageUrl,MainimageUrl;
     private StorageReference ProductImagesRef;
@@ -49,14 +50,14 @@ public class Admin_loan_corosel extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_loan_corosel);
+        setContentView(R.layout.activity_admin_corosel);
+
         CategoryName = "cqat";
         ProductImagesRef = FirebaseStorage.getInstance().getReference().child("Corosel");
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Corosels");
 
         ImageView btn_corosel = findViewById(R.id.select_corosel_image);
         Button add_new_corosel = findViewById(R.id.add_new_corosel);
-
         InputProductName = (EditText) findViewById(R.id.corosel_name);
         Inputtype = (EditText)findViewById(R.id.corosel_type_admin);
         InputProductDescription = (EditText) findViewById(R.id.corosel_description);
@@ -111,7 +112,7 @@ public class Admin_loan_corosel extends AppCompatActivity {
         Price = InputProductPrice.getText().toString();
         Pname = InputProductName.getText().toString();
         propertysize = et_size.getText().toString();
-        location = et_location.getText().toString();
+        type = et_location.getText().toString();
         number = et_number.getText().toString();
 
         if (TextUtils.isEmpty(downloadImageUrl))
@@ -168,13 +169,13 @@ public class Admin_loan_corosel extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     String message = e.toString();
-                    Toast.makeText(Admin_loan_corosel.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Admin_corosel_dashboard.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
                 }
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(Admin_loan_corosel.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Admin_corosel_dashboard.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
                     Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                         @Override
                         public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -202,7 +203,7 @@ public class Admin_loan_corosel extends AppCompatActivity {
                                 }
 
                                 System.out.println("url2---"+downloadImageUrl);
-                                Toast.makeText(Admin_loan_corosel.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Admin_corosel_dashboard.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
 
 
                             }
@@ -230,8 +231,9 @@ public class Admin_loan_corosel extends AppCompatActivity {
         productMap.put("category", CategoryName);
         productMap.put("price", Price);
         productMap.put("pname", Pname);
-        productMap.put("propertysize",propertysize);
-        productMap.put("location",location);
+        productMap.put("Approval",1);
+        productMap.put("url",propertysize);
+        productMap.put("type",type);
         productMap.put("number",number);
         productMap.put("Status", 1);
 
@@ -246,13 +248,13 @@ public class Admin_loan_corosel extends AppCompatActivity {
                             // Intent intent = new Intent(AdminAddNewProductActivity.this, .class);
                             //startActivity(intent);
                             loadingBar.dismiss();
-                            Toast.makeText(Admin_loan_corosel.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Admin_corosel_dashboard.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
                             loadingBar.dismiss();
                             String message = task.getException().toString();
-                            Toast.makeText(Admin_loan_corosel.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Admin_corosel_dashboard.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -260,6 +262,7 @@ public class Admin_loan_corosel extends AppCompatActivity {
 
 
 
+    @SuppressLint("Range")
     public String getFileName(Uri uri){
         String result = null;
         if (uri.getScheme().equals("content")){
@@ -280,6 +283,5 @@ public class Admin_loan_corosel extends AppCompatActivity {
         }
         return result;
     }
-
 
 }

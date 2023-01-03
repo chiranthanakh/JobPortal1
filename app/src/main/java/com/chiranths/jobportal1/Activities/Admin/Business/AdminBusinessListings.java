@@ -242,6 +242,8 @@ public class AdminBusinessListings extends AppCompatActivity {
         productMap.put("owner", owner);
         productMap.put("email",email);
         productMap.put("rating", rating);
+        productMap.put("Status", 1);
+
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Activities.Propertys.AdminAddNewProductActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/purple_700">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"
+                        android:id="@+id/tv_user"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:text="Please enter Property details"/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:id="@+id/select_livingplace_image"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:cropToPadding="false"
+                android:scaleType="centerCrop"
+                android:src="@drawable/select_product_image" />
+
+
+            <EditText
+                android:id="@+id/livingplace_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/select_corosel_image"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="45dp"
+                android:hint="living place title"
+                android:inputType="textMultiLine"
+                android:padding="20dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000" />
+
+            <EditText
+                android:id="@+id/livingplace_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/livingplace_name"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="45dp"
+                android:hint="Home/Commercial building"
+                android:inputType="textMultiLine"
+                android:padding="20dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000" />
+
+            <EditText
+                android:id="@+id/livingplace_rent_lease"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/livingplace_type"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:hint="rent/lease"
+                android:padding="20dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000" />
+
+
+            <EditText
+                android:id="@+id/livingplace_flore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/livingplace_rent_lease"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:hint="flore"
+                android:inputType="textMultiLine"
+                android:padding="20dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000" />
+
+
+            <EditText
+                android:id="@+id/livingplace_rent_amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/livingplace_flore"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:hint="rent/lease prise"
+                android:inputType="textMultiLine"
+                android:padding="20dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000" />
+
+
+            <EditText
+                android:id="@+id/livingplace_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/livingplace_rent_amount"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:hint="location"
+                android:inputType="textMultiLine"
+                android:padding="20dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000" />
+
+
+            <EditText
+                android:id="@+id/livingplace_contact_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/livingplace_location"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:hint="contact number"
+                android:inputType="textMultiLine"
+                android:padding="20dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000" />
+
+            <EditText
+                android:id="@+id/leavingplace_verify_or_nt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/livingplace_contact_number"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:hint="verifyed or nt"
+                android:inputType="textMultiLine"
+                android:padding="20dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000" />
+
+            <EditText
+                android:id="@+id/livingplace_number_of_bhk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/leavingplace_verify_or_nt"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:hint="number of bhk"
+                android:inputType="textMultiLine"
+                android:padding="20dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000" />
+
+            <EditText
+                android:id="@+id/livingplace_sqft"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/livingplace_number_of_bhk"
+                android:layout_marginLeft="45dp"
+                android:hint="total sqft"
+                android:inputType="textMultiLine"
+                android:padding="20dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000" />
+            <EditText
+                android:id="@+id/livingplace_water_facility"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/livingplace_sqft"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:hint="Water fecility"
+                android:inputType="textMultiLine"
+                android:padding="20dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000" />
+
+            <EditText
+                android:id="@+id/livingplace_vehicle_parking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/livingplace_water_facility"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:hint="Vahicle parking availabality"
+                android:inputType="textMultiLine"
+                android:padding="20dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000" />
+
+            <EditText
+                android:id="@+id/livingplace_posted_by"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/livingplace_vehicle_parking"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:hint="posted by owner/broker"
+                android:inputType="textMultiLine"
+                android:padding="20dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000"/>
+
+            <EditText
+                android:id="@+id/livingplace_discription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/livingplace_vehicle_parking"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:hint="Discription"
+                android:inputType="textMultiLine"
+                android:padding="20dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000"/>
+
+            <Button
+                android:id="@+id/livingplace_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/livingplace_posted_by"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="45dp"
+                android:background="@drawable/buttons"
+                android:padding="17dp"
+                android:text="NEXT"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

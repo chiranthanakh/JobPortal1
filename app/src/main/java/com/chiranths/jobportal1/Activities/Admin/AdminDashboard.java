@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -31,7 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class Admincoroselimages extends AppCompatActivity {
+public class AdminDashboard extends AppCompatActivity {
 
     private static final int GalleryPick = 1;
     private static final int GalleryPick2 = 2;
@@ -50,22 +51,16 @@ public class Admincoroselimages extends AppCompatActivity {
 
         ProductImagesRef = FirebaseStorage.getInstance().getReference().child("Corosel");
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Corosels");
-
         adsImageRef = FirebaseStorage.getInstance().getReference().child("ads");
         adsRef = FirebaseDatabase.getInstance().getReference().child("adsforyou");
-
         hotImageRef = FirebaseStorage.getInstance().getReference().child("hot");
         hotRef = FirebaseDatabase.getInstance().getReference().child("hotforyou");
-
         businessImageRef = FirebaseStorage.getInstance().getReference().child("business");
         businessRef = FirebaseDatabase.getInstance().getReference().child("BusinessListing");
-
         layoutsImagesRef = FirebaseStorage.getInstance().getReference().child("layouts");
         layoutRef = FirebaseDatabase.getInstance().getReference().child("layoutsforyou");
-
         loanImageRef = FirebaseStorage.getInstance().getReference().child("loanoffers");
         loanRef = FirebaseDatabase.getInstance().getReference().child("loanoffersforyou");
-
         loadingBar = new ProgressDialog(this);
 
         Button btn_corosel = findViewById(R.id.btn_corosel);
@@ -77,57 +72,71 @@ public class Admincoroselimages extends AppCompatActivity {
         Button btn_business_category = findViewById(R.id.btn_business_category);
         Button btn_propertys_approval = findViewById(R.id.propertys_for_approval);
         Button btn_business_approval = findViewById(R.id.business_for_approval);
+        Button btn_livingplace_add = findViewById(R.id.btn_livingplace);
+        Button btn_travels = findViewById(R.id.btn_travels);
+        Button btn_construction = findViewById(R.id.btn_construction);
 
+        btn_construction.setOnClickListener(view -> {
+            Intent intent = new Intent(AdminDashboard.this, Admin_Construction.class);
+            startActivity(intent);
+        });
 
-
+        btn_travels.setOnClickListener(view -> {
+            Intent intent = new Intent(AdminDashboard.this, Admin_travels.class);
+            startActivity(intent);
+        });
+        btn_livingplace_add.setOnClickListener(view -> {
+            Intent intent = new Intent(AdminDashboard.this, AdminLivingPlacess.class);
+            startActivity(intent);
+        });
         btn_propertys_approval.setOnClickListener(view -> {
-            Intent intent = new Intent(Admincoroselimages.this, AdminPropertyApproval.class);
+            Intent intent = new Intent(AdminDashboard.this, AdminPropertyApproval.class);
             startActivity(intent);
         });
 
         btn_business_approval.setOnClickListener(view -> {
-            Intent intent = new Intent(Admincoroselimages.this, AdminBusinessCategorys.class);
+            Intent intent = new Intent(AdminDashboard.this, AdminBusinessCategorys.class);
             startActivity(intent);
         });
 
         btn_business_category.setOnClickListener(view -> {
-            Intent intent = new Intent(Admincoroselimages.this, AdminBusinessCategorys.class);
+            Intent intent = new Intent(AdminDashboard.this, AdminBusinessCategorys.class);
             startActivity(intent);
         });
 
         btn_loan_offers.setOnClickListener(view -> {
-            Intent intent = new Intent(Admincoroselimages.this, AdminloanOffers.class);
+            Intent intent = new Intent(AdminDashboard.this, AdminloanOffers.class);
             startActivity(intent);
         });
 
         btn_hot_deals.setOnClickListener(view -> {
 
-            Intent intent = new Intent(Admincoroselimages.this,Admin_hotdeals.class);
+            Intent intent = new Intent(AdminDashboard.this, Admin_hotdeals_dashboard.class);
             startActivity(intent);
         });
 
         btn_layouts.setOnClickListener(view -> {
 
-            Intent intent = new Intent(Admincoroselimages.this,Admin_layouts.class);
+            Intent intent = new Intent(AdminDashboard.this, Admin_layouts_dashboard.class);
             startActivity(intent);
         });
 
 
         btn_corosel.setOnClickListener(view -> {
 
-            Intent intent = new Intent(Admincoroselimages.this,Admin_corosel.class);
+            Intent intent = new Intent(AdminDashboard.this, Admin_corosel_dashboard.class);
             startActivity(intent);
         });
 
         btn_ads.setOnClickListener(view -> {
 
-            Intent intent = new Intent(Admincoroselimages.this,Admin_ads.class);
+            Intent intent = new Intent(AdminDashboard.this, Admin_ads_dashboard.class);
             startActivity(intent);
         });
 
         btn_business_listing.setOnClickListener(view -> {
 
-            Intent intent = new Intent(Admincoroselimages.this, AdminBusinessListings.class);
+            Intent intent = new Intent(AdminDashboard.this, AdminBusinessListings.class);
             startActivity(intent);
         });
     }
@@ -183,13 +192,13 @@ public class Admincoroselimages extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 String message = e.toString();
-                Toast.makeText(Admincoroselimages.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdminDashboard.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                 loadingBar.dismiss();
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(Admincoroselimages.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdminDashboard.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
                 Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
                     public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -207,7 +216,7 @@ public class Admincoroselimages extends AppCompatActivity {
                         if (task.isSuccessful())
                         {
                             downloadImageUrl = task.getResult().toString();
-                            Toast.makeText(Admincoroselimages.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminDashboard.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
                             SaveProductInfoToDatabase();
                         }
                     }
@@ -230,16 +239,16 @@ public class Admincoroselimages extends AppCompatActivity {
                     {
                         if (task.isSuccessful())
                         {
-                            Intent intent = new Intent(Admincoroselimages.this, StartingActivity.class);
+                            Intent intent = new Intent(AdminDashboard.this, StartingActivity.class);
                             startActivity(intent);
                             loadingBar.dismiss();
-                            Toast.makeText(Admincoroselimages.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminDashboard.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
                             loadingBar.dismiss();
                             String message = task.getException().toString();
-                            Toast.makeText(Admincoroselimages.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminDashboard.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -269,13 +278,13 @@ public class Admincoroselimages extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 String message = e.toString();
-                Toast.makeText(Admincoroselimages.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdminDashboard.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                 loadingBar.dismiss();
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(Admincoroselimages.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdminDashboard.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
                 Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
                     public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -294,7 +303,7 @@ public class Admincoroselimages extends AppCompatActivity {
                         if (task.isSuccessful())
                         {
                             downloadImageUrl = task.getResult().toString();
-                            Toast.makeText(Admincoroselimages.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminDashboard.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
                             SaveadsInfoToDatabase();
                         }
                     }
@@ -320,6 +329,8 @@ public class Admincoroselimages extends AppCompatActivity {
         productMap.put("propertysize",4000*500);
         productMap.put("location","location");
         productMap.put("number","12345567");
+        productMap.put("Status", 1);
+
 
         adsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -328,16 +339,16 @@ public class Admincoroselimages extends AppCompatActivity {
                     {
                         if (task.isSuccessful())
                         {
-                            Intent intent = new Intent(Admincoroselimages.this, StartingActivity.class);
+                            Intent intent = new Intent(AdminDashboard.this, StartingActivity.class);
                             startActivity(intent);
                             loadingBar.dismiss();
-                            Toast.makeText(Admincoroselimages.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminDashboard.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
                             loadingBar.dismiss();
                             String message = task.getException().toString();
-                            Toast.makeText(Admincoroselimages.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminDashboard.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -368,13 +379,13 @@ public class Admincoroselimages extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 String message = e.toString();
-                Toast.makeText(Admincoroselimages.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdminDashboard.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                 loadingBar.dismiss();
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(Admincoroselimages.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdminDashboard.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
                 Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
                     public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -393,7 +404,7 @@ public class Admincoroselimages extends AppCompatActivity {
                         if (task.isSuccessful())
                         {
                             downloadImageUrl = task.getResult().toString();
-                            Toast.makeText(Admincoroselimages.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminDashboard.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
                             SavehotInfoToDatabase();
                         }
                     }
@@ -418,6 +429,8 @@ public class Admincoroselimages extends AppCompatActivity {
         productMap.put("propertysize",4000*500);
         productMap.put("location","location");
         productMap.put("number","12345567");
+        productMap.put("Status", 1);
+
 
         hotRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -426,16 +439,16 @@ public class Admincoroselimages extends AppCompatActivity {
                     {
                         if (task.isSuccessful())
                         {
-                            Intent intent = new Intent(Admincoroselimages.this, StartingActivity.class);
+                            Intent intent = new Intent(AdminDashboard.this, StartingActivity.class);
                             startActivity(intent);
                             loadingBar.dismiss();
-                            Toast.makeText(Admincoroselimages.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminDashboard.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
                             loadingBar.dismiss();
                             String message = task.getException().toString();
-                            Toast.makeText(Admincoroselimages.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminDashboard.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -465,13 +478,13 @@ public class Admincoroselimages extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 String message = e.toString();
-                Toast.makeText(Admincoroselimages.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdminDashboard.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                 loadingBar.dismiss();
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(Admincoroselimages.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdminDashboard.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
                 Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
                     public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -490,7 +503,7 @@ public class Admincoroselimages extends AppCompatActivity {
                         if (task.isSuccessful())
                         {
                             downloadImageUrl = task.getResult().toString();
-                            Toast.makeText(Admincoroselimages.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminDashboard.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
                             SaveBusinessToDatabase();
                         }
                     }
@@ -510,6 +523,8 @@ public class Admincoroselimages extends AppCompatActivity {
         productMap.put("location", "Gouribidanur, nr.reddy circle");
         productMap.put("servicess", "construction,material supplay");
         productMap.put("number","12345567");
+        productMap.put("Status", 1);
+
 
         businessRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -518,16 +533,16 @@ public class Admincoroselimages extends AppCompatActivity {
                     {
                         if (task.isSuccessful())
                         {
-                            Intent intent = new Intent(Admincoroselimages.this, StartingActivity.class);
+                            Intent intent = new Intent(AdminDashboard.this, StartingActivity.class);
                             startActivity(intent);
                             loadingBar.dismiss();
-                            Toast.makeText(Admincoroselimages.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminDashboard.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
                             loadingBar.dismiss();
                             String message = task.getException().toString();
-                            Toast.makeText(Admincoroselimages.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminDashboard.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

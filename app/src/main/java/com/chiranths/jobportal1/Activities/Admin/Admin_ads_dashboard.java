@@ -1,5 +1,9 @@
 package com.chiranths.jobportal1.Activities.Admin;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,9 +16,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.chiranths.jobportal1.R;
 import com.google.android.gms.tasks.Continuation;
@@ -33,11 +34,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class Admin_layouts extends AppCompatActivity {
+public class Admin_ads_dashboard extends AppCompatActivity {
 
     private static final int GalleryPick = 1;
     private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,propertysize,location,number;
-    private EditText InputProductName,Inputtype,InputProductDescription,InputProductPrice,et_size,et_location,et_number;
+    private EditText InputProductName,Inputtype,InputProductDescription
+            ,InputProductPrice,et_size,et_location,et_number,et_verified,et_text1, et_text2,et_text3,et_text4,et_posted_by;
     private Uri ImageUri;
     private String productRandomKey, downloadImageUrl,MainimageUrl;
     private StorageReference ProductImagesRef;
@@ -53,8 +55,8 @@ public class Admin_layouts extends AppCompatActivity {
         setContentView(R.layout.activity_admin_ads);
 
         //CategoryName = "cqat";
-        ProductImagesRef = FirebaseStorage.getInstance().getReference().child("layouts");
-        ProductsRef = FirebaseDatabase.getInstance().getReference().child("layoutsforyou");
+        ProductImagesRef = FirebaseStorage.getInstance().getReference().child("ads");
+        ProductsRef = FirebaseDatabase.getInstance().getReference().child("adsforyou");
 
         ImageView btn_corosel = findViewById(R.id.select_corosel_image);
         Button add_new_corosel = findViewById(R.id.add_new_ads);
@@ -65,8 +67,14 @@ public class Admin_layouts extends AppCompatActivity {
         InputProductPrice = (EditText) findViewById(R.id.ads_price_admin);
         ads_name = findViewById(R.id.ads_name);
         et_size = findViewById(R.id.ads_size);
+        et_text1 = findViewById(R.id.ads_text1);
+        et_text2 = findViewById(R.id.ads_text2);
+        et_text3 = findViewById(R.id.ads_text3);
+        et_text4 = findViewById(R.id.ads_text4);
+        et_posted_by= findViewById(R.id.ads_posted_by);
         et_location = findViewById(R.id.ads_location_admin);
         et_number = findViewById(R.id.ads_contact_number);
+        et_verified = findViewById(R.id.ads_verify_or_nt);
         loadingBar = new ProgressDialog(this);
 
         btn_corosel.setOnClickListener(new View.OnClickListener() {
@@ -180,13 +188,13 @@ public class Admin_layouts extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     String message = e.toString();
-                    Toast.makeText(Admin_layouts.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Admin_ads_dashboard.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
                 }
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(Admin_layouts.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Admin_ads_dashboard.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
                     Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                         @Override
                         public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -214,7 +222,7 @@ public class Admin_layouts extends AppCompatActivity {
                                 }
 
                                 System.out.println("url2---"+downloadImageUrl);
-                                Toast.makeText(Admin_layouts.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Admin_ads_dashboard.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
 
 
                             }
@@ -230,8 +238,7 @@ public class Admin_layouts extends AppCompatActivity {
         }
     }
 
-    private void SaveProductInfoToDatabase()
-    {
+    private void SaveProductInfoToDatabase() {
         HashMap<String, Object> productMap = new HashMap<>();
         productMap.put("pid", productRandomKey);
         productMap.put("date", saveCurrentDate);
@@ -245,6 +252,18 @@ public class Admin_layouts extends AppCompatActivity {
         productMap.put("propertysize",propertysize);
         productMap.put("location",location);
         productMap.put("number",number);
+        productMap.put("verified",et_verified.getText().toString());
+        productMap.put("postedOn", saveCurrentDate);
+        productMap.put("Postedby",et_posted_by.getText().toString());
+        productMap.put("Approval",1);
+        productMap.put("payment","");
+        productMap.put("text1", et_text1.getText().toString());
+        productMap.put("text2", et_text2.getText().toString());
+        productMap.put("text3", et_text3.getText().toString());
+        productMap.put("text4", et_text4.getText().toString());
+        productMap.put("Status", 1);
+
+
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -256,13 +275,13 @@ public class Admin_layouts extends AppCompatActivity {
                             // Intent intent = new Intent(AdminAddNewProductActivity.this, .class);
                             //startActivity(intent);
                             loadingBar.dismiss();
-                            Toast.makeText(Admin_layouts.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Admin_ads_dashboard.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
                             loadingBar.dismiss();
                             String message = task.getException().toString();
-                            Toast.makeText(Admin_layouts.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Admin_ads_dashboard.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -270,6 +289,7 @@ public class Admin_layouts extends AppCompatActivity {
 
 
 
+    @SuppressLint("Range")
     public String getFileName(Uri uri){
         String result = null;
         if (uri.getScheme().equals("content")){

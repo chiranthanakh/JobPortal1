@@ -79,7 +79,6 @@ public class HotDealsDetailsActivity extends AppCompatActivity {
                 Intent intent = new Intent(HotDealsDetailsActivity.this, UserDetailsActivity.class);
                 startActivity(intent);
             }
-
         });
 
         hd_whatsapp_btn.setOnClickListener(view -> {
@@ -123,8 +122,8 @@ public class HotDealsDetailsActivity extends AppCompatActivity {
                     tv_size.setText(products.getPropertysize());
                     tv_hot_location.setText(products.getLocation());
                     url = products.getImage2().split("---");
-                    carouselView.setPageCount(url.length);
                     carouselView.setImageListener(imageListener);
+                    carouselView.setPageCount(url.length);
                     number = products.getNumber();
                     tv_owner_broker.setText(products.getPostedby());
                     tv_typeof_post.setText(products.getType());

@@ -1,8 +1,6 @@
-package com.chiranths.jobportal1.Activities.Admin.loan;
+package com.chiranths.jobportal1.Activities.Admin;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -15,6 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.chiranths.jobportal1.R;
 import com.google.android.gms.tasks.Continuation;
@@ -33,11 +34,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class Admin_loan_corosel extends AppCompatActivity {
+public class Admin_Construction extends AppCompatActivity {
 
     private static final int GalleryPick = 1;
-    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,propertysize,location,number;
-    private EditText InputProductName,Inputtype,InputProductDescription,InputProductPrice,et_size,et_location,et_number;
+    String Name,category,cost,contactDetails,contactDetails2,experience,service1,service2,service3,service4,saveCurrentDate,saveCurrentTime,discription,vehicleNumber;
+    private EditText edt_construction_name,edt_construction_category,edt_construction_number,edt_construction_cost,
+            edt_construction_experience,edt_construction_model,edt_construction_servicessoffer_1,edt_construction_servicessoffer_2,edt_construction_servicessoffer_3,edt_construction_servicessoffer_4,
+            edt_construction_verified_not,edt_construction_discription,edt_construction_number2;
     private Uri ImageUri;
     private String productRandomKey, downloadImageUrl,MainimageUrl;
     private StorageReference ProductImagesRef;
@@ -45,43 +48,34 @@ public class Admin_loan_corosel extends AppCompatActivity {
     private ProgressDialog loadingBar;
     ArrayList fileNameList = new ArrayList<>();
     ArrayList fileDoneList = new ArrayList<>();
+    EditText ads_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_loan_corosel);
-        CategoryName = "cqat";
-        ProductImagesRef = FirebaseStorage.getInstance().getReference().child("Corosel");
-        ProductsRef = FirebaseDatabase.getInstance().getReference().child("Corosels");
+        setContentView(R.layout.admin_construction);
 
-        ImageView btn_corosel = findViewById(R.id.select_corosel_image);
-        Button add_new_corosel = findViewById(R.id.add_new_corosel);
-
-        InputProductName = (EditText) findViewById(R.id.corosel_name);
-        Inputtype = (EditText)findViewById(R.id.corosel_type_admin);
-        InputProductDescription = (EditText) findViewById(R.id.corosel_description);
-        InputProductPrice = (EditText) findViewById(R.id.corosel_price_admin);
-        et_size = findViewById(R.id.corosel_size);
-        et_location = findViewById(R.id.corosel_location_admin);
-        et_number = findViewById(R.id.contact_number1);
+        //CategoryName = "cqat";
+        ProductImagesRef = FirebaseStorage.getInstance().getReference().child("construction");
+        ProductsRef = FirebaseDatabase.getInstance().getReference().child("constructionforyou");
+        ImageView btn_add_image = findViewById(R.id.select_construction_images);
+        Button add_new_construction = findViewById(R.id.add_new_construction);
+        edt_construction_name = (EditText) findViewById(R.id.edt_construction_name);
+        edt_construction_category = (EditText)findViewById(R.id.edt_construction_category);
+        edt_construction_number = (EditText) findViewById(R.id.edt_construction_contact_number);
+        edt_construction_number2= (EditText) findViewById(R.id.edt_construction_contact_number2);
+        edt_construction_cost = (EditText) findViewById(R.id.edt_construction_cost);
+        edt_construction_experience = findViewById(R.id.edt_construction_experience);
+        edt_construction_model = findViewById(R.id.edt_construction_model);
+        edt_construction_servicessoffer_1 = findViewById(R.id.edt_construction_servicessoffer_1);
+        edt_construction_servicessoffer_2 = findViewById(R.id.edt_construction_servicessoffer_2);
+        edt_construction_servicessoffer_3 = findViewById(R.id.edt_construction_servicessoffer_3);
+        edt_construction_servicessoffer_4 = findViewById(R.id.edt_construction_servicessoffer_4);
+        edt_construction_verified_not = findViewById(R.id.edt_construction_verified_not);
+        edt_construction_discription = findViewById(R.id.edt_construction_discription);
         loadingBar = new ProgressDialog(this);
-
-        btn_corosel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                OpenGallery();
-
-            }
-        });
-
-        add_new_corosel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ValidateProductData();
-            }
-        });
-
+        btn_add_image.setOnClickListener(view -> OpenGallery());
+        add_new_construction.setOnClickListener(view -> ValidateProductData());
     }
 
     private void OpenGallery(){
@@ -91,7 +85,6 @@ public class Admin_loan_corosel extends AppCompatActivity {
         galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         startActivityForResult(galleryIntent, GalleryPick);
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
@@ -107,54 +100,55 @@ public class Admin_loan_corosel extends AppCompatActivity {
     }
 
     private void ValidateProductData() {
-        Description = InputProductDescription.getText().toString();
-        Price = InputProductPrice.getText().toString();
-        Pname = InputProductName.getText().toString();
-        propertysize = et_size.getText().toString();
-        location = et_location.getText().toString();
-        number = et_number.getText().toString();
+        Name = edt_construction_name.getText().toString();
+        category = edt_construction_category.getText().toString();
+        experience = edt_construction_experience.getText().toString();
+        cost = edt_construction_cost.getText().toString();
+        contactDetails = edt_construction_number.getText().toString();
+        discription = edt_construction_verified_not.getText().toString();
+        vehicleNumber = edt_construction_discription.getText().toString();
 
         if (TextUtils.isEmpty(downloadImageUrl))
         {
             Toast.makeText(this, "Product image is mandatory...", Toast.LENGTH_SHORT).show();
         }
-        else if (TextUtils.isEmpty(Description))
-        {
-            Toast.makeText(this, "Please write product description...", Toast.LENGTH_SHORT).show();
+        else if (TextUtils.isEmpty(Name)) {
+            Toast.makeText(this, "Please enter vehicle name...", Toast.LENGTH_SHORT).show();
         }
-        else if (TextUtils.isEmpty(Price))
-        {
-            Toast.makeText(this, "Please write product Price...", Toast.LENGTH_SHORT).show();
+        else if (TextUtils.isEmpty(cost)) {
+            Toast.makeText(this, "Please write Price/KM...", Toast.LENGTH_SHORT).show();
         }
-        else if (TextUtils.isEmpty(Pname))
-        {
-            Toast.makeText(this, "Please write product name...", Toast.LENGTH_SHORT).show();
+        else if (TextUtils.isEmpty(contactDetails)) {
+            Toast.makeText(this, "Please enter contact details...", Toast.LENGTH_SHORT).show();
         }
-        else
+        else if (TextUtils.isEmpty(category)) {
+            Toast.makeText(this, "Please enter category", Toast.LENGTH_SHORT).show();
+        } else
         {
             SaveProductInfoToDatabase();
         }
     }
 
     private void StoreProductInformation(Intent data) {
+
+        /*loadingBar.setTitle("Add New Product");
+        loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
+        loadingBar.setCanceledOnTouchOutside(false);
+        loadingBar.show();*/
+
         downloadImageUrl ="";
         System.out.println("image5---"+downloadImageUrl);
         int totalItems = data.getClipData().getItemCount();
-        int i;
-        for ( i = 0; i < totalItems; i++) {
+        for (int i = 0; i < totalItems; i++) {
             Uri fileUri = data.getClipData().getItemAt(i).getUri();
             String fileName = getFileName(fileUri);
             fileNameList.add(fileName);
             fileDoneList.add("Uploading");
-
             System.out.println("image1---"+downloadImageUrl);
             System.out.println("count---"+totalItems);
-
-
             Calendar calendar = Calendar.getInstance();
             SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd");
             saveCurrentDate = currentDate.format(calendar.getTime());
-
             SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm a");
             saveCurrentTime = currentTime.format(calendar.getTime());
 
@@ -168,19 +162,18 @@ public class Admin_loan_corosel extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     String message = e.toString();
-                    Toast.makeText(Admin_loan_corosel.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Admin_Construction.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
                 }
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(Admin_loan_corosel.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Admin_Construction.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
                     Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                         @Override
                         public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                             if (!task.isSuccessful()) {
                                 throw task.getException();
-
                             }
 
                             System.out.println("url3---"+downloadImageUrl);
@@ -200,11 +193,8 @@ public class Admin_loan_corosel extends AppCompatActivity {
                                 }else {
                                     downloadImageUrl = downloadImageUrl+"---"+task.getResult().toString();
                                 }
-
                                 System.out.println("url2---"+downloadImageUrl);
-                                Toast.makeText(Admin_loan_corosel.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
-
-
+                                Toast.makeText(Admin_Construction.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -221,18 +211,24 @@ public class Admin_loan_corosel extends AppCompatActivity {
     private void SaveProductInfoToDatabase()
     {
         HashMap<String, Object> productMap = new HashMap<>();
-        productMap.put("pid", productRandomKey);
+        productMap.put("pid", productRandomKey+"_travel");
         productMap.put("date", saveCurrentDate);
         productMap.put("time", saveCurrentTime);
-        productMap.put("description", Description);
+        productMap.put("description", discription);
         productMap.put("image2", downloadImageUrl);
         productMap.put("image", MainimageUrl);
-        productMap.put("category", CategoryName);
-        productMap.put("price", Price);
-        productMap.put("pname", Pname);
-        productMap.put("propertysize",propertysize);
-        productMap.put("location",location);
-        productMap.put("number",number);
+        productMap.put("category", category);
+        productMap.put("cost", cost);
+        productMap.put("name", Name);
+        productMap.put("number1",contactDetails);
+        productMap.put("number2",contactDetails2);
+        productMap.put("servicess1",service1);
+        productMap.put("servicess2",service2);
+        productMap.put("servicess3",service3);
+        productMap.put("servicess4",service4);
+        productMap.put("discription",discription);
+        productMap.put("verified", 1);
+        productMap.put("experience", experience);
         productMap.put("Status", 1);
 
 
@@ -246,13 +242,13 @@ public class Admin_loan_corosel extends AppCompatActivity {
                             // Intent intent = new Intent(AdminAddNewProductActivity.this, .class);
                             //startActivity(intent);
                             loadingBar.dismiss();
-                            Toast.makeText(Admin_loan_corosel.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Admin_Construction.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
                             loadingBar.dismiss();
                             String message = task.getException().toString();
-                            Toast.makeText(Admin_loan_corosel.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Admin_Construction.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -260,6 +256,7 @@ public class Admin_loan_corosel extends AppCompatActivity {
 
 
 
+    @SuppressLint("Range")
     public String getFileName(Uri uri){
         String result = null;
         if (uri.getScheme().equals("content")){
@@ -280,6 +277,4 @@ public class Admin_loan_corosel extends AppCompatActivity {
         }
         return result;
     }
-
-
 }

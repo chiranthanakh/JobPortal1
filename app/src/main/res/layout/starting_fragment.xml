@@ -393,7 +393,7 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <LinearLayout
-                                android:id="@+id/ll_rent"
+                                android:id="@+id/ll_home_rent"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -444,14 +444,14 @@
                                     android:fontFamily="@font/lato"
                                     android:gravity="center"
                                     android:maxLines="2"
-                                    android:text="Commercial Space rent"
+                                    android:text="Hotels / PG"
                                     android:textColor="@color/black"
                                     android:textSize="12sp" />
 
                             </LinearLayout>
 
                             <LinearLayout
-                                android:id="@+id/ll_hotel"
+                                android:id="@+id/ll_travels"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -480,6 +480,7 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/ll_constructions"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"

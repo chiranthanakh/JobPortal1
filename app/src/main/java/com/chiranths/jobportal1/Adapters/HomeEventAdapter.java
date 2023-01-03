@@ -11,8 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.chiranths.jobportal1.Activities.BasicActivitys.ProductInfo;
-import com.chiranths.jobportal1.Model.UpcomingEvent;
+import com.chiranths.jobportal1.Model.ProductInfo;
 import com.chiranths.jobportal1.R;
 import com.squareup.picasso.Picasso;
 

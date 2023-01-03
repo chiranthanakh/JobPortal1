@@ -200,6 +200,8 @@ public class AdminBusinessCategorys extends AppCompatActivity {
         productMap.put("image", MainimageUrl);
         productMap.put("category", category);
         productMap.put("subcategory", subcategory);
+        productMap.put("Status", 1);
+
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
