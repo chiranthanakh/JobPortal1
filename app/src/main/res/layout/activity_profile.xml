@@ -330,7 +330,7 @@
                 android:src="@drawable/ic_menudash" />
 
             <TextView
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
                 android:text="My Dashboard"
@@ -353,7 +353,7 @@
         <LinearLayout
             android:padding="8dp"
             android:layout_marginTop="5dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:layout_marginEnd="10dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -388,7 +388,7 @@
         <LinearLayout
             android:padding="8dp"
             android:layout_marginTop="5dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:layout_marginEnd="10dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -400,7 +400,7 @@
                 android:src="@drawable/ic_chat" />
 
             <TextView
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
                 android:text="My Chats"
