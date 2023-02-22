@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -73,7 +74,7 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initilize() {
-      //  recyclerView = findViewById(R.id.recycler_business);
+        recyclerView = findViewById(R.id.recycler_business);
         llsearch = findViewById(R.id.ll_search_business);
         btnListbusiness = findViewById(R.id.btn_list_business);
         back = findViewById(R.id.back_toolbar_business);
@@ -205,6 +206,7 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
                             }
                         }
                     }
+                    businessAdaptor =new BusinessAdaptor(filterbusinesslist, BusinessActivity.this);
 
                     if(cat.equals("")){
                         recyadaptor(filterbusinesslist);
@@ -221,11 +223,9 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void recyadaptor(ArrayList<BusinessModel> businesslist1){
-        recyclerView = findViewById(R.id.recycler_business);
         RecyclerView.LayoutManager nlayoutManager = new LinearLayoutManager(BusinessActivity.this, RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(nlayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        businessAdaptor =new BusinessAdaptor(businesslist1, this);
 
         mHandler.post(new Runnable() {
             @Override
@@ -244,10 +244,12 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void filter(String cat) {
 
+        Intent intent = new Intent(BusinessActivity.this, BusinessFilter.class);
+         BusinessActivity.this.startActivity(intent);
         //fetchbusiness(cat);
-        recyadaptor(businesslist);
+        //recyadaptor(businesslist);
 
-        /*if(cat!=null){
+       /* if(cat!=null){
             filterbusinesslist.clear();
             for (int i=0;i<businesslist.size();i++){
 
@@ -259,7 +261,7 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
 
-            recyadaptor(filterbusinesslist);
+            businessAdaptor.notifyDataSetChanged();
 
         }*/
         }

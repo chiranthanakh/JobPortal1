@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.chiranths.jobportal1.Activities.Businesthings.BusinessActivity;
 import com.chiranths.jobportal1.Activities.Businesthings.BusinessDetailsActivity;
+import com.chiranths.jobportal1.Activities.Businesthings.BusinessFilter;
 import com.chiranths.jobportal1.Model.BusinessModel;
 import com.chiranths.jobportal1.Model.Categorymmodel;
 import com.chiranths.jobportal1.R;
@@ -59,7 +60,9 @@ public class BusinessCategoryAdaptor extends RecyclerView.Adapter<BusinessCatego
         holder.business_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                businessActivity.filter(holder.tv_business_cat.getText().toString());
+                Intent intent = new Intent(context, BusinessFilter.class);
+                context.startActivity(intent);
+               // businessActivity.filter(holder.tv_business_cat.getText().toString());
             }
         });
     }

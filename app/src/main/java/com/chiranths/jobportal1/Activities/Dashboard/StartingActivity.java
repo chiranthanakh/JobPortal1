@@ -10,7 +10,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
-import com.chiranths.jobportal1.Activities.Profile.ProfileFragment;
+import com.chiranths.jobportal1.Activities.LoanActivity.LoanFragment;
+import com.chiranths.jobportal1.Activities.Profile.ProfileFragments;
+import com.chiranths.jobportal1.Activities.Propertys.PropertyFragment;
 import com.chiranths.jobportal1.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -18,8 +20,10 @@ import com.google.android.material.navigation.NavigationBarView;
 public class StartingActivity extends AppCompatActivity{
 
     BottomNavigationView bottomNavShift;
-    ProfileFragment profileFragment = new ProfileFragment();
-    StartingFragment startingFragment = new StartingFragment();
+    ProfileFragments profileFragment = new ProfileFragments();
+    DashboardFragment startingFragment = new DashboardFragment();
+    PropertyFragment propertyFragment = new PropertyFragment();
+    LoanFragment loanFragment = new LoanFragment();
     FrameLayout frameLayout;
     DrawerLayout drawer_layout;
     ProgressDialog progressDialog;
@@ -64,6 +68,12 @@ public class StartingActivity extends AppCompatActivity{
                         break;
                     case R.id.Home:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, startingFragment).commit();
+                        break;
+                    case R.id.it_loan:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, loanFragment).commit();
+                        break;
+                    case R.id.it_property:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, propertyFragment).commit();
                         break;
                 }
                 return true;

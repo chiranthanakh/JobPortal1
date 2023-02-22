@@ -19,6 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/JobPortaltheam">
         <activity
+            android:name=".BusinessFilter"
+            android:exported="false" />
+        <activity
             android:name=".ConstructionAdaptor"
             android:exported="false" />
         <activity
@@ -64,6 +67,9 @@
             android:exported="false" />
         <activity
             android:name=".Activities.Admin.Business.AdminBusinessCategorys"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Businesthings.BusinessFilter"
             android:exported="false" />
         <activity
             android:name=".Activities.Admin.Admin_Construction"

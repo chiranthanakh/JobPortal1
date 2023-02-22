@@ -78,7 +78,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-public class StartingFragment extends Fragment implements View.OnClickListener {
+public class DashboardFragment extends Fragment implements View.OnClickListener {
 
         String id,name ="",mail,pic;
         LinearLayout cv_jobs,cv_propertys,cv_servicess,cv_loans;

@@ -151,7 +151,6 @@ public class Admin_corosel_dashboard extends AppCompatActivity {
             System.out.println("image1---"+downloadImageUrl);
             System.out.println("count---"+totalItems);
 
-
             Calendar calendar = Calendar.getInstance();
             SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd");
             saveCurrentDate = currentDate.format(calendar.getTime());
@@ -181,7 +180,6 @@ public class Admin_corosel_dashboard extends AppCompatActivity {
                         public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                             if (!task.isSuccessful()) {
                                 throw task.getException();
-
                             }
 
                             System.out.println("url3---"+downloadImageUrl);

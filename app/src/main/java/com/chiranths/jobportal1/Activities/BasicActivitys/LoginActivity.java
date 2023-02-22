@@ -63,7 +63,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 .build();
 
         mSignInClient = GoogleSignIn.getClient(getApplicationContext(), signInOptions);
-
         //implementing onclick listener to accesss all available gamil accounts
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,11 +130,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                         public void onComplete(@NonNull @NotNull Task<Void> task) {
                                             if (task.isSuccessful()) {
                                                 progressBar.cancel();
-
                                                 //navigating to the main activity after user successfully registers
                                                 Intent intent = new Intent(getApplicationContext(), RoleActivity.class);
                                                 //Clears older activities and tasks
-                                               // intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                               //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                 startActivity(intent);
                                             }
                                         }
@@ -144,13 +142,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             }
                         });
                     }
-
                 } catch (ApiException e) {
                     e.printStackTrace();
                 }
             }
         }
-
     }
 
     @Override
