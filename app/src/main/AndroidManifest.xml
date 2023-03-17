@@ -19,6 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/JobPortaltheam">
         <activity
+            android:name=".OtpLoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".BusinessFilter"
             android:exported="false" />
         <activity
@@ -160,6 +163,17 @@
         <activity android:name=".Activities.HotDealsactivity.HotDealsDetailsActivity" />
         <activity android:name=".Activities.Admin.Admin_corosel_dashboard" />
         <activity android:name=".Activities.Admin.Admin_layouts_dashboard" />
+
+       <!-- <activity
+            android:name=".Activities.OtpLoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>-->
+
         <activity
             android:name=".Activities.Dashboard.StartingActivity"
             android:exported="true">

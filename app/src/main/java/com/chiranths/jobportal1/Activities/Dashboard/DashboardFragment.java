@@ -27,6 +27,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -80,12 +82,14 @@ import java.util.Locale;
 
 public class DashboardFragment extends Fragment implements View.OnClickListener {
 
+
         String id,name ="",mail,pic;
         LinearLayout cv_jobs,cv_propertys,cv_servicess,cv_loans;
         ImageView iv_sell;
         LinearLayout search_layout,ll_rent,ll_commercial_rent,ll_hotel,ll_travels,ll_construction;
         EditText search;
         TextView tv_seeall_upcooming, tv_seeall_layouts;
+
 
         private ArrayList<UpcomingEvent> upcomingEventList = new ArrayList<>();
         RecyclerView recyclerViewEvent;
@@ -96,7 +100,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         private DatabaseReference CallerRef;
         final int speedScroll = 150;
         final Handler handler = new Handler();
-        ImageView iv_nav_view,iv_bell;
+        ImageView iv_bell;
 
         private ArrayList<NoticeBoard> noticeBoardList = new ArrayList<>();
         RecyclerView recyclerView,recyclarviewads,recyclar_Layouts;
@@ -127,7 +131,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.starting_fragment, container, false);
+        return inflater.inflate(R.layout.dashboard_fragment, container, false);
         }
 
         @Override
@@ -147,9 +151,9 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
         private void initilize(View view)
         {
+
+
                 iv_bell = view.findViewById(R.id.iv_bell);
-                iv_nav_view = view.findViewById(R.id.iv_nav_view);
-                iv_nav_view.setOnClickListener(this);
                 iv_bell.setOnClickListener(this);
                 cv_jobs =  view.findViewById(R.id.cv_jobs);
                 cv_servicess = view.findViewById(R.id.cv_servicess1);
@@ -564,6 +568,9 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                                 intent12.putExtras(bundle);
                                 startActivity(intent12);
                                 break;
+
+
+
                 }
         }
 
