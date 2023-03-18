@@ -26,9 +26,9 @@
                 android:padding="10dp">
 
                 <ImageView
-                    android:id="@+id/iv_nav_view"
+                    android:id="@+id/iv_nav_view_d"
                     android:layout_width="30dp"
-                    android:layout_height="35dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="3dp"
@@ -42,7 +42,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="3dp"
                     android:layout_marginEnd="0dp"
                     android:layout_weight="0.9"
                     android:orientation="horizontal">
@@ -1042,6 +1042,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="2dp"
                         android:layout_marginTop="10dp"
+                        android:paddingBottom="50dp"
                         android:layout_marginEnd="2dp" />
 
 
@@ -1050,7 +1051,26 @@
             </androidx.core.widget.NestedScrollView>
 
         </LinearLayout>
+
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavShift"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/purple_500"
+            app:itemIconTint="@color/nav_item_state_list"
+            app:itemTextColor="@color/nav_item_state_list"
+            app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
+            app:menu="@menu/menu_items">
+
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+
     </FrameLayout>
+
+
+
 
 
 </LinearLayout>

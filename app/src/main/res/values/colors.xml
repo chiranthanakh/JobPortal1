@@ -82,4 +82,8 @@
     <color name="red_light">#e57373</color>
     <color name="green_light">#81c784</color>
     <color name="blue_very_light">#b3e5fc</color>
+
+
+    <color name="dark_text">#b3000000</color>
+    <color name="colorBlue">#39cefb</color>
 </resources>
