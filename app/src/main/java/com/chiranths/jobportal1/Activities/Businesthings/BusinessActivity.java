@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,11 +15,9 @@ import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.chiranths.jobportal1.Activities.Admin.AdminBusinessListings;
 import com.chiranths.jobportal1.Activities.BasicActivitys.SearchActivity;
 import com.chiranths.jobportal1.Adapters.BusinessAdaptor;
 import com.chiranths.jobportal1.Adapters.BusinessCategoryAdaptor;
@@ -37,17 +34,16 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class BusinessActivity extends AppCompatActivity implements View.OnClickListener, FilterCategory {
+public class BusinessActivity extends AppCompatActivity implements View.OnClickListener,FilterCategory {
 
     private DatabaseReference ProductsRef;
-    RecyclerView recyclerView;
-    EditText main_edt_search2;
+     RecyclerView recyclerView;
     private RecyclerView gridView;
     ImageView back;
-    LinearLayout btnListbusiness, llsearch;
-    ArrayList<BusinessModel> businesslist = new ArrayList<BusinessModel>();
-    ArrayList<BusinessModel> filterbusinesslist = new ArrayList<BusinessModel>();
-    ArrayList<Categorymmodel> categorylists = new ArrayList<Categorymmodel>();
+    LinearLayout btnListbusiness,llsearch;
+    ArrayList<BusinessModel> businesslist =new ArrayList<BusinessModel>();
+    ArrayList<BusinessModel> filterbusinesslist =new ArrayList<BusinessModel>();
+    ArrayList<Categorymmodel> categorylists =new ArrayList<Categorymmodel>();
     BusinessCategoryAdaptor businesscatAdaptor;
     BusinessAdaptor businessAdaptor;
     Handler mHandler = new Handler();
@@ -77,26 +73,19 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initilize() {
-        recyclerView = findViewById(R.id.recycler_business);
+      //  recyclerView = findViewById(R.id.recycler_business);
         llsearch = findViewById(R.id.ll_search_business);
         btnListbusiness = findViewById(R.id.btn_list_business);
         back = findViewById(R.id.back_toolbar_business);
         gridView = findViewById(R.id.id_gridview);
-        main_edt_search2 = findViewById(R.id.main_edt_search2);
-
         //recyclerView.setHasFixedSize(true);
-        GridLayoutManager mgrid = new GridLayoutManager(this, 2);
+       // GridLayoutManager mgrid = new GridLayoutManager(this,2);
 
         //code for filter cat recyclar view
         fetchbusiness("");
         fetchbusinessCategorys();
 
-        main_edt_search2.setOnClickListener(view -> {
-            Intent intent = new Intent(BusinessActivity.this, SearchActivity.class);
-            bundle.putString("searchtype", "business");
-            intent.putExtras(bundle);
-            startActivity(intent);
-        });
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,48 +96,59 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
         btnListbusiness.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(BusinessActivity.this, AdminBusinessListings.class);
-                 startActivity(intent);
+                //Intent intent = new Intent(BusinessActivity.this, Admin_business_listings.class);
+               // startActivity(intent);
+
+                recyadaptor(businesslist);
+
             }
         });
 
-        llsearch.setOnClickListener(view -> {
-            Intent intent = new Intent(BusinessActivity.this, SearchActivity.class);
-            bundle.putString("searchtype", "business");
-            intent.putExtras(bundle);
-            startActivity(intent);
+        llsearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BusinessActivity.this, SearchActivity.class);
+                bundle.putString("searchtype","business");
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
         });
     }
 
     private void fetchbusinessCategorys() {
+
         DatabaseReference categorylist = FirebaseDatabase.getInstance().getReference().child("BusinessListing_category");
+
         categorylist.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
+
+                if (snapshot.exists()){
+
                     HashMap<String, Object> dataMap = (HashMap<String, Object>) snapshot.getValue();
-                    for (String key : dataMap.keySet()) {
+                    for (String key : dataMap.keySet()){
                         Object data = dataMap.get(key);
-                        try {
+                        try{
 
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
-                            categorylists.add(new Categorymmodel(String.valueOf(userData.get("pid")), String.valueOf(userData.get("image")), String.valueOf(userData.get("category")), String.valueOf(userData.get("subcategory"))));
+                            categorylists.add(new Categorymmodel(String.valueOf(userData.get("pid")),String.valueOf(userData.get("image")),String.valueOf(userData.get("category")), String.valueOf(userData.get("subcategory"))));
 
-                        } catch (ClassCastException cce) {
 
-                            try {
+                        }catch (ClassCastException cce){
+
+                            try{
                                 String mString = String.valueOf(dataMap.get(key));
                                 //addTextToView(mString);
-                            } catch (ClassCastException cce2) {
+                            }catch (ClassCastException cce2){
 
                             }
                         }
                     }
-                    // RecyclerView.LayoutManager nlayoutManager1 = new LinearLayoutManager(BusinessActivity.this, RecyclerView.VERTICAL, false);
-                    GridLayoutManager nlayoutManager1 = new GridLayoutManager(BusinessActivity.this, 5);
+                   // RecyclerView.LayoutManager nlayoutManager1 = new LinearLayoutManager(BusinessActivity.this, RecyclerView.VERTICAL, false);
+                    GridLayoutManager nlayoutManager1=new GridLayoutManager(BusinessActivity.this,5);
                     gridView.setLayoutManager(nlayoutManager1);
                     gridView.setItemAnimator(new DefaultItemAnimator());
-                    businesscatAdaptor = new BusinessCategoryAdaptor(categorylists, BusinessActivity.this);
+                    businesscatAdaptor =new BusinessCategoryAdaptor(categorylists, BusinessActivity.this);
 
                     mHandler.post(new Runnable() {
                         @Override
@@ -160,7 +160,6 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
 
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -176,46 +175,44 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                if (snapshot.exists()) {
+                if (snapshot.exists()){
 
                     HashMap<String, Object> dataMap = (HashMap<String, Object>) snapshot.getValue();
-                    for (String key : dataMap.keySet()) {
+                    for (String key : dataMap.keySet()){
                         Object data = dataMap.get(key);
-                        try {
+                        try{
 
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
 
-                            if (String.valueOf(userData.get("Business_category")).equals(cat)) {
-                                businesslist.add(new BusinessModel(String.valueOf(userData.get("pid")), String.valueOf(userData.get("date")), String.valueOf(userData.get("time")),
-                                        String.valueOf(userData.get("Businessname")), String.valueOf(userData.get("Business_category")), String.valueOf(userData.get("description")),
-                                        String.valueOf(userData.get("price")), String.valueOf(userData.get("location")), String.valueOf(userData.get("number")), String.valueOf(userData.get("owner")), String.valueOf(userData.get("email")), String.valueOf(userData.get("rating")),
-                                        String.valueOf(userData.get("image")), String.valueOf(userData.get("image2"))));
+                            if(String.valueOf(userData.get("Business_category")).equals(cat)){
+                                businesslist.add(new BusinessModel(String.valueOf(userData.get("pid")),String.valueOf(userData.get("date")),String.valueOf(userData.get("time")),
+                                        String.valueOf(userData.get("Businessname")),String.valueOf(userData.get("Business_category")),String.valueOf(userData.get("description")),
+                                        String.valueOf(userData.get("price")),String.valueOf(userData.get("location")),String.valueOf(userData.get("number")),String.valueOf(userData.get("owner")),String.valueOf(userData.get("email")),String.valueOf(userData.get("rating")),
+                                        String.valueOf(userData.get("image")),String.valueOf(userData.get("image2"))));
                             }
-                            filterbusinesslist.add(new BusinessModel(String.valueOf(userData.get("pid")), String.valueOf(userData.get("date")), String.valueOf(userData.get("time")),
-                                    String.valueOf(userData.get("Businessname")), String.valueOf(userData.get("Business_category")), String.valueOf(userData.get("description")),
-                                    String.valueOf(userData.get("price")), String.valueOf(userData.get("location")), String.valueOf(userData.get("number")), String.valueOf(userData.get("owner")), String.valueOf(userData.get("email")), String.valueOf(userData.get("rating")),
-                                    String.valueOf(userData.get("image")), String.valueOf(userData.get("image2"))));
+                            filterbusinesslist.add(new BusinessModel(String.valueOf(userData.get("pid")),String.valueOf(userData.get("date")),String.valueOf(userData.get("time")),
+                                        String.valueOf(userData.get("Businessname")),String.valueOf(userData.get("Business_category")),String.valueOf(userData.get("description")),
+                                        String.valueOf(userData.get("price")),String.valueOf(userData.get("location")),String.valueOf(userData.get("number")),String.valueOf(userData.get("owner")),String.valueOf(userData.get("email")),String.valueOf(userData.get("rating")),
+                                        String.valueOf(userData.get("image")),String.valueOf(userData.get("image2"))));
 
-                        } catch (ClassCastException cce) {
+                        }catch (ClassCastException cce){
 
-                            try {
+                            try{
                                 String mString = String.valueOf(dataMap.get(key));
                                 //addTextToView(mString);
-                            } catch (ClassCastException cce2) {
+                            }catch (ClassCastException cce2){
 
                             }
                         }
                     }
-                    businessAdaptor = new BusinessAdaptor(filterbusinesslist, BusinessActivity.this);
 
-                    if (cat.equals("")) {
+                    if(cat.equals("")){
                         recyadaptor(filterbusinesslist);
-                    } else {
+                    }else {
                         recyadaptor(filterbusinesslist);
                     }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -223,10 +220,12 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
-    public void recyadaptor(ArrayList<BusinessModel> businesslist1) {
+    public void recyadaptor(ArrayList<BusinessModel> businesslist1){
+        recyclerView = findViewById(R.id.recycler_business);
         RecyclerView.LayoutManager nlayoutManager = new LinearLayoutManager(BusinessActivity.this, RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(nlayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        businessAdaptor =new BusinessAdaptor(businesslist1, this);
 
         mHandler.post(new Runnable() {
             @Override
@@ -245,14 +244,10 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void filter(String cat) {
 
-        //Intent intent = new Intent(BusinessActivity.this, BusinessFilter.class);
-        //bundle.putString("CatFilter",cat);
-        //intent.putExtras(bundle);
-        //BusinessActivity.this.startActivity(intent);
         //fetchbusiness(cat);
-        //recyadaptor(businesslist);
+        recyadaptor(businesslist);
 
-       /* if(cat!=null){
+        /*if(cat!=null){
             filterbusinesslist.clear();
             for (int i=0;i<businesslist.size();i++){
 
@@ -264,9 +259,9 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
 
-            businessAdaptor.notifyDataSetChanged();
+            recyadaptor(filterbusinesslist);
 
         }*/
-    }
+        }
 
 }

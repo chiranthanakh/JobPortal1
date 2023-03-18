@@ -50,7 +50,15 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <SearchView
+                    <ImageView
+                        android:id="@+id/iv_search"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="13dp"
+                        android:src="@drawable/search_hallow"
+                        app:tint="@color/grey" />
+
+                    <EditText
                         android:id="@+id/edt_filter"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"

@@ -25,7 +25,7 @@
 
         <ImageView
             android:id="@+id/iv_ads_image"
-            android:layout_width="180dp"
+            android:layout_width="wrap_content"
             android:layout_height="120dp"
             android:src="@drawable/aaimage"
             android:scaleType="fitXY"/>

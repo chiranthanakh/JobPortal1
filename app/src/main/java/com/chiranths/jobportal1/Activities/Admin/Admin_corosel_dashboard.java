@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.ClipData;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -107,88 +106,6 @@ public class Admin_corosel_dashboard extends AppCompatActivity {
             StoreProductInformation(data);
         }
     }
-    private void StoreProductInformation(Intent data) {
-
-        /*loadingBar.setTitle("Add New Product");
-        loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
-        loadingBar.setCanceledOnTouchOutside(false);
-        loadingBar.show();*/
-        downloadImageUrl ="";
-
-        // If the user selected only one image
-        if (data.getData() != null) {
-            Uri uri = data.getData();
-            uploadTostorage(data,uri);
-        }else if (data.getClipData() != null) {
-            ClipData clipData = data.getClipData();
-            for (int i = 0; i < clipData.getItemCount(); i++) {
-                Uri uri = clipData.getItemAt(i).getUri();
-                uploadTostorage(data,uri);
-            }
-        }
-    }
-
-    private void uploadTostorage(Intent data,Uri uri) {
-        String fileName = getFileName(uri);
-        fileNameList.add(fileName);
-        fileDoneList.add("Uploading");
-
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd");
-        saveCurrentDate = currentDate.format(calendar.getTime());
-
-        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm a");
-        saveCurrentTime = currentTime.format(calendar.getTime());
-
-        productRandomKey = saveCurrentDate + saveCurrentTime;
-
-        final StorageReference filePath = ProductImagesRef.child(uri.getLastPathSegment() + productRandomKey + ".jpg");
-
-        final UploadTask uploadTask = filePath.putFile(uri);
-
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                String message = e.toString();
-                Toast.makeText(Admin_corosel_dashboard.this, "Error: " + message, Toast.LENGTH_SHORT).show();
-                loadingBar.dismiss();
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(Admin_corosel_dashboard.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
-                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                    @Override
-                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        if (!task.isSuccessful()) {
-                            throw task.getException();
-
-                        }
-
-                        return filePath.getDownloadUrl();
-                    }
-                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        if (task.isSuccessful()) {
-
-                            if(downloadImageUrl.equals("")){
-                                downloadImageUrl =task.getResult().toString();
-                                MainimageUrl = task.getResult().toString();
-                            }else {
-                                downloadImageUrl = downloadImageUrl+"---"+task.getResult().toString();
-                            }
-
-                            System.out.println("url2---"+downloadImageUrl);
-                            Toast.makeText(Admin_corosel_dashboard.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-                });
-            }
-        });
-
-    }
 
     private void ValidateProductData() {
         Description = InputProductDescription.getText().toString();
@@ -217,6 +134,88 @@ public class Admin_corosel_dashboard extends AppCompatActivity {
         else
         {
             SaveProductInfoToDatabase();
+        }
+    }
+
+    private void StoreProductInformation(Intent data) {
+        downloadImageUrl ="";
+        System.out.println("image5---"+downloadImageUrl);
+        int totalItems = data.getClipData().getItemCount();
+        int i;
+        for ( i = 0; i < totalItems; i++) {
+            Uri fileUri = data.getClipData().getItemAt(i).getUri();
+            String fileName = getFileName(fileUri);
+            fileNameList.add(fileName);
+            fileDoneList.add("Uploading");
+
+            System.out.println("image1---"+downloadImageUrl);
+            System.out.println("count---"+totalItems);
+
+
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd");
+            saveCurrentDate = currentDate.format(calendar.getTime());
+
+            SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm a");
+            saveCurrentTime = currentTime.format(calendar.getTime());
+
+            productRandomKey = saveCurrentDate + saveCurrentTime;
+
+            final StorageReference filePath = ProductImagesRef.child(fileUri.getLastPathSegment() + productRandomKey + ".jpg");
+
+            final UploadTask uploadTask = filePath.putFile(fileUri);
+
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    String message = e.toString();
+                    Toast.makeText(Admin_corosel_dashboard.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                    loadingBar.dismiss();
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(Admin_corosel_dashboard.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
+                    Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                        @Override
+                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                            if (!task.isSuccessful()) {
+                                throw task.getException();
+
+                            }
+
+                            System.out.println("url3---"+downloadImageUrl);
+                            // downloadImageUrl = downloadImageUrl+"---"+ filePath.getDownloadUrl().toString();
+                            System.out.println("url1---"+downloadImageUrl);
+
+                            return filePath.getDownloadUrl();
+                        }
+                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if (task.isSuccessful()) {
+
+                                if(downloadImageUrl.equals("")){
+                                    downloadImageUrl =task.getResult().toString();
+                                    MainimageUrl = task.getResult().toString();
+                                }else {
+                                    downloadImageUrl = downloadImageUrl+"---"+task.getResult().toString();
+                                }
+
+                                System.out.println("url2---"+downloadImageUrl);
+                                Toast.makeText(Admin_corosel_dashboard.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
+
+
+                            }
+                        }
+                    });
+                }
+            });
+
+            if(i==totalItems-1){
+                System.out.println("downloadurl--"+downloadImageUrl);
+                // SaveProductInfoToDatabase();
+            }
         }
     }
 

@@ -1,4 +1,4 @@
-package com.chiranths.jobportal1.Activities.Admin;
+package com.chiranths.jobportal1.Activities.Admin.Business;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,65 +34,50 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class Admin_ads_dashboard extends AppCompatActivity {
+public class AdminBusinessCategorys extends AppCompatActivity {
 
     private static final int GalleryPick = 1;
-    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,propertysize,location,number;
-    private EditText InputProductName,Inputtype,InputProductDescription
-            ,InputProductPrice,et_size,et_location,et_number,et_verified,et_text1, et_text2,et_text3,et_text4,et_posted_by;
+    private String category, subcategory;
+    private EditText et_category,et_subcategory;
     private Uri ImageUri;
-    private String productRandomKey, downloadImageUrl,MainimageUrl;
+    private String productRandomKey, downloadImageUrl,MainimageUrl,saveCurrentDate, saveCurrentTime,propertysize;
     private StorageReference ProductImagesRef;
     private DatabaseReference ProductsRef;
     private ProgressDialog loadingBar;
     ArrayList fileNameList = new ArrayList<>();
     ArrayList fileDoneList = new ArrayList<>();
-    EditText ads_name;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_ads);
+        setContentView(R.layout.activity_admin_business_categorys);
 
-        //CategoryName = "cqat";
-        ProductImagesRef = FirebaseStorage.getInstance().getReference().child("ads");
-        ProductsRef = FirebaseDatabase.getInstance().getReference().child("adsforyou");
+        ProductImagesRef = FirebaseStorage.getInstance().getReference().child("business_category");
+        ProductsRef = FirebaseDatabase.getInstance().getReference().child("BusinessListing_category");
 
-        ImageView btn_corosel = findViewById(R.id.select_corosel_image);
-        Button add_new_corosel = findViewById(R.id.add_new_ads);
+        ImageView btn_corosel = findViewById(R.id.iv_business_category);
+        Button add_new_corosel = findViewById(R.id.add_category);
 
-        InputProductName = (EditText) findViewById(R.id.ads_name);
-        Inputtype = (EditText)findViewById(R.id.ads_type_admin);
-        InputProductDescription = (EditText) findViewById(R.id.ads_description);
-        InputProductPrice = (EditText) findViewById(R.id.ads_price_admin);
-        ads_name = findViewById(R.id.ads_name);
-        et_size = findViewById(R.id.ads_size);
-        et_text1 = findViewById(R.id.ads_text1);
-        et_text2 = findViewById(R.id.ads_text2);
-        et_text3 = findViewById(R.id.ads_text3);
-        et_text4 = findViewById(R.id.ads_text4);
-        et_posted_by= findViewById(R.id.ads_posted_by);
-        et_location = findViewById(R.id.ads_location_admin);
-        et_number = findViewById(R.id.ads_contact_number);
-        et_verified = findViewById(R.id.ads_verify_or_nt);
+        et_category = findViewById(R.id.et_category_name);
+        et_subcategory = findViewById(R.id.et_subcategory);
         loadingBar = new ProgressDialog(this);
 
         btn_corosel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 OpenGallery();
-
             }
         });
 
         add_new_corosel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 ValidateProductData();
+
             }
         });
-
     }
 
     private void OpenGallery(){
@@ -111,40 +96,17 @@ public class Admin_ads_dashboard extends AppCompatActivity {
         if (requestCode==GalleryPick  &&  resultCode==RESULT_OK  &&  data!=null)
         {
             ImageUri = data.getData();
-            //InputProductImage.setImageURI(ImageUri);
             StoreProductInformation(data);
         }
     }
 
     private void ValidateProductData() {
-
-        Description = InputProductDescription.getText().toString();
-        Price = InputProductPrice.getText().toString();
-        Pname = InputProductName.getText().toString();
-        propertysize = et_size.getText().toString();
-        location = et_location.getText().toString();
-        number = et_number.getText().toString();
-        CategoryName = Inputtype.getText().toString();
+        category = et_category.getText().toString();
+        subcategory = et_subcategory.getText().toString();
 
         if (TextUtils.isEmpty(downloadImageUrl))
         {
             Toast.makeText(this, "Product image is mandatory...", Toast.LENGTH_SHORT).show();
-        }
-        else if (TextUtils.isEmpty(Description))
-        {
-            Toast.makeText(this, "Please write product description...", Toast.LENGTH_SHORT).show();
-        }
-        else if (TextUtils.isEmpty(Price))
-        {
-            Toast.makeText(this, "Please write product Price...", Toast.LENGTH_SHORT).show();
-        }
-        else if (TextUtils.isEmpty(Pname))
-        {
-            Toast.makeText(this, "Please write product name...", Toast.LENGTH_SHORT).show();
-        }
-        else if (TextUtils.isEmpty(CategoryName))
-        {
-            Toast.makeText(this, "Please enter category", Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -154,11 +116,6 @@ public class Admin_ads_dashboard extends AppCompatActivity {
 
     private void StoreProductInformation(Intent data) {
 
-        /*loadingBar.setTitle("Add New Product");
-        loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
-        loadingBar.setCanceledOnTouchOutside(false);
-        loadingBar.show();*/
-
         downloadImageUrl ="";
         System.out.println("image5---"+downloadImageUrl);
         int totalItems = data.getClipData().getItemCount();
@@ -167,14 +124,11 @@ public class Admin_ads_dashboard extends AppCompatActivity {
             String fileName = getFileName(fileUri);
             fileNameList.add(fileName);
             fileDoneList.add("Uploading");
-
             System.out.println("image1---"+downloadImageUrl);
             System.out.println("count---"+totalItems);
-
             Calendar calendar = Calendar.getInstance();
             SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd");
             saveCurrentDate = currentDate.format(calendar.getTime());
-
             SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm a");
             saveCurrentTime = currentTime.format(calendar.getTime());
 
@@ -188,13 +142,13 @@ public class Admin_ads_dashboard extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     String message = e.toString();
-                    Toast.makeText(Admin_ads_dashboard.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AdminBusinessCategorys.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
                 }
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(Admin_ads_dashboard.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AdminBusinessCategorys.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
                     Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                         @Override
                         public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -206,7 +160,6 @@ public class Admin_ads_dashboard extends AppCompatActivity {
                             System.out.println("url3---"+downloadImageUrl);
                             // downloadImageUrl = downloadImageUrl+"---"+ filePath.getDownloadUrl().toString();
                             System.out.println("url1---"+downloadImageUrl);
-
                             return filePath.getDownloadUrl();
                         }
                     }).addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -222,8 +175,7 @@ public class Admin_ads_dashboard extends AppCompatActivity {
                                 }
 
                                 System.out.println("url2---"+downloadImageUrl);
-                                Toast.makeText(Admin_ads_dashboard.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
-
+                                Toast.makeText(AdminBusinessCategorys.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
 
                             }
                         }
@@ -239,30 +191,16 @@ public class Admin_ads_dashboard extends AppCompatActivity {
     }
 
     private void SaveProductInfoToDatabase() {
+
         HashMap<String, Object> productMap = new HashMap<>();
         productMap.put("pid", productRandomKey);
         productMap.put("date", saveCurrentDate);
         productMap.put("time", saveCurrentTime);
-        productMap.put("description", Description);
         productMap.put("image2", downloadImageUrl);
         productMap.put("image", MainimageUrl);
-        productMap.put("category", CategoryName);
-        productMap.put("price", Price);
-        productMap.put("pname", Pname);
-        productMap.put("propertysize",propertysize);
-        productMap.put("location",location);
-        productMap.put("number",number);
-        productMap.put("verified",et_verified.getText().toString());
-        productMap.put("postedOn", saveCurrentDate);
-        productMap.put("Postedby",et_posted_by.getText().toString());
-        productMap.put("Approval",1);
-        productMap.put("payment","");
-        productMap.put("text1", et_text1.getText().toString());
-        productMap.put("text2", et_text2.getText().toString());
-        productMap.put("text3", et_text3.getText().toString());
-        productMap.put("text4", et_text4.getText().toString());
+        productMap.put("category", category);
+        productMap.put("subcategory", subcategory);
         productMap.put("Status", 1);
-
 
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
@@ -275,19 +213,17 @@ public class Admin_ads_dashboard extends AppCompatActivity {
                             // Intent intent = new Intent(AdminAddNewProductActivity.this, .class);
                             //startActivity(intent);
                             loadingBar.dismiss();
-                            Toast.makeText(Admin_ads_dashboard.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminBusinessCategorys.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
                             loadingBar.dismiss();
                             String message = task.getException().toString();
-                            Toast.makeText(Admin_ads_dashboard.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminBusinessCategorys.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
-
-
 
     @SuppressLint("Range")
     public String getFileName(Uri uri){
@@ -310,4 +246,5 @@ public class Admin_ads_dashboard extends AppCompatActivity {
         }
         return result;
     }
+
 }

@@ -2,7 +2,6 @@ package com.chiranths.jobportal1.Activities.Admin;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.ClipData;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -10,8 +9,6 @@ import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -41,11 +38,10 @@ public class Admin_Construction extends AppCompatActivity {
 
     private static final int GalleryPick = 1;
     String Name,category,cost,contactDetails,contactDetails2,experience,service1,service2,service3,service4,saveCurrentDate,saveCurrentTime,discription,vehicleNumber;
-    private EditText edt_construction_name,edt_construction_number,edt_construction_cost,
+    private EditText edt_construction_name,edt_construction_category,edt_construction_number,edt_construction_cost,
             edt_construction_experience,edt_construction_model,edt_construction_servicessoffer_1,edt_construction_servicessoffer_2,edt_construction_servicessoffer_3,edt_construction_servicessoffer_4,
             edt_construction_verified_not,edt_construction_discription,edt_construction_number2;
     private Uri ImageUri;
-    private AutoCompleteTextView edt_construction_category;
     private String productRandomKey, downloadImageUrl,MainimageUrl;
     private StorageReference ProductImagesRef;
     private DatabaseReference ProductsRef;
@@ -65,7 +61,7 @@ public class Admin_Construction extends AppCompatActivity {
         ImageView btn_add_image = findViewById(R.id.select_construction_images);
         Button add_new_construction = findViewById(R.id.add_new_construction);
         edt_construction_name = (EditText) findViewById(R.id.edt_construction_name);
-        edt_construction_category = findViewById(R.id.edt_construction_category);
+        edt_construction_category = (EditText)findViewById(R.id.edt_construction_category);
         edt_construction_number = (EditText) findViewById(R.id.edt_construction_contact_number);
         edt_construction_number2= (EditText) findViewById(R.id.edt_construction_contact_number2);
         edt_construction_cost = (EditText) findViewById(R.id.edt_construction_cost);
@@ -80,30 +76,6 @@ public class Admin_Construction extends AppCompatActivity {
         loadingBar = new ProgressDialog(this);
         btn_add_image.setOnClickListener(view -> OpenGallery());
         add_new_construction.setOnClickListener(view -> ValidateProductData());
-
-        ArrayList list = new ArrayList();
-        list.add("Contractors");
-        list.add("Architect");
-        list.add("Interior Designer");
-        list.add("Construction Meterials");
-        list.add("Hardwares");
-        list.add("Painters");
-        list.add("Carpenters");
-        list.add("Electrician");
-        list.add("Plumber");
-        list.add("Painters");
-
-        ArrayAdapter arrayAdapter= new ArrayAdapter(this, android.R.layout.simple_list_item_1, list);
-        edt_construction_category.setAdapter(arrayAdapter);
-        edt_construction_category.setInputType(0);
-
-        edt_construction_category.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus)
-                    edt_construction_category.showDropDown();
-            }
-        });
     }
 
     private void OpenGallery(){
@@ -125,89 +97,6 @@ public class Admin_Construction extends AppCompatActivity {
             //InputProductImage.setImageURI(ImageUri);
             StoreProductInformation(data);
         }
-    }
-
-    private void StoreProductInformation(Intent data) {
-
-        /*loadingBar.setTitle("Add New Product");
-        loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
-        loadingBar.setCanceledOnTouchOutside(false);
-        loadingBar.show();*/
-        downloadImageUrl ="";
-
-        // If the user selected only one image
-        if (data.getData() != null) {
-            Uri uri = data.getData();
-            uploadTostorage(data,uri);
-        }else if (data.getClipData() != null) {
-            ClipData clipData = data.getClipData();
-            for (int i = 0; i < clipData.getItemCount(); i++) {
-                Uri uri = clipData.getItemAt(i).getUri();
-                uploadTostorage(data,uri);
-            }
-        }
-    }
-
-    private void uploadTostorage(Intent data,Uri uri) {
-        String fileName = getFileName(uri);
-        fileNameList.add(fileName);
-        fileDoneList.add("Uploading");
-
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd");
-        saveCurrentDate = currentDate.format(calendar.getTime());
-
-        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm a");
-        saveCurrentTime = currentTime.format(calendar.getTime());
-
-        productRandomKey = saveCurrentDate + saveCurrentTime;
-
-        final StorageReference filePath = ProductImagesRef.child(uri.getLastPathSegment() + productRandomKey + ".jpg");
-
-        final UploadTask uploadTask = filePath.putFile(uri);
-
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                String message = e.toString();
-                Toast.makeText(Admin_Construction.this, "Error: " + message, Toast.LENGTH_SHORT).show();
-                loadingBar.dismiss();
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(Admin_Construction.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
-                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                    @Override
-                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        if (!task.isSuccessful()) {
-                            throw task.getException();
-
-                        }
-
-                        return filePath.getDownloadUrl();
-                    }
-                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        if (task.isSuccessful()) {
-
-                            if(downloadImageUrl.equals("")){
-                                downloadImageUrl =task.getResult().toString();
-                                MainimageUrl = task.getResult().toString();
-                            }else {
-                                downloadImageUrl = downloadImageUrl+"---"+task.getResult().toString();
-                            }
-
-                            System.out.println("url2---"+downloadImageUrl);
-                            Toast.makeText(Admin_Construction.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-                });
-            }
-        });
-
     }
 
     private void ValidateProductData() {
@@ -237,6 +126,85 @@ public class Admin_Construction extends AppCompatActivity {
         } else
         {
             SaveProductInfoToDatabase();
+        }
+    }
+
+    private void StoreProductInformation(Intent data) {
+
+        /*loadingBar.setTitle("Add New Product");
+        loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
+        loadingBar.setCanceledOnTouchOutside(false);
+        loadingBar.show();*/
+
+        downloadImageUrl ="";
+        System.out.println("image5---"+downloadImageUrl);
+        int totalItems = data.getClipData().getItemCount();
+        for (int i = 0; i < totalItems; i++) {
+            Uri fileUri = data.getClipData().getItemAt(i).getUri();
+            String fileName = getFileName(fileUri);
+            fileNameList.add(fileName);
+            fileDoneList.add("Uploading");
+            System.out.println("image1---"+downloadImageUrl);
+            System.out.println("count---"+totalItems);
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd");
+            saveCurrentDate = currentDate.format(calendar.getTime());
+            SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm a");
+            saveCurrentTime = currentTime.format(calendar.getTime());
+
+            productRandomKey = saveCurrentDate + saveCurrentTime;
+
+            final StorageReference filePath = ProductImagesRef.child(fileUri.getLastPathSegment() + productRandomKey + ".jpg");
+
+            final UploadTask uploadTask = filePath.putFile(fileUri);
+
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    String message = e.toString();
+                    Toast.makeText(Admin_Construction.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                    loadingBar.dismiss();
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(Admin_Construction.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
+                    Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                        @Override
+                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                            if (!task.isSuccessful()) {
+                                throw task.getException();
+                            }
+
+                            System.out.println("url3---"+downloadImageUrl);
+                            // downloadImageUrl = downloadImageUrl+"---"+ filePath.getDownloadUrl().toString();
+                            System.out.println("url1---"+downloadImageUrl);
+
+                            return filePath.getDownloadUrl();
+                        }
+                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if (task.isSuccessful()) {
+
+                                if(downloadImageUrl.equals("")){
+                                    downloadImageUrl =task.getResult().toString();
+                                    MainimageUrl = task.getResult().toString();
+                                }else {
+                                    downloadImageUrl = downloadImageUrl+"---"+task.getResult().toString();
+                                }
+                                System.out.println("url2---"+downloadImageUrl);
+                                Toast.makeText(Admin_Construction.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            });
+
+            if(i==totalItems-1){
+                System.out.println("downloadurl--"+downloadImageUrl);
+                // SaveProductInfoToDatabase();
+            }
         }
     }
 
