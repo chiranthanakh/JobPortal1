@@ -24,7 +24,7 @@
             android:layout_marginTop="2dp"
             android:background="?selectableItemBackground"
             android:padding="5dp"
-            android:src="@drawable/back_arrow"
+            android:src="@drawable/back_arrow_new"
             app:tint="@color/white" />
 
         <LinearLayout
@@ -98,7 +98,7 @@
             android:padding="5dp"
             android:textStyle="bold"
             android:text="List \n your \n Business"
-            android:src="@drawable/back_arrow"
+            android:src="@drawable/back_arrow_new"
             app:tint="@color/red" />
 
         </LinearLayout>

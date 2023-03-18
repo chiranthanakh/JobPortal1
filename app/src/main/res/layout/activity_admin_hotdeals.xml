@@ -15,7 +15,7 @@
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        app:navigationIcon="@drawable/back_arrow"
+        app:navigationIcon="@drawable/back_arrow_new"
         android:layout_height="?attr/actionBarSize"
         app:title="Property Details"
         app:titleTextColor="@color/white"
