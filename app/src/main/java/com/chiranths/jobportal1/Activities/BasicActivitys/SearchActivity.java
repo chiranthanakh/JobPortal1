@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.ImageView;
+import android.widget.SearchView;
 
 import com.chiranths.jobportal1.Activities.Businesthings.BusinessActivity;
 import com.chiranths.jobportal1.Activities.Propertys.AdminAddNewProductActivity;
@@ -44,6 +45,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -62,12 +64,13 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     ArrayList Rentallist =new ArrayList();
     ArrayList adslist =new ArrayList();
     ArrayList<BusinessModel> businesslist =new ArrayList<BusinessModel>();
+    ArrayList<BusinessModel> businesslistFiltered =new ArrayList<BusinessModel>();
     PropertyAdaptor propertyAdaptor;
     BusinessAdaptor businessAdaptor;
     AdsAdaptor adsAdaptor;
     RecyclerView recyclarviewads;
     CardView cv_homes, cv_sites, cv_green,cv_comerical;
-    EditText edt_filter;
+    SearchView edt_filter;
     ArrayList filterarraylist = new ArrayList();
     String type="";
 
@@ -143,22 +146,20 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
         initilize();
 
-
-        edt_filter.addTextChangedListener(new TextWatcher() {
+        edt_filter.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+            public boolean onQueryTextSubmit(String s) {
+                return false;
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            public boolean onQueryTextChange(String s) {
+                //if(type.equals("business")){
+                    filter(s.toString());
+               // }else {
 
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-                filter(s.toString());
+                //}
+                return false;
             }
         });
 
@@ -216,7 +217,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
     }
-
 
     private void fetchcorosel() {
         DatabaseReference coroselimage = FirebaseDatabase.getInstance().getReference().child("Products");
@@ -440,44 +440,68 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     private void filter(String text) {
 
-        if(text.equals("")){
-            //adaptorclass(false);
-        }else {
+        if(type.equals("business")){
+            if(text.equals("")){
 
-            filterarraylist.clear();
+            }else {
+                businesslistFiltered.clear();
+                for (int i=0;i < businesslist.size(); i++){
+                    if(businesslist.get(i).getBusinessname().contains(text.toLowerCase()) ||
+                    businesslist.get(i).getBusiness_category().contains(text.toLowerCase()) ||
+                    businesslist.get(i).getLocation().contains(text.toLowerCase())){
 
-            for (int i=0;i<Propertyfilterlist.size();i++){
-
-                if(Propertyfilterlist.get(i).getLocation().toLowerCase().contains(text.toLowerCase()) ||
-                        Propertyfilterlist.get(i).getPname().toLowerCase().contains(text.toLowerCase()) ||
-                        Propertyfilterlist.get(i).getPrice().toLowerCase().contains(text.toLowerCase()) ||
-                        Propertyfilterlist.get(i).getType().toLowerCase().contains(text.toLowerCase())){
-
-                    filterarraylist.add(Propertyfilterlist.get(i).getImage()+"!!"+Propertyfilterlist.get(i).getPid()+"---"+Propertyfilterlist.get(i).getDescription()+"---"+
-                            Propertyfilterlist.get(i).getCategory()+"---"+Propertyfilterlist.get(i).getPrice()+"---"+Propertyfilterlist.get(i).getPname()
-                            +"---"+Propertyfilterlist.get(i).getSize()+"---"+Propertyfilterlist.get(i).getLocation()+"---"+Propertyfilterlist.get(i).getNumber()+"---"+Propertyfilterlist.get(i).getType());
+                        businesslistFiltered.add(new BusinessModel(businesslist.get(i).getPid(),businesslist.get(i).getDate(),businesslist.get(i).getTime(),
+                                businesslist.get(i).getBusinessname(),businesslist.get(i).getBusiness_category(),businesslist.get(i).getDescription(),
+                                businesslist.get(i).getPrice(),businesslist.get(i).getLocation(),businesslist.get(i).getNumber(),businesslist.get(i).getOwner(),
+                                businesslist.get(i).getEmail(),businesslist.get(i).getRating(),
+                                businesslist.get(i).getImage(),businesslist.get(i).getImage2()));
 
 
-                }
-                if(filterarraylist.size()==0){
-                   // ll_no_data_irfc.setVisibility(View.VISIBLE);
-                }else {
-                    //ll_no_data_irfc.setVisibility(View.GONE);
+                    }
 
                 }
             }
-            propertyAdaptor =new PropertyAdaptor(filterarraylist, SearchActivity.this);
-            RecyclerView.LayoutManager nlayoutManager3 = new LinearLayoutManager(SearchActivity.this, RecyclerView.VERTICAL, false);
-            recyclerView.setLayoutManager(nlayoutManager3);
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-            mHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    recyclerView.setAdapter(propertyAdaptor);
+        }else {
+            if(text.equals("")){
+                //adaptorclass(false);
+            }else {
+
+                filterarraylist.clear();
+
+                for (int i=0;i<Propertyfilterlist.size();i++){
+
+                    if(Propertyfilterlist.get(i).getLocation().toLowerCase().contains(text.toLowerCase()) ||
+                            Propertyfilterlist.get(i).getPname().toLowerCase().contains(text.toLowerCase()) ||
+                            Propertyfilterlist.get(i).getPrice().toLowerCase().contains(text.toLowerCase()) ||
+                            Propertyfilterlist.get(i).getType().toLowerCase().contains(text.toLowerCase())){
+
+                        filterarraylist.add(Propertyfilterlist.get(i).getImage()+"!!"+Propertyfilterlist.get(i).getPid()+"---"+Propertyfilterlist.get(i).getDescription()+"---"+
+                                Propertyfilterlist.get(i).getCategory()+"---"+Propertyfilterlist.get(i).getPrice()+"---"+Propertyfilterlist.get(i).getPname()
+                                +"---"+Propertyfilterlist.get(i).getSize()+"---"+Propertyfilterlist.get(i).getLocation()+"---"+Propertyfilterlist.get(i).getNumber()+"---"+Propertyfilterlist.get(i).getType());
+
+
+                    }
+                    if(filterarraylist.size()==0){
+                        // ll_no_data_irfc.setVisibility(View.VISIBLE);
+                    }else {
+                        //ll_no_data_irfc.setVisibility(View.GONE);
+
+                    }
                 }
-            });
-            propertyAdaptor.notifyItemRangeInserted(0, greenlandlist.size());
+                propertyAdaptor =new PropertyAdaptor(filterarraylist, SearchActivity.this);
+                RecyclerView.LayoutManager nlayoutManager3 = new LinearLayoutManager(SearchActivity.this, RecyclerView.VERTICAL, false);
+                recyclerView.setLayoutManager(nlayoutManager3);
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        recyclerView.setAdapter(propertyAdaptor);
+                    }
+                });
+                propertyAdaptor.notifyItemRangeInserted(0, greenlandlist.size());
+            }
         }
     }
 
@@ -498,6 +522,4 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         propertyAdaptor.notifyItemRangeInserted(0, greenlandlist.size());
 
     }
-
-
 }
