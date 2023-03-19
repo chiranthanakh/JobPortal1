@@ -5,10 +5,12 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:id="@+id/ll_bus_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
+        android:paddingTop="@dimen/margin_10dp"
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
 
@@ -18,7 +20,12 @@
             android:layout_height="45dp"
             android:layout_marginTop="30dp"
             android:adjustViewBounds="true"
-            android:src="@drawable/construction" />
+            android:src="@drawable/user"
+            android:visibility="gone" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/tv_business_category"
@@ -26,8 +33,12 @@
             android:layout_height="match_parent"
             android:fontFamily="@font/proxima_family"
             android:text="Construction"
+            android:textStyle="bold"
+            android:padding="@dimen/margin_10dp"
             android:textColor="@color/grey"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
+
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 
 

@@ -19,6 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/JobPortaltheam">
         <activity
+            android:name=".BusinessFilter"
+            android:exported="false" />
+        <activity
             android:name=".ConstructionAdaptor"
             android:exported="false" />
         <activity
@@ -63,7 +66,10 @@
             android:name=".Activities.LoanActivity.LoanFormfirst"
             android:exported="false" />
         <activity
-            android:name=".Activities.Admin.Business.AdminBusinessCategorys"
+            android:name=".Activities.Admin.AdminBusinessCategorys"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Businesthings.BusinessFilter"
             android:exported="false" />
         <activity
             android:name=".Activities.Admin.Admin_Construction"
@@ -114,10 +120,10 @@
             android:name=".Activities.Admin.Admin_hotdeals_dashboard"
             android:exported="false" />
         <activity
-            android:name=".Activities.Admin.Business.AdminBusinessListings"
+            android:name=".Activities.Admin.AdminBusinessListings"
             android:exported="false" />
         <activity
-            android:name=".Activities.Admin.loan.AdminloanOffers"
+            android:name=".Activities.Admin.AdminloanOffers"
             android:exported="false" />
         <activity
             android:name=".Activities.Sell.SellActivity"
@@ -140,6 +146,13 @@
         <activity
             android:name=".Activities.Servicess.ServicesActivity"
             android:exported="false" />
+        <service
+            android:name=".myFirebaseMessagingServices"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
         <activity
             android:name=".Activities.Propertys.PropertyActivity"
             android:exported="false" />

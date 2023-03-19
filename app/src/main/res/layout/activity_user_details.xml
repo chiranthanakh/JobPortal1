@@ -88,6 +88,15 @@
             app:layout_constraintTop_toTopOf="parent">
 
 
+            <ImageView
+                android:id="@+id/select_profile_image"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:cropToPadding="false"
+                android:scaleType="centerCrop"
+                android:src="@drawable/select_product_image" />
 
             <TextView
                 android:layout_width="match_parent"

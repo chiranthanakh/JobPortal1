@@ -60,7 +60,7 @@ public class LayoutsAdaptor extends RecyclerView.Adapter<LayoutsAdaptor.ViewHold
 
         Glide.with(context)
                 .load(data[0])
-                .apply(options)
+                .apply(new RequestOptions().override(1000, 500))
                 .into(holder.iv_corosel_image);
 
         holder.tv_ads_category.setText(data[2]);
