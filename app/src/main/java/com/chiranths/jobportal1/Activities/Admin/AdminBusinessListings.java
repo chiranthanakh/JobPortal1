@@ -1,7 +1,8 @@
-package com.chiranths.jobportal1.Activities.Admin.Business;
+package com.chiranths.jobportal1.Activities.Admin;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.ClipData;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -9,6 +10,8 @@ import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,15 +19,25 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
 
+import com.chiranths.jobportal1.Activities.Businesthings.BusinessActivity;
+import com.chiranths.jobportal1.Adapters.BusinessAdaptor;
+import com.chiranths.jobportal1.Adapters.BusinessCategoryAdaptor;
+import com.chiranths.jobportal1.Model.BusinessModel;
+import com.chiranths.jobportal1.Model.Categorymmodel;
 import com.chiranths.jobportal1.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -44,21 +57,24 @@ public class AdminBusinessListings extends AppCompatActivity {
     private StorageReference ProductImagesRef;
     private DatabaseReference ProductsRef;
     private ProgressDialog loadingBar;
+    private AutoCompleteTextView business_category;
     ArrayList fileNameList = new ArrayList<>();
     ArrayList fileDoneList = new ArrayList<>();
+    ArrayList categoryList = new ArrayList();
+    ArrayAdapter arrayAdapter;
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_business_listings);
-        CategoryName = "cqat";
         ProductImagesRef = FirebaseStorage.getInstance().getReference().child("business");
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("BusinessListing");
 
         ImageView btn_corosel = findViewById(R.id.select_business_image);
         Button add_new_corosel = findViewById(R.id.add_new_Business);
         InputProductName = (EditText) findViewById(R.id.Business_name);
-        Inputtype = (EditText)findViewById(R.id.Business_type_admin);
+        business_category = findViewById(R.id.Business_type_admin);
         InputProductDescription = (EditText) findViewById(R.id.Business_description);
         InputProductPrice = (EditText) findViewById(R.id.Business_price_admin);
         et_sell_name = findViewById(R.id.Business_size);
@@ -68,6 +84,7 @@ public class AdminBusinessListings extends AppCompatActivity {
         et_email = findViewById(R.id.Business_email);
         et_rating = findViewById(R.id.Business_rating);
         loadingBar = new ProgressDialog(this);
+        fetchbusinessCategorys();
 
         btn_corosel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +101,53 @@ public class AdminBusinessListings extends AppCompatActivity {
                 ValidateProductData();
             }
         });
+
+
+        business_category.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus)
+                    business_category.showDropDown();
+            }
+        });
+         arrayAdapter= new ArrayAdapter(this, android.R.layout.simple_list_item_1, categoryList);
+
     }
+
+    private void fetchbusinessCategorys() {
+        DatabaseReference categorylist = FirebaseDatabase.getInstance().getReference().child("BusinessListing_category");
+        categorylist.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    HashMap<String, Object> dataMap = (HashMap<String, Object>) snapshot.getValue();
+                    for (String key : dataMap.keySet()) {
+                        Object data = dataMap.get(key);
+                        try {
+                            HashMap<String, Object> userData = (HashMap<String, Object>) data;
+                            categoryList.add(userData.get("category"));
+
+                        } catch (ClassCastException cce) {
+                            try {
+                                String mString = String.valueOf(dataMap.get(key));
+                                //addTextToView(mString);
+                            } catch (ClassCastException cce2) {
+
+                            }
+                        }
+                    }
+                    business_category.setAdapter(arrayAdapter);
+                    business_category.setInputType(0);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 
     private void OpenGallery(){
         Intent galleryIntent = new Intent();
@@ -107,6 +170,89 @@ public class AdminBusinessListings extends AppCompatActivity {
         }
     }
 
+    private void StoreProductInformation(Intent data) {
+
+        /*loadingBar.setTitle("Add New Product");
+        loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
+        loadingBar.setCanceledOnTouchOutside(false);
+        loadingBar.show();*/
+        downloadImageUrl ="";
+
+        // If the user selected only one image
+        if (data.getData() != null) {
+            Uri uri = data.getData();
+            uploadTostorage(data,uri);
+        }else if (data.getClipData() != null) {
+            ClipData clipData = data.getClipData();
+            for (int i = 0; i < clipData.getItemCount(); i++) {
+                Uri uri = clipData.getItemAt(i).getUri();
+                uploadTostorage(data,uri);
+            }
+        }
+    }
+
+    private void uploadTostorage(Intent data,Uri uri) {
+        String fileName = getFileName(uri);
+        fileNameList.add(fileName);
+        fileDoneList.add("Uploading");
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd");
+        saveCurrentDate = currentDate.format(calendar.getTime());
+
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm a");
+        saveCurrentTime = currentTime.format(calendar.getTime());
+
+        productRandomKey = saveCurrentDate + saveCurrentTime;
+
+        final StorageReference filePath = ProductImagesRef.child(uri.getLastPathSegment() + productRandomKey + ".jpg");
+
+        final UploadTask uploadTask = filePath.putFile(uri);
+
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                String message = e.toString();
+                Toast.makeText(AdminBusinessListings.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                loadingBar.dismiss();
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Toast.makeText(AdminBusinessListings.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
+                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful()) {
+                            throw task.getException();
+
+                        }
+
+                        return filePath.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+
+                            if(downloadImageUrl.equals("")){
+                                downloadImageUrl =task.getResult().toString();
+                                MainimageUrl = task.getResult().toString();
+                            }else {
+                                downloadImageUrl = downloadImageUrl+"---"+task.getResult().toString();
+                            }
+
+                            System.out.println("url2---"+downloadImageUrl);
+                            Toast.makeText(AdminBusinessListings.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+            }
+        });
+
+    }
+
     private void ValidateProductData() {
 
         Description = InputProductDescription.getText().toString();
@@ -118,6 +264,7 @@ public class AdminBusinessListings extends AppCompatActivity {
         owner = et_ownername.getText().toString();
         email = et_email.getText().toString();
         rating = et_rating.getText().toString();
+        CategoryName = business_category.getText().toString();
 
         if (TextUtils.isEmpty(downloadImageUrl))
         {
@@ -138,90 +285,6 @@ public class AdminBusinessListings extends AppCompatActivity {
         else
         {
             SaveProductInfoToDatabase();
-        }
-    }
-
-    private void StoreProductInformation(Intent data) {
-
-        /*loadingBar.setTitle("Add New Product");
-        loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
-        loadingBar.setCanceledOnTouchOutside(false);
-        loadingBar.show();*/
-
-        downloadImageUrl ="";
-        System.out.println("image5---"+downloadImageUrl);
-        int totalItems = data.getClipData().getItemCount();
-        for (int i = 0; i < totalItems; i++) {
-            Uri fileUri = data.getClipData().getItemAt(i).getUri();
-            String fileName = getFileName(fileUri);
-            fileNameList.add(fileName);
-            fileDoneList.add("Uploading");
-
-            System.out.println("image1---"+downloadImageUrl);
-            System.out.println("count---"+totalItems);
-
-            Calendar calendar = Calendar.getInstance();
-            SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd");
-            saveCurrentDate = currentDate.format(calendar.getTime());
-
-            SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm a");
-            saveCurrentTime = currentTime.format(calendar.getTime());
-
-            productRandomKey = saveCurrentDate + saveCurrentTime;
-
-            final StorageReference filePath = ProductImagesRef.child(fileUri.getLastPathSegment() + productRandomKey + ".jpg");
-
-            final UploadTask uploadTask = filePath.putFile(fileUri);
-
-            uploadTask.addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    String message = e.toString();
-                    Toast.makeText(AdminBusinessListings.this, "Error: " + message, Toast.LENGTH_SHORT).show();
-                    loadingBar.dismiss();
-                }
-            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(AdminBusinessListings.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
-                    Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                        @Override
-                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                            if (!task.isSuccessful()) {
-                                throw task.getException();
-
-                            }
-
-                            System.out.println("url3---"+downloadImageUrl);
-                            // downloadImageUrl = downloadImageUrl+"---"+ filePath.getDownloadUrl().toString();
-                            System.out.println("url1---"+downloadImageUrl);
-                            return filePath.getDownloadUrl();
-                        }
-                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Uri> task) {
-                            if (task.isSuccessful()) {
-
-                                if(downloadImageUrl.equals("")){
-                                    downloadImageUrl =task.getResult().toString();
-                                    MainimageUrl = task.getResult().toString();
-                                }else {
-                                    downloadImageUrl = downloadImageUrl+"---"+task.getResult().toString();
-                                }
-
-                                System.out.println("url2---"+downloadImageUrl);
-                                Toast.makeText(AdminBusinessListings.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
-
-                            }
-                        }
-                    });
-                }
-            });
-
-            if(i==totalItems-1){
-                System.out.println("downloadurl--"+downloadImageUrl);
-                // SaveProductInfoToDatabase();
-            }
         }
     }
 

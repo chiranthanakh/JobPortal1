@@ -1,6 +1,10 @@
 package com.chiranths.jobportal1.Activities.Admin;
 
+import static java.security.AccessController.getContext;
+
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.ClipData;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -8,7 +12,10 @@ import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -36,9 +43,10 @@ import java.util.HashMap;
 public class Admin_layouts_dashboard extends AppCompatActivity {
 
     private static final int GalleryPick = 1;
-    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,propertysize,location,number;
+    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,propertysize,location,number,postedBy;
     private EditText InputProductName,Inputtype,InputProductDescription,InputProductPrice,et_size,et_location,et_number;
-    private Uri ImageUri;
+    private CheckBox cb_posted_owner,cb_posted_broker;
+    private AutoCompleteTextView category;
     private String productRandomKey, downloadImageUrl,MainimageUrl;
     private StorageReference ProductImagesRef;
     private DatabaseReference ProductsRef;
@@ -60,14 +68,38 @@ public class Admin_layouts_dashboard extends AppCompatActivity {
         Button add_new_corosel = findViewById(R.id.add_new_ads);
 
         InputProductName = (EditText) findViewById(R.id.ads_name);
-        Inputtype = (EditText)findViewById(R.id.ads_type_admin);
+        category = findViewById(R.id.ads_type_admin);
         InputProductDescription = (EditText) findViewById(R.id.ads_description);
         InputProductPrice = (EditText) findViewById(R.id.ads_price_admin);
         ads_name = findViewById(R.id.ads_name);
         et_size = findViewById(R.id.ads_size);
         et_location = findViewById(R.id.ads_location_admin);
         et_number = findViewById(R.id.ads_contact_number);
+        cb_posted_owner = findViewById(R.id.cb_posted_owner);
+        cb_posted_broker = findViewById(R.id.cb_posted_broker);
+
         loadingBar = new ProgressDialog(this);
+        postedBy = "owner";
+
+        ArrayList list = new ArrayList();
+        list.add("Site");
+        list.add("site in Layout");
+        list.add("Layout");
+        list.add("form land");
+        list.add("home");
+
+
+        ArrayAdapter arrayAdapter= new ArrayAdapter(this, android.R.layout.simple_list_item_1, list);
+        category.setAdapter(arrayAdapter);
+        category.setInputType(0);
+
+        category.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus)
+                    category.showDropDown();
+            }
+        });
 
         btn_corosel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +116,27 @@ public class Admin_layouts_dashboard extends AppCompatActivity {
                 ValidateProductData();
             }
         });
+
+        cb_posted_owner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(cb_posted_broker.isChecked()){
+                    cb_posted_broker.setChecked(false);
+                    postedBy = "owner";
+                }
+            }
+        });
+
+        cb_posted_broker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(cb_posted_owner.isChecked()){
+                    cb_posted_owner.setChecked(false);
+                    postedBy = "broker";
+                }
+            }
+        });
+
 
     }
 
@@ -102,8 +155,6 @@ public class Admin_layouts_dashboard extends AppCompatActivity {
 
         if (requestCode==GalleryPick  &&  resultCode==RESULT_OK  &&  data!=null)
         {
-            ImageUri = data.getData();
-            //InputProductImage.setImageURI(ImageUri);
             StoreProductInformation(data);
         }
     }
@@ -116,7 +167,7 @@ public class Admin_layouts_dashboard extends AppCompatActivity {
         propertysize = et_size.getText().toString();
         location = et_location.getText().toString();
         number = et_number.getText().toString();
-        CategoryName = Inputtype.getText().toString();
+        CategoryName = category.getText().toString();
 
         if (TextUtils.isEmpty(downloadImageUrl))
         {
@@ -150,84 +201,81 @@ public class Admin_layouts_dashboard extends AppCompatActivity {
         loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();*/
-
         downloadImageUrl ="";
-        System.out.println("image5---"+downloadImageUrl);
-        int totalItems = data.getClipData().getItemCount();
-        for (int i = 0; i < totalItems; i++) {
-            Uri fileUri = data.getClipData().getItemAt(i).getUri();
-            String fileName = getFileName(fileUri);
-            fileNameList.add(fileName);
-            fileDoneList.add("Uploading");
 
-            System.out.println("image1---"+downloadImageUrl);
-            System.out.println("count---"+totalItems);
-
-            Calendar calendar = Calendar.getInstance();
-            SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd");
-            saveCurrentDate = currentDate.format(calendar.getTime());
-
-            SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm a");
-            saveCurrentTime = currentTime.format(calendar.getTime());
-
-            productRandomKey = saveCurrentDate + saveCurrentTime;
-
-            final StorageReference filePath = ProductImagesRef.child(fileUri.getLastPathSegment() + productRandomKey + ".jpg");
-
-            final UploadTask uploadTask = filePath.putFile(fileUri);
-
-            uploadTask.addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    String message = e.toString();
-                    Toast.makeText(Admin_layouts_dashboard.this, "Error: " + message, Toast.LENGTH_SHORT).show();
-                    loadingBar.dismiss();
-                }
-            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(Admin_layouts_dashboard.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
-                    Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                        @Override
-                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                            if (!task.isSuccessful()) {
-                                throw task.getException();
-
-                            }
-
-                            System.out.println("url3---"+downloadImageUrl);
-                            // downloadImageUrl = downloadImageUrl+"---"+ filePath.getDownloadUrl().toString();
-                            System.out.println("url1---"+downloadImageUrl);
-
-                            return filePath.getDownloadUrl();
-                        }
-                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Uri> task) {
-                            if (task.isSuccessful()) {
-
-                                if(downloadImageUrl.equals("")){
-                                    downloadImageUrl =task.getResult().toString();
-                                    MainimageUrl = task.getResult().toString();
-                                }else {
-                                    downloadImageUrl = downloadImageUrl+"---"+task.getResult().toString();
-                                }
-
-                                System.out.println("url2---"+downloadImageUrl);
-                                Toast.makeText(Admin_layouts_dashboard.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
-
-
-                            }
-                        }
-                    });
-                }
-            });
-
-            if(i==totalItems-1){
-                System.out.println("downloadurl--"+downloadImageUrl);
-                // SaveProductInfoToDatabase();
+        // If the user selected only one image
+        if (data.getData() != null) {
+            Uri uri = data.getData();
+            uploadTostorage(data,uri);
+        }else if (data.getClipData() != null) {
+            ClipData clipData = data.getClipData();
+            for (int i = 0; i < clipData.getItemCount(); i++) {
+                Uri uri = clipData.getItemAt(i).getUri();
+                uploadTostorage(data,uri);
             }
         }
+    }
+
+    private void uploadTostorage(Intent data,Uri uri) {
+        String fileName = getFileName(uri);
+        fileNameList.add(fileName);
+        fileDoneList.add("Uploading");
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd");
+        saveCurrentDate = currentDate.format(calendar.getTime());
+
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm a");
+        saveCurrentTime = currentTime.format(calendar.getTime());
+
+        productRandomKey = saveCurrentDate + saveCurrentTime;
+
+        final StorageReference filePath = ProductImagesRef.child(uri.getLastPathSegment() + productRandomKey + ".jpg");
+
+        final UploadTask uploadTask = filePath.putFile(uri);
+
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                String message = e.toString();
+                Toast.makeText(Admin_layouts_dashboard.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                loadingBar.dismiss();
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Toast.makeText(Admin_layouts_dashboard.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
+                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful()) {
+                            throw task.getException();
+
+                        }
+
+                        return filePath.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+
+                            if(downloadImageUrl.equals("")){
+                                downloadImageUrl =task.getResult().toString();
+                                MainimageUrl = task.getResult().toString();
+                            }else {
+                                downloadImageUrl = downloadImageUrl+"---"+task.getResult().toString();
+                            }
+
+                            System.out.println("url2---"+downloadImageUrl);
+                            Toast.makeText(Admin_layouts_dashboard.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+            }
+        });
+
     }
 
     private void SaveProductInfoToDatabase()
@@ -246,6 +294,7 @@ public class Admin_layouts_dashboard extends AppCompatActivity {
         productMap.put("location",location);
         productMap.put("number",number);
         productMap.put("Status", 1);
+        productMap.put("postedBy", postedBy);
 
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
@@ -270,8 +319,7 @@ public class Admin_layouts_dashboard extends AppCompatActivity {
                 });
     }
 
-
-
+    @SuppressLint("Range")
     public String getFileName(Uri uri){
         String result = null;
         if (uri.getScheme().equals("content")){
