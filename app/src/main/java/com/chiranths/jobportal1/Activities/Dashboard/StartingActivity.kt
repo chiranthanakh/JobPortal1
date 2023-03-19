@@ -65,7 +65,7 @@ class StartingActivity : AppCompatActivity() {
     }
 
     private fun initilize() {
-        drawer_layout = findViewById(R.id.drawer_layout_main)
+       // drawer_layout = findViewById(R.id.drawer_layout_main)
         bottomNavShift = findViewById(R.id.bottomNavShift)
         frameLayout = findViewById(R.id.fragment_container)
         bottomNavShift?.setOnItemSelectedListener(NavigationBarView.OnItemSelectedListener { item ->
