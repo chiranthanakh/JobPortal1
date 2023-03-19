@@ -113,7 +113,6 @@
             android:layout_height="80dp">
 
             <LinearLayout
-                android:id="@+id/ll_post_property"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
@@ -207,7 +206,6 @@
             android:layout_height="80dp">
 
             <LinearLayout
-                android:id="@+id/ll_business_posting"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
@@ -248,7 +246,6 @@
             android:layout_height="80dp">
 
             <LinearLayout
-                android:id="@+id/ll_post_constructions"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
@@ -260,14 +257,14 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/construction" />
+                    android:src="@drawable/ic_loans" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:maxLines="2"
-                    android:text="Constructions"
+                    android:text="Product"
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     android:layout_marginTop="5dp"

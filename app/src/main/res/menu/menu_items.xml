@@ -7,12 +7,12 @@
         android:title="Home" />
 
     <item
-        android:id="@+id/it_loan"
+        android:id="@+id/movie_tv"
         android:icon="@drawable/ic_loan_menu"
         android:title="Get Loan" />
 
     <item
-        android:id="@+id/it_property"
+        android:id="@+id/loyalty"
         android:icon="@drawable/ic_property_menu"
         android:title="Property" />
 

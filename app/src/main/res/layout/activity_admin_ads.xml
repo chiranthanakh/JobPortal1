@@ -16,74 +16,73 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/purple_700">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/purple_700">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:gravity="center"
-                    android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tv_user"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="Please enter Property details"
-                        android:textColor="@color/white"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-
-            <ImageView
-                android:id="@+id/select_corosel_image"
-                android:layout_width="100dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:cropToPadding="false"
-                android:scaleType="centerCrop"
-                android:src="@drawable/select_product_image" />
-
-
-            <EditText
-                android:id="@+id/ads_name"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/select_corosel_image"
-                android:layout_marginLeft="45dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginRight="45dp"
-                android:hint="Property name"
-                android:inputType="textMultiLine"
-                android:padding="20dp"
-                android:textColor="#000000"
-                android:textColorHint="#000000" />
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:id="@+id/tv_user"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:text="Please enter Property details"/>
 
-            <AutoCompleteTextView
-                android:id="@+id/ads_type_admin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/ads_name"
-                android:layout_marginLeft="45dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginRight="45dp"
-                android:hint="Category"
-                android:singleLine="true"
-                android:inputType="textMultiLine"
-                android:padding="20dp"
-                android:textColor="#000000"
-                android:textColorHint="#000000" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/select_corosel_image"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:cropToPadding="false"
+        android:scaleType="centerCrop"
+        android:src="@drawable/select_product_image" />
+
+
+    <EditText
+        android:id="@+id/ads_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/select_corosel_image"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="45dp"
+        android:hint="Property name"
+        android:inputType="textMultiLine"
+        android:padding="20dp"
+        android:textColor="#000000"
+        android:textColorHint="#000000" />
+
+    <EditText
+        android:id="@+id/ads_type_admin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ads_name"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="45dp"
+        android:hint="Category"
+        android:inputType="textMultiLine"
+        android:padding="20dp"
+        android:textColor="#000000"
+        android:textColorHint="#000000" />
 
             <EditText
                 android:id="@+id/ads_size"
@@ -98,18 +97,18 @@
                 android:textColorHint="#000000" />
 
 
-            <EditText
-                android:id="@+id/ads_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/ads_size"
-                android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
-                android:hint="discription"
-                android:inputType="textMultiLine"
-                android:padding="20dp"
-                android:textColor="#000000"
-                android:textColorHint="#000000" />
+    <EditText
+        android:id="@+id/ads_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ads_size"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:hint="discription"
+        android:inputType="textMultiLine"
+        android:padding="20dp"
+        android:textColor="#000000"
+        android:textColorHint="#000000" />
 
 
             <EditText
@@ -126,18 +125,18 @@
                 android:textColorHint="#000000" />
 
 
-            <EditText
-                android:id="@+id/ads_location_admin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/ads_price_admin"
-                android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
-                android:hint="location"
-                android:inputType="textMultiLine"
-                android:padding="20dp"
-                android:textColor="#000000"
-                android:textColorHint="#000000" />
+    <EditText
+        android:id="@+id/ads_location_admin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ads_price_admin"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:hint="location"
+        android:inputType="textMultiLine"
+        android:padding="20dp"
+        android:textColor="#000000"
+        android:textColorHint="#000000" />
 
 
             <EditText
@@ -153,18 +152,18 @@
                 android:textColor="#000000"
                 android:textColorHint="#000000" />
 
-            <EditText
-                android:id="@+id/ads_verify_or_nt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/ads_contact_number"
-                android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
-                android:hint="verifyed or nt"
-                android:inputType="textMultiLine"
-                android:padding="20dp"
-                android:textColor="#000000"
-                android:textColorHint="#000000" />
+        <EditText
+            android:id="@+id/ads_verify_or_nt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ads_contact_number"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:hint="verifyed or nt"
+            android:inputType="textMultiLine"
+            android:padding="20dp"
+            android:textColor="#000000"
+            android:textColorHint="#000000" />
 
             <EditText
                 android:id="@+id/ads_text1"
@@ -190,7 +189,6 @@
                 android:padding="20dp"
                 android:textColor="#000000"
                 android:textColorHint="#000000" />
-
             <EditText
                 android:id="@+id/ads_text3"
                 android:layout_width="match_parent"
@@ -217,49 +215,33 @@
                 android:textColor="#000000"
                 android:textColorHint="#000000" />
 
-            <LinearLayout
+            <EditText
+                android:id="@+id/ads_posted_by"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center">
-
-                <CheckBox
-                    android:id="@+id/cb_posted_owner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/ads_text4"
-                    android:text="Owner"
-                    android:checked="true"
-                    android:textColor="#000000"
-                    android:textColorHint="#000000" />
-
-                <CheckBox
-                    android:id="@+id/cb_posted_broker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/ads_text4"
-                    android:text="Broker"
-                    android:padding="20dp"
-                    android:textColor="#000000"
-                    android:textColorHint="#000000" />
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/add_new_ads"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/ads_posted_by"
+                android:layout_below="@+id/ads_text4"
                 android:layout_marginLeft="45dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginRight="45dp"
-                android:background="@drawable/buttons"
-                android:padding="17dp"
-                android:text="NEXT"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textSize="18sp" />
+                android:hint="posted by"
+                android:inputType="textMultiLine"
+                android:padding="20dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000" />
+
+    <Button
+        android:id="@+id/add_new_ads"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ads_posted_by"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="45dp"
+        android:background="@drawable/buttons"
+        android:padding="17dp"
+        android:text="NEXT"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

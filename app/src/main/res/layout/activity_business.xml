@@ -9,15 +9,11 @@
 
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-    <LinearLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/purple_700"
-        android:orientation="horizontal">
+        android:background="@color/grey_light"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/back_toolbar_business"
@@ -31,99 +27,90 @@
             android:src="@drawable/back_arrow"
             app:tint="@color/white" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            android:gravity="center"
+            android:orientation="vertical">
 
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                app:contentInsetStartWithNavigation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:id="@+id/ll_search_business"
+                    android:background="@drawable/edittext_back"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_search"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="13dp"
+                        android:src="@drawable/search_hallow"
+                        app:tint="@color/grey" />
+
+                    <EditText
+                        android:id="@+id/edt_search_vct"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:hint="Search here..."
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey_light"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/iv_search" />
+
+                </LinearLayout>
+            </androidx.appcompat.widget.Toolbar>
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/btn_list_business"
-            android:layout_width="match_parent"
-            android:gravity="end"
-            android:layout_height="wrap_content">
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_30"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:background="@drawable/button_capsule_blue">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="2dp"
-                android:gravity="end"
-                android:background="@color/white"
-                android:text="List \n Business"
-                android:textStyle="bold" />
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+                android:gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="2dp"
+            android:background="?selectableItemBackground"
+            android:padding="5dp"
+            android:textStyle="bold"
+            android:text="List \n your \n Business"
+            android:src="@drawable/back_arrow"
+            app:tint="@color/red" />
 
         </LinearLayout>
+
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/search"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/purple_700">
-
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            app:contentInsetStartWithNavigation="0dp">
-
-            <LinearLayout
-                android:id="@+id/ll_search_business"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/edittext_back"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/iv_search"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:padding="13dp"
-                    android:src="@drawable/ic_search_location"
-                    app:tint="@color/grey" />
-
-                <EditText
-                    android:id="@+id/main_edt_search2"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:gravity="center_vertical"
-                    android:hint="Search by Location..."
-                    android:focusableInTouchMode="false"
-                    android:inputType="none"
-                    android:focusable="false"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/grey_light"
-                    android:textSize="18sp"
-                    android:cursorVisible="false"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/iv_search" />
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginEnd="3dp"
-                    android:background="@drawable/thumb"
-                    android:backgroundTint="@color/purple_500"
-                    android:padding="12dp"
-                    android:src="@drawable/search_hallow"
-                    app:tint="@color/white" />
-
-            </LinearLayout>
-        </androidx.appcompat.widget.Toolbar>
-    </LinearLayout>
-    </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="60dp"
         android:background="#f9f9f9"
         android:orientation="vertical">
 
@@ -150,52 +137,71 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp_20"
-                        android:layout_marginTop="@dimen/margin_10dp"
-                        android:text="Business Categorys"
-                        android:textColor="@color/purple_700"
                         android:textSize="15dp"
-                        android:textStyle="italic" />
+                        android:layout_marginTop="@dimen/margin_10dp"
+                        android:textColor="@color/purple_700"
+                        android:textStyle="italic"
+                        android:text="Business Categorys"/>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/id_gridview"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_10dp"
+                        android:layout_height="200dp"
                         android:horizontalSpacing="6dp"
+                        android:layout_marginTop="@dimen/margin_10dp"
                         android:numColumns="4"
                         android:verticalSpacing="6dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginEnd="5dp"
                         android:orientation="horizontal"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginTop="25dp"
                         app:layout_constraintTop_toBottomOf="@id/loan_corosel">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/dp_20"
-                            android:text="Top Search"
-                            android:textColor="@color/purple_700"
                             android:textSize="15dp"
-                            android:textStyle="italic" />
+                            android:textColor="@color/purple_700"
+                            android:textStyle="italic"
+                            android:text="Top Search"/>
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_business"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
                         android:clipToPadding="false"
-                        android:paddingBottom="45dp" />
+                        android:layout_marginTop="25dp"
+                        android:paddingBottom="45dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                 </LinearLayout>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_add_Business"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/button_capsule_blue"
+        android:text="List your business"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+    </androidx.appcompat.widget.AppCompatButton>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
