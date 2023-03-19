@@ -27,7 +27,7 @@
                 android:layout_gravity="center_vertical"
                 android:background="?selectableItemBackground"
                 android:padding="15dp"
-                android:src="@drawable/back_arrow"
+                android:src="@drawable/back_arrow_new"
                 app:tint="@color/white" />
 
             <TextView

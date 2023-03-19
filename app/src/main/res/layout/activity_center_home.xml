@@ -23,7 +23,7 @@
             android:layout_marginTop="2dp"
             android:background="?selectableItemBackground"
             android:padding="5dp"
-            android:src="@drawable/back_arrow"
+            android:src="@drawable/back_arrow_new"
             app:tint="@color/white" />
 
         <LinearLayout
