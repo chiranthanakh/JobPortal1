@@ -96,7 +96,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     private DatabaseReference CallerRef;
     final int speedScroll = 150;
     final Handler handler = new Handler();
-    ImageView iv_nav_view, iv_bell;
+    ImageView  iv_bell;
 
     private ArrayList<NoticeBoard> noticeBoardList = new ArrayList<>();
     RecyclerView recyclerView, recyclarviewads, recyclar_Layouts;
@@ -126,7 +126,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.starting_fragment, container, false);
+        return inflater.inflate(R.layout.dashboard_fragment, container, false);
     }
 
     @Override
@@ -147,8 +147,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
     private void initilize(View view) {
         iv_bell = view.findViewById(R.id.iv_bell);
-        iv_nav_view = view.findViewById(R.id.iv_nav_view);
-        iv_nav_view.setOnClickListener(this);
+
         iv_bell.setOnClickListener(this);
         cv_jobs = view.findViewById(R.id.cv_jobs);
         cv_servicess = view.findViewById(R.id.cv_servicess1);
