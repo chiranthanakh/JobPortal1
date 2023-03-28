@@ -5,7 +5,9 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
 import android.widget.FrameLayout
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.chiranths.jobportal1.Activities.LoanActivity.LoanFragment
 import com.chiranths.jobportal1.Activities.Profile.ProfileFragments
@@ -14,8 +16,6 @@ import com.chiranths.jobportal1.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.google.android.play.core.install.model.AppUpdateType
-import com.google.android.play.core.install.model.UpdateAvailability
 import java.text.DateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -29,6 +29,8 @@ class StartingActivity : AppCompatActivity() {
     var frameLayout: FrameLayout? = null
     var drawer_layout: DrawerLayout? = null
     var progressDialog: ProgressDialog? = null
+    var iv_drawer_nav: ImageView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_starting)
@@ -51,6 +53,8 @@ class StartingActivity : AppCompatActivity() {
         // Initialize the AppUpdateManager instance
         val appUpdateManager = AppUpdateManagerFactory.create(this)
 
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -65,7 +69,14 @@ class StartingActivity : AppCompatActivity() {
     }
 
     private fun initilize() {
-       // drawer_layout = findViewById(R.id.drawer_layout_main)
+        drawer_layout = findViewById(R.id.drawer_layout_main_d)
+
+        iv_drawer_nav = findViewById<ImageView>(R.id.iv_drawer_nav)
+
+        iv_drawer_nav?.setOnClickListener{
+            drawer_layout!!.openDrawer(GravityCompat.START)
+        }
+
         bottomNavShift = findViewById(R.id.bottomNavShift)
         frameLayout = findViewById(R.id.fragment_container)
         bottomNavShift?.setOnItemSelectedListener(NavigationBarView.OnItemSelectedListener { item ->
