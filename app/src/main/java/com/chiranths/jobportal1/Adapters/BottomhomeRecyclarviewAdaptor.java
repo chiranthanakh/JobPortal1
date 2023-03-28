@@ -23,6 +23,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.chiranths.jobportal1.Activities.OtpLoginActivity;
 import com.chiranths.jobportal1.Model.ProductInfo;
 import com.chiranths.jobportal1.Activities.BasicActivitys.UserDetailsActivity;
 import com.chiranths.jobportal1.Activities.HotDealsactivity.HotDealsDetailsActivity;
@@ -88,11 +89,9 @@ public class BottomhomeRecyclarviewAdaptor extends RecyclerView.Adapter<Bottomho
         holder.iv_call_bottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 //check permition
                 String permission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
                 int res = context.checkCallingOrSelfPermission(permission);
-                if (res == PackageManager.PERMISSION_GRANTED) {
                 SharedPreferences sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
                 String nameofuser = sh.getString("name", "");
                 String userNumber = sh.getString("number", "");
@@ -104,12 +103,17 @@ public class BottomhomeRecyclarviewAdaptor extends RecyclerView.Adapter<Bottomho
                     calldetails.callinfo(userNumber, nameofuser, cnumber, cname);
                     Intent callIntent = new Intent(Intent.ACTION_CALL);
                     callIntent.setData(Uri.parse("tel:" + productInfo.getNumber()));
-                    context.startActivity(callIntent);
+                    if (ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.CALL_PHONE},100);
+                    }
+                    else
+                    {
+                        context.startActivity(callIntent);
+                    }
                 } else {
-                    Intent intent = new Intent(context, UserDetailsActivity.class);
-                    context.startActivity(intent);
+                        Intent intent = new Intent(context, OtpLoginActivity.class);
+                        context.startActivity(intent);
                 }
-            }
             }
         });
 
@@ -133,14 +137,14 @@ public class BottomhomeRecyclarviewAdaptor extends RecyclerView.Adapter<Bottomho
                         context.startActivity(i);
                         calldetails.callinfo(userNumber, nameofuser, productInfo.getNumber(), productInfo.getPname());
                     } else {
-                        if (ContextCompat.checkSelfPermission(context, CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-                            Intent intent = new Intent(context, UserDetailsActivity.class);
+                        //if (ContextCompat.checkSelfPermission(context, CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                            Intent intent = new Intent(context, OtpLoginActivity.class);
                             context.startActivity(intent);
-                        } else {
+                      /*  } else {
                             ActivityCompat.requestPermissions((Activity) context,
                                     new String[]{Manifest.permission.CALL_PHONE},
                                     1);
-                        }
+                        }*/
                     }
                 }
             }

@@ -86,7 +86,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             setTheme(R.style.JobPortaltheam); //default app theme
         }
 
-
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = this.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -224,9 +223,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         coroselimage.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 if (snapshot.exists()){
-
                     HashMap<String, Object> dataMap = (HashMap<String, Object>) snapshot.getValue();
                     for (String key : dataMap.keySet()){
                         Object data = dataMap.get(key);
@@ -243,7 +240,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                                     +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type"));
 
                             if(userData.get("type").equals("sites")){
-
                                 siteslist.add(userData.get("type")+"!!"+userData.get("pid")+"---"+userData.get("description")+"---"+
                                         userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
                                         +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type"));
@@ -256,14 +252,12 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
 
                             }else if(userData.get("type").equals("greenland")){
-
                                 greenlandlist.add(userData.get("image")+"!!"+userData.get("pid")+"---"+userData.get("description")+"---"+
                                         userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
                                         +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type"));
 
 
                             }else if(userData.get("type").equals("rental")){
-
                                 Rentallist.add(userData.get("image")+"!!"+userData.get("pid")+"---"+userData.get("description")+"---"+
                                         userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
                                         +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type"));
@@ -311,7 +305,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 if (snapshot.exists()){
-
                     HashMap<String, Object> dataMap = (HashMap<String, Object>) snapshot.getValue();
                     for (String key : dataMap.keySet()){
                         Object data = dataMap.get(key);

@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
 
     <application
         android:allowBackup="true"
@@ -19,7 +20,10 @@
         android:supportsRtl="true"
         android:theme="@style/JobPortaltheam">
         <activity
-            android:name=".BusinessFilter"
+            android:name=".Activities.Construction.ConstructionListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Businesthings.BusinessFilter"
             android:exported="false" />
         <activity
             android:name=".ConstructionAdaptor"
@@ -63,6 +67,9 @@
             android:name=".Admin_loanoffers"
             android:exported="false" />
         <activity
+            android:name=".Activities.OtpLoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.LoanActivity.LoanFormfirst"
             android:exported="false" />
         <activity
@@ -78,7 +85,7 @@
             android:name=".Activities.Admin.Admin_travels"
             android:exported="false" />
         <activity
-            android:name=".Activities.BasicActivitys.ConstructionActivity"
+            android:name=".Activities.Construction.ConstructionActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.BasicActivitys.Travelsactivity"
@@ -146,6 +153,7 @@
         <activity
             android:name=".Activities.Servicess.ServicesActivity"
             android:exported="false" />
+
         <service
             android:name=".myFirebaseMessagingServices"
             android:exported="false">
@@ -153,6 +161,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <activity
             android:name=".Activities.Propertys.PropertyActivity"
             android:exported="false" />
