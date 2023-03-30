@@ -91,7 +91,6 @@ public class Admin_Construction extends AppCompatActivity {
         list.add("Carpenters");
         list.add("Electrician");
         list.add("Plumber");
-        list.add("Painters");
 
         ArrayAdapter arrayAdapter= new ArrayAdapter(this, android.R.layout.simple_list_item_1, list);
         edt_construction_category.setAdapter(arrayAdapter);

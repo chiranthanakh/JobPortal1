@@ -37,7 +37,7 @@ import androidx.recyclerview.widget.SnapHelper;
 
 import com.chiranths.jobportal1.Activities.Admin.AdminDashboard;
 import com.chiranths.jobportal1.Activities.BasicActivitys.CenterHomeActivity;
-import com.chiranths.jobportal1.Activities.BasicActivitys.ConstructionActivity;
+import com.chiranths.jobportal1.Activities.Construction.ConstructionActivity;
 import com.chiranths.jobportal1.Activities.BasicActivitys.LivingPlaceActivity;
 import com.chiranths.jobportal1.Activities.BasicActivitys.LoginActivity;
 import com.chiranths.jobportal1.Activities.BasicActivitys.Travelsactivity;
