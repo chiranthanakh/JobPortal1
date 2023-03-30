@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/category_back.xml" value="0.1265" />
+        <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/rating_back.xml" value="0.1265" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_admin.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_admin_add_new_product.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_admin_ads.xml" value="0.22" />
@@ -17,7 +19,7 @@
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_admin_property_approval.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_admincoroselimages.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_ads_details.xml" value="0.17552083333333332" />
-        <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_business.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_business.xml" value="0.22" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_business_details.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_business_filter.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_center_home.xml" value="0.17552083333333332" />
@@ -58,7 +60,7 @@
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/admin_product_items_layout.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/admin_travel.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/ads_recyclarview_layout.xml" value="0.17552083333333332" />
-        <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/business_gridlayout_adaptor.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/business_gridlayout_adaptor.xml" value="0.22" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/business_items_layout.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/center_carousel_item.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/custom_notification.xml" value="0.17552083333333332" />

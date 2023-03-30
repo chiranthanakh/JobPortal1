@@ -144,8 +144,8 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
                             }
                         }
                     }
-                    // RecyclerView.LayoutManager nlayoutManager1 = new LinearLayoutManager(BusinessActivity.this, RecyclerView.VERTICAL, false);
-                    GridLayoutManager nlayoutManager1 = new GridLayoutManager(BusinessActivity.this, 5);
+                     //RecyclerView.LayoutManager nlayoutManager1 = new LinearLayoutManager(BusinessActivity.this, RecyclerView.HORIZONTAL, false);
+                    GridLayoutManager nlayoutManager1 = new GridLayoutManager(BusinessActivity.this, 3);
                     gridView.setLayoutManager(nlayoutManager1);
                     gridView.setItemAnimator(new DefaultItemAnimator());
                     businesscatAdaptor = new BusinessCategoryAdaptor(categorylists, BusinessActivity.this);

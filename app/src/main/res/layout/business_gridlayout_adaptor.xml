@@ -1,45 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:id="@+id/ll_bus_category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="5dp"
         android:gravity="center"
-        android:paddingTop="@dimen/margin_10dp"
-        android:orientation="vertical"
-        tools:ignore="MissingConstraints">
+        android:orientation="horizontal">
 
         <ImageView
+            android:visibility="gone"
             android:id="@+id/iv_grid_image"
-            android:layout_width="40dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="30dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:adjustViewBounds="true"
-            android:src="@drawable/user"
-            android:visibility="gone" />
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:src="@drawable/user" />
 
         <TextView
+            android:background="@drawable/rating_back"
             android:id="@+id/tv_business_category"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/proxima_family"
-            android:text="Construction"
-            android:textStyle="bold"
-            android:padding="@dimen/margin_10dp"
-            android:textColor="@color/grey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:fontFamily="@font/proxima_nova_bold"
+            android:text="Construction Construction"
+            android:textColor="@color/white"
             android:textSize="14sp" />
 
-        </androidx.cardview.widget.CardView>
     </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -9,6 +9,7 @@
 
 
     <LinearLayout
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -27,11 +28,9 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="2dp"
             android:background="?selectableItemBackground"
-            android:padding="5dp"
+            android:padding="2dp"
             android:src="@drawable/back_arrow"
             app:tint="@color/white" />
-
-
 
         <LinearLayout
             android:id="@+id/btn_list_business"
@@ -45,9 +44,8 @@
                 android:layout_gravity="end"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="2dp"
-                android:gravity="end"
                 android:background="@color/white"
-                android:text="List \n Business"
+                android:text="List Business"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -149,27 +147,26 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_20"
-                        android:layout_marginTop="@dimen/margin_10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
                         android:text="Business Categorys"
-                        android:textColor="@color/purple_700"
-                        android:textSize="15dp"
-                        android:textStyle="italic" />
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                         android:fontFamily="@font/proxima_nova_semi_bold"/>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/id_gridview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_10dp"
+                        android:layout_marginTop="5dp"
                         android:horizontalSpacing="6dp"
-                        android:numColumns="4"
                         android:verticalSpacing="6dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
-                        android:layout_marginTop="25dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginEnd="5dp"
                         android:orientation="horizontal"
                         app:layout_constraintTop_toBottomOf="@id/loan_corosel">
@@ -177,11 +174,11 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/dp_20"
+                            android:layout_marginStart="10dp"
                             android:text="Top Search"
-                            android:textColor="@color/purple_700"
-                            android:textSize="15dp"
-                            android:textStyle="italic" />
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:fontFamily="@font/proxima_nova_semi_bold" />
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
