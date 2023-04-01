@@ -3,15 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/architect.xml" value="0.127" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/auto.xml" value="0.127" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/bg_buttons.xml" value="0.133" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/bus.xml" value="0.127" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/button_shape.xml" value="0.133" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/car.xml" value="0.127" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/category_back.xml" value="0.1265" />
+        <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/cons.xml" value="0.127" />
+        <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/electrician.xml" value="0.127" />
+        <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/hardware.xml" value="0.127" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/heavyV.xml" value="0.127" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/ic_job.xml" value="0.127" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/ic_power.xml" value="0.127" />
+        <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/painter.xml" value="0.127" />
+        <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/plumber.xml" value="0.127" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/rating_back.xml" value="0.1265" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/tempo.xml" value="0.127" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/transport.xml" value="0.127" />
@@ -33,7 +39,7 @@
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_business_details.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_business_filter.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_center_home.xml" value="0.17552083333333332" />
-        <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_construction.xml" value="0.22" />
+        <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_construction.xml" value="0.1" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_construction_adaptor.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_construction_list.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_corosel_details.xml" value="0.17552083333333332" />

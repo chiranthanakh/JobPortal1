@@ -77,19 +77,17 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_job" />
+                    android:src="@drawable/contractors" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/proxima_nova_semi_bold"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/proxima_nova_bold"
                     android:gravity="center"
-                    android:maxLines="2"
                     android:text="Contractors"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
@@ -117,23 +115,21 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_service" />
+                    android:src="@drawable/architect" />
 
                 <TextView
                     android:id="@+id/cd_meterials"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:maxLines="2"
                     android:text="Architect"
                     android:textColor="@color/black"
                     android:textSize="12sp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/proxima_nova_semi_bold"/>
+                    android:fontFamily="@font/proxima_nova_bold"/>
 
             </LinearLayout>
 
@@ -157,22 +153,20 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_homelo" />
+                    android:src="@drawable/interior" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:maxLines="2"
                     android:text="Interior Designers"
                     android:textColor="@color/black"
                     android:textSize="12sp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/proxima_nova_semi_bold"/>
+                    android:fontFamily="@font/proxima_nova_bold"/>
 
             </LinearLayout>
 
@@ -209,20 +203,18 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_job" />
+                    android:src="@drawable/material" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/proxima_nova_semi_bold"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/proxima_nova_bold"
                     android:gravity="center"
-                    android:maxLines="2"
-                    android:text="Construction Meterials"
+                    android:text="Construction Materials"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -249,22 +241,20 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_service" />
+                    android:src="@drawable/hardware" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:maxLines="2"
-                    android:text="Hardwares / Welders"
+                    android:text="hardware / Welders"
                     android:textColor="@color/black"
                     android:textSize="12sp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/proxima_nova_semi_bold"/>
+                    android:fontFamily="@font/proxima_nova_bold"/>
 
             </LinearLayout>
 
@@ -288,22 +278,20 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_homelo" />
+                    android:src="@drawable/painter" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:maxLines="2"
                     android:text="Painters"
                     android:textColor="@color/black"
                     android:textSize="12sp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/proxima_nova_semi_bold"/>
+                    android:fontFamily="@font/proxima_nova_bold"/>
 
             </LinearLayout>
 
@@ -340,22 +328,20 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_transport" />
+                    android:src="@drawable/carpenter" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:maxLines="2"
                     android:text="Carpenters"
                     android:textColor="@color/black"
                     android:textSize="12sp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/proxima_nova_semi_bold"/>
+                    android:fontFamily="@font/proxima_nova_bold"/>
 
             </LinearLayout>
 
@@ -380,22 +366,20 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_loans" />
+                    android:src="@drawable/electrician" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:maxLines="2"
                     android:text="Electrician"
                     android:textColor="@color/black"
                     android:textSize="12sp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/proxima_nova_semi_bold"/>
+                    android:fontFamily="@font/proxima_nova_bold"/>
             </LinearLayout>
 
 
@@ -420,22 +404,20 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_construction" />
+                    android:src="@drawable/plumber" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:maxLines="2"
                     android:text="Plumber"
                     android:textColor="@color/black"
                     android:textSize="12sp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/proxima_nova_semi_bold"/>
+                    android:fontFamily="@font/proxima_nova_bold"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -446,7 +428,7 @@
         android:id="@+id/ll_field"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/seckondrow">
 
@@ -454,16 +436,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Deals for you"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/black"
+            android:fontFamily="@font/proxima_nova_bold"
             android:textStyle="bold"
-            android:layout_marginStart="@dimen/dp_20"/>
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_constructions_relates"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="10dp"
             android:paddingBottom="45dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
