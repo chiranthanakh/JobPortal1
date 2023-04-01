@@ -127,13 +127,14 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="5dp"
                         android:layout_marginStart="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginEnd="10dp"
                         android:orientation="horizontal"
                         android:background="@drawable/customborder"
                         android:layout_gravity="end"
-                        android:gravity="center"
-                        android:layout_marginEnd="10dp">
+                        android:gravity="center">
 
                         <TextView
                             android:layout_width="wrap_content"

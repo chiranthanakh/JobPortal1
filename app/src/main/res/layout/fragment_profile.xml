@@ -365,53 +365,45 @@
 
     </LinearLayout>
 
-    <LinearLayout
 
-        android:layout_marginTop="10dp"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
+        android:layout_height="1dp"
+        android:background="@color/grey_very_light"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"/>
 
         <LinearLayout
             android:id="@+id/ll_logout"
-            android:padding="8dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="3dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            android:padding="10dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_chat" />
 
             <TextView
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
                 android:layout_weight="1"
                 android:text="Logout"
                 android:gravity="center_vertical"
                 android:layout_gravity="center"
-                android:paddingStart="10dp"
+                android:fontFamily="@font/proxima_nova_bold"
+                android:textSize="18sp"
                 android:textColor="@color/black"
                 android:background="?selectableItemBackground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <ImageView
+                android:id="@+id/iv_log"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_next"
+                android:src="@drawable/ic_power"
                 app:tint="@color/grey" />
 
         </LinearLayout>
 
-
-
-    </LinearLayout>
 
 
 

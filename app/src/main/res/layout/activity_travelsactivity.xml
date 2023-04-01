@@ -76,19 +76,17 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="45dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_job" />
+                    android:src="@drawable/car" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/proxima_nova_semi_bold"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/proxima_nova_bold"
                     android:gravity="center"
-                    android:maxLines="2"
                     android:text="Car"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
@@ -116,22 +114,20 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="45dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_service" />
+                    android:src="@drawable/tempo" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:maxLines="2"
                     android:text="Tempo Travel"
                     android:textColor="@color/black"
                     android:textSize="12sp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/proxima_nova_semi_bold"/>
+                    android:fontFamily="@font/proxima_nova_bold"/>
 
             </LinearLayout>
 
@@ -155,22 +151,20 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="45dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_homelo" />
+                    android:src="@drawable/bus" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:maxLines="2"
                     android:text="Bus"
                     android:textColor="@color/black"
                     android:textSize="12sp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/proxima_nova_semi_bold"/>
+                    android:fontFamily="@font/proxima_nova_bold"/>
 
             </LinearLayout>
 
@@ -210,22 +204,20 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="45dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_transport" />
+                    android:src="@drawable/auto" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:maxLines="2"
                     android:text="Auto"
                     android:textColor="@color/black"
                     android:textSize="12sp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/proxima_nova_semi_bold"/>
+                    android:fontFamily="@font/proxima_nova_bold"/>
 
             </LinearLayout>
 
@@ -250,22 +242,20 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="45dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_loans" />
+                    android:src="@drawable/transport" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:maxLines="2"
-                    android:text="Transforts"
+                    android:text="Transport"
                     android:textColor="@color/black"
                     android:textSize="12sp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/proxima_nova_semi_bold"/>
+                    android:fontFamily="@font/proxima_nova_bold"/>
 
             </LinearLayout>
 
@@ -290,22 +280,21 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="45dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_construction" />
+                    android:src="@drawable/heavy_ve" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center"
                     android:maxLines="2"
-                    android:text="Heavy Vaicles"
+                    android:text="Heavy Vehicle"
                     android:textColor="@color/black"
                     android:textSize="12sp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/proxima_nova_semi_bold"/>
+                    android:fontFamily="@font/proxima_nova_bold"/>
 
             </LinearLayout>
 
@@ -317,18 +306,16 @@
         android:id="@+id/ll_field"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/seckondrow"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/seckondrow">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_travels"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="5dp"
             android:paddingBottom="45dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 

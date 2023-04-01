@@ -154,6 +154,7 @@
             android:name=".Activities.Servicess.ServicesActivity"
             android:exported="false" />
 
+
         <service
             android:name=".myFirebaseMessagingServices"
             android:exported="false">

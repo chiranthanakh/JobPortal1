@@ -1,6 +1,7 @@
 package com.chiranths.jobportal1.Activities.Profile
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
@@ -15,33 +17,40 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.chiranths.jobportal1.Adapters.BottomhomeRecyclarviewAdaptor
+import com.chiranths.jobportal1.Activities.Dashboard.StartingActivity
 import com.chiranths.jobportal1.Adapters.ProfilePostingListings
 import com.chiranths.jobportal1.Model.ProductInfo
 import com.chiranths.jobportal1.R
 import com.google.firebase.database.*
 import de.hdodenhof.circleimageview.CircleImageView
 
-class ProfileFragments : Fragment(), View.OnClickListener {
+class ProfileFragments : Fragment() {
     private var ProductsRef: DatabaseReference? = null
     private var iv_profile_image: CircleImageView? = null
     private var tv_name: TextView? = null
     private var tv_email: TextView? = null
     private var iv_edit: ImageView? = null
     private var rv_my_postings : RecyclerView? = null
-    private var ll_logout: LinearLayout? = null
+
     private lateinit var nameofuser : String
     private lateinit var userNumber : String
     private lateinit var useremail : String
 
     var productinfolist: ArrayList<ProductInfo?> = ArrayList<ProductInfo?>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.activity_profile, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    {
+        val view =  inflater.inflate(R.layout.fragment_profile, container, false)
+
+        initilize(view)
+
+
+
+
+
+
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,7 +59,7 @@ class ProfileFragments : Fragment(), View.OnClickListener {
          nameofuser = sh?.getString("name", "")!!
          userNumber = sh?.getString("number", "")!!
          useremail = sh?.getString("email", "")!!
-        initilize(view)
+
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -59,18 +68,28 @@ class ProfileFragments : Fragment(), View.OnClickListener {
         tv_name = view.findViewById(R.id.tv_profile_name)
         tv_email = view.findViewById(R.id.tv_profile_email)
         iv_edit = view.findViewById(R.id.iv_edit)
-        ll_logout = view.findViewById(R.id.ll_logout)
+        val ll_logout = view.findViewById<LinearLayout>(R.id.ll_logout)
+
         rv_my_postings = view.findViewById(R.id.rv_my_postings)
         fetchProfile()
         fetchdata()
-        ll_logout?.setOnClickListener(View.OnClickListener { view1: View? ->
+
+        ll_logout.setOnClickListener {
+
             val sh = context?.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
             val editor = sh?.edit()
             editor?.clear()
             editor?.apply()
             val ft = fragmentManager?.beginTransaction()
             ft?.detach(this)?.attach(this)?.commit()
-        })
+
+            val intent= Intent(activity,StartingActivity::class.java)
+            startActivity(intent)
+
+        }
+
+
+
     }
 
     private fun fetchProfile() {
@@ -167,8 +186,4 @@ class ProfileFragments : Fragment(), View.OnClickListener {
         })
     }
 
-
-
-
-    override fun onClick(view: View) {}
 }
