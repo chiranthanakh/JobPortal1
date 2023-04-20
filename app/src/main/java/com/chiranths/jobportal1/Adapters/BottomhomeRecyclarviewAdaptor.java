@@ -76,79 +76,18 @@ public class BottomhomeRecyclarviewAdaptor extends RecyclerView.Adapter<Bottomho
 
         //holder.tv_btn_call_hot.setText("");
 
-        holder.cv_deals.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent =new Intent(context, HotDealsDetailsActivity.class);
-                intent.putExtra("pid",productInfo.getPid());
-                context.startActivity(intent);
-            }
+        holder.cv_deals.setOnClickListener(view -> {
+            Intent intent =new Intent(context, HotDealsDetailsActivity.class);
+            intent.putExtra("pid",productInfo.getPid());
+            context.startActivity(intent);
         });
 
         //calling function
-        holder.iv_call_bottom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //check permition
-                String permission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-                int res = context.checkCallingOrSelfPermission(permission);
-                SharedPreferences sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-                String nameofuser = sh.getString("name", "");
-                String userNumber = sh.getString("number", "");
-                String useremail = sh.getString("email", "");
-
-                String cnumber = productInfo.getNumber();
-                String cname = productInfo.getPname();
-                if (!userNumber.equals("")) {
-                    calldetails.callinfo(userNumber, nameofuser, cnumber, cname);
-                    Intent callIntent = new Intent(Intent.ACTION_CALL);
-                    callIntent.setData(Uri.parse("tel:" + productInfo.getNumber()));
-                    if (ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.CALL_PHONE},100);
-                    }
-                    else
-                    {
-                        context.startActivity(callIntent);
-                    }
-                } else {
-                        Intent intent = new Intent(context, OtpLoginActivity.class);
-                        context.startActivity(intent);
-                }
-            }
-        });
+        holder.iv_call_bottom.setOnClickListener(view -> utilitys.navigateCall(context,productInfo.getNumber(),productInfo.getPname()));
 
         //whatsapp function
-        holder.iv_whatsapp_bottom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String permission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-                int res = context.checkCallingOrSelfPermission(permission);
-                if (res == PackageManager.PERMISSION_GRANTED) {
-                    SharedPreferences sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-                    String nameofuser = sh.getString("name", "");
-                    String userNumber = sh.getString("number", "");
-                    String useremail = sh.getString("email", "");
-
-                    if (!userNumber.equals("")) {
-                        String url = "https://api.whatsapp.com/send?phone=" + "91" + productInfo.getNumber();
-                        Intent i = new Intent(Intent.ACTION_VIEW);
-                        i.setData(Uri.parse(url));
-                        context.startActivity(i);
-                        calldetails.callinfo(userNumber, nameofuser, productInfo.getNumber(), productInfo.getPname());
-                    } else {
-                        //if (ContextCompat.checkSelfPermission(context, CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-                            Intent intent = new Intent(context, OtpLoginActivity.class);
-                            context.startActivity(intent);
-                      /*  } else {
-                            ActivityCompat.requestPermissions((Activity) context,
-                                    new String[]{Manifest.permission.CALL_PHONE},
-                                    1);
-                        }*/
-                    }
-                }
-            }
-        });
+        holder.iv_whatsapp_bottom.setOnClickListener(view ->
+                utilitys.navigateWhatsapp(context,productInfo.getNumber(),productInfo.getPname()));
     }
 
     @Override

@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.chiranths.jobportal1.Model.ConstructionModel;
 import com.chiranths.jobportal1.Model.TravelsModel;
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class ConstructorAdaptor extends RecyclerView.Adapter<ConstructorAdaptor.
     private List<ConstructionModel> productInfos;
     private Context context;
     private String number, name;
-
+    Utilitys utilitys = new Utilitys();
 
     public ConstructorAdaptor(List<ConstructionModel> productInfos, Context context) {
         this.productInfos = productInfos;
@@ -59,12 +60,13 @@ public class ConstructorAdaptor extends RecyclerView.Adapter<ConstructorAdaptor.
         holder.tv_cost_km.setText(productInfo.getContactDetails());
         holder.tv_vehicle_number.setText(productInfo.getCost());
 
-        holder.btn_vehicle_contact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               // Intent intent = new Intent(context, LoanForm.class);
-               // context.startActivity(intent);
-            }
+        holder.iv_const_whatsapp_bottom.setOnClickListener(view -> {
+            utilitys.navigateCall(context,productInfo.getContactDetails(),productInfo.getName());
+        });
+
+        holder.iv_const_whatsapp_bottom.setOnClickListener(view -> {
+            utilitys.navigateWhatsapp(context,productInfo.getContactDetails(),productInfo.getName());
+
         });
 
 
@@ -77,10 +79,7 @@ public class ConstructorAdaptor extends RecyclerView.Adapter<ConstructorAdaptor.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView iv_vehicle_image;
-        CardView cv_deals;
-        private LinearLayout btn_applayLoan;
-        LinearLayout btn_vehicle_contact;
+        ImageView iv_vehicle_image,iv_const_whatsapp_bottom,iv_const_call_bottom;
         TextView travel_vehicle_name,tv_travel_category,tv_cost_km,tv_vehicle_number,tv_discription;
 
         public ViewHolder(@NonNull View itemView) {
@@ -90,7 +89,8 @@ public class ConstructorAdaptor extends RecyclerView.Adapter<ConstructorAdaptor.
             tv_cost_km = itemView.findViewById(R.id.tv_cost_km);
             tv_vehicle_number = itemView.findViewById(R.id.tv_vehicle_number);
             iv_vehicle_image = itemView.findViewById(R.id.iv_vehicle_image);
-            btn_vehicle_contact = itemView.findViewById(R.id.btn_vehicle_contact);
+            iv_const_whatsapp_bottom = itemView.findViewById(R.id.iv_const_whatsapp_bottom);
+            iv_const_call_bottom = itemView.findViewById(R.id.iv_const_call_bottom);
         }
     }
 

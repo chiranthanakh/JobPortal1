@@ -21,6 +21,7 @@ import com.chiranths.jobportal1.Activities.LoanActivity.LoanForm;
 import com.chiranths.jobportal1.Model.LoanOffersModel;
 import com.chiranths.jobportal1.Model.TravelsModel;
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class TravelsAdaptor extends RecyclerView.Adapter<TravelsAdaptor.ViewHold
     private List<TravelsModel> productInfos;
     private Context context;
     private String number, name;
-
+    Utilitys utilitys = new Utilitys();
 
     public TravelsAdaptor(List<TravelsModel> productInfos, Context context) {
         this.productInfos = productInfos;
@@ -63,15 +64,14 @@ public class TravelsAdaptor extends RecyclerView.Adapter<TravelsAdaptor.ViewHold
         holder.tv_cost_km.setText(productInfo.getCostperKM());
         holder.tv_vehicle_number.setText(productInfo.getVehicleNumber());
 
-        holder.btn_vehicle_contact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               // Intent intent = new Intent(context, LoanForm.class);
-               // context.startActivity(intent);
-            }
+        holder.iv_const_whatsapp_bottom.setOnClickListener(view -> {
+            utilitys.navigateCall(context,productInfo.getContactDetails(),productInfo.getOwnerName());
         });
 
+        holder.iv_const_whatsapp_bottom.setOnClickListener(view -> {
+            utilitys.navigateWhatsapp(context,productInfo.getContactDetails(),productInfo.getOwnerName());
 
+        });
     }
 
     @Override
@@ -81,7 +81,7 @@ public class TravelsAdaptor extends RecyclerView.Adapter<TravelsAdaptor.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView iv_vehicle_image;
+        ImageView iv_vehicle_image,iv_const_whatsapp_bottom,iv_const_call_bottom;
         CardView cv_deals;
         private LinearLayout btn_applayLoan;
         LinearLayout btn_vehicle_contact;
@@ -94,7 +94,8 @@ public class TravelsAdaptor extends RecyclerView.Adapter<TravelsAdaptor.ViewHold
             tv_cost_km = itemView.findViewById(R.id.tv_cost_km);
             tv_vehicle_number = itemView.findViewById(R.id.tv_vehicle_number);
             iv_vehicle_image = itemView.findViewById(R.id.iv_vehicle_image);
-            btn_vehicle_contact = itemView.findViewById(R.id.btn_vehicle_contact);
+            iv_const_whatsapp_bottom = itemView.findViewById(R.id.iv_const_whatsapp_bottom);
+            iv_const_call_bottom = itemView.findViewById(R.id.iv_const_call_bottom);
         }
     }
 

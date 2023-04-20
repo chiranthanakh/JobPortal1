@@ -163,7 +163,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         search.setOnClickListener(this);
         search_layout.setOnClickListener(this);
         //  tv_pincode = view.findViewById(R.id.tv_pincode);
-        admin_btn = view.findViewById(R.id.admin_btn);
+        //admin_btn = view.findViewById(R.id.admin_btn);
         iv_sell = view.findViewById(R.id.iv_sell);
         iv_sell.setOnClickListener(this);
         cv_loans.setOnClickListener(this);

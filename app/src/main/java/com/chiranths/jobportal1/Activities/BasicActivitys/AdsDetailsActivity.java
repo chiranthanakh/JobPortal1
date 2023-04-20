@@ -25,6 +25,7 @@ import com.chiranths.jobportal1.Activities.HotDealsactivity.HotDealsDetailsActiv
 import com.chiranths.jobportal1.Activities.Propertys.Products;
 import com.chiranths.jobportal1.CalldetailsRecords;
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,6 +44,7 @@ public class AdsDetailsActivity extends AppCompatActivity {
     private String productID="", state = "Normal",number,page;
     private String[] url;
     CalldetailsRecords calldetails = new CalldetailsRecords() ;
+    Utilitys utilitys = new Utilitys();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,65 +74,12 @@ public class AdsDetailsActivity extends AppCompatActivity {
         productPrice = (TextView) findViewById(R.id.product_price_details);
         getProductDetails(productID);
 
-        ads_cl_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //check permition
-                String permission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-                int res = checkCallingOrSelfPermission(permission);
-                if (res == PackageManager.PERMISSION_GRANTED) {
-                    SharedPreferences sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-                    String nameofuser = sh.getString("name", "");
-                    String userNumber = sh.getString("number", "");
-                    String useremail = sh.getString("email", "");
+        ads_cl_btn.setOnClickListener(view ->
+                utilitys.navigateCall(AdsDetailsActivity.this,number,productName.getText().toString()));
 
-                    String cnumber = number;
-                    String cname = productName.getText().toString();
-                    if (!userNumber.equals("")) {
-                        calldetails.callinfo(userNumber, nameofuser, cnumber, cname);
-                        Intent callIntent = new Intent(Intent.ACTION_CALL);
-                        callIntent.setData(Uri.parse("tel:" + number));
-                        startActivity(callIntent);
-                    } else {
-                        Intent intent = new Intent(AdsDetailsActivity.this, UserDetailsActivity.class);
-                        startActivity(intent);
-                    }
-                }
-            }
-        });
+        ads_whatsapp_btn.setOnClickListener(view -> {
 
-        ads_whatsapp_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String permission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-                int res = checkCallingOrSelfPermission(permission);
-                if (res == PackageManager.PERMISSION_GRANTED) {
-                    SharedPreferences sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-                    String nameofuser = sh.getString("name", "");
-                    String userNumber = sh.getString("number", "");
-                    String useremail = sh.getString("email", "");
-
-                    String cnumber = number;
-                    String cname = productName.getText().toString();
-                    if (!userNumber.equals("")) {
-                        String url = "https://api.whatsapp.com/send?phone=" + "91" + number;
-                        Intent i = new Intent(Intent.ACTION_VIEW);
-                        i.setData(Uri.parse(url));
-                        startActivity(i);
-                        calldetails.callinfo(userNumber, nameofuser, number,cname );
-
-                    } else {
-                        if (ContextCompat.checkSelfPermission(AdsDetailsActivity.this, CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-                            Intent intent = new Intent(AdsDetailsActivity.this, UserDetailsActivity.class);
-                            startActivity(intent);
-                        } else {
-                            ActivityCompat.requestPermissions((Activity) AdsDetailsActivity.this,
-                                    new String[]{Manifest.permission.CALL_PHONE}, 1);
-                        }
-                    }
-                }
-            }
+            utilitys.navigateWhatsapp(AdsDetailsActivity.this,number,productName.getText().toString());
         });
 
         iv_back_ads.setOnClickListener(new View.OnClickListener() {

@@ -40,19 +40,18 @@
                 android:id="@+id/iv_nav_image"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp"
-                android:layout_gravity="start"
+                android:layout_gravity="center"
                 android:layout_marginStart="10dp"
                 android:adjustViewBounds="true"
                 android:padding="10dp"
                 android:src="@drawable/user" />
 
             <TextView
-                android:id="@+id/iv_nav_name"
+                android:id="@+id/tv_nav_username"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="start"
+                android:gravity="center"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="20dp"
                 android:text="Welcome To Dashboard"
                 android:textColor="@color/white"
                 android:textSize="24sp"
@@ -61,13 +60,13 @@
 
 
             <TextView
-                android:id="@+id/tv_nav_username"
+                android:id="@+id/tv_nav_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:gravity="start"
+                android:gravity="center"
                 android:layout_marginStart="20dp"
-                android:text="dashboard.12@gmail.com"
+                android:text=""
                 android:fontFamily="@font/proxima_nova_bold"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
@@ -89,20 +88,21 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
-                    android:id="@+id/admin_btn"
+                    android:id="@+id/dashboard_property"
                     android:drawableTint="@color/icon_color"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?selectableItemBackground"
                     android:drawablePadding="5dp"
                     android:paddingLeft="5dp"
-                    android:gravity="center_vertical"
                     android:paddingBottom="13dp"
                     android:paddingTop="13dp"
                     android:fontFamily="@font/proxima_family"
-                    android:text="Add Image"
+                    android:text="Propertys"
+                    android:gravity="center"
+                    android:textStyle="bold"
                     android:textColor="@color/grey_dark"
-                    android:textSize="13sp"/>
+                    android:textSize="16sp"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -110,21 +110,21 @@
                     android:layout_marginEnd="10dp"
                     android:background="@color/grey_very_light"/>
                 <TextView
-                    android:id="@+id/tv_irfm"
+                    android:id="@+id/dashboard_loans"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?selectableItemBackground"
                     android:drawablePadding="5dp"
                     android:paddingLeft="5dp"
                     android:drawableTint="@color/icon_color"
-
-                    android:gravity="center_vertical"
                     android:paddingBottom="13dp"
                     android:paddingTop="13dp"
                     android:fontFamily="@font/proxima_family"
-                    android:text="Master"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:text="Loans"
                     android:textColor="@color/grey_dark"
-                    android:textSize="13sp"/>
+                    android:textSize="16sp"/>/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -132,21 +132,21 @@
                     android:background="@color/grey_very_light"/>
 
                 <TextView
-                    android:id="@+id/tv_ctnra"
+                    android:id="@+id/dashboard_Business"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?selectableItemBackground"
                     android:drawablePadding="5dp"
                     android:paddingLeft="5dp"
                     android:drawableTint="@color/icon_color"
-
-                    android:gravity="center_vertical"
                     android:paddingTop="13dp"
                     android:paddingBottom="13dp"
                     android:fontFamily="@font/proxima_family"
-                    android:text="Mapping"
+                    android:text="Business"
+                    android:gravity="center"
+                    android:textStyle="bold"
                     android:textColor="@color/grey_dark"
-                    android:textSize="13sp"/>
+                    android:textSize="16sp"/>/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -154,21 +154,21 @@
                     android:background="@color/grey_very_light"/>
 
                 <TextView
-                    android:id="@+id/tv_verifyBillingInstruction"
+                    android:id="@+id/dashboard_constructions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?selectableItemBackground"
                     android:drawablePadding="5dp"
                     android:paddingLeft="5dp"
                     android:drawableTint="@color/icon_color"
-
-                    android:gravity="center_vertical"
                     android:paddingTop="13dp"
                     android:paddingBottom="13dp"
                     android:fontFamily="@font/proxima_family"
-                    android:text="Transaction"
+                    android:text="Constructions"
+                    android:gravity="center"
+                    android:textStyle="bold"
                     android:textColor="@color/grey_dark"
-                    android:textSize="13sp"/>
+                    android:textSize="16sp"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -176,22 +176,89 @@
                     android:layout_marginEnd="10dp"
                     android:background="@color/grey_very_light"/>
                 <TextView
-                    android:id="@+id/tv_verifyCostTransfer"
+                    android:id="@+id/dashboard_travels"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?selectableItemBackground"
                     android:drawablePadding="5dp"
                     android:paddingLeft="5dp"
                     android:drawableTint="@color/icon_color"
-
-                    android:gravity="center_vertical"
                     android:paddingTop="13dp"
                     android:paddingBottom="13dp"
                     android:fontFamily="@font/proxima_family"
-                    android:text="Report"
+                    android:text="Travels"
+                    android:gravity="center"
+                    android:textStyle="bold"
                     android:textColor="@color/grey_dark"
-                    android:textSize="13sp"/>
+                    android:textSize="16sp"/>
 
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/grey_very_light"/>
+
+                <TextView
+                    android:id="@+id/dashboard_rented"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?selectableItemBackground"
+                    android:drawablePadding="5dp"
+                    android:paddingLeft="5dp"
+                    android:drawableTint="@color/icon_color"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="13dp"
+                    android:fontFamily="@font/proxima_family"
+                    android:text="Propertys for Rent"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="16sp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/grey_very_light"/>
+                <TextView
+                    android:id="@+id/dashboard_hotels"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?selectableItemBackground"
+                    android:drawablePadding="5dp"
+                    android:paddingLeft="5dp"
+                    android:drawableTint="@color/icon_color"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="13dp"
+                    android:fontFamily="@font/proxima_family"
+                    android:text="Hotels"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="16sp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/grey_very_light"/>
+                <TextView
+                    android:id="@+id/dashboard_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?selectableItemBackground"
+                    android:drawablePadding="5dp"
+                    android:paddingLeft="5dp"
+                    android:drawableTint="@color/icon_color"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="13dp"
+                    android:fontFamily="@font/proxima_family"
+                    android:text="Profile"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="16sp"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -206,23 +273,6 @@
                 android:layout_width="match_parent"
                 android:layout_marginTop="20dp"
                 android:layout_height="match_parent">
-
-
-                <Button
-                    android:id="@+id/btn_nav_profile"
-                    android:text="Profile"
-
-                    android:backgroundTint="@color/blue_light"
-                    android:layout_weight="1"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:fontFamily="@font/proxima_nova_bold"
-                    android:textSize="12sp"
-                    android:textColor="@color/white"
-                    />
 
                 <Button
                     android:id="@+id/btn_nav_logout"

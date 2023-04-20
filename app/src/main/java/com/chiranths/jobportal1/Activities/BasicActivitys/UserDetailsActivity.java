@@ -80,7 +80,6 @@ public class UserDetailsActivity extends AppCompatActivity {
     }
 
     private void initilize() {
-
         edtPhone = findViewById(R.id.edt_phone_login);
         edtName = findViewById(R.id.edt_name_login);
         edtEmail = findViewById(R.id.edt_email_login);

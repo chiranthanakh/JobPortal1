@@ -18,6 +18,7 @@ import com.chiranths.jobportal1.Activities.BasicActivitys.UserDetailsActivity;
 import com.chiranths.jobportal1.Activities.Propertys.Products;
 import com.chiranths.jobportal1.CalldetailsRecords;
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,6 +43,7 @@ public class HotDealsDetailsActivity extends AppCompatActivity {
     private String number;
     private Products products;
     String[] url;
+    Utilitys utilitys = new Utilitys();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,36 +68,11 @@ public class HotDealsDetailsActivity extends AppCompatActivity {
         getProductDetails(productID);
 
         hd_cl_btn.setOnClickListener(view -> {
-            SharedPreferences sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-            String nameofuser = sh.getString("name", "");
-            String userNumber = sh.getString("number","");
-            String useremail = sh.getString("email","");
-            if(!userNumber.equals("")){
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:"+ number));
-                startActivity(callIntent);
-                calldetails.callinfo(userNumber, nameofuser, products.getNumber(), products.getPname());
-            }else {
-                Intent intent = new Intent(HotDealsDetailsActivity.this, UserDetailsActivity.class);
-                startActivity(intent);
-            }
+            utilitys.navigateCall(this,products.getNumber(),products.getPname());
         });
 
         hd_whatsapp_btn.setOnClickListener(view -> {
-            SharedPreferences sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-            String nameofuser = sh.getString("name", "");
-            String userNumber = sh.getString("number","");
-            String useremail = sh.getString("email","");
-            if(!userNumber.equals("")){
-                String url = "https://api.whatsapp.com/send?phone="+"91"+number;
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-                calldetails.callinfo(userNumber, nameofuser, products.getNumber(), products.getPname());
-            }else {
-                Intent intent = new Intent(HotDealsDetailsActivity.this, UserDetailsActivity.class);
-                startActivity(intent);
-            }
+            utilitys.navigateWhatsapp(this,products.getNumber(),products.getPname());
         });
 
         iv_hot_back.setOnClickListener(view -> {
