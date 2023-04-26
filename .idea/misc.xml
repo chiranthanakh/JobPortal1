@@ -11,12 +11,15 @@
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/car.xml" value="0.127" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/category_back.xml" value="0.1265" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/cons.xml" value="0.127" />
+        <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/customborder.xml" value="0.1255" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/electrician.xml" value="0.127" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/hardware.xml" value="0.127" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/heavyV.xml" value="0.127" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/ic_job.xml" value="0.127" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/ic_power.xml" value="0.127" />
+        <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/ic_rupees_ads.xml" value="0.1255" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/painter.xml" value="0.127" />
+        <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/percent.xml" value="0.1255" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/plumber.xml" value="0.127" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/rating_back.xml" value="0.1265" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable/tempo.xml" value="0.127" />
@@ -65,7 +68,7 @@
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_services.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_starting.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_travels.xml" value="0.14666666666666667" />
-        <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_travels_adaptor.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_travels_adaptor.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_travels_listactivity.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_travelsactivity.xml" value="0.22" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/activity_upcomming_projects.xml" value="0.17552083333333332" />
@@ -100,7 +103,7 @@
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/home_colorsel_layout.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/home_event_layout.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/home_notice_board.xml" value="0.17552083333333332" />
-        <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/loan_offer_adaptor.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/loan_offer_adaptor.xml" value="0.22" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/loanenquairy.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/product_items_layout.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/profile_listings.xml" value="0.17552083333333332" />
@@ -109,6 +112,8 @@
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/single_data_file.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/starting_fragment.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/test.xml" value="0.1" />
+        <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/testform.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/91790/AndroidStudioProjects/JobPortal1/app/src/main/res/layout/toolbar.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/CEPL/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable-v24/btn_bg.xml" value="0.1265" />
         <entry key="..\:/Users/CEPL/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable-v24/button_capsule_blue.xml" value="0.1465" />
         <entry key="..\:/Users/CEPL/AndroidStudioProjects/JobPortal1/app/src/main/res/drawable-v24/et_bg.xml" value="0.1" />

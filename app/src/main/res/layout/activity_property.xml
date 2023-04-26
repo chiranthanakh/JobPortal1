@@ -20,7 +20,6 @@
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="2dp"
             android:background="?selectableItemBackground"
             android:padding="14dp"
             android:src="@drawable/back_arrow_new"
@@ -65,11 +64,12 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@null"
+                        android:inputType="text"
                         android:gravity="center_vertical"
                         android:hint="Search here..."
                         android:textColor="@color/black"
                         android:textColorHint="@color/grey_light"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/iv_search" />
 
@@ -90,8 +90,7 @@
             android:layout_marginBottom="8dp"
             android:textColor="@color/white"
             android:textSize="10sp"
-            android:textStyle="bold"
-            >
+            android:textStyle="bold">
         </androidx.appcompat.widget.AppCompatButton>
 
     </LinearLayout>

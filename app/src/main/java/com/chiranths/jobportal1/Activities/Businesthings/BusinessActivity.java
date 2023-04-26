@@ -3,6 +3,7 @@ package com.chiranths.jobportal1.Activities.Businesthings;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -44,7 +45,8 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
     EditText main_edt_search2;
     private RecyclerView gridView;
     ImageView back;
-    LinearLayout btnListbusiness, llsearch;
+    AppCompatButton btnListbusiness;
+    LinearLayout  llsearch;
     ArrayList<BusinessModel> businesslist = new ArrayList<BusinessModel>();
     ArrayList<BusinessModel> filterbusinesslist = new ArrayList<BusinessModel>();
     ArrayList<Categorymmodel> categorylists = new ArrayList<Categorymmodel>();

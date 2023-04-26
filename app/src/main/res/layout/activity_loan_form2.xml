@@ -16,23 +16,20 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-
             android:id="@+id/iv_nav_view"
             android:layout_width="40dp"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="5dp"
             android:background="?selectableItemBackground"
-            android:padding="10dp"
-            android:src="@drawable/ic_menu"
+            android:padding="14dp"
+            android:src="@drawable/back_arrow_new"
             app:tint="@color/white" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
             android:layout_weight="0.9"
-            android:layout_marginTop="@dimen/margin_10_dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -45,12 +42,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/lato_bold"
-                    android:text="GBD loans"
+                    android:text="Loan Form"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout

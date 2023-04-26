@@ -40,8 +40,8 @@
                     android:layout_marginBottom="5dp"
                     android:id="@+id/iv_bank_image"
                     android:src="@drawable/aaimage"
-                    android:layout_width="120dp"
-                    android:layout_height="140dp" />
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
             </LinearLayout>
                 <LinearLayout
                     android:layout_weight="1"
@@ -51,38 +51,58 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/tv_bankname"
-                        android:text="Bank name"
-                        android:layout_marginTop="10dp"
-                        app:layout_constraintStart_toStartOf="@+id/iv_product"
-                        app:layout_constraintTop_toTopOf="parent"
+
+                    <LinearLayout
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/dp_18"
-                        android:gravity="center"
-                        android:textColor="@color/black"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-
-
-                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:layout_marginStart="10dp">
+                        android:orientation="horizontal">
                         <TextView
+                            android:layout_weight="1"
+                            android:text="Bank name:"
+                            app:layout_constraintStart_toStartOf="@+id/iv_product"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:textSize="11dp"
+                            android:textColor="@color/black"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                        <TextView
+                            android:layout_weight="1"
+                            android:id="@+id/tv_bankname"
+                            android:text="Sbi"
+                            app:layout_constraintStart_toStartOf="@+id/iv_product"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:textStyle="bold"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="3dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_weight="1"
+                            android:text="Loan type:"
+                            android:drawablePadding="3dp"
+                            app:layout_constraintStart_toStartOf="@+id/iv_product"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:textSize="11dp"
+                            android:textColor="@color/black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <TextView
+                            android:layout_weight="1"
                             android:id="@+id/tv_bankloantype"
                             android:text="Loan type"
-                            android:drawableStart="@drawable/ic_rupees_ads"
-                            android:layout_marginTop="5dp"
-                            android:drawablePadding="3dp"
-                            app:layout_constraintStart_toStartOf="@+id/iv_product"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:layout_marginEnd="5dp"
                             android:textStyle="bold"
+                            android:textSize="12sp"
                             android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -90,83 +110,87 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:layout_marginTop="3dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp">
-                        <TextView
-                            android:text="Intrest Starts from : "
-                            android:layout_marginTop="5dp"
-                            android:drawablePadding="3dp"
-                            app:layout_constraintStart_toStartOf="@+id/iv_product"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:layout_marginEnd="5dp"
-                            android:textColor="@color/black"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:gravity="center_vertical"
-                            android:layout_marginStart="5dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp">
-                            <TextView
-                                android:id="@+id/tv_intrestRate"
-                                android:text="Intrest rate"
-                                android:textSize="12sp"
-                                android:textStyle="bold"
-                                android:gravity="center"
-                                android:textColor="@color/black"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
-
-                        </LinearLayout>
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="5dp">
-
+                        android:layout_marginEnd="10dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_weight="0"
+                            android:text="Interest Starts from : "
+                            android:drawablePadding="3dp"
+                            android:textColor="@color/black"
+                            android:textSize="11sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
 
                         <TextView
-                            android:id="@+id/tv_amount_upto"
-                            android:text="Amount"
+                            android:layout_weight="1"
+                            android:id="@+id/tv_intrestRate"
+                            android:text="6.6"
+                            android:drawablePadding="3dp"
+                            android:drawableStart="@drawable/percent"
+                            android:textStyle="bold"
+                            android:layout_marginStart="10dp"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp">
+                        <TextView
+                            android:layout_weight="1"
+                            android:text="Amount:"
                             app:layout_constraintStart_toStartOf="@+id/iv_product"
                             app:layout_constraintTop_toTopOf="parent"
                             android:layout_gravity="center_vertical"
-                            android:textSize="12sp"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginEnd="10dp"
+                            android:textSize="11sp"
                             android:layout_width="wrap_content"
                             android:textColor="@color/black"
+                            android:layout_height="wrap_content"/>
+                        <TextView
+                            android:layout_weight="1"
+                            android:id="@+id/tv_amount_upto"
+                            android:drawableStart="@drawable/ic_rupees_ads"
+                            android:text="23,23,000"
+                            android:layout_marginStart="20dp"
+                            android:drawablePadding="3dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:textStyle="bold"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/btn_loanapplay"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginStart="10dp"
                         android:orientation="horizontal"
-                        android:background="@drawable/customborder"
-                        android:layout_gravity="end"
+                        android:background="@drawable/button_capsule"
                         android:layout_marginBottom="@dimen/margin_10dp"
-                        android:gravity="center"
                         android:layout_marginEnd="10dp">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="Applay Now"
-                            android:layout_marginRight="@dimen/dp_30"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/proxima_nova_bold"
+                            android:text="Apply Now"
                             />
 
                     </LinearLayout>

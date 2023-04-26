@@ -396,7 +396,7 @@
                         android:layout_marginStart="@dimen/margin_10dp"
                         android:layout_marginEnd="10dp"
                         android:fontFamily="@font/proxima_nova_bold"
-                        android:text="Best offers for You......."
+                        android:text="Best offers for you"
                         android:textColor="@color/black"
                         android:textSize="15dp" />
                 </LinearLayout>
