@@ -73,7 +73,7 @@
                 android:drawableStart="@drawable/ic_home_ads"
                 android:gravity="start|center"
                 android:fontFamily="@font/lato"
-                android:textColor="@color/grey"
+                android:textColor="@color/black"
                 android:textSize="12sp"
                 android:drawablePadding="5dp"
                 android:layout_width="match_parent"
@@ -120,13 +120,12 @@
                 android:layout_marginTop="3dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="7dp"
+                android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/ads_location_adaptor"
                     android:text="RT Nagar Hmt Layout"
-                    app:layout_constraintStart_toStartOf="@+id/iv_product"
-                    app:layout_constraintTop_toTopOf="parent"
                     android:textSize="11dp"
                     android:drawableTint="@color/red"
                     android:drawableStart="@drawable/location_ads"
@@ -134,7 +133,7 @@
                     android:gravity="start|center"
                     android:drawablePadding="5dp"
                     android:fontFamily="@font/proxima_family"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
