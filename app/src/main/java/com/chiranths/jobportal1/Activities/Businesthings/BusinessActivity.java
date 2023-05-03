@@ -82,7 +82,6 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
     private void initilize() {
         recyclerView = findViewById(R.id.recycler_business);
         llsearch = findViewById(R.id.ll_search_business);
-        btnListbusiness = findViewById(R.id.btn_list_business);
         back = findViewById(R.id.back_toolbar_business);
         gridView = findViewById(R.id.id_gridview);
         main_edt_search2 = findViewById(R.id.main_edt_search2);
@@ -105,14 +104,6 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onClick(View view) {
                 finish();
-            }
-        });
-
-        btnListbusiness.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(BusinessActivity.this, AdminBusinessListings.class);
-                 startActivity(intent);
             }
         });
 
