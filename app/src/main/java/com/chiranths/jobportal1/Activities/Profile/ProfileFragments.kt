@@ -41,15 +41,7 @@ class ProfileFragments : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     {
         val view =  inflater.inflate(R.layout.fragment_profile, container, false)
-
         initilize(view)
-
-
-
-
-
-
-
         return view
     }
 
@@ -62,6 +54,8 @@ class ProfileFragments : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
     }
+
+
 
     private fun initilize(view: View) {
         iv_profile_image = view.findViewById(R.id.iv_profile_image)
@@ -87,10 +81,9 @@ class ProfileFragments : Fragment() {
             startActivity(intent)
 
         }
-
-
-
     }
+
+
 
     private fun fetchProfile() {
         val sh = context?.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)

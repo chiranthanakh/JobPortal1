@@ -107,7 +107,7 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
         iv_green_land.setOnClickListener(this);
         iv_commercial.setOnClickListener(this);
         iv_home.setOnClickListener(this);
-        iv_back_toolbar = findViewById(R.id.iv_back_toolbar);
+        iv_back_toolbar = findViewById(R.id.back_toolbar_business);
         iv_back_toolbar.setOnClickListener(this);
 
         recyclarviewads = findViewById(R.id.rv_adds_layots2);
@@ -340,7 +340,7 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
 
                 break;
 
-            case R.id.iv_back_toolbar:
+            case R.id.back_toolbar_business:
                 finish();
                 break;
         }

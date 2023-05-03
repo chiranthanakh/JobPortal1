@@ -317,9 +317,9 @@ public class AdminPropertyApproval extends AppCompatActivity implements View.OnC
 
                 break;
 
-            case R.id.iv_back_toolbar:
+            /*case R.id.iv_back_toolbar:
                 finish();
-                break;
+                break;*/
         }
 
     }

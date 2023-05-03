@@ -17,7 +17,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/purple_700"
+        android:background="@drawable/gradient"
         android:orientation="horizontal">
 
         <ImageView
@@ -27,10 +27,20 @@
             android:layout_gravity="center"
             android:layout_marginStart="5dp"
             android:layout_marginTop="2dp"
-            android:background="?selectableItemBackground"
+            android:background="@drawable/ic_back"
             android:padding="2dp"
-            android:src="@drawable/back_arrow"
             app:tint="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Business"
+            android:layout_gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:textSize="@dimen/dp_30"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
 
         <LinearLayout
             android:id="@+id/btn_list_business"
@@ -40,6 +50,7 @@
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_add_business"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_gravity="end"
@@ -49,7 +60,7 @@
                 android:paddingEnd="10dp"
                 android:textColor="@color/white"
                 android:background="@drawable/button_capsule"
-                android:text="List Business"
+                android:text="Add \n Business"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -59,13 +70,14 @@
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/purple_700">
+        android:background="@color/purple_500">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
+            android:background="@drawable/gradient"
             app:contentInsetStartWithNavigation="0dp">
 
             <LinearLayout

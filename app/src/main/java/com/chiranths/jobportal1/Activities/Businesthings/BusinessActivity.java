@@ -3,6 +3,7 @@ package com.chiranths.jobportal1.Activities.Businesthings;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -50,6 +51,7 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
     ArrayList<Categorymmodel> categorylists = new ArrayList<Categorymmodel>();
     BusinessCategoryAdaptor businesscatAdaptor;
     BusinessAdaptor businessAdaptor;
+    AppCompatButton add_button;
     Handler mHandler = new Handler();
     Bundle bundle = new Bundle();
 
@@ -83,6 +85,7 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
         back = findViewById(R.id.back_toolbar_business);
         gridView = findViewById(R.id.id_gridview);
         main_edt_search2 = findViewById(R.id.main_edt_search2);
+        add_button = findViewById(R.id.btn_add_business);
 
         //recyclerView.setHasFixedSize(true);
         GridLayoutManager mgrid = new GridLayoutManager(this, 2);
@@ -116,6 +119,11 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
             Intent intent = new Intent(BusinessActivity.this, SearchActivity.class);
             bundle.putString("searchtype", "business");
             intent.putExtras(bundle);
+            startActivity(intent);
+        });
+
+        add_button.setOnClickListener(view -> {
+            Intent intent = new Intent(BusinessActivity.this, AdminBusinessListings.class);
             startActivity(intent);
         });
     }

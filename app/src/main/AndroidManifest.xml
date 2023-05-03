@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
         android:allowBackup="true"
@@ -19,6 +19,9 @@
         android:roundIcon="@drawable/dataflair"
         android:supportsRtl="true"
         android:theme="@style/JobPortaltheam">
+        <activity
+            android:name=".SearchDashboardActivity"
+            android:exported="false" />
         <activity
             android:name=".Activities.Construction.ConstructionListActivity"
             android:exported="false" />
@@ -47,7 +50,7 @@
             android:name=".TravelsActivity"
             android:exported="false" />
         <activity
-            android:name=".LivingPlaceActivity"
+            android:name=".Activities.BasicActivitys.LivingPlaceActivity"
             android:exported="false" />
         <activity
             android:name=".AdminLivingPlacess"
@@ -153,7 +156,6 @@
         <activity
             android:name=".Activities.Servicess.ServicesActivity"
             android:exported="false" />
-
 
         <service
             android:name=".myFirebaseMessagingServices"

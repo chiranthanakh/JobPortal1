@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -23,7 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.ImageView;
-import android.widget.SearchView;
+import androidx.appcompat.widget.SearchView;
 
 import com.chiranths.jobportal1.Activities.Businesthings.BusinessActivity;
 import com.chiranths.jobportal1.Activities.Propertys.AdminAddNewProductActivity;
@@ -54,7 +55,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     Button btn_add;
-    ImageView iv_sites,iv_green_land,iv_home,iv_commercial;
+    ImageView iv_sites,iv_green_land,iv_home,iv_commercial,back_toolbar_search;
     Handler mHandler = new Handler();
     ArrayList propertylist =new ArrayList();
     ArrayList<FilterModel> Propertyfilterlist =new ArrayList();
@@ -72,7 +73,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     CardView cv_homes, cv_sites, cv_green,cv_comerical;
     SearchView edt_filter;
     ArrayList filterarraylist = new ArrayList();
-    String type="";
+    String type = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,26 +93,22 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(this.getResources().getColor(R.color.app_blue));
         }
-
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null) {
+            type = bundle.getString("searchtype", "");
+        }
+        //ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
+        initilize();
     }
 
     private void initilize() {
-
-        btn_add = findViewById(R.id.btn_add_property);
-        btn_add.setOnClickListener(this);
-        iv_sites = findViewById(R.id.iv_sites);
-        iv_commercial = findViewById(R.id.iv_commercial);
-        iv_green_land = findViewById(R.id.iv_green_land);
-        iv_home = findViewById(R.id.iv_home);
+        //recyclarviewads = findViewById(R.id.rv_adds_layots2);
         edt_filter = findViewById(R.id.edt_filter);
-
-        iv_sites.setOnClickListener(this);
-        iv_green_land.setOnClickListener(this);
-        iv_commercial.setOnClickListener(this);
-        iv_home.setOnClickListener(this);
-
-        recyclarviewads = findViewById(R.id.rv_adds_layots2);
-        recyclerView = findViewById(R.id.recycler_menu);
+        recyclerView = findViewById(R.id.recycler_search_results);
+        back_toolbar_search = findViewById(R.id.back_toolbar_search);
+        back_toolbar_search.setOnClickListener(this);
+        edt_filter.requestFocus();
+        edt_filter.setFocusable(true);
         recyclerView.setHasFixedSize(true);
         GridLayoutManager mgrid = new GridLayoutManager(this,1);
 
@@ -125,7 +122,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                  }
              });
 
-         }else if(type.equals("property")) {
+         }else if(type.equals("")) {
              //finterAdaptor();
              AsyncTask.execute(new Runnable() {
                  @Override
@@ -139,12 +136,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onResume() {
         super.onResume();
-
-        Bundle bundle = getIntent().getExtras();
-        type = bundle.getString("searchtype");
-        ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
-        initilize();
-
         edt_filter.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -161,13 +152,10 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 return false;
             }
         });
-
     }
 
     private void fetchads() {
-
         DatabaseReference adsimage = FirebaseDatabase.getInstance().getReference().child("adsforyou");
-
         adsimage.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -178,9 +166,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                     for (String key : dataMap.keySet()){
                         Object data = dataMap.get(key);
                         try{
-
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
-
                             adslist.add(userData.get("image")+"---"+userData.get("pid")+"---"+userData.get("category")+"---"+userData.get("price")+"---"+userData.get("propertysize")+"---"+userData.get("number"));
 
                         }catch (ClassCastException cce){
@@ -412,12 +398,10 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 break;
 
             case R.id.iv_green_land:
-
                 propertyAdaptor =new PropertyAdaptor(greenlandlist, SearchActivity.this);
                 RecyclerView.LayoutManager nlayoutManager3 = new LinearLayoutManager(SearchActivity.this, RecyclerView.VERTICAL, false);
                 recyclerView.setLayoutManager(nlayoutManager3);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
-
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -425,7 +409,10 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                     }
                 });
                 propertyAdaptor.notifyItemRangeInserted(0, greenlandlist.size());
+                break;
 
+            case R.id.back_toolbar_search:
+                finish();
                 break;
         }
 
@@ -449,19 +436,14 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                                 businesslist.get(i).getEmail(),businesslist.get(i).getRating(),
                                 businesslist.get(i).getImage(),businesslist.get(i).getImage2()));
 
-
                     }
 
                 }
             }
 
         }else {
-            if(text.equals("")){
-                //adaptorclass(false);
-            }else {
 
                 filterarraylist.clear();
-
                 for (int i=0;i<Propertyfilterlist.size();i++){
 
                     if(Propertyfilterlist.get(i).getLocation().toLowerCase().contains(text.toLowerCase()) ||
@@ -475,9 +457,12 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
 
                     }
+                    Log.d("listdatefilter", String.valueOf(filterarraylist.size()));
                     if(filterarraylist.size()==0){
+                        propertyAdaptor =new PropertyAdaptor(Propertyfilterlist, SearchActivity.this);
                         // ll_no_data_irfc.setVisibility(View.VISIBLE);
                     }else {
+                        propertyAdaptor =new PropertyAdaptor(filterarraylist, SearchActivity.this);
                         //ll_no_data_irfc.setVisibility(View.GONE);
 
                     }
@@ -496,11 +481,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 propertyAdaptor.notifyItemRangeInserted(0, greenlandlist.size());
             }
         }
-    }
-
 
     private void finterAdaptor() {
-
         propertyAdaptor =new PropertyAdaptor(greenlandlist, SearchActivity.this);
         RecyclerView.LayoutManager nlayoutManager3 = new LinearLayoutManager(SearchActivity.this, RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(nlayoutManager3);

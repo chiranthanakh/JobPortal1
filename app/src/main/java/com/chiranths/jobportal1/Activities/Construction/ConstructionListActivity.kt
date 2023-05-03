@@ -35,7 +35,6 @@ class ConstructionListActivity : AppCompatActivity() {
 
     private fun initilize() {
         rv_construction = findViewById(R.id.rv_constructionslist_relates)
-
     }
 
     private fun fetchdata() {
@@ -94,7 +93,6 @@ class ConstructionListActivity : AppCompatActivity() {
                     mHandler.post(Runnable { rv_construction?.setAdapter(constructionAdaptor) })
                 }
             }
-
             override fun onCancelled(databaseError: DatabaseError) {}
         })
     }

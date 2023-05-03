@@ -15,6 +15,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -156,6 +157,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         tv_location = view.findViewById(R.id.tv_location);
         search_layout = view.findViewById(R.id.search_layout);
         search = view.findViewById(R.id.main_edt_search2);
+        search.setInputType(InputType.TYPE_NULL); // disable soft input
         tv_seeall_upcooming = view.findViewById(R.id.tv_seeall_upcomming);
         tv_seeall_layouts = view.findViewById(R.id.tv_seeall_layouts);
         tv_seeall_layouts.setOnClickListener(this);
@@ -178,13 +180,11 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         ll_rent.setOnClickListener(this);
         ll_travels.setOnClickListener(this);
         ll_commercial_rent.setOnClickListener(this);
-
         recyclerView = view.findViewById(R.id.rv_home_event);
         recyclarviewads = view.findViewById(R.id.rv_adds_layots1);
         recyclerViewEvent = view.findViewById(R.id.rv_dash_prop);
         recyclar_Layouts = view.findViewById(R.id.rv_Layouts);
 
-        //fetchcorosel();
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -510,6 +510,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                 startActivity(intent4);
                 break;
 
+
             case R.id.main_edt_search2:
                 Intent intent5 = new Intent(getContext(), SearchActivity.class);
                 startActivity(intent5);
@@ -517,6 +518,8 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
             case R.id.search_layout:
                 Intent intent6 = new Intent(getContext(), SearchActivity.class);
+                bundle.putString("searchtype","property");
+                intent6.putExtras(bundle);
                 startActivity(intent6);
                 break;
 
@@ -551,6 +554,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                 Intent intent11 = new Intent(getContext(), SeeAllLayoutActivity.class);
                 intent11.putExtras(bundle);
                 startActivity(intent11);
+
                 break;
 
             case R.id.ll_constructions:

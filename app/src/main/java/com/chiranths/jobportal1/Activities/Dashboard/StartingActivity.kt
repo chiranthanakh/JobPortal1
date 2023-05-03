@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -180,6 +181,20 @@ class StartingActivity : AppCompatActivity() {
             }
             true
         })
+    }
+
+    override fun onBackPressed() {
+        if(drawer_layout?.isVisible == true){
+            drawer_layout?.closeDrawer(GravityCompat.START)
+        }else {
+            var count = supportFragmentManager.backStackEntryCount
+            if (count == 0) {
+                super.onBackPressed()
+            } else {
+                super.onBackPressed()
+               // supportFragmentManager.popBackStack()
+            }
+        }
     }
 
     private fun fetchProfile() {

@@ -27,6 +27,7 @@ import com.chiranths.jobportal1.Activities.BasicActivitys.UserDetailsActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyDetailsActivity;
 import com.chiranths.jobportal1.CalldetailsRecords;
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys;
 
 import java.util.List;
 
@@ -36,6 +37,8 @@ public class PropertyAdaptor extends RecyclerView.Adapter<PropertyAdaptor.ViewHo
     private List productInfos;
     private Context context;
     CalldetailsRecords calldetails = new CalldetailsRecords() ;
+    Utilitys utilitys = new Utilitys();
+
 
     public PropertyAdaptor(List productInfos, Context context) {
         this.productInfos = productInfos;
@@ -80,56 +83,12 @@ public class PropertyAdaptor extends RecyclerView.Adapter<PropertyAdaptor.ViewHo
             }
         });
 
-        holder.property_btn_call.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        //calling function
+        holder.property_btn_call.setOnClickListener(view -> utilitys.navigateCall(context,data[7],data[0]));
 
-                SharedPreferences sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-                String nameofuser = sh.getString("name", "");
-                String userNumber = sh.getString("number","");
-                String useremail = sh.getString("email","");
-
-                String cnumber = data[7];
-                String cname = data[0];
-                if(!userNumber.equals("")){
-                    calldetails.callinfo(userNumber,nameofuser,cnumber,cname);
-                    Intent callIntent = new Intent(Intent.ACTION_CALL);
-                    callIntent.setData(Uri.parse("tel:"+ data[7]));
-                    context.startActivity(callIntent);
-                }else {
-                    Intent intent = new Intent(context, UserDetailsActivity.class);
-                    context.startActivity(intent);
-                }
-            }
-        });
-
-        holder.property_btn_whatsapp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                SharedPreferences sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-                String nameofuser = sh.getString("name", "");
-                String userNumber = sh.getString("number","");
-                String useremail = sh.getString("email","");
-
-                if(!userNumber.equals("")){
-                    String url = "https://api.whatsapp.com/send?phone="+"91"+data[7];
-                    Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse(url));
-                    context.startActivity(i);
-                    calldetails.callinfo(userNumber,nameofuser,data[7],data[4]);
-                }else {
-                    if (ContextCompat.checkSelfPermission(context, CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-                        Intent intent = new Intent(context, UserDetailsActivity.class);
-                        context.startActivity(intent);
-                    } else {
-                        ActivityCompat.requestPermissions((Activity) context,
-                                new String[]{Manifest.permission.CALL_PHONE},
-                                1);
-                    }
-                }
-            }
-        });
+        //whatsapp function
+        holder.property_btn_whatsapp.setOnClickListener(view ->
+                utilitys.navigateWhatsapp(context,data[7],data[0]));
 
     }
 
