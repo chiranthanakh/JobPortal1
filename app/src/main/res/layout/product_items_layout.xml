@@ -1,199 +1,267 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#f9f9f9"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_layout"
-        android:backgroundTint="@color/white"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="3dp"
         android:layout_marginEnd="5dp"
-        android:layout_marginTop="5dp"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="3dp"
+        android:layout_marginBottom="3dp"
+        android:backgroundTint="@color/white"
         android:elevation="3dp"
-        android:layout_height="wrap_content">
+        app:cardCornerRadius="5dp"
+        app:cardElevation="3dp">
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:backgroundTint="@color/white"
+                android:elevation="3dp"
+                android:layout_gravity="center"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="3dp">
+
+                <ImageView
+                    android:id="@+id/product_image"
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/aaimage" />
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <androidx.cardview.widget.CardView
-                    android:backgroundTint="@color/white"
-                    android:layout_width="wrap_content"
-                    android:layout_margin="5dp"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="1dp"
-                    android:elevation="1dp"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/product_image"
-                        android:layout_width="130dp"
-                        android:layout_height="130dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp" />
-                </androidx.cardview.widget.CardView>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.4"
+                        android:text="Type:"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/product_type1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/proxima_nova_semi_bold"
+                        android:gravity="center_vertical"
+                        android:maxLines="2"
                         android:text="Home/Land Type"
-                        android:layout_marginTop="10dp"
-                        app:layout_constraintStart_toStartOf="@+id/iv_product"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
                         android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.4"
+                        android:text="Name:"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/product_name1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/proxima_nova_semi_bold"
+                    android:gravity="center_vertical"
+                    android:maxLines="2"
+                    android:text="The Taj Hotel Bangalore"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:text="Price:"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/product_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/proxima_nova_semi_bold"
                         android:maxLines="2"
-                        android:fontFamily="@font/proxima_family"
-                        android:gravity="center_vertical"
+                        android:minLines="2"
+                        android:singleLine="true"
+                        android:text="5000/-"
+                        android:drawableStart="@drawable/ic_rupees_ads"
+                        android:drawablePadding="3dp"
+                        android:textColor="@color/black"
                         android:textSize="12sp"
-                        android:layout_height="wrap_content"/>
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
                     <TextView
-                        android:id="@+id/product_name1"
-                        android:text="The Taj Hotel Bangalore"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/proxima_nova_bold"
-                        app:layout_constraintStart_toStartOf="@+id/iv_product"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.4"
+                        android:text="Size:"
                         android:textColor="@color/black"
-                        android:layout_width="match_parent"
-                        android:maxLines="2"
-                        android:gravity="center_vertical"
-                        android:textSize="14sp"
-                        android:layout_height="wrap_content"/>
-
-
-                    <LinearLayout
-                        android:layout_marginStart="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/product_price"
-                            android:text="Rs.5000/-"
-                            app:layout_constraintStart_toStartOf="@+id/iv_product"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:textSize="13dp"
-                            android:fontFamily="@font/proxima_nova_semi_bold"
-                            android:layout_weight="1"
-                            android:layout_marginEnd="5dp"
-                            android:singleLine="true"
-                            android:textColor="@color/grey"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="match_parent"
-                            android:maxLines="2"
-                            android:minLines="2"
-                            android:layout_height="wrap_content"/>
-
-                        <TextView
-                            android:id="@+id/product_size1"
-                            android:text="Available in 2400/sft."
-                            app:layout_constraintStart_toStartOf="@+id/iv_product"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:textSize="13dp"
-                            android:fontFamily="@font/proxima_nova_semi_bold"
-                            android:layout_weight="1"
-                            android:layout_marginEnd="10dp"
-                            android:singleLine="true"
-                            android:textColor="@color/grey"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="match_parent"
-                            android:maxLines="2"
-                            android:minLines="2"
-                            android:layout_height="wrap_content"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_marginStart="3dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_10dp"
-                        android:orientation="horizontal">
-                        <ImageView
-                            android:src="@drawable/location"
-                            android:layout_width="25dp"
-                            android:gravity="center"
-                            android:padding="6dp"
-                            android:layout_height="25dp"
-                            app:tint="#E50027" />
+                        android:textSize="12sp" />
 
                     <TextView
-                        android:id="@+id/product_location1"
-                        android:text="RT Nagar Hmt Layout "
-                        app:layout_constraintStart_toStartOf="@+id/iv_product"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:textSize="14dp"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/proxima_family"
-                        android:layout_marginEnd="10dp"
-                        android:textColor="@color/grey"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                    </LinearLayout>
-
-                    <LinearLayout
+                        android:id="@+id/product_size1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginStart="10dp"
-                        android:orientation="horizontal"
-                        android:background="@drawable/customborder"
-                        android:layout_gravity="end"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/proxima_nova_semi_bold"
+                        android:maxLines="2"
+                        android:minLines="2"
+                        android:singleLine="true"
+                        android:text="2400/sft."
+                        android:textColor="@color/black"
+                        android:textSize="12dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.4"
+                        android:text="Location:"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/product_location1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/proxima_nova_semi_bold"
+                        android:text="RT Nagar Hmt Layout "
+                        android:textColor="@color/black"
+                        android:textSize="12dp"
+                      />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="@dimen/margin_10dp"
+                    android:background="@drawable/button_capsule"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_contect_whome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:layout_marginEnd="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:textColor="@color/black"
-                            android:text="Contact:"
-                            android:layout_marginRight="@dimen/dp_30"
-                            />
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="Contact:"
+                        android:textColor="@color/white" />
 
 
-                        <ImageView
-                            android:id="@+id/property_btn_call"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="15dp"
-                            android:src="@drawable/ic_call"/>
+                    <ImageView
+                        android:id="@+id/property_btn_call"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_call"
+                        app:tint="@color/white" />
 
 
-                        <ImageView
-                            android:id="@+id/property_btn_whatsapp"
-                            android:text="Call Us"
-                            android:visibility="visible"
-                            android:textColor="@color/white"
-                            android:src="@drawable/whatsapp"
-                            android:layout_width="wrap_content"
-                            android:textStyle="bold"
-                            android:gravity="center"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"/>
-
-                    </LinearLayout>
+                    <ImageView
+                        android:id="@+id/property_btn_whatsapp"
+                        android:layout_width="25dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:src="@drawable/whatsapp"
+                        android:text="Call Us"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:visibility="visible" />
 
                 </LinearLayout>
 
             </LinearLayout>
+
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
@@ -201,17 +269,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
-        android:visibility="gone"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:visibility="gone">
 
         <Button
+            android:id="@+id/add_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add"
-            android:id="@+id/add_btn"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp" />
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="Add" />
 
     </LinearLayout>
 </LinearLayout>

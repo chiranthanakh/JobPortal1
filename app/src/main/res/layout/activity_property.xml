@@ -7,6 +7,7 @@
     android:background="@color/white"
     tools:context=".Activities.Propertys.PropertyActivity">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,16 +21,15 @@
             android:background="@drawable/gradient"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/back_toolbar_business"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="2dp"
-                android:background="@drawable/ic_back"
-                android:padding="2dp"
-                app:tint="@color/white" />
+        <ImageView
+            android:id="@+id/iv_back_toolbar"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="?selectableItemBackground"
+            android:padding="14dp"
+            android:src="@drawable/back_arrow_new"
+            app:tint="@color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -75,14 +75,15 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.9"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center"
+            android:layout_gravity="center"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 app:contentInsetStartWithNavigation="0dp">
 
@@ -92,7 +93,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginEnd="5dp"
                     android:background="@drawable/edittext_back"
                     android:gravity="center"
                     android:orientation="horizontal">
@@ -111,11 +112,12 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@null"
+                        android:inputType="text"
                         android:gravity="center_vertical"
                         android:hint="Search here..."
                         android:textColor="@color/black"
                         android:textColorHint="@color/grey_light"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/iv_search" />
 
@@ -125,13 +127,27 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_add_property"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/button_capsule"
+            android:text="Add property"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:textStyle="bold">
+        </androidx.appcompat.widget.AppCompatButton>
 
     </LinearLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="60dp"
         android:background="#f9f9f9"
         android:orientation="vertical">
 
@@ -336,14 +352,14 @@
                             android:text="Deals for you -----"/>
                     </LinearLayout>
 
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_menu"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
                         android:clipToPadding="false"
-                        android:layout_marginTop="25dp"
-                        android:paddingBottom="45dp"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                        android:paddingBottom="30dp" />
 
                 </LinearLayout>
 
@@ -351,4 +367,8 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
+
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

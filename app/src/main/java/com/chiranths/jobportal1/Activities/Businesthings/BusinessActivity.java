@@ -45,7 +45,8 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
     EditText main_edt_search2;
     private RecyclerView gridView;
     ImageView back;
-    LinearLayout btnListbusiness, llsearch;
+    AppCompatButton btnListbusiness;
+    LinearLayout  llsearch;
     ArrayList<BusinessModel> businesslist = new ArrayList<BusinessModel>();
     ArrayList<BusinessModel> filterbusinesslist = new ArrayList<BusinessModel>();
     ArrayList<Categorymmodel> categorylists = new ArrayList<Categorymmodel>();
