@@ -130,12 +130,9 @@ class ConstructionActivity : AppCompatActivity(), View.OnClickListener {
                     }
 
                     // Upcoming Event
-                    constructionAdaptor =
-                        ConstructorAdaptor(constructioninfo, this@ConstructionActivity)
-                    val elayoutManager: RecyclerView.LayoutManager =
-                        LinearLayoutManager(this@ConstructionActivity, RecyclerView.VERTICAL, false)
-                    rv_construction!!.layoutManager =
-                        GridLayoutManager(this@ConstructionActivity, 1)
+                    constructionAdaptor = ConstructorAdaptor(constructioninfo, this@ConstructionActivity)
+                    val elayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this@ConstructionActivity, RecyclerView.VERTICAL, false)
+                    rv_construction!!.layoutManager = GridLayoutManager(this@ConstructionActivity, 1)
                     rv_construction!!.itemAnimator = DefaultItemAnimator()
                     rv_construction!!.itemAnimator = DefaultItemAnimator()
                     mHandler.post { rv_construction!!.adapter = constructionAdaptor }
