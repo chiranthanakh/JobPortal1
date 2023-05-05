@@ -41,7 +41,7 @@ public class ConstructorAdaptor extends RecyclerView.Adapter<ConstructorAdaptor.
     public ConstructorAdaptor.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         context = parent.getContext();
-        View listItem= layoutInflater.inflate(R.layout.activity_travels_adaptor, parent, false);
+        View listItem= layoutInflater.inflate(R.layout.activity_construction_adaptor, parent, false);
         ConstructorAdaptor.ViewHolder viewHolder = new ConstructorAdaptor.ViewHolder(listItem);
         return viewHolder;
     }
@@ -60,7 +60,7 @@ public class ConstructorAdaptor extends RecyclerView.Adapter<ConstructorAdaptor.
         holder.tv_cost_km.setText(productInfo.getContactDetails());
         holder.tv_vehicle_number.setText(productInfo.getCost());
 
-        holder.iv_const_whatsapp_bottom.setOnClickListener(view -> {
+        holder.iv_const_call_bottom.setOnClickListener(view -> {
             utilitys.navigateCall(context,productInfo.getContactDetails(),productInfo.getName());
         });
 

@@ -108,7 +108,7 @@ public class PropertyFragment extends Fragment implements View.OnClickListener {
         iv_green_land.setOnClickListener(this);
         iv_commercial.setOnClickListener(this);
         iv_home.setOnClickListener(this);
-        iv_back_toolbar = view.findViewById(R.id.back_toolbar_business);
+        iv_back_toolbar = view.findViewById(R.id.back_toolbar_property);
         iv_back_toolbar.setOnClickListener(this);
 
         recyclarviewads = view.findViewById(R.id.rv_adds_layots2);
@@ -340,7 +340,7 @@ public class PropertyFragment extends Fragment implements View.OnClickListener {
 
                 break;
 
-            case R.id.back_toolbar_business:
+            case R.id.back_toolbar_property:
                 break;
         }
 

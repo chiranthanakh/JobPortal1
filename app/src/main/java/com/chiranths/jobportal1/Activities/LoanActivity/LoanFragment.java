@@ -104,7 +104,6 @@ public class LoanFragment extends Fragment implements View.OnClickListener {
                     for (String key : dataMap.keySet()){
                         Object data = dataMap.get(key);
                         try{
-
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
                             coroselimagelist.add(userData.get("image"));
 
@@ -239,6 +238,7 @@ public class LoanFragment extends Fragment implements View.OnClickListener {
             }
         });
     }
+
 
     @Override
     public void onClick(View view) {

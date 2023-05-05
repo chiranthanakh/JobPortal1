@@ -64,13 +64,12 @@ public class TravelsAdaptor extends RecyclerView.Adapter<TravelsAdaptor.ViewHold
         holder.tv_cost_km.setText(productInfo.getCostperKM());
         holder.tv_vehicle_number.setText(productInfo.getVehicleNumber());
 
-        holder.iv_const_whatsapp_bottom.setOnClickListener(view -> {
+        holder.iv_const_call_bottom.setOnClickListener(view -> {
             utilitys.navigateCall(context,productInfo.getContactDetails(),productInfo.getOwnerName());
         });
 
         holder.iv_const_whatsapp_bottom.setOnClickListener(view -> {
             utilitys.navigateWhatsapp(context,productInfo.getContactDetails(),productInfo.getOwnerName());
-
         });
     }
 

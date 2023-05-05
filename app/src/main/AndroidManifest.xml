@@ -79,6 +79,9 @@
             android:name=".Activities.Admin.AdminBusinessCategorys"
             android:exported="false" />
         <activity
+            android:name=".Activities.BasicActivitys.LayoutDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.Businesthings.BusinessFilter"
             android:exported="false" />
         <activity

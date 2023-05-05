@@ -107,7 +107,7 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
         iv_green_land.setOnClickListener(this);
         iv_commercial.setOnClickListener(this);
         iv_home.setOnClickListener(this);
-        iv_back_toolbar = findViewById(R.id.back_toolbar_business);
+        iv_back_toolbar = findViewById(R.id.back_toolbar_property);
         iv_back_toolbar.setOnClickListener(this);
 
         recyclarviewads = findViewById(R.id.rv_adds_layots2);
@@ -337,10 +337,9 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
                     }
                 });
                 propertyAdaptor.notifyItemRangeInserted(0, greenlandlist.size());
-
                 break;
 
-            case R.id.back_toolbar_business:
+            case R.id.back_toolbar_property:
                 finish();
                 break;
         }

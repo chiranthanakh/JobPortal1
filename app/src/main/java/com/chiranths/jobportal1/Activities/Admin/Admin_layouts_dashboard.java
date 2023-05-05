@@ -43,8 +43,8 @@ import java.util.HashMap;
 public class Admin_layouts_dashboard extends AppCompatActivity {
 
     private static final int GalleryPick = 1;
-    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,propertysize,location,number,postedBy;
-    private EditText InputProductName,Inputtype,InputProductDescription,InputProductPrice,et_size,et_location,et_number;
+    private String CategoryName, Description, Price,facing,nuOfSites,layoutArea, Pname, saveCurrentDate, saveCurrentTime,propertysize,location,number,postedBy;
+    private EditText InputProductName,Inputtype,InputProductDescription,InputProductPrice,et_size,et_location,et_number,et_no_available_sites,et_future1,et_future2,et_future3,et_future4,edt_layout_facing,edt_layout_area;
     private CheckBox cb_posted_owner,cb_posted_broker;
     private AutoCompleteTextView category;
     private String productRandomKey, downloadImageUrl,MainimageUrl;
@@ -58,7 +58,7 @@ public class Admin_layouts_dashboard extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_ads);
+        setContentView(R.layout.activity_admin_layouts);
 
         //CategoryName = "cqat";
         ProductImagesRef = FirebaseStorage.getInstance().getReference().child("layouts");
@@ -77,6 +77,14 @@ public class Admin_layouts_dashboard extends AppCompatActivity {
         et_number = findViewById(R.id.ads_contact_number);
         cb_posted_owner = findViewById(R.id.cb_posted_owner);
         cb_posted_broker = findViewById(R.id.cb_posted_broker);
+        et_no_available_sites = findViewById(R.id.no_available_sites);
+        edt_layout_facing = findViewById(R.id.edt_layout_facing);
+        edt_layout_area = findViewById(R.id.edt_layout_area);
+        et_future1 = findViewById(R.id.ads_text1);
+        et_future2 = findViewById(R.id.ads_text2);
+        et_future3 = findViewById(R.id.ads_text3);
+        et_future4 = findViewById(R.id.ads_text4);
+
 
         loadingBar = new ProgressDialog(this);
         postedBy = "owner";
@@ -163,11 +171,14 @@ public class Admin_layouts_dashboard extends AppCompatActivity {
 
         Description = InputProductDescription.getText().toString();
         Price = InputProductPrice.getText().toString();
+        nuOfSites = et_no_available_sites.getText().toString();
         Pname = InputProductName.getText().toString();
         propertysize = et_size.getText().toString();
         location = et_location.getText().toString();
         number = et_number.getText().toString();
         CategoryName = category.getText().toString();
+        facing = edt_layout_facing.getText().toString();
+        layoutArea = edt_layout_area.getText().toString();
 
         if (TextUtils.isEmpty(downloadImageUrl))
         {
@@ -294,7 +305,15 @@ public class Admin_layouts_dashboard extends AppCompatActivity {
         productMap.put("location",location);
         productMap.put("number",number);
         productMap.put("Status", 1);
+        productMap.put("sitesAvailable",nuOfSites);
         productMap.put("postedBy", postedBy);
+        productMap.put("facing",facing);
+        productMap.put("layoutarea",layoutArea);
+        productMap.put("point1",et_future1.getText().toString());
+        productMap.put("point2",et_future2.getText().toString());
+        productMap.put("point3",et_future3.getText().toString());
+        productMap.put("point4",et_future4.getText().toString());
+
 
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)

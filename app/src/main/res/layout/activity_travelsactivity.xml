@@ -248,7 +248,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/transport" />
+                    android:src="@drawable/construction" />
 
                 <TextView
                     android:layout_width="match_parent"
