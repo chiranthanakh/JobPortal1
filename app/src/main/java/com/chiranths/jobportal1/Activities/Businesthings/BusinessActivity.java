@@ -98,6 +98,7 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
             Intent intent = new Intent(BusinessActivity.this, SearchActivity.class);
             bundle.putString("searchtype", "business");
             intent.putExtras(bundle);
+
             startActivity(intent);
         });
         back.setOnClickListener(new View.OnClickListener() {
