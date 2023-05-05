@@ -17,6 +17,20 @@ android {
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    flavorDimensions "default"
+    productFlavors {
+        Dev {
+            dimension "default"
+            applicationIdSuffix ".debug"
+            buildConfigField("String", "GOOGLE_SERVICES_JSON", "\"google-services-debug.json\"")
+
+        }
+        Prod {
+            dimension "default"
+           // applicationIdSuffix ".release"
+            buildConfigField("String", "GOOGLE_SERVICES_JSON", "\"google-services-prod.json\"")
+        }
+        }
 
     buildTypes {
         release {

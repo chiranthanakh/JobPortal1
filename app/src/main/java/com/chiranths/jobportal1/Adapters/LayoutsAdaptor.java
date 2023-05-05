@@ -17,19 +17,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.chiranths.jobportal1.Activities.BasicActivitys.AdsDetailsActivity;
+import com.chiranths.jobportal1.Activities.BasicActivitys.LayoutDetailsActivity;
+import com.chiranths.jobportal1.Model.LayoutModel;
+import com.chiranths.jobportal1.Model.ProductInfo;
 import com.chiranths.jobportal1.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LayoutsAdaptor extends RecyclerView.Adapter<LayoutsAdaptor.ViewHolder> {
 
 
-    private ArrayList noticeBoardList;
+    private ArrayList<LayoutModel> layoutsList;
     private Context context;
 
-
-    public LayoutsAdaptor(ArrayList noticeBoardList, Context context) {
-        this.noticeBoardList = noticeBoardList;
+    public LayoutsAdaptor(ArrayList layoutsList, Context context) {
+        this.layoutsList = layoutsList;
         this.context = context;
 
     }
@@ -46,33 +49,27 @@ public class LayoutsAdaptor extends RecyclerView.Adapter<LayoutsAdaptor.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        final String noticeimage = String.valueOf(noticeBoardList.get(position));
+        LayoutModel layoutinfo = layoutsList.get(position);
 
-        String[] data = noticeimage.split("---");
-
-        /*Picasso.get()
-                .load(data[0])
-                //.centerCrop()
-                //.resize(150,120)
-                .into(holder.iv_corosel_image);*/
         RequestOptions options = new RequestOptions();
         options.fitCenter();
 
         Glide.with(context)
-                .load(data[0])
+                .load(layoutinfo.getImage())
                 .apply(new RequestOptions().override(1000, 500))
                 .into(holder.iv_corosel_image);
 
-        holder.tv_ads_category.setText(data[2]);
-        holder.tv_amount.setText(data[3]);
-        holder.tv_space.setText(data[4]);
-        holder.ads_location_adaptor.setText(data[6]);
+        holder.tv_ads_category.setText(layoutinfo.getCategory());
+        holder.tv_amount.setText(layoutinfo.getPrice());
+        holder.tv_space.setText(layoutinfo.getPropertysize());
+        holder.ads_location_adaptor.setText(layoutinfo.getLocation());
+        holder.tv_layout_name.setText(layoutinfo.getPname());
 
         holder.cv_card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =new Intent(context, AdsDetailsActivity.class);
-                intent.putExtra("pid",data[1]);
+                Intent intent =new Intent(context, LayoutDetailsActivity.class);
+                intent.putExtra("pid",layoutinfo.getPid());
                 intent.putExtra("page","2");
                 context.startActivity(intent);
             }
@@ -82,13 +79,13 @@ public class LayoutsAdaptor extends RecyclerView.Adapter<LayoutsAdaptor.ViewHold
 
     @Override
     public int getItemCount() {
-        return noticeBoardList.size();
+        return layoutsList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView iv_corosel_image;
-        TextView tv_ads_category,tv_amount,tv_space,ads_location_adaptor;
+        TextView tv_ads_category,tv_amount,tv_space,ads_location_adaptor,tv_layout_name;
         CardView cv_card;
         LinearLayout ll_enquiry;
 
@@ -101,6 +98,7 @@ public class LayoutsAdaptor extends RecyclerView.Adapter<LayoutsAdaptor.ViewHold
             this.tv_amount = itemView.findViewById(R.id.tv_ads_amount);
             this.tv_space = itemView.findViewById(R.id.tv_ads_spaces);
             this.ads_location_adaptor = itemView.findViewById(R.id.ads_location_adaptor);
+            this.tv_layout_name = itemView.findViewById(R.id.tv_layout_name);
            /// this.ll_enquiry = itemView.findViewById(R.id.ll_enquiry);
 
         }

@@ -1,29 +1,25 @@
 package com.chiranths.jobportal1.Activities.Construction
 
-import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
-import androidx.recyclerview.widget.RecyclerView
-import com.chiranths.jobportal1.Model.ConstructionModel
-import com.chiranths.jobportal1.Adapters.ConstructorAdaptor
-import android.os.Bundle
-import com.chiranths.jobportal1.R
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.DataSnapshot
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.DefaultItemAnimator
-import com.google.firebase.database.DatabaseError
 import android.content.Intent
+import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.ImageView
-import com.chiranths.jobportal1.Activities.BasicActivitys.TravelsListactivity
-import com.chiranths.jobportal1.Activities.BasicActivitys.Travelsactivity
-import java.lang.ClassCastException
-import java.util.ArrayList
-import java.util.HashMap
+import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.chiranths.jobportal1.Activities.BasicActivitys.SearchActivity
+import com.chiranths.jobportal1.Adapters.ConstructorAdaptor
+import com.chiranths.jobportal1.Model.ConstructionModel
+import com.chiranths.jobportal1.R
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class ConstructionActivity : AppCompatActivity(), View.OnClickListener {
     var cv_contractors: CardView? = null
@@ -55,6 +51,7 @@ class ConstructionActivity : AppCompatActivity(), View.OnClickListener {
     private var constructionAdaptor: ConstructorAdaptor? = null
     var mHandler = Handler()
     var type: String? = null
+    var llsearch : LinearLayout? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_construction)
@@ -72,6 +69,7 @@ class ConstructionActivity : AppCompatActivity(), View.OnClickListener {
         cv_carpenters = findViewById(R.id.cv_carpenters)
         cv_electricians = findViewById(R.id.cv_electricians)
         cv_plumbers = findViewById(R.id.cv_plumbers)
+        llsearch = findViewById(R.id.ll_search_construction)
         cv_contractors?.setOnClickListener(this)
         cv_architects?.setOnClickListener(this)
         cv_interior_designers?.setOnClickListener(this)
@@ -86,6 +84,14 @@ class ConstructionActivity : AppCompatActivity(), View.OnClickListener {
 
         backarrow?.setOnClickListener {
             this.finish()
+        }
+
+        llsearch?.setOnClickListener{ view: View? ->
+            val intent = Intent(this, SearchActivity::class.java)
+            val bundle = Bundle()
+            bundle.putString("searchtype", "construction")
+            intent.putExtras(bundle)
+            startActivity(intent)
         }
     }
 
@@ -134,10 +140,10 @@ class ConstructionActivity : AppCompatActivity(), View.OnClickListener {
                         ConstructorAdaptor(constructioninfo, this@ConstructionActivity)
                     val elayoutManager: RecyclerView.LayoutManager =
                         LinearLayoutManager(this@ConstructionActivity, RecyclerView.VERTICAL, false)
-                    rv_construction!!.layoutManager =
+                    rv_construction?.layoutManager =
                         GridLayoutManager(this@ConstructionActivity, 1)
-                    rv_construction!!.itemAnimator = DefaultItemAnimator()
-                    rv_construction!!.itemAnimator = DefaultItemAnimator()
+                    rv_construction?.itemAnimator = DefaultItemAnimator()
+                    rv_construction?.itemAnimator = DefaultItemAnimator()
                     mHandler.post { rv_construction!!.adapter = constructionAdaptor }
                 }
             }

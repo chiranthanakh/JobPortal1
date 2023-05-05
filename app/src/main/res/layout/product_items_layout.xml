@@ -23,16 +23,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:backgroundTint="@color/white"
-                android:elevation="3dp"
-                android:layout_gravity="center"
-                app:cardCornerRadius="5dp"
-                app:cardElevation="3dp">
-
                 <ImageView
                     android:id="@+id/product_image"
                     android:layout_width="130dp"
@@ -43,7 +33,6 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
                     android:src="@drawable/aaimage" />
-            </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:layout_width="match_parent"

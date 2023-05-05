@@ -104,8 +104,16 @@ public class HotDealsDetailsActivity extends AppCompatActivity {
                     number = products.getNumber();
                     tv_owner_broker.setText(products.getPostedby());
                     tv_typeof_post.setText(products.getType());
-                    tv_special_option1.setText(products.getText1());
-                    tv_special_option2.setText(products.getText2());
+                    if(products.getText1() == null || products.getText1().equals("")){
+                        tv_special_option1.setVisibility(View.GONE);
+                    }else {
+                        tv_special_option1.setText(products.getText1());
+                    }
+                    if(products.getText2() == null || products.getText2().equals("")){
+                        tv_special_option2.setVisibility(View.GONE);
+                    }else {
+                        tv_special_option2.setText(products.getText1());
+                    }
                     tv_posted_date.setText("Posted on "+products.getDate()+" "+"by"+" "+products.getPostedby());
                     /*if(products.getApproval().toString()=="1"){
                         tv_approval_hotdeal.setText("approved not property");

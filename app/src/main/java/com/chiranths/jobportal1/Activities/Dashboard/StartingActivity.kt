@@ -27,6 +27,7 @@ import com.chiranths.jobportal1.Activities.jobs.RoleActivity
 import com.chiranths.jobportal1.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
+import com.google.android.material.navigation.NavigationView
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -58,6 +59,7 @@ class StartingActivity : AppCompatActivity() {
     var dashboard_rented : TextView? = null
     var dashboard_hotels : TextView? = null
     var dashboard_profile : TextView? = null
+    var navigation_view : NavigationView? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,6 +101,7 @@ class StartingActivity : AppCompatActivity() {
 
     private fun initilize() {
         drawer_layout = findViewById(R.id.drawer_layout_main_d)
+        navigation_view = findViewById(R.id.nav_view_mainA)
         iv_drawer_nav = findViewById<ImageView>(R.id.iv_drawer_nav)
         btn_nav_logout = findViewById(R.id.btn_nav_logout)
         iv_nav_image = findViewById(R.id.iv_nav_image)
@@ -184,15 +187,15 @@ class StartingActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if(drawer_layout?.isVisible == true){
+        if(navigation_view?.isVisible == true){
             drawer_layout?.closeDrawer(GravityCompat.START)
         }else {
             var count = supportFragmentManager.backStackEntryCount
             if (count == 0) {
                 super.onBackPressed()
             } else {
-                super.onBackPressed()
-               // supportFragmentManager.popBackStack()
+                //super.onBackPressed()
+                supportFragmentManager.popBackStack()
             }
         }
     }

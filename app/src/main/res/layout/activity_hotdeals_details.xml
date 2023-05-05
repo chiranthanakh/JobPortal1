@@ -88,7 +88,7 @@
 
                         <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:orientation="vertical">
                         <TextView
                             android:id="@+id/tv_approval_hotdeal"
@@ -117,9 +117,9 @@
                                 android:padding="3dp">
 
                                 <ImageView
-                                    android:layout_width="10dp"
-                                    android:layout_height="10dp"
-                                    android:src="@drawable/star"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:src="@drawable/sites"
                                     app:tint="@color/white" />
 
                                 <TextView
@@ -127,6 +127,7 @@
                                     android:layout_height="20dp"
                                     android:layout_marginStart="5dp"
                                     android:text="4.5"
+                                    android:visibility="gone"
                                     android:gravity="center"
                                     android:textColor="@color/white"
                                     android:textSize="10sp" />
@@ -151,15 +152,16 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:gravity="end"
                             android:orientation="vertical">
 
                             <TextView
                                 android:id="@+id/tv_owner_broker"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="30dp"
+                                android:layout_marginEnd="50dp"
                                 android:layout_gravity="end"
                                 android:fontFamily="@font/proxima_family"
                                 android:text="Owner"
@@ -191,9 +193,9 @@
                                 android:textColor="@color/white"
                                 android:src="@drawable/whatsapp"
                                 android:layout_marginLeft="@dimen/margin_30_dp"
-                                android:layout_width="@dimen/margin_40_dp"
+                                android:layout_width="@dimen/dp_50"
                                 android:textStyle="bold"
-                                android:layout_height="40dp"
+                                android:layout_height="@dimen/dp_50"
                                 android:layout_gravity="center_vertical"/>
 
                         </LinearLayout>
@@ -285,7 +287,7 @@
 
                                     <TextView
                                         android:layout_width="100dp"
-                                        android:layout_height="15dp"
+                                        android:layout_height="20dp"
                                         android:src="@drawable/star"
                                         android:text="Size"
                                         android:textSize="14dp"
@@ -307,7 +309,42 @@
                                         android:textSize="18sp" />
                                 </LinearLayout>
 
-                        </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/info_option_bg"
+                                    android:gravity="center"
+                                    android:layout_marginLeft="@dimen/dp_20"
+                                    android:orientation="vertical"
+                                    android:padding="3dp">
+
+                                    <TextView
+                                        android:layout_width="100dp"
+                                        android:layout_height="20dp"
+                                        android:src="@drawable/star"
+                                        android:text="Facing"
+                                        android:textSize="14dp"
+                                        android:textColor="@color/purple_700"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:textStyle="bold"
+                                        app:tint="@color/white" />
+
+                                    <TextView
+                                        android:id="@+id/hot_facing"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="20dp"
+                                        android:layout_marginStart="5dp"
+                                        android:text="East facing"
+                                        android:layout_marginTop="@dimen/margin_10_dp"
+                                        android:gravity="center"
+                                        android:textColor="@color/black"
+                                        android:textSize="18sp" />
+                                </LinearLayout>
+
+
+                            </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"

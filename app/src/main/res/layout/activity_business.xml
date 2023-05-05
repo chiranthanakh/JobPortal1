@@ -59,43 +59,44 @@
                 android:paddingEnd="10dp"
                 android:textColor="@color/white"
                 android:background="@drawable/button_capsule"
-                android:text="Add /n Business"
+                android:text="Add \n Business"
                 android:textStyle="bold" />
 
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/search"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/purple_700">
-
-        <androidx.appcompat.widget.Toolbar
+        <LinearLayout
+            android:id="@+id/search"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            app:contentInsetStartWithNavigation="0dp">
+            android:layout_height="match_parent"
+            android:background="@color/purple_500">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:background="@drawable/gradient"
+                app:contentInsetStartWithNavigation="0dp">
 
                 <LinearLayout
                     android:id="@+id/ll_search_business"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="5dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/edittext_back"
-                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/iv_search"
-                        android:src="@drawable/ic_search_location"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
                         android:padding="13dp"
-                        app:tint="@color/grey"/>
+                        android:src="@drawable/ic_search_location"
+                        app:tint="@color/grey" />
 
                     <EditText
                         android:id="@+id/main_edt_search2"
@@ -110,7 +111,7 @@
                         android:focusable="false"
                         android:textColor="@color/black"
                         android:textColorHint="@color/grey_light"
-                        android:textSize="14sp"
+                        android:textSize="18sp"
                         android:cursorVisible="false"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/iv_search" />
@@ -118,6 +119,7 @@
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
+                        android:layout_marginTop="5dp"
                         android:layout_marginEnd="3dp"
                         android:background="@drawable/thumb"
                         android:backgroundTint="@color/purple_500"

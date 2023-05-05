@@ -27,15 +27,12 @@ import java.util.ArrayList;
 
 public class AdsAdaptor extends RecyclerView.Adapter<AdsAdaptor.ViewHolder> {
 
-
     private ArrayList noticeBoardList;
     private Context context;
-
 
     public AdsAdaptor(ArrayList noticeBoardList, Context context) {
         this.noticeBoardList = noticeBoardList;
         this.context = context;
-
     }
 
     @NonNull
@@ -63,7 +60,6 @@ public class AdsAdaptor extends RecyclerView.Adapter<AdsAdaptor.ViewHolder> {
         holder.tv_amount.setText(data[3]);
         holder.tv_space.setText(data[4]);
         holder.ads_location_adaptor.setText(data[6]);
-
 
         if(data[7].equals("1")){
             holder.tv_ads_verification.setText("Not Verified");
@@ -106,8 +102,8 @@ public class AdsAdaptor extends RecyclerView.Adapter<AdsAdaptor.ViewHolder> {
             this.tv_amount = itemView.findViewById(R.id.tv_ads_amount);
             this.tv_space = itemView.findViewById(R.id.tv_ads_spaces);
             this.ads_location_adaptor = itemView.findViewById(R.id.ads_location_adaptor);
-            this.tv_ads_verification = itemView.findViewById(R.id.tv_ads_verification);
-           /// this.ll_enquiry = itemView.findViewById(R.id.ll_enquiry);
+            this.tv_ads_verification = itemView.findViewById(R.id.tv_layout_name);
+            //this.ll_enquiry = itemView.findViewById(R.id.ll_enquiry);
 
         }
     }

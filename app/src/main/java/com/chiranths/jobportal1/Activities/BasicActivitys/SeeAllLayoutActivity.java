@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chiranths.jobportal1.Activities.Propertys.PropertyActivity;
 import com.chiranths.jobportal1.Adapters.AdsAdaptor;
+import com.chiranths.jobportal1.Adapters.LayoutsAdaptor;
 import com.chiranths.jobportal1.Adapters.SeeallLayouts;
 import com.chiranths.jobportal1.R;
 import com.google.firebase.database.DataSnapshot;
@@ -27,18 +29,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
 public class SeeAllLayoutActivity extends AppCompatActivity implements View.OnClickListener {
-
-
-
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     List layoutlist = new ArrayList();
     private Handler mHandler = new Handler();
     SeeallLayouts layoutAdaptor;
+    ArrayList layoutslists = new ArrayList();
+    SeeallLayouts layoutsAdaptor;
+    ImageView back_toolbar_layouts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,19 +69,25 @@ public class SeeAllLayoutActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void run() {
                 fetchads();
+                  //fetchlayouts();
             }
         });
 
     }
 
     private void initilize() {
-
-
         recyclerView = findViewById(R.id.recyclarview_alllayouts);
       //  recyclerView.setHasFixedSize(true);
         GridLayoutManager mgrid = new GridLayoutManager(this,1);
-
         recyclerView.setLayoutManager(mgrid);
+        back_toolbar_layouts = findViewById(R.id.back_toolbar_layouts);
+
+        back_toolbar_layouts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void fetchads() {
@@ -134,6 +143,67 @@ public class SeeAllLayoutActivity extends AppCompatActivity implements View.OnCl
             }
         });
     }
+
+    private void fetchlayouts() {
+        DatabaseReference adsimage = FirebaseDatabase.getInstance().getReference().child("layoutsforyou");
+        adsimage.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    layoutslists.clear();
+                    HashMap<String, Object> dataMap = (HashMap<String, Object>) snapshot.getValue();
+                    for (String key : dataMap.keySet()) {
+                        Object data = dataMap.get(key);
+                        try {
+                            HashMap userData = (HashMap) data;
+                            layoutlist.add(userData.get("image")+"!!"+userData.get("pid")+"---"+userData.get("description")+"---"+
+                                    userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
+                                    +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type"));
+
+                            layoutlist.add(userData.get("image")+"!!"+userData.get("pid")+"---"+userData.get("description")+"---"+
+                                    userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
+                                    +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number"));
+
+
+                        } catch (ClassCastException cce) {
+
+                            try {
+                                String mString = String.valueOf(dataMap.get(key));
+                                //addTextToView(mString);
+                            } catch (ClassCastException cce2) {
+
+                            }
+                        }
+                    }
+                    Collections.shuffle(layoutslists);
+                    layoutsAdaptor = new SeeallLayouts(layoutslists, SeeAllLayoutActivity.this);
+                    RecyclerView.LayoutManager n1layoutManager = new LinearLayoutManager(SeeAllLayoutActivity.this, RecyclerView.HORIZONTAL, false);
+                    recyclerView.setLayoutManager(n1layoutManager);
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+
+                          /*  if (progressDialog != null) {
+                                if (progressDialog.isShowing()) {
+                                    progressDialog.dismiss();
+                                }
+                            }*/
+                            recyclerView.setAdapter(layoutsAdaptor);
+                          //  layoutsAdaptor.notifyItemRangeInserted(0, adslist.size());
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 
     @Override
     public void onClick(View view) {

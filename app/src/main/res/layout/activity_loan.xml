@@ -42,9 +42,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/lato_bold"
-                    android:text="Select Your Loan Type"
+                    android:text="Apply here for loans "
                     android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:layout_marginStart="10dp"
+                    android:textSize="20sp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </LinearLayout>

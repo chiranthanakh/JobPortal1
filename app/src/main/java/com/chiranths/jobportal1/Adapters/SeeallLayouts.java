@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.chiranths.jobportal1.Activities.BasicActivitys.AdsDetailsActivity;
+import com.chiranths.jobportal1.Activities.BasicActivitys.LayoutDetailsActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyDetailsActivity;
 import com.chiranths.jobportal1.R;
 
@@ -63,8 +64,8 @@ public class SeeallLayouts extends RecyclerView.Adapter<SeeallLayouts.ViewHolder
                // Intent intent =new Intent(context, PropertyDetailsActivity.class);
                // intent.putExtra("pid",data[0]);
                // context.startActivity(intent);
-                Intent intent =new Intent(context, AdsDetailsActivity.class);
-                intent.putExtra("pid",data[1]);
+                Intent intent =new Intent(context, LayoutDetailsActivity.class);
+                intent.putExtra("pid",data[0]);
                 intent.putExtra("page","2");
                 context.startActivity(intent);
             }

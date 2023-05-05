@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,6 +38,7 @@ public class UpcommingProjects extends AppCompatActivity implements View.OnClick
     List<PropertytModel> layoutlist = new ArrayList<PropertytModel>();
     private Handler mHandler = new Handler();
     AllUpcommingadaptor layoutAdaptor;
+    ImageView back_toolbar_up;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,14 +73,21 @@ public class UpcommingProjects extends AppCompatActivity implements View.OnClick
     private void initilize() {
 
         recyclerView = findViewById(R.id.recyclarview_allupcomming);
+        back_toolbar_up = findViewById(R.id.back_toolbar_up);
         //  recyclerView.setHasFixedSize(true);
         GridLayoutManager mgrid = new GridLayoutManager(this,1);
 
         recyclerView.setLayoutManager(mgrid);
+
+        back_toolbar_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void fetchads() {
-
         //PropertytModel propertytModel = new PropertytModel()
         DatabaseReference adsimage = FirebaseDatabase.getInstance().getReference().child("adsforyou");
 

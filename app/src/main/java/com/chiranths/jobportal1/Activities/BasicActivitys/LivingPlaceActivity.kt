@@ -28,6 +28,7 @@ class LivingPlaceActivity : AppCompatActivity() {
     var mHandler = Handler()
     var backButton: ImageView? = null
     var type: String? = null
+    var iv_back_leving : ImageView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_center_home)
@@ -35,7 +36,12 @@ class LivingPlaceActivity : AppCompatActivity() {
         type = bundle?.getString("center")
         //backButton = findViewById(R.id.back_tool)
         rv_center_prop = findViewById(R.id.rv_center_prop)
+        iv_back_leving = findViewById(R.id.iv_back_leving);
         AsyncTask.execute { fetchdata() }
+
+        iv_back_leving?.setOnClickListener {
+            finish()
+        }
     }
 
     private fun fetchdata() {

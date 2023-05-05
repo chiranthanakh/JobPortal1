@@ -42,6 +42,7 @@ import com.chiranths.jobportal1.Activities.Construction.ConstructionActivity;
 import com.chiranths.jobportal1.Activities.BasicActivitys.LivingPlaceActivity;
 import com.chiranths.jobportal1.Activities.BasicActivitys.LoginActivity;
 import com.chiranths.jobportal1.Activities.BasicActivitys.Travelsactivity;
+import com.chiranths.jobportal1.Model.LayoutModel;
 import com.chiranths.jobportal1.Model.ProductInfo;
 import com.chiranths.jobportal1.Activities.BasicActivitys.SearchActivity;
 import com.chiranths.jobportal1.Activities.BasicActivitys.SeeAllLayoutActivity;
@@ -112,7 +113,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
     ArrayList<Corosolmodel> coroselimagelist = new ArrayList<Corosolmodel>();
     ArrayList adslist = new ArrayList();
-    ArrayList layoutslists = new ArrayList();
+    ArrayList<LayoutModel> layoutslists = new ArrayList();
     ArrayList<ProductInfo> productinfolist = new ArrayList();
     private int[] images = {R.drawable.banner1,
             R.drawable.banner1, R.drawable.banner1};
@@ -148,7 +149,6 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
     private void initilize(View view) {
         iv_bell = view.findViewById(R.id.iv_bell);
-
         iv_bell.setOnClickListener(this);
         cv_jobs = view.findViewById(R.id.cv_jobs);
         cv_servicess = view.findViewById(R.id.cv_servicess1);
@@ -357,7 +357,9 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                         Object data = dataMap.get(key);
                         try {
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
-                            layoutslists.add(userData.get("image") + "---" + userData.get("pid") + "---" + userData.get("category") + "---" + userData.get("price") + "---" + userData.get("propertysize") + "---" + userData.get("number") + "---" + userData.get("location"));
+
+                            layoutslists.add( new LayoutModel(String.valueOf(userData.get("image")), String.valueOf(userData.get("image2")), String.valueOf(userData.get("pid")), String.valueOf(userData.get("description")), String.valueOf(userData.get("date")),String.valueOf(userData.get("category")), String.valueOf(userData.get("price")),String.valueOf(userData.get("pname")),
+                                    String.valueOf(userData.get("propertysize")), String.valueOf(userData.get("location")),String.valueOf(userData.get("number")),String.valueOf(userData.get("Status")), String.valueOf(userData.get("sitesAvailable")),String.valueOf(userData.get("postedBy")),String.valueOf(userData.get("facing")),String.valueOf(userData.get("layoutarea")),String.valueOf(userData.get("point1")), String.valueOf(userData.get("point2")),String.valueOf(userData.get("point3")) ,String.valueOf(userData.get("point4"))) );
 
                         } catch (ClassCastException cce) {
 
@@ -378,7 +380,6 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
-
                             if (progressDialog != null) {
                                 if (progressDialog.isShowing()) {
                                     progressDialog.dismiss();
