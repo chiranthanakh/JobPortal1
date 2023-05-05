@@ -341,27 +341,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
                         android:background="@color/white"
                         android:orientation="vertical"
                         app:layout_constraintTop_toTopOf="parent">
 
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:background="@color/white"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            app:layout_constraintTop_toTopOf="parent">
-
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/rv_home_event"
-                                android:layout_width="370dp"
+                                android:layout_width="match_parent"
+                                android:layout_marginStart="3dp"
+                                android:layout_marginEnd="3dp"
                                 android:layout_height="160dp"
                                 android:layout_gravity="center" />
 
-                        </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -404,16 +397,15 @@
 
                                 <ImageView
                                     android:layout_width="match_parent"
-                                    android:layout_height="30dp"
+                                    android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginTop="5dp"
-                                    android:layout_marginBottom="5dp"
-                                    android:src="@drawable/rent" />
+                                    android:layout_marginBottom="2dp"
+                                    android:src="@drawable/ic_rent" />
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
                                     android:fontFamily="@font/lato"
                                     android:gravity="center"
                                     android:maxLines="2"
@@ -436,13 +428,12 @@
                                     android:layout_height="30dp"
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginTop="5dp"
-                                    android:layout_marginBottom="5dp"
-                                    android:src="@drawable/building" />
+                                    android:layout_marginBottom="2dp"
+                                    android:src="@drawable/ic_hotel" />
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
                                     android:fontFamily="@font/lato"
                                     android:gravity="center"
                                     android:maxLines="2"
@@ -465,13 +456,12 @@
                                     android:layout_height="30dp"
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginTop="5dp"
-                                    android:layout_marginBottom="5dp"
-                                    android:src="@drawable/hotel" />
+                                    android:layout_marginBottom="2dp"
+                                    android:src="@drawable/ic_travel" />
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
                                     android:fontFamily="@font/lato"
                                     android:gravity="center"
                                     android:maxLines="2"
@@ -494,13 +484,12 @@
                                     android:layout_height="30dp"
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginTop="5dp"
-                                    android:layout_marginBottom="5dp"
-                                    android:src="@drawable/ic_rent_icon" />
+                                    android:layout_marginBottom="2dp"
+                                    android:src="@drawable/ic_construction" />
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
                                     android:fontFamily="@font/lato"
                                     android:gravity="center"
                                     android:maxLines="2"

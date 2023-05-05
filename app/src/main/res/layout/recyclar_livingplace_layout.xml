@@ -42,6 +42,7 @@
                             android:id="@+id/iv_living_image"
                             android:src="@drawable/aaimage"
                             android:layout_width="@dimen/dp_150"
+                            android:scaleType="fitXY"
                             android:layout_height="@dimen/dp_150" />
                     </LinearLayout>
 
