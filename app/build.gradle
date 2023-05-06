@@ -17,7 +17,7 @@ android {
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    flavorDimensions "default"
+   /* flavorDimensions "default"
     productFlavors {
         Dev {
             dimension "default"
@@ -30,7 +30,7 @@ android {
            // applicationIdSuffix ".release"
             buildConfigField("String", "GOOGLE_SERVICES_JSON", "\"google-services-prod.json\"")
         }
-        }
+        }*/
 
     buildTypes {
         release {
@@ -96,7 +96,7 @@ dependencies {
 
     // Add the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation 'com.google.firebase:firebase-messaging:18.0.0'
+    implementation 'com.google.firebase:firebase-messaging:23.1.2'
     implementation 'com.google.firebase:firebase-config-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
 

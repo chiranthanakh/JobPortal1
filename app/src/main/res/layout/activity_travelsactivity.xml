@@ -66,8 +66,8 @@
             android:layout_weight="1"
             app:cardElevation="2dp"
             android:layout_margin="5dp"
-            app:cardCornerRadius="5dp"
-            android:layout_height="80dp">
+            app:cardCornerRadius="3dp"
+            android:layout_height="60dp">
 
             <LinearLayout
                 android:id="@+id/ll_car"
@@ -78,15 +78,14 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
                     android:src="@drawable/car" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/proxima_nova_bold"
                     android:gravity="center"
                     android:text="Car"
@@ -104,8 +103,8 @@
             android:layout_weight="1"
             app:cardElevation="2dp"
             android:layout_margin="5dp"
-            app:cardCornerRadius="5dp"
-            android:layout_height="80dp">
+            app:cardCornerRadius="3dp"
+            android:layout_height="60dp">
 
             <LinearLayout
                 android:id="@+id/ll_tempotravel"
@@ -116,15 +115,14 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
                     android:src="@drawable/tempo" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Tempo Travel"
                     android:textColor="@color/black"
@@ -141,8 +139,8 @@
             android:layout_weight="1"
             app:cardElevation="2dp"
             android:layout_margin="5dp"
-            app:cardCornerRadius="5dp"
-            android:layout_height="80dp">
+            app:cardCornerRadius="3dp"
+            android:layout_height="60dp">
 
             <LinearLayout
                 android:id="@+id/ll_bus"
@@ -153,15 +151,14 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
                     android:src="@drawable/bus" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Bus"
                     android:textColor="@color/black"
@@ -194,8 +191,8 @@
             android:layout_weight="1"
             app:cardElevation="2dp"
             android:layout_margin="5dp"
-            app:cardCornerRadius="5dp"
-            android:layout_height="80dp">
+            app:cardCornerRadius="3dp"
+            android:layout_height="60dp">
 
             <LinearLayout
                 android:id="@+id/ll_auto"
@@ -206,15 +203,14 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
                     android:src="@drawable/auto" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Auto"
                     android:textColor="@color/black"
@@ -232,8 +228,8 @@
             android:layout_weight="1"
             app:cardElevation="2dp"
             android:layout_margin="5dp"
-            app:cardCornerRadius="5dp"
-            android:layout_height="80dp">
+            app:cardCornerRadius="3dp"
+            android:layout_height="60dp">
 
             <LinearLayout
                 android:id="@+id/ll_transports"
@@ -244,15 +240,15 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:src="@drawable/construction" />
+                    android:layout_marginBottom="1dp"
+                    android:src="@drawable/transport" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Transport"
                     android:textColor="@color/black"
@@ -270,8 +266,8 @@
             android:layout_weight="1"
             app:cardElevation="2dp"
             android:layout_margin="5dp"
-            app:cardCornerRadius="5dp"
-            android:layout_height="80dp">
+            app:cardCornerRadius="3dp"
+            android:layout_height="60dp">
 
             <LinearLayout
                 android:id="@+id/ll_heavy_vehicles"
@@ -282,15 +278,14 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
                     android:src="@drawable/heavy_ve" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:maxLines="2"
                     android:text="Heavy Vehicle"

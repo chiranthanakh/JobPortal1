@@ -16,9 +16,9 @@
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
         android:backgroundTint="@color/white"
-        android:outlineAmbientShadowColor="@color/purple_500"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="3dp">
+        app:cardCornerRadius="2dp"
+        android:elevation="2dp"
+        app:cardElevation="2dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -44,6 +44,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="5dp"
                         android:layout_marginBottom="5dp"
+                        android:scaleType="fitXY"
                         android:src="@drawable/aaimage" />
                 </LinearLayout>
 
@@ -64,24 +65,37 @@
                         android:gravity="center"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1.2"
-                            android:text="Name              :"
-                            android:textColor="@color/black"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:id="@+id/travel_vehicle_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="3dp"
+                            android:layout_gravity="center_vertical"
                             android:layout_weight="1"
-                            android:text=""
-                            android:fontFamily="@font/proxima_nova_semi_bold"
-                            android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Vehicle Name:"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/travel_vehicle_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/proxima_nova_semi_bold"
+                                android:text="Vehicle Name"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -93,24 +107,37 @@
                         android:layout_marginEnd="10dp"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1.2"
-                            android:text="Product           :"
-                            android:textColor="@color/black"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:id="@+id/tv_travel_category"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="3dp"
+                            android:layout_gravity="center_vertical"
                             android:layout_weight="1"
-                            android:text=""
-                            android:fontFamily="@font/proxima_nova_semi_bold"
-                            android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Vehicle Type:"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_travel_category"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/proxima_nova_semi_bold"
+                                android:text="Cab"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -122,26 +149,39 @@
                         android:layout_marginEnd="10dp"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.2"
-                            android:text="Starting Price :"
-                            android:textColor="@color/black"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:id="@+id/tv_cost_km"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
+                            android:layout_gravity="center_vertical"
                             android:layout_weight="1"
-                            android:drawableStart="@drawable/ic_rupees_ads"
-                            android:drawablePadding="3dp"
-                            android:text=""
-                            android:fontFamily="@font/proxima_nova_semi_bold"
-                            android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Price per Km:"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_cost_km"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_rupees_ads"
+                                android:drawablePadding="3dp"
+                                android:fontFamily="@font/proxima_nova_semi_bold"
+                                android:text="1233"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -153,72 +193,84 @@
                         android:layout_marginEnd="10dp"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.3"
-                            android:text="Location          :"
-                            android:lines="1"
-                            android:textColor="@color/black"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:id="@+id/tv_vehicle_number"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
+                            android:layout_gravity="center_vertical"
                             android:layout_weight="1"
-                            android:text=""
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:fontFamily="@font/proxima_nova_semi_bold" />
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Vehicle number"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_vehicle_number"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/proxima_nova_semi_bold"
+                                android:text="Vehicle number"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+                        </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="end"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginBottom="@dimen/margin_10dp"
-                        android:background="@drawable/button_capsule"
+                        android:background="@drawable/spinner_background"
                         android:gravity="center"
                         android:orientation="horizontal">
 
                         <TextView
+                            android:layout_weight="1"
                             android:id="@+id/tv_contect_whome"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="@dimen/dp_30"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
+                            android:gravity="center|start"
+                            android:layout_marginEnd="3dp"
                             android:text="Contact:"
-                            android:textColor="@color/white" />
+                            android:textColor="#000000" />
 
 
                         <ImageView
                             android:id="@+id/iv_const_call_bottom"
                             android:layout_width="wrap_content"
-                            android:layout_height="30dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:padding="9dp"
+                            android:layout_marginEnd="3dp"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center"
                             android:src="@drawable/ic_call"
-                            app:tint="@color/white" />
+                            app:tint="@color/green" />
 
 
                         <ImageView
                             android:id="@+id/iv_const_whatsapp_bottom"
-                            android:layout_width="25dp"
-                            android:layout_height="30dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginEnd="10dp"
-                            android:layout_weight="1"
                             android:gravity="center"
-                            android:src="@drawable/whatsapp"
+                            android:padding="10dp"
+                            android:layout_marginStart="3dp"
+                            android:src="@drawable/whatapp"
                             android:text="Call Us"
+                            app:tint="@color/green"
                             android:textColor="@color/white"
                             android:textStyle="bold"
                             android:visibility="visible" />

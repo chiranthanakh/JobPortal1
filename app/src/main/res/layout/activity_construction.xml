@@ -64,11 +64,11 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_contractors"
             android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:layout_margin="5dp"
+            android:layout_height="60dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:elevation="2dp"
-            app:cardCornerRadius="5dp"
+            app:cardCornerRadius="3dp"
             app:cardElevation="2dp">
 
             <LinearLayout
@@ -79,7 +79,7 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
@@ -87,12 +87,12 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/proxima_nova_bold"
                     android:gravity="center"
                     android:text="Contractors"
                     android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:textSize="11sp" />
 
             </LinearLayout>
 
@@ -102,11 +102,11 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_architects"
             android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:layout_margin="5dp"
+            android:layout_height="60dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:elevation="2dp"
-            app:cardCornerRadius="5dp"
+            app:cardCornerRadius="3dp"
             app:cardElevation="2dp">
 
             <LinearLayout
@@ -117,7 +117,7 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
@@ -131,7 +131,7 @@
                     android:gravity="center"
                     android:text="Architect"
                     android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:textSize="11sp" />
 
             </LinearLayout>
 
@@ -140,11 +140,11 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_interior_designers"
             android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:layout_margin="5dp"
+            android:layout_height="60dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:elevation="2dp"
-            app:cardCornerRadius="5dp"
+            app:cardCornerRadius="3dp"
             app:cardElevation="2dp">
 
             <LinearLayout
@@ -155,7 +155,7 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
@@ -168,7 +168,7 @@
                     android:gravity="center"
                     android:text="Interior Designers"
                     android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:textSize="11sp" />
 
             </LinearLayout>
 
@@ -190,11 +190,11 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_construction_meterials"
             android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:layout_margin="5dp"
+            android:layout_height="60dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:elevation="2dp"
-            app:cardCornerRadius="5dp"
+            app:cardCornerRadius="3dp"
             app:cardElevation="2dp">
 
             <LinearLayout
@@ -205,7 +205,7 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
@@ -218,7 +218,7 @@
                     android:gravity="center"
                     android:text="Construction Materials"
                     android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:textSize="11sp" />
 
             </LinearLayout>
 
@@ -228,11 +228,11 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_hardware_welders"
             android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:layout_margin="5dp"
+            android:layout_height="60dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:elevation="2dp"
-            app:cardCornerRadius="5dp"
+            app:cardCornerRadius="3dp"
             app:cardElevation="2dp">
 
             <LinearLayout
@@ -243,7 +243,7 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
@@ -256,7 +256,7 @@
                     android:gravity="center"
                     android:text="hardware / Welders"
                     android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:textSize="11sp" />
 
             </LinearLayout>
 
@@ -265,11 +265,11 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_painters"
             android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:layout_margin="5dp"
+            android:layout_height="60dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:elevation="2dp"
-            app:cardCornerRadius="5dp"
+            app:cardCornerRadius="3dp"
             app:cardElevation="2dp">
 
             <LinearLayout
@@ -280,7 +280,7 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
@@ -293,7 +293,7 @@
                     android:gravity="center"
                     android:text="Painters"
                     android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:textSize="11sp" />
 
             </LinearLayout>
 
@@ -315,11 +315,11 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_carpenters"
             android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:layout_margin="5dp"
+            android:layout_height="60dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:elevation="2dp"
-            app:cardCornerRadius="5dp"
+            app:cardCornerRadius="3dp"
             app:cardElevation="2dp">
 
             <LinearLayout
@@ -330,7 +330,7 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
@@ -343,7 +343,7 @@
                     android:gravity="center"
                     android:text="Carpenters"
                     android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:textSize="11sp" />
 
             </LinearLayout>
 
@@ -353,11 +353,11 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_electricians"
             android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:layout_margin="5dp"
+            android:layout_height="60dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:elevation="2dp"
-            app:cardCornerRadius="5dp"
+            app:cardCornerRadius="3dp"
             app:cardElevation="2dp">
 
             <LinearLayout
@@ -368,7 +368,7 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
@@ -381,7 +381,7 @@
                     android:gravity="center"
                     android:text="Electrician"
                     android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:textSize="11sp" />
             </LinearLayout>
 
 
@@ -390,11 +390,11 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_plumbers"
             android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:layout_margin="5dp"
+            android:layout_height="60dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:elevation="2dp"
-            app:cardCornerRadius="5dp"
+            app:cardCornerRadius="3dp"
             app:cardElevation="2dp">
 
             <LinearLayout
@@ -406,7 +406,7 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
@@ -419,7 +419,7 @@
                     android:gravity="center"
                     android:text="Plumber"
                     android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:textSize="11sp" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -441,7 +441,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="365dp">
+        android:layout_marginTop="305dp">
 
         <LinearLayout
             android:id="@+id/ll_field"

@@ -22,23 +22,23 @@
 
         <ImageView
             android:id="@+id/back_toolbar_business"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginTop="2dp"
             android:background="?selectableItemBackground"
-            android:padding="2dp"
+            android:padding="12dp"
             android:src="@drawable/back_arrow"
             app:tint="@color/white" />
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:text="Business"
             android:layout_gravity="center"
             android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
-            android:textSize="@dimen/dp_30"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@color/white"/>
 
