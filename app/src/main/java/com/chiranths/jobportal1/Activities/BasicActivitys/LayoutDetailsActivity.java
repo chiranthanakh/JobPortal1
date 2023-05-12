@@ -45,7 +45,7 @@ public class LayoutDetailsActivity extends AppCompatActivity {
         carouselView =  findViewById(R.id.ads_details_carouselView);
         tv_prop_type = findViewById(R.id.tv_prop_type);
         iv_back_ads = findViewById(R.id.iv_back_ads);
-        tv_ads_posted = findViewById(R.id.tv_ads_posted);
+        //tv_ads_posted = findViewById(R.id.tv_ads_posted);
         tv_future1 = findViewById(R.id.tv_futures1);
         tv_future2 = findViewById(R.id.tv_futures2);
         tv_future3 = findViewById(R.id.tv_futures3);
@@ -53,7 +53,7 @@ public class LayoutDetailsActivity extends AppCompatActivity {
         tv_no_sites = findViewById(R.id.tv_sites_available);
         tv_layout_facing = findViewById(R.id.tv_layout_facing);
         tv_ads_details_verify = findViewById(R.id.ads_details_verifyed);
-        ads_details_not_verified = findViewById(R.id.ads_details_not_verified);
+       // ads_details_not_verified = findViewById(R.id.ads_details_not_verified);
         tv_ads_posted_on = findViewById(R.id.tv_ads_posted_on);
         tv_contact_type = findViewById(R.id.tv_contact_who);
         tv_place_location = findViewById(R.id.ads_place_location);
@@ -118,7 +118,7 @@ public class LayoutDetailsActivity extends AppCompatActivity {
                     if(test == 1){
                         tv_ads_details_verify.setVisibility(View.GONE);
                     }else {
-                        ads_details_not_verified.setVisibility(View.GONE);
+                        //ads_details_not_verified.setVisibility(View.GONE);
                     }
                     number = products.getNumber();
                     tv_contact_type.setText(products.getPostedBy());

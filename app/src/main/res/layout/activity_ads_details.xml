@@ -163,19 +163,106 @@
                                 android:textSize="12sp"
                                 app:layout_constraintTop_toTopOf="parent" />
 
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/product_price_details"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/proxima_nova_bold"
+                                android:gravity="center|start"
+                                android:text="Rs. 50,3000"
+                                android:textColor="@color/black"
+                                android:textSize="22sp" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="10sp"
+                                android:padding="8dp"
+                                app:tint="@color/red" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="10sp"
+                                android:padding="5dp"
+                                app:tint="@color/green" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="10sp"
+                                android:padding="8dp"
+                                android:src="@drawable/location" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/product_name_details"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/proxima_nova_semi_bold"
+                                android:text="Sai Manor Kripa Apartment"
+                                android:textColor="@color/black"
+                                android:textStyle="bold"
+                                android:textSize="18sp" />
+
                             <TextView
                                 android:id="@+id/tv_ads_posted_on"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="end"
-                                android:gravity="end"
-                                android:layout_marginStart="150dp"
-                                android:layout_marginEnd="10dp"
-                                android:fontFamily="@font/proxima_family"
-                                android:text="Category"
-                                android:textColor="@color/black"
-                                android:textSize="12sp"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/proxima_nova_semi_bold"
+                                android:gravity="center"
+                                android:text="Posted on May 07,22"
+                                android:textColor="@color/grey"
+                                android:textSize="12sp" />
+                            <TextView
+                                android:id="@+id/ads_details_verifyed"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/approved"
+                                android:drawablePadding="2dp"
+                                android:fontFamily="@font/proxima_nova_semi_bold"
+                                android:gravity="center"
+                                android:text="VERIFIED PROPERTY"
+                                android:textColor="#0dba43"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:orientation="vertical">
+
+                            <TextView
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/proxima_nova_bold"
+                                android:text="Details"
+                                android:textColor="#0E5E2B"
+                                android:layout_marginTop="@dimen/dp_5"
+                                android:textSize="18sp" />
+
                         </LinearLayout>
 
                     <LinearLayout
@@ -185,58 +272,9 @@
                         android:background="@drawable/rating_back"
                         android:padding="3dp">
 
-                        <TextView
-                            android:id="@+id/ads_details_verifyed"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawableStart="@drawable/approved"
-                            android:drawablePadding="2dp"
-                            android:fontFamily="@font/proxima_nova_semi_bold"
-                            android:gravity="center"
-                            android:text="VERIFIED PROPERTY"
-                            android:textColor="#0dba43"
-                            android:textSize="10sp" />
-
-                        <TextView
-                            android:id="@+id/ads_details_not_verified"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawableStart="@drawable/approved"
-                            android:drawablePadding="2dp"
-                            android:fontFamily="@font/proxima_nova_semi_bold"
-                            android:gravity="center"
-                            android:text=" Not Verified Property"
-                            android:textColor="#ebe534"
-                            android:textSize="10sp" />
-
-                        <TextView
-                            android:id="@+id/tv_ads_posted"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawablePadding="2dp"
-                            android:layout_marginLeft="80dp"
-                            android:fontFamily="@font/proxima_nova_semi_bold"
-                            android:gravity="center"
-                            android:text="VERIFIED PROPERTY"
-                            android:textColor="#eb8634" />
 
                     </LinearLayout>
 
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/product_name_details"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/proxima_nova_semi_bold"
-                                android:textColor="@color/black"
-                                android:textSize="16sp" />
-                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_marginTop="@dimen/dp_20"
@@ -244,78 +282,257 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="#E91E63"/>
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_gravity="center"
                                 android:gravity="center"
                                 android:orientation="horizontal">
 
                                 <LinearLayout
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:orientation="vertical"
-                                    android:padding="3dp">
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1">
 
                                     <TextView
-                                        android:layout_width="150dp"
-                                        android:layout_height="15dp"
-                                        android:src="@drawable/star"
-                                        android:text="Price"
-                                        android:layout_gravity="center"
-                                        android:gravity="center"
-                                        android:textSize="14dp"
-                                        android:textColor="@color/purple_700"
-                                        android:textStyle="bold"
-                                        app:tint="@color/white" />
-
-                                    <TextView
-                                        android:id="@+id/product_price_details"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="20dp"
-                                        android:layout_marginStart="5dp"
-                                        android:text="4.5"
-                                        android:layout_marginTop="@dimen/margin_10_dp"
-                                        android:gravity="center"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:fontFamily="@font/proxima_nova_regular"
+                                        android:gravity="start|center"
+                                        android:text="Ownership :"
                                         android:textColor="@color/black"
-                                        android:textSize="18sp" />
+                                        android:textSize="14sp" />
                                 </LinearLayout>
 
                                 <LinearLayout
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:layout_marginLeft="@dimen/dp_20"
-                                    android:orientation="vertical"
-                                    android:padding="3dp">
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1">
 
                                     <TextView
-                                        android:layout_width="150dp"
-                                        android:layout_height="15dp"
-                                        android:src="@drawable/star"
-                                        android:text="Size"
-                                        android:textSize="14dp"
-                                        android:textColor="@color/purple_700"
-                                        android:layout_gravity="center"
-                                        android:gravity="center"
-                                        android:textStyle="bold"
-                                        app:tint="@color/white" />
+                                        android:id="@+id/tv_ads_ownership"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:fontFamily="@font/lato_bold"
+                                        android:gravity="center|start"
+                                        android:maxLines="2"
+                                        android:textColor="@color/black"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="10dp"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:fontFamily="@font/proxima_nova_regular"
+                                        android:gravity="start|center"
+                                        android:text="Posted By :"
+                                        android:textColor="@color/black"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:id="@+id/tv_ads_posted"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:fontFamily="@font/lato_bold"
+                                        android:gravity="center|start"
+                                        android:maxLines="2"
+                                        android:textColor="@color/black"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="10dp"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:fontFamily="@font/proxima_nova_regular"
+                                        android:gravity="start|center"
+                                        android:text="Property size :"
+                                        android:textColor="@color/black"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1">
 
                                     <TextView
                                         android:id="@+id/ads_size_details"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="20dp"
-                                        android:layout_marginStart="5dp"
-                                        android:text="4.5"
-                                        android:layout_marginTop="@dimen/margin_10_dp"
-                                        android:gravity="center"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:fontFamily="@font/lato_bold"
+                                        android:gravity="center|start"
+                                        android:maxLines="2"
+                                        android:textColor="@color/black"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="10dp"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:fontFamily="@font/proxima_nova_regular"
+                                        android:gravity="start|center"
+                                        android:text="Property Posted By :"
+                                        android:textColor="@color/black"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:id="@+id/tv_sites_available"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:fontFamily="@font/lato_bold"
+                                        android:gravity="center|start"
+                                        android:maxLines="2"
+                                        android:textColor="@color/black"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="10dp"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:fontFamily="@font/proxima_nova_regular"
+                                        android:gravity="start|center"
+                                        android:text="Facing :"
+                                        android:textColor="@color/black"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:id="@+id/ads_tv_facing"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:fontFamily="@font/lato_bold"
+                                        android:gravity="center|start"
+                                        android:maxLines="2"
+                                        android:textColor="@color/black"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="10dp"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:fontFamily="@font/proxima_nova_regular"
+                                        android:gravity="start|center"
+                                        android:text="Approved By :"
+                                        android:textColor="@color/black"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:id="@+id/ads_approved_by"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:fontFamily="@font/lato_bold"
+                                        android:gravity="center|start"
+                                        android:maxLines="2"
                                         android:textColor="@color/black"
                                         android:textSize="14sp" />
                                 </LinearLayout>
@@ -349,7 +566,7 @@
                                 <TextView
                                     android:id="@+id/ads_place_location"
                                     android:layout_width="150dp"
-                                    android:layout_height="15dp"
+                                    android:layout_height="wrap_content"
                                     android:src="@drawable/star"
                                     android:text="Size"
                                     android:layout_marginStart="@dimen/dp_20"
@@ -392,7 +609,6 @@
                                 android:textSize="15sp"
                                 app:layout_constraintStart_toStartOf="@+id/iv_product"
                                 app:layout_constraintTop_toTopOf="parent" />
-
 
                         </LinearLayout>
 
@@ -455,6 +671,50 @@
 
 
                         <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:fontFamily="@font/proxima_nova_regular"
+                                    android:gravity="start|center"
+                                    android:text="Description :"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:fontFamily="@font/lato_bold"
+                                    android:gravity="center|start"
+                                    android:maxLines="2"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
                             android:id="@+id/ll_coins_buy"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -479,71 +739,59 @@
 
 
     </LinearLayout>
-
-
     <LinearLayout
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
+        android:background="@color/transparent1"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:orientation="horizontal">
 
         <LinearLayout
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="10dp"
-            android:orientation="horizontal"
-            android:background="@drawable/customborder"
-            android:layout_gravity="end"
-            android:gravity="center"
-            android:layout_marginEnd="10dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_contact_who"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="Contact:"
-                android:textColor="@color/black"
-                android:layout_marginRight="@dimen/dp_30"
-                />
-
-            <ImageView
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/ads_cl_btn"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:src="@drawable/ic_call"/>
-
-            <ImageView
-                android:id="@+id/ads_whtsapp_btn"
+                android:background="@drawable/gradient"
+                android:fontFamily="@font/proxima_nova_bold"
+                android:insetTop="0dp"
+                android:textSize="14sp"
+                android:insetBottom="0dp"
                 android:text="Call Us"
-                android:visibility="visible"
-                android:textColor="@color/white"
-                android:src="@drawable/whatsapp"
-                android:layout_width="wrap_content"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"/>
+                android:textColor="@color/white" />
+
+
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/tv_btn_call_hot"
+        <LinearLayout
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/button_capsule_blue"
-            android:text="Call us"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/ads_whtsapp_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gradient"
+                android:fontFamily="@font/proxima_nova_bold"
+                android:insetTop="0dp"
+                android:textSize="14sp"
+                android:insetBottom="0dp"
+                android:text="Message us"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
 
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

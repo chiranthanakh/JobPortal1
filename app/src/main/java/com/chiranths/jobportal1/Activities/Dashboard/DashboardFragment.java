@@ -42,6 +42,7 @@ import com.chiranths.jobportal1.Activities.Construction.ConstructionActivity;
 import com.chiranths.jobportal1.Activities.BasicActivitys.LivingPlaceActivity;
 import com.chiranths.jobportal1.Activities.BasicActivitys.LoginActivity;
 import com.chiranths.jobportal1.Activities.BasicActivitys.Travelsactivity;
+import com.chiranths.jobportal1.Model.AdsModel;
 import com.chiranths.jobportal1.Model.LayoutModel;
 import com.chiranths.jobportal1.Model.ProductInfo;
 import com.chiranths.jobportal1.Activities.BasicActivitys.SearchActivity;
@@ -112,7 +113,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     FrameLayout frameLayout;
 
     ArrayList<Corosolmodel> coroselimagelist = new ArrayList<Corosolmodel>();
-    ArrayList adslist = new ArrayList();
+    ArrayList<AdsModel> adslist = new ArrayList();
     ArrayList<LayoutModel> layoutslists = new ArrayList();
     ArrayList<ProductInfo> productinfolist = new ArrayList();
     private int[] images = {R.drawable.banner1,
@@ -302,8 +303,8 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                         try {
 
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
-
-                            adslist.add(userData.get("image") + "---" + userData.get("pid") + "---" + userData.get("category") + "---" + userData.get("price") + "---" + userData.get("propertysize") + "---" + userData.get("number") + "---" + userData.get("location") + "---" + userData.get("Approval"));
+                            adslist.add(new AdsModel(String.valueOf(userData.get("image")), String.valueOf(userData.get("image2")), String.valueOf(userData.get("pid")), String.valueOf(userData.get("description")), String.valueOf(userData.get("date")),String.valueOf(userData.get("category")), String.valueOf(userData.get("price")),String.valueOf(userData.get("pname")),
+                                    String.valueOf(userData.get("propertysize")), String.valueOf(userData.get("location")),String.valueOf(userData.get("number")),String.valueOf(userData.get("Status")), String.valueOf(userData.get("postedBy")),String.valueOf(userData.get("approvedBy")),String.valueOf(userData.get("facing")),String.valueOf(userData.get("ownership")),String.valueOf(userData.get("postedOn")),String.valueOf(userData.get("postedOn")),String.valueOf(userData.get("text1")), String.valueOf(userData.get("text2")),String.valueOf(userData.get("text3")) ,String.valueOf(userData.get("text4"))) );
 
                         } catch (ClassCastException cce) {
 
@@ -324,7 +325,6 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
-
                             if (progressDialog != null) {
                                 if (progressDialog.isShowing()) {
                                     progressDialog.dismiss();
@@ -343,7 +343,6 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
             }
         });
     }
-
     //layouts recyclarview
     private void fetchlayouts() {
         DatabaseReference adsimage = FirebaseDatabase.getInstance().getReference().child("layoutsforyou");

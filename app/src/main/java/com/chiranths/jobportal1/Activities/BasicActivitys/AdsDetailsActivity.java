@@ -24,8 +24,10 @@ import com.bumptech.glide.Glide;
 import com.chiranths.jobportal1.Activities.HotDealsactivity.HotDealsDetailsActivity;
 import com.chiranths.jobportal1.Activities.Propertys.Products;
 import com.chiranths.jobportal1.CalldetailsRecords;
+import com.chiranths.jobportal1.Model.AdsModel;
 import com.chiranths.jobportal1.R;
 import com.chiranths.jobportal1.Utilitys;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,9 +39,10 @@ import com.synnapps.carouselview.ImageListener;
 
 public class AdsDetailsActivity extends AppCompatActivity {
 
-    private ImageView ads_cl_btn, ads_whatsapp_btn,iv_back_ads;
+    private ImageView iv_back_ads;
+    private MaterialButton ads_cl_btn, ads_whatsapp_btn;
     CarouselView carouselView;
-    private TextView productPrice,productDescription,productName,tv_topbar_productName,tv_ads_details_verify,
+    private TextView productPrice,productDescription,productName,tv_topbar_productName,tv_ads_details_verify,tv_ads_ownership,ads_tv_facing,ads_approved_by,
             tv_place_location,tv_size_details,tv_prop_type,tv_future1,tv_future2,tv_future3,tv_future4,tv_contact_type,tv_ads_posted_on,tv_ads_posted,ads_details_not_verified;
     private String productID="", state = "Normal",number,page;
     private String[] url;
@@ -58,14 +61,16 @@ public class AdsDetailsActivity extends AppCompatActivity {
         tv_prop_type = findViewById(R.id.tv_prop_type);
         iv_back_ads = findViewById(R.id.iv_back_ads);
         tv_ads_posted = findViewById(R.id.tv_ads_posted);
+        ads_tv_facing = findViewById(R.id.ads_tv_facing);
         tv_future1 = findViewById(R.id.tv_futures1);
         tv_future2 = findViewById(R.id.tv_futures2);
         tv_future3 = findViewById(R.id.tv_futures3);
         tv_future4 = findViewById(R.id.tv_futures4);
+        tv_ads_ownership = findViewById(R.id.tv_ads_ownership);
         tv_ads_details_verify = findViewById(R.id.ads_details_verifyed);
-        ads_details_not_verified = findViewById(R.id.ads_details_not_verified);
+        ads_approved_by = findViewById(R.id.ads_approved_by);
+       // ads_details_not_verified = findViewById(R.id.ads_details_not_verified);
         tv_ads_posted_on = findViewById(R.id.tv_ads_posted_on);
-        tv_contact_type = findViewById(R.id.tv_contact_who);
         tv_place_location = findViewById(R.id.ads_place_location);
         tv_size_details = findViewById(R.id.ads_size_details);
         productName = (TextView) findViewById(R.id.product_name_details);
@@ -106,37 +111,39 @@ public class AdsDetailsActivity extends AppCompatActivity {
         productsRef.child(productID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists() && dataSnapshot.getValue(Products.class) != null){
-                    Products products=dataSnapshot.getValue(Products.class);
+                if (dataSnapshot.exists() && dataSnapshot.getValue(AdsModel.class) != null){
+                    AdsModel products=dataSnapshot.getValue(AdsModel.class);
                     productName.setText(products.getPname());
-                    productPrice.setText(products.getPrice());
+                    productPrice.setText("Rs."+products.getPrice());
                     productDescription.setText(products.getDescription());
                     tv_topbar_productName.setText(products.getPname());
                     tv_place_location.setText(products.getLocation());
                     tv_size_details.setText(products.getPropertysize());
                     tv_prop_type.setText(products.getCategory());
-                    tv_ads_posted.setText("Posted by : "+products.getPostedby());
+                    tv_ads_posted.setText(products.getPostedby());
+                    tv_ads_ownership.setText(products.getOwnership());
+                    ads_tv_facing.setText(products.getFacing());
+                    ads_approved_by.setText(products.getApprovedBy());
                     if(products.getPostedOn()==null){
                         tv_ads_posted_on.setVisibility(View.GONE);
                     }else {
-                        tv_ads_posted_on.setText("Posted on "+products.getPostedOn());
+                        tv_ads_posted_on.setText(products.getPostedOn());
                     }
                     url = products.getImage2().split("---");
                     carouselView.setImageListener(imageListener);
                     carouselView.setPageCount(url.length);
-                    int test = products.getApproval();
-                    if(test == 1){
-                        tv_ads_details_verify.setVisibility(View.GONE);
-                    }else {
-                        ads_details_not_verified.setVisibility(View.GONE);
-                    }
+
                     number = products.getNumber();
-                    tv_contact_type.setText("Context "+products.getPostedby());
-                    if(products.getText1()!=null){
+                    if(products.getText1()!=null && products.getText1() != ""){
                         tv_future1.setText(products.getText1());
                         tv_future2.setText(products.getText2());
                         tv_future3.setText(products.getText3());
                         tv_future4.setText(products.getText4());
+                    }else {
+                        tv_future1.setVisibility(View.GONE);
+                        tv_future2.setVisibility(View.GONE);
+                        tv_future3.setVisibility(View.GONE);
+                        tv_future4.setVisibility(View.GONE);
                     }
                 }
             }
