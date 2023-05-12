@@ -37,7 +37,6 @@
             android:text="Business"
             android:layout_gravity="center"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@color/white"/>

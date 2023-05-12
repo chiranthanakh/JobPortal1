@@ -31,7 +31,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
+                    android:layout_weight="1.7"
                     android:gravity="center">
 
                     <ImageView
@@ -59,168 +59,217 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
                         android:gravity="center"
                         android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1.6"
                             android:text="Type:"
+                            android:gravity="center|start"
                             android:textColor="@color/black"
                             android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/tv_business_type"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:fontFamily="@font/proxima_nova_semi_bold"
-                            android:gravity="center_vertical"
+                            android:gravity="center|start"
                             android:maxLines="2"
                             android:text="Home/Land Type"
                             android:textColor="@color/black"
                             android:textSize="12sp" />
+                        </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="5dp"
                         android:layout_marginTop="5dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginEnd="5dp"
                         android:gravity="center"
                         android:orientation="horizontal">
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1.6"
                             android:text="Type:"
                             android:textColor="@color/black"
                             android:textSize="12sp" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/tv_business_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:fontFamily="@font/proxima_nova_semi_bold"
-                            android:gravity="center_vertical"
-                            android:maxLines="2"
+                            android:gravity="center|start"
                             android:text="The Taj Hotel Bangalore"
                             android:textColor="@color/black"
                             android:textSize="12sp" />
+                        </LinearLayout>
+
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="5dp"
                         android:layout_marginTop="5dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginEnd="5dp"
                         android:gravity="center"
                         android:orientation="horizontal">
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1.6"
                             android:text="Size:"
                             android:textColor="@color/black"
                             android:textSize="12sp" />
+                        </LinearLayout>
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
                         <TextView
                             android:id="@+id/business_servicess"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:fontFamily="@font/proxima_nova_semi_bold"
-                            android:maxLines="2"
-                            android:minLines="2"
                             android:singleLine="true"
                             android:text="Available in 2400/sft."
                             android:textColor="@color/black"
                             android:textSize="13dp" />
+                        </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="5dp"
                         android:layout_marginTop="5dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginEnd="5dp"
                         android:gravity="center"
                         android:orientation="horizontal">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1.6"
                             android:text="Location:"
                             android:textColor="@color/black"
                             android:textSize="12sp" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/tv_business_locatin"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginEnd="10dp"
-                            android:layout_weight="1"
                             android:fontFamily="@font/proxima_nova_semi_bold"
                             android:text="RT Nagar Hmt Layout "
                             android:textColor="@color/black"
                             android:textSize="14dp" />
+                        </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="end"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/button_capsule"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="@dimen/margin_10dp"
+                        android:background="@drawable/spinner_background"
                         android:gravity="center"
                         android:orientation="horizontal">
 
                         <TextView
+                            android:layout_weight="1"
+                            android:id="@+id/tv_contect_whome"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="@dimen/dp_30"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
+                            android:gravity="center|start"
+                            android:layout_marginEnd="3dp"
                             android:text="Contact:"
-                            android:textColor="@color/white" />
+                            android:textColor="#000000" />
 
 
                         <ImageView
                             android:id="@+id/iv_call_bottom_business"
                             android:layout_width="wrap_content"
-                            android:layout_height="35dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center"
                             android:src="@drawable/ic_call"
-                            app:tint="@color/white" />
+                            app:tint="@color/green" />
 
 
                         <ImageView
                             android:id="@+id/iv_whatsapp_bottom_business"
-                            android:layout_width="25dp"
-                            android:layout_height="35dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginEnd="10dp"
-                            android:layout_weight="1"
                             android:gravity="center"
-                            android:src="@drawable/whatsapp"
+                            android:padding="5dp"
+                            android:layout_marginStart="3dp"
+                            android:src="@drawable/whatapp"
                             android:text="Call Us"
+                            app:tint="@color/green"
                             android:textColor="@color/white"
                             android:textStyle="bold"
                             android:visibility="visible" />

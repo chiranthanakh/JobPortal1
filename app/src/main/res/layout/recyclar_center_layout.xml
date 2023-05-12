@@ -17,186 +17,245 @@
         android:layout_marginBottom="5dp"
         android:backgroundTint="@color/white"
         android:outlineAmbientShadowColor="@color/purple_500"
-        app:cardCornerRadius="5dp"
+        app:cardCornerRadius="3dp"
         app:cardElevation="3dp">
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
+            android:layout_marginTop="@dimen/dp_5"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/dp_5"
-                android:orientation="horizontal">
+                android:layout_weight="1.7"
+                android:gravity="center">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/iv_location_image_center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/aaimage" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:id="@+id/iv_location_image_center"
-                        android:layout_width="@dimen/dp_150"
-                        android:layout_height="match_parent"
-                        android:layout_margin="3dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/aaimage" />
-                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_marginTop="5dp"
+                    <TextView
+                        android:id="@+id/tv_name_hot_center"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                        android:fontFamily="@font/proxima_nova_bold"
+                        android:text="The Taj Hotel Bangalore"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+                </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/tv_name_hot_center"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="The Taj Hotel Bangalore"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:fontFamily="@font/proxima_nova_semi_bold" />
-                    </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_marginTop="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <TextView
-                            android:layout_weight="2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Rent:"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/lato"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
                         <TextView
-                            android:layout_weight="1"
                             android:id="@+id/tv_final_price_hot_center"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawableStart="@drawable/ic_rupees_ads"
                             android:drawablePadding="3dp"
+                            android:fontFamily="@font/proxima_nova_bold"
                             android:text="50,000,00"
-                            android:textSize="12sp"
                             android:textColor="@color/black"
-                            android:fontFamily="@font/proxima_nova_semi_bold" />
-
+                            android:textSize="12sp" />
                     </LinearLayout>
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
                     <LinearLayout
-                        android:layout_marginTop="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <TextView
-                            android:layout_weight="2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Advance:"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/lato"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <TextView
-                            android:layout_weight="1"
                             android:id="@+id/tv_home_advance"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawableStart="@drawable/ic_rupees_ads"
                             android:drawablePadding="3dp"
+                            android:fontFamily="@font/proxima_nova_bold"
                             android:text="50,000,00"
                             android:textColor="@color/black"
-                            android:textSize="12sp"
-                            android:fontFamily="@font/proxima_nova_semi_bold"/>
-
+                            android:textSize="12sp" />
                     </LinearLayout>
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
                     <LinearLayout
-                        android:layout_marginTop="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <TextView
-                            android:layout_weight="2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Size:"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
-
-
-                            <TextView
-                                android:layout_weight="1"
-                                android:id="@+id/tv_hot_sqft_center"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="3000 sft."
-                                android:textColor="@color/black"
-                                android:textSize="12sp"
-                               android:fontFamily="@font/proxima_nova_semi_bold"/>
-
+                            android:textSize="12sp"
+                            android:fontFamily="@font/lato"/>
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_marginTop="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:orientation="horizontal">
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <TextView
-                            android:layout_weight="2"
+                            android:id="@+id/tv_hot_sqft_center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/proxima_nova_bold"
+                            android:text="3000 sft."
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Location:"
+                            android:fontFamily="@font/lato"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <TextView
-                            android:layout_weight="1"
                             android:id="@+id/tv_loaction_hot_center"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/proxima_nova_bold"
                             android:text="375 Ratings"
                             android:textColor="@color/black"
-                            android:fontFamily="@font/proxima_nova_semi_bold"
                             android:textSize="12sp" />
                     </LinearLayout>
-
-
                 </LinearLayout>
+
 
             </LinearLayout>
 
         </LinearLayout>
+
 
     </androidx.cardview.widget.CardView>
 
