@@ -1,5 +1,7 @@
 package com.chiranths.jobportal1.Activities.BasicActivitys;
 
+import static java.security.AccessController.getContext;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -34,6 +36,7 @@ import com.chiranths.jobportal1.Activities.Propertys.PropertyActivity;
 import com.chiranths.jobportal1.Adapters.AdsAdaptor;
 import com.chiranths.jobportal1.Adapters.BusinessAdaptor;
 import com.chiranths.jobportal1.Adapters.PropertyAdaptor;
+import com.chiranths.jobportal1.Model.AdsModel;
 import com.chiranths.jobportal1.Model.BusinessModel;
 import com.chiranths.jobportal1.Model.FilterModel;
 import com.chiranths.jobportal1.R;
@@ -45,6 +48,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -160,39 +164,45 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                if (snapshot.exists()){
-
+                if (snapshot.exists()) {
+                    adslist.clear();
                     HashMap<String, Object> dataMap = (HashMap<String, Object>) snapshot.getValue();
-                    for (String key : dataMap.keySet()){
+                    for (String key : dataMap.keySet()) {
                         Object data = dataMap.get(key);
-                        try{
+                        try {
+
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
-                            adslist.add(userData.get("image")+"---"+userData.get("pid")+"---"+userData.get("category")+"---"+userData.get("price")+"---"+userData.get("propertysize")+"---"+userData.get("number"));
+                            adslist.add(new AdsModel(String.valueOf(userData.get("image")), String.valueOf(userData.get("image2")), String.valueOf(userData.get("pid")), String.valueOf(userData.get("description")), String.valueOf(userData.get("date")),String.valueOf(userData.get("category")), String.valueOf(userData.get("price")),String.valueOf(userData.get("pname")),
+                                    String.valueOf(userData.get("propertysize")), String.valueOf(userData.get("location")),String.valueOf(userData.get("number")),String.valueOf(userData.get("Status")), String.valueOf(userData.get("postedBy")),String.valueOf(userData.get("approvedBy")),String.valueOf(userData.get("facing")),String.valueOf(userData.get("ownership")),String.valueOf(userData.get("postedOn")),String.valueOf(userData.get("postedOn")),String.valueOf(userData.get("text1")), String.valueOf(userData.get("text2")),String.valueOf(userData.get("text3")) ,String.valueOf(userData.get("text4"))) );
 
-                        }catch (ClassCastException cce){
+                        } catch (ClassCastException cce) {
 
-                            try{
+                            try {
                                 String mString = String.valueOf(dataMap.get(key));
                                 //addTextToView(mString);
-                            }catch (ClassCastException cce2){
+                            } catch (ClassCastException cce2) {
 
                             }
                         }
                     }
-
-                    propertyAdaptor =new PropertyAdaptor(propertylist, SearchActivity.this);
-                    RecyclerView.LayoutManager nlayoutManager = new LinearLayoutManager(SearchActivity.this, RecyclerView.VERTICAL, false);
-                    recyclerView.setLayoutManager(nlayoutManager);
-                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    Collections.shuffle(adslist);
+                    adsAdaptor = new AdsAdaptor(adslist, SearchActivity.this);
+                    RecyclerView.LayoutManager n1layoutManager = new LinearLayoutManager(SearchActivity.this, RecyclerView.HORIZONTAL, false);
+                    recyclarviewads.setLayoutManager(n1layoutManager);
+                    recyclarviewads.setItemAnimator(new DefaultItemAnimator());
 
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            recyclerView.setAdapter(propertyAdaptor);
+                           /* if (progressDialog != null) {
+                                if (progressDialog.isShowing()) {
+                                    progressDialog.dismiss();
+                                }
+                            }*/
+                            recyclarviewads.setAdapter(adsAdaptor);
+                            adsAdaptor.notifyItemRangeInserted(0, adslist.size());
                         }
                     });
-                    propertyAdaptor.notifyItemRangeInserted(0, propertylist.size());
-
                 }
             }
 
@@ -202,7 +212,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
     }
-
     private void fetchcorosel() {
         DatabaseReference coroselimage = FirebaseDatabase.getInstance().getReference().child("Products");
 

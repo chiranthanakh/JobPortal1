@@ -20,6 +20,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.chiranths.jobportal1.Activities.BasicActivitys.AdsDetailsActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyDetailsActivity;
+import com.chiranths.jobportal1.Model.AdsModel;
+import com.chiranths.jobportal1.Model.LayoutModel;
 import com.chiranths.jobportal1.R;
 import com.squareup.picasso.Picasso;
 
@@ -27,7 +29,7 @@ import java.util.ArrayList;
 
 public class AdsAdaptor extends RecyclerView.Adapter<AdsAdaptor.ViewHolder> {
 
-    private ArrayList noticeBoardList;
+    private ArrayList<AdsModel> noticeBoardList;
     private Context context;
 
     public AdsAdaptor(ArrayList noticeBoardList, Context context) {
@@ -37,11 +39,11 @@ public class AdsAdaptor extends RecyclerView.Adapter<AdsAdaptor.ViewHolder> {
 
     @NonNull
     @Override
-    public AdsAdaptor.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         context = parent.getContext();
         View listItem= layoutInflater.inflate(R.layout.ads_recyclarview_layout, parent, false);
-        AdsAdaptor.ViewHolder viewHolder = new AdsAdaptor.ViewHolder(listItem);
+        ViewHolder viewHolder = new ViewHolder(listItem);
         return viewHolder;
     }
 
@@ -49,22 +51,25 @@ public class AdsAdaptor extends RecyclerView.Adapter<AdsAdaptor.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         final String noticeimage = String.valueOf(noticeBoardList.get(position));
 
+        AdsModel adsModel = noticeBoardList.get(position);
+
+
         String[] data = noticeimage.split("---");
 
         Glide.with(context)
-                .load(data[0])
+                .load(adsModel.getImage())
                 .apply(new RequestOptions().override(500, 500))
                 .into(holder.iv_corosel_image);
 
-        holder.tv_ads_category.setText(data[2]);
-        holder.tv_amount.setText(data[3]);
-        holder.tv_space.setText(data[4]);
-        holder.ads_location_adaptor.setText(data[6]);
+        holder.tv_ads_category.setText(adsModel.getCategory());
+        holder.tv_amount.setText(adsModel.getPrice());
+        holder.tv_space.setText(adsModel.getPropertysize());
+        holder.ads_location_adaptor.setText(adsModel.getLocation());
 
-        if(data[7].equals("1")){
+        if(adsModel.getVerified().equals("1")){
             holder.tv_ads_verification.setText("Not Verified");
             holder.tv_ads_verification.setTextColor(Color.parseColor("#FDDA0D"));
-        }else if(data[7].equals("2")){
+        }else if(adsModel.getVerified().equals("2")){
             holder.tv_ads_verification.setText("Verified Property");
             holder.tv_ads_verification.setTextColor(Color.parseColor("#228B22"));
         }
@@ -73,7 +78,7 @@ public class AdsAdaptor extends RecyclerView.Adapter<AdsAdaptor.ViewHolder> {
             @Override
             public void onClick(View view) {
                 Intent intent =new Intent(context, AdsDetailsActivity.class);
-                intent.putExtra("pid",data[1]);
+                intent.putExtra("pid",adsModel.getPid());
                 intent.putExtra("page","1");
                 context.startActivity(intent);
             }

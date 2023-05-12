@@ -14,6 +14,7 @@ import android.provider.OpenableColumns;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -38,13 +39,14 @@ import java.util.HashMap;
 public class Admin_ads_dashboard extends AppCompatActivity {
 
     private static final int GalleryPick = 1;
-    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,propertysize,location,number;
-    private EditText InputProductName,Inputtype,InputProductDescription
-            ,InputProductPrice,et_size,et_location,et_number,et_verified,et_text1, et_text2,et_text3,et_text4,et_posted_by;
+    private String CategoryName, Description, Price, Pname,postedBy,saveCurrentDate, saveCurrentTime,propertysize,location,number,ownership,facing,approvedBy;
+    private EditText InputProductName,Inputtype,InputProductDescription,ads_ownerShip,ads_facing,ads_approved_by
+            ,InputProductPrice,et_size,et_location,et_number,et_verified,et_text1, et_text2,et_text3,et_text4;
     private Uri ImageUri;
     private String productRandomKey, downloadImageUrl,MainimageUrl;
     private StorageReference ProductImagesRef;
     private DatabaseReference ProductsRef;
+    private CheckBox cb_owner,cb_broker;
     private ProgressDialog loadingBar;
     ArrayList fileNameList = new ArrayList<>();
     ArrayList fileDoneList = new ArrayList<>();
@@ -66,13 +68,17 @@ public class Admin_ads_dashboard extends AppCompatActivity {
         Inputtype = (EditText)findViewById(R.id.ads_type_admin);
         InputProductDescription = (EditText) findViewById(R.id.ads_description);
         InputProductPrice = (EditText) findViewById(R.id.ads_price_admin);
+        ads_ownerShip = findViewById(R.id.ads_ownerShip);
+        ads_facing = findViewById(R.id.ads_facing);
+        ads_approved_by = findViewById(R.id.ads_approved_by);
+        cb_broker = findViewById(R.id.cb_posted_broker);
+        cb_owner = findViewById(R.id.cb_posted_owner);
         ads_name = findViewById(R.id.ads_name);
         et_size = findViewById(R.id.ads_size);
         et_text1 = findViewById(R.id.ads_text1);
         et_text2 = findViewById(R.id.ads_text2);
         et_text3 = findViewById(R.id.ads_text3);
         et_text4 = findViewById(R.id.ads_text4);
-        et_posted_by= findViewById(R.id.ads_posted_by);
         et_location = findViewById(R.id.ads_location_admin);
         et_number = findViewById(R.id.ads_contact_number);
         et_verified = findViewById(R.id.ads_verify_or_nt);
@@ -126,6 +132,15 @@ public class Admin_ads_dashboard extends AppCompatActivity {
         location = et_location.getText().toString();
         number = et_number.getText().toString();
         CategoryName = Inputtype.getText().toString();
+        ownership = ads_ownerShip.getText().toString();
+        facing = ads_facing.getText().toString();
+        approvedBy = ads_approved_by.getText().toString();
+
+        if(cb_owner.isChecked()){
+            postedBy = "Owner";
+        }else {
+            postedBy = "Broker";
+        }
 
         if (TextUtils.isEmpty(downloadImageUrl))
         {
@@ -146,6 +161,18 @@ public class Admin_ads_dashboard extends AppCompatActivity {
         else if (TextUtils.isEmpty(CategoryName))
         {
             Toast.makeText(this, "Please enter category", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(facing))
+        {
+            Toast.makeText(this, "Please enter facing", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(ownership))
+        {
+            Toast.makeText(this, "Please enter ownership", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(approvedBy))
+        {
+            Toast.makeText(this, "Please enter approvedBy", Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -252,8 +279,10 @@ public class Admin_ads_dashboard extends AppCompatActivity {
         productMap.put("number",number);
         productMap.put("verified",et_verified.getText().toString());
         productMap.put("postedOn", saveCurrentDate);
-        productMap.put("Postedby",et_posted_by.getText().toString());
-        productMap.put("Approval",1);
+        productMap.put("Postedby",postedBy);
+        productMap.put("facing",facing);
+        productMap.put("approvedBy",approvedBy);
+        productMap.put("ownership",ownership);
         productMap.put("payment","");
         productMap.put("text1", et_text1.getText().toString());
         productMap.put("text2", et_text2.getText().toString());
