@@ -134,13 +134,6 @@ class StartingActivity : AppCompatActivity() {
 
         }
 
-        dashboard_loans?.setOnClickListener{
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, loanFragment).commit()
-            drawer_layout?.closeDrawer(GravityCompat.START)
-
-        }
-
         dashboard_Business?.setOnClickListener{
             val intent = Intent(this, BusinessActivity::class.java)
             startActivity(intent)

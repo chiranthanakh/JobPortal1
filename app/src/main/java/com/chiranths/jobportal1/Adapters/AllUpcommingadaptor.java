@@ -13,6 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.chiranths.jobportal1.Activities.BasicActivitys.AdsDetailsActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyDetailsActivity;
 import com.chiranths.jobportal1.Model.PropertytModel;
 import com.chiranths.jobportal1.R;
@@ -58,8 +59,9 @@ public class AllUpcommingadaptor extends RecyclerView.Adapter<AllUpcommingadapto
         holder.cv_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =new Intent(context, PropertyDetailsActivity.class);
+                Intent intent =new Intent(context, AdsDetailsActivity.class);
                 intent.putExtra("pid",propertyinfo.getPid());
+                intent.putExtra("page","1");
                 context.startActivity(intent);
             }
         });

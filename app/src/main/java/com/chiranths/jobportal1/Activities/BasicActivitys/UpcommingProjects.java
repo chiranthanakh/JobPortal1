@@ -71,14 +71,11 @@ public class UpcommingProjects extends AppCompatActivity implements View.OnClick
     }
 
     private void initilize() {
-
         recyclerView = findViewById(R.id.recyclarview_allupcomming);
         back_toolbar_up = findViewById(R.id.back_toolbar_up);
         //  recyclerView.setHasFixedSize(true);
         GridLayoutManager mgrid = new GridLayoutManager(this,1);
-
         recyclerView.setLayoutManager(mgrid);
-
         back_toolbar_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

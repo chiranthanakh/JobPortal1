@@ -488,13 +488,11 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                 break;
 
             case R.id.cv_propertys:
-
                 Intent intent1 = new Intent(getContext(), PropertyActivity.class);
                 startActivity(intent1);
                 break;
 
             case R.id.cv_loans:
-
                 Intent intent2 = new Intent(getContext(), LoanActivity.class);
                 startActivity(intent2);
                 break;

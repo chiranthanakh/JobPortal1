@@ -49,7 +49,6 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
         edt_otp = findViewById(R.id.edt_otp)
         tvSendOtp?.setOnClickListener(this)
         btn_continue?.setOnClickListener(this)
-
         edtPhone?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
@@ -138,7 +137,7 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
                 if (task.isSuccessful) {
                     val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
                     val myEdit = sharedPreferences.edit()
-                    myEdit.putString("number", edtPhone!!.text.toString())
+                    myEdit.putString("number", edtPhone?.text.toString())
                     myEdit.commit()
                     fetchProfile(edtPhone?.text.toString())
                     startActivity(Intent(this@OtpLoginActivity, UserDetailsActivity::class.java))

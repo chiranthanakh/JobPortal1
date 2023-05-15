@@ -25,6 +25,7 @@ import com.chiranths.jobportal1.Activities.BasicActivitys.SearchActivity;
 import com.chiranths.jobportal1.Activities.Businesthings.BusinessActivity;
 import com.chiranths.jobportal1.Adapters.AdsAdaptor;
 import com.chiranths.jobportal1.Adapters.PropertyAdaptor;
+import com.chiranths.jobportal1.Model.AdsModel;
 import com.chiranths.jobportal1.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
@@ -34,6 +35,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class PropertyActivity extends AppCompatActivity implements View.OnClickListener {
@@ -136,35 +138,34 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void fetchads() {
-
         DatabaseReference adsimage = FirebaseDatabase.getInstance().getReference().child("adsforyou");
-
         adsimage.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                if (snapshot.exists()){
-
+                if (snapshot.exists()) {
+                    adslist.clear();
                     HashMap<String, Object> dataMap = (HashMap<String, Object>) snapshot.getValue();
-                    for (String key : dataMap.keySet()){
+                    for (String key : dataMap.keySet()) {
                         Object data = dataMap.get(key);
-                        try{
+                        try {
 
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
+                            adslist.add(new AdsModel(String.valueOf(userData.get("image")), String.valueOf(userData.get("image2")), String.valueOf(userData.get("pid")), String.valueOf(userData.get("description")), String.valueOf(userData.get("date")),String.valueOf(userData.get("category")), String.valueOf(userData.get("price")),String.valueOf(userData.get("pname")),
+                                    String.valueOf(userData.get("propertysize")), String.valueOf(userData.get("location")),String.valueOf(userData.get("number")),String.valueOf(userData.get("Status")), String.valueOf(userData.get("postedBy")),String.valueOf(userData.get("approvedBy")),String.valueOf(userData.get("facing")),String.valueOf(userData.get("ownership")),String.valueOf(userData.get("postedOn")),String.valueOf(userData.get("postedOn")),String.valueOf(userData.get("text1")), String.valueOf(userData.get("text2")),String.valueOf(userData.get("text3")) ,String.valueOf(userData.get("text4"))) );
 
-                            adslist.add(userData.get("image")+"---"+userData.get("pid")+"---"+userData.get("category")+"---"+userData.get("price")+"---"+userData.get("propertysize")+"---"+userData.get("number")+"---"+userData.get("location")+"---"+userData.get("Approval"));
+                        } catch (ClassCastException cce) {
 
-                        }catch (ClassCastException cce){
-
-                            try{
+                            try {
                                 String mString = String.valueOf(dataMap.get(key));
                                 //addTextToView(mString);
-                            }catch (ClassCastException cce2){
+                            } catch (ClassCastException cce2) {
 
                             }
                         }
                     }
-                    adsAdaptor =new AdsAdaptor(adslist,PropertyActivity.this);
+                    Collections.shuffle(adslist);
+                    adsAdaptor = new AdsAdaptor(adslist, PropertyActivity.this);
                     RecyclerView.LayoutManager n1layoutManager = new LinearLayoutManager(PropertyActivity.this, RecyclerView.HORIZONTAL, false);
                     recyclarviewads.setLayoutManager(n1layoutManager);
                     recyclarviewads.setItemAnimator(new DefaultItemAnimator());
@@ -172,11 +173,15 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
+                            /*if (progressDialog != null) {
+                                if (progressDialog.isShowing()) {
+                                    progressDialog.dismiss();
+                                }
+                            }*/
                             recyclarviewads.setAdapter(adsAdaptor);
+                            adsAdaptor.notifyItemRangeInserted(0, adslist.size());
                         }
                     });
-                    adsAdaptor.notifyItemRangeInserted(0, adslist.size());
-
                 }
             }
 
@@ -187,10 +192,8 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
-
     private void fetchcorosel() {
         DatabaseReference coroselimage = FirebaseDatabase.getInstance().getReference().child("Products");
-
         coroselimage.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
