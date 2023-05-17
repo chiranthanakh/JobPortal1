@@ -74,7 +74,8 @@ class LivingPlaceActivity : AppCompatActivity() {
                                     userData["postedBY"].toString(),
                                     userData["discription"].toString(),
                                     userData["image2"].toString(),
-                                    userData["image"].toString()
+                                    userData["image"].toString(),
+                                    userData["status"].toString()
                                 )
                             )
                         } catch (cce: ClassCastException) {

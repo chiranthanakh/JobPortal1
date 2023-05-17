@@ -89,7 +89,8 @@ public class Travelsactivity extends AppCompatActivity implements View.OnClickLi
                                     String.valueOf(userData.get("description")),
                                     String.valueOf(userData.get("image")),
                                     String.valueOf(userData.get("image2")),
-                                    String.valueOf(userData.get("model"))));
+                                    String.valueOf(userData.get("model")),
+                                    String.valueOf(userData.get("status"))));
 
                         }catch (ClassCastException cce){
 

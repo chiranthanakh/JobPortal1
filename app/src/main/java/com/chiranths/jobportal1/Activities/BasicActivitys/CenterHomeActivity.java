@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.chiranths.jobportal1.Adapters.CenterHomeadaptor;
-import com.chiranths.jobportal1.Model.LivingPlaceModel;
 import com.chiranths.jobportal1.Model.ProductInfo;
 import com.chiranths.jobportal1.R;
 import com.google.firebase.database.DataSnapshot;

@@ -2,9 +2,9 @@ package com.chiranths.jobportal1.Model;
 
 public class TravelsModel {
 
-    String  pid,saveCurrentDate, saveCurrentTime,vehicle,category,VehicleNumber,costperKM,contactDetails,ownerName,verified,discription,image,image2,model;
+    String  pid,saveCurrentDate, saveCurrentTime,vehicle,category,VehicleNumber,costperKM,contactDetails,ownerName,verified,discription,image,image2,model,status;
 
-    public TravelsModel(String pid, String saveCurrentDate, String saveCurrentTime, String vehicle, String category, String vehicleNumber, String costperKM, String contactDetails, String ownerName, String verified, String discription, String image, String image2, String model) {
+    public TravelsModel(String pid, String saveCurrentDate, String saveCurrentTime, String vehicle, String category, String vehicleNumber, String costperKM, String contactDetails, String ownerName, String verified, String discription, String image, String image2, String model, String status) {
         this.pid = pid;
         this.saveCurrentDate = saveCurrentDate;
         this.saveCurrentTime = saveCurrentTime;
@@ -19,6 +19,15 @@ public class TravelsModel {
         this.image = image;
         this.image2 = image2;
         this.model = model;
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getModel() {

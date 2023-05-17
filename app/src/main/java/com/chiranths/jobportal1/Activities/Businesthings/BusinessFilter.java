@@ -66,7 +66,7 @@ public class BusinessFilter extends AppCompatActivity {
                                 businesslist.add(new BusinessModel(String.valueOf(userData.get("pid")),String.valueOf(userData.get("date")),String.valueOf(userData.get("time")),
                                         String.valueOf(userData.get("Businessname")),String.valueOf(userData.get("Business_category")),String.valueOf(userData.get("description")),
                                         String.valueOf(userData.get("price")),String.valueOf(userData.get("location")),String.valueOf(userData.get("number")),String.valueOf(userData.get("owner")),String.valueOf(userData.get("email")),String.valueOf(userData.get("rating")),
-                                        String.valueOf(userData.get("image")),String.valueOf(userData.get("image2"))));
+                                        String.valueOf(userData.get("image")),String.valueOf(userData.get("image2")),String.valueOf(userData.get("status"))));
                             }
                         }catch (ClassCastException cce){
 

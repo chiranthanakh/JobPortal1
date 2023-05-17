@@ -2,9 +2,9 @@ package com.chiranths.jobportal1.Model;
 
 public class BusinessModel {
 
-    private String pid,date,time,Businessname,Business_category,description,price,location,number,owner,email,rating,image,image2;
+    private String pid,date,time,Businessname,Business_category,description,price,location,number,owner,email,rating,image,image2,status;
 
-    public BusinessModel(String pid, String date, String time, String businessname, String business_category, String description, String price, String location, String number, String owner, String email, String rating, String image, String image2) {
+    public BusinessModel(String pid, String date, String time, String businessname, String business_category, String description, String price, String location, String number, String owner, String email, String rating, String image, String image2, String status) {
         this.pid = pid;
         this.date = date;
         this.time = time;
@@ -19,6 +19,16 @@ public class BusinessModel {
         this.rating = rating;
         this.image = image;
         this.image2 = image2;
+        this.status = status;
+
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getPid() {

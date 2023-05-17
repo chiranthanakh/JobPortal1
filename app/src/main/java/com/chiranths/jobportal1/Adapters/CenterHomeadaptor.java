@@ -14,7 +14,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.chiranths.jobportal1.Model.LivingPlaceModel;
 import com.chiranths.jobportal1.Model.ProductInfo;
 import com.chiranths.jobportal1.Activities.HotDealsactivity.HotDealsDetailsActivity;
 import com.chiranths.jobportal1.R;

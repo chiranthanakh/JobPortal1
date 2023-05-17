@@ -158,34 +158,32 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
                         android:layout_marginStart="10dp"
-                        android:orientation="horizontal"
-                        android:background="@drawable/customborder"
+                        android:orientation="vertical"
                         android:layout_gravity="end"
                         android:layout_marginBottom="@dimen/margin_10dp"
                         android:gravity="center"
                         android:layout_marginEnd="10dp">
 
-                        <ImageView
-                            android:id="@+id/iv_call_bottom"
-                            android:layout_width="@dimen/dp_30"
-                            android:layout_height="@dimen/dp_30"
-                            android:layout_marginRight="15dp"
-                            android:src="@drawable/ic_delete_foreground"/>
+                        <Button
+                            android:id="@+id/iv_delete_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Delete"
+                            android:textSize="@dimen/dp_20"
+                            android:textStyle="bold"
+                            android:layout_marginRight="15dp"/>
 
-
-                        <ImageView
-                            android:id="@+id/iv_whatsapp_bottom"
-                                android:text="Call Us"
-                                android:visibility="visible"
-                                android:textColor="@color/white"
-                                android:src="@drawable/edit"
-                                android:layout_width="@dimen/dp_30"
-                                android:textStyle="bold"
-                                android:gravity="center"
-                                android:layout_height="30dp"
-                                android:layout_gravity="center_vertical"/>
+                        <Button
+                            android:id="@+id/iv_btn_removed"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Removed"
+                            android:textSize="@dimen/dp_20"
+                            android:visibility="gone"
+                            android:textStyle="bold"
+                            android:background="@color/red"
+                            android:layout_marginRight="15dp"/>
 
                     </LinearLayout>
 

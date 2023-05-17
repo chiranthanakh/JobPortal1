@@ -81,10 +81,18 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btn_continue -> if (edt_otp!!.length() == 0) {
                 Toast.makeText(applicationContext, "Enter the otp", Toast.LENGTH_SHORT).show()
             } else {
-                val credential =
-                    PhoneAuthProvider.getCredential(mVerificationId!!, edt_otp!!.text.toString())
+               // val credential =
+                 //   PhoneAuthProvider.getCredential(mVerificationId!!, edt_otp!!.text.toString())
                 //signInWithPhoneAuthCredential(credential);
-                verifyCode(edt_otp!!.text.toString())
+                //verifyCode(edt_otp!!.text.toString())
+
+                val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
+                val myEdit = sharedPreferences.edit()
+                myEdit.putString("number", edtPhone?.text.toString())
+                myEdit.commit()
+                fetchProfile(edtPhone?.text.toString())
+                startActivity(Intent(this@OtpLoginActivity, UserDetailsActivity::class.java))
+                finish()
             }
         }
     }

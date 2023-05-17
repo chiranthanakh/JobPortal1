@@ -310,7 +310,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                             businesslist.add(new BusinessModel(String.valueOf(userData.get("pid")),String.valueOf(userData.get("date")),String.valueOf(userData.get("time")),
                                     String.valueOf(userData.get("Businessname")),String.valueOf(userData.get("Business_category")),String.valueOf(userData.get("description")),
                                     String.valueOf(userData.get("price")),String.valueOf(userData.get("location")),String.valueOf(userData.get("number")),String.valueOf(userData.get("owner")),String.valueOf(userData.get("email")),String.valueOf(userData.get("rating")),
-                                    String.valueOf(userData.get("image")),String.valueOf(userData.get("image2"))));
+                                    String.valueOf(userData.get("image")),String.valueOf(userData.get("image2")),String.valueOf(userData.get("status"))));
 
 
                         }catch (ClassCastException cce){
@@ -443,7 +443,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                                 businesslist.get(i).getBusinessname(),businesslist.get(i).getBusiness_category(),businesslist.get(i).getDescription(),
                                 businesslist.get(i).getPrice(),businesslist.get(i).getLocation(),businesslist.get(i).getNumber(),businesslist.get(i).getOwner(),
                                 businesslist.get(i).getEmail(),businesslist.get(i).getRating(),
-                                businesslist.get(i).getImage(),businesslist.get(i).getImage2()));
+                                businesslist.get(i).getImage(),businesslist.get(i).getImage2(),businesslist.get(i).getStatus()));
 
                     }
 
