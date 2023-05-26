@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.chiranths.jobportal1.Activities.BasicActivitys.LivingPlaceActivity
@@ -67,36 +68,18 @@ class StartingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_starting)
         progressDialog = ProgressDialog(this)
         initilize()
+
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, startingFragment)
             .commit()
 
         val packageManager: PackageManager = applicationContext.getPackageManager()
         val lastUpdatedTime =
             packageManager.getPackageInfo(applicationContext.packageName, 0).lastUpdateTime
-
-        val test = TimeUnit.MILLISECONDS.toDays(System.currentTimeMillis() - lastUpdatedTime)
-        val test2 = System.currentTimeMillis()
-
-        val lastUpdateTime1 = packageManager.getPackageInfo(applicationContext.packageName, 0).firstInstallTime
-        val date = Date(lastUpdateTime1)
-        val dateFormat: DateFormat = DateFormat.getDateTimeInstance()
-        val lastUpdateDate: String = dateFormat.format(date)
-        // Initialize the AppUpdateManager instance
-        val appUpdateManager = AppUpdateManagerFactory.create(this)
-
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_items, menu)
         return true
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        // initilize();
     }
 
     private fun initilize() {
@@ -167,13 +150,13 @@ class StartingActivity : AppCompatActivity() {
             val id = item.itemId
             when (id) {
                 R.id.profile -> supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, profileFragment).commit()
+                    .replace(R.id.fragment_container, profileFragment).addToBackStack(null).commit()
                 R.id.Home -> supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, startingFragment).commit()
+                    .replace(R.id.fragment_container, startingFragment).addToBackStack(null).commit()
                 R.id.it_loan -> supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, loanFragment).commit()
+                    .replace(R.id.fragment_container, loanFragment).addToBackStack(null).commit()
                 R.id.it_property -> supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, propertyFragment).commit()
+                    .replace(R.id.fragment_container, propertyFragment).addToBackStack(null).commit()
             }
             true
         })

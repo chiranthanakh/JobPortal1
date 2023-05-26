@@ -40,10 +40,10 @@ import java.util.HashMap;
 public class Admin_Construction extends AppCompatActivity {
 
     private static final int GalleryPick = 1;
-    String Name,category,cost,contactDetails,contactDetails2,experience,service1,service2,service3,service4,saveCurrentDate,saveCurrentTime,discription,vehicleNumber;
+    String Name,category,cost,contactDetails,contactDetails2,experience,service1,service2,service3,service4,saveCurrentDate,saveCurrentTime,discription,vehicleNumber,address,owner,gst;
     private EditText edt_construction_name,edt_construction_number,edt_construction_cost,
             edt_construction_experience,edt_construction_model,edt_construction_servicessoffer_1,edt_construction_servicessoffer_2,edt_construction_servicessoffer_3,edt_construction_servicessoffer_4,
-            edt_construction_verified_not,edt_construction_discription,edt_construction_number2;
+            edt_construction_verified_not,edt_construction_discription,edt_construction_number2,edt_construction_address,edt_construction_gst,edt_construction_owner;
     private Uri ImageUri;
     private AutoCompleteTextView edt_construction_category;
     private String productRandomKey, downloadImageUrl,MainimageUrl;
@@ -54,6 +54,7 @@ public class Admin_Construction extends AppCompatActivity {
     ArrayList fileDoneList = new ArrayList<>();
     EditText ads_name;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +78,9 @@ public class Admin_Construction extends AppCompatActivity {
         edt_construction_servicessoffer_4 = findViewById(R.id.edt_construction_servicessoffer_4);
         edt_construction_verified_not = findViewById(R.id.edt_construction_verified_not);
         edt_construction_discription = findViewById(R.id.edt_construction_discription);
+        edt_construction_address = findViewById(R.id.edt_construction_address);
+        edt_construction_gst = findViewById(R.id.edt_construction_gst);
+        edt_construction_owner = findViewById(R.id.edt_construction_owner);
         loadingBar = new ProgressDialog(this);
         btn_add_image.setOnClickListener(view -> OpenGallery());
         add_new_construction.setOnClickListener(view -> ValidateProductData());
@@ -217,6 +221,9 @@ public class Admin_Construction extends AppCompatActivity {
         contactDetails = edt_construction_number.getText().toString();
         discription = edt_construction_verified_not.getText().toString();
         vehicleNumber = edt_construction_discription.getText().toString();
+        owner = edt_construction_owner.getText().toString();
+        address = edt_construction_address.getText().toString();
+        gst = edt_construction_gst.getText().toString();
 
         if (TextUtils.isEmpty(downloadImageUrl))
         {
@@ -242,7 +249,7 @@ public class Admin_Construction extends AppCompatActivity {
     private void SaveProductInfoToDatabase()
     {
         HashMap<String, Object> productMap = new HashMap<>();
-        productMap.put("pid", productRandomKey+"_travel");
+        productMap.put("pid", productRandomKey);
         productMap.put("date", saveCurrentDate);
         productMap.put("time", saveCurrentTime);
         productMap.put("description", discription);
@@ -260,7 +267,11 @@ public class Admin_Construction extends AppCompatActivity {
         productMap.put("discription",discription);
         productMap.put("verified", 1);
         productMap.put("experience", experience);
+        productMap.put("owner",owner);
+        productMap.put("address",address);
+        productMap.put("gst",gst);
         productMap.put("Status", 1);
+
 
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)

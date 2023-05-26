@@ -13,6 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.chiranths.jobportal1.Activities.BasicActivitys.RentHomeDetails;
 import com.chiranths.jobportal1.Activities.HotDealsactivity.HotDealsDetailsActivity;
 import com.chiranths.jobportal1.Model.LivingPlaceModel;
 import com.chiranths.jobportal1.R;
@@ -58,12 +59,11 @@ public class LivingPlaceAdaptor extends RecyclerView.Adapter<LivingPlaceAdaptor.
         holder.cv_card_living.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =new Intent(context, HotDealsDetailsActivity.class);
+                Intent intent =new Intent(context, RentHomeDetails.class);
                 intent.putExtra("pid",productInfo.getPid());
                 context.startActivity(intent);
             }
         });
-
     }
 
     @Override

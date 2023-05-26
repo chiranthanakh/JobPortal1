@@ -8,7 +8,7 @@
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_card_deals"
+        android:id="@+id/cv_card_const"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -75,7 +75,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Vehicle Name:"
+                                android:text="Name:"
                                 android:textColor="@color/black"
                                 android:textSize="12sp"
                                 android:fontFamily="@font/lato"/>
@@ -93,7 +93,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:fontFamily="@font/proxima_nova_semi_bold"
-                                android:text="Vehicle Name"
+                                android:text=""
                                 android:textColor="@color/black"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -118,7 +118,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Vehicle Type:"
+                                android:text="Servicess:"
                                 android:textColor="@color/black"
                                 android:textSize="12sp"
                                 android:fontFamily="@font/lato" />
@@ -136,7 +136,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/proxima_nova_semi_bold"
-                                android:text="Cab"
+                                android:text=""
                                 android:textColor="@color/black"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -161,7 +161,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Price per Km:"
+                                android:text="Price Range :"
                                 android:textColor="@color/black"
                                 android:textSize="12sp"
                                 android:fontFamily="@font/lato" />
@@ -181,7 +181,7 @@
                                 android:drawableStart="@drawable/ic_rupees_ads"
                                 android:drawablePadding="3dp"
                                 android:fontFamily="@font/proxima_nova_semi_bold"
-                                android:text="1233"
+                                android:text=""
                                 android:textColor="@color/black"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -206,7 +206,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Vehicle number"
+                                android:text="Owner"
                                 android:textColor="@color/black"
                                 android:textSize="12sp"
                                 android:fontFamily="@font/lato" />
@@ -224,7 +224,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/proxima_nova_semi_bold"
-                                android:text="Vehicle number"
+                                android:text=""
                                 android:textColor="@color/black"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -237,7 +237,6 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="5dp"
                         android:layout_marginBottom="@dimen/margin_10dp"
-                        android:background="@drawable/spinner_background"
                         android:gravity="center"
                         android:orientation="horizontal">
 
@@ -246,7 +245,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="3dp"
-                            android:layout_weight="1"
                             android:gravity="center|start"
                             android:text="Contact:"
                             android:textColor="#000000" />

@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/JobPortaltheam">
         <activity
-            android:name=".SearchDashboardActivity"
+            android:name=".Activities.BasicActivitys.SearchActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.Construction.ConstructionListActivity"
@@ -28,6 +28,8 @@
         <activity
             android:name=".Activities.Businesthings.BusinessFilter"
             android:exported="false" />
+        <activity android:name=".Activities.BasicActivitys.RentHomeDetails"
+            android:exported="false"/>
         <activity
             android:name=".ConstructionAdaptor"
             android:exported="false" />
@@ -35,7 +37,10 @@
             android:name=".AdminConstruction"
             android:exported="false" />
         <activity
-            android:name=".ConstructionActivity"
+            android:name=".Activities.Construction.ConstructionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Construction.ConstructionDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".TravelsAdaptor"

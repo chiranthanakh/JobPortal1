@@ -2,9 +2,8 @@ package com.chiranths.jobportal1.Model;
 
 public class ConstructionModel {
 
-    String pid,saveCurrentDate, saveCurrentTime,name,category,cost,contactDetails,contactDetails2,experience,service1,service2,service3,service4,discription,verified,image,image2;
-
-    public ConstructionModel(String pid, String saveCurrentDate, String saveCurrentTime, String name, String category, String cost, String contactDetails, String contactDetails2, String experience, String service1, String service2, String service3, String service4, String discription, String verified, String image, String image2) {
+    String pid,saveCurrentDate, saveCurrentTime,name,category,cost,contactDetails,contactDetails2,experience,service1,service2,service3,service4,discription,verified,image,image2,owner,address,status,gst;
+    public ConstructionModel(String pid, String saveCurrentDate, String saveCurrentTime, String name, String category, String cost, String contactDetails, String contactDetails2, String experience, String service1, String service2, String service3, String service4, String discription, String verified, String image, String image2, String owner, String address, String status, String gst) {
         this.pid = pid;
         this.saveCurrentDate = saveCurrentDate;
         this.saveCurrentTime = saveCurrentTime;
@@ -22,6 +21,13 @@ public class ConstructionModel {
         this.verified = verified;
         this.image = image;
         this.image2 = image2;
+        this.owner = owner;
+        this.address = address;
+        this.status = status;
+        this.gst = gst;
+    }
+
+    public ConstructionModel() {
     }
 
     public String getPid() {
@@ -158,5 +164,37 @@ public class ConstructionModel {
 
     public void setImage2(String image2) {
         this.image2 = image2;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.owner = ownerName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getGst() {
+        return gst;
+    }
+
+    public void setGst(String gst) {
+        this.gst = gst;
     }
 }

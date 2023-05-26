@@ -237,7 +237,11 @@ class ProfileFragments : Fragment() {
                                         userData["discription"].toString(),
                                         userData["verified"].toString(),
                                         userData["image"].toString(),
-                                        userData["image2"].toString()
+                                        userData["image2"].toString(),
+                                        userData["owner"].toString(),
+                                        userData["address"].toString(),
+                                        userData["status"].toString(),
+                                        userData["gst"].toString()
                                     )
                                 )
                             }
