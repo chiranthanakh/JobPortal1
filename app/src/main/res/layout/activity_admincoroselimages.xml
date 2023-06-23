@@ -111,12 +111,25 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/btn_construction_category"
+            android:layout_width="@dimen/margin_100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="@dimen/dp_20"
+            android:text="Add construction"/>
+
+        <Button
             android:id="@+id/btn_construction"
             android:layout_width="@dimen/margin_100dp"
             android:layout_height="100dp"
             android:layout_marginRight="@dimen/dp_20"
             android:text="Add construction"/>
 
+        <Button
+            android:id="@+id/btn_Hotels"
+            android:layout_width="@dimen/margin_100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="@dimen/dp_20"
+            android:text="Add construction"/>
 
 
     </LinearLayout>

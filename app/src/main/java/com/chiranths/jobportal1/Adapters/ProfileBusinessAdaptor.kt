@@ -37,17 +37,19 @@ class ProfileBusinessAdaptor(
         Glide.with(context)
             .load(propertyinfo.image)
             .into(holder.business_image)
-        holder.tv_business_type.text = propertyinfo.business_category
+        holder.tv_business_type.text = propertyinfo.Business_category
         holder.tv_business_locatin.text = propertyinfo.location
-        holder.tv_business_name.text = propertyinfo.businessname
+        holder.tv_business_name.text = propertyinfo.Businessname
         holder.tv_business_servicess.text = propertyinfo.description
         if (propertyinfo.status.equals("2")) {
             holder.ll_business_delete.visibility = View.GONE
         }
         holder.ll_business_delete.setOnClickListener {
-            FirebaseDatabase.getInstance().reference.child("BusinessListing").child(
-                propertyinfo.pid
-            ).child("status").setValue("2")
+            propertyinfo.pid?.let { it1 ->
+                FirebaseDatabase.getInstance().reference.child("BusinessListing").child(
+                    it1
+                ).child("status").setValue("2")
+            }
         }
 
     }

@@ -251,7 +251,7 @@ public class LoanFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.cv_business_loan:
-                Intent intent1 = new Intent(getContext(), LoanFormfirst.class);
+                Intent intent1 = new Intent(getContext(), LoanFormGeneral.class);
                 startActivity(intent1);
                 break;
 

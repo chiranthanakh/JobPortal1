@@ -170,7 +170,7 @@ class ProfileFragments : Fragment() {
                                         userData["date"].toString(),
                                         userData["time"].toString(),
                                         userData["Businessname"].toString(),
-                                        userData["Business_category"].toString(),
+                                        userData["products"].toString(),
                                         userData["description"].toString(),
                                         userData["price"].toString(),
                                         userData["location"].toString(),
@@ -180,7 +180,12 @@ class ProfileFragments : Fragment() {
                                         userData["rating"].toString(),
                                         userData["image"].toString(),
                                         userData["image2"].toString(),
-                                        userData["status"].toString()
+                                        userData["status"].toString(),
+                                        userData["gst"].toString(),
+                                        userData["from"].toString(),
+                                        userData["productServicess"].toString(),
+                                        userData["workingHrs"].toString()
+
                                     )
                                 )
                             }
@@ -228,7 +233,7 @@ class ProfileFragments : Fragment() {
                                         userData["category"].toString(),
                                         userData["cost"].toString(),
                                         userData["number1"].toString(),
-                                        userData["number2"].toString(),
+                                        userData["product_services"].toString(),
                                         userData["experience"].toString(),
                                         userData["servicess1"].toString(),
                                         userData["servicess2"].toString(),
@@ -241,7 +246,8 @@ class ProfileFragments : Fragment() {
                                         userData["owner"].toString(),
                                         userData["address"].toString(),
                                         userData["status"].toString(),
-                                        userData["gst"].toString()
+                                        userData["gst"].toString(),
+                                        userData["workingHrs"].toString()
                                     )
                                 )
                             }

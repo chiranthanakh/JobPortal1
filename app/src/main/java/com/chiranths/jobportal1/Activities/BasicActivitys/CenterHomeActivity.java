@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.chiranths.jobportal1.Adapters.CenterHomeadaptor;
+import com.chiranths.jobportal1.Model.HotelsModel;
 import com.chiranths.jobportal1.Model.ProductInfo;
 import com.chiranths.jobportal1.R;
 import com.google.firebase.database.DataSnapshot;
@@ -25,7 +26,7 @@ import java.util.HashMap;
 
 public class CenterHomeActivity extends AppCompatActivity {
 
-    ArrayList<ProductInfo> productinfolist =new ArrayList();
+    ArrayList<HotelsModel> productinfolist =new ArrayList();
     private CenterHomeadaptor centerHomeadaptor;
     RecyclerView rv_center_prop;
     Handler mHandler = new Handler();
@@ -50,7 +51,7 @@ public class CenterHomeActivity extends AppCompatActivity {
     }
 
     private void fetchdata() {
-        DatabaseReference productsinfo = FirebaseDatabase.getInstance().getReference().child("hotforyou");
+        DatabaseReference productsinfo = FirebaseDatabase.getInstance().getReference().child("hotelsforyou");
         productsinfo.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -60,19 +61,28 @@ public class CenterHomeActivity extends AppCompatActivity {
                         Object data = dataMap.get(key);
                         try{
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
-                            productinfolist.add(new ProductInfo(String.valueOf(userData.get("category")),
-                                    String.valueOf(userData.get("date")),
-                                    String.valueOf(userData.get("description")),
+                            productinfolist.add(new HotelsModel(
+                                    String.valueOf(userData.get("name")),
                                     String.valueOf(userData.get("image")),
-                                    String.valueOf(userData.get("location")),
-                                    String.valueOf(userData.get("number")),
+                                    String.valueOf(userData.get("image2")),
                                     String.valueOf(userData.get("pid")),
-                                    String.valueOf(userData.get("pname")),
+                                    String.valueOf(userData.get("date")),
+                                    String.valueOf(userData.get("category")),
                                     String.valueOf(userData.get("price")),
-                                    String.valueOf(userData.get("propertysize")),
-                                    String.valueOf(userData.get("time")),
-                                    String.valueOf(userData.get("type")),
-                                    String.valueOf(userData.get("postedby"))));
+                                    String.valueOf(userData.get("address")),
+                                    String.valueOf(userData.get("owner")),
+                                    String.valueOf(userData.get("alternative")),
+                                    String.valueOf(userData.get("Number")),
+                                    String.valueOf(userData.get("email")),
+                                    String.valueOf(userData.get("website")),
+                                    String.valueOf(userData.get("parking")),
+                                    String.valueOf(userData.get("discription")),
+                                    String.valueOf(userData.get("Rating")),
+                                    String.valueOf(userData.get("Status")),
+                                    String.valueOf(userData.get("point1")),
+                                    String.valueOf(userData.get("point2")),
+                                    String.valueOf(userData.get("point3")),
+                                    String.valueOf(userData.get("Approval"))));
 
                         }catch (ClassCastException cce){
 

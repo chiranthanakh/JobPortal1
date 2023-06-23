@@ -19,14 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
 
-import com.chiranths.jobportal1.Activities.Businesthings.BusinessActivity;
-import com.chiranths.jobportal1.Adapters.BusinessAdaptor;
-import com.chiranths.jobportal1.Adapters.BusinessCategoryAdaptor;
-import com.chiranths.jobportal1.Model.BusinessModel;
-import com.chiranths.jobportal1.Model.Categorymmodel;
 import com.chiranths.jobportal1.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -49,9 +42,10 @@ import java.util.HashMap;
 
 public class AdminBusinessListings extends AppCompatActivity {
     private static final int GalleryPick = 1;
-    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,propertysize,location,number,owner,rating,email;
-    private EditText InputProductName,Inputtype,InputProductDescription,InputProductPrice,et_sell_name,et_location,
-            et_number,et_ownername,et_email,et_rating;
+    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,products,
+            gst,from,productorservicess,location,number,owner,rating,email,open,close;
+    private EditText InputProductName,Inputtype,businessopen,businessClose,InputProductDescription,InputProductPrice,et_sell_name,et_location,
+            et_number,et_ownername,et_email,et_rating, et_from,et_gst,et_pors;
     private Uri ImageUri;
     private String productRandomKey, downloadImageUrl,MainimageUrl;
     private StorageReference ProductImagesRef;
@@ -82,7 +76,11 @@ public class AdminBusinessListings extends AppCompatActivity {
         et_number = findViewById(R.id.Business_number1);
         et_ownername = findViewById(R.id.Business_owner_name);
         et_email = findViewById(R.id.Business_email);
-        et_rating = findViewById(R.id.Business_rating);
+        businessopen = findViewById(R.id.business_open);
+        businessClose = findViewById(R.id.business_close);
+        et_gst = findViewById(R.id.Business_gst);
+        et_pors = findViewById(R.id.Business_pors);
+        et_from = findViewById(R.id.Business_from);
         loadingBar = new ProgressDialog(this);
         fetchbusinessCategorys();
 
@@ -130,7 +128,6 @@ public class AdminBusinessListings extends AppCompatActivity {
                         } catch (ClassCastException cce) {
                             try {
                                 String mString = String.valueOf(dataMap.get(key));
-                                //addTextToView(mString);
                             } catch (ClassCastException cce2) {
 
                             }
@@ -258,13 +255,18 @@ public class AdminBusinessListings extends AppCompatActivity {
         Description = InputProductDescription.getText().toString();
         Price = InputProductPrice.getText().toString();
         Pname = InputProductName.getText().toString();
-        propertysize = et_sell_name.getText().toString();
+        products = et_sell_name.getText().toString();
         location = et_location.getText().toString();
         number = et_number.getText().toString();
         owner = et_ownername.getText().toString();
         email = et_email.getText().toString();
-        rating = et_rating.getText().toString();
+        gst = et_gst.getText().toString();
         CategoryName = business_category.getText().toString();
+        open = businessopen.getText().toString();
+        close = businessopen.getText().toString();
+        from = et_from.getText().toString();
+        productorservicess = et_pors.getText().toString();
+
 
         if (TextUtils.isEmpty(downloadImageUrl))
         {
@@ -281,6 +283,16 @@ public class AdminBusinessListings extends AppCompatActivity {
         else if (TextUtils.isEmpty(Pname))
         {
             Toast.makeText(this, "Please write product name...", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(open))
+        {
+            Toast.makeText(this, "Please write product name...", Toast.LENGTH_SHORT).show();
+        }  else if (TextUtils.isEmpty(close))
+        {
+            Toast.makeText(this, "Please write product name...", Toast.LENGTH_SHORT).show();
+        }else if (TextUtils.isEmpty(from))
+        {
+            Toast.makeText(this, "Please write business started year...", Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -299,13 +311,18 @@ public class AdminBusinessListings extends AppCompatActivity {
         productMap.put("category", CategoryName);
         productMap.put("price", Price);
         productMap.put("Businessname", Pname);
-        productMap.put("Business_category",propertysize);
+        productMap.put("Business_category",products);
         productMap.put("location",location);
         productMap.put("number",number);
         productMap.put("owner", owner);
         productMap.put("email",email);
-        productMap.put("rating", rating);
+        productMap.put("rating", "4");
         productMap.put("Status", 1);
+        productMap.put("workingHrs",open+" to "+ close);
+        productMap.put("gst",gst);
+        productMap.put("from",from);
+        productMap.put("productServicess",productorservicess);
+
 
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)

@@ -244,7 +244,7 @@ public class LoanActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.cv_business_loan:
-                Intent intent1 = new Intent(LoanActivity.this, LoanFormfirst.class);
+                Intent intent1 = new Intent(LoanActivity.this, LoanFormGeneral.class);
                 startActivity(intent1);
                 break;
 

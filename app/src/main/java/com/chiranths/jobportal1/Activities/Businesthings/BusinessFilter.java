@@ -1,21 +1,17 @@
 package com.chiranths.jobportal1.Activities.Businesthings;
 
+import android.os.Bundle;
+import android.os.Handler;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-import android.os.Handler;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import com.chiranths.jobportal1.Adapters.BusinessAdaptor;
-import com.chiranths.jobportal1.Adapters.BusinessCategoryAdaptor;
 import com.chiranths.jobportal1.Model.BusinessModel;
-import com.chiranths.jobportal1.Model.Categorymmodel;
 import com.chiranths.jobportal1.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -63,10 +59,9 @@ public class BusinessFilter extends AppCompatActivity {
                         try{
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
                             if(String.valueOf(userData.get("category")).equals(cat)){
-                                businesslist.add(new BusinessModel(String.valueOf(userData.get("pid")),String.valueOf(userData.get("date")),String.valueOf(userData.get("time")),
-                                        String.valueOf(userData.get("Businessname")),String.valueOf(userData.get("Business_category")),String.valueOf(userData.get("description")),
+                                businesslist.add(new BusinessModel(String.valueOf(userData.get("pid")),String.valueOf(userData.get("date")),String.valueOf(userData.get("time")),String.valueOf(userData.get("Businessname")),String.valueOf(userData.get("products")),String.valueOf(userData.get("description")),
                                         String.valueOf(userData.get("price")),String.valueOf(userData.get("location")),String.valueOf(userData.get("number")),String.valueOf(userData.get("owner")),String.valueOf(userData.get("email")),String.valueOf(userData.get("rating")),
-                                        String.valueOf(userData.get("image")),String.valueOf(userData.get("image2")),String.valueOf(userData.get("status"))));
+                                        String.valueOf(userData.get("image")),String.valueOf(userData.get("image2")),String.valueOf(userData.get("status")),String.valueOf(userData.get("gst")),String.valueOf(userData.get("from")),String.valueOf(userData.get("productServicess")),String.valueOf(userData.get("workingHrs"))));
                             }
                         }catch (ClassCastException cce){
 

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.chiranths.jobportal1.Activities.BasicActivitys.UserDetailsActivity;
 import com.chiranths.jobportal1.Activities.Propertys.Products;
 import com.chiranths.jobportal1.CalldetailsRecords;
+import com.chiranths.jobportal1.Model.HotDealsModel;
 import com.chiranths.jobportal1.R;
 import com.chiranths.jobportal1.Utilitys;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,16 +34,16 @@ import com.synnapps.carouselview.ImageListener;
 public class HotDealsDetailsActivity extends AppCompatActivity {
 
     private Button btn_call;
-    private ImageView productImage,hd_whatsapp_btn,iv_hot_back;
-    private FloatingActionButton hd_cl_btn;
+    private ImageView productImage,iv_hot_back;
+    private LinearLayout hd_cl_btn, hd_whatsapp_btn;
     private TextView productPrice,productDescription,productName,tv_topbar_productName,
             tv_posted_date,tv_hot_location,tv_size,tv_owner_broker,tv_typeof_post,tv_approval_hotdeal,
-    tv_special_option1,tv_special_option2;
+            tv_special_option1,tv_special_option2,tv_hot_owner,tv_hot_timings;
     private String productID="", state = "Normal";
     CarouselView carouselView;
     private CalldetailsRecords calldetails = new CalldetailsRecords() ;
     private String number;
-    private Products products;
+    private HotDealsModel products;
     String[] url;
     Utilitys utilitys = new Utilitys();
     @Override
@@ -65,6 +67,8 @@ public class HotDealsDetailsActivity extends AppCompatActivity {
         tv_hot_location = findViewById(R.id.tv_hot_location);
         tv_special_option1 = findViewById(R.id.tv_special_option1);
         tv_special_option2 = findViewById(R.id.tv_special_option2);
+        tv_hot_owner = findViewById(R.id.tv_hot_owner);
+        tv_hot_timings = findViewById(R.id.tv_hot_timings);
         getProductDetails(productID);
 
         hd_cl_btn.setOnClickListener(view -> {
@@ -91,13 +95,15 @@ public class HotDealsDetailsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
-                     products=dataSnapshot.getValue(Products.class);
+                    products=dataSnapshot.getValue(HotDealsModel.class);
                     productName.setText(products.getPname());
                     productPrice.setText(products.getPrice());
                     productDescription.setText(products.getDescription());
                     tv_topbar_productName.setText(products.getPname());
                     tv_size.setText(products.getPropertysize());
+                    tv_hot_owner .setText(products.getOwnerName());
                     tv_hot_location.setText(products.getLocation());
+                    tv_hot_timings.setText(products.getTimings());
                     url = products.getImage2().split("---");
                     carouselView.setImageListener(imageListener);
                     carouselView.setPageCount(url.length);
@@ -114,7 +120,7 @@ public class HotDealsDetailsActivity extends AppCompatActivity {
                     }else {
                         tv_special_option2.setText(products.getText1());
                     }
-                    tv_posted_date.setText("Posted on "+products.getDate()+" "+"by"+" "+products.getPostedby());
+                    tv_posted_date.setText("Posted on "+products.getDate());
                     /*if(products.getApproval().toString()=="1"){
                         tv_approval_hotdeal.setText("approved not property");
                     }else {

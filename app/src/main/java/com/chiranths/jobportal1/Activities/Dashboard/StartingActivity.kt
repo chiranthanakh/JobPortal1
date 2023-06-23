@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.chiranths.jobportal1.Activities.BasicActivitys.LivingPlaceActivity
@@ -24,19 +23,15 @@ import com.chiranths.jobportal1.Activities.Construction.ConstructionActivity
 import com.chiranths.jobportal1.Activities.LoanActivity.LoanFragment
 import com.chiranths.jobportal1.Activities.Profile.ProfileFragments
 import com.chiranths.jobportal1.Activities.Propertys.PropertyFragment
-import com.chiranths.jobportal1.Activities.jobs.RoleActivity
 import com.chiranths.jobportal1.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
-import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import java.text.DateFormat
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 class StartingActivity : AppCompatActivity() {
     var bottomNavShift: BottomNavigationView? = null

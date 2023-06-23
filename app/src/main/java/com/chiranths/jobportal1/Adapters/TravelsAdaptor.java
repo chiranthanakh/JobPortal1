@@ -1,14 +1,11 @@
 package com.chiranths.jobportal1.Adapters;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.chiranths.jobportal1.Activities.LoanActivity.LoanForm;
-import com.chiranths.jobportal1.Model.LoanOffersModel;
 import com.chiranths.jobportal1.Model.TravelsModel;
 import com.chiranths.jobportal1.R;
 import com.chiranths.jobportal1.Utilitys;

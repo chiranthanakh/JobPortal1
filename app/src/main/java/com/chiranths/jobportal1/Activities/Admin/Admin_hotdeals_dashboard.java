@@ -38,8 +38,8 @@ import java.util.HashMap;
 public class Admin_hotdeals_dashboard extends AppCompatActivity {
 
     private static final int GalleryPick = 1;
-    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,propertysize,location,number;
-    private EditText InputProductName,Inputtype,InputProductDescription,
+    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,propertysize,location,number,ownerName,timings;
+    private EditText InputProductName,Inputtype,InputProductDescription,et_contact_person,et_timings,
             InputProductPrice,et_size,et_location,et_number,et_posted_by,et_hot_text1,et_hot_text2;
     private Uri ImageUri;
     private String productRandomKey, downloadImageUrl,MainimageUrl;
@@ -65,6 +65,8 @@ public class Admin_hotdeals_dashboard extends AppCompatActivity {
         InputProductDescription = (EditText) findViewById(R.id.hot_description);
         InputProductPrice = (EditText) findViewById(R.id.hot_price_admin);
         et_size = findViewById(R.id.hot_size);
+        et_timings = findViewById(R.id.et_timings);
+        et_contact_person = findViewById(R.id.et_contact_person);
         et_location = findViewById(R.id.hot_location_admin);
         et_number = findViewById(R.id.contact_number3);
         et_posted_by = findViewById(R.id.et_owner_broker);
@@ -75,9 +77,7 @@ public class Admin_hotdeals_dashboard extends AppCompatActivity {
         btn_corosel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 OpenGallery();
-
             }
         });
 
@@ -202,6 +202,8 @@ public class Admin_hotdeals_dashboard extends AppCompatActivity {
         propertysize = et_size.getText().toString();
         location = et_location.getText().toString();
         number = et_number.getText().toString();
+        timings = et_timings.getText().toString();
+        ownerName = et_contact_person.getText().toString();
 
         if (TextUtils.isEmpty(downloadImageUrl))
         {
@@ -218,6 +220,13 @@ public class Admin_hotdeals_dashboard extends AppCompatActivity {
         else if (TextUtils.isEmpty(Pname))
         {
             Toast.makeText(this, "Please write product name...", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(ownerName))
+        {
+            Toast.makeText(this, "Please write contact person name...", Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(timings))
+        {
+            Toast.makeText(this, "Please write contact timings...", Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -241,6 +250,8 @@ public class Admin_hotdeals_dashboard extends AppCompatActivity {
         productMap.put("propertysize",propertysize);
         productMap.put("location",location);
         productMap.put("number",number);
+        productMap.put("timings",timings);
+        productMap.put("ownerName",ownerName);
         productMap.put("type",Inputtype.getText().toString());
         productMap.put("postedby",et_posted_by.getText().toString());
         productMap.put("text1",et_hot_text1.getText().toString());

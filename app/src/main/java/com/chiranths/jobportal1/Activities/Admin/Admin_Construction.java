@@ -40,10 +40,10 @@ import java.util.HashMap;
 public class Admin_Construction extends AppCompatActivity {
 
     private static final int GalleryPick = 1;
-    String Name,category,cost,contactDetails,contactDetails2,experience,service1,service2,service3,service4,saveCurrentDate,saveCurrentTime,discription,vehicleNumber,address,owner,gst;
-    private EditText edt_construction_name,edt_construction_number,edt_construction_cost,
+    String Name,category,cost,contactDetails,contactDetails2,experience,service1,service2,open,close,service3,service4,saveCurrentDate,saveCurrentTime,discription,vehicleNumber,address,owner,product_services,gst;
+    private EditText edt_construction_name,edt_construction_number,edt_construction_cost,etd_opening_time,edt_closing_time,
             edt_construction_experience,edt_construction_model,edt_construction_servicessoffer_1,edt_construction_servicessoffer_2,edt_construction_servicessoffer_3,edt_construction_servicessoffer_4,
-            edt_construction_verified_not,edt_construction_discription,edt_construction_number2,edt_construction_address,edt_construction_gst,edt_construction_owner;
+            edt_construction_verified_not,edt_construction_discription,edt_product_services,edt_construction_address,edt_construction_gst,edt_construction_owner;
     private Uri ImageUri;
     private AutoCompleteTextView edt_construction_category;
     private String productRandomKey, downloadImageUrl,MainimageUrl;
@@ -68,10 +68,12 @@ public class Admin_Construction extends AppCompatActivity {
         edt_construction_name = (EditText) findViewById(R.id.edt_construction_name);
         edt_construction_category = findViewById(R.id.edt_construction_category);
         edt_construction_number = (EditText) findViewById(R.id.edt_construction_contact_number);
-        edt_construction_number2= (EditText) findViewById(R.id.edt_construction_contact_number2);
+        edt_product_services = (EditText) findViewById(R.id.edt_product_services);
         edt_construction_cost = (EditText) findViewById(R.id.edt_construction_cost);
         edt_construction_experience = findViewById(R.id.edt_construction_experience);
         edt_construction_model = findViewById(R.id.edt_construction_model);
+        etd_opening_time = findViewById(R.id.etd_opening_time);
+        edt_closing_time = findViewById(R.id.etd_closing_time);
         edt_construction_servicessoffer_1 = findViewById(R.id.edt_construction_servicessoffer_1);
         edt_construction_servicessoffer_2 = findViewById(R.id.edt_construction_servicessoffer_2);
         edt_construction_servicessoffer_3 = findViewById(R.id.edt_construction_servicessoffer_3);
@@ -224,6 +226,9 @@ public class Admin_Construction extends AppCompatActivity {
         owner = edt_construction_owner.getText().toString();
         address = edt_construction_address.getText().toString();
         gst = edt_construction_gst.getText().toString();
+        open = etd_opening_time.getText().toString();
+        close = edt_closing_time.getText().toString();
+        product_services = edt_product_services.getText().toString();
 
         if (TextUtils.isEmpty(downloadImageUrl))
         {
@@ -238,9 +243,18 @@ public class Admin_Construction extends AppCompatActivity {
         else if (TextUtils.isEmpty(contactDetails)) {
             Toast.makeText(this, "Please enter contact details...", Toast.LENGTH_SHORT).show();
         }
+        else if (TextUtils.isEmpty(open)) {
+            Toast.makeText(this, "Please enter opening timings...", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(close)) {
+            Toast.makeText(this, "Please enter closing timings...", Toast.LENGTH_SHORT).show();
+        }
         else if (TextUtils.isEmpty(category)) {
             Toast.makeText(this, "Please enter category", Toast.LENGTH_SHORT).show();
-        } else
+        }else if (TextUtils.isEmpty(product_services)) {
+            Toast.makeText(this, "please enter product or services", Toast.LENGTH_SHORT).show();
+        }
+        else
         {
             SaveProductInfoToDatabase();
         }
@@ -256,23 +270,21 @@ public class Admin_Construction extends AppCompatActivity {
         productMap.put("image2", downloadImageUrl);
         productMap.put("image", MainimageUrl);
         productMap.put("category", category);
+        productMap.put("workingHrs",open+" to "+ close);
         productMap.put("cost", cost);
         productMap.put("name", Name);
         productMap.put("number1",contactDetails);
-        productMap.put("number2",contactDetails2);
+        productMap.put("product_services",product_services);
         productMap.put("servicess1",service1);
         productMap.put("servicess2",service2);
         productMap.put("servicess3",service3);
         productMap.put("servicess4",service4);
-        productMap.put("discription",discription);
-        productMap.put("verified", 1);
+        productMap.put("verified", "1");
         productMap.put("experience", experience);
         productMap.put("owner",owner);
         productMap.put("address",address);
         productMap.put("gst",gst);
-        productMap.put("Status", 1);
-
-
+        productMap.put("Status", "1");
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

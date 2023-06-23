@@ -31,19 +31,16 @@
         <activity android:name=".Activities.BasicActivitys.RentHomeDetails"
             android:exported="false"/>
         <activity
-            android:name=".ConstructionAdaptor"
+            android:name=".Activities.LoanActivity.LoanActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminConstruction"
+            android:name=".Activities.LoanActivity.LoanFormGeneral"
             android:exported="false" />
         <activity
             android:name=".Activities.Construction.ConstructionActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.Construction.ConstructionDetailsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TravelsAdaptor"
             android:exported="false" />
         <activity
             android:name=".TravelsListactivity"
@@ -153,13 +150,7 @@
             android:name=".Activities.Businesthings.BusinessActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.LoanActivity.LoanForm"
-            android:exported="false" />
-        <activity
             android:name=".Activities.Propertys.PropertyDetailsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activities.LoanActivity.LoanActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.Servicess.ServicesActivity"

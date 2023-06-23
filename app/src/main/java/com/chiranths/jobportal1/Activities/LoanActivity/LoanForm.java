@@ -41,7 +41,6 @@ public class LoanForm extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loan_form2);
-
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Loans");
         mAuth = FirebaseAuth.getInstance();
         loadingBar = new ProgressDialog(this);
@@ -51,7 +50,6 @@ public class LoanForm extends AppCompatActivity {
     }
 
     private void initilize() {
-
         et_name = findViewById(R.id.edt_name);
         edt_email = findViewById(R.id.edt_email);
        // et_residence = findViewById(R.id.et_address);
@@ -61,22 +59,18 @@ public class LoanForm extends AppCompatActivity {
         et_dob = findViewById(R.id.edt_dob);
         et_address =findViewById(R.id.edt_address);
 
-        btn_next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //SaveProductInfoToDatabase();
-
-                if (TextUtils.isEmpty(et_number.getText().toString())) {
-                    // when mobile number text field is empty
-                    // displaying a toast message.
-                    Toast.makeText(LoanForm.this, "Please enter a valid phone number.", Toast.LENGTH_SHORT).show();
-                } else {
-                    // if the text field is not empty we are calling our
-                    // send OTP method for getting OTP from Firebase.
-                    String phone = "+91" + et_number.getText().toString();
-                    //sendVerificationCode(phone);
-                    SaveUserDetails();
-                }
+        btn_next.setOnClickListener(view -> {
+            //SaveProductInfoToDatabase();
+            if (TextUtils.isEmpty(et_number.getText().toString())) {
+                // when mobile number text field is empty
+                // displaying a toast message.
+                Toast.makeText(LoanForm.this, "Please enter a valid phone number.", Toast.LENGTH_SHORT).show();
+            } else {
+                // if the text field is not empty we are calling our
+                // send OTP method for getting OTP from Firebase.
+                String phone = "+91" + et_number.getText().toString();
+                //sendVerificationCode(phone);
+                SaveUserDetails();
             }
         });
 

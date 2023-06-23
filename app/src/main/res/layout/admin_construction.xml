@@ -252,11 +252,11 @@
                         app:startIconTint="@color/grey_dark">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edt_construction_contact_number2"
+                            android:id="@+id/edt_product_services"
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
                             android:background="@null"
-                            android:hint="Contact number 2"
+                            android:hint="Type of Product/Services "
                             android:inputType="text"
                             android:lines="4"
                             android:padding="@dimen/dp_0"
@@ -298,6 +298,73 @@
                             android:textSize="@dimen/text_size_14sp" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/black"
+                        app:boxStrokeColor="@color/grey_light"
+                        app:hintTextColor="@color/black"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:startIconTint="@color/grey_dark">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etd_opening_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:background="@null"
+                            android:hint="Opening Time"
+                            android:inputType="text"
+                            android:lines="4"
+                            android:padding="@dimen/dp_0"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="@dimen/text_size_14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/black"
+                        app:boxStrokeColor="@color/grey_light"
+                        app:hintTextColor="@color/black"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:startIconTint="@color/grey_dark">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etd_closing_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:background="@null"
+                            android:hint="Closing Time"
+                            android:inputType="text"
+                            android:lines="4"
+                            android:padding="@dimen/dp_0"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="@dimen/text_size_14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

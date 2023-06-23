@@ -250,11 +250,11 @@
                 app:startIconTint="@color/grey_dark">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/hot_description"
+                    android:id="@+id/hot_price_admin"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="45dp"
                     android:background="@null"
-                    android:hint="Description"
+                    android:hint="Price"
                     android:inputType="text"
                     android:lines="4"
                     android:padding="@dimen/dp_0"
@@ -263,7 +263,6 @@
                     android:textSize="@dimen/text_size_14sp" />
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -284,11 +283,11 @@
                 app:startIconTint="@color/grey_dark">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/hot_price_admin"
+                    android:id="@+id/et_timings"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:background="@null"
-                    android:hint="Price"
+                    android:hint="Contact timings"
                     android:inputType="text"
                     android:lines="4"
                     android:padding="@dimen/dp_0"
@@ -297,6 +296,40 @@
                     android:textSize="@dimen/text_size_14sp" />
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/black"
+                app:boxStrokeColor="@color/grey_light"
+                app:hintTextColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:startIconTint="@color/grey_dark">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_contact_person"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@null"
+                    android:hint="Contact person"
+                    android:inputType="text"
+                    android:lines="4"
+                    android:padding="@dimen/dp_0"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="@dimen/text_size_14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -495,6 +528,40 @@
                     android:textSize="@dimen/text_size_14sp" />
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/black"
+                app:boxStrokeColor="@color/grey_light"
+                app:hintTextColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:startIconTint="@color/grey_dark">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/hot_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@null"
+                    android:hint="Description"
+                    android:inputType="text"
+                    android:lines="4"
+                    android:padding="@dimen/dp_0"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="@dimen/text_size_14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/add_new_hot"

@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -98,7 +97,6 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
             Intent intent = new Intent(BusinessActivity.this, SearchActivity.class);
             bundle.putString("searchtype", "business");
             intent.putExtras(bundle);
-
             startActivity(intent);
         });
         back.setOnClickListener(new View.OnClickListener() {
@@ -186,16 +184,16 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
 
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
 
-                            if (String.valueOf(userData.get("Business_category")).equals(cat)) {
+                            if (String.valueOf(userData.get("products")).equals(cat)) {
                                 businesslist.add(new BusinessModel(String.valueOf(userData.get("pid")), String.valueOf(userData.get("date")), String.valueOf(userData.get("time")),
-                                        String.valueOf(userData.get("Businessname")), String.valueOf(userData.get("Business_category")), String.valueOf(userData.get("description")),
+                                        String.valueOf(userData.get("Businessname")), String.valueOf(userData.get("products")), String.valueOf(userData.get("description")),
                                         String.valueOf(userData.get("price")), String.valueOf(userData.get("location")), String.valueOf(userData.get("number")), String.valueOf(userData.get("owner")), String.valueOf(userData.get("email")), String.valueOf(userData.get("rating")),
-                                        String.valueOf(userData.get("image")), String.valueOf(userData.get("image2")),String.valueOf(userData.get("status"))));
+                                        String.valueOf(userData.get("image")), String.valueOf(userData.get("image2")),String.valueOf(userData.get("status")),String.valueOf(userData.get("gst")),String.valueOf(userData.get("from")),String.valueOf(userData.get("productServicess")),String.valueOf(userData.get("workingHrs"))));
                             }
                             filterbusinesslist.add(new BusinessModel(String.valueOf(userData.get("pid")), String.valueOf(userData.get("date")), String.valueOf(userData.get("time")),
-                                    String.valueOf(userData.get("Businessname")), String.valueOf(userData.get("Business_category")), String.valueOf(userData.get("description")),
+                                    String.valueOf(userData.get("Businessname")), String.valueOf(userData.get("products")), String.valueOf(userData.get("description")),
                                     String.valueOf(userData.get("price")), String.valueOf(userData.get("location")), String.valueOf(userData.get("number")), String.valueOf(userData.get("owner")), String.valueOf(userData.get("email")), String.valueOf(userData.get("rating")),
-                                    String.valueOf(userData.get("image")), String.valueOf(userData.get("image2")),String.valueOf(userData.get("status"))));
+                                    String.valueOf(userData.get("image")), String.valueOf(userData.get("image2")),String.valueOf(userData.get("status")),String.valueOf(userData.get("gst")),String.valueOf(userData.get("from")),String.valueOf(userData.get("productServicess")),String.valueOf(userData.get("workingHrs"))));
 
                         } catch (ClassCastException cce) {
 

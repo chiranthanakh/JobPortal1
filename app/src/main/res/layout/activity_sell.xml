@@ -62,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cv_personal_loan"
+            android:id="@+id/cv_business"
             android:layout_width="wrap_content"
             android:elevation="2dp"
             android:layout_weight="1"
@@ -72,6 +72,7 @@
             android:layout_height="80dp">
 
             <LinearLayout
+                android:id="@+id/ll_business_Lissting"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
@@ -83,7 +84,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_job" />
+                    android:src="@drawable/services" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -92,7 +93,7 @@
                     android:fontFamily="@font/proxima_nova_semi_bold"
                     android:gravity="center"
                     android:maxLines="2"
-                    android:text="Job"
+                    android:text="Business"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -124,7 +125,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_service" />
+                    android:src="@drawable/ic_property" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -152,6 +153,7 @@
             android:layout_height="80dp">
 
             <LinearLayout
+                android:id="@+id/ll_rent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
@@ -206,7 +208,7 @@
             android:layout_height="80dp">
 
             <LinearLayout
-                android:id="@+id/ll_business_posting"
+                android:id="@+id/ll_travels_listing"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
@@ -225,7 +227,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:maxLines="2"
-                    android:text="Business"
+                    android:text="Travels"
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     android:layout_marginTop="5dp"
@@ -259,7 +261,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/construction" />
+                    android:src="@drawable/ic_construction" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -288,6 +290,7 @@
             android:layout_height="80dp">
 
             <LinearLayout
+                android:id="@+id/ll_other_posting"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
@@ -299,7 +302,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_construction" />
+                    android:src="@drawable/construction" />
 
                 <TextView
                     android:layout_width="match_parent"

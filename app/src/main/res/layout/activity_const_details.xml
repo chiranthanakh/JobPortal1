@@ -151,7 +151,7 @@
                             </LinearLayout>
 
                             <TextView
-                                android:id="@+id/tv_prop_type"
+                                android:id="@+id/const_category"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -162,50 +162,6 @@
                                 android:textColor="@color/black"
                                 android:textSize="12sp"
                                 app:layout_constraintTop_toTopOf="parent" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/product_price_details"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center_vertical"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/proxima_nova_bold"
-                                android:gravity="center|start"
-                                android:text="Rs. 50,3000"
-                                android:textColor="@color/black"
-                                android:textSize="22sp" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center"
-                                android:layout_marginEnd="10sp"
-                                android:padding="8dp"
-                                app:tint="@color/red" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center"
-                                android:layout_marginEnd="10sp"
-                                android:padding="5dp"
-                                app:tint="@color/green" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center"
-                                android:layout_marginEnd="10sp"
-                                android:padding="8dp"
-                                android:src="@drawable/location" />
 
                         </LinearLayout>
 
@@ -234,17 +190,7 @@
                                 android:text="Posted on May 07,22"
                                 android:textColor="@color/grey"
                                 android:textSize="12sp" />
-                            <TextView
-                                android:id="@+id/ads_details_verifyed"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:drawableStart="@drawable/approved"
-                                android:drawablePadding="2dp"
-                                android:fontFamily="@font/proxima_nova_semi_bold"
-                                android:gravity="center"
-                                android:text="VERIFIED PROPERTY"
-                                android:textColor="#0dba43"
-                                android:textSize="10sp" />
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -300,7 +246,7 @@
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/proxima_nova_regular"
                                         android:gravity="start|center"
-                                        android:text="Ownership :"
+                                        android:text="Open hours :"
                                         android:textColor="@color/black"
                                         android:textSize="14sp" />
                                 </LinearLayout>
@@ -312,7 +258,7 @@
                                     android:layout_weight="1">
 
                                     <TextView
-                                        android:id="@+id/tv_ads_ownership"
+                                        android:id="@+id/tv_open_hrs"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/lato_bold"
@@ -343,7 +289,7 @@
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/proxima_nova_regular"
                                         android:gravity="start|center"
-                                        android:text="Posted By :"
+                                        android:text="Products / service :"
                                         android:textColor="@color/black"
                                         android:textSize="14sp" />
                                 </LinearLayout>
@@ -355,7 +301,7 @@
                                     android:layout_weight="1">
 
                                     <TextView
-                                        android:id="@+id/tv_ads_posted"
+                                        android:id="@+id/tv_product_service"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/lato_bold"
@@ -386,7 +332,7 @@
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/proxima_nova_regular"
                                         android:gravity="start|center"
-                                        android:text="Property size :"
+                                        android:text="GST number :"
                                         android:textColor="@color/black"
                                         android:textSize="14sp" />
                                 </LinearLayout>
@@ -398,7 +344,7 @@
                                     android:layout_weight="1">
 
                                     <TextView
-                                        android:id="@+id/ads_size_details"
+                                        android:id="@+id/const_gst"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/lato_bold"
@@ -429,7 +375,7 @@
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/proxima_nova_regular"
                                         android:gravity="start|center"
-                                        android:text="Property Posted By :"
+                                        android:text="Price start from :"
                                         android:textColor="@color/black"
                                         android:textSize="14sp" />
                                 </LinearLayout>
@@ -441,7 +387,7 @@
                                     android:layout_weight="1">
 
                                     <TextView
-                                        android:id="@+id/tv_sites_available"
+                                        android:id="@+id/const_price"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/lato_bold"
@@ -472,7 +418,7 @@
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/proxima_nova_regular"
                                         android:gravity="start|center"
-                                        android:text="Facing :"
+                                        android:text="Business establishment :"
                                         android:textColor="@color/black"
                                         android:textSize="14sp" />
                                 </LinearLayout>
@@ -484,7 +430,7 @@
                                     android:layout_weight="1">
 
                                     <TextView
-                                        android:id="@+id/ads_tv_facing"
+                                        android:id="@+id/tv_experience"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/lato_bold"
@@ -515,7 +461,7 @@
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/proxima_nova_regular"
                                         android:gravity="start|center"
-                                        android:text="Approved By :"
+                                        android:text="Owner name :"
                                         android:textColor="@color/black"
                                         android:textSize="14sp" />
                                 </LinearLayout>
@@ -527,7 +473,7 @@
                                     android:layout_weight="1">
 
                                     <TextView
-                                        android:id="@+id/ads_approved_by"
+                                        android:id="@+id/tv_owner"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/lato_bold"
@@ -564,11 +510,11 @@
                                     android:textSize="14sp" />
 
                                 <TextView
-                                    android:id="@+id/ads_place_location"
+                                    android:id="@+id/const_location"
                                     android:layout_width="150dp"
                                     android:layout_height="wrap_content"
                                     android:src="@drawable/star"
-                                    android:text="Size"
+                                    android:text=""
                                     android:layout_marginStart="@dimen/dp_20"
                                     android:layout_marginTop="@dimen/margin_10_dp"
                                     android:textSize="14dp"
@@ -576,14 +522,14 @@
                                     android:textColor="@color/black"/>
 
                                 <TextView
-                                    android:id="@+id/tv_posted_date"
+                                    android:id="@+id/tv_pincode"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="10dp"
                                     android:layout_marginStart="@dimen/dp_20"
                                     android:fontFamily="@font/proxima_family"
                                     android:gravity="center"
-                                    android:text="Posted on May 07,22"
+                                    android:text=""
                                     android:textColor="@color/grey"
                                     android:textSize="11sp" />
 

@@ -24,12 +24,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.chiranths.jobportal1.Activities.BasicActivitys.UserDetailsActivity;
-import com.chiranths.jobportal1.Activities.Businesthings.BusinessDetailsActivity;
-import com.chiranths.jobportal1.Activities.Propertys.PropertyDetailsActivity;
+import com.chiranths.jobportal1.Activities.Businesthings.BusinessDetails;
 import com.chiranths.jobportal1.CalldetailsRecords;
 import com.chiranths.jobportal1.Model.BusinessModel;
 import com.chiranths.jobportal1.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -46,11 +44,11 @@ public class BusinessAdaptor extends RecyclerView.Adapter<BusinessAdaptor.ViewHo
 
     @NonNull
     @Override
-    public BusinessAdaptor.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         context = parent.getContext();
         View listItem= layoutInflater.inflate(R.layout.business_items_layout, parent, false);
-        BusinessAdaptor.ViewHolder viewHolder = new BusinessAdaptor.ViewHolder(listItem);
+        ViewHolder viewHolder = new ViewHolder(listItem);
         return viewHolder;
     }
 
@@ -71,7 +69,7 @@ public class BusinessAdaptor extends RecyclerView.Adapter<BusinessAdaptor.ViewHo
         holder.cv_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =new Intent(context, BusinessDetailsActivity.class);
+                Intent intent =new Intent(context, BusinessDetails.class);
                 intent.putExtra("pid",propertyinfo.getPid());
                 context.startActivity(intent);
             }
@@ -83,7 +81,7 @@ public class BusinessAdaptor extends RecyclerView.Adapter<BusinessAdaptor.ViewHo
             public void onClick(View view) {
 
                 //check permition
-                String permission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+                String permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
                 int res = context.checkCallingOrSelfPermission(permission);
                 if (res == PackageManager.PERMISSION_GRANTED) {
                     SharedPreferences sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
@@ -111,7 +109,7 @@ public class BusinessAdaptor extends RecyclerView.Adapter<BusinessAdaptor.ViewHo
             @Override
             public void onClick(View view) {
 
-                String permission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+                String permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
                 int res = context.checkCallingOrSelfPermission(permission);
                 if (res == PackageManager.PERMISSION_GRANTED) {
                     SharedPreferences sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);

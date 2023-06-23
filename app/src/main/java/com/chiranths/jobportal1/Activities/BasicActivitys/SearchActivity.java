@@ -1,7 +1,5 @@
 package com.chiranths.jobportal1.Activities.BasicActivitys;
 
-import static java.security.AccessController.getContext;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -16,23 +14,17 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Filter;
 import android.widget.ImageView;
 import androidx.appcompat.widget.SearchView;
 
-import com.chiranths.jobportal1.Activities.Businesthings.BusinessActivity;
 import com.chiranths.jobportal1.Activities.Propertys.AdminAddNewProductActivity;
 import com.chiranths.jobportal1.Activities.Propertys.ProductViewHolder;
 import com.chiranths.jobportal1.Activities.Propertys.Products;
-import com.chiranths.jobportal1.Activities.Propertys.PropertyActivity;
 import com.chiranths.jobportal1.Adapters.AdsAdaptor;
 import com.chiranths.jobportal1.Adapters.BusinessAdaptor;
 import com.chiranths.jobportal1.Adapters.PropertyAdaptor;
@@ -50,7 +42,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Locale;
 
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -126,7 +117,14 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                  }
              });
 
-         }else if(type.equals("")) {
+         }else if(type.equals("const")){
+             AsyncTask.execute(new Runnable() {
+                 @Override
+                 public void run() {
+                     fetchConstruction();
+                 }
+             });
+         } else if(type.equals("")) {
              //finterAdaptor();
              AsyncTask.execute(new Runnable() {
                  @Override
@@ -308,9 +306,9 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
 
                             businesslist.add(new BusinessModel(String.valueOf(userData.get("pid")),String.valueOf(userData.get("date")),String.valueOf(userData.get("time")),
-                                    String.valueOf(userData.get("Businessname")),String.valueOf(userData.get("Business_category")),String.valueOf(userData.get("description")),
+                                    String.valueOf(userData.get("Businessname")),String.valueOf(userData.get("products")),String.valueOf(userData.get("description")),
                                     String.valueOf(userData.get("price")),String.valueOf(userData.get("location")),String.valueOf(userData.get("number")),String.valueOf(userData.get("owner")),String.valueOf(userData.get("email")),String.valueOf(userData.get("rating")),
-                                    String.valueOf(userData.get("image")),String.valueOf(userData.get("image2")),String.valueOf(userData.get("status"))));
+                                    String.valueOf(userData.get("image")),String.valueOf(userData.get("image2")),String.valueOf(userData.get("status")),String.valueOf(userData.get("gst")),String.valueOf(userData.get("from")),String.valueOf(userData.get("productServicess")),String.valueOf(userData.get("workingHrs"))));
 
 
                         }catch (ClassCastException cce){
@@ -344,6 +342,60 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
     }
+
+    private void fetchConstruction() {
+        DatabaseReference coroselimage = FirebaseDatabase.getInstance().getReference().child("constructionforyou");
+
+        coroselimage.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (snapshot.exists()){
+                    HashMap<String, Object> dataMap = (HashMap<String, Object>) snapshot.getValue();
+                    for (String key : dataMap.keySet()){
+                        Object data = dataMap.get(key);
+                        try{
+
+                            HashMap<String, Object> userData = (HashMap<String, Object>) data;
+
+                            businesslist.add(new BusinessModel(String.valueOf(userData.get("pid")),String.valueOf(userData.get("date")),String.valueOf(userData.get("time")),
+                                    String.valueOf(userData.get("Businessname")),String.valueOf(userData.get("products")),String.valueOf(userData.get("description")),
+                                    String.valueOf(userData.get("price")),String.valueOf(userData.get("location")),String.valueOf(userData.get("number")),String.valueOf(userData.get("owner")),String.valueOf(userData.get("email")),String.valueOf(userData.get("rating")),
+                                    String.valueOf(userData.get("image")),String.valueOf(userData.get("image2")),String.valueOf(userData.get("status")),String.valueOf(userData.get("gst")),String.valueOf(userData.get("from")),String.valueOf(userData.get("productServicess")),String.valueOf(userData.get("workingHrs"))));
+
+
+                        }catch (ClassCastException cce){
+
+                            try{
+                                String mString = String.valueOf(dataMap.get(key));
+                                //addTextToView(mString);
+                            }catch (ClassCastException cce2){
+
+                            }
+                        }
+                    }
+
+                    businessAdaptor =new BusinessAdaptor(businesslist, SearchActivity.this);
+                    RecyclerView.LayoutManager nlayoutManager = new LinearLayoutManager(SearchActivity.this, RecyclerView.VERTICAL, false);
+                    recyclerView.setLayoutManager(nlayoutManager);
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            recyclerView.setAdapter(businessAdaptor);
+                        }
+                    });
+                    businessAdaptor.notifyItemRangeInserted(0, businesslist.size());
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -443,7 +495,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                                 businesslist.get(i).getBusinessname(),businesslist.get(i).getBusiness_category(),businesslist.get(i).getDescription(),
                                 businesslist.get(i).getPrice(),businesslist.get(i).getLocation(),businesslist.get(i).getNumber(),businesslist.get(i).getOwner(),
                                 businesslist.get(i).getEmail(),businesslist.get(i).getRating(),
-                                businesslist.get(i).getImage(),businesslist.get(i).getImage2(),businesslist.get(i).getStatus()));
+                                businesslist.get(i).getImage(),businesslist.get(i).getImage2(),businesslist.get(i).getStatus(),businesslist.get(i).getGst(),businesslist.get(i).getFrom(),businesslist.get(i).getProductServicess(),businesslist.get(i).getWorkingHrs()));
 
                     }
 

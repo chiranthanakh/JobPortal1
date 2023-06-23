@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -71,6 +72,21 @@ public class AdminDashboard extends AppCompatActivity {
         Button btn_livingplace_add = findViewById(R.id.btn_livingplace);
         Button btn_travels = findViewById(R.id.btn_travels);
         Button btn_construction = findViewById(R.id.btn_construction);
+        Button btn_constCategory = findViewById(R.id.btn_construction_category);
+        Button btn_hotels = findViewById(R.id.btn_Hotels);
+
+        btn_hotels.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AdminDashboard.this, Admin_hotels.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_constCategory.setOnClickListener(view -> {
+            Intent intent = new Intent(AdminDashboard.this, AdminConstructionCategorys.class);
+            startActivity(intent);
+        });
 
         btn_construction.setOnClickListener(view -> {
             Intent intent = new Intent(AdminDashboard.this, Admin_Construction.class);
