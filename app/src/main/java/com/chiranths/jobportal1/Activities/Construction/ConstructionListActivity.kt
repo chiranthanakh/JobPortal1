@@ -56,7 +56,7 @@ class ConstructionListActivity : AppCompatActivity() {
                                     userData["category"].toString(),
                                     userData["cost"].toString(),
                                     userData["number1"].toString(),
-                                    userData["number2"].toString(),
+                                    userData["product_services"].toString(),
                                     userData["experience"].toString(),
                                     userData["servicess1"].toString(),
                                     userData["servicess2"].toString(),
@@ -69,7 +69,9 @@ class ConstructionListActivity : AppCompatActivity() {
                                     userData["owner"].toString(),
                                     userData["address"].toString(),
                                     userData["status"].toString(),
-                                    userData["gst"].toString()
+                                    userData["gst"].toString(),
+                                    userData["workingHrs"].toString()
+
                                 )
                             )
                         } catch (cce: ClassCastException) {
