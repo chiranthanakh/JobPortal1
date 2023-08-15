@@ -8,10 +8,8 @@ import com.chiranths.jobportal1.R
 import android.annotation.SuppressLint
 import android.content.Context
 import com.bumptech.glide.Glide
-import android.content.Intent
 import android.view.View
 import android.widget.ImageView
-import com.chiranths.jobportal1.Activities.Businesthings.BusinessDetailsActivity
 import androidx.cardview.widget.CardView
 import android.widget.TextView
 import android.widget.LinearLayout

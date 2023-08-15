@@ -286,7 +286,6 @@
                             android:orientation="vertical">
 
                             <TextView
-
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/proxima_nova_bold"
@@ -616,13 +615,23 @@
                             android:id="@+id/ll_coins_buy"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:orientation="vertical"
                             android:layout_marginTop="5dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/proxima_nova_bold"
+                                android:text="Discription"
+                                android:textColor="@color/black"
+                                android:layout_marginTop="@dimen/dp_5"
+                                android:textSize="18sp" />
 
                             <TextView
                                 android:id="@+id/hot_description_details"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
+                                android:layout_marginTop="10dp"
                                 android:fontFamily="@font/proxima_family"
                                 android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.remaining essentially unchanged."
                                 android:textColor="@color/black"

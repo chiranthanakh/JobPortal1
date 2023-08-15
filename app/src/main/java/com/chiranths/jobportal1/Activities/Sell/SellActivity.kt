@@ -27,7 +27,7 @@ class SellActivity : AppCompatActivity(), View.OnClickListener {
         ll_post_constructions = findViewById(R.id.ll_post_constructions)
         ll_other_posting = findViewById(R.id.ll_other_posting)
         ll_business_Lissting = findViewById(R.id.ll_business_Lissting)
-        iv_nav_view = findViewById(R.id.iv_nav_view)
+        iv_nav_view = findViewById(R.id.iv_nav_back)
         ll_rent = findViewById(R.id.ll_rent)
         ll_post_property?.setOnClickListener(this)
         ll_travel_posting?.setOnClickListener(this)
@@ -41,7 +41,7 @@ class SellActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.ll_post_property -> {
-                val intent = Intent(this, Admin_layouts_dashboard::class.java)
+                val intent = Intent(this, Admin_ads_dashboard::class.java)
                 startActivity(intent)
             }
             R.id.ll_travels_listing -> {
@@ -64,7 +64,7 @@ class SellActivity : AppCompatActivity(), View.OnClickListener {
                 val intent2 = Intent(this, AdminLivingPlacess::class.java)
                 startActivity(intent2)
             }
-            R.id.iv_nav_view -> {
+            R.id.iv_nav_back -> {
                 finish()
             }
         }

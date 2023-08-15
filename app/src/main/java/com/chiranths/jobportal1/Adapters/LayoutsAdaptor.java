@@ -27,10 +27,8 @@ import java.util.List;
 
 public class LayoutsAdaptor extends RecyclerView.Adapter<LayoutsAdaptor.ViewHolder> {
 
-
     private ArrayList<LayoutModel> layoutsList;
     private Context context;
-
     public LayoutsAdaptor(ArrayList layoutsList, Context context) {
         this.layoutsList = layoutsList;
         this.context = context;

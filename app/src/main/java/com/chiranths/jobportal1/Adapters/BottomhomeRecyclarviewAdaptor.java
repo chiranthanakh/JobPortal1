@@ -34,14 +34,11 @@ import com.chiranths.jobportal1.Utilitys;
 import java.util.List;
 
 public class BottomhomeRecyclarviewAdaptor extends RecyclerView.Adapter<BottomhomeRecyclarviewAdaptor.ViewHolder> {
-
-
     private List<ProductInfo> productInfos;
     private Context context;
     private String number, name;
     CalldetailsRecords calldetails = new CalldetailsRecords() ;
     Utilitys utilitys = new Utilitys();
-
     public BottomhomeRecyclarviewAdaptor(List<ProductInfo> productInfos,Context context, String number, String name) {
         this.productInfos = productInfos;
         this.context = context;

@@ -143,6 +143,7 @@ public class AdminDashboard extends AppCompatActivity {
         btn_ads.setOnClickListener(view -> {
 
             Intent intent = new Intent(AdminDashboard.this, Admin_ads_dashboard.class);
+            intent.putExtra("page","1");
             startActivity(intent);
         });
 

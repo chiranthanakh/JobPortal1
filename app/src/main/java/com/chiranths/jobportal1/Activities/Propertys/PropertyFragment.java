@@ -22,6 +22,8 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.chiranths.jobportal1.Activities.Admin.Admin_ads_dashboard;
 import com.chiranths.jobportal1.Activities.BasicActivitys.SearchActivity;
 import com.chiranths.jobportal1.Adapters.AdsAdaptor;
 import com.chiranths.jobportal1.Adapters.PropertyAdaptor;
@@ -44,7 +46,7 @@ public class PropertyFragment extends Fragment implements View.OnClickListener {
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     Button btn_add;
-    LinearLayout search;
+    ImageView search;
     ImageView iv_back_toolbar;
     ImageView iv_sites,iv_green_land,iv_home,iv_commercial;
     Handler mHandler = new Handler();
@@ -69,26 +71,9 @@ public class PropertyFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-           // setTheme(R.style.darkTheme);
-            //when dark mode is enabled, we use the dark theme
-        } else {
-            //setTheme(R.style.JobPortaltheam); //default app theme
-        }
-
-
-       /* if (Build.VERSION.SDK_INT >= 21) {
-            Window window = this.getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.setStatusBarColor(this.getResources().getColor(R.color.app_blue));
-        }*/
-
-
 
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
         initilize(view);
-
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -98,14 +83,13 @@ public class PropertyFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initilize(View view) {
-
         btn_add = view.findViewById(R.id.btn_add_property);
         btn_add.setOnClickListener(this);
         iv_sites = view.findViewById(R.id.iv_sites);
         iv_commercial = view.findViewById(R.id.iv_commercial);
         iv_green_land = view.findViewById(R.id.iv_green_land);
         iv_home = view.findViewById(R.id.iv_home);
-        search = view.findViewById(R.id.llsearch_property);
+        search = view.findViewById(R.id.iv_search);
         iv_sites.setOnClickListener(this);
         iv_green_land.setOnClickListener(this);
         iv_commercial.setOnClickListener(this);
@@ -210,7 +194,7 @@ public class PropertyFragment extends Fragment implements View.OnClickListener {
                                     userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
                                     +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type"));
 
-                            if(userData.get("type").equals("sites")){
+                            /*if(userData.get("type").equals("sites")){
                                 siteslist.add(userData.get("type")+"!!"+userData.get("pid")+"---"+userData.get("description")+"---"+
                                         userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
                                         +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type"));
@@ -230,7 +214,7 @@ public class PropertyFragment extends Fragment implements View.OnClickListener {
                                         userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
                                         +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type"));
 
-                            };
+                            };*/
 
                         }catch (ClassCastException cce){
 
@@ -271,7 +255,8 @@ public class PropertyFragment extends Fragment implements View.OnClickListener {
         switch (view.getId())
         {
             case R.id.btn_add_property:
-                Intent intent = new Intent(getContext(), AdminAddNewProductActivity.class);
+                Intent intent = new Intent(getContext(), Admin_ads_dashboard.class);
+                intent.putExtra("page","2");
                 startActivity(intent);
                 break;
 

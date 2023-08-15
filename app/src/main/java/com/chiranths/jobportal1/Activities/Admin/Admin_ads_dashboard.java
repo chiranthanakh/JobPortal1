@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -38,6 +40,7 @@ import java.util.HashMap;
 
 public class Admin_ads_dashboard extends AppCompatActivity {
 
+
     private static final int GalleryPick = 1;
     private String CategoryName, Description, Price, Pname,postedBy,saveCurrentDate, saveCurrentTime,propertysize,location,number,ownership,facing,approvedBy;
     private EditText InputProductName,Inputtype,InputProductDescription,ads_ownerShip,ads_facing,ads_approved_by
@@ -48,24 +51,40 @@ public class Admin_ads_dashboard extends AppCompatActivity {
     private DatabaseReference ProductsRef;
     private CheckBox cb_owner,cb_broker;
     private ProgressDialog loadingBar;
+    private AutoCompleteTextView propertyType;
     ArrayList fileNameList = new ArrayList<>();
     ArrayList fileDoneList = new ArrayList<>();
-    EditText ads_name;
+    ArrayList categoryList = new ArrayList();
+    private EditText ads_name;
+    private ArrayAdapter arrayAdapter;
+    ImageView backBtn;
 
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_ads);
 
+        String propertyPage = getIntent().getStringExtra("page");
+        categoryList.add("sites");
+        categoryList.add("flat");
+        categoryList.add("form land");
+        categoryList.add("Homes");
+        categoryList.add("commercial Space");
         //CategoryName = "cqat";
-        ProductImagesRef = FirebaseStorage.getInstance().getReference().child("ads");
-        ProductsRef = FirebaseDatabase.getInstance().getReference().child("adsforyou");
-
+        if(propertyPage.equals("2")) {
+            ProductImagesRef = FirebaseStorage.getInstance().getReference().child("Product Images");
+            ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
+        } else {
+            ProductImagesRef = FirebaseStorage.getInstance().getReference().child("ads");
+            ProductsRef = FirebaseDatabase.getInstance().getReference().child("adsforyou");
+        }
         ImageView btn_corosel = findViewById(R.id.select_corosel_image);
         Button add_new_corosel = findViewById(R.id.add_new_ads);
 
         InputProductName = (EditText) findViewById(R.id.ads_name);
-        Inputtype = (EditText)findViewById(R.id.ads_type_admin);
+
         InputProductDescription = (EditText) findViewById(R.id.ads_description);
         InputProductPrice = (EditText) findViewById(R.id.ads_price_admin);
         ads_ownerShip = findViewById(R.id.ads_ownerShip);
@@ -79,19 +98,36 @@ public class Admin_ads_dashboard extends AppCompatActivity {
         et_text2 = findViewById(R.id.ads_text2);
         et_text3 = findViewById(R.id.ads_text3);
         et_text4 = findViewById(R.id.ads_text4);
+        backBtn = findViewById(R.id.iv_nav_view);
         et_location = findViewById(R.id.ads_location_admin);
         et_number = findViewById(R.id.ads_contact_number);
         et_verified = findViewById(R.id.ads_verify_or_nt);
         loadingBar = new ProgressDialog(this);
+        propertyType = findViewById(R.id.sp_property_type_admin);
 
         btn_corosel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 OpenGallery();
-
             }
         });
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        propertyType.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus)
+                    propertyType.showDropDown();
+            }
+        });
+        arrayAdapter= new ArrayAdapter(this, android.R.layout.simple_list_item_1, categoryList);
+        propertyType.setAdapter(arrayAdapter);
+        propertyType.setInputType(0);
 
         add_new_corosel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,7 +167,7 @@ public class Admin_ads_dashboard extends AppCompatActivity {
         propertysize = et_size.getText().toString();
         location = et_location.getText().toString();
         number = et_number.getText().toString();
-        CategoryName = Inputtype.getText().toString();
+        CategoryName = propertyType.getText().toString();
         ownership = ads_ownerShip.getText().toString();
         facing = ads_facing.getText().toString();
         approvedBy = ads_approved_by.getText().toString();

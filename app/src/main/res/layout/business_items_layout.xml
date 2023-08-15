@@ -74,7 +74,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Type:"
+                            android:text="Name :"
                             android:gravity="center|start"
                             android:textColor="@color/black"
                             android:textSize="12sp" />
@@ -88,7 +88,7 @@
                             android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/tv_business_type"
+                            android:id="@+id/tv_business_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/proxima_nova_semi_bold"
@@ -130,7 +130,7 @@
                             android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/tv_business_name"
+                            android:id="@+id/tv_business_type"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/proxima_nova_semi_bold"

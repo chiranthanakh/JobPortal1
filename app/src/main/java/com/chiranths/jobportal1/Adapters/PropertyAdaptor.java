@@ -23,6 +23,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.chiranths.jobportal1.Activities.BasicActivitys.AdsDetailsActivity;
 import com.chiranths.jobportal1.Activities.BasicActivitys.UserDetailsActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyDetailsActivity;
 import com.chiranths.jobportal1.CalldetailsRecords;
@@ -77,8 +78,9 @@ public class PropertyAdaptor extends RecyclerView.Adapter<PropertyAdaptor.ViewHo
         holder.cv_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =new Intent(context, PropertyDetailsActivity.class);
+                Intent intent =new Intent(context, AdsDetailsActivity.class);
                 intent.putExtra("pid",data[0]);
+                intent.putExtra("page","2");
                 context.startActivity(intent);
             }
         });

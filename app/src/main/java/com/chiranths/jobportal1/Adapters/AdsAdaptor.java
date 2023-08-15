@@ -65,6 +65,7 @@ public class AdsAdaptor extends RecyclerView.Adapter<AdsAdaptor.ViewHolder> {
         holder.tv_amount.setText(adsModel.getPrice());
         holder.tv_space.setText(adsModel.getPropertysize());
         holder.ads_location_adaptor.setText(adsModel.getLocation());
+        holder.tv_ads_name.setText(adsModel.getPname());
 
         if(adsModel.getVerified().equals("1")){
             holder.tv_ads_verification.setText("Not Verified");
@@ -94,7 +95,7 @@ public class AdsAdaptor extends RecyclerView.Adapter<AdsAdaptor.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView iv_corosel_image;
-        TextView tv_ads_category,tv_amount,tv_space,ads_location_adaptor,tv_ads_verification;
+        TextView tv_ads_name,tv_ads_category,tv_amount,tv_space,ads_location_adaptor,tv_ads_verification;
         CardView cv_card;
         LinearLayout ll_enquiry;
 
@@ -108,6 +109,7 @@ public class AdsAdaptor extends RecyclerView.Adapter<AdsAdaptor.ViewHolder> {
             this.tv_space = itemView.findViewById(R.id.tv_ads_spaces);
             this.ads_location_adaptor = itemView.findViewById(R.id.ads_location_adaptor);
             this.tv_ads_verification = itemView.findViewById(R.id.tv_layout_name);
+            this.tv_ads_name = itemView.findViewById(R.id.tv_layout_name);
             //this.ll_enquiry = itemView.findViewById(R.id.ll_enquiry);
 
         }

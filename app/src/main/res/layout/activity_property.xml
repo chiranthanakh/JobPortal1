@@ -48,6 +48,14 @@
                 android:layout_marginTop="10dp"
                 android:layout_height="wrap_content">
 
+                <ImageView
+                    android:id="@+id/iv_search"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:padding="13dp"
+                    android:src="@drawable/search_hallow"
+                    app:tint="@color/grey" />
+
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_add_property"
                     android:layout_width="wrap_content"
@@ -64,69 +72,6 @@
 
             </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@drawable/gradient"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:orientation="vertical">
-
-            <androidx.appcompat.widget.Toolbar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:contentInsetStartWithNavigation="0dp">
-
-                <LinearLayout
-                    android:id="@+id/llsearch_property"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="5dp"
-                    android:background="@drawable/edittext_back"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/iv_search"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:padding="13dp"
-                        android:src="@drawable/search_hallow"
-                        app:tint="@color/grey" />
-
-                    <EditText
-                        android:id="@+id/edt_search_property"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:inputType="text"
-                        android:gravity="center_vertical"
-                        android:hint="Search here..."
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey_light"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/iv_search" />
-
-
-                </LinearLayout>
-            </androidx.appcompat.widget.Toolbar>
-
-        </LinearLayout>
-
-    </LinearLayout>
 
 
     <LinearLayout

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <FrameLayout
         android:id="@+id/fragment_container"
@@ -146,14 +146,14 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@null"
-                            android:gravity="center_vertical"
-                            android:inputType="none"
                             android:clickable="false"
+                            android:cursorVisible="false"
+                            android:gravity="center_vertical"
                             android:hint="Search for propertys..."
+                            android:inputType="none"
                             android:textColor="@color/black"
                             android:textColorHint="@color/grey_light"
                             android:textSize="18sp"
-                            android:cursorVisible="false"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/iv_search" />
 
@@ -214,9 +214,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:visibility="gone"
                                 android:orientation="vertical"
-                                android:paddingBottom="8dp">
+                                android:paddingBottom="8dp"
+                                android:visibility="gone">
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -240,7 +240,7 @@
                                     android:textSize="14sp" />
 
                             </LinearLayout>
-                            >
+
                             <LinearLayout
                                 android:id="@+id/cv_loans"
                                 android:layout_width="match_parent"
@@ -273,7 +273,7 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:id="@+id/cv_propertys"
+                                android:id="@+id/ll_travels"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -285,21 +285,18 @@
                                     android:layout_height="30dp"
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginTop="5dp"
-                                    android:layout_marginBottom="5dp"
-                                    android:src="@drawable/ic_property" />
+                                    android:layout_marginBottom="2dp"
+                                    android:src="@drawable/ic_travel" />
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="10dp"
-                                    android:layout_marginTop="2dp"
-                                    android:layout_marginEnd="10dp"
-                                    android:fontFamily="@font/proxima_nova_semi_bold"
+                                    android:fontFamily="@font/lato"
                                     android:gravity="center"
                                     android:maxLines="2"
-                                    android:text="Properties"
+                                    android:text="Travels"
                                     android:textColor="@color/white"
-                                    android:textSize="14sp" />
+                                    android:textSize="12sp" />
 
                             </LinearLayout>
 
@@ -347,24 +344,24 @@
                         app:layout_constraintTop_toTopOf="parent">
 
 
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/rv_home_event"
-                                android:layout_width="match_parent"
-                                android:layout_marginStart="3dp"
-                                android:layout_marginEnd="3dp"
-                                android:layout_height="160dp"
-                                android:layout_gravity="center" />
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_home_event"
+                            android:layout_width="match_parent"
+                            android:layout_height="160dp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="3dp"
+                            android:layout_marginEnd="3dp" />
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:background="@drawable/card_shadow_back_login"
-                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="5dp"
+                        android:background="@drawable/card_shadow_back_login"
+                        android:orientation="vertical"
                         android:outlineSpotShadowColor="@color/red"
                         app:layout_constraintTop_toTopOf="parent">
 
@@ -443,33 +440,6 @@
 
                             </LinearLayout>
 
-                            <LinearLayout
-                                android:id="@+id/ll_travels"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                android:paddingBottom="8dp">
-
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="30dp"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginBottom="2dp"
-                                    android:src="@drawable/ic_travel" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/lato"
-                                    android:gravity="center"
-                                    android:maxLines="2"
-                                    android:text="Travels"
-                                    android:textColor="@color/black"
-                                    android:textSize="12sp" />
-
-                            </LinearLayout>
 
                             <LinearLayout
                                 android:id="@+id/ll_constructions"
@@ -512,18 +482,18 @@
 
 
                         <LinearLayout
-                            android:layout_marginTop="5dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
                             android:orientation="horizontal">
 
                             <TextView
-                                android:gravity="start|center"
-                                android:layout_weight="1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
+                                android:layout_weight="1"
                                 android:fontFamily="@font/proxima_nova_semi_bold"
+                                android:gravity="start|center"
                                 android:text="Upcoming Projects"
                                 android:textColor="@color/black"
                                 android:textSize="15sp" />
@@ -543,10 +513,10 @@
 
 
                         <LinearLayout
-                            android:layout_marginTop="5dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
                             android:layout_marginEnd="5dp"
                             android:background="@color/white"
                             android:gravity="center"
@@ -577,18 +547,18 @@
 
 
                         <LinearLayout
-                            android:layout_marginTop="5dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
                             android:orientation="horizontal">
 
                             <TextView
-                                android:gravity="start|center"
-                                android:layout_weight="1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
+                                android:layout_weight="1"
                                 android:fontFamily="@font/proxima_nova_semi_bold"
+                                android:gravity="start|center"
                                 android:text="Layouts"
                                 android:textColor="@color/black"
                                 android:textSize="15sp" />
@@ -608,10 +578,10 @@
 
 
                         <LinearLayout
-                            android:layout_marginTop="5dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
                             android:layout_marginEnd="5dp"
                             android:background="@color/white"
                             android:gravity="center"
@@ -633,15 +603,15 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:background="@drawable/card_shadow_back_login"
-                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="5dp"
-                        android:visibility="gone"
+                        android:background="@drawable/card_shadow_back_login"
+                        android:orientation="vertical"
                         android:outlineSpotShadowColor="@color/red"
+                        android:visibility="gone"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
@@ -1036,8 +1006,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="2dp"
                         android:layout_marginTop="10dp"
-                        android:paddingBottom="50dp"
-                        android:layout_marginEnd="2dp" />
+                        android:layout_marginEnd="2dp"
+                        android:paddingBottom="50dp" />
 
 
                 </LinearLayout>
@@ -1062,9 +1032,6 @@
 
 
     </FrameLayout>
-
-
-
 
 
 </LinearLayout>

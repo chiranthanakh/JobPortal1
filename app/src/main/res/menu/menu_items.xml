@@ -7,9 +7,9 @@
         android:title="Home" />
 
     <item
-        android:id="@+id/it_loan"
-        android:icon="@drawable/ic_loan_menu"
-        android:title="Get Loan" />
+        android:id="@+id/it_business"
+        android:icon="@drawable/ic_shopping"
+        android:title="Business" />
 
     <item
         android:id="@+id/it_property"

@@ -46,6 +46,29 @@
                 android:gravity="center"
                 android:orientation="horizontal">
                 <TextView
+                    android:id="@+id/tv_ads_category"
+                    android:drawableTint="@color/black"
+                    android:drawableStart="@drawable/ic_home_ads"
+                    android:gravity="start|center"
+                    android:fontFamily="@font/lato"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:drawablePadding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_marginTop="3dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginEnd="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <TextView
                     android:id="@+id/tv_layout_name"
                     android:drawableTint="@color/black"
                     android:gravity="start|center"
@@ -53,31 +76,10 @@
                     android:textColor="@color/grey"
                     android:textSize="12sp"
                     android:textStyle="bold"
+                    android:maxLines="1"
                     android:drawablePadding="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
-            </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="3dp"
-            android:layout_marginStart="7dp"
-            android:layout_marginEnd="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/tv_ads_category"
-                android:drawableTint="@color/black"
-                android:drawableStart="@drawable/ic_home_ads"
-                android:gravity="start|center"
-                android:fontFamily="@font/lato"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:drawablePadding="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
             </LinearLayout>
 
             <LinearLayout
@@ -114,8 +116,8 @@
                     android:textSize="15sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
-
             </LinearLayout>
+
             <LinearLayout
                 android:layout_marginTop="3dp"
                 android:layout_marginEnd="5dp"
@@ -132,6 +134,7 @@
                     android:layout_gravity="center"
                     android:gravity="start|center"
                     android:drawablePadding="5dp"
+                    android:maxLines="1"
                     android:fontFamily="@font/proxima_family"
                     android:textColor="@color/black"
                     android:layout_width="match_parent"

@@ -115,7 +115,7 @@
             android:layout_width="@dimen/margin_100dp"
             android:layout_height="100dp"
             android:layout_marginRight="@dimen/dp_20"
-            android:text="Add construction"/>
+            android:text="Add construction category"/>
 
         <Button
             android:id="@+id/btn_construction"
@@ -129,7 +129,7 @@
             android:layout_width="@dimen/margin_100dp"
             android:layout_height="100dp"
             android:layout_marginRight="@dimen/dp_20"
-            android:text="Add construction"/>
+            android:text="Add Hotels/Pg"/>
 
 
     </LinearLayout>

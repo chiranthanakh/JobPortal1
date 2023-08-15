@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.chiranths.jobportal1">
 
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -43,34 +47,19 @@
             android:name=".Activities.Construction.ConstructionDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".TravelsListactivity"
+            android:name=".Activities.Businesthings.BusinessDetails"
             android:exported="false" />
-        <activity
-            android:name=".Travelsactivity"
-            android:exported="false" />
-        <activity
-            android:name=".TravelsActivity"
-            android:exported="false" />
+
         <activity
             android:name=".Activities.BasicActivitys.LivingPlaceActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminLivingPlacess"
+            android:name=".Activities.BasicActivitys.HotelsDetails"
             android:exported="false" />
-        <activity
-            android:name=".ProfileActivity"
-            android:exported="false"
-            android:label="@string/title_activity_profile"
-            android:theme="@style/JobPortaltheam.NoActionBar" />
         <activity
             android:name=".Activities.Admin.AdminPropertyApproval"
             android:exported="false" />
-        <activity
-            android:name=".AdminBusinessCategorys"
-            android:exported="false" />
-        <activity
-            android:name=".Admin_loanoffers"
-            android:exported="false" />
+
         <activity
             android:name=".Activities.OtpLoginActivity"
             android:exported="false" />
@@ -83,21 +72,26 @@
         <activity
             android:name=".Activities.BasicActivitys.LayoutDetailsActivity"
             android:exported="false" />
-        <activity
-            android:name=".Activities.Businesthings.BusinessFilter"
-            android:exported="false" />
+
         <activity
             android:name=".Activities.Admin.Admin_Construction"
             android:exported="false" />
+
         <activity
             android:name=".Activities.Admin.Admin_travels"
             android:exported="false" />
-        <activity
-            android:name=".Activities.Construction.ConstructionActivity"
+
+        <activity android:name=".Activities.LoanActivity.LoanForm"
             android:exported="false" />
+
         <activity
             android:name=".Activities.BasicActivitys.Travelsactivity"
             android:exported="false" />
+
+        <activity
+            android:name=".Activities.Admin.Admin_hotels"
+            android:exported="false" />
+
         <activity
             android:name=".Activities.BasicActivitys.TravelsListactivity"
             android:exported="false" />
@@ -107,27 +101,25 @@
         <activity
             android:name=".Activities.BasicActivitys.SeeAllLayoutActivity"
             android:exported="false" />
-        <activity
-            android:name=".Activities.BasicActivitys.LivingPlaceActivity"
-            android:exported="false" />
+
         <activity
             android:name=".Activities.BasicActivitys.UpcommingProjects"
             android:exported="false" />
         <activity
-            android:name=".Activities.Businesthings.BusinessDetailsActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activities.Admin.AdminLivingPlacess"
             android:exported="false" />
+
+        <activity
+            android:name=".Activities.Admin.AdminConstructionCategorys"
+            android:exported="false" />
+
         <activity
             android:name=".Activities.BasicActivitys.CenterHomeActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.Profile.ProfileActivity"
             android:exported="false" />
-        <activity
-            android:name=".Activities.BasicActivitys.SearchActivity"
-            android:exported="false" />
+
         <activity
             android:name=".Activities.Admin.Admin_ads_dashboard"
             android:exported="false" />

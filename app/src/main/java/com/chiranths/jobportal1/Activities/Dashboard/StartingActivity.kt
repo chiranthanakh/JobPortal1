@@ -5,7 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -14,15 +16,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.chiranths.jobportal1.Activities.BasicActivitys.LivingPlaceActivity
 import com.chiranths.jobportal1.Activities.BasicActivitys.Travelsactivity
 import com.chiranths.jobportal1.Activities.Businesthings.BusinessActivity
+import com.chiranths.jobportal1.Activities.Businesthings.BusinessFragment
 import com.chiranths.jobportal1.Activities.Construction.ConstructionActivity
 import com.chiranths.jobportal1.Activities.LoanActivity.LoanFragment
 import com.chiranths.jobportal1.Activities.Profile.ProfileFragments
 import com.chiranths.jobportal1.Activities.Propertys.PropertyFragment
+import com.chiranths.jobportal1.Interface.FragmentInteractionListener
 import com.chiranths.jobportal1.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
@@ -33,10 +39,12 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import java.util.*
 
+
 class StartingActivity : AppCompatActivity() {
     var bottomNavShift: BottomNavigationView? = null
     var profileFragment = ProfileFragments()
     var startingFragment = DashboardFragment()
+    var businessFragment = BusinessFragment()
     var propertyFragment = PropertyFragment()
     var loanFragment = LoanFragment()
     var frameLayout: FrameLayout? = null
@@ -148,8 +156,8 @@ class StartingActivity : AppCompatActivity() {
                     .replace(R.id.fragment_container, profileFragment).addToBackStack(null).commit()
                 R.id.Home -> supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, startingFragment).addToBackStack(null).commit()
-                R.id.it_loan -> supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, loanFragment).addToBackStack(null).commit()
+                R.id.it_business -> supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, businessFragment).addToBackStack(null).commit()
                 R.id.it_property -> supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, propertyFragment).addToBackStack(null).commit()
             }
@@ -161,14 +169,20 @@ class StartingActivity : AppCompatActivity() {
         if(navigation_view?.isVisible == true){
             drawer_layout?.closeDrawer(GravityCompat.START)
         }else {
+            val homeItem: MenuItem? = bottomNavShift?.getMenu()?.getItem(0)
             var count = supportFragmentManager.backStackEntryCount
             if (count == 0) {
                 super.onBackPressed()
             } else {
-                //super.onBackPressed()
                 supportFragmentManager.popBackStack()
+                bottomNavShift?.setSelectedItemId(homeItem?.getItemId()!!)
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
     }
 
     private fun fetchProfile() {

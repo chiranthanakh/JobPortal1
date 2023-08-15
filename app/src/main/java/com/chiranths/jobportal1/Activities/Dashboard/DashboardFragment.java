@@ -29,6 +29,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,10 +40,12 @@ import androidx.recyclerview.widget.SnapHelper;
 
 import com.chiranths.jobportal1.Activities.Admin.AdminDashboard;
 import com.chiranths.jobportal1.Activities.BasicActivitys.CenterHomeActivity;
+import com.chiranths.jobportal1.Activities.Businesthings.BusinessFragment;
 import com.chiranths.jobportal1.Activities.Construction.ConstructionActivity;
 import com.chiranths.jobportal1.Activities.BasicActivitys.LivingPlaceActivity;
 import com.chiranths.jobportal1.Activities.BasicActivitys.LoginActivity;
 import com.chiranths.jobportal1.Activities.BasicActivitys.Travelsactivity;
+import com.chiranths.jobportal1.Interface.FragmentInteractionListener;
 import com.chiranths.jobportal1.Model.AdsModel;
 import com.chiranths.jobportal1.Model.LayoutModel;
 import com.chiranths.jobportal1.Model.ProductInfo;
@@ -81,7 +85,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-public class DashboardFragment extends Fragment implements View.OnClickListener {
+public class DashboardFragment extends Fragment implements View.OnClickListener, FragmentInteractionListener {
 
     String id, name = "", mail, pic;
     LinearLayout cv_jobs, cv_propertys, cv_servicess, cv_loans;
@@ -111,6 +115,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     final int pixelsToMove = 5;
     private final Handler mHandler2 = new Handler(Looper.getMainLooper());
     FrameLayout frameLayout;
+    private Boolean reload = false;
 
     ArrayList<Corosolmodel> coroselimagelist = new ArrayList<Corosolmodel>();
     ArrayList<AdsModel> adslist = new ArrayList();
@@ -124,13 +129,16 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     ProgressDialog progressDialog;
     TextView admin_btn;
     Bundle bundle = new Bundle();
-
+    View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.dashboard_fragment, container, false);
+        if (view == null) {
+            view = inflater.inflate(R.layout.dashboard_fragment, container, false);
+        }
+        return view;
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -141,19 +149,18 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         name = sh.getString("name", "");
         mail = sh.getString("mail", null);
         pic = sh.getString("pic", null);
-        //  displayLocationSettingsRequest(getContext());
         progressDialog = new ProgressDialog(getContext());
-
-        initilize(view);
-
+        if(!reload){
+            initilize(view);
+        }
     }
 
     private void initilize(View view) {
+        reload = true;
         iv_bell = view.findViewById(R.id.iv_bell);
         iv_bell.setOnClickListener(this);
         cv_jobs = view.findViewById(R.id.cv_jobs);
         cv_servicess = view.findViewById(R.id.cv_servicess1);
-        cv_propertys = view.findViewById(R.id.cv_propertys);
         cv_loans = view.findViewById(R.id.cv_loans);
         tv_location = view.findViewById(R.id.tv_location);
         search_layout = view.findViewById(R.id.search_layout);
@@ -165,12 +172,9 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         tv_seeall_upcooming.setOnClickListener(this);
         search.setOnClickListener(this);
         search_layout.setOnClickListener(this);
-        //  tv_pincode = view.findViewById(R.id.tv_pincode);
-        //admin_btn = view.findViewById(R.id.admin_btn);
         iv_sell = view.findViewById(R.id.iv_sell);
         iv_sell.setOnClickListener(this);
         cv_loans.setOnClickListener(this);
-        cv_propertys.setOnClickListener(this);
         cv_servicess.setOnClickListener(this);
         cv_jobs.setOnClickListener(this);
         ll_rent = view.findViewById(R.id.ll_home_rent);
@@ -211,6 +215,12 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
             }
         });
 
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                fetchads();
+            }
+        });
 
         if (progressDialog != null) {
             if (!progressDialog.isShowing()) {
@@ -226,8 +236,6 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                 });
             }
         }
-
-
         iv_bell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -239,7 +247,6 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
     private void fetchcorosel() {
         DatabaseReference coroselimage = FirebaseDatabase.getInstance().getReference().child("Corosels");
-
         coroselimage.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -267,9 +274,10 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                     RecyclerView.LayoutManager nlayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
                     recyclerView.setLayoutManager(nlayoutManager);
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
-                    SnapHelper snapHelper = new PagerSnapHelper();
-                    snapHelper.attachToRecyclerView(recyclerView);
-                    snapHelper.onFling(20, 20);
+                    recyclerView.setOnFlingListener(null);
+                    //SnapHelper snapHelper = new PagerSnapHelper();
+                    //snapHelper.attachToRecyclerView(recyclerView);
+                    //snapHelper.onFling(20, 20);
 
                     mHandler.post(new Runnable() {
                         @Override
@@ -287,6 +295,11 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 
     private void fetchads() {
@@ -487,27 +500,24 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
                 break;
 
-            case R.id.cv_propertys:
-                Intent intent1 = new Intent(getContext(), PropertyActivity.class);
-                startActivity(intent1);
-                break;
-
             case R.id.cv_loans:
                 Intent intent2 = new Intent(getContext(), LoanActivity.class);
                 startActivity(intent2);
                 break;
 
             case R.id.cv_servicess1:
-                Intent intent3 = new Intent(getContext(), BusinessActivity.class);
-                startActivity(intent3);
+                BusinessFragment businessFragment = new BusinessFragment();
+                FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, businessFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
                 break;
-
 
             case R.id.iv_sell:
                 Intent intent4 = new Intent(getContext(), SellActivity.class);
                 startActivity(intent4);
                 break;
-
 
             case R.id.main_edt_search2:
                 Intent intent5 = new Intent(getContext(), SearchActivity.class);
@@ -552,7 +562,6 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                 Intent intent11 = new Intent(getContext(), SeeAllLayoutActivity.class);
                 intent11.putExtras(bundle);
                 startActivity(intent11);
-
                 break;
 
             case R.id.ll_constructions:
@@ -590,5 +599,15 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                 }
             });
         }
+    }
+
+    @Override
+    public void onFragmentInteraction() {
+        BusinessFragment businessFragment = new BusinessFragment();
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, businessFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }
