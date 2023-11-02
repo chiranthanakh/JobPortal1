@@ -39,7 +39,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import java.util.*
 
-
 class StartingActivity : AppCompatActivity() {
     var bottomNavShift: BottomNavigationView? = null
     var profileFragment = ProfileFragments()
@@ -71,9 +70,7 @@ class StartingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_starting)
         progressDialog = ProgressDialog(this)
         initilize()
-
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, startingFragment)
-            .commit()
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, startingFragment).commit()
 
         val packageManager: PackageManager = applicationContext.getPackageManager()
         val lastUpdatedTime =
@@ -102,22 +99,20 @@ class StartingActivity : AppCompatActivity() {
         dashboard_hotels = findViewById(R.id.dashboard_hotels)
         dashboard_profile = findViewById(R.id.dashboard_profile)
 
-
         iv_drawer_nav?.setOnClickListener{
             drawer_layout?.openDrawer(GravityCompat.START)
         }
 
-        dashboard_property?.setOnClickListener{
+        dashboard_property?.setOnClickListener {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, propertyFragment).commit()
             drawer_layout?.closeDrawer(GravityCompat.START)
         }
 
-        dashboard_loans?.setOnClickListener{
+        dashboard_loans?.setOnClickListener {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, loanFragment).commit()
             drawer_layout?.closeDrawer(GravityCompat.START)
-
         }
 
         dashboard_Business?.setOnClickListener{
@@ -128,7 +123,6 @@ class StartingActivity : AppCompatActivity() {
         dashboard_constructions?.setOnClickListener{
             val intent = Intent(this, ConstructionActivity::class.java)
             startActivity(intent)
-
         }
 
         dashboard_travels?.setOnClickListener{
@@ -182,7 +176,6 @@ class StartingActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-
     }
 
     private fun fetchProfile() {

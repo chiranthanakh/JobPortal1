@@ -212,7 +212,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     }
     private void fetchcorosel() {
         DatabaseReference coroselimage = FirebaseDatabase.getInstance().getReference().child("Products");
-
         coroselimage.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -519,13 +518,12 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
                     }
                     Log.d("listdatefilter", String.valueOf(filterarraylist.size()));
-                    if(filterarraylist.size()==0){
+                    if ( filterarraylist.size()==0 ){
                         propertyAdaptor =new PropertyAdaptor(Propertyfilterlist, SearchActivity.this);
                         // ll_no_data_irfc.setVisibility(View.VISIBLE);
-                    }else {
+                    } else {
                         propertyAdaptor =new PropertyAdaptor(filterarraylist, SearchActivity.this);
                         //ll_no_data_irfc.setVisibility(View.GONE);
-
                     }
                 }
                 propertyAdaptor =new PropertyAdaptor(filterarraylist, SearchActivity.this);

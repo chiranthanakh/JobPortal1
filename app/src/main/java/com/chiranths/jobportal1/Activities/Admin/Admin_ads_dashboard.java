@@ -82,7 +82,6 @@ public class Admin_ads_dashboard extends AppCompatActivity {
         }
         ImageView btn_corosel = findViewById(R.id.select_corosel_image);
         Button add_new_corosel = findViewById(R.id.add_new_ads);
-
         InputProductName = (EditText) findViewById(R.id.ads_name);
 
         InputProductDescription = (EditText) findViewById(R.id.ads_description);
