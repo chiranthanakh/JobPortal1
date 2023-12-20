@@ -23,7 +23,6 @@ import java.util.List;
 
 public class ConstructorAdaptor extends RecyclerView.Adapter<ConstructorAdaptor.ViewHolder> {
 
-
     private List<ConstructionModel> productInfos;
     private Context context;
     private String number, name;
@@ -50,7 +49,6 @@ public class ConstructorAdaptor extends RecyclerView.Adapter<ConstructorAdaptor.
     public void onBindViewHolder(@NonNull ConstructorAdaptor.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         ConstructionModel productInfo = productInfos.get(position);
-
         Glide.with(context)
                 .load(productInfo.getImage())
                 .into(holder.iv_vehicle_image);
@@ -74,7 +72,6 @@ public class ConstructorAdaptor extends RecyclerView.Adapter<ConstructorAdaptor.
             intent.putExtra("pid",productInfo.getPid());
             context.startActivity(intent);
         });
-
     }
 
     @Override
@@ -83,7 +80,6 @@ public class ConstructorAdaptor extends RecyclerView.Adapter<ConstructorAdaptor.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
         ImageView iv_vehicle_image,iv_const_whatsapp_bottom,iv_const_call_bottom;
         TextView travel_vehicle_name,tv_travel_category,tv_cost_km,tv_vehicle_number,tv_discription;
         CardView cv_card_const;

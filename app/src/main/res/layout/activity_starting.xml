@@ -11,8 +11,7 @@
     app:sliderType="slide"
     tools:openDrawer="start"
     android:fitsSystemWindows="true"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <include
         android:id="@+id/in_dashboard_layout"

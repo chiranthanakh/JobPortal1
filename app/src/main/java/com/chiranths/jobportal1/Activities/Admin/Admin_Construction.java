@@ -53,6 +53,8 @@ public class Admin_Construction extends AppCompatActivity {
     ArrayList fileNameList = new ArrayList<>();
     ArrayList fileDoneList = new ArrayList<>();
     EditText ads_name;
+    ImageView back_btn;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -83,6 +85,7 @@ public class Admin_Construction extends AppCompatActivity {
         edt_construction_address = findViewById(R.id.edt_construction_address);
         edt_construction_gst = findViewById(R.id.edt_construction_gst);
         edt_construction_owner = findViewById(R.id.edt_construction_owner);
+        back_btn = findViewById(R.id.iv_nav_view);
         loadingBar = new ProgressDialog(this);
         btn_add_image.setOnClickListener(view -> OpenGallery());
         add_new_construction.setOnClickListener(view -> ValidateProductData());
@@ -102,13 +105,12 @@ public class Admin_Construction extends AppCompatActivity {
         edt_construction_category.setAdapter(arrayAdapter);
         edt_construction_category.setInputType(0);
 
-        edt_construction_category.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus)
-                    edt_construction_category.showDropDown();
-            }
+        edt_construction_category.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus)
+                edt_construction_category.showDropDown();
         });
+
+        back_btn.setOnClickListener(view -> finish());
     }
 
     private void OpenGallery(){
@@ -284,7 +286,7 @@ public class Admin_Construction extends AppCompatActivity {
         productMap.put("owner",owner);
         productMap.put("address",address);
         productMap.put("gst",gst);
-        productMap.put("Status", "1");
+        productMap.put("Status", 1);
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -80,11 +80,14 @@ public class BottomhomeRecyclarviewAdaptor extends RecyclerView.Adapter<Bottomho
         });
 
         //calling function
-        holder.iv_call_bottom.setOnClickListener(view -> utilitys.navigateCall(context,productInfo.getNumber(),productInfo.getPname()));
+        holder.iv_call_bottom.setOnClickListener(view ->
+                utilitys.navigateCall(context,productInfo.getNumber(),productInfo.getPname())
+        );
 
         //whatsapp function
         holder.iv_whatsapp_bottom.setOnClickListener(view ->
-                utilitys.navigateWhatsapp(context,productInfo.getNumber(),productInfo.getPname()));
+                utilitys.navigateWhatsapp(context,productInfo.getNumber(),productInfo.getPname())
+        );
     }
 
     @Override

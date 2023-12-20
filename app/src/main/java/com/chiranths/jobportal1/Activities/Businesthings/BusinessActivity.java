@@ -1,5 +1,7 @@
 package com.chiranths.jobportal1.Activities.Businesthings;
 
+import static java.security.AccessController.getContext;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -22,6 +24,7 @@ import android.widget.LinearLayout;
 
 import com.chiranths.jobportal1.Activities.Admin.AdminBusinessListings;
 import com.chiranths.jobportal1.Activities.BasicActivitys.SearchActivity;
+import com.chiranths.jobportal1.Adapters.BottomhomeRecyclarviewAdaptor;
 import com.chiranths.jobportal1.Adapters.BusinessAdaptor;
 import com.chiranths.jobportal1.Adapters.BusinessCategoryAdaptor;
 
@@ -54,6 +57,7 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
     AppCompatButton add_button;
     Handler mHandler = new Handler();
     Bundle bundle = new Bundle();
+    private BottomhomeRecyclarviewAdaptor bottomhomeRecyclarviewAdaptor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,9 +185,7 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
                     for (String key : dataMap.keySet()) {
                         Object data = dataMap.get(key);
                         try {
-
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
-
                             if (String.valueOf(userData.get("products")).equals(cat)) {
                                 businesslist.add(new BusinessModel(String.valueOf(userData.get("pid")), String.valueOf(userData.get("date")), String.valueOf(userData.get("time")),
                                         String.valueOf(userData.get("Businessname")), String.valueOf(userData.get("products")), String.valueOf(userData.get("description")),
@@ -205,6 +207,8 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
                             }
                         }
                     }
+                    //bottomhomeRecyclarviewAdaptor = new BottomhomeRecyclarviewAdaptor(filterbusinesslist, getContext(), userNumber, nameofuser);
+
                     businessAdaptor = new BusinessAdaptor(filterbusinesslist, BusinessActivity.this);
 
                     if (cat.equals("")) {

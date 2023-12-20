@@ -28,6 +28,7 @@ import com.chiranths.jobportal1.Activities.Businesthings.BusinessDetails;
 import com.chiranths.jobportal1.CalldetailsRecords;
 import com.chiranths.jobportal1.Model.BusinessModel;
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys;
 
 import java.util.List;
 
@@ -36,6 +37,7 @@ public class BusinessAdaptor extends RecyclerView.Adapter<BusinessAdaptor.ViewHo
     private List<BusinessModel> productInfos;
     private Context context;
     CalldetailsRecords calldetailsRecords = new CalldetailsRecords();
+    Utilitys utilitys = new Utilitys();
 
     public BusinessAdaptor(List<BusinessModel> productInfos, Context context) {
         this.productInfos = productInfos;
@@ -76,6 +78,16 @@ public class BusinessAdaptor extends RecyclerView.Adapter<BusinessAdaptor.ViewHo
         });
 
         //calling function
+       /* holder.iv_call_business.setOnClickListener(view ->
+                utilitys.navigateCall(context,productInfo.getNumber(),productInfo.getPname())
+        );
+
+        //whatsapp function
+        holder.iv_whatsup_business.setOnClickListener(view ->
+                utilitys.navigateWhatsapp(context,productInfo.getNumber(),productInfo.getPname())
+        );*/
+
+        //calling function
         holder.iv_call_business.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,7 +115,6 @@ public class BusinessAdaptor extends RecyclerView.Adapter<BusinessAdaptor.ViewHo
                 }
             }
         });
-
         //whatsapp function
         holder.iv_whatsup_business.setOnClickListener(new View.OnClickListener() {
             @Override

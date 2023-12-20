@@ -56,6 +56,7 @@ public class AdminBusinessListings extends AppCompatActivity {
     ArrayList fileDoneList = new ArrayList<>();
     ArrayList categoryList = new ArrayList();
     ArrayAdapter arrayAdapter;
+    ImageView back_btn;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -81,32 +82,17 @@ public class AdminBusinessListings extends AppCompatActivity {
         et_gst = findViewById(R.id.Business_gst);
         et_pors = findViewById(R.id.Business_pors);
         et_from = findViewById(R.id.Business_from);
+        back_btn = findViewById(R.id.iv_nav_view);
         loadingBar = new ProgressDialog(this);
         fetchbusinessCategorys();
 
-        btn_corosel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        btn_corosel.setOnClickListener(view -> OpenGallery());
+        add_new_corosel.setOnClickListener(view -> ValidateProductData());
+        back_btn.setOnClickListener(view -> finish());
 
-                OpenGallery();
-
-            }
-        });
-
-        add_new_corosel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ValidateProductData();
-            }
-        });
-
-
-        business_category.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus)
-                    business_category.showDropDown();
-            }
+        business_category.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus)
+                business_category.showDropDown();
         });
          arrayAdapter= new ArrayAdapter(this, android.R.layout.simple_list_item_1, categoryList);
 

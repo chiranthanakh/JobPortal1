@@ -49,19 +49,18 @@ public class Admin_travels extends AppCompatActivity {
     ArrayList fileNameList = new ArrayList<>();
     ArrayList fileDoneList = new ArrayList<>();
     EditText ads_name;
+    ImageView back_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_travel);
-
         //CategoryName = "cqat";
         ProductImagesRef = FirebaseStorage.getInstance().getReference().child("travels");
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("travelsforyou");
-
         ImageView btn_add_image = findViewById(R.id.select_vehicle_images);
         Button add_new_vehicle = findViewById(R.id.add_new_vehicle);
-
+        back_btn = findViewById(R.id.iv_nav_view);
         edt_vehicle_name = (EditText) findViewById(R.id.edt_vehicle_name);
         edt_travel_category = (EditText)findViewById(R.id.edt_travel_category);
         edt_travel_vehicle_number = (EditText) findViewById(R.id.edt_travel_vehicle_number);
@@ -73,21 +72,9 @@ public class Admin_travels extends AppCompatActivity {
         edt_travel_discription = findViewById(R.id.edt_travel_discription);
         loadingBar = new ProgressDialog(this);
 
-        btn_add_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                OpenGallery();
-
-            }
-        });
-
-        add_new_vehicle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ValidateProductData();
-            }
-        });
+        btn_add_image.setOnClickListener(view -> OpenGallery());
+        add_new_vehicle.setOnClickListener(view -> ValidateProductData());
+        back_btn.setOnClickListener(view -> finish());
 
     }
 
@@ -132,6 +119,7 @@ public class Admin_travels extends AppCompatActivity {
             }
         }
     }
+
 
     private void uploadTostorage(Intent data,Uri uri) {
         String fileName = getFileName(uri);

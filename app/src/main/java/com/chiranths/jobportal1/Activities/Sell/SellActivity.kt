@@ -1,14 +1,17 @@
 package com.chiranths.jobportal1.Activities.Sell
 
-import androidx.appcompat.app.AppCompatActivity
-import android.widget.LinearLayout
-import android.os.Bundle
-import com.chiranths.jobportal1.R
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
-import androidx.cardview.widget.CardView
-import com.chiranths.jobportal1.Activities.Admin.*
+import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
+import com.chiranths.jobportal1.Activities.Admin.AdminBusinessListings
+import com.chiranths.jobportal1.Activities.Admin.AdminLivingPlacess
+import com.chiranths.jobportal1.Activities.Admin.Admin_Construction
+import com.chiranths.jobportal1.Activities.Admin.Admin_ads_dashboard
+import com.chiranths.jobportal1.Activities.Admin.Admin_travels
+import com.chiranths.jobportal1.R
 
 class SellActivity : AppCompatActivity(), View.OnClickListener {
     var ll_post_property: LinearLayout? = null
@@ -42,6 +45,7 @@ class SellActivity : AppCompatActivity(), View.OnClickListener {
         when (view.id) {
             R.id.ll_post_property -> {
                 val intent = Intent(this, Admin_ads_dashboard::class.java)
+                intent.putExtra("page", "2")
                 startActivity(intent)
             }
             R.id.ll_travels_listing -> {

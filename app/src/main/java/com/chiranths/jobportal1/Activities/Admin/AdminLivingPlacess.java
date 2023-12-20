@@ -48,6 +48,7 @@ public class AdminLivingPlacess extends AppCompatActivity {
     ArrayList fileNameList = new ArrayList<>();
     ArrayList fileDoneList = new ArrayList<>();
     EditText ads_name;
+    ImageView back_btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,22 +78,11 @@ public class AdminLivingPlacess extends AppCompatActivity {
         livingplace_vehicle_parking = findViewById(R.id.livingplace_vehicle_parking);
         livingplace_posted_by = findViewById(R.id.livingplace_posted_by);
         livingplace_discription = findViewById(R.id.livingplace_discription);
+        back_btn = findViewById(R.id.iv_nav_view);
 
-        add_images.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                OpenGallery();
-
-            }
-        });
-
-        btn_add_livingplace.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ValidateProductData();
-            }
-        });
+        add_images.setOnClickListener(view -> OpenGallery());
+        btn_add_livingplace.setOnClickListener(view -> ValidateProductData());
+        back_btn.setOnClickListener(view -> finish());
     }
 
     @Override
@@ -155,45 +145,36 @@ public class AdminLivingPlacess extends AppCompatActivity {
 
         final UploadTask uploadTask = filePath.putFile(uri);
 
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                String message = e.toString();
-                Toast.makeText(AdminLivingPlacess.this, "Error: " + message, Toast.LENGTH_SHORT).show();
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(AdminLivingPlacess.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
-                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                    @Override
-                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        if (!task.isSuccessful()) {
-                            throw task.getException();
+        uploadTask.addOnFailureListener(e -> {
+            String message = e.toString();
+            Toast.makeText(AdminLivingPlacess.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+        }).addOnSuccessListener(taskSnapshot -> {
+            Toast.makeText(AdminLivingPlacess.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
+            Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
 
-                        }
-
-                        return filePath.getDownloadUrl();
                     }
-                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        if (task.isSuccessful()) {
 
-                            if(downloadImageUrl.equals("")){
-                                downloadImageUrl =task.getResult().toString();
-                                MainimageUrl = task.getResult().toString();
-                            }else {
-                                downloadImageUrl = downloadImageUrl+"---"+task.getResult().toString();
-                            }
+                    return filePath.getDownloadUrl();
+                }
+            }).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
 
-                            System.out.println("url2---"+downloadImageUrl);
-                            Toast.makeText(AdminLivingPlacess.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
-
-                        }
+                    if(downloadImageUrl.equals("")){
+                        downloadImageUrl =task.getResult().toString();
+                        MainimageUrl = task.getResult().toString();
+                    }else {
+                        downloadImageUrl = downloadImageUrl+"---"+task.getResult().toString();
                     }
-                });
-            }
+
+                    System.out.println("url2---"+downloadImageUrl);
+                    Toast.makeText(AdminLivingPlacess.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
+
+                }
+            });
         });
 
     }

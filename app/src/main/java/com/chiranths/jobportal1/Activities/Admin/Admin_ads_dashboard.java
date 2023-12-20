@@ -158,6 +158,7 @@ public class Admin_ads_dashboard extends AppCompatActivity {
         }
     }
 
+
     private void ValidateProductData() {
 
         Description = InputProductDescription.getText().toString();
@@ -326,25 +327,20 @@ public class Admin_ads_dashboard extends AppCompatActivity {
         productMap.put("Status", 1);
 
 
-
         ProductsRef.child(productRandomKey).updateChildren(productMap)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful())
                     {
-                        if (task.isSuccessful())
-                        {
-                            // Intent intent = new Intent(AdminAddNewProductActivity.this, .class);
-                            //startActivity(intent);
-                            loadingBar.dismiss();
-                            Toast.makeText(Admin_ads_dashboard.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
-                            loadingBar.dismiss();
-                            String message = task.getException().toString();
-                            Toast.makeText(Admin_ads_dashboard.this, "Error: " + message, Toast.LENGTH_SHORT).show();
-                        }
+                        // Intent intent = new Intent(AdminAddNewProductActivity.this, .class);
+                        //startActivity(intent);
+                        loadingBar.dismiss();
+                        Toast.makeText(Admin_ads_dashboard.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        loadingBar.dismiss();
+                        String message = task.getException().toString();
+                        Toast.makeText(Admin_ads_dashboard.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
