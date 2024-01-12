@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chiranths.jobportal1.Adapters.BusinessAdaptor;
 import com.chiranths.jobportal1.Model.BusinessModel;
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -58,10 +59,10 @@ public class BusinessFilter extends AppCompatActivity {
                         Object data = dataMap.get(key);
                         try{
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
-                            if(String.valueOf(userData.get("category")).equals(cat)){
-                                businesslist.add(new BusinessModel(String.valueOf(userData.get("pid")),String.valueOf(userData.get("date")),String.valueOf(userData.get("time")),String.valueOf(userData.get("Businessname")),String.valueOf(userData.get("products")),String.valueOf(userData.get("description")),
-                                        String.valueOf(userData.get("price")),String.valueOf(userData.get("location")),String.valueOf(userData.get("number")),String.valueOf(userData.get("owner")),String.valueOf(userData.get("email")),String.valueOf(userData.get("rating")),
-                                        String.valueOf(userData.get("image")),String.valueOf(userData.get("image2")),String.valueOf(userData.get("status")),String.valueOf(userData.get("gst")),String.valueOf(userData.get("from")),String.valueOf(userData.get("productServicess")),String.valueOf(userData.get("workingHrs"))));
+                            if(String.valueOf(userData.get(AppConstants.category)).equals(cat)){
+                                businesslist.add(new BusinessModel(String.valueOf(userData.get(AppConstants.pid)),String.valueOf(userData.get(AppConstants.date)),String.valueOf(userData.get(AppConstants.time)),String.valueOf(userData.get("Businessname")),String.valueOf(userData.get("products")),String.valueOf(userData.get(AppConstants.description)),
+                                        String.valueOf(userData.get(AppConstants.price)),String.valueOf(userData.get(AppConstants.location)),String.valueOf(userData.get(AppConstants.number)),String.valueOf(userData.get("owner")),String.valueOf(userData.get("email")),String.valueOf(userData.get("rating")),
+                                        String.valueOf(userData.get(AppConstants.image)),String.valueOf(userData.get(AppConstants.image2)),String.valueOf(userData.get(AppConstants.Status)),String.valueOf(userData.get("gst")),String.valueOf(userData.get("from")),String.valueOf(userData.get("productServicess")),String.valueOf(userData.get("workingHrs"))));
                             }
                         }catch (ClassCastException cce){
 

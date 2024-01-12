@@ -24,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -292,27 +293,27 @@ public class Admin_layouts_dashboard extends AppCompatActivity {
     private void SaveProductInfoToDatabase()
     {
         HashMap<String, Object> productMap = new HashMap<>();
-        productMap.put("pid", productRandomKey);
-        productMap.put("date", saveCurrentDate);
-        productMap.put("time", saveCurrentTime);
-        productMap.put("description", Description);
-        productMap.put("image2", downloadImageUrl);
-        productMap.put("image", MainimageUrl);
-        productMap.put("category", CategoryName);
-        productMap.put("price", Price);
-        productMap.put("pname", Pname);
-        productMap.put("propertysize",propertysize);
-        productMap.put("location",location);
-        productMap.put("number",number);
-        productMap.put("Status", 1);
-        productMap.put("sitesAvailable",nuOfSites);
-        productMap.put("postedBy", postedBy);
-        productMap.put("facing",facing);
-        productMap.put("layoutarea",layoutArea);
-        productMap.put("point1",et_future1.getText().toString());
-        productMap.put("point2",et_future2.getText().toString());
-        productMap.put("point3",et_future3.getText().toString());
-        productMap.put("point4",et_future4.getText().toString());
+        productMap.put(AppConstants.pid, productRandomKey);
+        productMap.put(AppConstants.date, saveCurrentDate);
+        productMap.put(AppConstants.time, saveCurrentTime);
+        productMap.put(AppConstants.description, Description);
+        productMap.put(AppConstants.image2, downloadImageUrl);
+        productMap.put(AppConstants.image, MainimageUrl);
+        productMap.put(AppConstants.category, CategoryName);
+        productMap.put(AppConstants.price, Price);
+        productMap.put(AppConstants.pname, Pname);
+        productMap.put(AppConstants.propertysize,propertysize);
+        productMap.put(AppConstants.location,location);
+        productMap.put(AppConstants.number,number);
+        productMap.put(AppConstants.Status, 1);
+        productMap.put(AppConstants.sitesAvailable,nuOfSites);
+        productMap.put(AppConstants.postedBy, postedBy);
+        productMap.put(AppConstants.facing,facing);
+        productMap.put(AppConstants.layoutarea,layoutArea);
+        productMap.put(AppConstants.point1,et_future1.getText().toString());
+        productMap.put(AppConstants.point2,et_future2.getText().toString());
+        productMap.put(AppConstants.point3,et_future3.getText().toString());
+        productMap.put(AppConstants.point4,et_future4.getText().toString());
 
 
 

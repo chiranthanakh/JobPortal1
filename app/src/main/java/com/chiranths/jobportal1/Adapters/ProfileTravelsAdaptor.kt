@@ -2,7 +2,7 @@ package com.chiranths.jobportal1.Adapters
 
 import com.chiranths.jobportal1.Model.TravelsModel
 import androidx.recyclerview.widget.RecyclerView
-import com.chiranths.jobportal1.Utilitys
+import com.chiranths.jobportal1.Utilitys.Utilitys
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import com.chiranths.jobportal1.R
@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import androidx.cardview.widget.CardView
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.chiranths.jobportal1.Utilitys.AppConstants
 import com.google.firebase.database.FirebaseDatabase
 import java.util.ArrayList
 
@@ -49,7 +50,7 @@ class ProfileTravelsAdaptor(
         holder.ll_travels_delete.setOnClickListener{
             FirebaseDatabase.getInstance().reference.child("travelsforyou").child(
                 productInfo?.pid.toString()
-            ).child("status").setValue("2")
+            ).child(AppConstants.Status).setValue("2")
         }
     }
 

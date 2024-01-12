@@ -19,6 +19,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.chiranths.jobportal1.Activities.Admin.AdminPropertyApproval;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyDetailsActivity;
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 
 import java.util.List;
 
@@ -67,7 +68,7 @@ public class AdminPropertyAdaptor extends RecyclerView.Adapter<AdminPropertyAdap
             @Override
             public void onClick(View view) {
                 Intent intent =new Intent(context, PropertyDetailsActivity.class);
-                intent.putExtra("pid",data[0]);
+                intent.putExtra(AppConstants.pid,data[0]);
                 context.startActivity(intent);
             }
         });

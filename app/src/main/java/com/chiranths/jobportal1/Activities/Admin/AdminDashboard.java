@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.chiranths.jobportal1.Activities.Dashboard.StartingActivity;
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -242,7 +243,7 @@ public class AdminDashboard extends AppCompatActivity {
     {
         HashMap<String, Object> productMap = new HashMap<>();
 
-        productMap.put("image", downloadImageUrl);
+        productMap.put(AppConstants.image, downloadImageUrl);
 
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
@@ -330,19 +331,19 @@ public class AdminDashboard extends AppCompatActivity {
         HashMap<String, Object> productMap = new HashMap<>();
 
 
-        productMap.put("pid", productRandomKey);
-        productMap.put("date", "today");
-        productMap.put("time", "time");
-        productMap.put("description", "better places in haven");
-        productMap.put("image", downloadImageUrl);
-        productMap.put("category", "flats");
-        productMap.put("price", "50000");
-        productMap.put("pname", "flats");
+        productMap.put(AppConstants.pid, productRandomKey);
+        productMap.put(AppConstants.date, "today");
+        productMap.put(AppConstants.time, AppConstants.time);
+        productMap.put(AppConstants.description, "better places in haven");
+        productMap.put(AppConstants.image, downloadImageUrl);
+        productMap.put(AppConstants.category, "flats");
+        productMap.put(AppConstants.price, "50000");
+        productMap.put(AppConstants.pname, "flats");
         productMap.put("type","flat");
-        productMap.put("propertysize",4000*500);
-        productMap.put("location","location");
-        productMap.put("number","12345567");
-        productMap.put("Status", 1);
+        productMap.put(AppConstants.propertysize,4000*500);
+        productMap.put(AppConstants.location,AppConstants.location);
+        productMap.put(AppConstants.number,"12345567");
+        productMap.put(AppConstants.Status, 1);
 
 
         adsRef.child(productRandomKey).updateChildren(productMap)
@@ -430,19 +431,19 @@ public class AdminDashboard extends AppCompatActivity {
     {
         HashMap<String, Object> productMap = new HashMap<>();
 
-        productMap.put("pid", productRandomKey);
-        productMap.put("date", "today");
-        productMap.put("time", "time");
-        productMap.put("description", "better places in haven");
-        productMap.put("image", downloadImageUrl);
-        productMap.put("category", "flats");
-        productMap.put("price", "50000");
-        productMap.put("pname", "flats");
+        productMap.put(AppConstants.pid, productRandomKey);
+        productMap.put(AppConstants.date, "today");
+        productMap.put(AppConstants.time, AppConstants.time);
+        productMap.put(AppConstants.description, "better places in haven");
+        productMap.put(AppConstants.image, downloadImageUrl);
+        productMap.put(AppConstants.category, "flats");
+        productMap.put(AppConstants.price, "50000");
+        productMap.put(AppConstants.pname, "flats");
         productMap.put("type","flat");
-        productMap.put("propertysize",4000*500);
-        productMap.put("location","location");
-        productMap.put("number","12345567");
-        productMap.put("Status", 1);
+        productMap.put(AppConstants.propertysize,4000*500);
+        productMap.put(AppConstants.location,AppConstants.location);
+        productMap.put(AppConstants.number,"12345567");
+        productMap.put(AppConstants.Status, 1);
 
 
         hotRef.child(productRandomKey).updateChildren(productMap)
@@ -528,15 +529,15 @@ public class AdminDashboard extends AppCompatActivity {
     private void SaveBusinessToDatabase()
     {
         HashMap<String, Object> productMap = new HashMap<>();
-        productMap.put("pid", productRandomKey);
+        productMap.put(AppConstants.pid, productRandomKey);
         productMap.put("type", "Construction");
         productMap.put("name", "BR builders");
-        productMap.put("description", "20 yeras of experiece in construction fields");
-        productMap.put("image", downloadImageUrl);
-        productMap.put("location", "Gouribidanur, nr.reddy circle");
+        productMap.put(AppConstants.description, "20 yeras of experiece in construction fields");
+        productMap.put(AppConstants.image, downloadImageUrl);
+        productMap.put(AppConstants.location, "Gouribidanur, nr.reddy circle");
         productMap.put("servicess", "construction,material supplay");
-        productMap.put("number","12345567");
-        productMap.put("Status", 1);
+        productMap.put(AppConstants.number,"12345567");
+        productMap.put(AppConstants.Status, 1);
 
 
         businessRef.child(productRandomKey).updateChildren(productMap)

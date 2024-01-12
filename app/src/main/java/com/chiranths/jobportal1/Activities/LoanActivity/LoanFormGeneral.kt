@@ -7,6 +7,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import com.chiranths.jobportal1.R
+import com.chiranths.jobportal1.Utilitys.AppConstants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -121,7 +122,7 @@ class LoanFormGeneral : AppCompatActivity() {
         currentTime.format(calendar.time)
         val LoanMap = HashMap<String, Any>()
         LoanMap["name"] = edt_loan_name?.getText().toString()
-        LoanMap["number"] = edt_loan_number?.getText().toString()
+        LoanMap[AppConstants.number] = edt_loan_number?.getText().toString()
         LoanMap["email"] = edt_loan_email?.getText().toString()
         LoanMap["dob"] = edt_loan_dob?.getText().toString()
         LoanMap["address"] = edt_loan_address?.getText().toString()
@@ -132,7 +133,7 @@ class LoanFormGeneral : AppCompatActivity() {
         LoanMap["alternative"] = edt_loan_alternative?.getText().toString()
         LoanMap["adhar"] = edt_loan_adhar?.getText().toString()
         LoanMap["pincode"] = edt_loan_pin?.getText().toString()
-        LoanMap["status"] = "1"
+        LoanMap[AppConstants.Status] = "1"
         LoanMap["appliedOn"] = currentDate
         LoanMap["familyIncome"] = edt_Familyanual_income?.getText().toString()
 

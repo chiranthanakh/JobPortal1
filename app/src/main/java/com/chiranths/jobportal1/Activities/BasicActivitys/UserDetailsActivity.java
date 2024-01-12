@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.chiranths.jobportal1.Activities.Admin.Admin_corosel_dashboard;
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -108,7 +109,7 @@ public class UserDetailsActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
                 SharedPreferences.Editor myEdit = sharedPreferences.edit();
                 myEdit.putString("name", edtName.getText().toString());
-                myEdit.putString("number", edtPhone.getText().toString());
+                myEdit.putString(AppConstants.number, edtPhone.getText().toString());
                 myEdit.commit();
                 finish();
             }else {
@@ -208,8 +209,8 @@ public class UserDetailsActivity extends AppCompatActivity {
         HashMap<String, Object> productMap = new HashMap<>();
         productMap.put("name", edtName.getText().toString());
         productMap.put("Email", edtEmail.getText().toString());
-        productMap.put("image", MainProfileUrl);
-        productMap.put("number",edtPhone.getText().toString());
+        productMap.put(AppConstants.image, MainProfileUrl);
+        productMap.put(AppConstants.number,edtPhone.getText().toString());
 
 
         Profiles.child(edtPhone.getText().toString()).updateChildren(productMap)

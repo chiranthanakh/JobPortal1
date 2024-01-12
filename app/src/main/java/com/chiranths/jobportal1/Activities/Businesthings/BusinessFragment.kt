@@ -24,6 +24,7 @@ import com.chiranths.jobportal1.Interface.FragmentInteractionListener
 import com.chiranths.jobportal1.Model.BusinessModel
 import com.chiranths.jobportal1.Model.Categorymmodel
 import com.chiranths.jobportal1.R
+import com.chiranths.jobportal1.Utilitys.AppConstants
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -140,9 +141,9 @@ class BusinessFragment : Fragment() {
                             val userData = data as HashMap<String, Any>?
                             categorylists.add(
                                 Categorymmodel(
-                                    userData!!["pid"].toString(),
-                                    userData["image"].toString(),
-                                    userData["category"].toString(),
+                                    userData!![AppConstants.pid].toString(),
+                                    userData[AppConstants.image].toString(),
+                                    userData[AppConstants.category].toString(),
                                     userData["subcategory"].toString()
                                 )
                             )
@@ -183,21 +184,21 @@ class BusinessFragment : Fragment() {
                             if (userData!!["products"].toString() == cat) {
                                 businesslist.add(
                                     BusinessModel(
-                                        userData["pid"].toString(),
-                                        userData["date"].toString(),
-                                        userData["time"].toString(),
+                                        userData[AppConstants.pid].toString(),
+                                        userData[AppConstants.date].toString(),
+                                        userData[AppConstants.time].toString(),
                                         userData["Businessname"].toString(),
                                         userData["Business_category"].toString(),
-                                        userData["description"].toString(),
-                                        userData["price"].toString(),
-                                        userData["location"].toString(),
-                                        userData["number"].toString(),
+                                        userData[AppConstants.description].toString(),
+                                        userData[AppConstants.price].toString(),
+                                        userData[AppConstants.location].toString(),
+                                        userData[AppConstants.number].toString(),
                                         userData["owner"].toString(),
                                         userData["email"].toString(),
                                         userData["rating"].toString(),
-                                        userData["image"].toString(),
-                                        userData["image2"].toString(),
-                                        userData["status"].toString(),
+                                        userData[AppConstants.image].toString(),
+                                        userData[AppConstants.image2].toString(),
+                                        userData[AppConstants.Status].toString(),
                                         userData["gst"].toString(),
                                         userData["from"].toString(),
                                         userData["productServicess"].toString(),
@@ -207,21 +208,21 @@ class BusinessFragment : Fragment() {
                             }
                             filterbusinesslist.add(
                                 BusinessModel(
-                                    userData["pid"].toString(),
-                                    userData["date"].toString(),
-                                    userData["time"].toString(),
+                                    userData[AppConstants.pid].toString(),
+                                    userData[AppConstants.date].toString(),
+                                    userData[AppConstants.time].toString(),
                                     userData["Businessname"].toString(),
                                     userData["Business_category"].toString(),
-                                    userData["description"].toString(),
-                                    userData["price"].toString(),
-                                    userData["location"].toString(),
-                                    userData["number"].toString(),
+                                    userData[AppConstants.description].toString(),
+                                    userData[AppConstants.price].toString(),
+                                    userData[AppConstants.location].toString(),
+                                    userData[AppConstants.number].toString(),
                                     userData["owner"].toString(),
                                     userData["email"].toString(),
                                     userData["rating"].toString(),
-                                    userData["image"].toString(),
-                                    userData["image2"].toString(),
-                                    userData["status"].toString(),
+                                    userData[AppConstants.image].toString(),
+                                    userData[AppConstants.image2].toString(),
+                                    userData[AppConstants.Status].toString(),
                                     userData["gst"].toString(),
                                     userData["from"].toString(),
                                     userData["productServicess"].toString(),

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chiranths.jobportal1.Adapters.TravelsAdaptor
 import com.chiranths.jobportal1.Model.TravelsModel
 import com.chiranths.jobportal1.R
+import com.chiranths.jobportal1.Utilitys.AppConstants
 import com.chiranths.jobportal1.databinding.ActivityStartingBinding
 import com.chiranths.jobportal1.databinding.ActivityTravelsactivityBinding
 import com.google.firebase.database.DataSnapshot
@@ -76,21 +77,21 @@ class Travelsactivity : AppCompatActivity(), View.OnClickListener {
                             val userData = data as HashMap<String, Any>?
                             vehicleinfo.add(
                                 TravelsModel(
-                                    userData!!["pid"].toString(),
-                                    userData["date"].toString(),
-                                    userData["time"].toString(),
+                                    userData!![AppConstants.pid].toString(),
+                                    userData[AppConstants.date].toString(),
+                                    userData[AppConstants.time].toString(),
                                     userData["vehiclename"].toString(),
-                                    userData["category"].toString(),
+                                    userData[AppConstants.category].toString(),
                                     userData["vehiclenumber"].toString(),
                                     userData["costperkm"].toString(),
                                     userData["contactnumber"].toString(),
                                     userData["ownerNmae"].toString(),
-                                    userData["verified"].toString(),
-                                    userData["description"].toString(),
-                                    userData["image"].toString(),
-                                    userData["image2"].toString(),
+                                    userData[AppConstants.verified].toString(),
+                                    userData[AppConstants.description].toString(),
+                                    userData[AppConstants.image].toString(),
+                                    userData[AppConstants.image2].toString(),
                                     userData["model"].toString(),
-                                    userData["status"].toString()
+                                    userData[AppConstants.Status].toString()
                                 )
                             )
                         } catch (cce: ClassCastException) {

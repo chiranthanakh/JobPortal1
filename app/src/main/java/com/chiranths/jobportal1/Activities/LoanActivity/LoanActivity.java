@@ -20,6 +20,7 @@ import com.chiranths.jobportal1.Adapters.LoanCoroselListAdaptor;
 import com.chiranths.jobportal1.Adapters.LoanoffersAdaptor;
 import com.chiranths.jobportal1.Model.LoanOffersModel;
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -93,7 +94,7 @@ public class LoanActivity extends AppCompatActivity implements View.OnClickListe
                         try{
 
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
-                            coroselimagelist.add(userData.get("image"));
+                            coroselimagelist.add(userData.get(AppConstants.image));
 
                         }catch (ClassCastException cce){
 
@@ -170,7 +171,7 @@ public class LoanActivity extends AppCompatActivity implements View.OnClickListe
                         try{
 
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
-                            bankadslist.add(new LoanOffersModel(String.valueOf(userData.get("pid")),String.valueOf(userData.get("bankName")),String.valueOf(userData.get("intrestrate")),String.valueOf(userData.get("loanamount")),String.valueOf(userData.get("loantype")),String.valueOf(userData.get("description")),String.valueOf(userData.get("image"))));
+                            bankadslist.add(new LoanOffersModel(String.valueOf(userData.get(AppConstants.pid)),String.valueOf(userData.get("bankName")),String.valueOf(userData.get("intrestrate")),String.valueOf(userData.get("loanamount")),String.valueOf(userData.get("loantype")),String.valueOf(userData.get(AppConstants.description)),String.valueOf(userData.get(AppConstants.image))));
 
                         }catch (ClassCastException cce){
 

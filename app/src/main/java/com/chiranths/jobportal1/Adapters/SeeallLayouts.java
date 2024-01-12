@@ -17,6 +17,7 @@ import com.chiranths.jobportal1.Activities.BasicActivitys.AdsDetailsActivity;
 import com.chiranths.jobportal1.Activities.BasicActivitys.LayoutDetailsActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyDetailsActivity;
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 
 import java.util.List;
 
@@ -62,10 +63,10 @@ public class SeeallLayouts extends RecyclerView.Adapter<SeeallLayouts.ViewHolder
             @Override
             public void onClick(View view) {
                // Intent intent =new Intent(context, PropertyDetailsActivity.class);
-               // intent.putExtra("pid",data[0]);
+               // intent.putExtra(AppConstants.pid,data[0]);
                // context.startActivity(intent);
                 Intent intent =new Intent(context, LayoutDetailsActivity.class);
-                intent.putExtra("pid",data[0]);
+                intent.putExtra(AppConstants.pid,data[0]);
                 intent.putExtra("page","2");
                 context.startActivity(intent);
             }

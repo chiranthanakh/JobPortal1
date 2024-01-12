@@ -21,6 +21,7 @@ import com.chiranths.jobportal1.Activities.BasicActivitys.LayoutDetailsActivity;
 import com.chiranths.jobportal1.Model.LayoutModel;
 import com.chiranths.jobportal1.Model.ProductInfo;
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +68,7 @@ public class LayoutsAdaptor extends RecyclerView.Adapter<LayoutsAdaptor.ViewHold
             @Override
             public void onClick(View view) {
                 Intent intent =new Intent(context, LayoutDetailsActivity.class);
-                intent.putExtra("pid",layoutinfo.getPid());
+                intent.putExtra(AppConstants.pid,layoutinfo.getPid());
                 intent.putExtra("page","2");
                 context.startActivity(intent);
             }

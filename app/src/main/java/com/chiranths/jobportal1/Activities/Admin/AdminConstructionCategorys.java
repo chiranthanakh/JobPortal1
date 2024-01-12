@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -193,14 +194,14 @@ public class AdminConstructionCategorys extends AppCompatActivity {
     private void SaveProductInfoToDatabase() {
 
         HashMap<String, Object> productMap = new HashMap<>();
-        productMap.put("pid", productRandomKey);
-        productMap.put("date", saveCurrentDate);
-        productMap.put("time", saveCurrentTime);
-        productMap.put("image2", downloadImageUrl);
-        productMap.put("image", MainimageUrl);
-        productMap.put("category", category);
+        productMap.put(AppConstants.pid, productRandomKey);
+        productMap.put(AppConstants.date, saveCurrentDate);
+        productMap.put(AppConstants.time, saveCurrentTime);
+        productMap.put(AppConstants.image2, downloadImageUrl);
+        productMap.put(AppConstants.image, MainimageUrl);
+        productMap.put(AppConstants.category, category);
         productMap.put("subcategory", subcategory);
-        productMap.put("Status", 1);
+        productMap.put(AppConstants.Status, 1);
 
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)

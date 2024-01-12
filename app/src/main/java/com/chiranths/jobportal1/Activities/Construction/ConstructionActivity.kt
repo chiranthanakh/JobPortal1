@@ -19,6 +19,7 @@ import com.chiranths.jobportal1.Adapters.ConstructorAdaptor
 import com.chiranths.jobportal1.Model.Categorymmodel
 import com.chiranths.jobportal1.Model.ConstructionModel
 import com.chiranths.jobportal1.R
+import com.chiranths.jobportal1.Utilitys.AppConstants
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -91,9 +92,9 @@ class ConstructionActivity : AppCompatActivity() {
                             val userData = data as HashMap<String, Any>?
                             categorylists.add(
                                     Categorymmodel(
-                                            userData!!["pid"].toString(),
-                                            userData["image"].toString(),
-                                            userData["category"].toString(),
+                                            userData!![AppConstants.pid].toString(),
+                                            userData[AppConstants.image].toString(),
+                                            userData[AppConstants.category].toString(),
                                             userData["subcategory"].toString()
                                     )
                             )
@@ -130,14 +131,14 @@ class ConstructionActivity : AppCompatActivity() {
                         val data = dataMap[key]
                         try {
                             val userData = data as HashMap<String, Any>?
-                            if (userData?.get("Status").toString().equals("2")) {
+                            if (userData?.get(AppConstants.Status).toString().equals("2")) {
                                 constructioninfo.add(
                                         ConstructionModel(
-                                                userData!!["pid"].toString(),
-                                                userData["date"].toString(),
-                                                userData["time"].toString(),
+                                                userData!![AppConstants.pid].toString(),
+                                                userData[AppConstants.date].toString(),
+                                                userData[AppConstants.time].toString(),
                                                 userData["name"].toString(),
-                                                userData["category"].toString(),
+                                                userData[AppConstants.category].toString(),
                                                 userData["cost"].toString(),
                                                 userData["number1"].toString(),
                                                 userData["product_services"].toString(),
@@ -147,12 +148,12 @@ class ConstructionActivity : AppCompatActivity() {
                                                 userData["servicess3"].toString(),
                                                 userData["servicess4"].toString(),
                                                 userData["discription"].toString(),
-                                                userData["verified"].toString(),
-                                                userData["image"].toString(),
-                                                userData["image2"].toString(),
+                                                userData[AppConstants.verified].toString(),
+                                                userData[AppConstants.image].toString(),
+                                                userData[AppConstants.image2].toString(),
                                                 userData["owner"].toString(),
                                                 userData["address"].toString(),
-                                                userData["Status"].toString(),
+                                                userData[AppConstants.Status].toString(),
                                                 userData["gst"].toString(),
                                                 userData["workingHrs"].toString()
                                         )

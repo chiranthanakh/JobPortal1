@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.chiranths.jobportal1.R
+import com.chiranths.jobportal1.Utilitys.AppConstants
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -206,25 +207,25 @@ class Admin_hotels : AppCompatActivity() {
     private fun SaveProductInfoToDatabase() {
 
         val productMap = HashMap<String, Any?>()
-        productMap["pid"] = productRandomKey
+        productMap[AppConstants.pid] = productRandomKey
         productMap["name"] = name
-        productMap["category"] = category
+        productMap[AppConstants.category] = category
         productMap["address"] = address
-        productMap["image2"] = downloadImageUrl
-        productMap["image"] = MainimageUrl
+        productMap[AppConstants.image2] = downloadImageUrl
+        productMap[AppConstants.image] = MainimageUrl
         productMap["alternative"] = alternative
-        productMap["price"] = price
-        productMap["Number"] = number
+        productMap[AppConstants.price] = price
+        productMap[AppConstants.number] = number
         productMap["email"] = email
         productMap["website"] = website
-        productMap["point1"] = point1
-        productMap["point2"] = point2
-        productMap["point3"] = point3
+        productMap[AppConstants.point1] = point1
+        productMap[AppConstants.point2] = point2
+        productMap[AppConstants.point3] = point3
         productMap["parking"] = parking
         productMap["owner"]  = contact_person
         productMap["discription"] = discription
         productMap["Rating"] = "4"
-        productMap["Status"] = "1"
+        productMap[AppConstants.Status] = "1"
         productMap["Approval"] = "1"
 
         ProductsRef!!.child(productRandomKey!!).updateChildren(productMap)

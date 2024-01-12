@@ -15,7 +15,8 @@ import com.chiranths.jobportal1.Activities.HotDealsactivity.HotDealsDetailsActiv
 import com.chiranths.jobportal1.CalldetailsRecords
 import com.chiranths.jobportal1.Model.ProductInfo
 import com.chiranths.jobportal1.R
-import com.chiranths.jobportal1.Utilitys
+import com.chiranths.jobportal1.Utilitys.AppConstants
+import com.chiranths.jobportal1.Utilitys.Utilitys
 
 class BottomhomeRecyclarviewAdaptor(
     private val productInfos: ArrayList<ProductInfo>,
@@ -48,7 +49,7 @@ class BottomhomeRecyclarviewAdaptor(
         //holder.tv_btn_call_hot.setText("");
         holder.cv_deals.setOnClickListener { view: View? ->
             val intent = Intent(context, HotDealsDetailsActivity::class.java)
-            intent.putExtra("pid", productInfo.pid)
+            intent.putExtra(AppConstants.pid, productInfo.pid)
             context.startActivity(intent)
         }
 

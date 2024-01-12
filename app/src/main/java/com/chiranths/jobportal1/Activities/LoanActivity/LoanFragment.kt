@@ -19,6 +19,7 @@ import com.chiranths.jobportal1.Adapters.LoanCoroselListAdaptor
 import com.chiranths.jobportal1.Adapters.LoanoffersAdaptor
 import com.chiranths.jobportal1.Model.LoanOffersModel
 import com.chiranths.jobportal1.R
+import com.chiranths.jobportal1.Utilitys.AppConstants
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -87,7 +88,7 @@ class LoanFragment : Fragment(), View.OnClickListener {
                         val data = dataMap[key]
                         try {
                             val userData = data as HashMap<String, Any>?
-                            coroselimagelist.add((userData?.get("image") ?: "") as String)
+                            coroselimagelist.add((userData?.get(AppConstants.image) ?: "") as String)
                         } catch (cce: ClassCastException) {
                             try {
                                 val mString = dataMap[key].toString()
@@ -147,13 +148,13 @@ class LoanFragment : Fragment(), View.OnClickListener {
                             val userData = data as HashMap<String, Any>?
                             bankadslist.add(
                                 LoanOffersModel(
-                                    userData!!["pid"].toString(),
+                                    userData!![AppConstants.pid].toString(),
                                     userData["bankName"].toString(),
                                     userData["intrestrate"].toString(),
                                     userData["loanamount"].toString(),
                                     userData["loantype"].toString(),
-                                    userData["description"].toString(),
-                                    userData["image"].toString()
+                                    userData[AppConstants.description].toString(),
+                                    userData[AppConstants.image].toString()
                                 )
                             )
                         } catch (cce: ClassCastException) {

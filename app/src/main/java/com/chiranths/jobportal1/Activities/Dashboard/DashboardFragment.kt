@@ -51,6 +51,7 @@ import com.chiranths.jobportal1.Model.NoticeBoard
 import com.chiranths.jobportal1.Model.ProductInfo
 import com.chiranths.jobportal1.Model.UpcomingEvent
 import com.chiranths.jobportal1.R
+import com.chiranths.jobportal1.Utilitys.AppConstants
 import com.chiranths.jobportal1.databinding.ActivityStartingBinding
 import com.chiranths.jobportal1.databinding.DashboardFragmentBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -137,11 +138,14 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
         binding.llHomeRent.setOnClickListener(this)
         binding.llTravels.setOnClickListener(this)
         binding.llCommercialRent.setOnClickListener(this)
-        AsyncTask.execute { fetchcorosel() }
-        AsyncTask.execute { fetchdata() }
-        AsyncTask.execute { fetchads() }
-        AsyncTask.execute { fetchlayouts() }
-        AsyncTask.execute { fetchads() }
+
+        AsyncTask.execute {
+            fetchcorosel()
+            fetchdata()
+            fetchads()
+            fetchlayouts()
+        }
+
         if (progressDialog != null) {
             if (!progressDialog!!.isShowing) {
                 progressDialog!!.setCancelable(false)
@@ -168,16 +172,12 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                             val userData = data as HashMap<String, Any>?
                             coroselimagelist.add(
                                 Corosolmodel(
-                                    userData!!["image"].toString(),
+                                    userData!![AppConstants.image].toString(),
                                     userData["type"].toString()
                                 )
                             )
                         } catch (cce: ClassCastException) {
-                            try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
-                            } catch (cce2: ClassCastException) {
-                            }
+                           //through exception
                         }
                     }
                     coroselListAdaptor = CoroselListAdaptor(coroselimagelist, context)
@@ -197,9 +197,6 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
         })
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
 
     private fun fetchads() {
         val adsimage = FirebaseDatabase.getInstance().reference.child("adsforyou")
@@ -214,36 +211,32 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                             val userData = data as HashMap<String, Any>?
                             adslist.add(
                                 AdsModel(
-                                    userData!!["image"].toString(),
-                                    userData["image2"].toString(),
-                                    userData["pid"].toString(),
-                                    userData["description"].toString(),
-                                    userData["date"].toString(),
-                                    userData["category"].toString(),
-                                    userData["price"].toString(),
-                                    userData["pname"].toString(),
-                                    userData["propertysize"].toString(),
-                                    userData["location"].toString(),
-                                    userData["number"].toString(),
-                                    userData["Status"].toString(),
-                                    userData["postedBy"].toString(),
-                                    userData["approvedBy"].toString(),
-                                    userData["facing"].toString(),
-                                    userData["ownership"].toString(),
-                                    userData["postedOn"].toString(),
-                                    userData["postedOn"].toString(),
-                                    userData["text1"].toString(),
-                                    userData["text2"].toString(),
-                                    userData["text3"].toString(),
-                                    userData["text4"].toString()
+                                    userData!![AppConstants.image].toString(),
+                                    userData[AppConstants.image2].toString(),
+                                    userData[AppConstants.pid].toString(),
+                                    userData[AppConstants.description].toString(),
+                                    userData[AppConstants.date].toString(),
+                                    userData[AppConstants.category].toString(),
+                                    userData[AppConstants.price].toString(),
+                                    userData[AppConstants.pname].toString(),
+                                    userData[AppConstants.propertysize].toString(),
+                                    userData[AppConstants.location].toString(),
+                                    userData[AppConstants.number].toString(),
+                                    userData[AppConstants.Status].toString(),
+                                    userData[AppConstants.postedBy].toString(),
+                                    userData[AppConstants.approvedBy].toString(),
+                                    userData[AppConstants.facing].toString(),
+                                    userData[AppConstants.ownership].toString(),
+                                    userData[AppConstants.postedOn].toString(),
+                                    userData[AppConstants.postedOn].toString(),
+                                    userData[AppConstants.text1].toString(),
+                                    userData[AppConstants.text2].toString(),
+                                    userData[AppConstants.text3].toString(),
+                                    userData[AppConstants.text4].toString()
                                 )
                             )
                         } catch (cce: ClassCastException) {
-                            try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
-                            } catch (cce2: ClassCastException) {
-                            }
+
                         }
                     }
                     Collections.shuffle(adslist)
@@ -269,8 +262,8 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
     }
 
     private fun fetchlayouts() {
-        val adsimage = FirebaseDatabase.getInstance().reference.child("layoutsforyou")
-        adsimage.addValueEventListener(object : ValueEventListener {
+        val layouts = FirebaseDatabase.getInstance().reference.child("layoutsforyou")
+        layouts.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     layoutslists.clear()
@@ -281,34 +274,30 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                             val userData = data as HashMap<String, Any>?
                             layoutslists.add(
                                 LayoutModel(
-                                    userData!!["image"].toString(),
-                                    userData["image2"].toString(),
-                                    userData["pid"].toString(),
-                                    userData["description"].toString(),
-                                    userData["date"].toString(),
-                                    userData["category"].toString(),
-                                    userData["price"].toString(),
-                                    userData["pname"].toString(),
-                                    userData["propertysize"].toString(),
-                                    userData["location"].toString(),
-                                    userData["number"].toString(),
-                                    userData["Status"].toString(),
-                                    userData["sitesAvailable"].toString(),
-                                    userData["postedBy"].toString(),
-                                    userData["facing"].toString(),
-                                    userData["layoutarea"].toString(),
-                                    userData["point1"].toString(),
-                                    userData["point2"].toString(),
-                                    userData["point3"].toString(),
-                                    userData["point4"].toString()
+                                    userData!![AppConstants.image].toString(),
+                                    userData[AppConstants.image2].toString(),
+                                    userData[AppConstants.pid].toString(),
+                                    userData[AppConstants.description].toString(),
+                                    userData[AppConstants.date].toString(),
+                                    userData[AppConstants.category].toString(),
+                                    userData[AppConstants.price].toString(),
+                                    userData[AppConstants.pname].toString(),
+                                    userData[AppConstants.propertysize].toString(),
+                                    userData[AppConstants.location].toString(),
+                                    userData[AppConstants.number].toString(),
+                                    userData[AppConstants.Status].toString(),
+                                    userData[AppConstants.sitesAvailable].toString(),
+                                    userData[AppConstants.postedBy].toString(),
+                                    userData[AppConstants.facing].toString(),
+                                    userData[AppConstants.layoutarea].toString(),
+                                    userData[AppConstants.point1].toString(),
+                                    userData[AppConstants.point2].toString(),
+                                    userData[AppConstants.point3].toString(),
+                                    userData[AppConstants.point4].toString(),
                                 )
                             )
                         } catch (cce: ClassCastException) {
-                            try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
-                            } catch (cce2: ClassCastException) {
-                            }
+
                         }
                     }
                     Collections.shuffle(layoutslists)
@@ -346,19 +335,19 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                             val userData = data as HashMap<String, Any>?
                             productinfolist.add(
                                 ProductInfo(
-                                    userData!!["category"].toString(),
-                                    userData["date"].toString(),
-                                    userData["description"].toString(),
-                                    userData["image"].toString(),
-                                    userData["location"].toString(),
-                                    userData["number"].toString(),
-                                    userData["pid"].toString(),
-                                    userData["pname"].toString(),
-                                    userData["price"].toString(),
-                                    userData["propertysize"].toString(),
-                                    userData["time"].toString(),
+                                    userData!![AppConstants.category].toString(),
+                                    userData[AppConstants.date].toString(),
+                                    userData[AppConstants.description].toString(),
+                                    userData[AppConstants.image].toString(),
+                                    userData[AppConstants.location].toString(),
+                                    userData[AppConstants.number].toString(),
+                                    userData[AppConstants.pid].toString(),
+                                    userData[AppConstants.pname].toString(),
+                                    userData[AppConstants.price].toString(),
+                                    userData[AppConstants.propertysize].toString(),
+                                    userData[AppConstants.time].toString(),
                                     userData["type"].toString(),
-                                    userData["postedby"].toString()
+                                    userData[AppConstants.postedBy].toString()
                                 )
                             )
                         } catch (cce: ClassCastException) {

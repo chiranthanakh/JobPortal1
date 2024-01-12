@@ -28,6 +28,7 @@ import com.chiranths.jobportal1.Activities.Propertys.Products;
 import com.chiranths.jobportal1.Adapters.admin.AdminAdsAdaptor;
 import com.chiranths.jobportal1.Adapters.admin.AdminPropertyAdaptor;
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -150,7 +151,7 @@ public class AdminPropertyApproval extends AppCompatActivity implements View.OnC
 
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
 
-                            adslist.add(userData.get("image")+"---"+userData.get("pid")+"---"+userData.get("category")+"---"+userData.get("price")+"---"+userData.get("propertysize")+"---"+userData.get("number")+"---"+userData.get("location")+"---"+userData.get("Approval"));
+                            adslist.add(userData.get(AppConstants.image)+"---"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.number)+"---"+userData.get(AppConstants.location)+"---"+userData.get("Approval"));
 
                         }catch (ClassCastException cce){
 
@@ -202,9 +203,9 @@ public class AdminPropertyApproval extends AppCompatActivity implements View.OnC
 
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
 
-                            propertylist.add(userData.get("image")+"!!"+userData.get("pid")+"---"+userData.get("description")+"---"+
-                                    userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
-                                    +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type")+"---"+userData.get("Approval"));
+                            propertylist.add(userData.get(AppConstants.image)+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
+                                    userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.pname)
+                                    +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get("type")+"---"+userData.get("Approval"));
 
 
 

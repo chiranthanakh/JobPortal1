@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.chiranths.jobportal1.Model.TravelsModel;
 import com.chiranths.jobportal1.R;
-import com.chiranths.jobportal1.Utilitys;
+import com.chiranths.jobportal1.Utilitys.Utilitys;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -13,6 +13,7 @@ import android.widget.ImageView
 import androidx.cardview.widget.CardView
 import android.widget.TextView
 import android.widget.LinearLayout
+import com.chiranths.jobportal1.Utilitys.AppConstants
 import com.google.firebase.database.FirebaseDatabase
 
 class ProfileBusinessAdaptor(
@@ -46,7 +47,7 @@ class ProfileBusinessAdaptor(
             propertyinfo.pid?.let { it1 ->
                 FirebaseDatabase.getInstance().reference.child("BusinessListing").child(
                     it1
-                ).child("status").setValue("2")
+                ).child(AppConstants.Status).setValue("2")
             }
         }
 

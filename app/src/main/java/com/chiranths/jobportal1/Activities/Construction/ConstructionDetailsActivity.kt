@@ -7,10 +7,10 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.chiranths.jobportal1.CalldetailsRecords
-import com.chiranths.jobportal1.Model.AdsModel
 import com.chiranths.jobportal1.Model.ConstructionModel
 import com.chiranths.jobportal1.R
-import com.chiranths.jobportal1.Utilitys
+import com.chiranths.jobportal1.Utilitys.AppConstants
+import com.chiranths.jobportal1.Utilitys.Utilitys
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.database.*
 import com.synnapps.carouselview.CarouselView
@@ -50,7 +50,7 @@ class ConstructionDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_const_details)
-        productID = intent.getStringExtra("pid")
+        productID = intent.getStringExtra(AppConstants.pid)
         page = intent.getStringExtra("page")
         ads_cl_btn = findViewById(R.id.ads_cl_btn)
         ads_whatsapp_btn = findViewById(R.id.ads_whtsapp_btn)

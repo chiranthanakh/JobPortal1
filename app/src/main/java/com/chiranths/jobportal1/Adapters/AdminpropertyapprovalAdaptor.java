@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.chiranths.jobportal1.Activities.BasicActivitys.AdsDetailsActivity;
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 
 import java.util.ArrayList;
 
@@ -68,7 +69,7 @@ public class AdminpropertyapprovalAdaptor extends RecyclerView.Adapter<Adminprop
             @Override
             public void onClick(View view) {
                 Intent intent =new Intent(context, AdsDetailsActivity.class);
-                intent.putExtra("pid",data[1]);
+                intent.putExtra(AppConstants.pid,data[1]);
                 context.startActivity(intent);
             }
         });

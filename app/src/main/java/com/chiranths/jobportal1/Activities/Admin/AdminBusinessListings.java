@@ -21,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -109,7 +110,7 @@ public class AdminBusinessListings extends AppCompatActivity {
                         Object data = dataMap.get(key);
                         try {
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
-                            categoryList.add(userData.get("category"));
+                            categoryList.add(userData.get(AppConstants.category));
 
                         } catch (ClassCastException cce) {
                             try {
@@ -288,22 +289,22 @@ public class AdminBusinessListings extends AppCompatActivity {
 
     private void SaveProductInfoToDatabase() {
         HashMap<String, Object> productMap = new HashMap<>();
-        productMap.put("pid", productRandomKey);
-        productMap.put("date", saveCurrentDate);
-        productMap.put("time", saveCurrentTime);
-        productMap.put("description", Description);
-        productMap.put("image2", downloadImageUrl);
-        productMap.put("image", MainimageUrl);
-        productMap.put("category", CategoryName);
-        productMap.put("price", Price);
+        productMap.put(AppConstants.pid, productRandomKey);
+        productMap.put(AppConstants.date, saveCurrentDate);
+        productMap.put(AppConstants.time, saveCurrentTime);
+        productMap.put(AppConstants.description, Description);
+        productMap.put(AppConstants.image2, downloadImageUrl);
+        productMap.put(AppConstants.image, MainimageUrl);
+        productMap.put(AppConstants.category, CategoryName);
+        productMap.put(AppConstants.price, Price);
         productMap.put("Businessname", Pname);
         productMap.put("Business_category",products);
-        productMap.put("location",location);
-        productMap.put("number",number);
+        productMap.put(AppConstants.location,location);
+        productMap.put(AppConstants.number,number);
         productMap.put("owner", owner);
         productMap.put("email",email);
         productMap.put("rating", "4");
-        productMap.put("Status", 1);
+        productMap.put(AppConstants.Status, 1);
         productMap.put("workingHrs",open+" to "+ close);
         productMap.put("gst",gst);
         productMap.put("from",from);

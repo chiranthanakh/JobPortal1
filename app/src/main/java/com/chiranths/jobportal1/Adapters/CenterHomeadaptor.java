@@ -19,6 +19,7 @@ import com.chiranths.jobportal1.Model.HotelsModel;
 import com.chiranths.jobportal1.Model.ProductInfo;
 import com.chiranths.jobportal1.Activities.HotDealsactivity.HotDealsDetailsActivity;
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 
 import java.util.List;
 
@@ -63,7 +64,7 @@ public class CenterHomeadaptor extends RecyclerView.Adapter<CenterHomeadaptor.Vi
             @Override
             public void onClick(View view) {
                 Intent intent =new Intent(context, HotelsDetails.class);
-                intent.putExtra("pid",productInfo.getPid());
+                intent.putExtra(AppConstants.pid,productInfo.getPid());
                 context.startActivity(intent);
             }
         });

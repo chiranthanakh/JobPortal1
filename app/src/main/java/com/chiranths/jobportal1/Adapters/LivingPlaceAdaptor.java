@@ -17,6 +17,7 @@ import com.chiranths.jobportal1.Activities.BasicActivitys.RentHomeDetails;
 import com.chiranths.jobportal1.Activities.HotDealsactivity.HotDealsDetailsActivity;
 import com.chiranths.jobportal1.Model.LivingPlaceModel;
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 
 import java.util.List;
 
@@ -60,7 +61,7 @@ public class LivingPlaceAdaptor extends RecyclerView.Adapter<LivingPlaceAdaptor.
             @Override
             public void onClick(View view) {
                 Intent intent =new Intent(context, RentHomeDetails.class);
-                intent.putExtra("pid",productInfo.getPid());
+                intent.putExtra(AppConstants.pid,productInfo.getPid());
                 context.startActivity(intent);
             }
         });

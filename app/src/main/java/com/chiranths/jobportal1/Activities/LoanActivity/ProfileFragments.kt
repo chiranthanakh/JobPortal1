@@ -26,6 +26,7 @@ import com.chiranths.jobportal1.Model.ConstructionModel
 import com.chiranths.jobportal1.Model.ProfileListModel
 import com.chiranths.jobportal1.Model.TravelsModel
 import com.chiranths.jobportal1.R
+import com.chiranths.jobportal1.Utilitys.AppConstants
 import com.google.firebase.database.*
 import de.hdodenhof.circleimageview.CircleImageView
 
@@ -61,7 +62,7 @@ class ProfileFragments : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_profile, container, false)
         val sh = context?.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
         nameofuser = sh?.getString("name", "")!!
-        userNumber = sh?.getString("number", "")!!
+        userNumber = sh?.getString(AppConstants.number, "")!!
         useremail = sh?.getString("email", "")!!
         initilize(view)
         return view
@@ -132,7 +133,7 @@ class ProfileFragments : Fragment() {
                             tv_name?.text = dataMap["name"] as CharSequence?
                             tv_email?.text = dataMap["Email"] as CharSequence?
                             Glide.with(context!!)
-                                .load(dataMap["image"])
+                                .load(dataMap[AppConstants.image])
                                 .apply(RequestOptions().override(500, 500))
                                 .into(iv_profile_image!!)
                             try {
@@ -163,24 +164,24 @@ class ProfileFragments : Fragment() {
                         val data = dataMap[key]
                         try {
                             val userData = data as java.util.HashMap<String, Any>?
-                            if (userData?.get("number") == userNumber) {
+                            if (userData?.get(AppConstants.number) == userNumber) {
                                 businesslist.add(
                                     BusinessModel(
-                                        userData["pid"].toString(),
-                                        userData["date"].toString(),
-                                        userData["time"].toString(),
+                                        userData[AppConstants.pid].toString(),
+                                        userData[AppConstants.date].toString(),
+                                        userData[AppConstants.time].toString(),
                                         userData["Businessname"].toString(),
                                         userData["products"].toString(),
-                                        userData["description"].toString(),
-                                        userData["price"].toString(),
-                                        userData["location"].toString(),
-                                        userData["number"].toString(),
+                                        userData[AppConstants.description].toString(),
+                                        userData[AppConstants.price].toString(),
+                                        userData[AppConstants.location].toString(),
+                                        userData[AppConstants.number].toString(),
                                         userData["owner"].toString(),
                                         userData["email"].toString(),
                                         userData["rating"].toString(),
-                                        userData["image"].toString(),
-                                        userData["image2"].toString(),
-                                        userData["status"].toString(),
+                                        userData[AppConstants.image].toString(),
+                                        userData[AppConstants.image2].toString(),
+                                        userData[AppConstants.Status].toString(),
                                         userData["gst"].toString(),
                                         userData["from"].toString(),
                                         userData["productServicess"].toString(),
@@ -226,11 +227,11 @@ class ProfileFragments : Fragment() {
                                 if (userData?.get("number1") == userNumber) {
                                 constructioninfo.add(
                                     ConstructionModel(
-                                        userData!!["pid"].toString(),
-                                        userData["date"].toString(),
-                                        userData["time"].toString(),
+                                        userData!![AppConstants.pid].toString(),
+                                        userData[AppConstants.date].toString(),
+                                        userData[AppConstants.time].toString(),
                                         userData["name"].toString(),
-                                        userData["category"].toString(),
+                                        userData[AppConstants.category].toString(),
                                         userData["cost"].toString(),
                                         userData["number1"].toString(),
                                         userData["product_services"].toString(),
@@ -240,12 +241,12 @@ class ProfileFragments : Fragment() {
                                         userData["servicess3"].toString(),
                                         userData["servicess4"].toString(),
                                         userData["discription"].toString(),
-                                        userData["verified"].toString(),
-                                        userData["image"].toString(),
-                                        userData["image2"].toString(),
+                                        userData[AppConstants.verified].toString(),
+                                        userData[AppConstants.image].toString(),
+                                        userData[AppConstants.image2].toString(),
                                         userData["owner"].toString(),
                                         userData["address"].toString(),
-                                        userData["status"].toString(),
+                                        userData[AppConstants.Status].toString(),
                                         userData["gst"].toString(),
                                         userData["workingHrs"].toString()
                                     )
@@ -287,21 +288,21 @@ class ProfileFragments : Fragment() {
                                 if (userData?.get("contactnumber") == userNumber) {
                                     vehicleinfo.add(
                                         TravelsModel(
-                                            userData!!["pid"].toString(),
-                                            userData!!["date"].toString(),
-                                            userData!!["time"].toString(),
+                                            userData!![AppConstants.pid].toString(),
+                                            userData!![AppConstants.date].toString(),
+                                            userData!![AppConstants.time].toString(),
                                             userData!!["vehiclename"].toString(),
-                                            userData!!["category"].toString(),
+                                            userData!![AppConstants.category].toString(),
                                             userData!!["vehiclenumber"].toString(),
                                             userData!!["costperkm"].toString(),
                                             userData!!["contactnumber"].toString(),
                                             userData!!["ownerNmae"].toString(),
-                                            userData!!["verified"].toString(),
-                                            userData!!["description"].toString(),
-                                            userData!!["image"].toString(),
-                                            userData!!["image2"].toString(),
+                                            userData!![AppConstants.verified].toString(),
+                                            userData!![AppConstants.description].toString(),
+                                            userData!![AppConstants.image].toString(),
+                                            userData!![AppConstants.image2].toString(),
                                             userData!!["model"].toString(),
-                                            userData!!["status"].toString()
+                                            userData!![AppConstants.Status].toString()
                                         )
                                     )
                                 }
@@ -341,24 +342,24 @@ class ProfileFragments : Fragment() {
                         val data = dataMap[key]
                         try {
                             val userData = data as HashMap<String, Any>?
-                            if (userData?.get("number") == userNumber) {
+                            if (userData?.get(AppConstants.number) == userNumber) {
                             productinfolist.add(
                                 ProfileListModel(
-                                    userData!!["category"].toString(),
-                                    userData["date"].toString(),
-                                    userData["description"].toString(),
-                                    userData["image"].toString(),
-                                    userData["location"].toString(),
-                                    userData["number"].toString(),
-                                    userData["pid"].toString(),
-                                    userData["pname"].toString(),
-                                    userData["price"].toString(),
-                                    userData["propertysize"].toString(),
-                                    userData["time"].toString(),
+                                    userData!![AppConstants.category].toString(),
+                                    userData[AppConstants.date].toString(),
+                                    userData[AppConstants.description].toString(),
+                                    userData[AppConstants.image].toString(),
+                                    userData[AppConstants.location].toString(),
+                                    userData[AppConstants.number].toString(),
+                                    userData[AppConstants.pid].toString(),
+                                    userData[AppConstants.pname].toString(),
+                                    userData[AppConstants.price].toString(),
+                                    userData[AppConstants.propertysize].toString(),
+                                    userData[AppConstants.time].toString(),
                                     userData["type"].toString(),
-                                    userData["postedby"].toString(),
+                                    userData[AppConstants.postedBy].toString(),
                                     "hotforyou",
-                                    userData["Status"].toString()
+                                    userData[AppConstants.Status].toString()
                                 )
                             )
                         }
@@ -403,24 +404,24 @@ class ProfileFragments : Fragment() {
                         val data = dataMap[key]
                         try {
                             val userData = data as HashMap<String, Any>?
-                            if (userData?.get("number") == userNumber) {
+                            if (userData?.get(AppConstants.number) == userNumber) {
                                 productinfolist.add(
                                     ProfileListModel(
-                                        userData!!["category"].toString(),
-                                        userData["date"].toString(),
-                                        userData["description"].toString(),
-                                        userData["image"].toString(),
-                                        userData["location"].toString(),
-                                        userData["number"].toString(),
-                                        userData["pid"].toString(),
-                                        userData["pname"].toString(),
-                                        userData["price"].toString(),
-                                        userData["propertysize"].toString(),
-                                        userData["time"].toString(),
+                                        userData!![AppConstants.category].toString(),
+                                        userData[AppConstants.date].toString(),
+                                        userData[AppConstants.description].toString(),
+                                        userData[AppConstants.image].toString(),
+                                        userData[AppConstants.location].toString(),
+                                        userData[AppConstants.number].toString(),
+                                        userData[AppConstants.pid].toString(),
+                                        userData[AppConstants.pname].toString(),
+                                        userData[AppConstants.price].toString(),
+                                        userData[AppConstants.propertysize].toString(),
+                                        userData[AppConstants.time].toString(),
                                         userData["type"].toString(),
-                                        userData["postedby"].toString(),
+                                        userData[AppConstants.postedBy].toString(),
                                         "layoutsforyou",
-                                        userData["Status"].toString()
+                                        userData[AppConstants.Status].toString()
                                     )
                                 )
                             }
@@ -462,24 +463,24 @@ class ProfileFragments : Fragment() {
                         val data = dataMap[key]
                         try {
                             val userData = data as HashMap<String, Any>?
-                            if (userData?.get("number") == userNumber) {
+                            if (userData?.get(AppConstants.number) == userNumber) {
                                 productinfolist.add(
                                     ProfileListModel(
-                                        userData!!["category"].toString(),
-                                        userData["date"].toString(),
-                                        userData["description"].toString(),
-                                        userData["image"].toString(),
-                                        userData["location"].toString(),
-                                        userData["number"].toString(),
-                                        userData["pid"].toString(),
-                                        userData["pname"].toString(),
-                                        userData["price"].toString(),
-                                        userData["propertysize"].toString(),
-                                        userData["time"].toString(),
+                                        userData!![AppConstants.category].toString(),
+                                        userData[AppConstants.date].toString(),
+                                        userData[AppConstants.description].toString(),
+                                        userData[AppConstants.image].toString(),
+                                        userData[AppConstants.location].toString(),
+                                        userData[AppConstants.number].toString(),
+                                        userData[AppConstants.pid].toString(),
+                                        userData[AppConstants.pname].toString(),
+                                        userData[AppConstants.price].toString(),
+                                        userData[AppConstants.propertysize].toString(),
+                                        userData[AppConstants.time].toString(),
                                         userData["type"].toString(),
-                                        userData["postedby"].toString(),
+                                        userData[AppConstants.postedBy].toString(),
                                         "adsforyou",
-                                        userData["Status"].toString()
+                                        userData[AppConstants.Status].toString()
 
                                     )
                                 )

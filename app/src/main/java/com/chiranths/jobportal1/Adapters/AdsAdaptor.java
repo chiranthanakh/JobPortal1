@@ -23,6 +23,7 @@ import com.chiranths.jobportal1.Activities.Propertys.PropertyDetailsActivity;
 import com.chiranths.jobportal1.Model.AdsModel;
 import com.chiranths.jobportal1.Model.LayoutModel;
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -79,7 +80,7 @@ public class AdsAdaptor extends RecyclerView.Adapter<AdsAdaptor.ViewHolder> {
             @Override
             public void onClick(View view) {
                 Intent intent =new Intent(context, AdsDetailsActivity.class);
-                intent.putExtra("pid",adsModel.getPid());
+                intent.putExtra(AppConstants.pid,adsModel.getPid());
                 intent.putExtra("page","1");
                 context.startActivity(intent);
             }

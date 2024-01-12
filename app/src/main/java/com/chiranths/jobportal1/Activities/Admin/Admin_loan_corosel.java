@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -220,19 +221,19 @@ public class Admin_loan_corosel extends AppCompatActivity {
     private void SaveProductInfoToDatabase()
     {
         HashMap<String, Object> productMap = new HashMap<>();
-        productMap.put("pid", productRandomKey);
-        productMap.put("date", saveCurrentDate);
-        productMap.put("time", saveCurrentTime);
-        productMap.put("description", Description);
-        productMap.put("image2", downloadImageUrl);
-        productMap.put("image", MainimageUrl);
-        productMap.put("category", CategoryName);
-        productMap.put("price", Price);
-        productMap.put("pname", Pname);
-        productMap.put("propertysize",propertysize);
-        productMap.put("location",location);
-        productMap.put("number",number);
-        productMap.put("Status", 1);
+        productMap.put(AppConstants.pid, productRandomKey);
+        productMap.put(AppConstants.date, saveCurrentDate);
+        productMap.put(AppConstants.time, saveCurrentTime);
+        productMap.put(AppConstants.description, Description);
+        productMap.put(AppConstants.image2, downloadImageUrl);
+        productMap.put(AppConstants.image, MainimageUrl);
+        productMap.put(AppConstants.category, CategoryName);
+        productMap.put(AppConstants.price, Price);
+        productMap.put(AppConstants.pname, Pname);
+        productMap.put(AppConstants.propertysize,propertysize);
+        productMap.put(AppConstants.location,location);
+        productMap.put(AppConstants.number,number);
+        productMap.put(AppConstants.Status, 1);
 
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)

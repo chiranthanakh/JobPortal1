@@ -15,6 +15,7 @@ import com.chiranths.jobportal1.Adapters.CenterHomeadaptor;
 import com.chiranths.jobportal1.Model.HotelsModel;
 import com.chiranths.jobportal1.Model.ProductInfo;
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -63,25 +64,25 @@ public class CenterHomeActivity extends AppCompatActivity {
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
                             productinfolist.add(new HotelsModel(
                                     String.valueOf(userData.get("name")),
-                                    String.valueOf(userData.get("image")),
-                                    String.valueOf(userData.get("image2")),
-                                    String.valueOf(userData.get("pid")),
-                                    String.valueOf(userData.get("date")),
-                                    String.valueOf(userData.get("category")),
-                                    String.valueOf(userData.get("price")),
+                                    String.valueOf(userData.get(AppConstants.image)),
+                                    String.valueOf(userData.get(AppConstants.image2)),
+                                    String.valueOf(userData.get(AppConstants.pid)),
+                                    String.valueOf(userData.get(AppConstants.date)),
+                                    String.valueOf(userData.get(AppConstants.category)),
+                                    String.valueOf(userData.get(AppConstants.price)),
                                     String.valueOf(userData.get("address")),
                                     String.valueOf(userData.get("owner")),
                                     String.valueOf(userData.get("alternative")),
-                                    String.valueOf(userData.get("Number")),
+                                    String.valueOf(userData.get(AppConstants.number)),
                                     String.valueOf(userData.get("email")),
                                     String.valueOf(userData.get("website")),
                                     String.valueOf(userData.get("parking")),
                                     String.valueOf(userData.get("discription")),
                                     String.valueOf(userData.get("Rating")),
-                                    String.valueOf(userData.get("Status")),
-                                    String.valueOf(userData.get("point1")),
-                                    String.valueOf(userData.get("point2")),
-                                    String.valueOf(userData.get("point3")),
+                                    String.valueOf(userData.get(AppConstants.Status)),
+                                    String.valueOf(userData.get(AppConstants.point1)),
+                                    String.valueOf(userData.get(AppConstants.point2)),
+                                    String.valueOf(userData.get(AppConstants.point3)),
                                     String.valueOf(userData.get("Approval"))));
 
                         }catch (ClassCastException cce){

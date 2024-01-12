@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -227,18 +228,18 @@ public class AdminloanOffers extends AppCompatActivity {
     private void SaveProductInfoToDatabase()
     {
         HashMap<String, Object> productMap = new HashMap<>();
-        productMap.put("pid", productRandomKey);
-        productMap.put("date", saveCurrentDate);
-        productMap.put("time", saveCurrentTime);
-        productMap.put("image2", downloadImageUrl);
-        productMap.put("postedOn", saveCurrentDate);
-        productMap.put("image", MainimageUrl);
+        productMap.put(AppConstants.pid, productRandomKey);
+        productMap.put(AppConstants.date, saveCurrentDate);
+        productMap.put(AppConstants.time, saveCurrentTime);
+        productMap.put(AppConstants.image2, downloadImageUrl);
+        productMap.put(AppConstants.postedOn, saveCurrentDate);
+        productMap.put(AppConstants.image, MainimageUrl);
         productMap.put("bankName", BankName);
         productMap.put("loantype", BankLoanType);
         productMap.put("loanamount", BankLoanamount);
         productMap.put("intrestrate",BankIntrestRate);
-        productMap.put("description", BankLOanDiscription);
-        productMap.put("Status", 1);
+        productMap.put(AppConstants.description, BankLOanDiscription);
+        productMap.put(AppConstants.Status, 1);
 
 
         loanRef.child(productRandomKey).updateChildren(productMap)

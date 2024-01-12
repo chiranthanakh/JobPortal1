@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.chiranths.jobportal1.Activities.BasicActivitys.UserDetailsActivity
 import com.chiranths.jobportal1.R
+import com.chiranths.jobportal1.Utilitys.AppConstants
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseAuth
@@ -88,7 +89,7 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
 
                 val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
                 val myEdit = sharedPreferences.edit()
-                myEdit.putString("number", edtPhone?.text.toString())
+                myEdit.putString(AppConstants.number, edtPhone?.text.toString())
                 myEdit.commit()
                 fetchProfile(edtPhone?.text.toString())
                 // startActivity(Intent(this@OtpLoginActivity, UserDetailsActivity::class.java))
@@ -145,7 +146,7 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
                 if (task.isSuccessful) {
                     val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
                     val myEdit = sharedPreferences.edit()
-                    myEdit.putString("number", edtPhone?.text.toString())
+                    myEdit.putString(AppConstants.number, edtPhone?.text.toString())
                     myEdit.commit()
                     fetchProfile(edtPhone?.text.toString())
 
@@ -167,7 +168,7 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
                         for (key in dataMap!!.keys) {
                             val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
                             val myEdit = sharedPreferences.edit()
-                            myEdit.putString("number", edtPhone?.text.toString())
+                            myEdit.putString(AppConstants.number, edtPhone?.text.toString())
                             myEdit.commit()
                             finish()
                         }

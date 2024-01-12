@@ -21,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -265,13 +266,13 @@ public class Admin_Construction extends AppCompatActivity {
     private void SaveProductInfoToDatabase()
     {
         HashMap<String, Object> productMap = new HashMap<>();
-        productMap.put("pid", productRandomKey);
-        productMap.put("date", saveCurrentDate);
-        productMap.put("time", saveCurrentTime);
-        productMap.put("description", discription);
-        productMap.put("image2", downloadImageUrl);
-        productMap.put("image", MainimageUrl);
-        productMap.put("category", category);
+        productMap.put(AppConstants.pid, productRandomKey);
+        productMap.put(AppConstants.date, saveCurrentDate);
+        productMap.put(AppConstants.time, saveCurrentTime);
+        productMap.put(AppConstants.description, discription);
+        productMap.put(AppConstants.image2, downloadImageUrl);
+        productMap.put(AppConstants.image, MainimageUrl);
+        productMap.put(AppConstants.category, category);
         productMap.put("workingHrs",open+" to "+ close);
         productMap.put("cost", cost);
         productMap.put("name", Name);
@@ -281,12 +282,12 @@ public class Admin_Construction extends AppCompatActivity {
         productMap.put("servicess2",service2);
         productMap.put("servicess3",service3);
         productMap.put("servicess4",service4);
-        productMap.put("verified", "1");
+        productMap.put(AppConstants.verified, "1");
         productMap.put("experience", experience);
         productMap.put("owner",owner);
         productMap.put("address",address);
         productMap.put("gst",gst);
-        productMap.put("Status", 1);
+        productMap.put(AppConstants.Status, 1);
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

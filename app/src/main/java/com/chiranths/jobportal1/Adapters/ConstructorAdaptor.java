@@ -17,7 +17,8 @@ import com.bumptech.glide.Glide;
 import com.chiranths.jobportal1.Activities.Construction.ConstructionDetailsActivity;
 import com.chiranths.jobportal1.Model.ConstructionModel;
 import com.chiranths.jobportal1.R;
-import com.chiranths.jobportal1.Utilitys;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
+import com.chiranths.jobportal1.Utilitys.Utilitys;
 
 import java.util.List;
 
@@ -69,7 +70,7 @@ public class ConstructorAdaptor extends RecyclerView.Adapter<ConstructorAdaptor.
 
         holder.cv_card_const.setOnClickListener(view -> {
             Intent intent =new Intent(context, ConstructionDetailsActivity.class);
-            intent.putExtra("pid",productInfo.getPid());
+            intent.putExtra(AppConstants.pid,productInfo.getPid());
             context.startActivity(intent);
         });
     }

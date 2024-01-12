@@ -1,15 +1,8 @@
 package com.chiranths.jobportal1.Adapters;
 
-import static android.Manifest.permission.CALL_PHONE;
-
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,17 +11,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.chiranths.jobportal1.Activities.BasicActivitys.AdsDetailsActivity;
-import com.chiranths.jobportal1.Activities.BasicActivitys.UserDetailsActivity;
-import com.chiranths.jobportal1.Activities.Propertys.PropertyDetailsActivity;
 import com.chiranths.jobportal1.CalldetailsRecords;
 import com.chiranths.jobportal1.R;
-import com.chiranths.jobportal1.Utilitys;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
+import com.chiranths.jobportal1.Utilitys.Utilitys;
 
 import java.util.List;
 
@@ -79,7 +69,7 @@ public class PropertyAdaptor extends RecyclerView.Adapter<PropertyAdaptor.ViewHo
             @Override
             public void onClick(View view) {
                 Intent intent =new Intent(context, AdsDetailsActivity.class);
-                intent.putExtra("pid",data[0]);
+                intent.putExtra(AppConstants.pid,data[0]);
                 intent.putExtra("page","2");
                 context.startActivity(intent);
             }

@@ -27,6 +27,7 @@ import com.chiranths.jobportal1.Adapters.AdsAdaptor;
 import com.chiranths.jobportal1.Adapters.PropertyAdaptor;
 import com.chiranths.jobportal1.Model.AdsModel;
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -151,8 +152,8 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
                         try {
 
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
-                            adslist.add(new AdsModel(String.valueOf(userData.get("image")), String.valueOf(userData.get("image2")), String.valueOf(userData.get("pid")), String.valueOf(userData.get("description")), String.valueOf(userData.get("date")),String.valueOf(userData.get("category")), String.valueOf(userData.get("price")),String.valueOf(userData.get("pname")),
-                                    String.valueOf(userData.get("propertysize")), String.valueOf(userData.get("location")),String.valueOf(userData.get("number")),String.valueOf(userData.get("Status")), String.valueOf(userData.get("postedBy")),String.valueOf(userData.get("approvedBy")),String.valueOf(userData.get("facing")),String.valueOf(userData.get("ownership")),String.valueOf(userData.get("postedOn")),String.valueOf(userData.get("postedOn")),String.valueOf(userData.get("text1")), String.valueOf(userData.get("text2")),String.valueOf(userData.get("text3")) ,String.valueOf(userData.get("text4"))) );
+                            adslist.add(new AdsModel(String.valueOf(userData.get(AppConstants.image)), String.valueOf(userData.get(AppConstants.image2)), String.valueOf(userData.get(AppConstants.pid)), String.valueOf(userData.get(AppConstants.description)), String.valueOf(userData.get(AppConstants.date)),String.valueOf(userData.get(AppConstants.category)), String.valueOf(userData.get(AppConstants.price)),String.valueOf(userData.get(AppConstants.pname)),
+                                    String.valueOf(userData.get(AppConstants.propertysize)), String.valueOf(userData.get(AppConstants.location)),String.valueOf(userData.get(AppConstants.number)),String.valueOf(userData.get(AppConstants.Status)), String.valueOf(userData.get(AppConstants.postedBy)),String.valueOf(userData.get(AppConstants.approvedBy)),String.valueOf(userData.get(AppConstants.facing)),String.valueOf(userData.get(AppConstants.ownership)),String.valueOf(userData.get(AppConstants.postedOn)),String.valueOf(userData.get(AppConstants.postedOn)),String.valueOf(userData.get(AppConstants.text1)), String.valueOf(userData.get(AppConstants.text2)),String.valueOf(userData.get(AppConstants.text3)) ,String.valueOf(userData.get(AppConstants.text4))) );
 
                         } catch (ClassCastException cce) {
 
@@ -206,29 +207,29 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
                         try{
 
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
-                            propertylist.add(userData.get("image")+"!!"+userData.get("pid")+"---"+userData.get("description")+"---"+
-                                    userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
-                                    +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type"));
+                            propertylist.add(userData.get(AppConstants.image)+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
+                                    userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.pname)
+                                    +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get("type"));
 
                             if(userData.get("type").equals("sites")){
-                                siteslist.add(userData.get("type")+"!!"+userData.get("pid")+"---"+userData.get("description")+"---"+
-                                        userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
-                                        +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type"));
+                                siteslist.add(userData.get("type")+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
+                                        userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.pname)
+                                        +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get("type"));
 
                             }else if(userData.get("type").equals("homes")){
-                                Homeslist.add(userData.get("image")+"!!"+userData.get("pid")+"---"+userData.get("description")+"---"+
-                                        userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
-                                        +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type"));
+                                Homeslist.add(userData.get(AppConstants.image)+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
+                                        userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.pname)
+                                        +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get("type"));
 
                             }else if(userData.get("type").equals("greenland")){
-                                greenlandlist.add(userData.get("image")+"!!"+userData.get("pid")+"---"+userData.get("description")+"---"+
-                                        userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
-                                        +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type"));
+                                greenlandlist.add(userData.get(AppConstants.image)+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
+                                        userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.pname)
+                                        +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get("type"));
 
                             }else if(userData.get("type").equals("rental")){
-                                Rentallist.add(userData.get("image")+"!!"+userData.get("pid")+"---"+userData.get("description")+"---"+
-                                        userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
-                                        +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type"));
+                                Rentallist.add(userData.get(AppConstants.image)+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
+                                        userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.pname)
+                                        +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get("type"));
 
                             };
 

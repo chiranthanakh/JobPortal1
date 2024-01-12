@@ -22,6 +22,7 @@ import com.chiranths.jobportal1.Adapters.AdsAdaptor;
 import com.chiranths.jobportal1.Adapters.LayoutsAdaptor;
 import com.chiranths.jobportal1.Adapters.SeeallLayouts;
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -107,9 +108,9 @@ public class SeeAllLayoutActivity extends AppCompatActivity implements View.OnCl
 
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
 
-                            layoutlist.add(userData.get("image")+"!!"+userData.get("pid")+"---"+userData.get("description")+"---"+
-                                    userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
-                                    +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type"));
+                            layoutlist.add(userData.get(AppConstants.image)+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
+                                    userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.pname)
+                                    +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get("type"));
 
                         }catch (ClassCastException cce){
 
@@ -156,13 +157,13 @@ public class SeeAllLayoutActivity extends AppCompatActivity implements View.OnCl
                         Object data = dataMap.get(key);
                         try {
                             HashMap userData = (HashMap) data;
-                            layoutlist.add(userData.get("image")+"!!"+userData.get("pid")+"---"+userData.get("description")+"---"+
-                                    userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
-                                    +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number")+"---"+userData.get("type"));
+                            layoutlist.add(userData.get(AppConstants.image)+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
+                                    userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.pname)
+                                    +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get("type"));
 
-                            layoutlist.add(userData.get("image")+"!!"+userData.get("pid")+"---"+userData.get("description")+"---"+
-                                    userData.get("category")+"---"+userData.get("price")+"---"+userData.get("pname")
-                                    +"---"+userData.get("propertysize")+"---"+userData.get("location")+"---"+userData.get("number"));
+                            layoutlist.add(userData.get(AppConstants.image)+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
+                                    userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.pname)
+                                    +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number));
 
 
                         } catch (ClassCastException cce) {

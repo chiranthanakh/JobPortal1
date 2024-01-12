@@ -15,7 +15,8 @@ import com.chiranths.jobportal1.Activities.HotDealsactivity.HotDealsDetailsActiv
 import com.chiranths.jobportal1.CalldetailsRecords
 import com.chiranths.jobportal1.Model.ProfileListModel
 import com.chiranths.jobportal1.R
-import com.chiranths.jobportal1.Utilitys
+import com.chiranths.jobportal1.Utilitys.AppConstants
+import com.chiranths.jobportal1.Utilitys.Utilitys
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.database.FirebaseDatabase
 
@@ -59,13 +60,13 @@ class ProfilePostingListings(
         //holder.tv_btn_call_hot.setText("");
         holder.cv_deals.setOnClickListener {
             val intent = Intent(context, HotDealsDetailsActivity::class.java)
-            intent.putExtra("pid", productInfo?.pid)
+            intent.putExtra(AppConstants.pid, productInfo?.pid)
             context.startActivity(intent)
         }
         holder.iv_delete_btn.setOnClickListener { view: View? ->
              FirebaseDatabase.getInstance().reference.child(productInfo?.listedFrom.toString()).child(
                  productInfo?.pid.toString()
-             ).child("Status").setValue("2")
+             ).child(AppConstants.Status).setValue("2")
         }
     }
 

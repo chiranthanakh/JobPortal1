@@ -31,6 +31,7 @@ import com.chiranths.jobportal1.Adapters.BusinessCategoryAdaptor;
 import com.chiranths.jobportal1.Model.BusinessModel;
 import com.chiranths.jobportal1.Model.Categorymmodel;
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -135,7 +136,7 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
                         try {
 
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
-                            categorylists.add(new Categorymmodel(String.valueOf(userData.get("pid")), String.valueOf(userData.get("image")), String.valueOf(userData.get("category")), String.valueOf(userData.get("subcategory"))));
+                            categorylists.add(new Categorymmodel(String.valueOf(userData.get(AppConstants.pid)), String.valueOf(userData.get(AppConstants.image)), String.valueOf(userData.get(AppConstants.category)), String.valueOf(userData.get("subcategory"))));
 
                         } catch (ClassCastException cce) {
 
@@ -187,15 +188,15 @@ public class BusinessActivity extends AppCompatActivity implements View.OnClickL
                         try {
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
                             if (String.valueOf(userData.get("products")).equals(cat)) {
-                                businesslist.add(new BusinessModel(String.valueOf(userData.get("pid")), String.valueOf(userData.get("date")), String.valueOf(userData.get("time")),
-                                        String.valueOf(userData.get("Businessname")), String.valueOf(userData.get("products")), String.valueOf(userData.get("description")),
-                                        String.valueOf(userData.get("price")), String.valueOf(userData.get("location")), String.valueOf(userData.get("number")), String.valueOf(userData.get("owner")), String.valueOf(userData.get("email")), String.valueOf(userData.get("rating")),
-                                        String.valueOf(userData.get("image")), String.valueOf(userData.get("image2")),String.valueOf(userData.get("status")),String.valueOf(userData.get("gst")),String.valueOf(userData.get("from")),String.valueOf(userData.get("productServicess")),String.valueOf(userData.get("workingHrs"))));
+                                businesslist.add(new BusinessModel(String.valueOf(userData.get(AppConstants.pid)), String.valueOf(userData.get(AppConstants.date)), String.valueOf(userData.get(AppConstants.time)),
+                                        String.valueOf(userData.get("Businessname")), String.valueOf(userData.get("products")), String.valueOf(userData.get(AppConstants.description)),
+                                        String.valueOf(userData.get(AppConstants.price)), String.valueOf(userData.get(AppConstants.location)), String.valueOf(userData.get(AppConstants.number)), String.valueOf(userData.get("owner")), String.valueOf(userData.get("email")), String.valueOf(userData.get("rating")),
+                                        String.valueOf(userData.get(AppConstants.image)), String.valueOf(userData.get(AppConstants.image2)),String.valueOf(userData.get(AppConstants.Status)),String.valueOf(userData.get("gst")),String.valueOf(userData.get("from")),String.valueOf(userData.get("productServicess")),String.valueOf(userData.get("workingHrs"))));
                             }
-                            filterbusinesslist.add(new BusinessModel(String.valueOf(userData.get("pid")), String.valueOf(userData.get("date")), String.valueOf(userData.get("time")),
-                                    String.valueOf(userData.get("Businessname")), String.valueOf(userData.get("products")), String.valueOf(userData.get("description")),
-                                    String.valueOf(userData.get("price")), String.valueOf(userData.get("location")), String.valueOf(userData.get("number")), String.valueOf(userData.get("owner")), String.valueOf(userData.get("email")), String.valueOf(userData.get("rating")),
-                                    String.valueOf(userData.get("image")), String.valueOf(userData.get("image2")),String.valueOf(userData.get("status")),String.valueOf(userData.get("gst")),String.valueOf(userData.get("from")),String.valueOf(userData.get("productServicess")),String.valueOf(userData.get("workingHrs"))));
+                            filterbusinesslist.add(new BusinessModel(String.valueOf(userData.get(AppConstants.pid)), String.valueOf(userData.get(AppConstants.date)), String.valueOf(userData.get(AppConstants.time)),
+                                    String.valueOf(userData.get("Businessname")), String.valueOf(userData.get("products")), String.valueOf(userData.get(AppConstants.description)),
+                                    String.valueOf(userData.get(AppConstants.price)), String.valueOf(userData.get(AppConstants.location)), String.valueOf(userData.get(AppConstants.number)), String.valueOf(userData.get("owner")), String.valueOf(userData.get("email")), String.valueOf(userData.get("rating")),
+                                    String.valueOf(userData.get(AppConstants.image)), String.valueOf(userData.get(AppConstants.image2)),String.valueOf(userData.get(AppConstants.Status)),String.valueOf(userData.get("gst")),String.valueOf(userData.get("from")),String.valueOf(userData.get("productServicess")),String.valueOf(userData.get("workingHrs"))));
 
                         } catch (ClassCastException cce) {
 

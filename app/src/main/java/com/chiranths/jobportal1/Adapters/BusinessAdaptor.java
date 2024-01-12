@@ -28,7 +28,8 @@ import com.chiranths.jobportal1.Activities.Businesthings.BusinessDetails;
 import com.chiranths.jobportal1.CalldetailsRecords;
 import com.chiranths.jobportal1.Model.BusinessModel;
 import com.chiranths.jobportal1.R;
-import com.chiranths.jobportal1.Utilitys;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
+import com.chiranths.jobportal1.Utilitys.Utilitys;
 
 import java.util.List;
 
@@ -72,7 +73,7 @@ public class BusinessAdaptor extends RecyclerView.Adapter<BusinessAdaptor.ViewHo
             @Override
             public void onClick(View view) {
                 Intent intent =new Intent(context, BusinessDetails.class);
-                intent.putExtra("pid",propertyinfo.getPid());
+                intent.putExtra(AppConstants.pid,propertyinfo.getPid());
                 context.startActivity(intent);
             }
         });
@@ -98,7 +99,7 @@ public class BusinessAdaptor extends RecyclerView.Adapter<BusinessAdaptor.ViewHo
                 if (res == PackageManager.PERMISSION_GRANTED) {
                     SharedPreferences sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
                     String nameofuser = sh.getString("name", "");
-                    String userNumber = sh.getString("number", "");
+                    String userNumber = sh.getString(AppConstants.number, "");
                     String useremail = sh.getString("email", "");
 
                     String cnumber = propertyinfo.getNumber();
@@ -125,7 +126,7 @@ public class BusinessAdaptor extends RecyclerView.Adapter<BusinessAdaptor.ViewHo
                 if (res == PackageManager.PERMISSION_GRANTED) {
                     SharedPreferences sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
                     String nameofuser = sh.getString("name", "");
-                    String userNumber = sh.getString("number", "");
+                    String userNumber = sh.getString(AppConstants.number, "");
                     String useremail = sh.getString("email", "");
 
                     if (!userNumber.equals("")) {

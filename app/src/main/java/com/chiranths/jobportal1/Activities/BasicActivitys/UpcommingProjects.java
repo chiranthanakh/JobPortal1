@@ -21,6 +21,7 @@ import com.chiranths.jobportal1.Adapters.AllUpcommingadaptor;
 import com.chiranths.jobportal1.Adapters.SeeallLayouts;
 import com.chiranths.jobportal1.Model.PropertytModel;
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -102,9 +103,9 @@ public class UpcommingProjects extends AppCompatActivity implements View.OnClick
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
 
 
-                            layoutlist.add(new PropertytModel(String.valueOf(userData.get("image")),String.valueOf(userData.get("pid")),String.valueOf(userData.get("description")),
-                                    String.valueOf(userData.get("category")),String.valueOf(userData.get("price")),String.valueOf(userData.get("pname")),
-                                    String.valueOf(userData.get("propertysize")),String.valueOf(userData.get("location")),String.valueOf(userData.get("number")),String.valueOf(userData.get("type"))));
+                            layoutlist.add(new PropertytModel(String.valueOf(userData.get(AppConstants.image)),String.valueOf(userData.get(AppConstants.pid)),String.valueOf(userData.get(AppConstants.description)),
+                                    String.valueOf(userData.get(AppConstants.category)),String.valueOf(userData.get(AppConstants.price)),String.valueOf(userData.get(AppConstants.pname)),
+                                    String.valueOf(userData.get(AppConstants.propertysize)),String.valueOf(userData.get(AppConstants.location)),String.valueOf(userData.get(AppConstants.number)),String.valueOf(userData.get("type"))));
 
                         }catch (ClassCastException cce){
 

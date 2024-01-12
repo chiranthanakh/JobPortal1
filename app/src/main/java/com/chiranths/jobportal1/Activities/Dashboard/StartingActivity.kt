@@ -29,6 +29,7 @@ import com.chiranths.jobportal1.Activities.LoanActivity.LoanFragment
 import com.chiranths.jobportal1.Activities.Profile.ProfileFragments
 import com.chiranths.jobportal1.Activities.Propertys.PropertyFragment
 import com.chiranths.jobportal1.R
+import com.chiranths.jobportal1.Utilitys.AppConstants
 import com.chiranths.jobportal1.databinding.ActivityStartingBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
@@ -52,25 +53,13 @@ class StartingActivity : AppCompatActivity() {
     var drawer_layout: DrawerLayout? = null
     var progressDialog: ProgressDialog? = null
     var iv_drawer_nav: ImageView? = null
-    var btn_nav_logout : Button? = null
-    var iv_nav_image : ImageView? = null
-    var tv_nav_username : TextView? = null
-    var tv_nav_email : TextView? = null
-    var dashboard_property : TextView? = null
-    var dashboard_loans : TextView? = null
-    var dashboard_Business : TextView? = null
-    var dashboard_constructions : TextView? = null
-    var dashboard_travels : TextView? = null
-    var dashboard_rented : TextView? = null
-    var dashboard_hotels : TextView? = null
-    var dashboard_profile : TextView? = null
-    var navigation_view : NavigationView? = null
     private var permissionListener: PermissionListener? = null
     private lateinit var binding: ActivityStartingBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_starting)
+        binding=ActivityStartingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         progressDialog = ProgressDialog(this)
         initilize()
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, startingFragment).commit()
@@ -87,65 +76,45 @@ class StartingActivity : AppCompatActivity() {
     }
 
     private fun initilize() {
-        drawer_layout = findViewById(R.id.drawer_layout_main_d)
-        navigation_view = findViewById(R.id.nav_view_mainA)
         iv_drawer_nav = findViewById<ImageView>(R.id.iv_drawer_nav)
-        btn_nav_logout = findViewById(R.id.btn_nav_logout)
-        iv_nav_image = findViewById(R.id.iv_nav_image)
-        tv_nav_username = findViewById(R.id.tv_nav_username)
-        tv_nav_email = findViewById(R.id.tv_nav_email)
-        dashboard_property = findViewById(R.id.dashboard_property)
-        dashboard_loans = findViewById(R.id.dashboard_loans)
-        dashboard_Business = findViewById(R.id.dashboard_Business)
-        dashboard_constructions = findViewById(R.id.dashboard_constructions)
-        dashboard_travels = findViewById(R.id.dashboard_travels)
-        dashboard_rented = findViewById(R.id.dashboard_rented)
-        dashboard_hotels = findViewById(R.id.dashboard_hotels)
-        dashboard_profile = findViewById(R.id.dashboard_profile)
-
 
         iv_drawer_nav?.setOnClickListener{
-            drawer_layout?.openDrawer(GravityCompat.START)
+            binding.drawerLayoutMainD?.openDrawer(GravityCompat.START)
         }
 
-        dashboard_property?.setOnClickListener {
+        binding.dashboardProperty?.setOnClickListener {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, propertyFragment).commit()
-            drawer_layout?.closeDrawer(GravityCompat.START)
+            binding.drawerLayoutMainD?.closeDrawer(GravityCompat.START)
         }
 
-        /* binding.dashboardLoans?.setOnClickListener {
+        binding.dashboardLoans?.setOnClickListener {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, loanFragment).commit()
-            drawer_layout?.closeDrawer(GravityCompat.START)
-        }*/
-        dashboard_loans?.setOnClickListener {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, loanFragment).commit()
-            drawer_layout?.closeDrawer(GravityCompat.START)
+            binding.drawerLayoutMainD?.closeDrawer(GravityCompat.START)
         }
 
-        dashboard_Business?.setOnClickListener{
+        binding.dashboardBusiness?.setOnClickListener{
             val intent = Intent(this, BusinessActivity::class.java)
             startActivity(intent)
         }
 
-        dashboard_constructions?.setOnClickListener{
+        binding.dashboardConstructions?.setOnClickListener{
             val intent = Intent(this, ConstructionActivity::class.java)
             startActivity(intent)
         }
 
-        dashboard_travels?.setOnClickListener{
+        binding.dashboardTravels?.setOnClickListener{
             val intent = Intent(this, Travelsactivity::class.java)
             startActivity(intent)
         }
 
-        dashboard_rented?.setOnClickListener{
+        binding.dashboardRented?.setOnClickListener{
             val intent = Intent(this, LivingPlaceActivity::class.java)
             startActivity(intent)
         }
 
-        dashboard_hotels?.setOnClickListener{
+        binding.dashboardHotels?.setOnClickListener{
             val intent = Intent(this, LivingPlaceActivity::class.java)
             startActivity(intent)
         }
@@ -170,7 +139,7 @@ class StartingActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if(navigation_view?.isVisible == true){
+        if(binding.navViewMainA?.isVisible == true){
             drawer_layout?.closeDrawer(GravityCompat.START)
         }else {
             val homeItem: MenuItem? = bottomNavShift?.getMenu()?.getItem(0)
@@ -184,14 +153,10 @@ class StartingActivity : AppCompatActivity() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
-
     private fun fetchProfile() {
         val sh = this.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
         val nameofuser = sh?.getString("name", "")
-        val userNumber = sh?.getString("number", "")
+        val userNumber = sh?.getString(AppConstants.number, "")
         val useremail = sh?.getString("email", "")
         if (userNumber !== "") {
             val profile = FirebaseDatabase.getInstance().reference.child("Profile").child(
@@ -202,12 +167,12 @@ class StartingActivity : AppCompatActivity() {
                     if (snapshot.exists()) {
                         val dataMap = snapshot.value as HashMap<String, Any>?
                         for (key in dataMap!!.keys) {
-                            tv_nav_username?.text = dataMap["name"] as CharSequence?
-                            tv_nav_email?.text = dataMap["Email"] as CharSequence?
+                            binding.tvNavUsername?.text = dataMap["name"] as CharSequence?
+                            binding.tvNavEmail?.text = dataMap["Email"] as CharSequence?
                             Glide.with(this@StartingActivity)
-                                .load(dataMap["image"])
+                                .load(dataMap[AppConstants.image])
                                 .apply(RequestOptions().override(500, 500))
-                                .into(iv_nav_image!!)
+                                .into(binding.ivNavImage)
                             try {
                             } catch (cce: ClassCastException) {
                                 try {
@@ -241,7 +206,7 @@ class StartingActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             TedPermission.create()
                 .setPermissionListener(permissionListener)
-                .setDeniedMessage("If you reject permission,you can not use this service\\n\\nPlease turn on permissions at [Setting] > [Permission]]")
+                .setDeniedMessage("Please Provide permission ")
                 .setPermissions(
                     Manifest.permission.READ_MEDIA_VIDEO,
                     Manifest.permission.READ_MEDIA_IMAGES,
@@ -251,7 +216,7 @@ class StartingActivity : AppCompatActivity() {
         } else {
             TedPermission.create()
                 .setPermissionListener(permissionListener)
-                .setDeniedMessage("If you reject permission,you can not use this service\\n\\nPlease turn on permissions at [Setting] > [Permission]]")
+                .setDeniedMessage("Please provide Permission")
                 .setPermissions(
                     Manifest.permission.READ_EXTERNAL_STORAGE,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE,

@@ -2,7 +2,7 @@ package com.chiranths.jobportal1.Adapters
 
 import com.chiranths.jobportal1.Model.ConstructionModel
 import androidx.recyclerview.widget.RecyclerView
-import com.chiranths.jobportal1.Utilitys
+import com.chiranths.jobportal1.Utilitys.Utilitys
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import com.chiranths.jobportal1.R
@@ -13,6 +13,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import android.widget.TextView
 import android.widget.LinearLayout
+import com.chiranths.jobportal1.Utilitys.AppConstants
 import com.google.firebase.database.FirebaseDatabase
 import java.util.ArrayList
 
@@ -45,7 +46,7 @@ class ProfileConstructorAdaptor(
         holder.ll_construction_delete.setOnClickListener{
             FirebaseDatabase.getInstance().reference.child("constructionforyou").child(
                 productInfo?.pid.toString()
-            ).child("Status").setValue("2")
+            ).child(AppConstants.Status).setValue("2")
         }
     }
 

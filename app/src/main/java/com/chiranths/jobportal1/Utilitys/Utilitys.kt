@@ -1,17 +1,14 @@
-package com.chiranths.jobportal1
+package com.chiranths.jobportal1.Utilitys
 
 import android.Manifest
 import com.chiranths.jobportal1.CalldetailsRecords
 import android.content.pm.PackageManager
-import android.content.SharedPreferences
 import android.content.Intent
 import androidx.core.content.ContextCompat
 import androidx.core.app.ActivityCompat
 import android.app.Activity
 import android.content.Context
 import android.net.Uri
-import android.os.Build
-import android.widget.Toast
 import com.chiranths.jobportal1.Activities.OtpLoginActivity
 import com.gun0912.tedpermission.PermissionListener
 
@@ -30,7 +27,7 @@ class Utilitys {
         val res = context.checkCallingOrSelfPermission(permission)
         val sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
         val nameofuser = sh.getString("name", "")
-        val userNumber = sh.getString("number", "")
+        val userNumber = sh.getString(AppConstants.number, "")
         val useremail = sh.getString("email", "")
         if (userNumber != "") {
             calldetails.callinfo(userNumber, nameofuser, cnumber, cname)
@@ -60,7 +57,7 @@ class Utilitys {
         val res = context.checkCallingOrSelfPermission(permission)
         val sh = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
         val nameofuser = sh.getString("name", "")
-        val userNumber = sh.getString("number", "")
+        val userNumber = sh.getString(AppConstants.number, "")
         val useremail = sh.getString("email", "")
         if (userNumber != "") {
             val url = "https://api.whatsapp.com/send?phone=91$cnumber"

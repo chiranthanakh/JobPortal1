@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -222,25 +223,25 @@ public class AdminLivingPlacess extends AppCompatActivity {
 
     private void SaveProductInfoToDatabase() {
         HashMap<String, Object> productMap = new HashMap<>();
-        productMap.put("pid", productRandomKey);
+        productMap.put(AppConstants.pid, productRandomKey);
         productMap.put("title", title);
-        productMap.put("category", category);
+        productMap.put(AppConstants.category, category);
         productMap.put("rent_lease", rent_lease);
         productMap.put("floore", floore);
-        productMap.put("image2", downloadImageUrl);
-        productMap.put("image", MainimageUrl);
-        productMap.put("location", location);
+        productMap.put(AppConstants.image2, downloadImageUrl);
+        productMap.put(AppConstants.image, MainimageUrl);
+        productMap.put(AppConstants.location, location);
         productMap.put("rentamount", rentamount);
         productMap.put("contactNumber", contactNumber);
         productMap.put("nuBHK",nuBHK);
         productMap.put("sqft",sqft);
         productMap.put("water",water);
-        productMap.put("postedOn", saveCurrentDate);
+        productMap.put(AppConstants.postedOn, saveCurrentDate);
         productMap.put("Approval",1);
         productMap.put("parking",parking);
-        productMap.put("postedBY", postedBY);
+        productMap.put(AppConstants.postedBy, postedBY);
         productMap.put("discription", discription);
-        productMap.put("Status", 1);
+        productMap.put(AppConstants.Status, 1);
 
 
 

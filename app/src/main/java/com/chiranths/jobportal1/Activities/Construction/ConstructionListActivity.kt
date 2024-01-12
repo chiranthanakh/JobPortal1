@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chiranths.jobportal1.Adapters.ConstructorAdaptor
 import com.chiranths.jobportal1.Model.ConstructionModel
 import com.chiranths.jobportal1.R
+import com.chiranths.jobportal1.Utilitys.AppConstants
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -38,7 +39,8 @@ class ConstructionListActivity : AppCompatActivity() {
     }
 
     private fun fetchdata() {
-        val productsinfo = FirebaseDatabase.getInstance().reference.child("constructionforyou").orderByChild("category").equalTo(type);
+        val productsinfo = FirebaseDatabase.getInstance().reference.child("constructionforyou").orderByChild(
+            AppConstants.category).equalTo(type);
         productsinfo.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -49,11 +51,11 @@ class ConstructionListActivity : AppCompatActivity() {
                             val userData = data as HashMap<String, Any>?
                             constructioninfo.add(
                                 ConstructionModel(
-                                    userData!!["pid"].toString(),
-                                    userData["date"].toString(),
-                                    userData["time"].toString(),
+                                    userData!![AppConstants.pid].toString(),
+                                    userData[AppConstants.date].toString(),
+                                    userData[AppConstants.time].toString(),
                                     userData["name"].toString(),
-                                    userData["category"].toString(),
+                                    userData[AppConstants.category].toString(),
                                     userData["cost"].toString(),
                                     userData["number1"].toString(),
                                     userData["product_services"].toString(),
@@ -63,12 +65,12 @@ class ConstructionListActivity : AppCompatActivity() {
                                     userData["servicess3"].toString(),
                                     userData["servicess4"].toString(),
                                     userData["discription"].toString(),
-                                    userData["verified"].toString(),
-                                    userData["image"].toString(),
-                                    userData["image2"].toString(),
+                                    userData[AppConstants.verified].toString(),
+                                    userData[AppConstants.image].toString(),
+                                    userData[AppConstants.image2].toString(),
                                     userData["owner"].toString(),
                                     userData["address"].toString(),
-                                    userData["status"].toString(),
+                                    userData[AppConstants.Status].toString(),
                                     userData["gst"].toString(),
                                     userData["workingHrs"].toString()
 

@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -54,7 +55,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_add_new_product);
-        //CategoryName = getIntent().getExtras().get("category").toString();
+        //CategoryName = getIntent().getExtras().get(AppConstants.category).toString();
         CategoryName = "cqat";
         ProductImagesRef = FirebaseStorage.getInstance().getReference().child("Product Images");
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
@@ -248,19 +249,19 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
     private void SaveProductInfoToDatabase()
     {
         HashMap<String, Object> productMap = new HashMap<>();
-        productMap.put("pid", productRandomKey);
-        productMap.put("date", saveCurrentDate);
-        productMap.put("time", saveCurrentTime);
-        productMap.put("description", Description);
-        productMap.put("image", downloadImageUrl);
-        productMap.put("category", CategoryName);
-        productMap.put("price", Price);
-        productMap.put("pname", Pname);
+        productMap.put(AppConstants.pid, productRandomKey);
+        productMap.put(AppConstants.date, saveCurrentDate);
+        productMap.put(AppConstants.time, saveCurrentTime);
+        productMap.put(AppConstants.description, Description);
+        productMap.put(AppConstants.image, downloadImageUrl);
+        productMap.put(AppConstants.category, CategoryName);
+        productMap.put(AppConstants.price, Price);
+        productMap.put(AppConstants.pname, Pname);
         productMap.put("type",type);
         productMap.put("Approval",1);
-        productMap.put("propertysize",propertysize);
-        productMap.put("location",location);
-        productMap.put("number",number);
+        productMap.put(AppConstants.propertysize,propertysize);
+        productMap.put(AppConstants.location,location);
+        productMap.put(AppConstants.number,number);
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -11,7 +11,8 @@ import com.bumptech.glide.Glide;
 import com.chiranths.jobportal1.CalldetailsRecords;
 import com.chiranths.jobportal1.Model.LayoutModel;
 import com.chiranths.jobportal1.R;
-import com.chiranths.jobportal1.Utilitys;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
+import com.chiranths.jobportal1.Utilitys.Utilitys;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,7 +38,7 @@ public class LayoutDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_layouts_details);
-        productID = getIntent().getStringExtra("pid");
+        productID = getIntent().getStringExtra(AppConstants.pid);
         page = getIntent().getStringExtra("page");
         ads_cl_btn = findViewById(R.id.ads_cl_btn);
         ads_whatsapp_btn = findViewById(R.id.ads_whtsapp_btn);

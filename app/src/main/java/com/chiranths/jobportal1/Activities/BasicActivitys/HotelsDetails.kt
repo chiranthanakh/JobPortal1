@@ -7,7 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.chiranths.jobportal1.Model.HotelsModel
 import com.chiranths.jobportal1.R
-import com.chiranths.jobportal1.Utilitys
+import com.chiranths.jobportal1.Utilitys.AppConstants
+import com.chiranths.jobportal1.Utilitys.Utilitys
 import com.google.firebase.database.*
 import com.synnapps.carouselview.CarouselView
 import com.synnapps.carouselview.ImageListener
@@ -49,7 +50,7 @@ class HotelsDetails : AppCompatActivity() {
     }
 
     private fun initilize() {
-        productID = intent.getStringExtra("pid")!!
+        productID = intent.getStringExtra(AppConstants.pid)!!
         tv_hotel_name = findViewById(R.id.tv_hotel_name);
         tv_rent_price = findViewById(R.id.tv_hotel_price);
         tv_rent_posted_on = findViewById(R.id.tv_rent_posted_on);

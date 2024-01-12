@@ -3,6 +3,7 @@ package com.chiranths.jobportal1;
 import androidx.annotation.NonNull;
 
 import com.chiranths.jobportal1.Activities.Dashboard.Calldetails;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
@@ -28,8 +29,8 @@ public class CalldetailsRecords implements Calldetails {
         String saveCurrentTime = currentTime.format(calendar.getTime());
         productRandomKey = saveCurrentDate + saveCurrentTime;
         HashMap<String, Object> productMap = new HashMap<>();
-        productMap.put("date", saveCurrentDate);
-        productMap.put("time", saveCurrentTime);
+        productMap.put(AppConstants.date, saveCurrentDate);
+        productMap.put(AppConstants.time, saveCurrentTime);
         productMap.put("called_name",name);
         productMap.put("called_number",number);
         productMap.put("caller_name", caller_name);

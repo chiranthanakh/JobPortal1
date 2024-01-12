@@ -17,6 +17,7 @@ import com.chiranths.jobportal1.Activities.BasicActivitys.AdsDetailsActivity;
 import com.chiranths.jobportal1.Activities.Propertys.PropertyDetailsActivity;
 import com.chiranths.jobportal1.Model.PropertytModel;
 import com.chiranths.jobportal1.R;
+import com.chiranths.jobportal1.Utilitys.AppConstants;
 
 import java.util.List;
 
@@ -60,7 +61,7 @@ public class AllUpcommingadaptor extends RecyclerView.Adapter<AllUpcommingadapto
             @Override
             public void onClick(View view) {
                 Intent intent =new Intent(context, AdsDetailsActivity.class);
-                intent.putExtra("pid",propertyinfo.getPid());
+                intent.putExtra(AppConstants.pid,propertyinfo.getPid());
                 intent.putExtra("page","1");
                 context.startActivity(intent);
             }
