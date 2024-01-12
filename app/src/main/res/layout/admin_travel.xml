@@ -185,20 +185,22 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:startIconTint="@color/grey_dark">
 
-                        <com.google.android.material.textfield.TextInputEditText
+                        <AutoCompleteTextView
                             android:id="@+id/edt_travel_category"
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
                             android:background="@null"
                             android:hint="Cab/auto/tt/heavy vehicles"
-                            android:inputType="text"
+                            android:inputType=""
                             android:lines="4"
                             android:padding="@dimen/dp_0"
+                            android:paddingStart="15dp"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
                             android:textSize="@dimen/text_size_14sp" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

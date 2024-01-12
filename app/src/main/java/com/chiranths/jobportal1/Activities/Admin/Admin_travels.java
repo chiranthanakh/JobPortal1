@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -39,8 +41,10 @@ public class Admin_travels extends AppCompatActivity {
 
     private static final int GalleryPick = 1;
     String vehicleName,category,VehicleNumber,costperKM,contactDetails,vehiclemodel,ownerName,saveCurrentDate,saveCurrentTime,discription,vehicleNumber;
-    private EditText edt_vehicle_name,edt_travel_category,edt_travel_vehicle_number,edt_rupes_for_km,edt_travel_contact,edt_travel_vehicle_model,edt_owner_name,
+    private EditText edt_vehicle_name,edt_travel_vehicle_number,edt_rupes_for_km,edt_travel_contact,edt_travel_vehicle_model,edt_owner_name,
             edt_travel_verified_not,edt_travel_discription;
+    private AutoCompleteTextView edt_travel_category;
+
     private Uri ImageUri;
     private String productRandomKey, downloadImageUrl,MainimageUrl;
     private StorageReference ProductImagesRef;
@@ -62,7 +66,7 @@ public class Admin_travels extends AppCompatActivity {
         Button add_new_vehicle = findViewById(R.id.add_new_vehicle);
         back_btn = findViewById(R.id.iv_nav_view);
         edt_vehicle_name = (EditText) findViewById(R.id.edt_vehicle_name);
-        edt_travel_category = (EditText)findViewById(R.id.edt_travel_category);
+        edt_travel_category = findViewById(R.id.edt_travel_category);
         edt_travel_vehicle_number = (EditText) findViewById(R.id.edt_travel_vehicle_number);
         edt_rupes_for_km = (EditText) findViewById(R.id.edt_rupes_for_km);
         edt_travel_contact = findViewById(R.id.edt_travel_contact);
@@ -76,6 +80,17 @@ public class Admin_travels extends AppCompatActivity {
         add_new_vehicle.setOnClickListener(view -> ValidateProductData());
         back_btn.setOnClickListener(view -> finish());
 
+        ArrayList list = new ArrayList();
+        list.add("Cab");
+        list.add("Tempo Traveler");
+        list.add("Bus");
+        list.add("Auto");
+        list.add("goods vehicles");
+        list.add("Heavy Vehicles");
+
+        ArrayAdapter arrayAdapter= new ArrayAdapter(this, android.R.layout.simple_list_item_1, list);
+        edt_travel_category.setAdapter(arrayAdapter);
+        edt_travel_category.setInputType(0);
     }
 
     private void OpenGallery(){

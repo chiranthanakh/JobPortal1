@@ -18,17 +18,16 @@ import com.chiranths.jobportal1.Model.TravelsModel;
 import com.chiranths.jobportal1.R;
 import com.chiranths.jobportal1.Utilitys;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TravelsAdaptor extends RecyclerView.Adapter<TravelsAdaptor.ViewHolder> {
-
-
     private List<TravelsModel> productInfos;
     private Context context;
     private String number, name;
     Utilitys utilitys = new Utilitys();
 
-    public TravelsAdaptor(List<TravelsModel> productInfos, Context context) {
+    public TravelsAdaptor(ArrayList<TravelsModel> productInfos, Context context) {
         this.productInfos = productInfos;
         this.context = context;
         this.number = number;

@@ -41,6 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/lato_bold"
+                    android:layout_marginLeft="@dimen/margin_15_dp"
                     android:text="Select What you looking for"
                     android:textColor="@color/white"
                     android:textSize="14sp" />

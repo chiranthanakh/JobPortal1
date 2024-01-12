@@ -1,23 +1,23 @@
 package com.chiranths.jobportal1.Activities.Dashboard
 
+import android.Manifest
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.chiranths.jobportal1.Activities.BasicActivitys.LivingPlaceActivity
@@ -28,8 +28,8 @@ import com.chiranths.jobportal1.Activities.Construction.ConstructionActivity
 import com.chiranths.jobportal1.Activities.LoanActivity.LoanFragment
 import com.chiranths.jobportal1.Activities.Profile.ProfileFragments
 import com.chiranths.jobportal1.Activities.Propertys.PropertyFragment
-import com.chiranths.jobportal1.Interface.FragmentInteractionListener
 import com.chiranths.jobportal1.R
+import com.chiranths.jobportal1.databinding.ActivityStartingBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
@@ -37,6 +37,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.normal.TedPermission
 import java.util.*
 
 class StartingActivity : AppCompatActivity() {
@@ -63,7 +65,8 @@ class StartingActivity : AppCompatActivity() {
     var dashboard_hotels : TextView? = null
     var dashboard_profile : TextView? = null
     var navigation_view : NavigationView? = null
-
+    private var permissionListener: PermissionListener? = null
+    private lateinit var binding: ActivityStartingBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,6 +78,7 @@ class StartingActivity : AppCompatActivity() {
         val packageManager: PackageManager = applicationContext.getPackageManager()
         val lastUpdatedTime =
             packageManager.getPackageInfo(applicationContext.packageName, 0).lastUpdateTime
+        checkPermissions()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -99,6 +103,7 @@ class StartingActivity : AppCompatActivity() {
         dashboard_hotels = findViewById(R.id.dashboard_hotels)
         dashboard_profile = findViewById(R.id.dashboard_profile)
 
+
         iv_drawer_nav?.setOnClickListener{
             drawer_layout?.openDrawer(GravityCompat.START)
         }
@@ -109,6 +114,11 @@ class StartingActivity : AppCompatActivity() {
             drawer_layout?.closeDrawer(GravityCompat.START)
         }
 
+        /* binding.dashboardLoans?.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, loanFragment).commit()
+            drawer_layout?.closeDrawer(GravityCompat.START)
+        }*/
         dashboard_loans?.setOnClickListener {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, loanFragment).commit()
@@ -212,6 +222,42 @@ class StartingActivity : AppCompatActivity() {
 
                 override fun onCancelled(error: DatabaseError) {}
             })
+        }
+    }
+
+    private fun checkPermissions() {
+        permissionListener = object : PermissionListener {
+            override fun onPermissionGranted() {
+                //openCamera()
+            }
+
+            override fun onPermissionDenied(deniedPermissions: List<String>) {
+                Toast.makeText(
+                    this@StartingActivity,
+                    "Permission Denied\n$deniedPermissions", Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            TedPermission.create()
+                .setPermissionListener(permissionListener)
+                .setDeniedMessage("If you reject permission,you can not use this service\\n\\nPlease turn on permissions at [Setting] > [Permission]]")
+                .setPermissions(
+                    Manifest.permission.READ_MEDIA_VIDEO,
+                    Manifest.permission.READ_MEDIA_IMAGES,
+                    Manifest.permission.CAMERA
+                )
+                .check()
+        } else {
+            TedPermission.create()
+                .setPermissionListener(permissionListener)
+                .setDeniedMessage("If you reject permission,you can not use this service\\n\\nPlease turn on permissions at [Setting] > [Permission]]")
+                .setPermissions(
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.CAMERA
+                )
+                .check()
         }
     }
 
