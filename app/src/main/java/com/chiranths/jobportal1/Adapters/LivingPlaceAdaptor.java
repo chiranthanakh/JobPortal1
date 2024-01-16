@@ -23,10 +23,8 @@ import java.util.List;
 
 public class LivingPlaceAdaptor extends RecyclerView.Adapter<LivingPlaceAdaptor.ViewHolder> {
 
-
     private List<LivingPlaceModel> productInfos;
     private Context context;
-
 
     public LivingPlaceAdaptor(List<LivingPlaceModel> productInfos, Context context) {
         this.productInfos = productInfos;

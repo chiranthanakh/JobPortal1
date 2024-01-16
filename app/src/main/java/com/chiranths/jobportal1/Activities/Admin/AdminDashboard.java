@@ -339,7 +339,7 @@ public class AdminDashboard extends AppCompatActivity {
         productMap.put(AppConstants.category, "flats");
         productMap.put(AppConstants.price, "50000");
         productMap.put(AppConstants.pname, "flats");
-        productMap.put("type","flat");
+        productMap.put(AppConstants.type,"flat");
         productMap.put(AppConstants.propertysize,4000*500);
         productMap.put(AppConstants.location,AppConstants.location);
         productMap.put(AppConstants.number,"12345567");
@@ -439,7 +439,7 @@ public class AdminDashboard extends AppCompatActivity {
         productMap.put(AppConstants.category, "flats");
         productMap.put(AppConstants.price, "50000");
         productMap.put(AppConstants.pname, "flats");
-        productMap.put("type","flat");
+        productMap.put(AppConstants.type,"flat");
         productMap.put(AppConstants.propertysize,4000*500);
         productMap.put(AppConstants.location,AppConstants.location);
         productMap.put(AppConstants.number,"12345567");
@@ -530,7 +530,7 @@ public class AdminDashboard extends AppCompatActivity {
     {
         HashMap<String, Object> productMap = new HashMap<>();
         productMap.put(AppConstants.pid, productRandomKey);
-        productMap.put("type", "Construction");
+        productMap.put(AppConstants.type, "Construction");
         productMap.put("name", "BR builders");
         productMap.put(AppConstants.description, "20 yeras of experiece in construction fields");
         productMap.put(AppConstants.image, downloadImageUrl);

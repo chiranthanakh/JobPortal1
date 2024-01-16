@@ -209,27 +209,27 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
                             propertylist.add(userData.get(AppConstants.image)+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
                                     userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.pname)
-                                    +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get("type"));
+                                    +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get(AppConstants.type));
 
-                            if(userData.get("type").equals("sites")){
-                                siteslist.add(userData.get("type")+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
+                            if(userData.get(AppConstants.type).equals("sites")){
+                                siteslist.add(userData.get(AppConstants.type)+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
                                         userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.pname)
-                                        +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get("type"));
+                                        +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get(AppConstants.type));
 
-                            }else if(userData.get("type").equals("homes")){
+                            }else if(userData.get(AppConstants.type).equals("homes")){
                                 Homeslist.add(userData.get(AppConstants.image)+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
                                         userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.pname)
-                                        +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get("type"));
+                                        +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get(AppConstants.type));
 
-                            }else if(userData.get("type").equals("greenland")){
+                            }else if(userData.get(AppConstants.type).equals("greenland")){
                                 greenlandlist.add(userData.get(AppConstants.image)+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
                                         userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.pname)
-                                        +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get("type"));
+                                        +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get(AppConstants.type));
 
-                            }else if(userData.get("type").equals("rental")){
+                            }else if(userData.get(AppConstants.type).equals("rental")){
                                 Rentallist.add(userData.get(AppConstants.image)+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
                                         userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.pname)
-                                        +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get("type"));
+                                        +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get(AppConstants.type));
 
                             };
 

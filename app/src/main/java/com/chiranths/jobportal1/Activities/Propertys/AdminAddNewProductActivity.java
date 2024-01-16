@@ -257,7 +257,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         productMap.put(AppConstants.category, CategoryName);
         productMap.put(AppConstants.price, Price);
         productMap.put(AppConstants.pname, Pname);
-        productMap.put("type",type);
+        productMap.put(AppConstants.type,type);
         productMap.put("Approval",1);
         productMap.put(AppConstants.propertysize,propertysize);
         productMap.put(AppConstants.location,location);

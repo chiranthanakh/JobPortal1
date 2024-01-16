@@ -356,7 +356,7 @@ class ProfileFragments : Fragment() {
                                     userData[AppConstants.price].toString(),
                                     userData[AppConstants.propertysize].toString(),
                                     userData[AppConstants.time].toString(),
-                                    userData["type"].toString(),
+                                    userData[AppConstants.type].toString(),
                                     userData[AppConstants.postedBy].toString(),
                                     "hotforyou",
                                     userData[AppConstants.Status].toString()
@@ -418,7 +418,7 @@ class ProfileFragments : Fragment() {
                                         userData[AppConstants.price].toString(),
                                         userData[AppConstants.propertysize].toString(),
                                         userData[AppConstants.time].toString(),
-                                        userData["type"].toString(),
+                                        userData[AppConstants.type].toString(),
                                         userData[AppConstants.postedBy].toString(),
                                         "layoutsforyou",
                                         userData[AppConstants.Status].toString()
@@ -477,7 +477,7 @@ class ProfileFragments : Fragment() {
                                         userData[AppConstants.price].toString(),
                                         userData[AppConstants.propertysize].toString(),
                                         userData[AppConstants.time].toString(),
-                                        userData["type"].toString(),
+                                        userData[AppConstants.type].toString(),
                                         userData[AppConstants.postedBy].toString(),
                                         "adsforyou",
                                         userData[AppConstants.Status].toString()

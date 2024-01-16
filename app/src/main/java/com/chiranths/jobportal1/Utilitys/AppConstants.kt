@@ -23,6 +23,7 @@ object AppConstants {
     const val postedOn = "postedOn"
     const val verified = "verified"
     const val payment = "payment"
+    const val type = "type"
     const val time = "time"
     const val text1 = "text1"
     const val text2 = "text2"

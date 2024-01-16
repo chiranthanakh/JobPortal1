@@ -225,35 +225,35 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
 
                             Propertyfilterlist.add(new FilterModel(String.valueOf(userData.get(AppConstants.pname)),String.valueOf(userData.get(AppConstants.description)),String.valueOf(userData.get(AppConstants.price)),String.valueOf(userData.get(AppConstants.image)),
-                                    String.valueOf(userData.get(AppConstants.category)),String.valueOf(userData.get(AppConstants.pid)),AppConstants.date,AppConstants.time,String.valueOf(userData.get("type")),String.valueOf(userData.get(AppConstants.propertysize)),String.valueOf(userData.get(AppConstants.location)),
+                                    String.valueOf(userData.get(AppConstants.category)),String.valueOf(userData.get(AppConstants.pid)),AppConstants.date,AppConstants.time,String.valueOf(userData.get(AppConstants.type)),String.valueOf(userData.get(AppConstants.propertysize)),String.valueOf(userData.get(AppConstants.location)),
                                     String.valueOf(userData.get(AppConstants.number))));
 
                             propertylist.add(userData.get(AppConstants.image)+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
                                     userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.pname)
-                                    +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get("type"));
+                                    +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get(AppConstants.type));
 
-                            if(userData.get("type").equals("sites")){
-                                siteslist.add(userData.get("type")+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
+                            if(userData.get(AppConstants.type).equals("sites")){
+                                siteslist.add(userData.get(AppConstants.type)+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
                                         userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.pname)
-                                        +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get("type"));
+                                        +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get(AppConstants.type));
 
-                            }else if(userData.get("type").equals("homes")){
+                            }else if(userData.get(AppConstants.type).equals("homes")){
 
                                 Homeslist.add(userData.get(AppConstants.image)+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
                                         userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.pname)
-                                        +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get("type"));
+                                        +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get(AppConstants.type));
 
 
-                            }else if(userData.get("type").equals("greenland")){
+                            }else if(userData.get(AppConstants.type).equals("greenland")){
                                 greenlandlist.add(userData.get(AppConstants.image)+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
                                         userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.pname)
-                                        +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get("type"));
+                                        +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get(AppConstants.type));
 
 
-                            }else if(userData.get("type").equals("rental")){
+                            }else if(userData.get(AppConstants.type).equals("rental")){
                                 Rentallist.add(userData.get(AppConstants.image)+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
                                         userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.pname)
-                                        +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get("type"));
+                                        +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get(AppConstants.type));
 
                             };
 

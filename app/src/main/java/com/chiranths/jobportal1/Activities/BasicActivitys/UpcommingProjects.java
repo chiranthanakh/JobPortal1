@@ -105,7 +105,7 @@ public class UpcommingProjects extends AppCompatActivity implements View.OnClick
 
                             layoutlist.add(new PropertytModel(String.valueOf(userData.get(AppConstants.image)),String.valueOf(userData.get(AppConstants.pid)),String.valueOf(userData.get(AppConstants.description)),
                                     String.valueOf(userData.get(AppConstants.category)),String.valueOf(userData.get(AppConstants.price)),String.valueOf(userData.get(AppConstants.pname)),
-                                    String.valueOf(userData.get(AppConstants.propertysize)),String.valueOf(userData.get(AppConstants.location)),String.valueOf(userData.get(AppConstants.number)),String.valueOf(userData.get("type"))));
+                                    String.valueOf(userData.get(AppConstants.propertysize)),String.valueOf(userData.get(AppConstants.location)),String.valueOf(userData.get(AppConstants.number)),String.valueOf(userData.get(AppConstants.type))));
 
                         }catch (ClassCastException cce){
 

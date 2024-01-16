@@ -235,7 +235,7 @@ public class Admin_corosel_dashboard extends AppCompatActivity {
         productMap.put(AppConstants.pname, Pname);
         productMap.put("Approval",1);
         productMap.put("url",propertysize);
-        productMap.put("type",type);
+        productMap.put(AppConstants.type,type);
         productMap.put(AppConstants.number,number);
         productMap.put(AppConstants.Status, 1);
 

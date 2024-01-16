@@ -253,7 +253,7 @@ public class Admin_hotdeals_dashboard extends AppCompatActivity {
         productMap.put(AppConstants.number,number);
         productMap.put("timings",timings);
         productMap.put("ownerName",ownerName);
-        productMap.put("type",Inputtype.getText().toString());
+        productMap.put(AppConstants.type,Inputtype.getText().toString());
         productMap.put(AppConstants.postedBy,et_posted_by.getText().toString());
         productMap.put(AppConstants.text1,et_hot_text1.getText().toString());
         productMap.put(AppConstants.text2,et_hot_text2.getText().toString());

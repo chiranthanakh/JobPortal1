@@ -29,7 +29,7 @@ class ConstructionListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_construction_list)
         val bundle = intent.extras
-        type = bundle?.getString("type")
+        type = bundle?.getString(AppConstants.type)
         initilize()
         fetchdata()
     }

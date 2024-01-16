@@ -173,7 +173,7 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                             coroselimagelist.add(
                                 Corosolmodel(
                                     userData!![AppConstants.image].toString(),
-                                    userData["type"].toString()
+                                    userData[AppConstants.type].toString()
                                 )
                             )
                         } catch (cce: ClassCastException) {
@@ -346,7 +346,7 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                                     userData[AppConstants.price].toString(),
                                     userData[AppConstants.propertysize].toString(),
                                     userData[AppConstants.time].toString(),
-                                    userData["type"].toString(),
+                                    userData[AppConstants.type].toString(),
                                     userData[AppConstants.postedBy].toString()
                                 )
                             )
