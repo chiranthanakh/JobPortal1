@@ -111,15 +111,14 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val sh = requireActivity().getSharedPreferences("MyPref", Context.MODE_PRIVATE)
-        val editor = sh.edit()
         id = sh.getString("id", null)
         name = sh.getString("name", "")
         mail = sh.getString("mail", null)
         pic = sh.getString("pic", null)
         progressDialog = ProgressDialog(context)
-       // if (!reload) {
+        //if (!reload) {
             initilize(view)
-       // }
+        //}
     }
 
     private fun initilize(view: View) {
@@ -139,19 +138,24 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
         binding.llTravels.setOnClickListener(this)
         binding.llCommercialRent.setOnClickListener(this)
 
-        AsyncTask.execute {
+        /*AsyncTask.execute {
             fetchcorosel()
             fetchdata()
             fetchads()
             fetchlayouts()
-        }
+        */
 
         if (progressDialog != null) {
             if (!progressDialog!!.isShowing) {
-                progressDialog!!.setCancelable(false)
-                progressDialog!!.setMessage("Please wait...")
-                progressDialog!!.show()
-                AsyncTask.execute { fetchads() }
+                progressDialog?.setCancelable(false)
+                progressDialog?.setMessage("Please wait...")
+                progressDialog?.show()
+                AsyncTask.execute {
+                    fetchcorosel()
+                    fetchdata()
+                    fetchads()
+                    fetchlayouts()
+                }
             }
         }
         binding.ivBell.setOnClickListener{

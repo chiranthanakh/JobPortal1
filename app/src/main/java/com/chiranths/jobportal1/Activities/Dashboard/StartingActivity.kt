@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.chiranths.jobportal1.Activities.BasicActivitys.LivingPlaceActivity
@@ -34,6 +35,9 @@ import com.chiranths.jobportal1.databinding.ActivityStartingBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.Firebase
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.analytics
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -55,11 +59,13 @@ class StartingActivity : AppCompatActivity() {
     var iv_drawer_nav: ImageView? = null
     private var permissionListener: PermissionListener? = null
     private lateinit var binding: ActivityStartingBinding
+    private lateinit var analytics: FirebaseAnalytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivityStartingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        analytics = Firebase.analytics
         progressDialog = ProgressDialog(this)
         initilize()
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, startingFragment).commit()
@@ -67,7 +73,7 @@ class StartingActivity : AppCompatActivity() {
         val packageManager: PackageManager = applicationContext.getPackageManager()
         val lastUpdatedTime =
             packageManager.getPackageInfo(applicationContext.packageName, 0).lastUpdateTime
-        checkPermissions()
+       // checkPermissions()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -125,14 +131,10 @@ class StartingActivity : AppCompatActivity() {
         bottomNavShift?.setOnItemSelectedListener(NavigationBarView.OnItemSelectedListener { item ->
             val id = item.itemId
             when (id) {
-                R.id.profile -> supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, profileFragment).addToBackStack(null).commit()
-                R.id.Home -> supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, startingFragment).addToBackStack(null).commit()
-                R.id.it_business -> supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, businessFragment).addToBackStack(null).commit()
-                R.id.it_property -> supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, propertyFragment).addToBackStack(null).commit()
+                R.id.profile -> replaceFragment(profileFragment)
+                R.id.Home -> replaceFragment(startingFragment)
+                R.id.it_business -> replaceFragment(businessFragment)
+                R.id.it_property -> replaceFragment(propertyFragment)
             }
             true
         })
@@ -188,6 +190,18 @@ class StartingActivity : AppCompatActivity() {
                 override fun onCancelled(error: DatabaseError) {}
             })
         }
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.setCustomAnimations(
+            R.anim.slide_in_left,
+            R.anim.slide_in_right,
+            R.anim.slide_in_left,
+            R.anim.slide_in_right
+        )
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.addToBackStack(null).commit()
     }
 
     private fun checkPermissions() {
