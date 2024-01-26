@@ -87,10 +87,6 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
     var adslist: ArrayList<Any?> = ArrayList<Any?>()
     var layoutslists: ArrayList<Any?> = ArrayList<Any?>()
     var productinfolist: ArrayList<ProductInfo> = ArrayList<ProductInfo>()
-    private val images = intArrayOf(
-        R.drawable.banner1,
-        R.drawable.banner1, R.drawable.banner1
-    )
     var carouselView: CarouselView? = null
     var mHandler = Handler()
     var tv_location: TextView? = null
@@ -137,13 +133,6 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
         binding.llHomeRent.setOnClickListener(this)
         binding.llTravels.setOnClickListener(this)
         binding.llCommercialRent.setOnClickListener(this)
-
-        /*AsyncTask.execute {
-            fetchcorosel()
-            fetchdata()
-            fetchads()
-            fetchlayouts()
-        */
 
         if (progressDialog != null) {
             if (!progressDialog!!.isShowing) {
@@ -405,6 +394,7 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
             }
 
             R.id.cv_servicess1 -> {
+                binding.bottomNavShift.visibility = View.GONE
                 val businessFragment = BusinessFragment()
                 val fragmentManager = requireActivity().supportFragmentManager
                 val fragmentTransaction = fragmentManager.beginTransaction()

@@ -25,6 +25,7 @@ import com.chiranths.jobportal1.Model.BusinessModel
 import com.chiranths.jobportal1.Model.Categorymmodel
 import com.chiranths.jobportal1.R
 import com.chiranths.jobportal1.Utilitys.AppConstants
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -91,6 +92,8 @@ class BusinessFragment : Fragment() {
         iv_back = view.findViewById(R.id.iv_business_back)
         iv_search = view.findViewById(R.id.iv_business_search)
 
+        //val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottomNavShift)
+        //bottomNav?.visibility = View.GONE
 
         fetchbusiness("")
         fetchbusinessCategorys()

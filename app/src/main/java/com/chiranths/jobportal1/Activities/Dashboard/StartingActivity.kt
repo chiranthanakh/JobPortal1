@@ -100,10 +100,10 @@ class StartingActivity : AppCompatActivity() {
             binding.drawerLayoutMainD?.closeDrawer(GravityCompat.START)
         }
 
-        binding.dashboardBusiness?.setOnClickListener{
+       /* binding.dashboardBusiness?.setOnClickListener{
             val intent = Intent(this, BusinessActivity::class.java)
             startActivity(intent)
-        }
+        }*/
 
         binding.dashboardConstructions?.setOnClickListener{
             val intent = Intent(this, ConstructionActivity::class.java)

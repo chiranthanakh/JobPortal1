@@ -12,10 +12,12 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="160dp"
         android:elevation="1dp"
         android:id="@+id/cv_card_deals"
         android:layout_gravity="center"
+        android:layout_marginRight="@dimen/margin_10dp"
+        android:layout_marginLeft="@dimen/margin_10dp"
         android:backgroundTint="@color/white"
         app:cardCornerRadius="5dp">
 
