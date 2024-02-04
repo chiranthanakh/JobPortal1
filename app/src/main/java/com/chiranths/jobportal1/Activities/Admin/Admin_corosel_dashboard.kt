@@ -24,55 +24,62 @@ import com.google.firebase.storage.StorageReference
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
-class AdminloanOffers : AppCompatActivity() {
-    private var BankName: String? = null
-    private var BankIntrestRate: String? = null
-    private var BankLoanType: String? = null
-    private var BankLoanamount: String? = null
-    private var BankLOanDiscription: String? = null
+class Admin_corosel_dashboard : AppCompatActivity() {
+    private var CategoryName: String? = null
+    private var Description: String? = null
+    private var Price: String? = null
+    private var Pname: String? = null
     private var saveCurrentDate: String? = null
     private var saveCurrentTime: String? = null
-    var et_bankname: EditText? = null
-    var et_loantype: EditText? = null
-    var et_loanintrestrate: EditText? = null
-    var et_loanamount: EditText? = null
-    var et_loandiscription: EditText? = null
+    private var propertysize: String? = null
+    private var type: String? = null
+    private var number: String? = null
+    private var InputProductName: EditText? = null
+    private var Inputtype: EditText? = null
+    private var InputProductDescription: EditText? = null
+    private var InputProductPrice: EditText? = null
+    private var et_size: EditText? = null
+    private var et_location: EditText? = null
+    private var et_number: EditText? = null
     private var ImageUri: Uri? = null
     private var productRandomKey: String? = null
     private var downloadImageUrl: String? = null
+    private var corosel_type: String? = null
     private var MainimageUrl: String? = null
-    private var loanImagesRef: StorageReference? = null
-    private var loanRef: DatabaseReference? = null
+    private var ProductImagesRef: StorageReference? = null
+    private var ProductsRef: DatabaseReference? = null
     private var loadingBar: ProgressDialog? = null
-    private var postplace: String? = ""
+    private var sp_corosel_type: Spinner? = null
     var fileNameList: ArrayList<String> = ArrayList<String>()
     var fileDoneList: ArrayList<String> = ArrayList<String>()
-    private var placement: Spinner? = null
-    var ads_name: EditText? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_admin_loanoffers)
-        loanImagesRef = FirebaseStorage.getInstance().reference.child("bank")
-        loanRef = FirebaseDatabase.getInstance().reference.child("banksadsforyou")
-        val btn_corosel = findViewById<ImageView>(R.id.loan_image)
-        val add_new_corosel = findViewById<Button>(R.id.btn_loanoffer)
-        et_bankname = findViewById<View>(R.id.et_bank_name) as EditText
-        et_loantype = findViewById<View>(R.id.et_loan_type) as EditText
-        et_loanamount = findViewById<View>(R.id.et_loanamount_upto) as EditText
-        et_loanintrestrate = findViewById<View>(R.id.et_intrestrate) as EditText
-        et_loandiscription = findViewById(R.id.et_loan_description)
-        ads_name = findViewById(R.id.ads_name)
-        placement = findViewById(R.id.sp_placement)
+        setContentView(R.layout.activity_admin_corosel)
+        ProductImagesRef = FirebaseStorage.getInstance().reference.child("Corosel")
+        ProductsRef = FirebaseDatabase.getInstance().reference.child("Corosels")
+        val btn_corosel = findViewById<ImageView>(R.id.select_corosel_image)
+        val add_new_corosel = findViewById<Button>(R.id.add_new_corosel)
+        InputProductName = findViewById<View>(R.id.corosel_name) as EditText
+        InputProductDescription = findViewById<View>(R.id.corosel_description) as EditText
+        InputProductPrice = findViewById<View>(R.id.corosel_price_admin) as EditText
+        et_size = findViewById(R.id.corosel_size)
+        et_location = findViewById(R.id.corosel_location_admin)
+        et_number = findViewById(R.id.contact_number1)
+        sp_corosel_type = findViewById(R.id.sp_corosel_type)
         loadingBar = ProgressDialog(this)
         btn_corosel.setOnClickListener { OpenGallery() }
         add_new_corosel.setOnClickListener { ValidateProductData() }
 
-        placement?.onItemSelectedListener=object : AdapterView.OnItemSelectedListener {
-            val placement = resources.getStringArray(R.array.placement)
+        sp_corosel_type?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            var corosel = resources.getStringArray(R.array.corosel_type)
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                postplace = placement.get(p2)
+                if (p2 > 0) {
+                    corosel_type = corosel.get(p2)
+                }
             }
+
             override fun onNothingSelected(p0: AdapterView<*>?) {
+
             }
         }
     }
@@ -94,36 +101,8 @@ class AdminloanOffers : AppCompatActivity() {
         }
     }
 
-    private fun ValidateProductData() {
-        BankName = et_bankname!!.text.toString()
-        BankLoanType = et_loantype!!.text.toString()
-        BankIntrestRate = et_loanintrestrate!!.text.toString()
-        BankLOanDiscription = et_loandiscription!!.text.toString()
-        BankLoanamount = et_loanamount!!.text.toString()
-        if (TextUtils.isEmpty(downloadImageUrl)) {
-            Toast.makeText(this, "Product image is mandatory...", Toast.LENGTH_SHORT).show()
-        } else if (TextUtils.isEmpty(BankLOanDiscription)) {
-            Toast.makeText(this, "Please write product description...", Toast.LENGTH_SHORT).show()
-        } else if (TextUtils.isEmpty(BankIntrestRate)) {
-            Toast.makeText(this, "Please write intrest Rate...", Toast.LENGTH_SHORT).show()
-        } else if (TextUtils.isEmpty(BankLoanType)) {
-            Toast.makeText(this, "Please write LoanType...", Toast.LENGTH_SHORT).show()
-        } else if (TextUtils.isEmpty(BankName)) {
-            Toast.makeText(this, "Please enter Bank name", Toast.LENGTH_SHORT).show()
-        } else {
-            SaveProductInfoToDatabase()
-        }
-    }
-
     private fun StoreProductInformation(data: Intent) {
-
-        /*loadingBar.setTitle("Add New Product");
-        loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
-        loadingBar.setCanceledOnTouchOutside(false);
-        loadingBar.show();*/
         downloadImageUrl = ""
-
-        // If the user selected only one image
         if (data.data != null) {
             val uri = data.data
             uploadTostorage(data, uri)
@@ -146,15 +125,16 @@ class AdminloanOffers : AppCompatActivity() {
         val currentTime = SimpleDateFormat("HH:mm a")
         saveCurrentTime = currentTime.format(calendar.time)
         productRandomKey = saveCurrentDate + saveCurrentTime
-        val filePath = loanImagesRef!!.child(uri!!.lastPathSegment + productRandomKey + ".jpg")
+        val filePath = ProductImagesRef!!.child(uri!!.lastPathSegment + productRandomKey + ".jpg")
         val uploadTask = filePath.putFile(uri)
         uploadTask.addOnFailureListener { e ->
             val message = e.toString()
-            Toast.makeText(this@AdminloanOffers, "Error: $message", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@Admin_corosel_dashboard, "Error: $message", Toast.LENGTH_SHORT)
+                .show()
             loadingBar!!.dismiss()
         }.addOnSuccessListener {
             Toast.makeText(
-                this@AdminloanOffers,
+                this@Admin_corosel_dashboard,
                 "Product Image uploaded Successfully...",
                 Toast.LENGTH_SHORT
             ).show()
@@ -174,7 +154,7 @@ class AdminloanOffers : AppCompatActivity() {
                         }
                         println("url2---$downloadImageUrl")
                         Toast.makeText(
-                            this@AdminloanOffers,
+                            this@Admin_corosel_dashboard,
                             "got the Product image Url Successfully...",
                             Toast.LENGTH_SHORT
                         ).show()
@@ -183,36 +163,55 @@ class AdminloanOffers : AppCompatActivity() {
         }
     }
 
+    private fun ValidateProductData() {
+        Description = InputProductDescription!!.text.toString()
+        Price = InputProductPrice!!.text.toString()
+        Pname = InputProductName!!.text.toString()
+        propertysize = et_size!!.text.toString()
+        type = et_location!!.text.toString()
+        number = et_number!!.text.toString()
+        if (TextUtils.isEmpty(downloadImageUrl)) {
+            Toast.makeText(this, "Product image is mandatory...", Toast.LENGTH_SHORT).show()
+        } else if (TextUtils.isEmpty(Description)) {
+            Toast.makeText(this, "Please write product description...", Toast.LENGTH_SHORT).show()
+        } else if (TextUtils.isEmpty(Price)) {
+            Toast.makeText(this, "Please write product Price...", Toast.LENGTH_SHORT).show()
+        } else if (TextUtils.isEmpty(Pname)) {
+            Toast.makeText(this, "Please write product name...", Toast.LENGTH_SHORT).show()
+        } else {
+            SaveProductInfoToDatabase()
+        }
+    }
+
     private fun SaveProductInfoToDatabase() {
         val productMap = HashMap<String, Any?>()
         productMap[AppConstants.pid] = productRandomKey
         productMap[AppConstants.date] = saveCurrentDate
         productMap[AppConstants.time] = saveCurrentTime
+        productMap[AppConstants.description] = Description
         productMap[AppConstants.image2] = downloadImageUrl
-        productMap[AppConstants.postedOn] = saveCurrentDate
         productMap[AppConstants.image] = MainimageUrl
-        productMap["bankName"] = BankName
-        productMap["loantype"] = BankLoanType
-        productMap["loanamount"] = BankLoanamount
-        productMap["intrestrate"] = BankIntrestRate
-        productMap[AppConstants.description] = BankLOanDiscription
+        productMap[AppConstants.category] = corosel_type
+        productMap[AppConstants.price] = Price
+        productMap[AppConstants.pname] = Pname
+        productMap["Approval"] = 1
+        productMap["url"] = propertysize
+        productMap[AppConstants.type] = type
+        productMap[AppConstants.number] = number
         productMap[AppConstants.Status] = 1
-        loanRef!!.child(productRandomKey!!).updateChildren(productMap)
+        ProductsRef!!.child(productRandomKey!!).updateChildren(productMap)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    // Intent intent = new Intent(AdminAddNewProductActivity.this, .class);
-                    //startActivity(intent);
                     loadingBar!!.dismiss()
-                    Toast.makeText(
-                        this@AdminloanOffers,
-                        "Product is added successfully..",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(this@Admin_corosel_dashboard, "Product is added successfully..", Toast.LENGTH_SHORT).show()
                 } else {
                     loadingBar!!.dismiss()
                     val message = task.exception.toString()
-                    Toast.makeText(this@AdminloanOffers, "Error: $message", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(
+                        this@Admin_corosel_dashboard,
+                        "Error: $message",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
     }

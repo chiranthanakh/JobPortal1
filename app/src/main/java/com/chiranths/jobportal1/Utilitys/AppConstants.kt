@@ -33,5 +33,6 @@ object AppConstants {
     const val point2 = "point2"
     const val point3 = "point3"
     const val point4 = "point4"
+    const val carousel = "Carousel"
     
 }

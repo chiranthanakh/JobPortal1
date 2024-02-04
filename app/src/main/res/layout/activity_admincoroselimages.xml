@@ -155,6 +155,12 @@
             android:layout_height="100dp"
             android:text="Business for approval"/>
 
+        <Button
+            android:id="@+id/travel_approval"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="Travel for approval"/>
+
     </LinearLayout>
 
 

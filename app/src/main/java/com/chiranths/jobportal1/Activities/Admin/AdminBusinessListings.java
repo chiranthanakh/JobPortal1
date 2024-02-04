@@ -211,7 +211,6 @@ public class AdminBusinessListings extends AppCompatActivity {
                             throw task.getException();
 
                         }
-
                         return filePath.getDownloadUrl();
                     }
                 }).addOnCompleteListener(new OnCompleteListener<Uri>() {

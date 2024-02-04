@@ -17,8 +17,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import com.chiranths.jobportal1.Activities.Admin.Admin_corosel_dashboard;
 import com.chiranths.jobportal1.R;
 import com.chiranths.jobportal1.Utilitys.AppConstants;
 import com.google.android.gms.tasks.Continuation;

@@ -24,55 +24,70 @@ import com.google.firebase.storage.StorageReference
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
-class AdminloanOffers : AppCompatActivity() {
-    private var BankName: String? = null
-    private var BankIntrestRate: String? = null
-    private var BankLoanType: String? = null
-    private var BankLoanamount: String? = null
-    private var BankLOanDiscription: String? = null
-    private var saveCurrentDate: String? = null
-    private var saveCurrentTime: String? = null
-    var et_bankname: EditText? = null
-    var et_loantype: EditText? = null
-    var et_loanintrestrate: EditText? = null
-    var et_loanamount: EditText? = null
-    var et_loandiscription: EditText? = null
+class Admin_travels : AppCompatActivity() {
+    var vehicleName: String? = null
+    var category: String? = null
+    var VehicleNumber: String? = null
+    var costperKM: String? = null
+    var contactDetails: String? = null
+    var vehiclemodel: String? = null
+    var ownerName: String? = null
+    var saveCurrentDate: String? = null
+    var saveCurrentTime: String? = null
+    var discription: String? = null
+    private var edt_vehicle_name: EditText? = null
+    private var edt_travel_vehicle_number: EditText? = null
+    private var edt_rupes_for_km: EditText? = null
+    private var edt_travel_contact: EditText? = null
+    private var edt_travel_vehicle_model: EditText? = null
+    private var edt_owner_name: EditText? = null
+    private var edt_travel_verified_not: EditText? = null
+    private var edt_travel_discription: EditText? = null
+    private var edt_travel_category: Spinner? = null
     private var ImageUri: Uri? = null
     private var productRandomKey: String? = null
     private var downloadImageUrl: String? = null
     private var MainimageUrl: String? = null
-    private var loanImagesRef: StorageReference? = null
-    private var loanRef: DatabaseReference? = null
+    private var ProductImagesRef: StorageReference? = null
+    private var ProductsRef: DatabaseReference? = null
     private var loadingBar: ProgressDialog? = null
-    private var postplace: String? = ""
     var fileNameList: ArrayList<String> = ArrayList<String>()
     var fileDoneList: ArrayList<String> = ArrayList<String>()
-    private var placement: Spinner? = null
     var ads_name: EditText? = null
+    var back_btn: ImageView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_admin_loanoffers)
-        loanImagesRef = FirebaseStorage.getInstance().reference.child("bank")
-        loanRef = FirebaseDatabase.getInstance().reference.child("banksadsforyou")
-        val btn_corosel = findViewById<ImageView>(R.id.loan_image)
-        val add_new_corosel = findViewById<Button>(R.id.btn_loanoffer)
-        et_bankname = findViewById<View>(R.id.et_bank_name) as EditText
-        et_loantype = findViewById<View>(R.id.et_loan_type) as EditText
-        et_loanamount = findViewById<View>(R.id.et_loanamount_upto) as EditText
-        et_loanintrestrate = findViewById<View>(R.id.et_intrestrate) as EditText
-        et_loandiscription = findViewById(R.id.et_loan_description)
-        ads_name = findViewById(R.id.ads_name)
-        placement = findViewById(R.id.sp_placement)
+        //binding=ActivityTravelsBinding.inflate(layoutInflater)
+        setContentView(R.layout.admin_travel)
+        ProductImagesRef = FirebaseStorage.getInstance().reference.child("travels")
+        ProductsRef = FirebaseDatabase.getInstance().reference.child("travelsforyou")
+        val btn_add_image = findViewById<ImageView>(R.id.select_vehicle_images)
+        val add_new_vehicle = findViewById<Button>(R.id.add_new_vehicle)
+        back_btn = findViewById(R.id.iv_nav_view)
+        edt_vehicle_name = findViewById<View>(R.id.edt_vehicle_name) as EditText
+        edt_travel_category = findViewById(R.id.sp_vehicle_type)
+        edt_travel_vehicle_number = findViewById(R.id.edt_travel_vehicle_number)
+        edt_rupes_for_km = findViewById(R.id.edt_rupes_for_km)
+        edt_travel_contact = findViewById(R.id.edt_travel_contact)
+        edt_travel_vehicle_model = findViewById(R.id.edt_travel_vehicle_model)
+        edt_owner_name = findViewById(R.id.edt_owner_name)
+        edt_travel_verified_not = findViewById(R.id.edt_travel_verified_not)
+        edt_travel_discription = findViewById(R.id.edt_travel_discription)
         loadingBar = ProgressDialog(this)
-        btn_corosel.setOnClickListener { OpenGallery() }
-        add_new_corosel.setOnClickListener { ValidateProductData() }
+        btn_add_image.setOnClickListener { view: View? -> OpenGallery() }
+        add_new_vehicle.setOnClickListener { view: View? -> ValidateProductData() }
+        back_btn?.setOnClickListener(View.OnClickListener { view: View? -> finish() })
 
-        placement?.onItemSelectedListener=object : AdapterView.OnItemSelectedListener {
-            val placement = resources.getStringArray(R.array.placement)
+        edt_travel_category?.onItemSelectedListener=object : AdapterView.OnItemSelectedListener {
+            val frequencyArray = resources.getStringArray(R.array.vehicle_type)
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                postplace = placement.get(p2)
+                if (p2>0){
+                    // getDistrict(stateList[p2].mst_state_id.toInt())
+                    category = frequencyArray.get(p2)
+                }
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
+
             }
         }
     }
@@ -94,35 +109,8 @@ class AdminloanOffers : AppCompatActivity() {
         }
     }
 
-    private fun ValidateProductData() {
-        BankName = et_bankname!!.text.toString()
-        BankLoanType = et_loantype!!.text.toString()
-        BankIntrestRate = et_loanintrestrate!!.text.toString()
-        BankLOanDiscription = et_loandiscription!!.text.toString()
-        BankLoanamount = et_loanamount!!.text.toString()
-        if (TextUtils.isEmpty(downloadImageUrl)) {
-            Toast.makeText(this, "Product image is mandatory...", Toast.LENGTH_SHORT).show()
-        } else if (TextUtils.isEmpty(BankLOanDiscription)) {
-            Toast.makeText(this, "Please write product description...", Toast.LENGTH_SHORT).show()
-        } else if (TextUtils.isEmpty(BankIntrestRate)) {
-            Toast.makeText(this, "Please write intrest Rate...", Toast.LENGTH_SHORT).show()
-        } else if (TextUtils.isEmpty(BankLoanType)) {
-            Toast.makeText(this, "Please write LoanType...", Toast.LENGTH_SHORT).show()
-        } else if (TextUtils.isEmpty(BankName)) {
-            Toast.makeText(this, "Please enter Bank name", Toast.LENGTH_SHORT).show()
-        } else {
-            SaveProductInfoToDatabase()
-        }
-    }
-
     private fun StoreProductInformation(data: Intent) {
-
-        /*loadingBar.setTitle("Add New Product");
-        loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
-        loadingBar.setCanceledOnTouchOutside(false);
-        loadingBar.show();*/
         downloadImageUrl = ""
-
         // If the user selected only one image
         if (data.data != null) {
             val uri = data.data
@@ -138,7 +126,7 @@ class AdminloanOffers : AppCompatActivity() {
 
     private fun uploadTostorage(data: Intent, uri: Uri?) {
         val fileName = getFileName(uri)
-        fileNameList.add(fileName!!)
+        fileNameList.add(fileName.toString())
         fileDoneList.add("Uploading")
         val calendar = Calendar.getInstance()
         val currentDate = SimpleDateFormat("MMM dd")
@@ -146,15 +134,15 @@ class AdminloanOffers : AppCompatActivity() {
         val currentTime = SimpleDateFormat("HH:mm a")
         saveCurrentTime = currentTime.format(calendar.time)
         productRandomKey = saveCurrentDate + saveCurrentTime
-        val filePath = loanImagesRef!!.child(uri!!.lastPathSegment + productRandomKey + ".jpg")
+        val filePath = ProductImagesRef!!.child(uri!!.lastPathSegment + productRandomKey + ".jpg")
         val uploadTask = filePath.putFile(uri)
         uploadTask.addOnFailureListener { e ->
             val message = e.toString()
-            Toast.makeText(this@AdminloanOffers, "Error: $message", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@Admin_travels, "Error: $message", Toast.LENGTH_SHORT).show()
             loadingBar!!.dismiss()
         }.addOnSuccessListener {
             Toast.makeText(
-                this@AdminloanOffers,
+                this@Admin_travels,
                 "Product Image uploaded Successfully...",
                 Toast.LENGTH_SHORT
             ).show()
@@ -172,47 +160,64 @@ class AdminloanOffers : AppCompatActivity() {
                         } else {
                             downloadImageUrl = downloadImageUrl + "---" + task.result.toString()
                         }
-                        println("url2---$downloadImageUrl")
-                        Toast.makeText(
-                            this@AdminloanOffers,
-                            "got the Product image Url Successfully...",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(this@Admin_travels, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show()
                     }
                 }
         }
     }
 
+    private fun ValidateProductData() {
+        vehicleName = edt_vehicle_name?.text.toString()
+        VehicleNumber = edt_travel_vehicle_number!!.text.toString()
+        costperKM = edt_rupes_for_km!!.text.toString()
+        contactDetails = edt_travel_contact!!.text.toString()
+        vehiclemodel = edt_travel_vehicle_model!!.text.toString()
+        ownerName = edt_owner_name!!.text.toString()
+        discription = edt_travel_discription!!.text.toString()
+        if (TextUtils.isEmpty(downloadImageUrl)) {
+            Toast.makeText(this, "Product image is mandatory...", Toast.LENGTH_SHORT).show()
+        } else if (TextUtils.isEmpty(vehicleName)) {
+            Toast.makeText(this, "Please enter vehicle name...", Toast.LENGTH_SHORT).show()
+        } else if (TextUtils.isEmpty(costperKM)) {
+            Toast.makeText(this, "Please write Price/KM...", Toast.LENGTH_SHORT).show()
+        } else if (TextUtils.isEmpty(contactDetails)) {
+            Toast.makeText(this, "Please enter contact details...", Toast.LENGTH_SHORT).show()
+        } else if (TextUtils.isEmpty(category)) {
+            Toast.makeText(this, "Please enter category", Toast.LENGTH_SHORT).show()
+        } else {
+            SaveProductInfoToDatabase()
+        }
+    }
+
     private fun SaveProductInfoToDatabase() {
         val productMap = HashMap<String, Any?>()
-        productMap[AppConstants.pid] = productRandomKey
+        productMap[AppConstants.pid] = productRandomKey + "_travel"
         productMap[AppConstants.date] = saveCurrentDate
         productMap[AppConstants.time] = saveCurrentTime
+        productMap[AppConstants.description] = discription
         productMap[AppConstants.image2] = downloadImageUrl
-        productMap[AppConstants.postedOn] = saveCurrentDate
         productMap[AppConstants.image] = MainimageUrl
-        productMap["bankName"] = BankName
-        productMap["loantype"] = BankLoanType
-        productMap["loanamount"] = BankLoanamount
-        productMap["intrestrate"] = BankIntrestRate
-        productMap[AppConstants.description] = BankLOanDiscription
+        productMap[AppConstants.category] = category
+        productMap["costperkm"] = costperKM
+        productMap["vehiclename"] = vehicleName
+        productMap["vehiclenumber"] = VehicleNumber
+        productMap["contactnumber"] = contactDetails
+        productMap["model"] = vehiclemodel
+        productMap["ownerNmae"] = ownerName
+        productMap[AppConstants.verified] = 1
         productMap[AppConstants.Status] = 1
-        loanRef!!.child(productRandomKey!!).updateChildren(productMap)
+        ProductsRef!!.child(productRandomKey!!).updateChildren(productMap)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Intent intent = new Intent(AdminAddNewProductActivity.this, .class);
                     //startActivity(intent);
                     loadingBar!!.dismiss()
-                    Toast.makeText(
-                        this@AdminloanOffers,
-                        "Product is added successfully..",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(this@Admin_travels, "Product is added successfully..", Toast.LENGTH_SHORT).show()
+                    finish()
                 } else {
                     loadingBar!!.dismiss()
                     val message = task.exception.toString()
-                    Toast.makeText(this@AdminloanOffers, "Error: $message", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(this@Admin_travels, "Error: $message", Toast.LENGTH_SHORT).show()
                 }
             }
     }

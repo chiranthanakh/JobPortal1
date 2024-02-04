@@ -36,6 +36,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.Firebase
+import com.google.firebase.FirebaseApp
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.analytics
 import com.google.firebase.database.DataSnapshot
@@ -60,11 +61,14 @@ class StartingActivity : AppCompatActivity() {
     private var permissionListener: PermissionListener? = null
     private lateinit var binding: ActivityStartingBinding
     private lateinit var analytics: FirebaseAnalytics
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivityStartingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        FirebaseApp.initializeApp(this)
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
         analytics = Firebase.analytics
         progressDialog = ProgressDialog(this)
         initilize()
@@ -73,6 +77,7 @@ class StartingActivity : AppCompatActivity() {
         val packageManager: PackageManager = applicationContext.getPackageManager()
         val lastUpdatedTime =
             packageManager.getPackageInfo(applicationContext.packageName, 0).lastUpdateTime
+        sendCustomEvent()
        // checkPermissions()
     }
 
@@ -238,6 +243,16 @@ class StartingActivity : AppCompatActivity() {
                 )
                 .check()
         }
+    }
+
+
+    private fun sendCustomEvent() {
+        val params = Bundle().apply {
+            // Add any custom parameters to your event
+            putString("custom_param_key", "custom_param_value")
+        }
+
+        firebaseAnalytics.logEvent("custom_event_name", params)
     }
 
 }

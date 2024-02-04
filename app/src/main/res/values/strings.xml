@@ -3,6 +3,33 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string-array name="corosel_type">
+        <item>"Business"</item>
+        <item>"Property"</item>
+        <item>"Loan"</item>
+        <item>"Travel"</item>
+        <item>"Construction"</item>
+        <item>"Rent"</item>
+        <item>"Hotels"</item>
+        <item>"Layout"</item>
+
+    </string-array>
+
+    <string-array name="vehicle_type">
+        <item>" "</item>
+        <item>"Cab"</item>
+        <item>"Tempo Traveler"</item>
+        <item>"Bus"</item>
+        <item>"Auto"</item>
+        <item>"goods vehicles"</item>
+        <item>"Heavy Vehicles"</item>
+    </string-array>
+
+    <string-array name="placement">
+        <item>"Carousel"</item>
+        <item>"layout"</item>
+    </string-array>
+
     <string-array name="lunch_time_array">
         <item>Select Time</item>
         <item>10:00 AM</item>

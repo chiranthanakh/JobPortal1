@@ -166,14 +166,16 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                             coroselimagelist.add(
                                 Corosolmodel(
                                     userData!![AppConstants.image].toString(),
-                                    userData[AppConstants.type].toString()
+                                    userData[AppConstants.type].toString(),
+                                    userData[AppConstants.category].toString(),
+                                    userData[AppConstants.pid].toString()
                                 )
                             )
                         } catch (cce: ClassCastException) {
                            //through exception
                         }
                     }
-                    coroselListAdaptor = CoroselListAdaptor(coroselimagelist, context)
+                    coroselListAdaptor = CoroselListAdaptor(coroselimagelist, context!!)
                     val nlayoutManager: RecyclerView.LayoutManager =
                         LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                     binding.rvHomeEvent.layoutManager = nlayoutManager

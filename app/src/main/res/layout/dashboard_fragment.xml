@@ -149,7 +149,7 @@
                             android:clickable="false"
                             android:cursorVisible="false"
                             android:gravity="center_vertical"
-                            android:hint="Search for propertys..."
+                            android:hint="Search by locality..."
                             android:inputType="none"
                             android:textColor="@color/black"
                             android:textColorHint="@color/grey_light"

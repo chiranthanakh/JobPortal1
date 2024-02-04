@@ -88,7 +88,11 @@ public class LayoutDetailsActivity extends AppCompatActivity {
 
     private void getProductDetails(String productID) {
         DatabaseReference productsRef;
-        productsRef = FirebaseDatabase.getInstance().getReference().child("layoutsforyou");
+        if (page.equals("3")) {
+            productsRef = FirebaseDatabase.getInstance().getReference().child("Corosels");
+        } else {
+            productsRef = FirebaseDatabase.getInstance().getReference().child("layoutsforyou");
+        }
 
         productsRef.child(productID).addValueEventListener(new ValueEventListener() {
             @Override
@@ -108,7 +112,7 @@ public class LayoutDetailsActivity extends AppCompatActivity {
                    // tv_ads_posted.setText("Posted by : "+products.getPostedBy());
                     if(products.getDate()==null){
                         tv_ads_posted_on.setVisibility(View.GONE);
-                    }else {
+                    } else {
                         tv_ads_posted_on.setText("Posted on "+products.getDate());
                     }
                     url = products.getImage2().split("---");

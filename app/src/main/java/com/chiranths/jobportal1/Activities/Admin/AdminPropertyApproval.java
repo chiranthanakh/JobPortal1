@@ -39,7 +39,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class AdminPropertyApproval extends AppCompatActivity implements View.OnClickListener,Adminapproveorremove {
+public class AdminPropertyApproval extends AppCompatActivity implements View.OnClickListener, Adminapproveorremove {
 
     private DatabaseReference ProductsRef;
     FirebaseRecyclerAdapter<Products, ProductViewHolder> adapter;
@@ -48,18 +48,18 @@ public class AdminPropertyApproval extends AppCompatActivity implements View.OnC
     Button btn_add;
     LinearLayout search;
     ImageView iv_back_toolbar;
-    ImageView iv_sites,iv_green_land,iv_home,iv_commercial;
+    ImageView iv_sites, iv_green_land, iv_home, iv_commercial;
     Handler mHandler = new Handler();
-    ArrayList propertylist =new ArrayList();
-    ArrayList greenlandlist =new ArrayList();
-    ArrayList siteslist =new ArrayList();
-    ArrayList Homeslist =new ArrayList();
-    ArrayList Rentallist =new ArrayList();
-    ArrayList adslist =new ArrayList();
+    ArrayList propertylist = new ArrayList();
+    ArrayList greenlandlist = new ArrayList();
+    ArrayList siteslist = new ArrayList();
+    ArrayList Homeslist = new ArrayList();
+    ArrayList Rentallist = new ArrayList();
+    ArrayList adslist = new ArrayList();
     AdminPropertyAdaptor propertyAdaptor;
     AdminAdsAdaptor adsAdaptor;
     RecyclerView recyclarviewads;
-    CardView cv_homes, cv_sites, cv_green,cv_comerical;
+    CardView cv_homes, cv_sites, cv_green, cv_comerical;
     Bundle bundle = new Bundle();
 
     @Override
@@ -80,8 +80,6 @@ public class AdminPropertyApproval extends AppCompatActivity implements View.OnC
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(this.getResources().getColor(R.color.app_blue));
         }
-
-
 
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
         initilize();
@@ -112,7 +110,7 @@ public class AdminPropertyApproval extends AppCompatActivity implements View.OnC
         recyclarviewads = findViewById(R.id.rv_adds_layots2_admin);
         recyclerView = findViewById(R.id.recycler_menu_admin);
         recyclerView.setHasFixedSize(true);
-        GridLayoutManager mgrid = new GridLayoutManager(this,1);
+        GridLayoutManager mgrid = new GridLayoutManager(this, 1);
 
         recyclerView.setLayoutManager(mgrid);
         fetchcorosel();
@@ -121,7 +119,7 @@ public class AdminPropertyApproval extends AppCompatActivity implements View.OnC
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AdminPropertyApproval.this, SearchActivity.class);
-                bundle.putString("searchtype","property");
+                bundle.putString("searchtype", "property");
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -142,28 +140,28 @@ public class AdminPropertyApproval extends AppCompatActivity implements View.OnC
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
 
                     HashMap<String, Object> dataMap = (HashMap<String, Object>) snapshot.getValue();
-                    for (String key : dataMap.keySet()){
+                    for (String key : dataMap.keySet()) {
                         Object data = dataMap.get(key);
-                        try{
+                        try {
 
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
 
-                            adslist.add(userData.get(AppConstants.image)+"---"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.number)+"---"+userData.get(AppConstants.location)+"---"+userData.get("Approval"));
+                            adslist.add(userData.get(AppConstants.image) + "---" + userData.get(AppConstants.pid) + "---" + userData.get(AppConstants.category) + "---" + userData.get(AppConstants.price) + "---" + userData.get(AppConstants.propertysize) + "---" + userData.get(AppConstants.number) + "---" + userData.get(AppConstants.location) + "---" + userData.get("Approval"));
 
-                        }catch (ClassCastException cce){
+                        } catch (ClassCastException cce) {
 
-                            try{
+                            try {
                                 String mString = String.valueOf(dataMap.get(key));
                                 //addTextToView(mString);
-                            }catch (ClassCastException cce2){
+                            } catch (ClassCastException cce2) {
 
                             }
                         }
                     }
-                    adsAdaptor =new AdminAdsAdaptor(adslist,AdminPropertyApproval.this);
+                    adsAdaptor = new AdminAdsAdaptor(adslist, AdminPropertyApproval.this);
                     RecyclerView.LayoutManager n1layoutManager = new LinearLayoutManager(AdminPropertyApproval.this, RecyclerView.HORIZONTAL, false);
                     recyclarviewads.setLayoutManager(n1layoutManager);
                     recyclarviewads.setItemAnimator(new DefaultItemAnimator());
@@ -194,33 +192,32 @@ public class AdminPropertyApproval extends AppCompatActivity implements View.OnC
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
 
                     HashMap<String, Object> dataMap = (HashMap<String, Object>) snapshot.getValue();
-                    for (String key : dataMap.keySet()){
+                    for (String key : dataMap.keySet()) {
                         Object data = dataMap.get(key);
-                        try{
+                        try {
 
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
 
-                            propertylist.add(userData.get(AppConstants.image)+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
-                                    userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.pname)
-                                    +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get(AppConstants.type)+"---"+userData.get("Approval"));
+                            propertylist.add(userData.get(AppConstants.image) + "!!" + userData.get(AppConstants.pid) + "---" + userData.get(AppConstants.description) + "---" +
+                                    userData.get(AppConstants.category) + "---" + userData.get(AppConstants.price) + "---" + userData.get(AppConstants.pname)
+                                    + "---" + userData.get(AppConstants.propertysize) + "---" + userData.get(AppConstants.location) + "---" + userData.get(AppConstants.number) + "---" + userData.get(AppConstants.type) + "---" + userData.get("Approval"));
 
 
+                        } catch (ClassCastException cce) {
 
-                        }catch (ClassCastException cce){
-
-                            try{
+                            try {
                                 String mString = String.valueOf(dataMap.get(key));
                                 //addTextToView(mString);
-                            }catch (ClassCastException cce2){
+                            } catch (ClassCastException cce2) {
 
                             }
                         }
                     }
 
-                    propertyAdaptor =new AdminPropertyAdaptor(propertylist, AdminPropertyApproval.this);
+                    propertyAdaptor = new AdminPropertyAdaptor(propertylist, AdminPropertyApproval.this);
                     RecyclerView.LayoutManager nlayoutManager = new LinearLayoutManager(AdminPropertyApproval.this, RecyclerView.VERTICAL, false);
                     recyclerView.setLayoutManager(nlayoutManager);
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -235,6 +232,7 @@ public class AdminPropertyApproval extends AppCompatActivity implements View.OnC
 
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -245,8 +243,7 @@ public class AdminPropertyApproval extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View view) {
 
-        switch (view.getId())
-        {
+        switch (view.getId()) {
             case R.id.btn_add_property:
                 Intent intent = new Intent(AdminPropertyApproval.this, AdminAddNewProductActivity.class);
                 startActivity(intent);
@@ -254,7 +251,7 @@ public class AdminPropertyApproval extends AppCompatActivity implements View.OnC
 
             case R.id.iv_sites:
 
-                propertyAdaptor =new AdminPropertyAdaptor(siteslist, AdminPropertyApproval.this);
+                propertyAdaptor = new AdminPropertyAdaptor(siteslist, AdminPropertyApproval.this);
                 RecyclerView.LayoutManager nlayoutManager = new LinearLayoutManager(AdminPropertyApproval.this, RecyclerView.VERTICAL, false);
                 recyclerView.setLayoutManager(nlayoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -270,7 +267,7 @@ public class AdminPropertyApproval extends AppCompatActivity implements View.OnC
                 break;
 
             case R.id.iv_home:
-                propertyAdaptor =new AdminPropertyAdaptor(Homeslist, AdminPropertyApproval.this);
+                propertyAdaptor = new AdminPropertyAdaptor(Homeslist, AdminPropertyApproval.this);
                 RecyclerView.LayoutManager nlayoutManager1 = new LinearLayoutManager(AdminPropertyApproval.this, RecyclerView.VERTICAL, false);
                 recyclerView.setLayoutManager(nlayoutManager1);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -285,7 +282,7 @@ public class AdminPropertyApproval extends AppCompatActivity implements View.OnC
                 break;
 
             case R.id.iv_commercial:
-                propertyAdaptor =new AdminPropertyAdaptor(Rentallist, AdminPropertyApproval.this);
+                propertyAdaptor = new AdminPropertyAdaptor(Rentallist, AdminPropertyApproval.this);
                 RecyclerView.LayoutManager nlayoutManager2 = new LinearLayoutManager(AdminPropertyApproval.this, RecyclerView.VERTICAL, false);
                 recyclerView.setLayoutManager(nlayoutManager2);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -300,7 +297,7 @@ public class AdminPropertyApproval extends AppCompatActivity implements View.OnC
                 break;
 
             case R.id.iv_green_land:
-                propertyAdaptor =new AdminPropertyAdaptor(greenlandlist, AdminPropertyApproval.this);
+                propertyAdaptor = new AdminPropertyAdaptor(greenlandlist, AdminPropertyApproval.this);
                 RecyclerView.LayoutManager nlayoutManager3 = new LinearLayoutManager(AdminPropertyApproval.this, RecyclerView.VERTICAL, false);
                 recyclerView.setLayoutManager(nlayoutManager3);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -323,7 +320,7 @@ public class AdminPropertyApproval extends AppCompatActivity implements View.OnC
     }
 
     @Override
-    public void sendpdi(String type,String pid, int state) {
+    public void sendpdi(String type, String pid, int state) {
         FirebaseDatabase.getInstance().getReference().child(type).child(pid).child("Approval").setValue(state);
     }
 }
