@@ -53,10 +53,7 @@ public class AdsAdaptor extends RecyclerView.Adapter<AdsAdaptor.ViewHolder> {
         final String noticeimage = String.valueOf(noticeBoardList.get(position));
 
         AdsModel adsModel = noticeBoardList.get(position);
-
-
         String[] data = noticeimage.split("---");
-
         Glide.with(context)
                 .load(adsModel.getImage())
                 .apply(new RequestOptions().override(500, 500))

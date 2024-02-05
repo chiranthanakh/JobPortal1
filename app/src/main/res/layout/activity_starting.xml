@@ -92,6 +92,7 @@
                     android:paddingLeft="5dp"
                     android:paddingBottom="13dp"
                     android:paddingTop="13dp"
+                    android:visibility="gone"
                     android:fontFamily="@font/proxima_family"
                     android:text="Propertys"
                     android:gravity="center"
@@ -103,6 +104,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginEnd="10dp"
+                    android:visibility="gone"
                     android:background="@color/grey_very_light"/>
                 <TextView
                     android:id="@+id/dashboard_loans"
@@ -136,6 +138,7 @@
                     android:drawableTint="@color/icon_color"
                     android:paddingTop="13dp"
                     android:paddingBottom="13dp"
+                    android:visibility="gone"
                     android:fontFamily="@font/proxima_family"
                     android:text="Business"
                     android:gravity="center"
@@ -145,6 +148,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:visibility="gone"
                     android:layout_marginEnd="10dp"
                     android:background="@color/grey_very_light"/>
 
@@ -205,7 +209,7 @@
                     android:paddingTop="13dp"
                     android:paddingBottom="13dp"
                     android:fontFamily="@font/proxima_family"
-                    android:text="Propertys for Rent"
+                    android:text="House / Shop Rent"
                     android:gravity="center"
                     android:textStyle="bold"
                     android:textColor="@color/grey_dark"
@@ -245,6 +249,7 @@
                     android:background="?selectableItemBackground"
                     android:drawablePadding="5dp"
                     android:paddingLeft="5dp"
+                    android:visibility="gone"
                     android:drawableTint="@color/icon_color"
                     android:paddingTop="13dp"
                     android:paddingBottom="13dp"
@@ -260,6 +265,23 @@
                     android:layout_height="1dp"
                     android:layout_marginEnd="10dp"
                     android:background="@color/grey_very_light"/>
+
+                <TextView
+                    android:id="@+id/dashboard_about_us"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?selectableItemBackground"
+                    android:drawablePadding="5dp"
+                    android:paddingLeft="5dp"
+                    android:drawableTint="@color/icon_color"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="13dp"
+                    android:fontFamily="@font/proxima_family"
+                    android:text="About Us"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 

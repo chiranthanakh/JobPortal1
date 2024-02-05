@@ -184,6 +184,10 @@ class AdminloanOffers : AppCompatActivity() {
     }
 
     private fun SaveProductInfoToDatabase() {
+        if(postplace == AppConstants.carousel) {
+            loanImagesRef = FirebaseStorage.getInstance().reference.child("Corosel")
+            loanRef = FirebaseDatabase.getInstance().reference.child("Corosels")
+        }
         val productMap = HashMap<String, Any?>()
         productMap[AppConstants.pid] = productRandomKey
         productMap[AppConstants.date] = saveCurrentDate
@@ -191,6 +195,7 @@ class AdminloanOffers : AppCompatActivity() {
         productMap[AppConstants.image2] = downloadImageUrl
         productMap[AppConstants.postedOn] = saveCurrentDate
         productMap[AppConstants.image] = MainimageUrl
+        productMap[AppConstants.category] = "Loan"
         productMap["bankName"] = BankName
         productMap["loantype"] = BankLoanType
         productMap["loanamount"] = BankLoanamount

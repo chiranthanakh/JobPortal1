@@ -11,7 +11,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.chiranths.jobportal1.Activities.BasicActivitys.LayoutDetailsActivity
+import com.chiranths.jobportal1.Activities.LoanActivity.LoanForm
 import com.chiranths.jobportal1.Model.Corosolmodel
 import com.chiranths.jobportal1.R
 import com.chiranths.jobportal1.Utilitys.AppConstants
@@ -35,6 +37,7 @@ class CoroselListAdaptor(
         val noticeimage = noticeBoardList[position]
         Glide.with(context)
             .load(noticeimage.imageurl)
+            .transition(DrawableTransitionOptions.withCrossFade())
             .into(holder.iv_corosel_image)
         holder.iv_corosel_image.setOnClickListener {
             if (noticeimage.type == "2") {
@@ -47,6 +50,10 @@ class CoroselListAdaptor(
                     val intent = Intent(context, LayoutDetailsActivity::class.java)
                     intent.putExtra(AppConstants.pid, noticeimage.pid)
                     intent.putExtra("page", "3")
+                    context.startActivity(intent)
+                } else if(noticeimage.category == "Loan") {
+                    val intent = Intent(context, LoanForm::class.java)
+                    intent.putExtra(AppConstants.pid, noticeimage.pid)
                     context.startActivity(intent)
                 }
             }

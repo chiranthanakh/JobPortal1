@@ -42,7 +42,82 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:314239789737:android:937cc16e30f82243c797b8",
+        "android_client_info": {
+          "package_name": "com.chiranths.jobportal1.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "314239789737-nquaoflnt4r5ee5ha6a5h4aknalio28g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chiranths.jobportal1.debug",
+            "certificate_hash": "365efea0436ca5a176206e37e5327c25bff01258"
+          }
+        },
+        {
+          "client_id": "314239789737-hinugvqhbi0gmk130eu2e5fofahvinb8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKU5Xszlq61JR8SQLNQik4WTyPfRnFGio"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "314239789737-8db0ijifb3n266h66j3gm23avtuo155j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:314239789737:android:937cc16e30f82243c797b8",
+        "android_client_info": {
+          "package_name": "com.chiranths.jobportal1.release"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "314239789737-nquaoflnt4r5ee5ha6a5h4aknalio28g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chiranths.jobportal1.release",
+            "certificate_hash": "365efea0436ca5a176206e37e5327c25bff01258"
+          }
+        },
+        {
+          "client_id": "314239789737-hinugvqhbi0gmk130eu2e5fofahvinb8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKU5Xszlq61JR8SQLNQik4WTyPfRnFGio"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "314239789737-8db0ijifb3n266h66j3gm23avtuo155j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
+
   ],
   "configuration_version": "1"
 }

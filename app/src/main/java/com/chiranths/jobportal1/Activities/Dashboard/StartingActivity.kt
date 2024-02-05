@@ -21,16 +21,19 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.chiranths.jobportal1.Activities.BasicActivitys.AboutUsActivity
 import com.chiranths.jobportal1.Activities.BasicActivitys.LivingPlaceActivity
 import com.chiranths.jobportal1.Activities.BasicActivitys.Travelsactivity
 import com.chiranths.jobportal1.Activities.Businesthings.BusinessActivity
 import com.chiranths.jobportal1.Activities.Businesthings.BusinessFragment
 import com.chiranths.jobportal1.Activities.Construction.ConstructionActivity
 import com.chiranths.jobportal1.Activities.LoanActivity.LoanFragment
+import com.chiranths.jobportal1.Activities.OtpLoginActivity
 import com.chiranths.jobportal1.Activities.Profile.ProfileFragments
 import com.chiranths.jobportal1.Activities.Propertys.PropertyFragment
 import com.chiranths.jobportal1.R
 import com.chiranths.jobportal1.Utilitys.AppConstants
+import com.chiranths.jobportal1.Utilitys.PreferenceManager
 import com.chiranths.jobportal1.databinding.ActivityStartingBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
@@ -62,23 +65,22 @@ class StartingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStartingBinding
     private lateinit var analytics: FirebaseAnalytics
     private lateinit var firebaseAnalytics: FirebaseAnalytics
+    lateinit var preferenceManager:PreferenceManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivityStartingBinding.inflate(layoutInflater)
+        preferenceManager= PreferenceManager(this);
         setContentView(binding.root)
         FirebaseApp.initializeApp(this)
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
         analytics = Firebase.analytics
         progressDialog = ProgressDialog(this)
         initilize()
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, startingFragment).commit()
-
         val packageManager: PackageManager = applicationContext.getPackageManager()
         val lastUpdatedTime =
             packageManager.getPackageInfo(applicationContext.packageName, 0).lastUpdateTime
-        sendCustomEvent()
-       // checkPermissions()
+        //checkPermissions()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -86,48 +88,79 @@ class StartingActivity : AppCompatActivity() {
         return true
     }
 
+    override fun onResume() {
+        super.onResume()
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, startingFragment).commit()
+    }
+
     private fun initilize() {
         iv_drawer_nav = findViewById<ImageView>(R.id.iv_drawer_nav)
 
         iv_drawer_nav?.setOnClickListener{
+            if (preferenceManager.getLoginState()) {
+                fetchProfile()
+            } else {
+                binding.btnNavLogout.setText("LogIn")
+            }
             binding.drawerLayoutMainD?.openDrawer(GravityCompat.START)
         }
 
         binding.dashboardProperty?.setOnClickListener {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, propertyFragment).commit()
+            replaceFragment(propertyFragment)
             binding.drawerLayoutMainD?.closeDrawer(GravityCompat.START)
+
         }
 
         binding.dashboardLoans?.setOnClickListener {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, loanFragment).commit()
+            replaceFragment(loanFragment)
             binding.drawerLayoutMainD?.closeDrawer(GravityCompat.START)
         }
 
-       /* binding.dashboardBusiness?.setOnClickListener{
-            val intent = Intent(this, BusinessActivity::class.java)
-            startActivity(intent)
-        }*/
+        binding.dashboardBusiness?.setOnClickListener {
+            replaceFragment(businessFragment)
+        }
 
         binding.dashboardConstructions?.setOnClickListener{
+            binding.drawerLayoutMainD?.closeDrawer(GravityCompat.START)
             val intent = Intent(this, ConstructionActivity::class.java)
             startActivity(intent)
         }
 
-        binding.dashboardTravels?.setOnClickListener{
+        binding.dashboardTravels.setOnClickListener{
+            binding.drawerLayoutMainD?.closeDrawer(GravityCompat.START)
             val intent = Intent(this, Travelsactivity::class.java)
             startActivity(intent)
         }
 
-        binding.dashboardRented?.setOnClickListener{
+        binding.dashboardAboutUs.setOnClickListener {
+            binding.drawerLayoutMainD.closeDrawer(GravityCompat.START)
+            val intent = Intent(this, AboutUsActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.dashboardRented.setOnClickListener{
+            binding.drawerLayoutMainD?.closeDrawer(GravityCompat.START)
             val intent = Intent(this, LivingPlaceActivity::class.java)
             startActivity(intent)
         }
 
-        binding.dashboardHotels?.setOnClickListener{
+        binding.dashboardHotels.setOnClickListener{
+            binding.drawerLayoutMainD.closeDrawer(GravityCompat.START)
             val intent = Intent(this, LivingPlaceActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.btnNavLogout.setOnClickListener{
+            if (preferenceManager.getLoginState()) {
+                val sh = this?.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
+                val editor = sh?.edit()
+                editor?.clear()
+                editor?.apply()
+                binding.drawerLayoutMainD?.closeDrawer(GravityCompat.START)
+            } else {
+                val intent = Intent(this, OtpLoginActivity::class.java)
+                startActivity(intent)
+            }
         }
 
         bottomNavShift = findViewById(R.id.bottomNavShift)
@@ -244,15 +277,4 @@ class StartingActivity : AppCompatActivity() {
                 .check()
         }
     }
-
-
-    private fun sendCustomEvent() {
-        val params = Bundle().apply {
-            // Add any custom parameters to your event
-            putString("custom_param_key", "custom_param_value")
-        }
-
-        firebaseAnalytics.logEvent("custom_event_name", params)
-    }
-
 }

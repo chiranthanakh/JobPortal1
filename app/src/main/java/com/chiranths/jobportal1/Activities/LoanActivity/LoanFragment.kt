@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
+import com.chiranths.jobportal1.Activities.Dashboard.DashboardFragment
 import com.chiranths.jobportal1.Adapters.LoanCoroselListAdaptor
 import com.chiranths.jobportal1.Adapters.LoanoffersAdaptor
 import com.chiranths.jobportal1.Model.LoanOffersModel
@@ -33,12 +35,14 @@ class LoanFragment : Fragment(), View.OnClickListener {
     var cv_LAP: CardView? = null
     var cv_VL: CardView? = null
     var btn_next: Button? = null
+    var iv_nav_view :ImageView? = null
     var coroselimagelist: java.util.ArrayList<String> = java.util.ArrayList<String>()
     var bankadslist = ArrayList<LoanOffersModel>()
     var recyclerView: RecyclerView? = null
     var recyclarviewloanads: RecyclerView? = null
     private var coroselListAdaptor: LoanCoroselListAdaptor? = null
     private var loanoffersAdaptor: LoanoffersAdaptor? = null
+    var startingFragment = DashboardFragment()
     var mHandler = Handler()
 
     override fun onCreateView(
@@ -62,10 +66,12 @@ class LoanFragment : Fragment(), View.OnClickListener {
         cv_ML = view.findViewById(R.id.cv_martgage_loan)
         cv_LAP = view.findViewById(R.id.cv_lap)
         cv_VL = view.findViewById(R.id.cv_vehicle)
+        iv_nav_view = view.findViewById(R.id.iv_nav_view)
         recyclerView = view.findViewById<View>(R.id.rv_loan_event) as RecyclerView
         recyclarviewloanads = view.findViewById(R.id.recycler_loanoffers)
-        //btn_next = findViewById(R.id.add_new_product);
-        //btn_next.setOnClickListener(this);
+        iv_nav_view?.setOnClickListener{
+            removeCurrentFragment()
+        }
         cv_PL?.setOnClickListener(this)
         cv_BL?.setOnClickListener(this)
         cv_HL?.setOnClickListener(this)
@@ -236,5 +242,10 @@ class LoanFragment : Fragment(), View.OnClickListener {
                 startActivity(intent5)
             }
         }
+    }
+
+    private fun removeCurrentFragment() {
+        val fragmentManager = requireActivity().supportFragmentManager
+        fragmentManager.beginTransaction().replace(R.id.fragment_container, startingFragment).commit()
     }
 }
