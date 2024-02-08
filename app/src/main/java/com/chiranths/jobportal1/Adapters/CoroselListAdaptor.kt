@@ -12,7 +12,9 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.chiranths.jobportal1.Activities.BasicActivitys.CoroselDetailsActivity
 import com.chiranths.jobportal1.Activities.BasicActivitys.LayoutDetailsActivity
+import com.chiranths.jobportal1.Activities.HotDealsactivity.HotDealsDetailsActivity
 import com.chiranths.jobportal1.Activities.LoanActivity.LoanForm
 import com.chiranths.jobportal1.Model.Corosolmodel
 import com.chiranths.jobportal1.R
@@ -45,15 +47,29 @@ class CoroselListAdaptor(
                 val intent = Intent(Intent.ACTION_VIEW, uri)
                 context.startActivity(intent)
             } else {
-                Log.d("printCaroselDetails", noticeimage.category + "--" + noticeimage.pid)
                 if (noticeimage.category == "Layout") {
                     val intent = Intent(context, LayoutDetailsActivity::class.java)
                     intent.putExtra(AppConstants.pid, noticeimage.pid)
                     intent.putExtra("page", "3")
                     context.startActivity(intent)
-                } else if(noticeimage.category == "Loan") {
+                } else if (noticeimage.category == "Loan") {
                     val intent = Intent(context, LoanForm::class.java)
                     intent.putExtra(AppConstants.pid, noticeimage.pid)
+                    intent.putExtra("page", "3")
+                    context.startActivity(intent)
+                } else if (noticeimage.category == "hotdeals") {
+                    val intent = Intent(context, HotDealsDetailsActivity::class.java)
+                    intent.putExtra(AppConstants.pid, noticeimage.pid)
+                    intent.putExtra("page", "3")
+                    context.startActivity(intent)
+                } else {
+                    val intent = Intent(context, CoroselDetailsActivity::class.java)
+                    intent.putExtra(AppConstants.pid, noticeimage.pid)
+                    intent.putExtra(AppConstants.image, noticeimage.imageurl)
+                    intent.putExtra(AppConstants.category, noticeimage.category)
+                    intent.putExtra(AppConstants.pname, noticeimage.pname)
+                    intent.putExtra(AppConstants.description, noticeimage.discription)
+                    intent.putExtra("page", "3")
                     context.startActivity(intent)
                 }
             }

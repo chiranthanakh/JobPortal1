@@ -24,6 +24,9 @@
         android:supportsRtl="true"
         android:theme="@style/JobPortaltheam">
         <activity
+            android:name=".Activities.Admin.AdminPropertyBasicsDetails"
+            android:exported="false" />
+        <activity
             android:name=".Activities.BasicActivitys.AboutUsActivity"
             android:exported="false" />
         <activity

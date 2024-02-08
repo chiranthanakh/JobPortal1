@@ -28,11 +28,11 @@ public class ProductViewHolder extends RecyclerView.ViewHolder implements View.O
         cv_layout = (CardView) itemView.findViewById(R.id.cv_layout);
         //imageview1 = (ImageView)itemView.findViewById(R.id.imgBanner);
        // imageview2 = (ImageView)itemView.findViewById(R.id.image_cat);
-        txtProductName = (TextView) itemView.findViewById(R.id.product_name);
+        txtProductName = (TextView) itemView.findViewById(R.id.project_name);
         location = itemView.findViewById(R.id.product_location1);
         size = itemView.findViewById(R.id.product_size1);
         type = itemView.findViewById(R.id.product_type1);
-        txtProductDescription = (TextView) itemView.findViewById(R.id.product_description);
+       // txtProductDescription = (TextView) itemView.findViewById(R.id.product_description);
         txtProductPrice = (TextView) itemView.findViewById(R.id.product_price);
         btn_add=(Button)itemView.findViewById(R.id.add_btn);
 

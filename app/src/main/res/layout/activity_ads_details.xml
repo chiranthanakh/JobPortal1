@@ -83,35 +83,6 @@
                     app:strokeColor="#FF777777"
                     app:strokeWidth="1dp" />
 
-                <!--  <FrameLayout
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:background="@color/white"
-                      android:paddingBottom="5dp">
-                      <LinearLayout
-                          android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:orientation="vertical">
-
-                          <androidx.viewpager.widget.ViewPager
-                              android:id="@+id/product_viewpager"
-                              android:layout_width="match_parent"
-                              android:layout_height="240dp">
-                              <com.google.android.material.tabs.TabLayout
-                                  android:id="@+id/tab_layout"
-                                  android:layout_gravity="center_horizontal|bottom"
-                                  app:tabBackground="@drawable/tab_selector"
-                                  app:tabIndicatorHeight="0dp"
-                                  app:tabGravity="center"
-                                  app:tabPaddingStart="5dp"
-                                  app:tabPaddingEnd="5dp"
-                                  android:clipToPadding="false"
-                                  app:tabIndicatorFullWidth="false"
-                                  android:layout_width="wrap_content"
-                                  android:layout_height="20dp"/>
-                          </androidx.viewpager.widget.ViewPager>
-                      </LinearLayout>
-                  </FrameLayout>-->
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -205,6 +176,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginEnd="10sp"
                                 android:padding="8dp"
+                                android:visibility="gone"
                                 android:src="@drawable/location" />
 
                         </LinearLayout>
@@ -300,7 +272,7 @@
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/proxima_nova_regular"
                                         android:gravity="start|center"
-                                        android:text="Ownership :"
+                                        android:text="Owner Name :"
                                         android:textColor="@color/black"
                                         android:textSize="14sp" />
                                 </LinearLayout>
@@ -343,7 +315,7 @@
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/proxima_nova_regular"
                                         android:gravity="start|center"
-                                        android:text="Posted By :"
+                                        android:text="Posted By       :"
                                         android:textColor="@color/black"
                                         android:textSize="14sp" />
                                 </LinearLayout>
@@ -386,7 +358,7 @@
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/proxima_nova_regular"
                                         android:gravity="start|center"
-                                        android:text="Property size :"
+                                        android:text="Property size   :"
                                         android:textColor="@color/black"
                                         android:textSize="14sp" />
                                 </LinearLayout>
@@ -429,7 +401,7 @@
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/proxima_nova_regular"
                                         android:gravity="start|center"
-                                        android:text="Property Posted By :"
+                                        android:text="Katha               :"
                                         android:textColor="@color/black"
                                         android:textSize="14sp" />
                                 </LinearLayout>
@@ -441,7 +413,7 @@
                                     android:layout_weight="1">
 
                                     <TextView
-                                        android:id="@+id/tv_sites_available"
+                                        android:id="@+id/tv_katha"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/lato_bold"
@@ -472,7 +444,7 @@
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/proxima_nova_regular"
                                         android:gravity="start|center"
-                                        android:text="Facing :"
+                                        android:text="Facing             :"
                                         android:textColor="@color/black"
                                         android:textSize="14sp" />
                                 </LinearLayout>
@@ -502,6 +474,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginTop="10dp"
                                 android:gravity="center"
+                                android:visibility="gone"
                                 android:orientation="horizontal">
 
                                 <LinearLayout
@@ -515,7 +488,7 @@
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/proxima_nova_regular"
                                         android:gravity="start|center"
-                                        android:text="Approved By :"
+                                        android:text="Approved By    :"
                                         android:textColor="@color/black"
                                         android:textSize="14sp" />
                                 </LinearLayout>
@@ -568,7 +541,7 @@
                                     android:layout_width="150dp"
                                     android:layout_height="wrap_content"
                                     android:src="@drawable/star"
-                                    android:text="Size"
+                                    android:text="Location"
                                     android:layout_marginStart="@dimen/dp_20"
                                     android:layout_marginTop="@dimen/margin_10_dp"
                                     android:textSize="14dp"
@@ -583,7 +556,6 @@
                                     android:layout_marginStart="@dimen/dp_20"
                                     android:fontFamily="@font/proxima_family"
                                     android:gravity="center"
-                                    android:text="Posted on May 07,22"
                                     android:textColor="@color/grey"
                                     android:textSize="11sp" />
 

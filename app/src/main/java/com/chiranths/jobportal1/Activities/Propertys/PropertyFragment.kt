@@ -232,8 +232,10 @@ class PropertyFragment : Fragment(), View.OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.btn_add_property -> {
-                val intent = Intent(context, Admin_ads_dashboard::class.java)
+               /*val intent = Intent(context, Admin_ads_dashboard::class.java)
                 intent.putExtra("page", "2")
+                startActivity(intent)*/
+                val intent = Intent(context, AdminAddNewProductActivity::class.java)
                 startActivity(intent)
             }
 

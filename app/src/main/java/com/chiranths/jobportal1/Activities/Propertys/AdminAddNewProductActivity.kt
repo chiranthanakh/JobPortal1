@@ -1,116 +1,128 @@
-package com.chiranths.jobportal1.Activities.Propertys;
+package com.chiranths.jobportal1.Activities.Propertys
 
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.Bundle;
-import android.provider.OpenableColumns;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
+import android.app.ProgressDialog
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import android.provider.OpenableColumns
+import android.text.TextUtils
+import android.view.View
+import android.widget.AdapterView
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.RadioGroup
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
+import com.chiranths.jobportal1.R
+import com.chiranths.jobportal1.Utilitys.AppConstants
+import com.chiranths.jobportal1.Utilitys.UtilityMethods
+import com.chiranths.jobportal1.Utilitys.Utilitys
+import com.chiranths.jobportal1.databinding.ActivityAdminAddNewProductBinding
+import com.chiranths.jobportal1.databinding.ActivityAdminTravelApprovalBinding
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import java.text.SimpleDateFormat
+import java.util.Calendar
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+class AdminAddNewProductActivity : AppCompatActivity() {
+    private var CategoryName: String? = null
+    private var Description: String? = null
+    private var Price: String? = null
+    private var Pname: String? = null
+    private var ownerORagent: String? = null
+    private var saveCurrentDate: String? = null
+    private var saveCurrentTime: String? = null
+    private var propertysize: String? = null
+    private var location: String? = null
+    private var number: String? = null
+    private var type: String? = null
+    private var katha: String? = null
+    private var ownerName: String? = null
+    private var facing: String? = null
+    private var AddNewProductButton: AppCompatButton? = null
+    private var InputProductImage: ImageView? = null
+    private var InputProductName: EditText? = null
+    private var InputProductDescription: EditText? = null
+    private var InputProductPrice: EditText? = null
+    private var propertyType: EditText? = null
+    private var et_size: EditText? = null
+    private var et_location: EditText? = null
+    private var et_number: EditText? = null
+    private val ImageUri: Uri? = null
+    private var productRandomKey: String? = null
+    private var downloadImageUrl: String? = null
+    private var ProductImagesRef: StorageReference? = null
+    private var ProductsRef: DatabaseReference? = null
+    private var loadingBar: ProgressDialog? = null
+    var fileNameList: ArrayList<String?> = ArrayList<String?>()
+    var fileDoneList: ArrayList<String> = ArrayList<String>()
+    lateinit var binding: ActivityAdminAddNewProductBinding
 
-import com.chiranths.jobportal1.R;
-import com.chiranths.jobportal1.Utilitys.AppConstants;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityAdminAddNewProductBinding.inflate(layoutInflater)
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-
-public class AdminAddNewProductActivity extends AppCompatActivity {
-    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime,propertysize,location,number;
-    private String type;
-    private Button AddNewProductButton;
-    private ImageView InputProductImage;
-    private EditText InputProductName, InputProductDescription, InputProductPrice, Inputtype,et_size,et_location,et_number;
-    private static final int GalleryPick = 1;
-    private Uri ImageUri;
-    private String productRandomKey, downloadImageUrl;
-    private StorageReference ProductImagesRef;
-    private DatabaseReference ProductsRef;
-    private ProgressDialog loadingBar;
-    ArrayList fileNameList = new ArrayList<>();
-    ArrayList fileDoneList = new ArrayList<>();
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_add_new_product);
         //CategoryName = getIntent().getExtras().get(AppConstants.category).toString();
-        CategoryName = "cqat";
-        ProductImagesRef = FirebaseStorage.getInstance().getReference().child("Product Images");
-        ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
+        CategoryName = "cqat"
+        ProductImagesRef = FirebaseStorage.getInstance().reference.child("Product Images")
+        ProductsRef = FirebaseDatabase.getInstance().reference.child("Products")
+        et_size = findViewById(R.id.product_size)
+        et_location = findViewById(R.id.product_location_admin)
+        et_number = findViewById(R.id.contact_number)
+        loadingBar = ProgressDialog(this)
+        binding.selectProductImage!!.setOnClickListener { OpenGallery() }
+        binding.addNewProduct.setOnClickListener { ValidateProductData() }
 
-
-        AddNewProductButton = (Button) findViewById(R.id.add_new_product);
-        InputProductImage = (ImageView) findViewById(R.id.select_product_image);
-        InputProductName = (EditText) findViewById(R.id.product_name);
-        Inputtype = (EditText)findViewById(R.id.product_type_admin);
-        InputProductDescription = (EditText) findViewById(R.id.product_description);
-        InputProductPrice = (EditText) findViewById(R.id.product_price_admin);
-        et_size = findViewById(R.id.product_size);
-        et_location = findViewById(R.id.product_location_admin);
-        et_number = findViewById(R.id.contact_number);
-        loadingBar = new ProgressDialog(this);
-
-
-        InputProductImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                OpenGallery();
-            }
-        });
-
-
-        AddNewProductButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                ValidateProductData();
-            }
-        });
+        initilize()
     }
 
+    private fun initilize() {
 
-    private void OpenGallery(){
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent,"Select Picture"),1);
+        binding.rbData.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { arg0, id ->
+            when (id) {
+                R.id.rb_owner -> {
+                    ownerORagent = AppConstants.owner
+                }
 
+                R.id.rb_agent -> {
+                    ownerORagent = AppConstants.agent
+                }
+            }
+
+        })
+
+        binding.spPropertyType.onItemSelectedListener=object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                if (p2>0){
+                    val propertyArray = resources.getStringArray(R.array.property_type)
+                    type = propertyArray[p2]
+                }
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+
+        }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        super.onActivityResult(requestCode, resultCode, data);
+    private fun OpenGallery() {
+        val intent = Intent()
+        intent.setType("image/*")
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+        intent.setAction(Intent.ACTION_GET_CONTENT)
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1)
+    }
 
-        if (requestCode==1  &&  resultCode==RESULT_OK  &&  data!=null)
-        {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
             /*ImageUri = data.getData();
             InputProductImage.setImageURI(ImageUri);*/
-            StoreProductInformation(data);
+            StoreProductInformation(data)
         }
 
         /*if (requestCode == 1 && resultCode == RESULT_OK){
@@ -131,178 +143,143 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         }*/
     }
 
-    private void ValidateProductData() {
-        Description = InputProductDescription.getText().toString();
-        Price = InputProductPrice.getText().toString();
-        Pname = InputProductName.getText().toString();
-        propertysize = et_size.getText().toString();
-        location = et_location.getText().toString();
-        type = Inputtype.getText().toString();
-        number = et_number.getText().toString();
+    private fun ValidateProductData() {
+        Description = binding.productDiscription.text.toString()
+        Price = binding.productPrice.text.toString()
+        Pname = binding.projectName.text.toString()
+        propertysize = et_size!!.text.toString()
+        location = et_location!!.text.toString()
+        number = et_number!!.text.toString()
+        katha = binding.edtPropertyKatha.text.toString()
+        ownerName = binding.edtOwnerName.text.toString()
+        facing = binding.edtPropertyFacing.text.toString()
 
-        if (TextUtils.isEmpty(downloadImageUrl))
-        {
-            Toast.makeText(this, "Product image is mandatory...", Toast.LENGTH_SHORT).show();
-        }
-        else if (TextUtils.isEmpty(Description))
-        {
-            Toast.makeText(this, "Please write product description...", Toast.LENGTH_SHORT).show();
-        }
-        else if (TextUtils.isEmpty(Price))
-        {
-            Toast.makeText(this, "Please write product Price...", Toast.LENGTH_SHORT).show();
-        }
-        else if (TextUtils.isEmpty(Pname))
-        {
-            Toast.makeText(this, "Please write product name...", Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
-            SaveProductInfoToDatabase();
+        if (TextUtils.isEmpty(downloadImageUrl)) {
+            Toast.makeText(this, "Product image is mandatory...", Toast.LENGTH_SHORT).show()
+        }else if (TextUtils.isEmpty(ownerORagent)) {
+            Toast.makeText(this, "Please select whether are you owner or agent", Toast.LENGTH_SHORT).show()
+        }else if (TextUtils.isEmpty(type)) {
+            Toast.makeText(this, "Please select property type...", Toast.LENGTH_SHORT).show()
+        } else if (TextUtils.isEmpty(Price)) {
+            Toast.makeText(this, "Please enter property Price...", Toast.LENGTH_SHORT).show()
+        } else if (TextUtils.isEmpty(Pname)) {
+            Toast.makeText(this, "Please enter property name...", Toast.LENGTH_SHORT).show()
+        }else if (TextUtils.isEmpty(katha)) {
+            Toast.makeText(this, "Please write property katha...", Toast.LENGTH_SHORT).show()
+        }else if (TextUtils.isEmpty(ownerName)) {
+            Toast.makeText(this, "Please enter property owner name...", Toast.LENGTH_SHORT).show()
+        }else if (TextUtils.isEmpty(facing)) {
+            Toast.makeText(this, "Please enter property facing...", Toast.LENGTH_SHORT).show()
+        } else if (TextUtils.isEmpty(Description)) {
+            Toast.makeText(this, "Please enter property description...", Toast.LENGTH_SHORT).show()
+        } else {
+            SaveProductInfoToDatabase()
         }
     }
 
-    private void StoreProductInformation(Intent data) {
-        /*loadingBar.setTitle("Add New Product");
-        loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
-        loadingBar.setCanceledOnTouchOutside(false);
-        loadingBar.show();*/
-        downloadImageUrl ="";
-        System.out.println("image5---"+downloadImageUrl);
-        int totalItems = data.getClipData().getItemCount();
-        for (int i = 0; i < totalItems; i++) {
-            Uri fileUri = data.getClipData().getItemAt(i).getUri();
-            String fileName = getFileName(fileUri);
-            fileNameList.add(fileName);
-            fileDoneList.add("Uploading");
-
-            System.out.println("image1---"+downloadImageUrl);
-            System.out.println("count---"+totalItems);
-
-
-            Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd");
-        saveCurrentDate = currentDate.format(calendar.getTime());
-
-        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm a");
-        saveCurrentTime = currentTime.format(calendar.getTime());
-
-        productRandomKey = saveCurrentDate + saveCurrentTime;
-
-        final StorageReference filePath = ProductImagesRef.child(fileUri.getLastPathSegment() + productRandomKey + ".jpg");
-
-        final UploadTask uploadTask = filePath.putFile(fileUri);
-
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                String message = e.toString();
-                Toast.makeText(AdminAddNewProductActivity.this, "Error: " + message, Toast.LENGTH_SHORT).show();
-                loadingBar.dismiss();
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(AdminAddNewProductActivity.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
-                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                    @Override
-                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        if (!task.isSuccessful()) {
-                            throw task.getException();
-
-                        }
-
-                        System.out.println("url3---"+downloadImageUrl);
-                       // downloadImageUrl = downloadImageUrl+"---"+ filePath.getDownloadUrl().toString();
-                        System.out.println("url1---"+downloadImageUrl);
-                        return filePath.getDownloadUrl();
+    private fun StoreProductInformation(data: Intent) {
+        loadingBar?.setTitle("Property Posting");
+        loadingBar?.setMessage("please wait while we are adding the new Property.");
+        loadingBar?.setCanceledOnTouchOutside(false);
+        loadingBar?.show();
+        downloadImageUrl = ""
+        val totalItems = data.clipData!!.itemCount
+        for (i in 0 until totalItems) {
+            val fileUri = data.clipData!!.getItemAt(i).uri
+            val fileName = getFileName(fileUri)
+            fileNameList.add(fileName)
+            fileDoneList.add("Uploading")
+            productRandomKey = UtilityMethods.getCurrentTimeDate()
+            val filePath = ProductImagesRef!!.child(fileUri.lastPathSegment + productRandomKey + ".jpg")
+            val uploadTask = filePath.putFile(fileUri)
+            uploadTask.addOnFailureListener { e ->
+                val message = e.toString()
+                UtilityMethods.showToast(this@AdminAddNewProductActivity,"Error: $message", )
+                loadingBar!!.dismiss()
+            }.addOnSuccessListener {
+                UtilityMethods.showToast(this@AdminAddNewProductActivity,"Property Image uploaded Successfully..." )
+                val urlTask = uploadTask.continueWithTask { task ->
+                    if (!task.isSuccessful) {
+                        throw task.exception!!
                     }
-                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        if (task.isSuccessful()) {
-
-                            if(downloadImageUrl.equals("")){
-                                downloadImageUrl =task.getResult().toString();
-                            }else {
-                                downloadImageUrl = downloadImageUrl+"---"+task.getResult().toString();
+                    filePath.downloadUrl
+                }
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            downloadImageUrl = if (downloadImageUrl == "") {
+                                task.result.toString()
+                            } else {
+                                downloadImageUrl + "---" + task.result.toString()
                             }
-
-                            System.out.println("url2---"+downloadImageUrl);
-                            Toast.makeText(AdminAddNewProductActivity.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
-
-
+                            UtilityMethods.showToast(this@AdminAddNewProductActivity,"got the Property image Url Successfully..." )
                         }
                     }
-                });
             }
-        });
-
-        if(i==totalItems-1){
-            System.out.println("downloadurl--"+downloadImageUrl);
-           // SaveProductInfoToDatabase();
         }
     }
 
+    private fun SaveProductInfoToDatabase() {
+        val productMap = HashMap<String, Any?>()
+        productMap[AppConstants.pid] = productRandomKey
+        productMap[AppConstants.owner] = ownerORagent
+        productMap[AppConstants.date] = saveCurrentDate
+        productMap[AppConstants.time] = saveCurrentTime
+        productMap[AppConstants.description] = Description
+        productMap[AppConstants.image] = downloadImageUrl
+        productMap[AppConstants.category] = CategoryName
+        productMap[AppConstants.price] = Price
+        productMap[AppConstants.pname] = Pname
+        productMap[AppConstants.type] = type
+        productMap["Approval"] = 1
+        productMap[AppConstants.propertysize] = propertysize
+        productMap[AppConstants.location] = location
+        productMap[AppConstants.number] = number
+        ProductsRef!!.child(productRandomKey!!).updateChildren(productMap)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Intent intent = new Intent(AdminAddNewProductActivity.this, .class);
+                    //startActivity(intent);
+                    loadingBar!!.dismiss()
+                    Toast.makeText(
+                        this@AdminAddNewProductActivity,
+                        "Product is added successfully..",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    loadingBar!!.dismiss()
+                    val message = task.exception.toString()
+                    Toast.makeText(
+                        this@AdminAddNewProductActivity,
+                        "Error: $message",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
     }
 
-    private void SaveProductInfoToDatabase()
-    {
-        HashMap<String, Object> productMap = new HashMap<>();
-        productMap.put(AppConstants.pid, productRandomKey);
-        productMap.put(AppConstants.date, saveCurrentDate);
-        productMap.put(AppConstants.time, saveCurrentTime);
-        productMap.put(AppConstants.description, Description);
-        productMap.put(AppConstants.image, downloadImageUrl);
-        productMap.put(AppConstants.category, CategoryName);
-        productMap.put(AppConstants.price, Price);
-        productMap.put(AppConstants.pname, Pname);
-        productMap.put(AppConstants.type,type);
-        productMap.put("Approval",1);
-        productMap.put(AppConstants.propertysize,propertysize);
-        productMap.put(AppConstants.location,location);
-        productMap.put(AppConstants.number,number);
-
-        ProductsRef.child(productRandomKey).updateChildren(productMap)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task)
-                    {
-                        if (task.isSuccessful())
-                        {
-                           // Intent intent = new Intent(AdminAddNewProductActivity.this, .class);
-                            //startActivity(intent);
-                            loadingBar.dismiss();
-                            Toast.makeText(AdminAddNewProductActivity.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
-                            loadingBar.dismiss();
-                            String message = task.getException().toString();
-                            Toast.makeText(AdminAddNewProductActivity.this, "Error: " + message, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
-
-    public String getFileName(Uri uri){
-        String result = null;
-        if (uri.getScheme().equals("content")){
-            Cursor cursor = getContentResolver().query(uri,null,null,null,null);
+    fun getFileName(uri: Uri): String? {
+        var result: String? = null
+        if (uri.scheme == "content") {
+            val cursor = contentResolver.query(uri, null, null, null, null)
             try {
-                if (cursor != null && cursor.moveToFirst()){
-                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
                 }
             } finally {
-                cursor.close();
-            }
-        } if (result == null){
-            result = uri.getPath();
-            int cut = result.lastIndexOf('/');
-            if (cut != -1){
-                result = result.substring(cut + 1);
+                cursor!!.close()
             }
         }
-        return result;
+        if (result == null) {
+            result = uri.path
+            val cut = result!!.lastIndexOf('/')
+            if (cut != -1) {
+                result = result.substring(cut + 1)
+            }
+        }
+        return result
+    }
+
+    companion object {
+        private const val GalleryPick = 1
     }
 }

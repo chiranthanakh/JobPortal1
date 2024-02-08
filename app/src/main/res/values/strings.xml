@@ -25,6 +25,16 @@
         <item>"Heavy Vehicles"</item>
     </string-array>
 
+    <string-array name="property_type">
+        <item>" "</item>
+        <item>"Site"</item>
+        <item>"Green Land"</item>
+        <item>"Layout"</item>
+        <item>"House"</item>
+        <item>"Shops"</item>
+        <item>"other"</item>
+    </string-array>
+
     <string-array name="placement">
         <item>"Carousel"</item>
         <item>"layout"</item>

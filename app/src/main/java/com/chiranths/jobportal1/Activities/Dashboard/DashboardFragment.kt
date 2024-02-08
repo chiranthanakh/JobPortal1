@@ -94,6 +94,7 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
     var progressDialog: ProgressDialog? = null
     var admin_btn: TextView? = null
     var bundle = Bundle()
+
     //var view: View? = null
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -113,7 +114,7 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
         pic = sh.getString("pic", null)
         progressDialog = ProgressDialog(context)
         //if (!reload) {
-            initilize(view)
+        initilize(view)
         //}
     }
 
@@ -121,6 +122,7 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
         reload = true
         tv_location = view.findViewById(R.id.tv_location)
         binding.mainEdtSearch2.setInputType(InputType.TYPE_NULL) // disable soft input
+        binding.mainEdtSearch2.setOnClickListener(this)
         binding.tvSeeallLayouts.setOnClickListener(this)
         binding.tvSeeallUpcomming.setOnClickListener(this)
         search?.setOnClickListener(this)
@@ -147,7 +149,7 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                 }
             }
         }
-        binding.ivBell.setOnClickListener{
+        binding.ivBell.setOnClickListener {
             val intent = Intent(context, AdminDashboard::class.java)
             startActivity(intent)
         }
@@ -168,23 +170,27 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                                     userData!![AppConstants.image].toString(),
                                     userData[AppConstants.type].toString(),
                                     userData[AppConstants.category].toString(),
-                                    userData[AppConstants.pid].toString()
+                                    userData[AppConstants.pid].toString(),
+                                    userData[AppConstants.pname].toString(),
+                                    userData[AppConstants.description].toString()
                                 )
                             )
                         } catch (cce: ClassCastException) {
-                           //through exception
+                            //through exception
                         }
                     }
-                    coroselListAdaptor = CoroselListAdaptor(coroselimagelist, context!!)
-                    val nlayoutManager: RecyclerView.LayoutManager =
-                        LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-                    binding.rvHomeEvent.layoutManager = nlayoutManager
-                    binding.rvHomeEvent.itemAnimator = DefaultItemAnimator()
-                    binding.rvHomeEvent.onFlingListener = null
-                    mHandler.post {
-                        binding.rvHomeEvent.adapter = coroselListAdaptor
+                    if (coroselimagelist.size != 0) {
+                        coroselListAdaptor = CoroselListAdaptor(coroselimagelist, context!!)
+                        val nlayoutManager: RecyclerView.LayoutManager =
+                            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                        binding.rvHomeEvent.layoutManager = nlayoutManager
+                        binding.rvHomeEvent.itemAnimator = DefaultItemAnimator()
+                        binding.rvHomeEvent.onFlingListener = null
+                        mHandler.post {
+                            binding.rvHomeEvent.adapter = coroselListAdaptor
+                        }
+                        coroselListAdaptor!!.notifyItemRangeInserted(0, coroselimagelist.size)
                     }
-                    coroselListAdaptor!!.notifyItemRangeInserted(0, coroselimagelist.size)
                 }
             }
 
@@ -355,7 +361,8 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                     }
 
                     // Upcoming Event
-                    bottomhomeRecyclarviewAdaptor = BottomhomeRecyclarviewAdaptor(productinfolist, context!!)
+                    bottomhomeRecyclarviewAdaptor =
+                        BottomhomeRecyclarviewAdaptor(productinfolist, context!!)
                     val elayoutManager: RecyclerView.LayoutManager =
                         LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                     binding.rvDashProp.layoutManager = GridLayoutManager(context, 1)
@@ -412,6 +419,8 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
 
             R.id.main_edt_search2 -> {
                 val intent5 = Intent(context, SearchActivity::class.java)
+                bundle.putString("searchtype", "property")
+                intent5.putExtras(bundle)
                 startActivity(intent5)
             }
 

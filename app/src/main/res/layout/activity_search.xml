@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_500"
     tools:context=".Activities.Propertys.PropertyActivity">
 
 
@@ -57,8 +56,10 @@
     <LinearLayout
         android:id="@+id/search"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="50dp">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="@+id/toolbar">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
@@ -97,14 +98,47 @@
 
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/buttonToggleGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            app:singleSelection="true">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button1"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Property" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button2"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Business" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button3"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Constructions" />
+
+            <!-- Add more MaterialButtons as needed -->
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="180dp"
         android:background="#f9f9f9"
         android:orientation="vertical">
+
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"

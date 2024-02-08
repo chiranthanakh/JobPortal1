@@ -9,6 +9,7 @@ import androidx.core.app.ActivityCompat
 import android.app.Activity
 import android.content.Context
 import android.net.Uri
+import android.widget.Toast
 import com.chiranths.jobportal1.Activities.OtpLoginActivity
 import com.gun0912.tedpermission.PermissionListener
 

@@ -1,5 +1,8 @@
 package com.chiranths.jobportal1.Utilitys
 
+import android.content.Context
+import android.widget.Toast
+
 object AppConstants {
 
     const val image = "image"
@@ -10,6 +13,7 @@ object AppConstants {
     const val category = "category"
     const val price = "price"
     const val pname = "pname"
+    const val katha = "katha"
     const val propertysize = "propertysize"
     const val location = "location"
     const val number = "number"
@@ -35,4 +39,19 @@ object AppConstants {
     const val point4 = "point4"
     const val carousel = "Carousel"
     const val profile = "Profile"
+    const val owner = "owner"
+    const val agent = "agent"
+
+    fun profileinfoadd(contest : Context): HashMap<String, Any?> {
+        val sh = contest.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
+        val nameofuser = sh?.getString("name", "")
+        val userNumber = sh?.getString(AppConstants.number, "")
+        val useremail = sh?.getString("email", "")
+        val productMap = HashMap<String, Any?>()
+        productMap["loginUser"] = nameofuser
+        productMap["loginNumber"] = userNumber
+        productMap["loginEmail"] = useremail
+        return productMap
+    }
+
 }

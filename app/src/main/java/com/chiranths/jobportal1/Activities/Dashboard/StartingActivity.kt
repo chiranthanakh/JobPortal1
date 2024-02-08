@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
@@ -19,6 +20,7 @@ import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.chiranths.jobportal1.Activities.BasicActivitys.AboutUsActivity
@@ -27,6 +29,7 @@ import com.chiranths.jobportal1.Activities.BasicActivitys.Travelsactivity
 import com.chiranths.jobportal1.Activities.Businesthings.BusinessActivity
 import com.chiranths.jobportal1.Activities.Businesthings.BusinessFragment
 import com.chiranths.jobportal1.Activities.Construction.ConstructionActivity
+import com.chiranths.jobportal1.Activities.LoanActivity.LoanActivity
 import com.chiranths.jobportal1.Activities.LoanActivity.LoanFragment
 import com.chiranths.jobportal1.Activities.OtpLoginActivity
 import com.chiranths.jobportal1.Activities.Profile.ProfileFragments
@@ -108,26 +111,26 @@ class StartingActivity : AppCompatActivity() {
         binding.dashboardProperty?.setOnClickListener {
             replaceFragment(propertyFragment)
             binding.drawerLayoutMainD?.closeDrawer(GravityCompat.START)
-
         }
 
-        binding.dashboardLoans?.setOnClickListener {
-            replaceFragment(loanFragment)
-            binding.drawerLayoutMainD?.closeDrawer(GravityCompat.START)
+        binding.dashboardLoans.setOnClickListener {
+            binding.drawerLayoutMainD.closeDrawer(GravityCompat.START)
+            val intent = Intent(this, LoanActivity::class.java)
+            startActivity(intent)
         }
 
-        binding.dashboardBusiness?.setOnClickListener {
+        binding.dashboardBusiness.setOnClickListener {
             replaceFragment(businessFragment)
         }
 
-        binding.dashboardConstructions?.setOnClickListener{
-            binding.drawerLayoutMainD?.closeDrawer(GravityCompat.START)
+        binding.dashboardConstructions.setOnClickListener{
+            binding.drawerLayoutMainD.closeDrawer(GravityCompat.START)
             val intent = Intent(this, ConstructionActivity::class.java)
             startActivity(intent)
         }
 
         binding.dashboardTravels.setOnClickListener{
-            binding.drawerLayoutMainD?.closeDrawer(GravityCompat.START)
+            binding.drawerLayoutMainD.closeDrawer(GravityCompat.START)
             val intent = Intent(this, Travelsactivity::class.java)
             startActivity(intent)
         }
@@ -139,7 +142,7 @@ class StartingActivity : AppCompatActivity() {
         }
 
         binding.dashboardRented.setOnClickListener{
-            binding.drawerLayoutMainD?.closeDrawer(GravityCompat.START)
+            binding.drawerLayoutMainD.closeDrawer(GravityCompat.START)
             val intent = Intent(this, LivingPlaceActivity::class.java)
             startActivity(intent)
         }
@@ -152,7 +155,7 @@ class StartingActivity : AppCompatActivity() {
 
         binding.btnNavLogout.setOnClickListener{
             if (preferenceManager.getLoginState()) {
-                val sh = this?.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
+                val sh = this.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
                 val editor = sh?.edit()
                 editor?.clear()
                 editor?.apply()
@@ -182,13 +185,18 @@ class StartingActivity : AppCompatActivity() {
         if(binding.navViewMainA?.isVisible == true){
             drawer_layout?.closeDrawer(GravityCompat.START)
         }else {
-            val homeItem: MenuItem? = bottomNavShift?.getMenu()?.getItem(0)
+           /* val homeItem: MenuItem? = bottomNavShift?.getMenu()?.getItem(0)
             var count = supportFragmentManager.backStackEntryCount
-            if (count == 0) {
-                super.onBackPressed()
-            } else {
-                supportFragmentManager.popBackStack()
+            Log.d("countofFragment",count.toString())*/
+
+            val homeItem: MenuItem? = bottomNavShift?.getMenu()?.getItem(0)
+            Log.d("checkCountfdn", homeItem.toString())
+            if (supportFragmentManager.backStackEntryCount > 0) {
+               // supportFragmentManager.popBackStack()
                 bottomNavShift?.setSelectedItemId(homeItem?.getItemId()!!)
+            } else {
+                // If the back stack is empty, handle the back press as needed
+                super.onBackPressed()
             }
         }
     }
