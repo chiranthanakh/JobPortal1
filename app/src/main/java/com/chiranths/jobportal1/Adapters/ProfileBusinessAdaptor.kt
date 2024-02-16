@@ -33,21 +33,27 @@ class ProfileBusinessAdaptor(
 
     override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val propertyinfo = productInfos[position]
-        Glide.with(context)
-            .load(propertyinfo.image)
-            .into(holder.business_image)
+        Glide.with(context).load(propertyinfo.image).into(holder.business_image)
         holder.tv_business_type.text = propertyinfo.Business_category
         holder.tv_business_locatin.text = propertyinfo.location
         holder.tv_business_name.text = propertyinfo.Businessname
         holder.tv_business_servicess.text = propertyinfo.description
-        if (propertyinfo.status.equals("2")) {
-            holder.ll_business_delete.visibility = View.GONE
+
+        if (propertyinfo?.status == "2") {
+            holder.ll_remove.visibility = View.VISIBLE
+            holder.ll_text_msg.visibility = View.GONE
+        } else if (propertyinfo?.status == "1") {
+            holder.ll_text_msg.visibility = View.VISIBLE
+            holder.ll_remove.visibility = View.GONE
+        } else {
+            holder.ll_text_msg.visibility = View.VISIBLE
+            holder.tv_msg.text = "You deleted this post"
+            holder.ll_remove.visibility = View.GONE
         }
-        holder.ll_business_delete.setOnClickListener {
+        holder.ll_remove.setOnClickListener {
             propertyinfo.pid?.let { it1 ->
-                FirebaseDatabase.getInstance().reference.child("BusinessListing").child(
-                    it1
-                ).child(AppConstants.Status).setValue("2")
+                FirebaseDatabase.getInstance().reference.child("BusinessListing").child(it1)
+                    .child(AppConstants.Status).setValue("3")
             }
         }
 
@@ -67,14 +73,15 @@ class ProfileBusinessAdaptor(
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var business_image: ImageView
-        var iv_call_business: ImageView? = null
-        var iv_whatsup_business: ImageView? = null
         var cv_layout: CardView
         var tv_business_locatin: TextView
         var tv_business_name: TextView
         var tv_business_type: TextView
         var tv_business_servicess: TextView
         var ll_business_delete: LinearLayout
+        var tv_msg: TextView
+        var ll_remove: LinearLayout
+        var ll_text_msg: LinearLayout
 
         init {
             tv_business_locatin = itemView.findViewById(R.id.tv_business_locatin)
@@ -84,8 +91,9 @@ class ProfileBusinessAdaptor(
             business_image = itemView.findViewById(R.id.business_image)
             tv_business_servicess = itemView.findViewById(R.id.business_servicess)
             ll_business_delete = itemView.findViewById(R.id.ll_business_delete)
-            //iv_call_business = itemView.findViewById(R.id.iv_call_bottom_business);
-            //iv_whatsup_business = itemView.findViewById(R.id.iv_whatsapp_bottom_business);
+            ll_text_msg = itemView.findViewById(R.id.ll_text_msg)
+            tv_msg = itemView.findViewById(R.id.tv_msg)
+            ll_remove = itemView.findViewById(R.id.ll_remove)
         }
     }
 }

@@ -279,6 +279,7 @@ class Admin_ads_dashboard : AppCompatActivity() {
         productMap[AppConstants.image2] = downloadImageUrl
         productMap[AppConstants.image] = MainimageUrl
         productMap[AppConstants.category] = CategoryName
+        productMap[AppConstants.type] = CategoryName
         productMap[AppConstants.price] = Price
         productMap[AppConstants.pname] = Pname
         productMap[AppConstants.katha] = katha
@@ -295,7 +296,7 @@ class Admin_ads_dashboard : AppCompatActivity() {
         productMap[AppConstants.text2] = et_text2!!.text.toString()
         productMap[AppConstants.text3] = et_text3!!.text.toString()
         productMap[AppConstants.text4] = et_text4!!.text.toString()
-        productMap[AppConstants.Status] = 1
+        productMap[AppConstants.Status] = "1"
         ProductsRef!!.child(productRandomKey!!).updateChildren(productMap + AppConstants.profileinfoadd(this))
             .addOnCompleteListener { task: Task<Void?> ->
                 if (task.isSuccessful) {

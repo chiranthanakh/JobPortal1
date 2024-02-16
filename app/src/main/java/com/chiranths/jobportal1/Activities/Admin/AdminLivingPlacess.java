@@ -241,7 +241,7 @@ public class AdminLivingPlacess extends AppCompatActivity {
         productMap.put("parking",parking);
         productMap.put(AppConstants.postedBy, postedBY);
         productMap.put("discription", discription);
-        productMap.put(AppConstants.Status, 1);
+        productMap.put(AppConstants.Status, "1");
 
 
 

@@ -201,7 +201,7 @@ public class AdminConstructionCategorys extends AppCompatActivity {
         productMap.put(AppConstants.image, MainimageUrl);
         productMap.put(AppConstants.category, category);
         productMap.put("subcategory", subcategory);
-        productMap.put(AppConstants.Status, 1);
+        productMap.put(AppConstants.Status, "1");
 
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)

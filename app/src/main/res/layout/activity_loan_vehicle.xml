@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Activities.LoanActivity.LoanForm">
+
+
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/gradient"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:id="@+id/iv_nav_view"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:background="?selectableItemBackground"
+            android:padding="14dp"
+            android:src="@drawable/back_arrow_new"
+            app:tint="@color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.9"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Loan Form"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_loan_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_15_dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_loantype"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/dp_20"
+                android:fontFamily="@font/lato_bold"
+                android:text="Vehicle loan"
+                android:textColor="@color/purple_700"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="100dp"
+                android:layout_height="5dp"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_marginStart="@dimen/dp_30"
+                android:background="@color/purple_700" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_20"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/dp_20"
+                android:fontFamily="@font/lato_bold"
+                android:layout_marginTop="@dimen/dp_5"
+                android:text="Their is only few steps to get loan"
+                android:textColor="@color/grey"
+                android:textSize="15sp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ll_loan_name">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/ll_vehicle_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_20"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:layout_marginTop="8dp"
+                    android:inputType="number"
+                    android:fontFamily="@font/lato"
+                    android:text="Vehicle price*"
+                    android:textColor="@color/purple_500"
+                    android:textSize="18sp" />
+
+
+                <!--this is the actual edit text which takes the input-->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_vehicle_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:backgroundTint="@color/app_blue"
+                    android:hint="Enter Vehicle Price"
+                    android:textColorHint="@color/profile_textHint" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_reqamount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_vehicle_price"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/lato"
+                    android:text="Required Loan amount*"
+                    android:textColor="@color/purple_500"
+                    android:textSize="18sp" />
+
+
+                <!--this is the actual edit text which takes the input-->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_loan_amoutnt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:backgroundTint="@color/app_blue"
+                    android:hint="Enter required loan amount"
+                    android:textColorHint="@color/profile_textHint" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_annual_turnover"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_reqamount"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/lato"
+                    android:text="Vehicle Module*"
+                    android:textColor="@color/purple_500"
+                    android:textSize="18sp" />
+
+
+                <!--this is the actual edit text which takes the input-->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_vehicle_module"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:backgroundTint="@color/app_blue"
+                    android:hint="Enter Vehicle Module"
+                    android:textColorHint="@color/profile_textHint" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_monthly_income1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_annual_turnover"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/lato"
+                    android:text="Monthly Income*"
+                    android:textColor="@color/purple_500"
+                    android:textSize="18sp" />
+
+
+                <!--this is the actual edit text which takes the input-->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_monthly_income1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:backgroundTint="@color/app_blue"
+                    android:hint="Enter monthly income"
+                    android:textColorHint="@color/profile_textHint" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_type_emp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_monthly_income1"
+                android:layout_marginStart="10dp"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/margin_20_dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/lato"
+                    android:text="Company Type*"
+                    android:textColor="@color/purple_500"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/Sp_company_type"
+                    android:layout_width="fill_parent"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:backgroundTint="@color/app_blue"
+                    android:hint="Select employment type"
+                    android:entries="@array/companyType"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_nature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_type_emp"
+                android:layout_marginStart="10dp"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/margin_20_dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/lato"
+                    android:text="Business Nature*"
+                    android:textColor="@color/purple_500"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/sp_business_nature"
+                    android:layout_width="fill_parent"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:backgroundTint="@color/app_blue"
+                    android:hint="Select employment type"
+                    android:entries="@array/businessNature"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_company_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_nature"
+                android:layout_marginTop="@dimen/margin_20_dp"
+                android:visibility="gone"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/lato"
+                    android:text="Company Name*"
+                    android:textColor="@color/purple_500"
+                    android:textSize="18sp" />
+
+
+                <!--this is the actual edit text which takes the input-->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_company_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:backgroundTint="@color/app_blue"
+                    android:hint="Enter Your company name"
+                    android:textColorHint="@color/profile_textHint" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_pan_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_company_name"
+                android:layout_marginTop="@dimen/margin_20_dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/lato"
+                    android:text="Pan card*"
+                    android:textColor="@color/purple_500"
+                    android:textSize="18sp" />
+
+
+                <!--this is the actual edit text which takes the input-->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_pancard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:backgroundTint="@color/app_blue"
+                    android:hint="Enter pan card number"
+                    android:textColorHint="@color/profile_textHint" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_aadhar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_pan_card"
+                android:layout_marginTop="@dimen/margin_20_dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/lato"
+                    android:text="Aadhar card*"
+                    android:textColor="@color/purple_500"
+                    android:textSize="18sp" />
+
+
+                <!--this is the actual edit text which takes the input-->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_aadhaar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:backgroundTint="@color/app_blue"
+                    android:hint="Enter aadhar card number"
+                    android:textColorHint="@color/profile_textHint" />
+
+            </LinearLayout>
+            <Button
+                android:id="@+id/btn_next_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_aadhar"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="45dp"
+                android:background="@drawable/buttons"
+                android:padding="17dp"
+                android:text="NEXT"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

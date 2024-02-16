@@ -237,7 +237,6 @@ public class AdminBusinessListings extends AppCompatActivity {
     }
 
     private void ValidateProductData() {
-
         Description = InputProductDescription.getText().toString();
         Price = InputProductPrice.getText().toString();
         Pname = InputProductName.getText().toString();
@@ -303,13 +302,11 @@ public class AdminBusinessListings extends AppCompatActivity {
         productMap.put("owner", owner);
         productMap.put("email",email);
         productMap.put("rating", "4");
-        productMap.put(AppConstants.Status, 1);
+        productMap.put(AppConstants.Status, "1");
         productMap.put("workingHrs",open+" to "+ close);
         productMap.put("gst",gst);
         productMap.put("from",from);
         productMap.put("productServicess",productorservicess);
-
-
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -9,15 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/gradient"
             android:orientation="horizontal">
-
 
             <ImageView
                 android:id="@+id/iv_back_ads"
@@ -52,14 +50,13 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-
                 <com.synnapps.carouselview.CarouselView
                     android:id="@+id/business_carouselView"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     app:fillColor="#FFFFFFFF"
                     app:pageColor="#00000000"
-                    app:radius="6dp"
+                    app:radius="3dp"
                     app:slideInterval="3000"
                     app:strokeColor="#FF777777"
                     app:strokeWidth="1dp" />
@@ -74,6 +71,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="10dp"
+                        android:layout_marginTop="@dimen/margin_10dp"
                         android:background="@color/white"
                         android:orientation="vertical">
 
@@ -108,7 +106,7 @@
                                 android:layout_marginEnd="10dp"
                                 android:fontFamily="@font/proxima_family"
                                 android:text="Category"
-                                android:textColor="@color/black"
+                                android:textColor="#0E5E2B"
                                 android:textSize="12sp"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -125,10 +123,9 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/proxima_nova_semi_bold"
                                 android:text=""
-                                android:textColor="@color/black"
-                                android:textStyle="bold"
+                                android:textColor="#0E5E2B"
                                 android:textSize="20sp"
-                                />
+                                android:textStyle="bold" />
 
 
                             <ImageView
@@ -147,94 +144,95 @@
                             android:id="@+id/loan1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
                             android:layout_marginStart="5dp"
-                            android:layout_marginEnd="5dp"
                             android:layout_marginTop="15dp"
-                            android:gravity="center"
+                            android:layout_marginEnd="5dp"
                             android:background="@drawable/card_shadow_back_login"
+                            android:gravity="center"
+                            android:orientation="horizontal"
                             app:layout_constraintTop_toBottomOf="@id/toolbar">
 
                             <LinearLayout
-                                    android:id="@+id/bus_cl_btn"
-                                    android:layout_width="90dp"
-                                    android:layout_height="match_parent"
-                                    android:background="@color/white"
-                                    android:orientation="vertical">
+                                android:id="@+id/bus_cl_btn"
+                                android:layout_width="90dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/white"
+                                android:orientation="vertical">
 
-                                    <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="30dp"
-                                        android:layout_gravity="center"
-                                        android:layout_marginTop="5dp"
-                                        android:src="@drawable/call" />
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="5dp"
+                                    android:src="@drawable/call" />
 
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:fontFamily="@font/proxima_nova_bold"
-                                        android:gravity="center"
-                                        android:text="Call"
-                                        android:layout_marginTop="8dp"
-                                        android:textColor="@color/black"
-                                        android:textStyle="bold"
-                                        android:textSize="12sp" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:fontFamily="@font/proxima_nova_bold"
+                                    android:gravity="center"
+                                    android:text="Call"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
 
-                                </LinearLayout>
-
-                            <LinearLayout
-                                    android:id="@+id/ads_whatsapp_btn"
-                                    android:layout_width="90dp"
-                                    android:layout_height="match_parent"
-                                    android:background="@color/white"
-                                    android:layout_marginLeft="@dimen/dp_30"
-                                    android:layout_marginRight="@dimen/dp_30"
-                                    android:orientation="vertical">
-
-                                    <ImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginTop="5dp"
-                                        android:src="@drawable/whatapp" />
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:text="WhatsApp"
-                                        android:textColor="@color/black"
-                                        android:textSize="12sp"
-                                        android:layout_marginTop="8dp"
-                                        android:fontFamily="@font/proxima_nova_bold"/>
-
-                                </LinearLayout>
+                            </LinearLayout>
 
                             <LinearLayout
-                                    android:id="@+id/ll_enquairy"
-                                    android:layout_width="90dp"
-                                    android:layout_height="match_parent"
-                                    android:background="@color/white"
-                                    android:orientation="vertical">
+                                android:id="@+id/ads_whatsapp_btn"
+                                android:layout_width="90dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="@dimen/dp_30"
+                                android:layout_marginRight="@dimen/dp_30"
+                                android:background="@color/white"
+                                android:orientation="vertical">
 
-                                    <ImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="30dp"
-                                        android:layout_gravity="center"
-                                        android:layout_marginTop="5dp"
-                                        android:src="@drawable/enquiry" />
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="5dp"
+                                    android:src="@drawable/whatapp" />
 
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:text="Enquire"
-                                        android:layout_marginTop="8dp"
-                                        android:textColor="@color/black"
-                                        android:textSize="12sp"
-                                        android:fontFamily="@font/proxima_nova_bold"/>
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:fontFamily="@font/proxima_nova_bold"
+                                    android:gravity="center"
+                                    android:text="WhatsApp"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp" />
 
-                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_enquairy"
+                                android:layout_width="90dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/white"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="5dp"
+                                    android:src="@drawable/enquiry" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:fontFamily="@font/proxima_nova_bold"
+                                    android:gravity="center"
+                                    android:text="Enquire"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
 
 
                         </LinearLayout>
@@ -246,13 +244,12 @@
                             android:orientation="vertical">
 
                             <TextView
-
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_5"
                                 android:fontFamily="@font/proxima_nova_bold"
                                 android:text="Business Details"
                                 android:textColor="#0E5E2B"
-                                android:layout_marginTop="@dimen/dp_5"
                                 android:textSize="18sp" />
 
                             <View
@@ -316,8 +313,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
-                                android:gravity="center"
                                 android:layout_marginTop="10dp"
+                                android:gravity="center"
                                 android:orientation="horizontal">
 
                                 <LinearLayout
@@ -332,7 +329,7 @@
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/proxima_nova_regular"
                                         android:gravity="start|center"
-                                        android:text="Products / Services :"
+                                        android:text="Business Type :"
                                         android:textColor="@color/black"
                                         android:textSize="14sp" />
                                 </LinearLayout>
@@ -363,8 +360,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
-                                android:gravity="center"
                                 android:layout_marginTop="10dp"
+                                android:gravity="center"
                                 android:orientation="horizontal">
 
                                 <LinearLayout
@@ -560,15 +557,15 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/proxima_nova_semi_bold"
-                                android:text="DESCRIPTION"
+                                android:text="About Us"
                                 android:textColor="@color/black"
                                 android:textSize="16sp" />
 
                             <TextView
                                 android:id="@+id/tv_business_description"
-                                android:layout_marginTop="10dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
                                 android:fontFamily="@font/proxima"
                                 android:textColor="@color/black"
                                 android:textSize="16sp" />

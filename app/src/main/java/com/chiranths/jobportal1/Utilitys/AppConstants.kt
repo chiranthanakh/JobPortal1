@@ -17,7 +17,7 @@ object AppConstants {
     const val propertysize = "propertysize"
     const val location = "location"
     const val number = "number"
-    const val Status = "Status"
+    const val Status = "status"
     const val sitesAvailable = "sitesAvailable"
     const val postedBy = "postedBy"
     const val facing = "facing"
@@ -41,6 +41,8 @@ object AppConstants {
     const val profile = "Profile"
     const val owner = "owner"
     const val agent = "agent"
+    const val notVerified = "VERIFIED PROPERTY"
+    const val verified1 = " VERIFIED"
 
     fun profileinfoadd(contest : Context): HashMap<String, Any?> {
         val sh = contest.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)

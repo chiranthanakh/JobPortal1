@@ -60,6 +60,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
                         android:textStyle="bold"
+                        android:maxLines="1"
                         android:textColor="@color/black"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
@@ -148,6 +149,7 @@
                             app:layout_constraintTop_toTopOf="parent"
                             android:layout_gravity="center_vertical"
                             android:textSize="12sp"
+                            android:maxLines="1"
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="10dp"
                             android:layout_width="wrap_content"
@@ -156,11 +158,59 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_text_msg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp">
+                        <TextView
+                            android:id="@+id/tv_msg"
+                            android:text="Company approval required"
+                            android:layout_marginTop="5dp"
+                            android:drawablePadding="3dp"
+                            app:layout_constraintStart_toStartOf="@+id/iv_product"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginEnd="5dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/yellow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/ll_remove"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="@dimen/margin_10dp"
+                        android:background="@drawable/button_capsule"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_contect_whome"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:text="Remove"
+                            android:textColor="@color/white" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:orientation="vertical"
                         android:layout_gravity="end"
+                        android:visibility="gone"
                         android:layout_marginBottom="@dimen/margin_10dp"
                         android:gravity="center"
                         android:layout_marginEnd="10dp">

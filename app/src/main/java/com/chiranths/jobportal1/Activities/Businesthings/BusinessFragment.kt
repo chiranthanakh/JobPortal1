@@ -108,7 +108,10 @@ class BusinessFragment : Fragment() {
             onBackButtonClicked()
         }
         iv_search?.setOnClickListener {
-
+            val intent = Intent(context, SearchActivity::class.java)
+            bundle.putString("searchtype", "business")
+            intent.putExtras(bundle)
+            startActivity(intent)
         }
 
         llsearch?.setOnClickListener { view: View? ->
@@ -173,7 +176,7 @@ class BusinessFragment : Fragment() {
     }
 
     private fun fetchbusiness(cat: String) {
-        val coroselimage = FirebaseDatabase.getInstance().reference.child("BusinessListing")
+        val coroselimage = FirebaseDatabase.getInstance().reference.child("BusinessListing").orderByChild(AppConstants.Status).equalTo("2")
         coroselimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -192,6 +195,7 @@ class BusinessFragment : Fragment() {
                                         userData[AppConstants.time].toString(),
                                         userData["Businessname"].toString(),
                                         userData["Business_category"].toString(),
+                                        userData[AppConstants.category].toString(),
                                         userData[AppConstants.description].toString(),
                                         userData[AppConstants.price].toString(),
                                         userData[AppConstants.location].toString(),
@@ -216,6 +220,7 @@ class BusinessFragment : Fragment() {
                                     userData[AppConstants.time].toString(),
                                     userData["Businessname"].toString(),
                                     userData["Business_category"].toString(),
+                                    userData[AppConstants.category].toString(),
                                     userData[AppConstants.description].toString(),
                                     userData[AppConstants.price].toString(),
                                     userData[AppConstants.location].toString(),
@@ -233,14 +238,9 @@ class BusinessFragment : Fragment() {
                                 )
                             )
                         } catch (cce: java.lang.ClassCastException) {
-                            try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
-                            } catch (cce2: java.lang.ClassCastException) {
-                            }
                         }
                     }
-                    businessAdaptor = BusinessAdaptor(filterbusinesslist, context)
+                    businessAdaptor = BusinessAdaptor(filterbusinesslist, context!!)
                     if (cat == "") {
                         recyadaptor(filterbusinesslist)
                     } else {

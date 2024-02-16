@@ -264,7 +264,7 @@ class Admin_layouts_dashboard : AppCompatActivity() {
         productMap[AppConstants.propertysize] = propertysize
         productMap[AppConstants.location] = location
         productMap[AppConstants.number] = number
-        productMap[AppConstants.Status] = 1
+        productMap[AppConstants.Status] = "1"
         productMap[AppConstants.sitesAvailable] = nuOfSites
         productMap[AppConstants.postedBy] = postedBy
         productMap[AppConstants.facing] = facing

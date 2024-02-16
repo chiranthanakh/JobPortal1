@@ -205,7 +205,7 @@ class Admin_travels : AppCompatActivity() {
         productMap["model"] = vehiclemodel
         productMap["ownerNmae"] = ownerName
         productMap[AppConstants.verified] = 1
-        productMap[AppConstants.Status] = 1
+        productMap[AppConstants.Status] = "1"
         ProductsRef!!.child(productRandomKey!!).updateChildren(productMap)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {

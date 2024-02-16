@@ -45,12 +45,22 @@ class ProfileTravelsAdaptor(
         holder.tv_vehicle_number.text = productInfo?.vehicleNumber
 
         if(productInfo?.status == "2"){
-            holder.ll_travels_delete.visibility = View.GONE
+            holder.ll_remove.visibility = View.VISIBLE
+            holder.ll_text_msg.visibility = View.GONE
+        } else if(productInfo?.status == "1") {
+            holder.ll_text_msg.visibility = View.VISIBLE
+            holder.ll_remove.visibility = View.GONE
+        } else {
+            holder.ll_text_msg.visibility = View.VISIBLE
+            holder.tv_msg.text = "You deleted this post"
+            holder.ll_remove.visibility = View.GONE
+            holder.ll_remove.visibility = View.GONE
         }
-        holder.ll_travels_delete.setOnClickListener{
+
+        holder.ll_remove.setOnClickListener{
             FirebaseDatabase.getInstance().reference.child("travelsforyou").child(
                 productInfo?.pid.toString()
-            ).child(AppConstants.Status).setValue("2")
+            ).child(AppConstants.Status).setValue("3")
         }
     }
 
@@ -70,7 +80,9 @@ class ProfileTravelsAdaptor(
         var tv_cost_km: TextView
         var tv_vehicle_number: TextView
         var tv_discription: TextView? = null
-        var ll_travels_delete: LinearLayout
+        var tv_msg : TextView
+        var ll_remove : LinearLayout
+        var ll_text_msg: LinearLayout
 
         init {
             travel_vehicle_name = itemView.findViewById(R.id.travel_vehicle_name)
@@ -78,7 +90,9 @@ class ProfileTravelsAdaptor(
             tv_cost_km = itemView.findViewById(R.id.tv_cost_km)
             tv_vehicle_number = itemView.findViewById(R.id.tv_vehicle_number)
             iv_vehicle_image = itemView.findViewById(R.id.iv_vehicle_image)
-            ll_travels_delete = itemView.findViewById(R.id.ll_travels_delete)
+            ll_remove = itemView.findViewById(R.id.ll_remove)
+            ll_text_msg = itemView.findViewById(R.id.ll_text_msg)
+            tv_msg = itemView.findViewById(R.id.tv_msg)
         }
     }
 }

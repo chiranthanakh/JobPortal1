@@ -248,7 +248,10 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     val dataMap = snapshot.value as HashMap<String, Any>?
+                    propertylist.clear()
+                    Propertyfilterlist.clear()
                     for (key in dataMap!!.keys) {
+                        Log.d("testflight",key)
                         val data = dataMap[key]
                         try {
                             val userData = data as HashMap<String, Any>?
@@ -273,31 +276,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
                                         userData[AppConstants.category] + "---" + userData[AppConstants.price] + "---" + userData[AppConstants.pname]
                                         + "---" + userData[AppConstants.propertysize] + "---" + userData[AppConstants.location] + "---" + userData[AppConstants.number] + "---" + userData[AppConstants.type]
                             )
-                            if (userData[AppConstants.type] == "sites") {
-                                siteslist.add(
-                                    userData[AppConstants.type].toString() + "!!" + userData[AppConstants.pid] + "---" + userData[AppConstants.description] + "---" +
-                                            userData[AppConstants.category] + "---" + userData[AppConstants.price] + "---" + userData[AppConstants.pname]
-                                            + "---" + userData[AppConstants.propertysize] + "---" + userData[AppConstants.location] + "---" + userData[AppConstants.number] + "---" + userData[AppConstants.type]
-                                )
-                            } else if (userData[AppConstants.type] == "homes") {
-                                Homeslist.add(
-                                    userData[AppConstants.image].toString() + "!!" + userData[AppConstants.pid] + "---" + userData[AppConstants.description] + "---" +
-                                            userData[AppConstants.category] + "---" + userData[AppConstants.price] + "---" + userData[AppConstants.pname]
-                                            + "---" + userData[AppConstants.propertysize] + "---" + userData[AppConstants.location] + "---" + userData[AppConstants.number] + "---" + userData[AppConstants.type]
-                                )
-                            } else if (userData[AppConstants.type] == "greenland") {
-                                greenlandlist.add(
-                                    userData[AppConstants.image].toString() + "!!" + userData[AppConstants.pid] + "---" + userData[AppConstants.description] + "---" +
-                                            userData[AppConstants.category] + "---" + userData[AppConstants.price] + "---" + userData[AppConstants.pname]
-                                            + "---" + userData[AppConstants.propertysize] + "---" + userData[AppConstants.location] + "---" + userData[AppConstants.number] + "---" + userData[AppConstants.type]
-                                )
-                            } else if (userData[AppConstants.type] == "rental") {
-                                Rentallist.add(
-                                    userData[AppConstants.image].toString() + "!!" + userData[AppConstants.pid] + "---" + userData[AppConstants.description] + "---" +
-                                            userData[AppConstants.category] + "---" + userData[AppConstants.price] + "---" + userData[AppConstants.pname]
-                                            + "---" + userData[AppConstants.propertysize] + "---" + userData[AppConstants.location] + "---" + userData[AppConstants.number] + "---" + userData[AppConstants.type]
-                                )
-                            }
+
                         } catch (cce: ClassCastException) {
                             try {
 
@@ -336,6 +315,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
                                     userData[AppConstants.time].toString(),
                                     userData["Businessname"].toString(),
                                     userData["products"].toString(),
+                                    userData[AppConstants.category].toString(),
                                     userData[AppConstants.description].toString(),
                                     userData[AppConstants.price].toString(),
                                     userData[AppConstants.location].toString(),
@@ -512,6 +492,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
                                 businesslist[i].time,
                                 businesslist[i].Businessname,
                                 businesslist[i].Business_category,
+                                businesslist[i].Category,
                                 businesslist[i].description,
                                 businesslist[i].price,
                                 businesslist[i].location,
@@ -608,7 +589,6 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
                             .number + "---" + Propertyfilterlist[i].type
                     )
                 }
-                Log.d("listdatefilter", filterarraylist.size.toString())
                 propertyAdaptor = if (filterarraylist.size == 0) {
                     PropertyAdaptor(Propertyfilterlist, this@SearchActivity)
                 } else {

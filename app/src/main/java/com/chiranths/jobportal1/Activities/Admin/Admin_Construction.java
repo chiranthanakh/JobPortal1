@@ -287,7 +287,7 @@ public class Admin_Construction extends AppCompatActivity {
         productMap.put("owner",owner);
         productMap.put("address",address);
         productMap.put("gst",gst);
-        productMap.put(AppConstants.Status, 1);
+        productMap.put(AppConstants.Status, "1");
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

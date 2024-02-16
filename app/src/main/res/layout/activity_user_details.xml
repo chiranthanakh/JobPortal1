@@ -4,53 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/pb3"
     android:orientation="vertical"
     tools:context=".Activities.BasicActivitys.UserDetailsActivity">
-
-    <LinearLayout
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/purple_500"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/iv_menu"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="5dp"
-            android:background="?selectableItemBackground"
-            android:padding="14dp"
-            android:src="@drawable/back_arrow_new"
-            app:tint="@color/white" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.9"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/tv_topbar_productName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/lato_bold"
-                    android:text="Please Enter your Details "
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-        </LinearLayout>
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -62,12 +18,10 @@
 
 
         <TextView
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:text="Please Share some details to make contact"
             android:textColor="@color/black"
             android:textSize="16sp"
              />
@@ -75,18 +29,7 @@
     </LinearLayout>
 
 
-    <androidx.cardview.widget.CardView
-        android:backgroundTint="#f9f9f9"
-        android:id="@+id/cv_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardMaxElevation="0dp"
-        android:layout_marginBottom="20dp"
-        android:elevation="0dp"
-        app:cardCornerRadius="52dp"
-        app:cardElevation="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+
 
 
         <LinearLayout
@@ -96,125 +39,130 @@
             android:layout_marginTop="50dp"
             android:layout_marginBottom="20dp"
             android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            app:cardCornerRadius="52dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
-            <ImageView
-                android:id="@+id/select_profile_image"
-                android:layout_width="100dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="50dp"
-                android:cropToPadding="false"
-                android:scaleType="centerCrop"
-                android:src="@drawable/select_product_image" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/proxima_family"
-                android:text="Enter Name"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp">
+            <FrameLayout
+                android:layout_width="@dimen/margin_100dp"
+                android:layout_height="@dimen/margin_100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginBottom="10dp">
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="@dimen/margin_100dp"
+                    android:layout_height="@dimen/margin_100dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/person"
+                    app:tint="@color/green"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
+                    app:shapeAppearanceOverlay="@style/circleImageView"/>
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/select_profile_image"
+                    android:layout_width="@dimen/margin_100dp"
+                    android:layout_height="@dimen/margin_100dp"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
+                    app:shapeAppearanceOverlay="@style/circleImageView"/>
+            </FrameLayout>
 
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <androidx.cardview.widget.CardView
+                android:layout_width="350dp"
+                android:layout_height="@dimen/dp_50"
+                app:cardCornerRadius="@dimen/dp_25"
+                android:layout_marginTop="@dimen/margin_10dp"
+                app:cardElevation="@dimen/dp_3">
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColorHint="@color/grey_dark"
-                    app:boxStrokeColor="@color/grey"
-                    app:boxStrokeWidth="0.5dp"
-                    app:boxStrokeWidthFocused="0.9dp"
-                    app:hintTextColor="@color/grey_dark"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:startIconTint="@color/grey_light">
-
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:background="@null"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:src="@drawable/telephone"
+                        android:padding="@dimen/dp_5"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="@dimen/dp_30"
+                        android:layout_height="@dimen/dp_30"/>
+                    <EditText
                         android:id="@+id/edt_name_login"
-                        android:fontFamily="@font/proxima_family"
-                        android:inputType="textEmailAddress"
-                        android:padding="0dp"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="15sp" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_gravity="center_vertical"
+                        android:background="@null"
+                        android:layout_weight="1"
+                        android:maxLength="10"
+                        android:inputType="text"
+                        android:paddingStart="10dp"
+                        android:hint="Enter Your Name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="350dp"
+                android:layout_height="@dimen/dp_50"
+                app:cardCornerRadius="@dimen/dp_25"
+                android:layout_marginTop="@dimen/margin_10dp"
+                app:cardElevation="@dimen/dp_3">
 
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/proxima_family"
-                android:text="Phone Number"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp">
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColorHint="@color/grey_dark"
-                    app:boxStrokeColor="@color/grey"
-                    app:boxStrokeWidth="0.5dp"
-                    app:boxStrokeWidthFocused="0.9dp"
-                    app:hintTextColor="@color/grey_dark"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:startIconTint="@color/grey_light">
-
-
-                    <com.google.android.material.textfield.TextInputEditText
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:src="@drawable/telephone"
+                        android:padding="@dimen/dp_5"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="@dimen/dp_30"
+                        android:layout_height="@dimen/dp_30"/>
+                    <EditText
                         android:id="@+id/edt_phone_login"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
+                        android:layout_gravity="center_vertical"
                         android:background="@null"
-                        android:fontFamily="@font/proxima_family"
-                        android:inputType="textEmailAddress"
-                        android:padding="0dp"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="15sp" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_weight="1"
+                        android:maxLength="10"
+                        android:inputType="number"
+                        android:paddingStart="10dp"
+                        android:hint="Enter Mobile Number"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="350dp"
+                android:layout_height="@dimen/dp_50"
+                app:cardCornerRadius="@dimen/dp_25"
+                android:layout_marginTop="@dimen/margin_10dp"
+                app:cardElevation="@dimen/dp_3">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/proxima_family"
-                android:text="Email"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:src="@drawable/telephone"
+                        android:padding="@dimen/dp_5"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="@dimen/dp_30"
+                        android:layout_height="@dimen/dp_30"/>
+                    <EditText
+                        android:id="@+id/edt_email_login"
+                        android:layout_gravity="center_vertical"
+                        android:background="@null"
+                        android:layout_weight="1"
+                        android:maxLength="10"
+                        android:inputType="text"
+                        android:paddingStart="10dp"
+                        android:hint="Enter Email"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -222,36 +170,8 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp">
 
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:id="@+id/et_user_email"
-                    android:layout_height="wrap_content"
-                    android:textColorHint="@color/grey_dark"
-                    app:boxStrokeColor="@color/grey"
-                    app:boxStrokeWidth="0.5dp"
-                    app:boxStrokeWidthFocused="0.9dp"
-                    app:hintTextColor="@color/grey_dark"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:startIconTint="@color/grey_light">
-
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edt_email_login"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:background="@null"
-                        android:fontFamily="@font/proxima_family"
-                        android:inputType="textEmailAddress"
-                        android:padding="0dp"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey"
-                        android:textSize="15sp" />
-                </com.google.android.material.textfield.TextInputLayout>
-
             </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
             <LinearLayout
@@ -301,8 +221,5 @@
 
             </LinearLayout>
         </LinearLayout>
-
-
-    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

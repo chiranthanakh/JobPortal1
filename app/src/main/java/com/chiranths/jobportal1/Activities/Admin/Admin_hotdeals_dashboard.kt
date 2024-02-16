@@ -227,7 +227,7 @@ class Admin_hotdeals_dashboard : AppCompatActivity() {
         productMap[AppConstants.postedBy] = et_posted_by!!.text.toString()
         productMap[AppConstants.text1] = et_hot_text1!!.text.toString()
         productMap[AppConstants.text2] = et_hot_text2!!.text.toString()
-        productMap[AppConstants.Status] = 1
+        productMap[AppConstants.Status] = "1"
         ProductsRef!!.child(productRandomKey!!).updateChildren(productMap)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {

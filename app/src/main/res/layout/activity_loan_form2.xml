@@ -87,190 +87,285 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_reqamount"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_loan_name"
-        android:layout_marginVertical="@dimen/dp_20"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ll_loan_name">
 
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/margin_10_dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/lato"
-            android:text="Name*"
-            android:textColor="@color/purple_500"
-            android:textSize="18sp" />
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/ll_reqamount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp_20"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/lato"
+                    android:text="Name*"
+                    android:textColor="@color/purple_500"
+                    android:textSize="18sp" />
 
 
-        <!--this is the actual edit text which takes the input-->
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_10_dp"
-            android:backgroundTint="@color/app_blue"
-            android:hint="Enter Your name"
-            android:textColorHint="@color/profile_textHint" />
+                <!--this is the actual edit text which takes the input-->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:backgroundTint="@color/app_blue"
+                    android:hint="Enter Your name"
+                    android:textColorHint="@color/profile_textHint" />
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_monthly_income1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_reqamount"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/ll_monthly_income1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_reqamount"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/margin_10_dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/lato"
-            android:text="Phone Number*"
-            android:textColor="@color/purple_500"
-            android:textSize="18sp" />
-
-
-        <!--this is the actual edit text which takes the input-->
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_10_dp"
-            android:backgroundTint="@color/app_blue"
-            android:hint="Enter monthly income"
-            android:textColorHint="@color/profile_textHint" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_type_emp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_monthly_income1"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="@dimen/margin_20_dp"
-        android:layout_marginEnd="10dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/margin_10_dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/lato"
-            android:text="Email"
-            android:textColor="@color/purple_500"
-            android:textSize="18sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/lato"
+                    android:text="Phone Number*"
+                    android:textColor="@color/purple_500"
+                    android:textSize="18sp" />
 
 
-        <!--this is the actual edit text which takes the input-->
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_10_dp"
-            android:backgroundTint="@color/app_blue"
-            android:hint="Enter email"
-            android:textColorHint="@color/profile_textHint" />
+                <!--this is the actual edit text which takes the input-->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:inputType="phone"
+                    android:backgroundTint="@color/app_blue"
+                    android:hint="Enter monthly income"
+                    android:textColorHint="@color/profile_textHint" />
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_dob"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_type_emp"
-        android:layout_marginTop="@dimen/margin_20_dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/ll_type_emp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_monthly_income1"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="@dimen/margin_20_dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/margin_10_dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/lato"
-            android:text="DOB*"
-            android:textColor="@color/purple_500"
-            android:textSize="18sp" />
-
-
-        <!--this is the actual edit text which takes the input-->
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_dob"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_10_dp"
-            android:backgroundTint="@color/app_blue"
-            android:hint="Enter your Date of birth"
-            android:textColorHint="@color/profile_textHint" />
-
-    </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/lato"
+                    android:text="Email"
+                    android:textColor="@color/purple_500"
+                    android:textSize="18sp" />
 
 
-    <LinearLayout
-        android:id="@+id/ll_current_city"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_dob"
-        android:layout_marginTop="@dimen/margin_20_dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:orientation="vertical">
+                <!--this is the actual edit text which takes the input-->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:inputType="text"
+                    android:backgroundTint="@color/app_blue"
+                    android:hint="Enter email"
+                    android:textColorHint="@color/profile_textHint" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/margin_10_dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/lato"
-            android:text="address*"
-            android:textColor="@color/purple_500"
-            android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_type_emp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="@dimen/margin_20_dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/lato"
+                    android:text="Gender"
+                    android:textColor="@color/purple_500"
+                    android:textSize="18sp" />
 
 
-        <!--this is the actual edit text which takes the input-->
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_10_dp"
-            android:backgroundTint="@color/app_blue"
-            android:hint="Enter address"
-            android:textColorHint="@color/profile_textHint" />
+                <RadioGroup
+                    android:id="@+id/rb_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ll_type_emp"
+                    android:layout_marginStart="@dimen/margin_10dp"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:id="@+id/rb_male"
+                        android:text="Male"
+                        android:layout_weight="2"
+                        android:checked="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <RadioButton
+                        android:id="@+id/rb_female"
+                        android:text="Female"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </RadioGroup>
 
-    </LinearLayout>
+            </LinearLayout>
 
 
-    <Button
-        android:id="@+id/btn_next"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_current_city"
-        android:layout_marginLeft="45dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="45dp"
-        android:background="@drawable/buttons"
-        android:padding="17dp"
-        android:text="NEXT"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="18sp" />
+            <LinearLayout
+                android:id="@+id/ll_dob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_gender"
+                android:layout_marginTop="@dimen/margin_20_dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/lato"
+                    android:text="DOB*"
+                    android:textColor="@color/purple_500"
+                    android:textSize="18sp" />
+
+
+                <!--this is the actual edit text which takes the input-->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_dob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:inputType="number"
+                    android:backgroundTint="@color/app_blue"
+                    android:hint="Enter your Date of birth"
+                    android:textColorHint="@color/profile_textHint" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_current_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_dob"
+                android:layout_marginTop="@dimen/margin_20_dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/lato"
+                    android:text="Current city name*"
+                    android:textColor="@color/purple_500"
+                    android:textSize="18sp" />
+
+
+                <!--this is the actual edit text which takes the input-->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:backgroundTint="@color/app_blue"
+                    android:hint="Enter current city"
+                    android:textColorHint="@color/profile_textHint" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_current_city"
+                android:layout_marginTop="@dimen/margin_20_dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/lato"
+                    android:text="address*"
+                    android:textColor="@color/purple_500"
+                    android:textSize="18sp" />
+
+
+                <!--this is the actual edit text which takes the input-->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_10_dp"
+                    android:backgroundTint="@color/app_blue"
+                    android:hint="Enter address"
+                    android:textColorHint="@color/profile_textHint" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_next"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_address"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="45dp"
+                android:background="@drawable/buttons"
+                android:padding="17dp"
+                android:text="NEXT"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </RelativeLayout>

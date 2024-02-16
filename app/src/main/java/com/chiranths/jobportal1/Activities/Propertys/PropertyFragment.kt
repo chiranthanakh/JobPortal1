@@ -4,11 +4,13 @@ import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
@@ -23,6 +25,8 @@ import com.chiranths.jobportal1.Model.AdsModel
 import com.chiranths.jobportal1.R
 import com.chiranths.jobportal1.Utilitys.AppConstants
 import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -49,7 +53,10 @@ class PropertyFragment : Fragment(), View.OnClickListener {
     var Homeslist: ArrayList<*> = ArrayList<Any?>()
     var Rentallist: ArrayList<*> = ArrayList<Any?>()
     var adslist: ArrayList<AdsModel?> = ArrayList<AdsModel?>()
+    var buttonToggleGroup: MaterialButtonToggleGroup? = null
     var propertyAdaptor: PropertyAdaptor? = null
+    var ll_assetRecyclrView : LinearLayout? = null
+    var ll_asset : LinearLayout? = null
     var adsAdaptor: AdsAdaptor? = null
     var recyclarviewads: RecyclerView? = null
     var bundle = Bundle()
@@ -79,6 +86,8 @@ class PropertyFragment : Fragment(), View.OnClickListener {
         iv_commercial = view.findViewById(R.id.iv_commercial)
         iv_green_land = view.findViewById(R.id.iv_green_land)
         iv_home = view.findViewById(R.id.iv_home)
+        ll_asset = view.findViewById(R.id.ll_assetText)
+        ll_assetRecyclrView = view.findViewById(R.id.ll_assetRecyclrView)
         search = view.findViewById(R.id.iv_search)
         iv_sites?.setOnClickListener(this)
         iv_green_land?.setOnClickListener(this)
@@ -88,16 +97,51 @@ class PropertyFragment : Fragment(), View.OnClickListener {
         iv_back_toolbar?.setOnClickListener(this)
         recyclarviewads = view.findViewById(R.id.rv_adds_layots2)
         recyclerView = view.findViewById(R.id.recycler_menu)
+        buttonToggleGroup = view.findViewById<MaterialButtonToggleGroup>(R.id.buttonToggleGroup)
         recyclerView?.setHasFixedSize(true)
         val mgrid = GridLayoutManager(context, 1)
         recyclerView?.setLayoutManager(mgrid)
-        fetchcorosel()
+        fetchproducts("")
         search?.setOnClickListener(View.OnClickListener {
             val intent = Intent(context, SearchActivity::class.java)
             bundle.putString("searchtype", "property")
             intent.putExtras(bundle)
             startActivity(intent)
         })
+
+        buttonToggleGroup?.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            val selectedButton = view.findViewById<MaterialButton>(checkedId)
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.button1 -> {
+                        fetchproducts("Site")
+                        ll_asset?.visibility = View.GONE
+                        ll_assetRecyclrView?.visibility = View.GONE
+                    }
+
+                    R.id.button2 -> {
+                        fetchproducts("Green Land")
+                        ll_asset?.visibility = View.GONE
+                        ll_assetRecyclrView?.visibility = View.GONE
+                    }
+
+                    R.id.button3 -> {
+                        fetchproducts("House")
+                        ll_asset?.visibility = View.GONE
+                        ll_assetRecyclrView?.visibility = View.GONE
+                    }
+
+                    R.id.button -> {
+                        fetchproducts("Layout")
+                        ll_asset?.visibility = View.GONE
+                        ll_assetRecyclrView?.visibility = View.GONE
+                    }
+                }
+            } else {
+
+            }
+        }
+
     }
 
     private fun fetchads() {
@@ -166,8 +210,12 @@ class PropertyFragment : Fragment(), View.OnClickListener {
         })
     }
 
-    private fun fetchcorosel() {
-        val coroselimage = FirebaseDatabase.getInstance().reference.child("Products")
+    private fun fetchproducts(type : String) {
+        var coroselimage = if(type == "" || type == null ) {
+            FirebaseDatabase.getInstance().reference.child("Products")
+        } else {
+            FirebaseDatabase.getInstance().reference.child("Products").orderByChild(AppConstants.type).equalTo(type)
+        }
         coroselimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -186,33 +234,8 @@ class PropertyFragment : Fragment(), View.OnClickListener {
                                         + "---" + userData[AppConstants.propertysize] + "---" + userData[AppConstants.location] + "---" + userData[AppConstants.number] + "---" + userData[AppConstants.type]
                             )
 
-                            /*if(userData.get(AppConstants.type).equals("sites")){
-                                siteslist.add(userData.get(AppConstants.type)+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
-                                        userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.pname)
-                                        +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get(AppConstants.type));
-
-                            }else if(userData.get(AppConstants.type).equals("homes")){
-                                Homeslist.add(userData.get(AppConstants.image)+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
-                                        userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.pname)
-                                        +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get(AppConstants.type));
-
-                            }else if(userData.get(AppConstants.type).equals("greenland")){
-                                greenlandlist.add(userData.get(AppConstants.image)+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
-                                        userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.pname)
-                                        +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get(AppConstants.type));
-
-                            }else if(userData.get(AppConstants.type).equals("rental")){
-                                Rentallist.add(userData.get(AppConstants.image)+"!!"+userData.get(AppConstants.pid)+"---"+userData.get(AppConstants.description)+"---"+
-                                        userData.get(AppConstants.category)+"---"+userData.get(AppConstants.price)+"---"+userData.get(AppConstants.pname)
-                                        +"---"+userData.get(AppConstants.propertysize)+"---"+userData.get(AppConstants.location)+"---"+userData.get(AppConstants.number)+"---"+userData.get(AppConstants.type));
-
-                            };*/
                         } catch (cce: ClassCastException) {
-                            try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
-                            } catch (cce2: ClassCastException) {
-                            }
+
                         }
                     }
                     propertyAdaptor = PropertyAdaptor(propertylist, context)
@@ -232,10 +255,8 @@ class PropertyFragment : Fragment(), View.OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.btn_add_property -> {
-               /*val intent = Intent(context, Admin_ads_dashboard::class.java)
+               val intent = Intent(context, Admin_ads_dashboard::class.java)
                 intent.putExtra("page", "2")
-                startActivity(intent)*/
-                val intent = Intent(context, AdminAddNewProductActivity::class.java)
                 startActivity(intent)
             }
 

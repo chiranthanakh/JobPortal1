@@ -201,7 +201,7 @@ class AdminloanOffers : AppCompatActivity() {
         productMap["loanamount"] = BankLoanamount
         productMap["intrestrate"] = BankIntrestRate
         productMap[AppConstants.description] = BankLOanDiscription
-        productMap[AppConstants.Status] = 1
+        productMap[AppConstants.Status] = "1"
         loanRef!!.child(productRandomKey!!).updateChildren(productMap)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {

@@ -12,7 +12,7 @@ class AdsModel(
     var propertysize: String? = "",
     var location: String? = "",
     var number: String? = "",
-    var status: String? = "",
+    var status: String? = "2",
     var postedBy: String? = "",
     var approvedBy: String? = "",
     var facing: String? = "",

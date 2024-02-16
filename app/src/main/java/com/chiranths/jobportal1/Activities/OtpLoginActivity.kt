@@ -38,9 +38,10 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
     var tvSendOtp: TextView? = null
     var cvOtp: CardView? = null
     var btn_continue: Button? = null
-    var mAuth: FirebaseAuth? = null
     var mVerificationId: String? = null
     lateinit var preferenceManager: PreferenceManager
+    private lateinit var mAuth: FirebaseAuth
+    private var verificationId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,11 +70,18 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
         })
     }
 
+
+
+
+
+
+
+
     override fun onClick(view: View) {
         when (view.id) {
             R.id.tv_send_otp -> {
-                cvOtp!!.visibility = View.VISIBLE
-                val phoneNumber = "+91" + edtPhone!!.text.toString().trim { it <= ' ' }
+                cvOtp?.visibility = View.VISIBLE
+                val phoneNumber = "+91" + edtPhone?.text.toString().trim { it <= ' ' }
                 // OnVerificationStateChangedCallbacks
                 PhoneAuthProvider.getInstance().verifyPhoneNumber(
                     phoneNumber,  // Phone number to verify
@@ -83,28 +91,20 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
                     mCallbacks
                 )
             }
-            R.id.btn_continue -> if (edt_otp!!.length() == 0) {
+            R.id.btn_continue ->
+                if (edt_otp?.text?.length == 0) {
+
                 Toast.makeText(applicationContext, "Enter the otp", Toast.LENGTH_SHORT).show()
-                val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
+                /*val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
                 val myEdit = sharedPreferences.edit()
                 preferenceManager.saveLoginState(true)
                 myEdit.putString(AppConstants.number, edtPhone?.text.toString())
                 myEdit.commit()
-                fetchProfile(edtPhone?.text.toString())
-                startActivity(Intent(this@OtpLoginActivity, UserDetailsActivity::class.java))
+                //fetchProfile(edtPhone?.text.toString())
+                startActivity(Intent(this@OtpLoginActivity, UserDetailsActivity::class.java))*/
 
-            } else {
-                // val credential =
-                //   PhoneAuthProvider.getCredential(mVerificationId!!, edt_otp!!.text.toString())
-                //signInWithPhoneAuthCredential(credential);
-               /* verifyCode(edt_otp?.text.toString())
-
-                val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
-                val myEdit = sharedPreferences.edit()
-                myEdit.putString(AppConstants.number, edtPhone?.text.toString())
-                myEdit.commit()*/
-                fetchProfile(edtPhone?.text.toString())
-                //finish()
+            } else if (edt_otp?.text?.length == 6) {
+                verifyCode(edt_otp?.text.toString())
             }
         }
     }
@@ -137,12 +137,7 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
 
     // below method is use to verify code from Firebase.
     private fun verifyCode(code: String) {
-        // below line is used for getting
-        // credentials from our verification id and code.
         val credential = PhoneAuthProvider.getCredential(mVerificationId!!, code)
-
-        // after getting credential we are
-        // calling sign in method.
         signInWithPhoneAuthCredential(credential)
     }
 
@@ -150,10 +145,10 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
         mAuth!!.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
+                    /*val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
                     val myEdit = sharedPreferences.edit()
                     myEdit.putString(AppConstants.number, edtPhone?.text.toString())
-                    myEdit.commit()
+                    myEdit.commit()*/
                     fetchProfile(edtPhone?.text.toString())
 
                 } else {
@@ -164,9 +159,7 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun fetchProfile(userNumber: String) {
         if (userNumber !== "") {
-            val profile = FirebaseDatabase.getInstance().reference.child(AppConstants.profile).child(
-                userNumber
-            )
+            val profile = FirebaseDatabase.getInstance().reference.child(AppConstants.profile).child(userNumber)
             profile.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
@@ -178,7 +171,7 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
                             myEdit.commit()
                             finish()
                         }
-                    }else{
+                    } else {
                         startActivity(Intent(this@OtpLoginActivity, UserDetailsActivity::class.java))
                         finish()
                     }

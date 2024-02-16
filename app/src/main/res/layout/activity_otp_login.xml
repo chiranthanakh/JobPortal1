@@ -139,4 +139,30 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/ll_progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="#ffffff"
+        android:visibility="gone"
+        android:orientation="vertical">
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progress_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="@dimen/dp_20"
+            android:indeterminate="true"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_20"/>
+        <TextView
+            android:id="@+id/progress_message"
+            android:gravity="center"
+            android:text="Synchronizing the data to server"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

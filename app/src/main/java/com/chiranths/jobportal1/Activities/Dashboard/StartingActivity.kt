@@ -80,10 +80,7 @@ class StartingActivity : AppCompatActivity() {
         analytics = Firebase.analytics
         progressDialog = ProgressDialog(this)
         initilize()
-        val packageManager: PackageManager = applicationContext.getPackageManager()
-        val lastUpdatedTime =
-            packageManager.getPackageInfo(applicationContext.packageName, 0).lastUpdateTime
-        //checkPermissions()
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, startingFragment).commit()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -93,7 +90,7 @@ class StartingActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, startingFragment).commit()
+        //supportFragmentManager.beginTransaction().replace(R.id.fragment_container, startingFragment).commit()
     }
 
     private fun initilize() {

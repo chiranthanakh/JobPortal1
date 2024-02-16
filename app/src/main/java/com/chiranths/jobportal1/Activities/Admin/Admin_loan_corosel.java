@@ -233,7 +233,7 @@ public class Admin_loan_corosel extends AppCompatActivity {
         productMap.put(AppConstants.propertysize,propertysize);
         productMap.put(AppConstants.location,location);
         productMap.put(AppConstants.number,number);
-        productMap.put(AppConstants.Status, 1);
+        productMap.put(AppConstants.Status, "1");
 
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)

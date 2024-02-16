@@ -40,6 +40,36 @@
         <item>"layout"</item>
     </string-array>
 
+    <string-array name="companyType">
+        <item>"Proprietorship / Individual "</item>
+        <item>"Partnership firm"</item>
+        <item>"LLP"</item>
+        <item>"LTD"</item>
+    </string-array>
+
+    <string-array name="businessNature">
+        <item>"Manufacture "</item>
+        <item>"Trade"</item>
+        <item>"Retail"</item>
+        <item>"Service Providers"</item>
+        <item>"Other"</item>
+
+    </string-array>
+
+    <string-array name="tenure">
+        <item>Select tenure</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
+    </string-array>
+
     <string-array name="lunch_time_array">
         <item>Select Time</item>
         <item>10:00 AM</item>

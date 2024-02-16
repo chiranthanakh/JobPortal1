@@ -19,7 +19,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     flavorDimensions "default"
-    productFlavors {
+    /*productFlavors {
         Dev {
             dimension "default"
             applicationIdSuffix ".debug"
@@ -31,11 +31,13 @@ android {
             applicationIdSuffix ".release"
             buildConfigField("String", "GOOGLE_SERVICES_JSON", "\"google-services-prod.json\"")
         }
-        }
+        }*/
 
     buildTypes {
         release {
-            minifyEnabled false
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debug
         }
@@ -56,14 +58,14 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'org.jetbrains:annotations:23.0.0'
-    implementation 'com.google.firebase:firebase-firestore:24.10.1'
+    implementation 'com.google.firebase:firebase-firestore:24.10.2'
     implementation 'com.google.firebase:firebase-storage:20.3.0'
     implementation 'com.google.android.gms:play-services-auth:20.7.0'
     implementation 'com.google.android.gms:play-services-location:21.1.0'
     implementation 'com.android.car.ui:car-ui-lib:2.6.0'
     implementation 'com.google.android.play:core-ktx:1.8.1'
     implementation 'androidx.core:core-ktx:1.12.0'
-    implementation 'com.google.firebase:firebase-analytics:21.5.0'
+    implementation 'com.google.firebase:firebase-analytics:21.5.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'

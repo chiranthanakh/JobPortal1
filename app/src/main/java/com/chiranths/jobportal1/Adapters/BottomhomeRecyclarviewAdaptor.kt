@@ -44,7 +44,7 @@ class BottomhomeRecyclarviewAdaptor(
         holder.tv_final_price_hot.text = productInfo.price
         holder.tv_hot_sqft.text = productInfo.propertysize
         holder.tv_loaction_hot.text = productInfo.location
-        holder.tv_contect_whome.text = "Contact: " + productInfo.posted
+        holder.tv_contect_whome.text = "Contact: "
 
         //holder.tv_btn_call_hot.setText("");
         holder.cv_deals.setOnClickListener { view: View? ->

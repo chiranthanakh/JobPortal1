@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.chiranths.jobportal1.Activities.Dashboard.StartingActivity
 import com.chiranths.jobportal1.Activities.OtpLoginActivity
 import com.chiranths.jobportal1.Adapters.*
+import com.chiranths.jobportal1.Interface.OnItemClick
 import com.chiranths.jobportal1.Model.BusinessModel
 import com.chiranths.jobportal1.Model.ConstructionModel
 import com.chiranths.jobportal1.Model.ProfileListModel
@@ -30,11 +32,12 @@ import com.chiranths.jobportal1.Utilitys.AppConstants
 import com.google.firebase.database.*
 import de.hdodenhof.circleimageview.CircleImageView
 
-class ProfileFragments : Fragment() {
+class ProfileFragments : Fragment(),OnItemClick {
     private var ProductsRef: DatabaseReference? = null
     private var iv_profile_image: CircleImageView? = null
     private var tv_name: TextView? = null
     private var tv_email: TextView? = null
+    private var tv_number: TextView? = null
     private var iv_edit: ImageView? = null
     private var rv_my_postings : RecyclerView? = null
     private var rv_my_business : RecyclerView? = null
@@ -73,13 +76,11 @@ class ProfileFragments : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-
-
     private fun initilize(view: View) {
         iv_profile_image = view.findViewById(R.id.iv_profile_image)
         tv_name = view.findViewById(R.id.tv_profile_name)
         tv_email = view.findViewById(R.id.tv_profile_email)
-        iv_edit = view.findViewById(R.id.iv_edit)
+        tv_number = view.findViewById(R.id.tv_profile_number)
         val ll_logout = view.findViewById<LinearLayout>(R.id.ll_logout)
         val ll_login = view.findViewById<LinearLayout>(R.id.ll_login)
 
@@ -122,9 +123,7 @@ class ProfileFragments : Fragment() {
     private fun fetchProfile() {
 
         if (userNumber !== "") {
-            val profile = FirebaseDatabase.getInstance().reference.child("Profile").child(
-                userNumber!!
-            )
+            val profile = FirebaseDatabase.getInstance().reference.child("Profile").child(userNumber)
             profile.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
@@ -132,6 +131,7 @@ class ProfileFragments : Fragment() {
                         for (key in dataMap!!.keys) {
                             tv_name?.text = dataMap["name"] as CharSequence?
                             tv_email?.text = dataMap["Email"] as CharSequence?
+                            tv_number?.text = dataMap["number"] as CharSequence?
                             Glide.with(context!!)
                                 .load(dataMap[AppConstants.image])
                                 .apply(RequestOptions().override(500, 500))
@@ -139,8 +139,7 @@ class ProfileFragments : Fragment() {
                             try {
                             } catch (cce: ClassCastException) {
                                 try {
-                                    val mString = dataMap[key].toString()
-                                    //addTextToView(mString);
+
                                 } catch (cce2: ClassCastException) {
                                 }
                             }
@@ -172,6 +171,7 @@ class ProfileFragments : Fragment() {
                                         userData[AppConstants.time].toString(),
                                         userData["Businessname"].toString(),
                                         userData["products"].toString(),
+                                        userData[AppConstants.category].toString(),
                                         userData[AppConstants.description].toString(),
                                         userData[AppConstants.price].toString(),
                                         userData[AppConstants.location].toString(),
@@ -254,8 +254,7 @@ class ProfileFragments : Fragment() {
                             }
                             } catch (cce: java.lang.ClassCastException) {
                                 try {
-                                    val mString = dataMap[key].toString()
-                                    //addTextToView(mString);
+
                                 } catch (cce2: java.lang.ClassCastException) {
                                 }
                             }
@@ -308,8 +307,7 @@ class ProfileFragments : Fragment() {
                                 }
                             } catch (cce: java.lang.ClassCastException) {
                                 try {
-                                    val mString = dataMap!![key].toString()
-                                    //addTextToView(mString);
+
                                 } catch (cce2: java.lang.ClassCastException) {
                                 }
                             }
@@ -332,48 +330,50 @@ class ProfileFragments : Fragment() {
 
 
     private fun fetchdata() {
-        val productsinfo = FirebaseDatabase.getInstance().reference.child("hotforyou")
+        productinfolist.clear()
+        val productsinfo = FirebaseDatabase.getInstance().reference.child("hotforyou").orderByChild(AppConstants.number).equalTo(userNumber)
         productsinfo.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
                     val dataMap = dataSnapshot.value as HashMap<String, Any>?
-                    productinfolist.clear()
                     for (key in dataMap!!.keys) {
                         val data = dataMap[key]
                         try {
                             val userData = data as HashMap<String, Any>?
-                            if (userData?.get(AppConstants.number) == userNumber) {
-                            productinfolist.add(
-                                ProfileListModel(
-                                    userData!![AppConstants.category].toString(),
-                                    userData[AppConstants.date].toString(),
-                                    userData[AppConstants.description].toString(),
-                                    userData[AppConstants.image].toString(),
-                                    userData[AppConstants.location].toString(),
-                                    userData[AppConstants.number].toString(),
-                                    userData[AppConstants.pid].toString(),
-                                    userData[AppConstants.pname].toString(),
-                                    userData[AppConstants.price].toString(),
-                                    userData[AppConstants.propertysize].toString(),
-                                    userData[AppConstants.time].toString(),
-                                    userData[AppConstants.type].toString(),
-                                    userData[AppConstants.postedBy].toString(),
-                                    "hotforyou",
-                                    userData[AppConstants.Status].toString()
+                            if (userData?.get(AppConstants.number)?.equals(userNumber) == true) {
+                                Log.d("dataparm5",userData?.get(AppConstants.number).toString()+"--"+userData?.get(AppConstants.Status))
+                                productinfolist.add(
+                                    ProfileListModel(
+                                        userData!![AppConstants.category].toString(),
+                                        userData[AppConstants.date].toString(),
+                                        userData[AppConstants.description].toString(),
+                                        userData[AppConstants.image].toString(),
+                                        userData[AppConstants.location].toString(),
+                                        userData[AppConstants.number].toString(),
+                                        userData[AppConstants.pid].toString(),
+                                        userData[AppConstants.pname].toString(),
+                                        userData[AppConstants.price].toString(),
+                                        userData[AppConstants.propertysize].toString(),
+                                        userData[AppConstants.time].toString(),
+                                        userData[AppConstants.type].toString(),
+                                        userData[AppConstants.postedBy].toString(),
+                                        "hotforyou",
+                                        userData[AppConstants.Status].toString()
+                                    )
                                 )
-                            )
+                                Log.d("dataparm61",productinfolist.size.toString())
+                                //}
                         }
                         } catch (cce: ClassCastException) {
                             try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
+
                             } catch (cce2: ClassCastException) {
                             }
                         }
                     }
 
                     // Upcoming Event
-                    val bottomhomeRecyclarviewAdaptor = context?.let {
+                    /*val bottomhomeRecyclarviewAdaptor = context?.let {
                         ProfilePostingListings(
                             productinfolist,
                             it, userNumber, nameofuser
@@ -387,7 +387,7 @@ class ProfileFragments : Fragment() {
                     rv_my_postings?.setNestedScrollingEnabled(false);
                     mHandler.post(Runnable { rv_my_postings?.setAdapter(
                         bottomhomeRecyclarviewAdaptor
-                    ) })
+                    ) })*/
                 }
             }
             override fun onCancelled(databaseError: DatabaseError) {}
@@ -395,7 +395,7 @@ class ProfileFragments : Fragment() {
 
 
         //layouts
-        val productsinfoLayouts = FirebaseDatabase.getInstance().reference.child("layoutsforyou")
+        val productsinfoLayouts = FirebaseDatabase.getInstance().reference.child("layoutsforyou").orderByChild(AppConstants.number).equalTo(userNumber)
         productsinfoLayouts.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -404,26 +404,26 @@ class ProfileFragments : Fragment() {
                         val data = dataMap[key]
                         try {
                             val userData = data as HashMap<String, Any>?
-                            if (userData?.get(AppConstants.number) == userNumber) {
-                                productinfolist.add(
-                                    ProfileListModel(
-                                        userData!![AppConstants.category].toString(),
-                                        userData[AppConstants.date].toString(),
-                                        userData[AppConstants.description].toString(),
-                                        userData[AppConstants.image].toString(),
-                                        userData[AppConstants.location].toString(),
-                                        userData[AppConstants.number].toString(),
-                                        userData[AppConstants.pid].toString(),
-                                        userData[AppConstants.pname].toString(),
-                                        userData[AppConstants.price].toString(),
-                                        userData[AppConstants.propertysize].toString(),
-                                        userData[AppConstants.time].toString(),
-                                        userData[AppConstants.type].toString(),
-                                        userData[AppConstants.postedBy].toString(),
-                                        "layoutsforyou",
-                                        userData[AppConstants.Status].toString()
+                            if (userData?.get(AppConstants.number)?.equals(userNumber) == true) {
+                                    productinfolist.add(
+                                        ProfileListModel(
+                                            userData!![AppConstants.category].toString(),
+                                            userData[AppConstants.date].toString(),
+                                            userData[AppConstants.description].toString(),
+                                            userData[AppConstants.image].toString(),
+                                            userData[AppConstants.location].toString(),
+                                            userData[AppConstants.number].toString(),
+                                            userData[AppConstants.pid].toString(),
+                                            userData[AppConstants.pname].toString(),
+                                            userData[AppConstants.price].toString(),
+                                            userData[AppConstants.propertysize].toString(),
+                                            userData[AppConstants.time].toString(),
+                                            userData[AppConstants.type].toString(),
+                                            userData[AppConstants.postedBy].toString(),
+                                            "layoutsforyou",
+                                            userData[AppConstants.Status].toString()
+                                        )
                                     )
-                                )
                             }
                         } catch (cce: ClassCastException) {
                             try {
@@ -435,7 +435,7 @@ class ProfileFragments : Fragment() {
                     }
 
                     // Upcoming Event
-                    val bottomhomeRecyclarviewAdaptor = context?.let {
+                    /*val bottomhomeRecyclarviewAdaptor = context?.let {
                         ProfilePostingListings(
                             productinfolist,
                             it, userNumber, nameofuser
@@ -448,13 +448,13 @@ class ProfileFragments : Fragment() {
                     rv_my_postings?.setItemAnimator(DefaultItemAnimator())
                     mHandler.post(Runnable { rv_my_postings?.setAdapter(
                         bottomhomeRecyclarviewAdaptor
-                    ) })
+                    ) })*/
                 }
             }
             override fun onCancelled(databaseError: DatabaseError) {}
         })
 
-        val productsinfogeneral = FirebaseDatabase.getInstance().reference.child("adsforyou")
+        val productsinfogeneral = FirebaseDatabase.getInstance().reference.child("adsforyou").orderByChild(AppConstants.number).equalTo(userNumber)
         productsinfogeneral.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -463,32 +463,31 @@ class ProfileFragments : Fragment() {
                         val data = dataMap[key]
                         try {
                             val userData = data as HashMap<String, Any>?
-                            if (userData?.get(AppConstants.number) == userNumber) {
-                                productinfolist.add(
-                                    ProfileListModel(
-                                        userData!![AppConstants.category].toString(),
-                                        userData[AppConstants.date].toString(),
-                                        userData[AppConstants.description].toString(),
-                                        userData[AppConstants.image].toString(),
-                                        userData[AppConstants.location].toString(),
-                                        userData[AppConstants.number].toString(),
-                                        userData[AppConstants.pid].toString(),
-                                        userData[AppConstants.pname].toString(),
-                                        userData[AppConstants.price].toString(),
-                                        userData[AppConstants.propertysize].toString(),
-                                        userData[AppConstants.time].toString(),
-                                        userData[AppConstants.type].toString(),
-                                        userData[AppConstants.postedBy].toString(),
-                                        "adsforyou",
-                                        userData[AppConstants.Status].toString()
+                            Log.d("dataparm1",productinfolist.toString())
+                             if (userData?.get(AppConstants.number)?.equals(userNumber) == true) {
+                                     productinfolist.add(
+                                        ProfileListModel(
+                                            userData!![AppConstants.category].toString(),
+                                            userData[AppConstants.date].toString(),
+                                            userData[AppConstants.description].toString(),
+                                            userData[AppConstants.image].toString(),
+                                            userData[AppConstants.location].toString(),
+                                            userData[AppConstants.number].toString(),
+                                            userData[AppConstants.pid].toString(),
+                                            userData[AppConstants.pname].toString(),
+                                            userData[AppConstants.price].toString(),
+                                            userData[AppConstants.propertysize].toString(),
+                                            userData[AppConstants.time].toString(),
+                                            userData[AppConstants.type].toString(),
+                                            userData[AppConstants.postedBy].toString(),
+                                            "adsforyou",
+                                            userData[AppConstants.Status].toString()
 
+                                        )
                                     )
-                                )
-                            }
+                                }
                         } catch (cce: ClassCastException) {
                             try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
                             } catch (cce2: ClassCastException) {
                             }
                         }
@@ -510,11 +509,14 @@ class ProfileFragments : Fragment() {
                     mHandler.post(Runnable { rv_my_postings?.setAdapter(
                         bottomhomeRecyclarviewAdaptor
                     ) })
-
                 }
             }
             override fun onCancelled(databaseError: DatabaseError) {}
         })
+    }
+
+    override fun onClick1() {
+        TODO("Not yet implemented")
     }
 
 }

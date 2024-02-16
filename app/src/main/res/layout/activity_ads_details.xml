@@ -13,7 +13,6 @@
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <LinearLayout
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -52,13 +51,10 @@
                         android:fontFamily="@font/lato_bold"
                         android:text="The Taj Hotel Bangalore"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="18sp" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
-
             </LinearLayout>
-
         </LinearLayout>
-
 
 
         <androidx.core.widget.NestedScrollView
@@ -71,14 +67,13 @@
                 android:layout_marginBottom="80dp"
                 android:orientation="vertical">
 
-
                 <com.synnapps.carouselview.CarouselView
                     android:id="@+id/ads_details_carouselView"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="230dp"
                     app:fillColor="#FFFFFFFF"
                     app:pageColor="#00000000"
-                    app:radius="6dp"
+                    app:radius="3dp"
                     app:slideInterval="3000"
                     app:strokeColor="#FF777777"
                     app:strokeWidth="1dp" />
@@ -95,8 +90,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"
                         android:layout_marginStart="@dimen/margin_20_dp"
+                        android:background="@color/white"
                         android:orientation="vertical">
 
                         <LinearLayout
@@ -136,10 +131,33 @@
 
                         </LinearLayout>
 
+                        <TextView
+                            android:id="@+id/tv_ads_posted_on"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/proxima_nova_semi_bold"
+                            android:gravity="center"
+                            android:text="Posted on May 07,22"
+                            android:textColor="@color/grey"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/ads_details_verifyed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/proxima_nova_semi_bold"
+                            android:gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:text="VERIFIED PROPERTY"
+                            android:textColor="#0dba43"
+                            android:textSize="14sp" />
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
                             android:orientation="horizontal">
 
                             <TextView
@@ -176,8 +194,8 @@
                                 android:layout_gravity="center"
                                 android:layout_marginEnd="10sp"
                                 android:padding="8dp"
-                                android:visibility="gone"
-                                android:src="@drawable/location" />
+                                android:src="@drawable/location"
+                                android:visibility="gone" />
 
                         </LinearLayout>
 
@@ -193,30 +211,9 @@
                                 android:fontFamily="@font/proxima_nova_semi_bold"
                                 android:text="Sai Manor Kripa Apartment"
                                 android:textColor="@color/black"
-                                android:textStyle="bold"
-                                android:textSize="18sp" />
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/tv_ads_posted_on"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:fontFamily="@font/proxima_nova_semi_bold"
-                                android:gravity="center"
-                                android:text="Posted on May 07,22"
-                                android:textColor="@color/grey"
-                                android:textSize="12sp" />
-                            <TextView
-                                android:id="@+id/ads_details_verifyed"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:drawableStart="@drawable/approved"
-                                android:drawablePadding="2dp"
-                                android:fontFamily="@font/proxima_nova_semi_bold"
-                                android:gravity="center"
-                                android:text="VERIFIED PROPERTY"
-                                android:textColor="#0dba43"
-                                android:textSize="10sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -229,29 +226,29 @@
 
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_5"
                                 android:fontFamily="@font/proxima_nova_bold"
                                 android:text="Details"
                                 android:textColor="#0E5E2B"
-                                android:layout_marginTop="@dimen/dp_5"
                                 android:textSize="18sp" />
 
                         </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:background="@drawable/rating_back"
-                        android:padding="3dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:background="@drawable/rating_back"
+                            android:padding="3dp">
 
 
-                    </LinearLayout>
+                        </LinearLayout>
 
 
                         <LinearLayout
-                            android:layout_marginTop="@dimen/dp_20"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_20"
                             android:orientation="vertical">
 
                             <LinearLayout
@@ -474,8 +471,8 @@
                                 android:layout_gravity="center"
                                 android:layout_marginTop="10dp"
                                 android:gravity="center"
-                                android:visibility="gone"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:visibility="gone">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -515,7 +512,7 @@
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
-                                android:background="#E91E63"/>
+                                android:background="#E91E63" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -526,12 +523,12 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/proxima_nova_semi_bold"
-                                    android:gravity="center"
                                     android:layout_marginTop="@dimen/dp_20"
                                     android:drawableStart="@drawable/map"
-                                    android:drawableTint="@color/red"
                                     android:drawablePadding="3dp"
+                                    android:drawableTint="@color/red"
+                                    android:fontFamily="@font/proxima_nova_semi_bold"
+                                    android:gravity="center"
                                     android:text="Location"
                                     android:textColor="@color/purple_700"
                                     android:textSize="14sp" />
@@ -540,20 +537,20 @@
                                     android:id="@+id/ads_place_location"
                                     android:layout_width="150dp"
                                     android:layout_height="wrap_content"
-                                    android:src="@drawable/star"
-                                    android:text="Location"
                                     android:layout_marginStart="@dimen/dp_20"
                                     android:layout_marginTop="@dimen/margin_10_dp"
+                                    android:src="@drawable/star"
+                                    android:text="Location"
+                                    android:textColor="@color/black"
                                     android:textSize="14dp"
-                                    android:textStyle="bold"
-                                    android:textColor="@color/black"/>
+                                    android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/tv_posted_date"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
                                     android:layout_marginStart="@dimen/dp_20"
+                                    android:layout_marginTop="10dp"
                                     android:fontFamily="@font/proxima_family"
                                     android:gravity="center"
                                     android:textColor="@color/grey"
@@ -564,9 +561,9 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_marginTop="5dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
                             android:orientation="vertical">
 
                             <TextView
@@ -585,16 +582,16 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_marginTop="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
                             android:orientation="vertical">
 
                             <TextView
                                 android:id="@+id/tv_futures1"
-                                android:layout_marginTop="5dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
                                 android:drawableStart="@drawable/check"
                                 android:drawablePadding="2dp"
                                 android:fontFamily="@font/proxima_family"
@@ -662,9 +659,9 @@
                                     android:fontFamily="@font/proxima_nova_regular"
                                     android:gravity="start|center"
                                     android:text="Description :"
-                                    android:textStyle="bold"
                                     android:textColor="@color/black"
-                                    android:textSize="14sp" />
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -704,26 +701,25 @@
                         </LinearLayout>
                     </LinearLayout>
                 </FrameLayout>
-
-
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
 
     </LinearLayout>
+
     <LinearLayout
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
-        android:background="@color/colorWhite"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:background="@color/colorWhite"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <com.google.android.material.button.MaterialButton
@@ -733,20 +729,20 @@
                 android:background="@drawable/gradient"
                 android:fontFamily="@font/proxima_nova_bold"
                 android:insetTop="0dp"
-                android:textSize="14sp"
                 android:insetBottom="0dp"
                 android:text="Call Us"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="14sp" />
 
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
             android:orientation="vertical">
 
 
@@ -757,10 +753,10 @@
                 android:background="@drawable/gradient"
                 android:fontFamily="@font/proxima_nova_bold"
                 android:insetTop="0dp"
-                android:textSize="14sp"
                 android:insetBottom="0dp"
                 android:text="Message us"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="14sp" />
 
         </LinearLayout>
 

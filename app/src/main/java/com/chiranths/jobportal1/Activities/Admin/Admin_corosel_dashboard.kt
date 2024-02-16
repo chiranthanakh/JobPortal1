@@ -198,7 +198,7 @@ class Admin_corosel_dashboard : AppCompatActivity() {
         productMap["url"] = propertysize
         productMap[AppConstants.type] = type
         productMap[AppConstants.number] = number
-        productMap[AppConstants.Status] = 1
+        productMap[AppConstants.Status] = "1"
         ProductsRef!!.child(productRandomKey!!).updateChildren(productMap)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {

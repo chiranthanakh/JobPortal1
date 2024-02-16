@@ -60,7 +60,7 @@ public class BusinessFilter extends AppCompatActivity {
                         try{
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
                             if(String.valueOf(userData.get(AppConstants.category)).equals(cat)){
-                                businesslist.add(new BusinessModel(String.valueOf(userData.get(AppConstants.pid)),String.valueOf(userData.get(AppConstants.date)),String.valueOf(userData.get(AppConstants.time)),String.valueOf(userData.get("Businessname")),String.valueOf(userData.get("products")),String.valueOf(userData.get(AppConstants.description)),
+                                businesslist.add(new BusinessModel(String.valueOf(userData.get(AppConstants.pid)),String.valueOf(userData.get(AppConstants.date)),String.valueOf(userData.get(AppConstants.time)),String.valueOf(userData.get("Businessname")),String.valueOf(userData.get("products")),String.valueOf(userData.get(AppConstants.category)),String.valueOf(userData.get(AppConstants.description)),
                                         String.valueOf(userData.get(AppConstants.price)),String.valueOf(userData.get(AppConstants.location)),String.valueOf(userData.get(AppConstants.number)),String.valueOf(userData.get("owner")),String.valueOf(userData.get("email")),String.valueOf(userData.get("rating")),
                                         String.valueOf(userData.get(AppConstants.image)),String.valueOf(userData.get(AppConstants.image2)),String.valueOf(userData.get(AppConstants.Status)),String.valueOf(userData.get("gst")),String.valueOf(userData.get("from")),String.valueOf(userData.get("productServicess")),String.valueOf(userData.get("workingHrs"))));
                             }

@@ -6,6 +6,7 @@ class BusinessModel {
     var time: String? = ""
     var Businessname: String? = ""
     var Business_category: String? = ""
+    var Category: String? = ""
     var description: String? = ""
     var price: String? = ""
     var location: String? = ""
@@ -29,6 +30,7 @@ class BusinessModel {
         time: String?,
         businessname: String?,
         business_category: String?,
+        category: String?,
         description: String?,
         price: String?,
         location: String?,

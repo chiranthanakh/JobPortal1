@@ -24,7 +24,10 @@
         android:supportsRtl="true"
         android:theme="@style/JobPortaltheam">
         <activity
-            android:name=".Activities.Admin.AdminPropertyBasicsDetails"
+            android:name=".Activities.LoanActivity.LoanVehicle"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.LoanActivity.LoanBusiness"
             android:exported="false" />
         <activity
             android:name=".Activities.BasicActivitys.AboutUsActivity"
@@ -190,7 +193,7 @@
             android:exported="false" />
         <activity
             android:name=".Activities.Dashboard.StartingActivity"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

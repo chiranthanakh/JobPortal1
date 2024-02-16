@@ -137,6 +137,12 @@ class AdsDetailsActivity : AppCompatActivity() {
                     } else {
                         tv_ads_posted_on?.text = "Posted on :"+products.postedOn
                     }
+                    if(products.verified.equals("1")) {
+                        tv_ads_details_verify?.text = AppConstants.notVerified
+                    } else if(products.verified.equals("2")) {
+                        tv_ads_details_verify?.text = AppConstants.verified1
+                        tv_ads_details_verify?.setTextColor(getResources().getColor(R.color.yellow));
+                    }
                     url = products.image2?.split("---".toRegex())?.dropLastWhile { it.isEmpty() }!!.toTypedArray()
                     carouselView?.setImageListener(imageListener)
                     carouselView?.pageCount = url.size

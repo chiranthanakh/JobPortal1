@@ -6,6 +6,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.chiranths.jobportal1.Activities.Propertys.Products
+import com.chiranths.jobportal1.Adapters.BusinessAdaptor
 import com.chiranths.jobportal1.Model.BusinessModel
 import com.chiranths.jobportal1.R
 import com.chiranths.jobportal1.Utilitys.AppConstants
@@ -65,22 +67,21 @@ class BusinessDetails : AppCompatActivity() {
         ads_whatsapp_btn = findViewById(R.id.ads_whatsapp_btn)
         carouselView = findViewById(R.id.business_carouselView)
 
-        bus_cl_btn?.setOnClickListener(View.OnClickListener { view: View? ->
+        bus_cl_btn?.setOnClickListener{ view: View? ->
             utilitys.navigateCall(
                 this,
                 number,
                 productName
             )
-        })
+        }
 
-        ads_whatsapp_btn?.setOnClickListener(View.OnClickListener { view: View? ->
+        ads_whatsapp_btn?.setOnClickListener{ view: View? ->
             utilitys.navigateWhatsapp(
                 this,
                 number,
                 productName
             )
-        })
-
+        }
     }
 
     private fun getProductDetails(productID: String) {
@@ -88,7 +89,7 @@ class BusinessDetails : AppCompatActivity() {
         productsRef = FirebaseDatabase.getInstance().reference.child("BusinessListing")
         productsRef?.child(productID)?.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                if (dataSnapshot.exists() && dataSnapshot.getValue(BusinessModel::class.java) != null) {
+               if (dataSnapshot.exists() && dataSnapshot.getValue(BusinessModel::class.java) != null) {
                     val products = dataSnapshot.getValue(BusinessModel::class.java)
                     business_name?.setText(products?.Businessname)
                     tv_business_cat?.setText(products?.Business_category)
@@ -97,7 +98,7 @@ class BusinessDetails : AppCompatActivity() {
                     tv_discription?.setText(products?.description)
                     number = products?.number
                     productName = products?.Businessname
-                    tv_product_servicess?.setText("")
+                    tv_product_servicess?.setText(products?.Category)
                     tv_business_gst?.setText(products?.gst)
                     tv_business_owner?.setText(products?.owner)
                     tv_business_timings?.setText(products?.time)
@@ -111,7 +112,7 @@ class BusinessDetails : AppCompatActivity() {
     }
 
     var imageListener =
-        ImageListener { position, imageView -> //Picasso.get().load(url[position]).into(imageView);
+        ImageListener { position, imageView ->
             Glide.with(this)
                 .load(url.get(position))
                 .into(imageView)

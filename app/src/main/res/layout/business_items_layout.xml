@@ -218,6 +218,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:maxLines="1"
                             android:fontFamily="@font/proxima_nova_semi_bold"
                             android:text="RT Nagar Hmt Layout "
                             android:textColor="@color/black"
@@ -226,19 +227,100 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_approve"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="end"
                         android:layout_marginStart="5dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginEnd="5dp"
                         android:layout_marginBottom="@dimen/margin_10dp"
-                        android:background="@drawable/spinner_background"
+                        android:background="@drawable/button_capsule"
                         android:gravity="center"
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tv_admin_approve"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
                             android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:text="Approve"
+                            android:textColor="@color/white" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="@dimen/margin_10dp"
+                        android:background="@drawable/button_capsule"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
                             android:id="@+id/tv_contect_whome"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:text="Contact:"
+                            android:textColor="@color/white" />
+
+
+                        <ImageView
+                            android:id="@+id/iv_call_bottom_business"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/ic_call"
+                            app:tint="@color/white" />
+
+
+                        <ImageView
+                            android:id="@+id/iv_whatsapp_bottom_business"
+                            android:layout_width="25dp"
+                            android:layout_height="35dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:src="@drawable/whatsapp"
+                            android:text="Call Us"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:visibility="visible" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_remove"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="10dp"
+                        android:visibility="gone"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="@dimen/margin_10dp"
+                        android:background="@drawable/button_capsule"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_contect_whome2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center|start"
@@ -246,9 +328,8 @@
                             android:text="Contact:"
                             android:textColor="#000000" />
 
-
                         <ImageView
-                            android:id="@+id/iv_call_bottom_business"
+                            android:id="@+id/iv_call_bottom_business1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
@@ -258,9 +339,8 @@
                             android:src="@drawable/ic_call"
                             app:tint="@color/green" />
 
-
                         <ImageView
-                            android:id="@+id/iv_whatsapp_bottom_business"
+                            android:id="@+id/iv_whatsapp_bottom_business1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
