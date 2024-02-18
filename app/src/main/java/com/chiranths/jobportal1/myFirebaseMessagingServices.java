@@ -1,19 +1,10 @@
 package com.chiranths.jobportal1;
 
 import android.annotation.SuppressLint;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
 import android.util.Log;
 import android.widget.RemoteViews;
-
 import androidx.annotation.NonNull;
-import androidx.core.app.NotificationCompat;
 
-import com.chiranths.jobportal1.Activities.jobs.MainActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -58,8 +49,8 @@ public class myFirebaseMessagingServices extends FirebaseMessagingService {
                                  String message)
     {
         // Pass the intent to switch to the MainActivity
-        Intent intent
-                = new Intent(this, MainActivity.class);
+       /* Intent intent
+                = new Intent(this, Starti.class);
         // Assign channel ID
         String channel_id = "notification_channel";
         // Here FLAG_ACTIVITY_CLEAR_TOP flag is set to clear
@@ -118,6 +109,6 @@ public class myFirebaseMessagingServices extends FirebaseMessagingService {
                     notificationChannel);
         }
 
-        notificationManager.notify(0, builder.build());
+        notificationManager.notify(0, builder.build());*/
     }
 }

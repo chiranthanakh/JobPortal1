@@ -10,15 +10,11 @@ import android.location.Geocoder
 import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
 import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
@@ -29,7 +25,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chiranths.jobportal1.Activities.Admin.AdminDashboard
 import com.chiranths.jobportal1.Activities.BasicActivitys.CenterHomeActivity
 import com.chiranths.jobportal1.Activities.BasicActivitys.LivingPlaceActivity
-import com.chiranths.jobportal1.Activities.BasicActivitys.LoginActivity
 import com.chiranths.jobportal1.Activities.BasicActivitys.SearchActivity
 import com.chiranths.jobportal1.Activities.BasicActivitys.SeeAllLayoutActivity
 import com.chiranths.jobportal1.Activities.BasicActivitys.Travelsactivity
@@ -38,7 +33,6 @@ import com.chiranths.jobportal1.Activities.Businesthings.BusinessFragment
 import com.chiranths.jobportal1.Activities.Construction.ConstructionActivity
 import com.chiranths.jobportal1.Activities.LoanActivity.LoanActivity
 import com.chiranths.jobportal1.Activities.Sell.SellActivity
-import com.chiranths.jobportal1.Activities.jobs.MainActivity
 import com.chiranths.jobportal1.Adapters.AdsAdaptor
 import com.chiranths.jobportal1.Adapters.BottomhomeRecyclarviewAdaptor
 import com.chiranths.jobportal1.Adapters.CoroselListAdaptor
@@ -47,19 +41,14 @@ import com.chiranths.jobportal1.Interface.FragmentInteractionListener
 import com.chiranths.jobportal1.Model.AdsModel
 import com.chiranths.jobportal1.Model.Corosolmodel
 import com.chiranths.jobportal1.Model.LayoutModel
-import com.chiranths.jobportal1.Model.NoticeBoard
 import com.chiranths.jobportal1.Model.ProductInfo
-import com.chiranths.jobportal1.Model.UpcomingEvent
 import com.chiranths.jobportal1.R
 import com.chiranths.jobportal1.Utilitys.AppConstants
-import com.chiranths.jobportal1.databinding.ActivityStartingBinding
 import com.chiranths.jobportal1.databinding.DashboardFragmentBinding
-import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.synnapps.carouselview.CarouselView
@@ -380,20 +369,9 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
             R.id.cv_jobs -> {
                 val intent: Intent
                 if (name == "") {
-                    intent = Intent(context, LoginActivity::class.java)
-                    startActivity(intent)
+
                 } else {
-                    val userId = GoogleSignIn.getLastSignedInAccount(requireContext())!!
-                        .id
-                    FirebaseDatabase.getInstance().reference.child("users")
-                        .child(userId!!)
-                        .child("role")
-                        .setValue("jobseeker").addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                val intent = Intent(context, MainActivity::class.java)
-                                startActivity(intent)
-                            }
-                        }
+
                 }
             }
 
