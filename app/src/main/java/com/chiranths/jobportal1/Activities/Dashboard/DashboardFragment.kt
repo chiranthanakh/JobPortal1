@@ -29,6 +29,7 @@ import com.chiranths.jobportal1.Activities.BasicActivitys.SearchActivity
 import com.chiranths.jobportal1.Activities.BasicActivitys.SeeAllLayoutActivity
 import com.chiranths.jobportal1.Activities.BasicActivitys.Travelsactivity
 import com.chiranths.jobportal1.Activities.BasicActivitys.UpcommingProjects
+import com.chiranths.jobportal1.Activities.Businesthings.BusinessActivity
 import com.chiranths.jobportal1.Activities.Businesthings.BusinessFragment
 import com.chiranths.jobportal1.Activities.Construction.ConstructionActivity
 import com.chiranths.jobportal1.Activities.LoanActivity.LoanActivity
@@ -381,13 +382,15 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
             }
 
             R.id.cv_servicess1 -> {
-                binding.bottomNavShift.visibility = View.GONE
+                /*binding.bottomNavShift.visibility = View.GONE
                 val businessFragment = BusinessFragment()
                 val fragmentManager = requireActivity().supportFragmentManager
                 val fragmentTransaction = fragmentManager.beginTransaction()
                 fragmentTransaction.replace(R.id.fragment_container, businessFragment)
                 fragmentTransaction.addToBackStack(null)
-                fragmentTransaction.commit()
+                fragmentTransaction.commit()*/
+                val intent2 = Intent(context, BusinessActivity::class.java)
+                startActivity(intent2)
             }
 
             R.id.iv_sell -> {

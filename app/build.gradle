@@ -19,19 +19,19 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     flavorDimensions "default"
-    /*productFlavors {
-        Dev {
+    productFlavors {
+        dev {
             dimension "default"
             applicationIdSuffix ".debug"
-            buildConfigField("String", "GOOGLE_SERVICES_JSON", "\"google-services-debug.json\"")
+          //  buildConfigField("String", "GOOGLE_SERVICES_JSON", "\"google-services.json\"")
 
         }
-        Prod {
+        prod {
             dimension "default"
             applicationIdSuffix ".release"
-            buildConfigField("String", "GOOGLE_SERVICES_JSON", "\"google-services-prod.json\"")
+            ////buildConfigField("String", "GOOGLE_SERVICES_JSON", "\"google-services.json\"")
         }
-        }*/
+      }
 
     buildTypes {
         release {

@@ -322,7 +322,7 @@ class Admin_ads_dashboard : AppCompatActivity() {
                     result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
                 }
             } finally {
-                cursor!!.close()
+                cursor?.close()
             }
         }
         if (result == null) {

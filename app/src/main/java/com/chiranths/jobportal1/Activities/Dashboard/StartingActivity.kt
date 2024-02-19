@@ -34,6 +34,7 @@ import com.chiranths.jobportal1.Activities.LoanActivity.LoanFragment
 import com.chiranths.jobportal1.Activities.OtpLoginActivity
 import com.chiranths.jobportal1.Activities.Profile.ProfileFragments
 import com.chiranths.jobportal1.Activities.Propertys.PropertyFragment
+import com.chiranths.jobportal1.BuildConfig
 import com.chiranths.jobportal1.R
 import com.chiranths.jobportal1.Utilitys.AppConstants
 import com.chiranths.jobportal1.Utilitys.PreferenceManager
@@ -43,6 +44,7 @@ import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.Firebase
 import com.google.firebase.FirebaseApp
+import com.google.firebase.FirebaseOptions
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.analytics
 import com.google.firebase.database.DataSnapshot
@@ -75,6 +77,13 @@ class StartingActivity : AppCompatActivity() {
         binding=ActivityStartingBinding.inflate(layoutInflater)
         preferenceManager= PreferenceManager(this);
         setContentView(binding.root)
+       /* if (BuildConfig.FLAVOR.equals("dev")) {
+            FirebaseApp.initializeApp(this,
+                FirebaseOptions.fromResource(this, R.raw.google_services_dev)!!
+            );
+        } else if (BuildConfig.FLAVOR.equals("release")) {
+            FirebaseApp.initializeApp(this, FirebaseOptions.fromResource(this, R.raw.google_services_release));
+        }*/
         FirebaseApp.initializeApp(this)
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
         analytics = Firebase.analytics
@@ -117,7 +126,10 @@ class StartingActivity : AppCompatActivity() {
         }
 
         binding.dashboardBusiness.setOnClickListener {
-            replaceFragment(businessFragment)
+           // replaceFragment(businessFragment)
+            binding.drawerLayoutMainD.closeDrawer(GravityCompat.START)
+            val intent = Intent(this, BusinessActivity::class.java)
+            startActivity(intent)
         }
 
         binding.dashboardConstructions.setOnClickListener{
@@ -182,18 +194,15 @@ class StartingActivity : AppCompatActivity() {
         if(binding.navViewMainA?.isVisible == true){
             drawer_layout?.closeDrawer(GravityCompat.START)
         }else {
-           /* val homeItem: MenuItem? = bottomNavShift?.getMenu()?.getItem(0)
-            var count = supportFragmentManager.backStackEntryCount
-            Log.d("countofFragment",count.toString())*/
-
             val homeItem: MenuItem? = bottomNavShift?.getMenu()?.getItem(0)
-            Log.d("checkCountfdn", homeItem.toString())
-            if (supportFragmentManager.backStackEntryCount > 0) {
-               // supportFragmentManager.popBackStack()
-                bottomNavShift?.setSelectedItemId(homeItem?.getItemId()!!)
+            if (bottomNavShift?.getSelectedItemId() == R.id.Home) {
+                finish();
             } else {
-                // If the back stack is empty, handle the back press as needed
-                super.onBackPressed()
+                supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                bottomNavShift?.setSelectedItemId(homeItem?.getItemId()!!)
+
+                // If not on the main screen, navigate back within the app
+                super.onBackPressed();
             }
         }
     }
