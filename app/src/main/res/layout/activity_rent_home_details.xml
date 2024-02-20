@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:text="The Taj Hotel Bangalore"
+                android:text="Rentend Place Details"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -44,6 +44,7 @@
                 android:layout_gravity="center_vertical"
                 android:background="?selectableItemBackground"
                 android:padding="15dp"
+                android:visibility="invisible"
                 android:src="@drawable/share"
                 app:tint="@color/black" />
 
@@ -62,7 +63,7 @@
                 <com.synnapps.carouselview.CarouselView
                     android:id="@+id/cv_rent"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="280dp"
                     app:fillColor="#FFFFFFFF"
                     app:pageColor="#00000000"
                     app:radius="3dp"
@@ -797,6 +798,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/proxima_nova_bold"
                                 android:text="Read More.."
+                                android:visibility="invisible"
                                 android:textColor="#0E5E2B"
                                 android:textSize="18sp" />
                         </LinearLayout>
@@ -824,7 +826,6 @@
     <LinearLayout
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
-        android:background="@color/transparent1"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
@@ -845,7 +846,7 @@
                 android:insetTop="0dp"
                 android:textSize="14sp"
                 android:insetBottom="0dp"
-                android:text="Call Us"
+                android:text="Call"
                 android:textColor="@color/white" />
 
 
@@ -869,7 +870,7 @@
                 android:insetTop="0dp"
                 android:textSize="14sp"
                 android:insetBottom="0dp"
-                android:text="Message us"
+                android:text="WhatsApp"
                 android:textColor="@color/white" />
 
         </LinearLayout>

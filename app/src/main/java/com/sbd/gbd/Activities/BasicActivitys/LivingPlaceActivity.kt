@@ -9,6 +9,7 @@ import com.sbd.gbd.R
 import android.os.AsyncTask
 import android.os.Handler
 import android.widget.ImageView
+import android.widget.TextView
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.DataSnapshot
@@ -29,6 +30,7 @@ class LivingPlaceActivity : AppCompatActivity() {
     var backButton: ImageView? = null
     var type: String? = null
     var iv_back_leving : ImageView? = null
+    var tv_heading : TextView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_center_home)
@@ -36,7 +38,9 @@ class LivingPlaceActivity : AppCompatActivity() {
         type = bundle?.getString("center")
         //backButton = findViewById(R.id.back_tool)
         rv_center_prop = findViewById(R.id.rv_center_prop)
-        iv_back_leving = findViewById(R.id.iv_back_leving);
+        iv_back_leving = findViewById(R.id.iv_back_leving)
+        tv_heading = findViewById(R.id.tv_heading)
+        tv_heading?.setText("Homes or Commercial Placess ")
         AsyncTask.execute { fetchdata() }
 
         iv_back_leving?.setOnClickListener {
@@ -45,7 +49,7 @@ class LivingPlaceActivity : AppCompatActivity() {
     }
 
     private fun fetchdata() {
-        val productsinfo = FirebaseDatabase.getInstance().reference.child("livingplaceforyou")
+        val productsinfo = FirebaseDatabase.getInstance().reference.child("livingplaceforyou").orderByChild(AppConstants.Status).equalTo(AppConstants.user)
         productsinfo?.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -75,15 +79,12 @@ class LivingPlaceActivity : AppCompatActivity() {
                                     userData["discription"].toString(),
                                     userData[AppConstants.image2].toString(),
                                     userData[AppConstants.image].toString(),
-                                    userData[AppConstants.Status].toString()
+                                    "","","","","","","",
+                                    AppConstants.user
                                 )
                             )
                         } catch (cce: ClassCastException) {
-                            try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
-                            } catch (cce2: ClassCastException) {
-                            }
+
                         }
                     }
 

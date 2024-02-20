@@ -17,7 +17,7 @@ class HotelsModel(
     var parking: String? = "",
     var discription: String? = "",
     var Rating: String? = "",
-    var Status: String? = "",
+    var status: String? = "",
     var point1: String? = "",
     var point2: String? = "",
     var point3: String? = "",

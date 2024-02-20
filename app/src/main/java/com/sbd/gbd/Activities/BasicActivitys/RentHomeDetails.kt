@@ -9,6 +9,7 @@ import com.sbd.gbd.Model.LivingPlaceModel
 import com.sbd.gbd.Utilitys.AppConstants
 import com.google.firebase.database.*
 import com.sbd.gbd.R
+import com.sbd.gbd.Utilitys.Utilitys
 import com.synnapps.carouselview.CarouselView
 import com.synnapps.carouselview.ImageListener
 
@@ -36,6 +37,9 @@ class RentHomeDetails : AppCompatActivity() {
     private var productID = ""
     private lateinit var url: Array<String>
     var carouselView: CarouselView? = null
+    private var number :String? = ""
+    private var name :String? = ""
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,9 +70,24 @@ class RentHomeDetails : AppCompatActivity() {
         tv_rent_posted_by = findViewById(R.id.tv_rent_posted_by)
         tv_rent_status = findViewById(R.id.tv_rent_status)
         btn_rent_whatsApp = findViewById(R.id.btn_rent_whatsApp)
+        btn_rent_call = findViewById(R.id.btn_rent_call)
+        var utilitys = Utilitys()
+
 
         btn_rent_whatsApp?.setOnClickListener(){
+            utilitys.navigateCall(
+                this,
+                number,
+                name
+            )
+        }
 
+        btn_rent_call?.setOnClickListener {
+            utilitys.navigateCall(
+                this,
+                number,
+                name
+            )
         }
 
         getProductDetails(productID)
@@ -89,6 +108,8 @@ class RentHomeDetails : AppCompatActivity() {
                     tv_rent_type?.setText(products?.category)
                     tv_rent_deposite?.setText(products?.deposit)
                     tv_rent_parking?.setText(products?.parking)
+                    number = products?.contactNumber
+                    name = products?.postedBY
                     //tv_ads_posted.setText(products?.Postedby)
                     tv_rent_availableFrom?.setText(products?.availableFrom)
                     tv_rent_no_bedrooms?.setText(products?.bedroom)
@@ -104,7 +125,7 @@ class RentHomeDetails : AppCompatActivity() {
                     if(products?.status == "1"){
 
                     }else{
-                        tv_rent_status?.setText("Not Available")
+                       // tv_rent_status?.setText("Not Available")
                     }
                     url = products?.image2?.split("---")?.toTypedArray()!!
                     carouselView?.setImageListener(imageListener)

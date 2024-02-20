@@ -10,7 +10,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_card_deals_center"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
@@ -107,7 +107,6 @@
                             android:id="@+id/tv_home_advance"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:drawableStart="@drawable/ic_rupees_ads"
                             android:drawablePadding="3dp"
                             android:fontFamily="@font/proxima_nova_bold"
                             android:text="50,000,00"
@@ -182,7 +181,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Website :"
+                            android:text="Parking :"
                             android:textColor="@color/black"
                             android:textSize="12sp"
                             android:fontFamily="@font/lato"/>
@@ -200,7 +199,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/proxima_nova_bold"
-                            android:text="3000 sft."
+                            android:text="Available"
                             android:textColor="@color/black"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -250,6 +249,84 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/ll_call"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="@dimen/margin_10dp"
+                    android:background="@drawable/button_capsule"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_contect_whome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="Contact:"
+                        android:textColor="@color/white" />
+
+
+                    <ImageView
+                        android:id="@+id/iv_call_bottom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_call"
+                        app:tint="@color/white" />
+
+
+                    <ImageView
+                        android:id="@+id/iv_whatsapp_bottom"
+                        android:layout_width="25dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:src="@drawable/whatsapp"
+                        android:text="Call Us"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:visibility="visible" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_approve"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="@dimen/margin_10dp"
+                    android:background="@drawable/button_capsule"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_remove"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="Approve"
+                        android:textColor="@color/white" />
+
+
+                </LinearLayout>
 
             </LinearLayout>
 

@@ -78,11 +78,7 @@ class SeeAllLayoutActivity : AppCompatActivity(), View.OnClickListener {
                                         + "---" + userData[AppConstants.propertysize] + "---" + userData[AppConstants.location] + "---" + userData[AppConstants.number] + "---" + userData[AppConstants.type]
                             )
                         } catch (cce: ClassCastException) {
-                            try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
-                            } catch (cce2: ClassCastException) {
-                            }
+
                         }
                     }
                     layoutAdaptor = SeeallLayouts(layoutlist, this@SeeAllLayoutActivity)

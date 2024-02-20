@@ -119,7 +119,7 @@ class HotelsDetails : AppCompatActivity() {
                     } else {
                         tv_rent_posted_on?.setText(products?.postedOn)
                     }*/
-                    if(products?.Status == "1"){
+                    if(products?.status == "1"){
 
                     }else{
                         tv_rent_status?.setText("Not Available")

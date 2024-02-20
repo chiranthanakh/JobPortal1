@@ -241,7 +241,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun fetchpropertys() {
-        val coroselimage = FirebaseDatabase.getInstance().reference.child("Products")
+        val coroselimage = FirebaseDatabase.getInstance().reference.child("Products").orderByChild(AppConstants.Status).equalTo(AppConstants.user)
         coroselimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -297,7 +297,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun fetchbusiness() {
-        val coroselimage = FirebaseDatabase.getInstance().reference.child("BusinessListing")
+        val coroselimage = FirebaseDatabase.getInstance().reference.child("BusinessListing").orderByChild(AppConstants.Status).equalTo(AppConstants.user)
         coroselimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -353,7 +353,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun fetchConstruction() {
-        val coroselimage = FirebaseDatabase.getInstance().reference.child("constructionforyou")
+        val coroselimage = FirebaseDatabase.getInstance().reference.child("constructionforyou").orderByChild(AppConstants.Status).equalTo(AppConstants.user)
         coroselimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {

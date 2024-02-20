@@ -141,7 +141,7 @@ class BusinessActivity : AppCompatActivity(), View.OnClickListener, FilterCatego
     }
 
     private fun fetchbusiness(cat: String) {
-        val coroselimage = FirebaseDatabase.getInstance().reference.child("BusinessListing")
+        val coroselimage = FirebaseDatabase.getInstance().reference.child("BusinessListing").orderByChild(AppConstants.Status).equalTo(AppConstants.user)
         coroselimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {

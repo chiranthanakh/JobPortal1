@@ -124,7 +124,7 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
         binding.llConstructions.setOnClickListener(this)
         binding.llHomeRent.setOnClickListener(this)
         binding.llTravels.setOnClickListener(this)
-        binding.llCommercialRent.setOnClickListener(this)
+        binding.llHotels.setOnClickListener(this)
 
         AsyncTask.execute {
             fetchcorosel()
@@ -377,14 +377,6 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
 
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.cv_jobs -> {
-                val intent: Intent
-                if (name == "") {
-
-                } else {
-
-                }
-            }
 
             R.id.cv_loans -> {
                 val intent2 = Intent(context, LoanActivity::class.java)
@@ -429,7 +421,7 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                 startActivity(intent7)
             }
 
-            R.id.ll_commercial_rent -> {
+            R.id.ll_hotels -> {
                 val intent8 = Intent(context, CenterHomeActivity::class.java)
                 bundle.putString("center", "commercial")
                 intent8.putExtras(bundle)

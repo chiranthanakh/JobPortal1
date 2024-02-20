@@ -27,8 +27,8 @@ class Travelsactivity : AppCompatActivity(), View.OnClickListener {
     var iv_nav_view: ImageView? = null
     var ll_transport: LinearLayout? = null
     var ll_heavyvehicles: LinearLayout? = null
-    var vehicleinfo: ArrayList<TravelsModel?> = ArrayList<TravelsModel?>()
-    var vehicleinfofilter: ArrayList<TravelsModel?> = ArrayList<TravelsModel?>()
+    var vehicleinfo: ArrayList<TravelsModel> = ArrayList<TravelsModel>()
+    var vehicleinfofilter: ArrayList<TravelsModel> = ArrayList<TravelsModel>()
 
     private var travelsAdaptor: TravelsAdaptor? = null
     var rv_travels: RecyclerView? = null
@@ -63,7 +63,8 @@ class Travelsactivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun fetchdata() {
-        val productsinfo = FirebaseDatabase.getInstance().reference.child("travelsforyou")
+        val productsinfo = FirebaseDatabase.getInstance().reference.child("travelsforyou").orderByChild(AppConstants.Status).equalTo(AppConstants.user)
+        vehicleinfo.clear()
         productsinfo.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -92,13 +93,10 @@ class Travelsactivity : AppCompatActivity(), View.OnClickListener {
                                 )
                             )
                         } catch (cce: ClassCastException) {
-                            try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
-                            } catch (cce2: ClassCastException) {
-                            }
+
                         }
                     }
+
 
                     // Upcoming Event
                     travelsAdaptor = TravelsAdaptor(vehicleinfo, this@Travelsactivity)
@@ -182,6 +180,7 @@ class Travelsactivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun addtofilteradaptor() {
+        vehicleinfofilter.clear()
        travelsAdaptor = TravelsAdaptor(vehicleinfofilter, this@Travelsactivity)
         val elayoutManager: RecyclerView.LayoutManager =
             LinearLayoutManager(this@Travelsactivity, RecyclerView.VERTICAL, false)

@@ -16,7 +16,7 @@ import com.google.firebase.database.ValueEventListener
 class AdminTravelApproval : AppCompatActivity() {
 
     private lateinit var binding: ActivityAdminTravelApprovalBinding
-    var vehicleinfo: ArrayList<TravelsModel?> = ArrayList<TravelsModel?>()
+    var vehicleinfo: ArrayList<TravelsModel> = ArrayList<TravelsModel>()
     private var travelsAdaptor: TravelsAdaptor? = null
 
 

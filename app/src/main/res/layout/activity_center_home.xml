@@ -38,11 +38,12 @@
                 android:layout_height="match_parent">
 
                 <TextView
+                    android:id="@+id/tv_heading"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/lato_bold"
-                    android:text="Commercial or living spaces"
+                    android:text="Hotels And PG's"
                     android:textColor="@color/white"
                     android:layout_marginStart="10dp"
                     android:textSize="14sp" />
