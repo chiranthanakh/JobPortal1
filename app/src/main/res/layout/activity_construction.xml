@@ -58,7 +58,8 @@
                     android:paddingEnd="10dp"
                     android:textColor="@color/white"
                     android:background="@drawable/button_capsule"
-                    android:text="Add \n Business"
+                    android:text="post Business"
+                    android:textSize="12sp"
                     android:textStyle="bold" />
 
             </LinearLayout>

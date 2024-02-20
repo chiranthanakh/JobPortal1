@@ -1,0 +1,120 @@
+package com.sbd.gbd.Activities.BasicActivitys;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+
+import com.sbd.gbd.Adapters.CenterHomeadaptor;
+import com.sbd.gbd.Model.HotelsModel;
+import com.sbd.gbd.R;
+import com.sbd.gbd.Utilitys.AppConstants;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class CenterHomeActivity extends AppCompatActivity {
+
+    ArrayList<HotelsModel> productinfolist =new ArrayList();
+    private CenterHomeadaptor centerHomeadaptor;
+    RecyclerView rv_center_prop;
+    Handler mHandler = new Handler();
+    String type;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_center_home);
+
+        Bundle bundle = getIntent().getExtras();
+        type = bundle.getString("center");
+
+        rv_center_prop = findViewById(R.id.rv_center_prop);
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                fetchdata();
+            }
+        });
+    }
+
+    private void fetchdata() {
+        DatabaseReference productsinfo = FirebaseDatabase.getInstance().getReference().child("hotelsforyou");
+        productsinfo.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+                    HashMap<String, Object> dataMap = (HashMap<String, Object>) dataSnapshot.getValue();
+                    for (String key : dataMap.keySet()){
+                        Object data = dataMap.get(key);
+                        try{
+                            HashMap<String, Object> userData = (HashMap<String, Object>) data;
+                            productinfolist.add(new HotelsModel(
+                                    String.valueOf(userData.get("name")),
+                                    String.valueOf(userData.get(AppConstants.image)),
+                                    String.valueOf(userData.get(AppConstants.image2)),
+                                    String.valueOf(userData.get(AppConstants.pid)),
+                                    String.valueOf(userData.get(AppConstants.date)),
+                                    String.valueOf(userData.get(AppConstants.category)),
+                                    String.valueOf(userData.get(AppConstants.price)),
+                                    String.valueOf(userData.get("address")),
+                                    String.valueOf(userData.get("owner")),
+                                    String.valueOf(userData.get("alternative")),
+                                    String.valueOf(userData.get(AppConstants.number)),
+                                    String.valueOf(userData.get("email")),
+                                    String.valueOf(userData.get("website")),
+                                    String.valueOf(userData.get("parking")),
+                                    String.valueOf(userData.get("discription")),
+                                    String.valueOf(userData.get("Rating")),
+                                    String.valueOf(userData.get(AppConstants.Status)),
+                                    String.valueOf(userData.get(AppConstants.point1)),
+                                    String.valueOf(userData.get(AppConstants.point2)),
+                                    String.valueOf(userData.get(AppConstants.point3)),
+                                    String.valueOf(userData.get("Approval"))));
+
+                        }catch (ClassCastException cce){
+
+                            try{
+                                String mString = String.valueOf(dataMap.get(key));
+                                //addTextToView(mString);
+                            }catch (ClassCastException cce2){
+
+                            }
+                        }
+                    }
+
+                    // Upcoming Event
+                    centerHomeadaptor = new CenterHomeadaptor(productinfolist, CenterHomeActivity.this);
+                    RecyclerView.LayoutManager elayoutManager = new LinearLayoutManager(CenterHomeActivity.this,RecyclerView.VERTICAL,false);
+                    rv_center_prop.setLayoutManager(new GridLayoutManager(CenterHomeActivity.this, 1));
+                    rv_center_prop.setItemAnimator(new DefaultItemAnimator());
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            rv_center_prop.setAdapter(centerHomeadaptor);
+
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+}

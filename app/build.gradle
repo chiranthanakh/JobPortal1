@@ -10,7 +10,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.chiranths.jobportal1"
+        applicationId "com.sbd.gbd"
         minSdkVersion 28
         targetSdkVersion 34
         versionCode 11

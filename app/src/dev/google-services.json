@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:314239789737:android:937cc16e30f82243c797b8",
         "android_client_info": {
-          "package_name": "com.chiranths.jobportal1"
+          "package_name": "com.sbd.gbd"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "314239789737-nquaoflnt4r5ee5ha6a5h4aknalio28g.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.chiranths.jobportal1",
+            "package_name": "com.sbd.gbd",
             "certificate_hash": "365efea0436ca5a176206e37e5327c25bff01258"
           }
         },
@@ -47,7 +47,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:314239789737:android:937cc16e30f82243c797b8",
         "android_client_info": {
-          "package_name": "com.chiranths.jobportal1.debug"
+          "package_name": "com.sbd.gbd.debug"
         }
       },
       "oauth_client": [
@@ -55,7 +55,7 @@
           "client_id": "314239789737-nquaoflnt4r5ee5ha6a5h4aknalio28g.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.chiranths.jobportal1.debug",
+            "package_name": "com.sbd.gbd.debug",
             "certificate_hash": "365efea0436ca5a176206e37e5327c25bff01258"
           }
         },

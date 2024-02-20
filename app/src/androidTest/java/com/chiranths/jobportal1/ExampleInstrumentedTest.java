@@ -1,4 +1,4 @@
-package com.chiranths.jobportal1;
+package com.sbd.gbd;
 
 import android.content.Context;
 
