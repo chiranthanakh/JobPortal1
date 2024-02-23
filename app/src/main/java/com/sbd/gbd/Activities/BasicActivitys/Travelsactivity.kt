@@ -1,11 +1,13 @@
 package com.sbd.gbd.Activities.BasicActivitys
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +20,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.sbd.gbd.Activities.Admin.Admin_travels
 
 class Travelsactivity : AppCompatActivity(), View.OnClickListener {
     var ll_car: LinearLayout? = null
@@ -29,7 +32,7 @@ class Travelsactivity : AppCompatActivity(), View.OnClickListener {
     var ll_heavyvehicles: LinearLayout? = null
     var vehicleinfo: ArrayList<TravelsModel> = ArrayList<TravelsModel>()
     var vehicleinfofilter: ArrayList<TravelsModel> = ArrayList<TravelsModel>()
-
+    var btn_add_vehicle : AppCompatButton? = null
     private var travelsAdaptor: TravelsAdaptor? = null
     var rv_travels: RecyclerView? = null
     var mHandler = Handler()
@@ -48,6 +51,7 @@ class Travelsactivity : AppCompatActivity(), View.OnClickListener {
         ll_auto = findViewById(R.id.ll_auto)
         ll_transport = findViewById(R.id.ll_transports)
         ll_heavyvehicles = findViewById(R.id.ll_heavy_vehicles)
+        btn_add_vehicle = findViewById(R.id.btn_add_vehicle)
         iv_nav_view = findViewById(R.id.iv_nav_view)
         ll_car?.setOnClickListener(this)
         ll_bus?.setOnClickListener(this)
@@ -59,6 +63,11 @@ class Travelsactivity : AppCompatActivity(), View.OnClickListener {
 
         iv_nav_view?.setOnClickListener {
             finish()
+        }
+
+        btn_add_vehicle?.setOnClickListener {
+            val intent = Intent(this, Admin_travels::class.java)
+            startActivity(intent)
         }
     }
 
@@ -180,7 +189,6 @@ class Travelsactivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun addtofilteradaptor() {
-        vehicleinfofilter.clear()
        travelsAdaptor = TravelsAdaptor(vehicleinfofilter, this@Travelsactivity)
         val elayoutManager: RecyclerView.LayoutManager =
             LinearLayoutManager(this@Travelsactivity, RecyclerView.VERTICAL, false)

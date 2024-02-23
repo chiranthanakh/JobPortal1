@@ -16,7 +16,7 @@ class LivingPlaceModel(
     var sqft: String = "",
     var water: String = "",
     var parking: String = "",
-    var postedBY: String = "",
+    var postedBy: String = "",
     var discription: String = "",
     var image: String = "",
     var image2: String = "",

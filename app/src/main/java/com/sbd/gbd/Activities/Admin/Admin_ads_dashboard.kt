@@ -7,16 +7,20 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.OpenableColumns
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.GridView
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.RadioGroup
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.cast.framework.media.ImagePicker
 import com.sbd.gbd.R
 import com.sbd.gbd.Utilitys.AppConstants
 import com.sbd.gbd.Utilitys.UtilityMethods
@@ -25,6 +29,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.sbd.gbd.Adapters.ImageAdaptor
 
 class Admin_ads_dashboard : AppCompatActivity() {
     private var CategoryName: String? = null
@@ -68,12 +73,17 @@ class Admin_ads_dashboard : AppCompatActivity() {
     private var rbButton: RadioGroup? = null
     private var loadingBar: ProgressDialog? = null
     private var propertyType: Spinner? = null
+    private var gridView: GridView? = null
+    private var btn_corosel : ImageView? = null
+    private var ll_selfie : LinearLayout? = null
     var fileNameList: ArrayList<String> = ArrayList<String>()
     var fileDoneList: ArrayList<String> = ArrayList<String>()
     var categoryList: ArrayList<String> = ArrayList<String>()
     private var ads_name: EditText? = null
     private var arrayAdapter: ArrayAdapter<*>? = null
     var backBtn: ImageView? = null
+    private lateinit var imageAdapter: ImageAdaptor
+    private val selectedImages = mutableListOf<Uri>()
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,18 +97,19 @@ class Admin_ads_dashboard : AppCompatActivity() {
             ProductImagesRef = FirebaseStorage.getInstance().reference.child("ads")
             ProductsRef = FirebaseDatabase.getInstance().reference.child("adsforyou")
         }
-        val btn_corosel = findViewById<ImageView>(R.id.select_corosel_image)
+        btn_corosel = findViewById<ImageView>(R.id.select_image)
         val add_new_corosel = findViewById<Button>(R.id.add_new_ads)
         InputProductName = findViewById<View>(R.id.ads_name) as EditText
         InputProductDescription = findViewById<View>(R.id.ads_description) as EditText
         InputProductPrice = findViewById<View>(R.id.ads_price_admin) as EditText
         ads_facing = findViewById(R.id.ads_facing)
         edt_katha = findViewById(R.id.edt_property_katha)
-
+        gridView = findViewById(R.id.gridView)
         ads_approved_by = findViewById(R.id.ads_approved_by)
         ads_approved_by?.visibility = View.GONE
         rbButton = findViewById(R.id.rb_data)
         ads_name = findViewById(R.id.ads_name)
+        ll_selfie = findViewById(R.id.ll_selfie)
         et_size = findViewById(R.id.ads_size)
         et_text1 = findViewById(R.id.ads_text1)
         et_text2 = findViewById(R.id.ads_text2)
@@ -111,7 +122,9 @@ class Admin_ads_dashboard : AppCompatActivity() {
         propertyOwner = findViewById(R.id.edt_owner_name)
         loadingBar = ProgressDialog(this)
         propertyType = findViewById(R.id.sp_property_type)
-        btn_corosel.setOnClickListener { OpenGallery() }
+        imageAdapter = ImageAdaptor(this, selectedImages)
+        gridView?.adapter = imageAdapter
+        btn_corosel?.setOnClickListener { OpenGallery() }
         backBtn?.setOnClickListener(View.OnClickListener { finish() })
         add_new_corosel.setOnClickListener { ValidateProductData() }
         postedBy = "owner"
@@ -200,23 +213,22 @@ class Admin_ads_dashboard : AppCompatActivity() {
     }
 
     private fun StoreProductInformation(data: Intent) {
-
-        /*loadingBar.setTitle("Add New Product");
-        loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
-        loadingBar.setCanceledOnTouchOutside(false);
-        loadingBar.show();*/
         downloadImageUrl = ""
-
-        // If the user selected only one image
         if (data.data != null) {
             val uri = data.data
+            btn_corosel?.setImageURI(uri)
             uploadTostorage(data, uri)
         } else if (data.clipData != null) {
+            ll_selfie?.visibility = View.GONE
+            gridView?.visibility = View.VISIBLE
             val clipData = data.clipData
+            btn_corosel?.setImageURI(clipData?.getItemAt(0)?.uri)
             for (i in 0 until clipData!!.itemCount) {
                 val uri = clipData.getItemAt(i).uri
+                selectedImages.add(uri)
                 uploadTostorage(data, uri)
             }
+            imageAdapter.notifyDataSetChanged()
         }
     }
 
@@ -232,11 +244,6 @@ class Admin_ads_dashboard : AppCompatActivity() {
             Toast.makeText(this@Admin_ads_dashboard, "Error: $message", Toast.LENGTH_SHORT).show()
             loadingBar!!.dismiss()
         }.addOnSuccessListener {
-            Toast.makeText(
-                this@Admin_ads_dashboard,
-                "Product Image uploaded Successfully...",
-                Toast.LENGTH_SHORT
-            ).show()
             val urlTask = uploadTask.continueWithTask { task ->
                 if (!task.isSuccessful) {
                     throw task.exception!!
@@ -251,17 +258,16 @@ class Admin_ads_dashboard : AppCompatActivity() {
                         } else {
                             downloadImageUrl = downloadImageUrl + "---" + task.result.toString()
                         }
-                        Toast.makeText(
-                            this@Admin_ads_dashboard,
-                            "got the Product image Url Successfully...",
-                            Toast.LENGTH_SHORT
-                        ).show()
                     }
                 }
         }
     }
 
     private fun SaveProductInfoToDatabase() {
+       loadingBar?.setTitle("Posting New Property");
+       loadingBar?.setMessage("please wait while we are listing your property");
+       loadingBar?.setCanceledOnTouchOutside(false);
+       loadingBar?.show();
         val productMap = HashMap<String, Any?>()
         productMap[AppConstants.pid] = productRandomKey
         productMap[AppConstants.date] = UtilityMethods.getDate()
@@ -294,7 +300,8 @@ class Admin_ads_dashboard : AppCompatActivity() {
                     loadingBar!!.dismiss()
                     UtilityMethods.showToast(
                         this@Admin_ads_dashboard, "Property is added successfully..")
-
+                    loadingBar?.dismiss()
+                    finish()
                 } else {
                     loadingBar!!.dismiss()
                     val message = task.exception.toString()

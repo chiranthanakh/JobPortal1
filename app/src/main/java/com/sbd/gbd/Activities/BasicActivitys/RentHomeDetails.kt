@@ -26,6 +26,7 @@ class RentHomeDetails : AppCompatActivity() {
     var tv_rent_type : TextView? = null
     var tv_rent_no_bedrooms : TextView? = null
     var tv_rent_bathrooms : TextView? = null
+    var tv_bhk_number : TextView? = null
     var tv_rent_balcaney : TextView? = null
     var tv_rent_floor : TextView? = null
     var tv_rent_discription : TextView? = null
@@ -34,6 +35,8 @@ class RentHomeDetails : AppCompatActivity() {
     var tv_rent_status : TextView? = null
     var btn_rent_whatsApp : TextView? =null
     var btn_rent_call : TextView? =null
+    var tv_rent_amount : TextView? =null
+
     private var productID = ""
     private lateinit var url: Array<String>
     var carouselView: CarouselView? = null
@@ -55,8 +58,11 @@ class RentHomeDetails : AppCompatActivity() {
         tv_rent_price = findViewById(R.id.tv_rent_price);
         tv_rent_posted_on = findViewById(R.id.tv_rent_posted_on);
         tv_rent_deposite = findViewById(R.id.tv_rent_deposite);
+        tv_rent_amount = findViewById(R.id.tv_rent_amount);
+
         tv_rent_home_size = findViewById(R.id.tv_rent_home_size);
         tv_rent_parking = findViewById(R.id.tv_rent_parking)
+        tv_bhk_number = findViewById(R.id.tv_bhk_number)
         tv_rent_furnished = findViewById(R.id.tv_rent_furnished);
         tv_rent_availableFrom = findViewById(R.id.tv_rent_availableFrom);
         tv_rent_location = findViewById(R.id.tv_rent_location);
@@ -105,27 +111,24 @@ class RentHomeDetails : AppCompatActivity() {
                     tv_rent_discription?.setText(products?.discription)
                     tv_rent_location?.setText(products?.location)
                     tv_rent_home_size?.setText(products?.area)
-                    tv_rent_type?.setText(products?.category)
+                    tv_bhk_number?.setText(products?.nuBHK)
+                    tv_rent_type?.setText(products?.rent_lease)
                     tv_rent_deposite?.setText(products?.deposit)
                     tv_rent_parking?.setText(products?.parking)
+                    tv_rent_amount?.setText(products?.rentamount)
                     number = products?.contactNumber
-                    name = products?.postedBY
+                    name = products?.postedBy
                     //tv_ads_posted.setText(products?.Postedby)
                     tv_rent_availableFrom?.setText(products?.availableFrom)
                     tv_rent_no_bedrooms?.setText(products?.bedroom)
                     tv_rent_bathrooms?.setText(products?.bathroom)
                     tv_rent_balcaney?.setText(products?.balconey)
                     tv_rent_floor?.setText(products?.floore)
-                    tv_rent_posted_by?.setText(products?.postedBY)
+                    tv_rent_posted_by?.setText(products?.postedBy)
                     if (products?.postedOn == null) {
                         tv_rent_posted_on?.setVisibility(View.GONE)
                     } else {
                         tv_rent_posted_on?.setText(products?.postedOn)
-                    }
-                    if(products?.status == "1"){
-
-                    }else{
-                       // tv_rent_status?.setText("Not Available")
                     }
                     url = products?.image2?.split("---")?.toTypedArray()!!
                     carouselView?.setImageListener(imageListener)

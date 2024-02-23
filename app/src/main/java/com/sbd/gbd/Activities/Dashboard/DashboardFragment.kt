@@ -117,7 +117,7 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
         binding.tvSeeallUpcomming.setOnClickListener(this)
         search?.setOnClickListener(this)
         binding.searchLayout.setOnClickListener(this)
-        binding.ivSell.setOnClickListener(this)
+        binding.btnPost.setOnClickListener(this)
         binding.cvLoans.setOnClickListener(this)
         binding.cvServicess1.setOnClickListener(this)
         binding.cvJobs.setOnClickListener(this)
@@ -349,11 +349,7 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                                 )
                             )
                         } catch (cce: ClassCastException) {
-                            try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
-                            } catch (cce2: ClassCastException) {
-                            }
+
                         }
                     }
 
@@ -366,9 +362,7 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                     binding.rvDashProp.itemAnimator = DefaultItemAnimator()
                     mHandler.post { binding.rvDashProp.adapter = bottomhomeRecyclarviewAdaptor }
                 }
-                if (productinfolist.size == 0) {
-                    binding.llUpcommingProject.visibility = View.GONE
-                }
+
             }
 
             override fun onCancelled(databaseError: DatabaseError) {}
@@ -395,7 +389,7 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                 startActivity(intent2)
             }
 
-            R.id.iv_sell -> {
+            R.id.btn_post -> {
                 val intent4 = Intent(context, SellActivity::class.java)
                 startActivity(intent4)
             }

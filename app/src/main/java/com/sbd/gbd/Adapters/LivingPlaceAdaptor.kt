@@ -71,14 +71,14 @@ class LivingPlaceAdaptor(
             utilitys.navigateCall(
                 context,
                 productInfo.contactNumber,
-                productInfo.postedBY
+                productInfo.postedBy
             )
         }
         holder.iv_const_whatsapp_bottom.setOnClickListener { view: View? ->
             utilitys.navigateWhatsapp(
                 context,
                 productInfo.contactNumber,
-                productInfo.postedBY
+                productInfo.postedBy
             )
         }
     }

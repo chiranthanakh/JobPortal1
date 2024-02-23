@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".Activities.Propertys.AdminAddNewProductActivity">
+    android:background="@color/white">
 
 
     <LinearLayout
@@ -48,7 +47,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/lato_bold"
-                        android:text="Property Details"
+                        android:text="Hotel Details"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -73,13 +72,13 @@
                     android:layout_margin="@dimen/margin_10dp"
                     android:visibility="visible"
                     android:orientation="vertical"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent">
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:orientation="vertical">
                         <TextView
-                            android:text="Upload Document"
+                            android:text="Upload Business Images"
                             android:gravity="center_vertical"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="@dimen/margin_10dp"
@@ -87,6 +86,19 @@
                             android:layout_weight="1"
                             android:textColor="@color/black"
                             android:layout_height="match_parent"/>
+
+                        <GridView
+                            android:id="@+id/gridView"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="@dimen/margin_10dp"
+                            android:gravity="center"
+                            android:visibility="gone"
+                            android:numColumns="4"
+                            android:horizontalSpacing="3dp"
+                            android:verticalSpacing="@dimen/margin_3_dp"
+                            android:stretchMode="columnWidth" />
                         <LinearLayout
                             android:id="@+id/ll_selfie"
                             app:layout_constraintTop_toTopOf="parent"
@@ -111,7 +123,7 @@
                                     android:layout_height="@dimen/dp_25"/>
 
                                 <ImageView
-                                    android:id="@+id/select_livingplace_image"
+                                    android:id="@+id/select_image"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:adjustViewBounds="true"
@@ -129,8 +141,11 @@
                                     android:layout_alignParentBottom="true"/>
 
                             </RelativeLayout>
+
+
                         </LinearLayout>
                     </LinearLayout>
+
                 </LinearLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -166,38 +181,26 @@
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <RadioGroup
+                    android:id="@+id/rb_data"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginStart="@dimen/margin_10dp"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:id="@+id/rb_hotel"
+                        android:text="Hotel"
+                        android:layout_weight="2"
+                        android:checked="true"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColorHint="@color/black"
-                        app:boxStrokeColor="@color/grey_light"
-                        app:hintTextColor="@color/black"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:startIconTint="@color/grey_dark">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edt_hotel_category"
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:background="@null"
-                            android:hint="select Hotel or PG"
-                            android:inputType="text"
-                            android:lines="4"
-                            android:padding="@dimen/dp_0"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/black"
-                            android:textSize="@dimen/text_size_14sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
+                        android:layout_height="wrap_content"/>
+                    <RadioButton
+                        android:id="@+id/rb_pg"
+                        android:text="PG"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </RadioGroup>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -322,8 +325,8 @@
                             android:layout_height="45dp"
                             android:background="@null"
                             android:hint="Phone number"
-                            android:inputType="text"
-                            android:lines="4"
+                            android:maxLength="10"
+                            android:inputType="number"
                             android:padding="@dimen/dp_0"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -355,8 +358,9 @@
                             android:layout_height="45dp"
                             android:background="@null"
                             android:hint="alternative number"
-                            android:inputType="text"
                             android:lines="4"
+                            android:maxLength="10"
+                            android:inputType="number"
                             android:padding="@dimen/dp_0"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"

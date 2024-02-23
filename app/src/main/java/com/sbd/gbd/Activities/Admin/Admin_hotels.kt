@@ -1,14 +1,19 @@
 package com.sbd.gbd.Activities.Admin
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.OpenableColumns
 import android.text.TextUtils
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.GridView
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.sbd.gbd.R
@@ -17,6 +22,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.sbd.gbd.Adapters.ImageAdaptor
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -39,10 +45,10 @@ class Admin_hotels : AppCompatActivity() {
     var point2: String? = null
     var point3: String? = null
     var parking: String? = null
+    private var loadingBar: ProgressDialog? = null
     var discription: String? = null
     private var edt_hotel_name: EditText? = null
     private  var edt_hotel_price:EditText? = null
-    private  var edt_hotel_category:EditText? = null
     private  var edt_hotel_address:EditText? = null
     private  var edt_hotel_contact_person:EditText? = null
     private  var edt_hotel_number:EditText? = null
@@ -63,6 +69,14 @@ class Admin_hotels : AppCompatActivity() {
     var fileNameList: ArrayList<String> = ArrayList<String>()
     var fileDoneList: ArrayList<Any> = ArrayList<Any>()
     var ads_name: EditText? = null
+    private var gridView: GridView? = null
+    private var add_images : ImageView? = null
+    private var ll_selfie : LinearLayout? = null
+    private var rb_data : RadioGroup? = null
+    private var iv_nav_view : ImageView? = null
+    private lateinit var imageAdapter: ImageAdaptor
+    private val selectedImages = mutableListOf<Uri>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_hotels)
@@ -72,11 +86,11 @@ class Admin_hotels : AppCompatActivity() {
     }
 
     private fun initilize() {
-        val add_images = findViewById<ImageView>(R.id.select_livingplace_image)
+        iv_nav_view = findViewById(R.id.iv_nav_view)
+         add_images = findViewById<ImageView>(R.id.select_image)
         val btn_add_livingplace = findViewById<Button>(R.id.livingplace_submit)
         edt_hotel_name = findViewById(R.id.edt_hotel_name)
         edt_hotel_price = findViewById<EditText>(R.id.edt_hotel_price)
-        edt_hotel_category = findViewById<EditText>(R.id.edt_hotel_category)
         edt_hotel_address = findViewById<EditText>(R.id.edt_hotel_address)
         edt_hotel_contact_person = findViewById<EditText>(R.id.edt_hotel_contact_person)
         edt_hotel_number = findViewById(R.id.edt_hotel_number)
@@ -86,10 +100,34 @@ class Admin_hotels : AppCompatActivity() {
         tv_hotel_fecility1 = findViewById<EditText>(R.id.tv_hotel_fecility1)
         tv_hotel_fecility2 = findViewById<EditText>(R.id.tv_hotel_fecility2)
         tv_hotel_fecility3 = findViewById(R.id.tv_hotel_fecility3)
+        rb_data = findViewById(R.id.rb_data)
         tv_hotel_parking = findViewById<EditText>(R.id.tv_hotel_parking)
         tv_hotel_discription = findViewById<EditText>(R.id.tv_hotel_discription)
-        add_images.setOnClickListener { OpenGallery() }
+        ll_selfie = findViewById(R.id.ll_selfie)
+        gridView = findViewById(R.id.gridView)
+        loadingBar = ProgressDialog(this)
+        add_images?.setOnClickListener { OpenGallery() }
         btn_add_livingplace.setOnClickListener { ValidateProductData() }
+
+        imageAdapter = ImageAdaptor(this, selectedImages)
+        gridView?.adapter = imageAdapter
+        category = "Hotel"
+
+        iv_nav_view?.setOnClickListener {
+            finish()
+        }
+
+        rb_data?.setOnCheckedChangeListener { _, id ->
+            when (id) {
+                R.id.rb_owner -> {
+                    category = "Hotel"
+                }
+
+                R.id.rb_agent -> {
+                    category = "PG"
+                }
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -108,23 +146,21 @@ class Admin_hotels : AppCompatActivity() {
         startActivityForResult(galleryIntent, GalleryPick)
     }
     private fun StoreProductInformation(data: Intent) {
-
-        /*loadingBar.setTitle("Add New Product");
-        loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
-        loadingBar.setCanceledOnTouchOutside(false);
-        loadingBar.show();*/
         downloadImageUrl = ""
-
-        // If the user selected only one image
         if (data.data != null) {
             val uri = data.data
+            add_images?.setImageURI(uri)
             uploadTostorage(data, uri)
         } else if (data.clipData != null) {
+            ll_selfie?.visibility = View.GONE
+            gridView?.visibility = View.VISIBLE
             val clipData = data.clipData
             for (i in 0 until clipData!!.itemCount) {
                 val uri = clipData.getItemAt(i).uri
+                selectedImages.add(uri)
                 uploadTostorage(data, uri)
             }
+            imageAdapter.notifyDataSetChanged()
         }
     }
 
@@ -144,11 +180,6 @@ class Admin_hotels : AppCompatActivity() {
             val message = e.toString()
             Toast.makeText(this@Admin_hotels, "Error: $message", Toast.LENGTH_SHORT).show()
         }?.addOnSuccessListener {
-            Toast.makeText(
-                this@Admin_hotels,
-                "Product Image uploaded Successfully...",
-                Toast.LENGTH_SHORT
-            ).show()
             val urlTask = uploadTask.continueWithTask { task ->
                 if (!task.isSuccessful) {
                     throw task.exception!!
@@ -162,12 +193,6 @@ class Admin_hotels : AppCompatActivity() {
                     } else {
                         downloadImageUrl = downloadImageUrl + "---" + task.result.toString()
                     }
-                    println("url2---$downloadImageUrl")
-                    Toast.makeText(
-                        this@Admin_hotels,
-                        "got the Product image Url Successfully...",
-                        Toast.LENGTH_SHORT
-                    ).show()
                 }
             }
         }
@@ -176,7 +201,6 @@ class Admin_hotels : AppCompatActivity() {
     private fun ValidateProductData() {
         name = edt_hotel_name?.text.toString()
         price = edt_hotel_price?.getText().toString()
-        category = edt_hotel_category?.getText().toString()
         address = edt_hotel_address?.getText().toString()
         contact_person = edt_hotel_contact_person?.text.toString()
         number = edt_hotel_number?.getText().toString()
@@ -205,7 +229,10 @@ class Admin_hotels : AppCompatActivity() {
     }
 
     private fun SaveProductInfoToDatabase() {
-
+        loadingBar?.setTitle("List Your Hotel/PG");
+        loadingBar?.setMessage("please wait while we are adding the new Property.");
+        loadingBar?.setCanceledOnTouchOutside(false);
+        loadingBar?.show();
         val productMap = HashMap<String, Any?>()
         productMap[AppConstants.pid] = productRandomKey
         productMap["name"] = name
@@ -235,9 +262,11 @@ class Admin_hotels : AppCompatActivity() {
                     //startActivity(intent);
                     Toast.makeText(
                         this@Admin_hotels,
-                        "Product is added successfully..",
+                        "Hotel is added successfully. Please wait for approval",
                         Toast.LENGTH_SHORT
                     ).show()
+                    finish()
+                    loadingBar?.dismiss()
                 } else {
                     val message = task.exception.toString()
                     Toast.makeText(this@Admin_hotels, "Error: $message", Toast.LENGTH_SHORT)

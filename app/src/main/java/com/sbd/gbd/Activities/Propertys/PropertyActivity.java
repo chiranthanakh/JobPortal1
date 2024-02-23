@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.sbd.gbd.Activities.Admin.AdminAddNewProductActivity;
 import com.sbd.gbd.Activities.BasicActivitys.SearchActivity;
 import com.sbd.gbd.Adapters.AdsAdaptor;
 import com.sbd.gbd.Adapters.PropertyAdaptor;
@@ -156,12 +157,6 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
 
                         } catch (ClassCastException cce) {
 
-                            try {
-                                String mString = String.valueOf(dataMap.get(key));
-                                //addTextToView(mString);
-                            } catch (ClassCastException cce2) {
-
-                            }
                         }
                     }
                     Collections.shuffle(adslist);
@@ -234,12 +229,6 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
 
                         }catch (ClassCastException cce){
 
-                            try{
-                                String mString = String.valueOf(dataMap.get(key));
-                                //addTextToView(mString);
-                            }catch (ClassCastException cce2){
-
-                            }
                         }
                     }
 
@@ -276,7 +265,6 @@ public class PropertyActivity extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.iv_sites:
-
                 propertyAdaptor =new PropertyAdaptor(siteslist, PropertyActivity.this);
                 RecyclerView.LayoutManager nlayoutManager = new LinearLayoutManager(PropertyActivity.this, RecyclerView.VERTICAL, false);
                 recyclerView.setLayoutManager(nlayoutManager);

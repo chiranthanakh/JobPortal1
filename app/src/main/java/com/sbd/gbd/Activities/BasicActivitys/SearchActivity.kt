@@ -8,23 +8,19 @@ import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
-import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.sbd.gbd.Activities.Propertys.AdminAddNewProductActivity
 import com.sbd.gbd.Activities.Propertys.ProductViewHolder
 import com.sbd.gbd.Activities.Propertys.Products
 import com.sbd.gbd.Adapters.AdsAdaptor
 import com.sbd.gbd.Adapters.BusinessAdaptor
 import com.sbd.gbd.Adapters.ConstructorAdaptor
-import com.sbd.gbd.Adapters.ItemAdapter
 import com.sbd.gbd.Adapters.PropertyAdaptor
 import com.sbd.gbd.Model.AdsModel
 import com.sbd.gbd.Model.BusinessModel
@@ -33,27 +29,20 @@ import com.sbd.gbd.Model.FilterModel
 import com.sbd.gbd.R
 import com.sbd.gbd.Utilitys.AppConstants
 import com.firebase.ui.database.FirebaseRecyclerAdapter
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.sbd.gbd.Activities.Admin.AdminAddNewProductActivity
 import java.util.Collections
 import java.util.Locale
 
 
 class SearchActivity : AppCompatActivity(), View.OnClickListener {
-    private val ProductsRef: DatabaseReference? = null
     var adapter: FirebaseRecyclerAdapter<Products, ProductViewHolder>? = null
     private var recyclerView: RecyclerView? = null
     var layoutManager: RecyclerView.LayoutManager? = null
-    var btn_add: Button? = null
-    var iv_sites: ImageView? = null
-    var iv_green_land: ImageView? = null
-    var iv_home: ImageView? = null
-    var iv_commercial: ImageView? = null
     var back_toolbar_search: ImageView? = null
     var mHandler = Handler()
     var propertylist: ArrayList<String> = ArrayList<String>()
@@ -63,7 +52,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
     var Homeslist: ArrayList<String> = ArrayList<String>()
     var Rentallist: ArrayList<String> = ArrayList<String>()
     var adslist: ArrayList<AdsModel> = ArrayList<AdsModel>()
-    var constructionList: ArrayList<ConstructionModel?> = ArrayList<ConstructionModel?>()
+    var constructionList: ArrayList<ConstructionModel> = ArrayList<ConstructionModel>()
     var businesslist = ArrayList<BusinessModel>()
     var businesslistFiltered = ArrayList<BusinessModel>()
     var constlistFiltered = ArrayList<ConstructionModel>()
@@ -72,15 +61,10 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
     var businessAdaptor: BusinessAdaptor? = null
     var adsAdaptor: AdsAdaptor? = null
     var recyclarviewads: RecyclerView? = null
-    var cv_homes: CardView? = null
-    var cv_sites: CardView? = null
-    var cv_green: CardView? = null
-    var cv_comerical: CardView? = null
     var edt_filter: SearchView? = null
     var buttonToggleGroup: MaterialButtonToggleGroup? = null
     var filterarraylist: ArrayList<String> = ArrayList<String>()
     var type = ""
-    private lateinit var firebaseadapter: ItemAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
@@ -101,16 +85,6 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
             type = bundle.getString("searchtype", "")
         }
         initilize()
-
-        /* val query: Query = FirebaseDatabase.getInstance().reference.child("items").orderByChild("itemName")
-         val options = FirebaseRecyclerOptions.Builder<BusinessModel>()
-             .setQuery(query, BusinessModel::class.java)
-             .build()
-         firebaseadapter = ItemAdapter(options)
-
-         val recyclerView: RecyclerView = findViewById(R.id.recycler_search_results)
-         recyclerView.layoutManager = LinearLayoutManager(this)
-         recyclerView.adapter = adapter?*/
     }
 
     private fun initilize() {
@@ -134,7 +108,6 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         buttonToggleGroup?.addOnButtonCheckedListener { _, checkedId, isChecked ->
-            val selectedButton = findViewById<MaterialButton>(checkedId)
             if (isChecked) {
                 when (checkedId) {
                     R.id.button1 -> {
@@ -216,11 +189,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
                                 )
                             )
                         } catch (cce: ClassCastException) {
-                            try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
-                            } catch (cce2: ClassCastException) {
-                            }
+
                         }
                     }
                     Collections.shuffle(adslist)
@@ -331,11 +300,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
                                 )
                             )
                         } catch (cce: ClassCastException) {
-                            try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
-                            } catch (cce2: ClassCastException) {
-                            }
+
                         }
                     }
                     businessAdaptor = BusinessAdaptor(businesslist, this@SearchActivity)
@@ -462,18 +427,6 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun filter(text: String) {
-
-        /*val newQuery: Query = FirebaseDatabase.getInstance().getReference("constructionforyou")
-            .startAt(text)
-            .endAt(text + "\uf8ff")
-
-        val newOptions: FirebaseRecyclerOptions<BusinessModel> =
-            FirebaseRecyclerOptions.Builder<BusinessModel>()
-                .setQuery(newQuery, BusinessModel::class.java)
-                .build()*?
-
-        Log.d("testModuled",newOptions.toString())*/
-
         if (type.equals("business")) {
             if (text == "") {
             } else {
@@ -601,15 +554,5 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
             mHandler.post { recyclerView!!.adapter = propertyAdaptor }
             propertyAdaptor!!.notifyItemRangeInserted(0, greenlandlist.size)
         }
-    }
-
-    private fun finterAdaptor() {
-        propertyAdaptor = PropertyAdaptor(greenlandlist, this@SearchActivity)
-        val nlayoutManager3: RecyclerView.LayoutManager =
-            LinearLayoutManager(this@SearchActivity, RecyclerView.VERTICAL, false)
-        recyclerView!!.layoutManager = nlayoutManager3
-        recyclerView!!.itemAnimator = DefaultItemAnimator()
-        mHandler.post { recyclerView!!.adapter = propertyAdaptor }
-        propertyAdaptor!!.notifyItemRangeInserted(0, greenlandlist.size)
     }
 }

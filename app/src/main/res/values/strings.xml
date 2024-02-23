@@ -16,13 +16,26 @@
     </string-array>
 
     <string-array name="vehicle_type">
-        <item>" "</item>
+        <item>"Please Select Type of vehicle "</item>
         <item>"Cab"</item>
         <item>"Tempo Traveler"</item>
         <item>"Bus"</item>
         <item>"Auto"</item>
         <item>"goods vehicles"</item>
         <item>"Heavy Vehicles"</item>
+    </string-array>
+
+    <string-array name="building_type">
+    <item>"Please Select Type"</item>
+    <item>"Residential"</item>
+    <item>"Commercial"</item>
+    </string-array>
+
+    <string-array name="home_type">
+        <item>"Please Select Rent or Lease"</item>
+        <item>"Rent"</item>
+        <item>"Lease"</item>
+
     </string-array>
 
     <string-array name="property_type">

@@ -10,16 +10,16 @@
       "client_info": {
         "mobilesdk_app_id": "1:314239789737:android:937cc16e30f82243c797b8",
         "android_client_info": {
-          "package_name": "com.sbd.gbd"
+          "package_name": "com.chiranths.jobportal1"
         }
       },
       "oauth_client": [
         {
-          "client_id": "314239789737-nquaoflnt4r5ee5ha6a5h4aknalio28g.apps.googleusercontent.com",
+          "client_id": "314239789737-9doqfgtvdolceptb6lm395rvgtjedr3o.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.sbd.gbd",
-            "certificate_hash": "365efea0436ca5a176206e37e5327c25bff01258"
+            "package_name": "com.chiranths.jobportal1",
+            "certificate_hash": "2feff55067a17ed9f0409814bab411fbccccc94d"
           }
         },
         {
@@ -45,18 +45,18 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:314239789737:android:937cc16e30f82243c797b8",
+        "mobilesdk_app_id": "1:314239789737:android:965f812303fcbd6fc797b8",
         "android_client_info": {
           "package_name": "com.sbd.gbd.debug"
         }
       },
       "oauth_client": [
         {
-          "client_id": "314239789737-nquaoflnt4r5ee5ha6a5h4aknalio28g.apps.googleusercontent.com",
+          "client_id": "314239789737-5n4qr3p8kkfamt7kisutsau53v1vanll.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.sbd.gbd.debug",
-            "certificate_hash": "365efea0436ca5a176206e37e5327c25bff01258"
+            "certificate_hash": "2feff55067a17ed9f0409814bab411fbccccc94d"
           }
         },
         {
@@ -80,7 +80,6 @@
         }
       }
     }
-
   ],
   "configuration_version": "1"
 }

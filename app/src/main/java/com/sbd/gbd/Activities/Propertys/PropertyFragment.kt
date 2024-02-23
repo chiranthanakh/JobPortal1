@@ -181,11 +181,7 @@ class PropertyFragment : Fragment(), View.OnClickListener {
                                 )
                             )
                         } catch (cce: ClassCastException) {
-                            try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
-                            } catch (cce2: ClassCastException) {
-                            }
+
                         }
                     }
                     Collections.shuffle(adslist)
@@ -211,7 +207,7 @@ class PropertyFragment : Fragment(), View.OnClickListener {
 
     private fun fetchproducts(type : String) {
         var coroselimage = if(type == "" || type == null ) {
-            FirebaseDatabase.getInstance().reference.child("Products")
+            FirebaseDatabase.getInstance().reference.child("Products").orderByChild(AppConstants.Status).equalTo(AppConstants.user)
         } else {
             FirebaseDatabase.getInstance().reference.child("Products").orderByChild(AppConstants.type).equalTo(type)
         }
@@ -227,17 +223,21 @@ class PropertyFragment : Fragment(), View.OnClickListener {
                         val data = dataMap[key]
                         try {
                             val userData = data as HashMap<String, Any>?
+                            if (userData?.get(AppConstants.Status)
+                                    ?.equals(AppConstants.user) == true
+                            ) {
                             propertylist.add(
                                 userData!![AppConstants.image].toString() + "!!" + userData[AppConstants.pid] + "---" + userData[AppConstants.description] + "---" +
                                         userData[AppConstants.category] + "---" + userData[AppConstants.price] + "---" + userData[AppConstants.pname]
-                                        + "---" + userData[AppConstants.propertysize] + "---" + userData[AppConstants.location] + "---" + userData[AppConstants.number] + "---" + userData[AppConstants.type]
+                                        + "---" + userData[AppConstants.propertysize] + "---" + userData[AppConstants.location] + "---" + userData[AppConstants.number] + "---" + userData[AppConstants.type] + "---" + userData[AppConstants.Status]
                             )
+                        }
 
                         } catch (cce: ClassCastException) {
 
                         }
                     }
-                    propertyAdaptor = PropertyAdaptor(propertylist, context)
+                    propertyAdaptor = PropertyAdaptor(propertylist, requireContext())
                     val nlayoutManager: RecyclerView.LayoutManager =
                         LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                     recyclerView!!.layoutManager = nlayoutManager
@@ -260,7 +260,7 @@ class PropertyFragment : Fragment(), View.OnClickListener {
             }
 
             R.id.iv_sites -> {
-                propertyAdaptor = PropertyAdaptor(siteslist, context)
+                propertyAdaptor = PropertyAdaptor(siteslist, requireContext())
                 val nlayoutManager: RecyclerView.LayoutManager =
                     LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                 recyclerView!!.layoutManager = nlayoutManager
@@ -270,7 +270,7 @@ class PropertyFragment : Fragment(), View.OnClickListener {
             }
 
             R.id.iv_home -> {
-                propertyAdaptor = PropertyAdaptor(Homeslist, context)
+                propertyAdaptor = PropertyAdaptor(Homeslist, requireContext())
                 val nlayoutManager1: RecyclerView.LayoutManager =
                     LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                 recyclerView!!.layoutManager = nlayoutManager1
@@ -280,7 +280,7 @@ class PropertyFragment : Fragment(), View.OnClickListener {
             }
 
             R.id.iv_commercial -> {
-                propertyAdaptor = PropertyAdaptor(Rentallist, context)
+                propertyAdaptor = PropertyAdaptor(Rentallist, requireContext())
                 val nlayoutManager2: RecyclerView.LayoutManager =
                     LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                 recyclerView!!.layoutManager = nlayoutManager2
@@ -290,7 +290,7 @@ class PropertyFragment : Fragment(), View.OnClickListener {
             }
 
             R.id.iv_green_land -> {
-                propertyAdaptor = PropertyAdaptor(greenlandlist, context)
+                propertyAdaptor = PropertyAdaptor(greenlandlist, requireContext())
                 val nlayoutManager3: RecyclerView.LayoutManager =
                     LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                 recyclerView!!.layoutManager = nlayoutManager3

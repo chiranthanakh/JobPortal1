@@ -167,7 +167,6 @@
                             android:orientation="vertical">
 
                             <TextView
-
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/proxima_nova_bold"
@@ -212,7 +211,102 @@
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/proxima_nova_regular"
                                         android:gravity="start|center"
-                                        android:text="Deposit:"
+                                        android:text="Rent or Lease:"
+                                        android:textColor="@color/black"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:id="@+id/tv_rent_type"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:drawablePadding="3dp"
+                                        android:fontFamily="@font/lato_bold"
+                                        android:gravity="center|start"
+                                        android:maxLines="2"
+                                        android:text=""
+                                        android:textColor="@color/black"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:fontFamily="@font/proxima_nova_regular"
+                                        android:gravity="start|center"
+                                        android:text="Number of BHK:"
+                                        android:textColor="@color/black"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:id="@+id/tv_bhk_number"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:drawablePadding="3dp"
+                                        android:fontFamily="@font/lato_bold"
+                                        android:gravity="center|start"
+                                        android:maxLines="2"
+                                        android:text=""
+                                        android:textColor="@color/black"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:fontFamily="@font/proxima_nova_regular"
+                                        android:gravity="start|center"
+                                        android:text="Deposit Amount:"
                                         android:textColor="@color/black"
                                         android:textSize="14sp" />
                                 </LinearLayout>
@@ -243,6 +337,54 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
+                                android:gravity="center"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:fontFamily="@font/proxima_nova_regular"
+                                        android:gravity="start|center"
+                                        android:text="Rent/Lease Amount:"
+                                        android:textColor="@color/black"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:id="@+id/tv_rent_amount"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:drawableStart="@drawable/ic_rupees_ads"
+                                        android:drawablePadding="3dp"
+                                        android:fontFamily="@font/lato_bold"
+                                        android:gravity="center|start"
+                                        android:maxLines="2"
+                                        android:text=""
+                                        android:textColor="@color/black"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
                                 android:layout_marginTop="10dp"
                                 android:gravity="center"
                                 android:orientation="horizontal">
@@ -259,7 +401,7 @@
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/proxima_nova_regular"
                                         android:gravity="start|center"
-                                        android:text="Area Square Fit:"
+                                        android:text="Measurment :"
                                         android:textColor="@color/black"
                                         android:textSize="14sp" />
                                 </LinearLayout>
@@ -380,6 +522,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginTop="10dp"
                                 android:gravity="center"
+                                android:visibility="gone"
                                 android:orientation="horizontal">
 
                                 <LinearLayout
@@ -610,6 +753,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
+                            android:visibility="gone"
                             android:orientation="vertical">
 
                             <LinearLayout
@@ -636,7 +780,6 @@
                                         android:textSize="14sp" />
 
                                     <TextView
-                                        android:id="@+id/tv_rent_type"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="10dp"

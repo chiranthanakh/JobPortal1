@@ -16,6 +16,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_logo1"
@@ -143,9 +144,16 @@
         <activity
             android:name="com.sbd.gbd.Activities.Propertys.PropertyDetailsActivity"
             android:exported="false" />
-        <activity
-            android:name=".Activities.Servicess.ServicesActivity"
-            android:exported="false" />
+
+        <service
+            android:name="com.sbd.gbd.Utilitys.NotificationListener"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
 
         <service
             android:name="com.sbd.gbd.myFirebaseMessagingServices"
@@ -158,27 +166,15 @@
         <activity
             android:name="com.sbd.gbd.Activities.Propertys.PropertyActivity"
             android:exported="false" />
-        <activity
-            android:name=".Activities.jobs.JobDetailsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activities.jobs.AdminActivity"
-            android:exported="false" />
+
         <activity
             android:name="com.sbd.gbd.Activities.Admin.AdminDashboard"
             android:exported="false" />
+
         <activity
-            android:name=".Activities.jobs.RoleActivity"
+            android:name="com.sbd.gbd.Activities.Admin.AdminAddNewProductActivity"
             android:exported="false" />
-        <activity
-            android:name=".Activities.BasicActivitys.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.sbd.gbd.Activities.Propertys.AdminAddNewProductActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activities.jobs.MainActivity"
-            android:exported="false" />
+
         <activity
             android:name="com.sbd.gbd.Activities.BasicActivitys.AdsDetailsActivity"
             android:exported="false" />

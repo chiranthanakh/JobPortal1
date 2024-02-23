@@ -244,6 +244,7 @@
                             android:layout_gravity="center_vertical"
                             android:fontFamily="@font/proxima_nova_bold"
                             android:text="375 Ratings"
+                            android:maxLines="3"
                             android:textColor="@color/black"
                             android:textSize="12sp" />
                     </LinearLayout>

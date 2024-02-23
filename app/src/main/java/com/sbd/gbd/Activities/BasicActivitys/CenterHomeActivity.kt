@@ -1,10 +1,12 @@
 package com.sbd.gbd.Activities.BasicActivitys
 
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +15,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.sbd.gbd.Activities.Admin.Admin_hotels
 import com.sbd.gbd.Adapters.CenterHomeadaptor
 import com.sbd.gbd.Model.HotelsModel
 import com.sbd.gbd.R
@@ -24,6 +27,7 @@ class CenterHomeActivity : AppCompatActivity() {
     var rv_center_prop: RecyclerView? = null
     var iv_back_leving: ImageView? = null
     var mHandler = Handler()
+    var btn_add_hotel : AppCompatButton? = null
     var type: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +36,13 @@ class CenterHomeActivity : AppCompatActivity() {
         type = bundle!!.getString("center")
         rv_center_prop = findViewById(R.id.rv_center_prop)
         iv_back_leving = findViewById(R.id.iv_back_leving)
+        btn_add_hotel = findViewById(R.id.btn_add_hotel)
         AsyncTask.execute { fetchdata() }
 
+        btn_add_hotel?.setOnClickListener {
+            val intent = Intent(this, Admin_hotels::class.java)
+            startActivity(intent)
+        }
         iv_back_leving?.setOnClickListener {
             finish()
         }
@@ -75,11 +84,7 @@ class CenterHomeActivity : AppCompatActivity() {
                                 )
                             )
                         } catch (cce: ClassCastException) {
-                            try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
-                            } catch (cce2: ClassCastException) {
-                            }
+
                         }
                     }
 

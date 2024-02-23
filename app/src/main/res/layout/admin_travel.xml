@@ -66,33 +66,50 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:background="@drawable/capsule_border_grey"
+                    android:layout_height="match_parent"
                     android:layout_margin="@dimen/margin_10dp"
-                    android:visibility="visible"
+                    android:background="@drawable/capsule_border_grey"
                     android:orientation="vertical"
-                    android:layout_height="wrap_content">
+                    android:visibility="visible">
+
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:orientation="vertical">
+
                         <TextView
-                            android:text="Upload Document"
-                            android:gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="@dimen/margin_10dp"
-                            android:layout_width="wrap_content"
                             android:layout_weight="1"
-                            android:textColor="@color/black"
-                            android:layout_height="match_parent"/>
+                            android:gravity="center_vertical"
+                            android:text="Upload Business Images"
+                            android:textColor="@color/black" />
+
+                        <GridView
+                            android:id="@+id/gridView"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="@dimen/margin_10dp"
+                            android:gravity="center"
+                            android:horizontalSpacing="3dp"
+                            android:numColumns="4"
+                            android:stretchMode="columnWidth"
+                            android:verticalSpacing="@dimen/margin_3_dp"
+                            android:visibility="gone" />
+
                         <LinearLayout
                             android:id="@+id/ll_selfie"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
                             android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_5"
-                            android:gravity="center_horizontal"
                             android:layout_marginBottom="@dimen/margin_10dp"
-                            android:layout_height="wrap_content">
+                            android:gravity="center_horizontal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
                             <RelativeLayout
                                 android:id="@+id/rl_document"
                                 android:layout_width="90dp"
@@ -100,30 +117,32 @@
                                 android:layout_marginStart="@dimen/dp_20"
                                 android:layout_marginEnd="@dimen/dp_20"
                                 android:background="@drawable/image_place_holder">
-                                <ImageView
-                                    android:layout_centerInParent="true"
-                                    android:layout_margin="@dimen/dp_3"
-                                    android:src="@drawable/camera"
-                                    android:layout_width="@dimen/dp_25"
-                                    android:layout_height="@dimen/dp_25"/>
 
                                 <ImageView
-                                    android:id="@+id/select_vehicle_images"
+                                    android:layout_width="@dimen/dp_25"
+                                    android:layout_height="@dimen/dp_25"
+                                    android:layout_centerInParent="true"
+                                    android:layout_margin="@dimen/dp_3"
+                                    android:src="@drawable/camera" />
+
+                                <ImageView
+                                    android:id="@+id/select_image"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:adjustViewBounds="true"
                                     android:scaleType="centerCrop" />
+
                                 <ImageView
                                     android:id="@+id/ic_uploaded_selfie"
-                                    android:visibility="gone"
-                                    android:src="@drawable/uploaded_tick"
                                     android:layout_width="@dimen/dp_70"
-                                    android:layout_marginEnd="@dimen/margin_10dp"
                                     android:layout_height="wrap_content"
-                                    android:adjustViewBounds="true"
-                                    android:layout_marginBottom="@dimen/margin_10dp"
                                     android:layout_alignParentEnd="true"
-                                    android:layout_alignParentBottom="true"/>
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_marginEnd="@dimen/margin_10dp"
+                                    android:layout_marginBottom="@dimen/margin_10dp"
+                                    android:adjustViewBounds="true"
+                                    android:src="@drawable/uploaded_tick"
+                                    android:visibility="gone" />
 
                             </RelativeLayout>
 
@@ -156,7 +175,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
                             android:background="@null"
-                            android:hint="Vehicle Name"
+                            android:hint="Vehicle / Travels Name"
                             android:inputType="text"
                             android:lines="4"
                             android:padding="@dimen/dp_0"
@@ -169,15 +188,16 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/spinner_background"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp">
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/spinner_background">
+
                     <Spinner
                         android:id="@+id/sp_vehicle_type"
-                        android:entries="@array/vehicle_type"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent"
+                        android:entries="@array/vehicle_type" />
 
                 </LinearLayout>
 
@@ -237,9 +257,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
                             android:background="@null"
-                            android:hint="Rupes per KM"
+                            android:hint="Price per KM"
                             android:inputType="text"
-                            android:lines="4"
                             android:padding="@dimen/dp_0"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -273,6 +292,7 @@
                             android:hint="Contact Number"
                             android:inputType="text"
                             android:lines="4"
+                            android:maxLength="10"
                             android:padding="@dimen/dp_0"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -351,7 +371,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp">
+                    android:layout_marginEnd="10dp"
+                    android:visibility="gone">
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -422,11 +443,10 @@
                     android:layout_marginEnd="30dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/button_capsule_blue"
-                    android:text="Next"
+                    android:text="Submit"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:textStyle="bold">
-
                 </androidx.appcompat.widget.AppCompatButton>
 
 

@@ -48,7 +48,7 @@ class BusinessActivity : AppCompatActivity(), View.OnClickListener, FilterCatego
     var bundle = Bundle()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_business)
+        setContentView(R.layout.fragment_business)
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
             setTheme(R.style.darkTheme)
             //when dark mode is enabled, we use the dark theme
@@ -72,11 +72,6 @@ class BusinessActivity : AppCompatActivity(), View.OnClickListener, FilterCatego
         gridView = findViewById(R.id.id_gridview)
         main_edt_search2 = findViewById(R.id.main_edt_search2)
         add_button = findViewById(R.id.btn_add_business)
-
-        //recyclerView.setHasFixedSize(true);
-        val mgrid = GridLayoutManager(this, 2)
-
-        //code for filter cat recyclar view
         fetchbusiness("")
         fetchbusinessCategorys()
         main_edt_search2?.setOnClickListener(View.OnClickListener { view: View? ->
@@ -118,11 +113,7 @@ class BusinessActivity : AppCompatActivity(), View.OnClickListener, FilterCatego
                                 )
                             )
                         } catch (cce: ClassCastException) {
-                            try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
-                            } catch (cce2: ClassCastException) {
-                            }
+
                         }
                     }
                     //RecyclerView.LayoutManager nlayoutManager1 = new LinearLayoutManager(BusinessActivity.this, RecyclerView.HORIZONTAL, false);
@@ -201,11 +192,7 @@ class BusinessActivity : AppCompatActivity(), View.OnClickListener, FilterCatego
                                 )
                             )
                         } catch (cce: ClassCastException) {
-                            try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
-                            } catch (cce2: ClassCastException) {
-                            }
+
                         }
                     }
                     //bottomhomeRecyclarviewAdaptor = new BottomhomeRecyclarviewAdaptor(filterbusinesslist, getContext(), userNumber, nameofuser);

@@ -7,48 +7,57 @@
     android:background="@color/white"
     tools:context=".Activities.LoanActivity.LoanActivity">
 
+
     <LinearLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@drawable/gradient"
+        android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/iv_nav_view"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="5dp"
+            android:layout_gravity="center"
             android:background="?selectableItemBackground"
             android:padding="14dp"
             android:src="@drawable/back_arrow_new"
             app:tint="@color/white" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select What you looking for"
+            android:layout_gravity="center"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+
         <LinearLayout
+            android:id="@+id/btn_list_business"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.9"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:gravity="end"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/lato_bold"
-                    android:layout_marginLeft="@dimen/margin_15_dp"
-                    android:text="Select What you looking for"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_add_vehicle"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="end"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:paddingStart="10dp"
+                android:textSize="10sp"
+                android:paddingEnd="10dp"
+                android:textColor="@color/white"
+                android:background="@drawable/button_capsule"
+                android:text="Post Vehicle"
+                android:textStyle="bold" />
 
         </LinearLayout>
-
     </LinearLayout>
 
     <LinearLayout

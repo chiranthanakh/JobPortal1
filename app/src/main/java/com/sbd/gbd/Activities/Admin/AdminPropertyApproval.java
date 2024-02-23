@@ -22,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.sbd.gbd.Activities.BasicActivitys.SearchActivity;
-import com.sbd.gbd.Activities.Propertys.AdminAddNewProductActivity;
 import com.sbd.gbd.Activities.Propertys.ProductViewHolder;
 import com.sbd.gbd.Activities.Propertys.Products;
 import com.sbd.gbd.Adapters.admin.AdminAdsAdaptor;
@@ -153,12 +152,6 @@ public class AdminPropertyApproval extends AppCompatActivity implements View.OnC
 
                         } catch (ClassCastException cce) {
 
-                            try {
-                                String mString = String.valueOf(dataMap.get(key));
-                                //addTextToView(mString);
-                            } catch (ClassCastException cce2) {
-
-                            }
                         }
                     }
                     adsAdaptor = new AdminAdsAdaptor(adslist, AdminPropertyApproval.this);
@@ -208,12 +201,6 @@ public class AdminPropertyApproval extends AppCompatActivity implements View.OnC
 
                         } catch (ClassCastException cce) {
 
-                            try {
-                                String mString = String.valueOf(dataMap.get(key));
-                                //addTextToView(mString);
-                            } catch (ClassCastException cce2) {
-
-                            }
                         }
                     }
 

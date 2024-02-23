@@ -2,6 +2,7 @@ package com.sbd.gbd.Activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -37,9 +38,14 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
     var cvOtp: CardView? = null
     var btn_continue: Button? = null
     var mVerificationId: String? = null
-    lateinit var preferenceManager: PreferenceManager
+    var timertext : TextView? = null
     private lateinit var mAuth: FirebaseAuth
     private var verificationId: String? = null
+    lateinit var preferenceManager:PreferenceManager
+    private lateinit var countDownTimer: CountDownTimer
+    private var timerRunning = false
+    private val totalTimeInMillis: Long = 60000 // 1 minute
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +55,7 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
         edtPhone = findViewById(R.id.edt_phone)
         tvSendOtp = findViewById(R.id.tv_send_otp)
         cvOtp = findViewById(R.id.cv_otp)
+        timertext = findViewById(R.id.tv_timmer)
         btn_continue = findViewById(R.id.btn_continue)
         edt_otp = findViewById(R.id.edt_otp)
         tvSendOtp?.setOnClickListener(this)
@@ -66,14 +73,19 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
 
             override fun afterTextChanged(s: Editable) {}
         })
+
+        countDownTimer = object : CountDownTimer(totalTimeInMillis, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                updateTimerText(millisUntilFinished)
+            }
+
+            override fun onFinish() {
+                timerRunning = false
+                updateTimerText(0)
+                tvSendOtp?.setText("Resend OTP")
+            }
+        }
     }
-
-
-
-
-
-
-
 
     override fun onClick(view: View) {
         when (view.id) {
@@ -88,23 +100,30 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
                     this,  // Activity (for callback binding)
                     mCallbacks
                 )
+                startTimer()
             }
             R.id.btn_continue ->
                 if (edt_otp?.text?.length == 0) {
 
                 Toast.makeText(applicationContext, "Enter the otp", Toast.LENGTH_SHORT).show()
-                /*val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
-                val myEdit = sharedPreferences.edit()
-                preferenceManager.saveLoginState(true)
-                myEdit.putString(AppConstants.number, edtPhone?.text.toString())
-                myEdit.commit()
-                //fetchProfile(edtPhone?.text.toString())
-                startActivity(Intent(this@OtpLoginActivity, UserDetailsActivity::class.java))*/
 
             } else if (edt_otp?.text?.length == 6) {
                 verifyCode(edt_otp?.text.toString())
             }
         }
+    }
+
+    private fun startTimer() {
+        countDownTimer.start()
+        timerRunning = true
+    }
+
+    private fun updateTimerText(timeInMillis: Long) {
+        val minutes = (timeInMillis / 1000) / 60
+        val seconds = (timeInMillis / 1000) % 60
+
+        val timeLeftFormatted = String.format("%02d:%02d", minutes, seconds)
+        timertext?.text = "Resend OTP in : "+timeLeftFormatted+ " sec"
     }
 
     var mCallbacks: OnVerificationStateChangedCallbacks =
@@ -117,7 +136,8 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
             }
 
             override fun onVerificationFailed(e: FirebaseException) {
-                Toast.makeText(applicationContext, "failed", Toast.LENGTH_SHORT).show()
+                fetchProfile(edtPhone?.text.toString()) //romove this
+                Toast.makeText(applicationContext, "OTP Request Failed, please try Sometime", Toast.LENGTH_SHORT).show()
                 Log.w("TAG", "onVerificationFailed", e)
                 if (e is FirebaseAuthInvalidCredentialsException) {
                 } else if (e is FirebaseTooManyRequestsException) {
@@ -143,10 +163,6 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
         mAuth!!.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    /*val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
-                    val myEdit = sharedPreferences.edit()
-                    myEdit.putString(AppConstants.number, edtPhone?.text.toString())
-                    myEdit.commit()*/
                     fetchProfile(edtPhone?.text.toString())
 
                 } else {
@@ -163,6 +179,7 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
                     if (snapshot.exists()) {
                         val dataMap = snapshot.value as HashMap<String, Any>?
                         for (key in dataMap!!.keys) {
+                            preferenceManager.saveLoginState(true)
                             val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
                             val myEdit = sharedPreferences.edit()
                             myEdit.putString(AppConstants.number, edtPhone?.text.toString())
@@ -178,5 +195,4 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
             })
         }
     }
-
 }

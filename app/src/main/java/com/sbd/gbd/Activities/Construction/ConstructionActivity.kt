@@ -36,14 +36,14 @@ class ConstructionActivity : AppCompatActivity() {
     var discription: String? = null
     var vehicleNumber: String? = null
     var llsearch: LinearLayout? = null
-    var edt_const_search : EditText? = null
+    var edt_const_search : ImageView? = null
     var rv_construction: RecyclerView? = null
     private var btn_add_business: AppCompatButton? = null
     private var rv_category: RecyclerView? = null
     var businesscatAdaptor: BusinessCategoryAdaptor? = null
     var bundle = Bundle()
 
-    var constructioninfo: ArrayList<ConstructionModel?> = ArrayList<ConstructionModel?>()
+    var constructioninfo: ArrayList<ConstructionModel> = ArrayList<ConstructionModel>()
     var categorylists = java.util.ArrayList<Categorymmodel>()
 
     private var constructionAdaptor: ConstructorAdaptor? = null
@@ -62,7 +62,7 @@ class ConstructionActivity : AppCompatActivity() {
         rv_category = findViewById(R.id.id_gridview_construction)
         backarrow = findViewById(R.id.iv_const_backarrow)
         llsearch = findViewById(R.id.ll_search_business)
-        edt_const_search = findViewById(R.id.edt_const_search)
+        edt_const_search = findViewById(R.id.iv_business_search)
         btn_add_business = findViewById(R.id.btn_add_business)
 
         llsearch?.setOnClickListener {
@@ -107,14 +107,9 @@ class ConstructionActivity : AppCompatActivity() {
                                     )
                             )
                         } catch (cce: ClassCastException) {
-                            try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
-                            } catch (cce2: ClassCastException) {
-                            }
+
                         }
                     }
-                    //RecyclerView.LayoutManager nlayoutManager1 = new LinearLayoutManager(BusinessActivity.this, RecyclerView.HORIZONTAL, false);
                     val nlayoutManager1 = GridLayoutManager(this@ConstructionActivity, 4)
                     rv_category?.setLayoutManager(nlayoutManager1)
                     rv_category?.setItemAnimator(DefaultItemAnimator())
@@ -139,7 +134,7 @@ class ConstructionActivity : AppCompatActivity() {
                         val data = dataMap[key]
                         try {
                             val userData = data as HashMap<String, Any>?
-                            if (userData?.get(AppConstants.Status).toString().equals("2")) {
+                            if (userData?.get(AppConstants.Status).toString().equals(AppConstants.user)) {
                                 constructioninfo.add(
                                         ConstructionModel(
                                                 userData!![AppConstants.pid].toString(),
@@ -168,11 +163,7 @@ class ConstructionActivity : AppCompatActivity() {
                                 )
                             }
                         } catch (cce: ClassCastException) {
-                            try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
-                            } catch (cce2: ClassCastException) {
-                            }
+
                         }
                     }
 

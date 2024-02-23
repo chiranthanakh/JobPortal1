@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#21222D"
+    android:background="@drawable/b1"
     tools:context=".Activities.OtpLoginActivity">
 
 
@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:src="@drawable/new1"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
@@ -25,7 +26,7 @@
         android:layout_marginStart="@dimen/margin_10dp"
         android:layout_marginEnd="@dimen/margin_10dp"
         android:text="Welcome"
-        android:textColor="@color/white"
+        android:textColor="#68030B"
         android:textSize="40sp"
         android:textStyle="bold" />
 
@@ -36,9 +37,9 @@
         app:layout_constraintTop_toBottomOf="@id/welcome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Back!"
-        android:textColor="@color/white"
-        android:textSize="40sp"
+        android:text="Please Login Here To Continue."
+        android:textColor="#3A4E02"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -90,6 +91,16 @@
                     android:layout_height="match_parent"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:id="@+id/tv_timmer"
+            android:layout_marginStart="50dp"
+            android:textColor="@color/black"
+            android:textSize="14sp"/>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_otp"
             android:layout_width="match_parent"
@@ -164,5 +175,18 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
+    <ProgressBar
+        android:id="@+id/circularProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:indeterminate="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:indeterminateDrawable="@drawable/circular_progress_drawable"
+        android:max="100" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

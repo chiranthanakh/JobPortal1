@@ -11,7 +11,9 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.Button
 import android.widget.EditText
+import android.widget.GridView
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +23,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.sbd.gbd.Adapters.ImageAdaptor
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
@@ -55,13 +58,18 @@ class Admin_travels : AppCompatActivity() {
     var fileDoneList: ArrayList<String> = ArrayList<String>()
     var ads_name: EditText? = null
     var back_btn: ImageView? = null
+    private var gridView: GridView? = null
+    private var btn_corosel : ImageView? = null
+    private var ll_selfie : LinearLayout? = null
+    private var btn_add_image : ImageView? = null
+    private lateinit var imageAdapter: ImageAdaptor
+    private val selectedImages = mutableListOf<Uri>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //binding=ActivityTravelsBinding.inflate(layoutInflater)
         setContentView(R.layout.admin_travel)
         ProductImagesRef = FirebaseStorage.getInstance().reference.child("travels")
         ProductsRef = FirebaseDatabase.getInstance().reference.child("travelsforyou")
-        val btn_add_image = findViewById<ImageView>(R.id.select_vehicle_images)
+         btn_add_image = findViewById(R.id.select_image)
         val add_new_vehicle = findViewById<Button>(R.id.add_new_vehicle)
         back_btn = findViewById(R.id.iv_nav_view)
         edt_vehicle_name = findViewById<View>(R.id.edt_vehicle_name) as EditText
@@ -73,23 +81,26 @@ class Admin_travels : AppCompatActivity() {
         edt_owner_name = findViewById(R.id.edt_owner_name)
         edt_travel_verified_not = findViewById(R.id.edt_travel_verified_not)
         edt_travel_discription = findViewById(R.id.edt_travel_discription)
+        ll_selfie = findViewById(R.id.ll_selfie)
+        gridView = findViewById(R.id.gridView)
         loadingBar = ProgressDialog(this)
-        btn_add_image.setOnClickListener { view: View? -> OpenGallery() }
-        add_new_vehicle.setOnClickListener { view: View? -> ValidateProductData() }
-        back_btn?.setOnClickListener(View.OnClickListener { view: View? -> finish() })
+        btn_add_image?.setOnClickListener { OpenGallery() }
+        add_new_vehicle.setOnClickListener {  ValidateProductData() }
+        back_btn?.setOnClickListener { finish() }
 
         edt_travel_category?.onItemSelectedListener=object : AdapterView.OnItemSelectedListener {
             val frequencyArray = resources.getStringArray(R.array.vehicle_type)
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 if (p2>0){
-                    // getDistrict(stateList[p2].mst_state_id.toInt())
                     category = frequencyArray.get(p2)
                 }
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
-
             }
         }
+
+        imageAdapter = ImageAdaptor(this, selectedImages)
+        gridView?.adapter = imageAdapter
     }
 
     private fun OpenGallery() {
@@ -111,16 +122,20 @@ class Admin_travels : AppCompatActivity() {
 
     private fun StoreProductInformation(data: Intent) {
         downloadImageUrl = ""
-        // If the user selected only one image
         if (data.data != null) {
             val uri = data.data
+            btn_corosel?.setImageURI(uri)
             uploadTostorage(data, uri)
         } else if (data.clipData != null) {
+            ll_selfie?.visibility = View.GONE
+            gridView?.visibility = View.VISIBLE
             val clipData = data.clipData
             for (i in 0 until clipData!!.itemCount) {
                 val uri = clipData.getItemAt(i).uri
+                selectedImages.add(uri)
                 uploadTostorage(data, uri)
             }
+            imageAdapter.notifyDataSetChanged()
         }
     }
 
@@ -141,11 +156,6 @@ class Admin_travels : AppCompatActivity() {
             Toast.makeText(this@Admin_travels, "Error: $message", Toast.LENGTH_SHORT).show()
             loadingBar!!.dismiss()
         }.addOnSuccessListener {
-            Toast.makeText(
-                this@Admin_travels,
-                "Product Image uploaded Successfully...",
-                Toast.LENGTH_SHORT
-            ).show()
             val urlTask = uploadTask.continueWithTask { task ->
                 if (!task.isSuccessful) {
                     throw task.exception!!
@@ -160,7 +170,6 @@ class Admin_travels : AppCompatActivity() {
                         } else {
                             downloadImageUrl = downloadImageUrl + "---" + task.result.toString()
                         }
-                        Toast.makeText(this@Admin_travels, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show()
                     }
                 }
         }
@@ -180,8 +189,8 @@ class Admin_travels : AppCompatActivity() {
             Toast.makeText(this, "Please enter vehicle name...", Toast.LENGTH_SHORT).show()
         } else if (TextUtils.isEmpty(costperKM)) {
             Toast.makeText(this, "Please write Price/KM...", Toast.LENGTH_SHORT).show()
-        } else if (TextUtils.isEmpty(contactDetails)) {
-            Toast.makeText(this, "Please enter contact details...", Toast.LENGTH_SHORT).show()
+        } else if (TextUtils.isEmpty(contactDetails) || contactDetails?.length != 10) {
+            Toast.makeText(this, "Please enter Contact number...", Toast.LENGTH_SHORT).show()
         } else if (TextUtils.isEmpty(category)) {
             Toast.makeText(this, "Please enter category", Toast.LENGTH_SHORT).show()
         } else {
@@ -191,7 +200,7 @@ class Admin_travels : AppCompatActivity() {
 
     private fun SaveProductInfoToDatabase() {
         val productMap = HashMap<String, Any?>()
-        productMap[AppConstants.pid] = productRandomKey + "_travel"
+        productMap[AppConstants.pid] = productRandomKey
         productMap[AppConstants.date] = saveCurrentDate
         productMap[AppConstants.time] = saveCurrentTime
         productMap[AppConstants.description] = discription
@@ -209,10 +218,8 @@ class Admin_travels : AppCompatActivity() {
         ProductsRef!!.child(productRandomKey!!).updateChildren(productMap)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    // Intent intent = new Intent(AdminAddNewProductActivity.this, .class);
-                    //startActivity(intent);
                     loadingBar!!.dismiss()
-                    Toast.makeText(this@Admin_travels, "Product is added successfully..", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@Admin_travels,"Vehicle is added successfully. Please wait for approval", Toast.LENGTH_SHORT).show()
                     finish()
                 } else {
                     loadingBar!!.dismiss()

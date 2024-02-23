@@ -36,17 +36,17 @@ import com.sbd.gbd.R
 import com.sbd.gbd.Utilitys.AppConstants
 import de.hdodenhof.circleimageview.CircleImageView
 
-class ProfileFragments : Fragment(),OnItemClick {
+class ProfileFragments : Fragment(), OnItemClick {
     private var ProductsRef: DatabaseReference? = null
     private var iv_profile_image: CircleImageView? = null
     private var tv_name: TextView? = null
     private var tv_email: TextView? = null
     private var tv_number: TextView? = null
     private var iv_edit: ImageView? = null
-    private var rv_my_postings : RecyclerView? = null
-    private var rv_my_business : RecyclerView? = null
-    private var rv_my_construction : RecyclerView? = null
-    private var rv_my_travels : RecyclerView? = null
+    private var rv_my_postings: RecyclerView? = null
+    private var rv_my_business: RecyclerView? = null
+    private var rv_my_construction: RecyclerView? = null
+    private var rv_my_travels: RecyclerView? = null
     var businesslist = java.util.ArrayList<BusinessModel>()
     var businessAdaptor: ProfileBusinessAdaptor? = null
     private var travelsAdaptor: ProfileTravelsAdaptor? = null
@@ -56,17 +56,20 @@ class ProfileFragments : Fragment(),OnItemClick {
 
     private var constructionAdaptor: ProfileConstructorAdaptor? = null
 
-    private lateinit var nameofuser : String
-    private lateinit var userNumber : String
-    private lateinit var useremail : String
+    private lateinit var nameofuser: String
+    private lateinit var userNumber: String
+    private lateinit var useremail: String
     var mHandler = Handler()
 
 
     var productinfolist: ArrayList<ProfileListModel?> = ArrayList<ProfileListModel?>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
-    {
-        val view =  inflater.inflate(R.layout.fragment_profile, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_profile, container, false)
         val sh = context?.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
         nameofuser = sh?.getString("name", "")!!
         userNumber = sh?.getString(AppConstants.number, "")!!
@@ -78,6 +81,15 @@ class ProfileFragments : Fragment(),OnItemClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         ProductsRef = FirebaseDatabase.getInstance().reference.child("Profile")
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val sh = context?.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
+        nameofuser = sh?.getString("name", "")!!
+        userNumber = sh?.getString(AppConstants.number, "")!!
+        useremail = sh?.getString("email", "")!!
+        fetchProfile()
     }
 
     private fun initilize(view: View) {
@@ -92,18 +104,17 @@ class ProfileFragments : Fragment(),OnItemClick {
         rv_my_business = view.findViewById(R.id.rv_my_business);
         rv_my_construction = view.findViewById(R.id.rv_my_construction)
         rv_my_travels = view.findViewById(R.id.rv_my_travels)
-        fetchProfile()
         AsyncTask.execute { fetchdata() }
         fetchbusiness()
-        if(userNumber == null || userNumber.equals("")){
+        if (userNumber == null || userNumber.equals("")) {
             ll_logout.visibility = View.GONE
             ll_login.visibility = View.VISIBLE
-        }else{
+        } else {
             ll_logout.visibility = View.VISIBLE
             ll_login.visibility = View.GONE
         }
 
-        ll_login.setOnClickListener{
+        ll_login.setOnClickListener {
             val intent = Intent(context, OtpLoginActivity::class.java)
             context?.startActivity(intent)
         }
@@ -116,18 +127,18 @@ class ProfileFragments : Fragment(),OnItemClick {
             val ft = fragmentManager?.beginTransaction()
             ft?.detach(this)?.attach(this)?.commit()
 
-            val intent= Intent(activity,StartingActivity::class.java)
+            val intent = Intent(activity, StartingActivity::class.java)
             startActivity(intent)
 
         }
     }
 
 
-
     private fun fetchProfile() {
 
         if (userNumber !== "") {
-            val profile = FirebaseDatabase.getInstance().reference.child("Profile").child(userNumber)
+            val profile =
+                FirebaseDatabase.getInstance().reference.child("Profile").child(userNumber)
             profile.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
@@ -196,11 +207,7 @@ class ProfileFragments : Fragment(),OnItemClick {
                             }
 
                         } catch (cce: java.lang.ClassCastException) {
-                            try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
-                            } catch (cce2: java.lang.ClassCastException) {
-                            }
+
                         }
                     }
                     businessAdaptor = context?.let { ProfileBusinessAdaptor(businesslist, it) }
@@ -218,17 +225,17 @@ class ProfileFragments : Fragment(),OnItemClick {
             override fun onCancelled(error: DatabaseError) {}
         })
 
-            val productsinfo = FirebaseDatabase.getInstance().reference.child("constructionforyou")
-            productsinfo.addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        val dataMap = dataSnapshot.value as java.util.HashMap<String, Any>?
-                        constructioninfo.clear()
-                        for (key in dataMap!!.keys) {
-                            val data = dataMap[key]
-                            try {
-                                val userData = data as java.util.HashMap<String, Any>?
-                                if (userData?.get("number1") == userNumber) {
+        val productsinfo = FirebaseDatabase.getInstance().reference.child("constructionforyou")
+        productsinfo.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    val dataMap = dataSnapshot.value as java.util.HashMap<String, Any>?
+                    constructioninfo.clear()
+                    for (key in dataMap!!.keys) {
+                        val data = dataMap[key]
+                        try {
+                            val userData = data as java.util.HashMap<String, Any>?
+                            if (userData?.get("number1") == userNumber) {
                                 constructioninfo.add(
                                     ConstructionModel(
                                         userData!![AppConstants.pid].toString(),
@@ -256,86 +263,88 @@ class ProfileFragments : Fragment(),OnItemClick {
                                     )
                                 )
                             }
-                            } catch (cce: java.lang.ClassCastException) {
-                                try {
-
-                                } catch (cce2: java.lang.ClassCastException) {
-                                }
-                            }
-                        }
-
-                        // Upcoming Event
-                        constructionAdaptor =
-                            context?.let { ProfileConstructorAdaptor(constructioninfo, it) }
-                        val elayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-                        rv_my_construction?.layoutManager = GridLayoutManager(context, 1)
-                        rv_my_construction?.itemAnimator = DefaultItemAnimator()
-                        rv_my_construction?.itemAnimator = DefaultItemAnimator()
-                        mHandler.post { rv_my_construction?.adapter = constructionAdaptor }
-                    }
-                }
-
-                override fun onCancelled(databaseError: DatabaseError) {}
-            })
-
-            val travelsinfo = FirebaseDatabase.getInstance().reference.child("travelsforyou")
-        travelsinfo.addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        val dataMap = dataSnapshot.value as java.util.HashMap<String, Any>?
-                        vehicleinfo.clear()
-                        for (key in dataMap!!.keys) {
-                            val data = dataMap!![key]
+                        } catch (cce: java.lang.ClassCastException) {
                             try {
-                                val userData = data as java.util.HashMap<String, Any>?
-                                if (userData?.get("contactnumber") == userNumber) {
-                                    vehicleinfo.add(
-                                        TravelsModel(
-                                            userData!![AppConstants.pid].toString(),
-                                            userData!![AppConstants.date].toString(),
-                                            userData!![AppConstants.time].toString(),
-                                            userData!!["vehiclename"].toString(),
-                                            userData!![AppConstants.category].toString(),
-                                            userData!!["vehiclenumber"].toString(),
-                                            userData!!["costperkm"].toString(),
-                                            userData!!["contactnumber"].toString(),
-                                            userData!!["ownerNmae"].toString(),
-                                            userData!![AppConstants.verified].toString(),
-                                            userData!![AppConstants.description].toString(),
-                                            userData!![AppConstants.image].toString(),
-                                            userData!![AppConstants.image2].toString(),
-                                            userData!!["model"].toString(),
-                                            userData!![AppConstants.Status].toString()
-                                        )
-                                    )
-                                }
-                            } catch (cce: java.lang.ClassCastException) {
-                                try {
 
-                                } catch (cce2: java.lang.ClassCastException) {
-                                }
+                            } catch (cce2: java.lang.ClassCastException) {
                             }
                         }
-
-                        // Upcoming Event
-                        travelsAdaptor = context?.let { ProfileTravelsAdaptor(vehicleinfo, it) }
-                        val elayoutManager: RecyclerView.LayoutManager =
-                            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-                        rv_my_travels?.setLayoutManager(GridLayoutManager(context, 1))
-                        rv_my_travels?.setItemAnimator(DefaultItemAnimator())
-                        mHandler.post { rv_my_travels?.setAdapter(travelsAdaptor) }
                     }
-                }
 
-                override fun onCancelled(databaseError: DatabaseError) {}
-            })
+                    // Upcoming Event
+                    constructionAdaptor =
+                        context?.let { ProfileConstructorAdaptor(constructioninfo, it) }
+                    val elayoutManager: RecyclerView.LayoutManager =
+                        LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                    rv_my_construction?.layoutManager = GridLayoutManager(context, 1)
+                    rv_my_construction?.itemAnimator = DefaultItemAnimator()
+                    rv_my_construction?.itemAnimator = DefaultItemAnimator()
+                    mHandler.post { rv_my_construction?.adapter = constructionAdaptor }
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
+
+        val travelsinfo = FirebaseDatabase.getInstance().reference.child("travelsforyou")
+        travelsinfo.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    val dataMap = dataSnapshot.value as java.util.HashMap<String, Any>?
+                    vehicleinfo.clear()
+                    for (key in dataMap!!.keys) {
+                        val data = dataMap!![key]
+                        try {
+                            val userData = data as java.util.HashMap<String, Any>?
+                            if (userData?.get("contactnumber") == userNumber) {
+                                vehicleinfo.add(
+                                    TravelsModel(
+                                        userData!![AppConstants.pid].toString(),
+                                        userData!![AppConstants.date].toString(),
+                                        userData!![AppConstants.time].toString(),
+                                        userData!!["vehiclename"].toString(),
+                                        userData!![AppConstants.category].toString(),
+                                        userData!!["vehiclenumber"].toString(),
+                                        userData!!["costperkm"].toString(),
+                                        userData!!["contactnumber"].toString(),
+                                        userData!!["ownerNmae"].toString(),
+                                        userData!![AppConstants.verified].toString(),
+                                        userData!![AppConstants.description].toString(),
+                                        userData!![AppConstants.image].toString(),
+                                        userData!![AppConstants.image2].toString(),
+                                        userData!!["model"].toString(),
+                                        userData!![AppConstants.Status].toString()
+                                    )
+                                )
+                            }
+                        } catch (cce: java.lang.ClassCastException) {
+                            try {
+
+                            } catch (cce2: java.lang.ClassCastException) {
+                            }
+                        }
+                    }
+
+                    // Upcoming Event
+                    travelsAdaptor = context?.let { ProfileTravelsAdaptor(vehicleinfo, it) }
+                    val elayoutManager: RecyclerView.LayoutManager =
+                        LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                    rv_my_travels?.setLayoutManager(GridLayoutManager(context, 1))
+                    rv_my_travels?.setItemAnimator(DefaultItemAnimator())
+                    mHandler.post { rv_my_travels?.setAdapter(travelsAdaptor) }
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
 
     }
 
 
     private fun fetchdata() {
         productinfolist.clear()
-        val productsinfo = FirebaseDatabase.getInstance().reference.child("hotforyou").orderByChild(AppConstants.number).equalTo(userNumber)
+        val productsinfo = FirebaseDatabase.getInstance().reference.child("hotforyou")
+            .orderByChild(AppConstants.number).equalTo(userNumber)
         productsinfo.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -345,7 +354,11 @@ class ProfileFragments : Fragment(),OnItemClick {
                         try {
                             val userData = data as HashMap<String, Any>?
                             if (userData?.get(AppConstants.number)?.equals(userNumber) == true) {
-                                Log.d("dataparm5",userData?.get(AppConstants.number).toString()+"--"+userData?.get(AppConstants.Status))
+                                Log.d(
+                                    "dataparm5",
+                                    userData?.get(AppConstants.number)
+                                        .toString() + "--" + userData?.get(AppConstants.Status)
+                                )
                                 productinfolist.add(
                                     ProfileListModel(
                                         userData!![AppConstants.category].toString(),
@@ -365,9 +378,9 @@ class ProfileFragments : Fragment(),OnItemClick {
                                         userData[AppConstants.Status].toString()
                                     )
                                 )
-                                Log.d("dataparm61",productinfolist.size.toString())
+                                Log.d("dataparm61", productinfolist.size.toString())
                                 //}
-                        }
+                            }
                         } catch (cce: ClassCastException) {
                             try {
 
@@ -394,12 +407,14 @@ class ProfileFragments : Fragment(),OnItemClick {
                     ) })*/
                 }
             }
+
             override fun onCancelled(databaseError: DatabaseError) {}
         })
 
 
         //layouts
-        val productsinfoLayouts = FirebaseDatabase.getInstance().reference.child("layoutsforyou").orderByChild(AppConstants.number).equalTo(userNumber)
+        val productsinfoLayouts = FirebaseDatabase.getInstance().reference.child("layoutsforyou")
+            .orderByChild(AppConstants.number).equalTo(userNumber)
         productsinfoLayouts.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -409,32 +424,28 @@ class ProfileFragments : Fragment(),OnItemClick {
                         try {
                             val userData = data as HashMap<String, Any>?
                             if (userData?.get(AppConstants.number)?.equals(userNumber) == true) {
-                                    productinfolist.add(
-                                        ProfileListModel(
-                                            userData!![AppConstants.category].toString(),
-                                            userData[AppConstants.date].toString(),
-                                            userData[AppConstants.description].toString(),
-                                            userData[AppConstants.image].toString(),
-                                            userData[AppConstants.location].toString(),
-                                            userData[AppConstants.number].toString(),
-                                            userData[AppConstants.pid].toString(),
-                                            userData[AppConstants.pname].toString(),
-                                            userData[AppConstants.price].toString(),
-                                            userData[AppConstants.propertysize].toString(),
-                                            userData[AppConstants.time].toString(),
-                                            userData[AppConstants.type].toString(),
-                                            userData[AppConstants.postedBy].toString(),
-                                            "layoutsforyou",
-                                            userData[AppConstants.Status].toString()
-                                        )
+                                productinfolist.add(
+                                    ProfileListModel(
+                                        userData!![AppConstants.category].toString(),
+                                        userData[AppConstants.date].toString(),
+                                        userData[AppConstants.description].toString(),
+                                        userData[AppConstants.image].toString(),
+                                        userData[AppConstants.location].toString(),
+                                        userData[AppConstants.number].toString(),
+                                        userData[AppConstants.pid].toString(),
+                                        userData[AppConstants.pname].toString(),
+                                        userData[AppConstants.price].toString(),
+                                        userData[AppConstants.propertysize].toString(),
+                                        userData[AppConstants.time].toString(),
+                                        userData[AppConstants.type].toString(),
+                                        userData[AppConstants.postedBy].toString(),
+                                        "layoutsforyou",
+                                        userData[AppConstants.Status].toString()
                                     )
+                                )
                             }
                         } catch (cce: ClassCastException) {
-                            try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
-                            } catch (cce2: ClassCastException) {
-                            }
+
                         }
                     }
 
@@ -455,10 +466,12 @@ class ProfileFragments : Fragment(),OnItemClick {
                     ) })*/
                 }
             }
+
             override fun onCancelled(databaseError: DatabaseError) {}
         })
 
-        val productsinfogeneral = FirebaseDatabase.getInstance().reference.child("adsforyou").orderByChild(AppConstants.number).equalTo(userNumber)
+        val productsinfogeneral = FirebaseDatabase.getInstance().reference.child("adsforyou")
+            .orderByChild(AppConstants.number).equalTo(userNumber)
         productsinfogeneral.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -467,29 +480,29 @@ class ProfileFragments : Fragment(),OnItemClick {
                         val data = dataMap[key]
                         try {
                             val userData = data as HashMap<String, Any>?
-                            Log.d("dataparm1",productinfolist.toString())
-                             if (userData?.get(AppConstants.number)?.equals(userNumber) == true) {
-                                     productinfolist.add(
-                                        ProfileListModel(
-                                            userData!![AppConstants.category].toString(),
-                                            userData[AppConstants.date].toString(),
-                                            userData[AppConstants.description].toString(),
-                                            userData[AppConstants.image].toString(),
-                                            userData[AppConstants.location].toString(),
-                                            userData[AppConstants.number].toString(),
-                                            userData[AppConstants.pid].toString(),
-                                            userData[AppConstants.pname].toString(),
-                                            userData[AppConstants.price].toString(),
-                                            userData[AppConstants.propertysize].toString(),
-                                            userData[AppConstants.time].toString(),
-                                            userData[AppConstants.type].toString(),
-                                            userData[AppConstants.postedBy].toString(),
-                                            "adsforyou",
-                                            userData[AppConstants.Status].toString()
+                            Log.d("dataparm1", productinfolist.toString())
+                            if (userData?.get(AppConstants.number)?.equals(userNumber) == true) {
+                                productinfolist.add(
+                                    ProfileListModel(
+                                        userData!![AppConstants.category].toString(),
+                                        userData[AppConstants.date].toString(),
+                                        userData[AppConstants.description].toString(),
+                                        userData[AppConstants.image].toString(),
+                                        userData[AppConstants.location].toString(),
+                                        userData[AppConstants.number].toString(),
+                                        userData[AppConstants.pid].toString(),
+                                        userData[AppConstants.pname].toString(),
+                                        userData[AppConstants.price].toString(),
+                                        userData[AppConstants.propertysize].toString(),
+                                        userData[AppConstants.time].toString(),
+                                        userData[AppConstants.type].toString(),
+                                        userData[AppConstants.postedBy].toString(),
+                                        "adsforyou",
+                                        userData[AppConstants.Status].toString()
 
-                                        )
                                     )
-                                }
+                                )
+                            }
                         } catch (cce: ClassCastException) {
                             try {
                             } catch (cce2: ClassCastException) {
@@ -510,11 +523,14 @@ class ProfileFragments : Fragment(),OnItemClick {
                     rv_my_postings?.setLayoutManager(GridLayoutManager(context, 1))
                     rv_my_postings?.setItemAnimator(DefaultItemAnimator())
                     rv_my_postings?.setNestedScrollingEnabled(false);
-                    mHandler.post(Runnable { rv_my_postings?.setAdapter(
-                        bottomhomeRecyclarviewAdaptor
-                    ) })
+                    mHandler.post(Runnable {
+                        rv_my_postings?.setAdapter(
+                            bottomhomeRecyclarviewAdaptor
+                        )
+                    })
                 }
             }
+
             override fun onCancelled(databaseError: DatabaseError) {}
         })
     }

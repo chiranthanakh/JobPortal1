@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.sbd.gbd.Utilitys.PreferenceManager
 
 class UserDetailsActivity : AppCompatActivity() {
     private var mAuth: FirebaseAuth? = null
@@ -42,9 +43,12 @@ class UserDetailsActivity : AppCompatActivity() {
     var fileDoneList: ArrayList<String> = ArrayList<String>()
     var profileImage: ImageView? = null
     private var ImageUri: Uri? = null
+    lateinit var preferenceManager: PreferenceManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_details)
+        preferenceManager= PreferenceManager(this);
         mAuth = FirebaseAuth.getInstance()
         Profiles = FirebaseDatabase.getInstance().reference.child("Profile")
         ProfileImagesRef = FirebaseStorage.getInstance().reference.child("ProfileImage")
@@ -60,13 +64,14 @@ class UserDetailsActivity : AppCompatActivity() {
         submit = findViewById(R.id.btn_submit_login)
         loadingBar = ProgressDialog(this)
 
-        profileImage?.setOnClickListener(View.OnClickListener { OpenGallery() })
+        profileImage?.setOnClickListener { OpenGallery() }
 
-        submit?.setOnClickListener(View.OnClickListener {
+        submit?.setOnClickListener {
             val number = edtName?.getText().toString()
             val name = edtName?.getText().toString()
             val email = edtEmail?.getText().toString()
             if (number != "" && name != "" && email != "") {
+                preferenceManager.saveLoginState(true)
                 SaveProductInfoToDatabase()
                 val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
                 val myEdit = sharedPreferences.edit()
@@ -81,7 +86,7 @@ class UserDetailsActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-        })
+        }
     }
 
     private fun OpenGallery() {
@@ -143,14 +148,13 @@ class UserDetailsActivity : AppCompatActivity() {
         Profiles!!.child(edtPhone!!.text.toString()).updateChildren(productMap)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    // Intent intent = new Intent(AdminAddNewProductActivity.this, .class);
-                    //startActivity(intent);
                     loadingBar!!.dismiss()
                     Toast.makeText(
                         this@UserDetailsActivity,
                         "Profile successfull",
                         Toast.LENGTH_SHORT
                     ).show()
+                    finish()
                 } else {
                     loadingBar!!.dismiss()
                     val message = task.exception.toString()

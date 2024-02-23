@@ -71,13 +71,13 @@
                     android:layout_margin="@dimen/margin_10dp"
                     android:visibility="visible"
                     android:orientation="vertical"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent">
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:orientation="vertical">
                         <TextView
-                            android:text="Upload Document"
+                            android:text="Upload Business Images"
                             android:gravity="center_vertical"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="@dimen/margin_10dp"
@@ -85,6 +85,19 @@
                             android:layout_weight="1"
                             android:textColor="@color/black"
                             android:layout_height="match_parent"/>
+
+                        <GridView
+                            android:id="@+id/gridView"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="@dimen/margin_10dp"
+                            android:gravity="center"
+                            android:visibility="gone"
+                            android:numColumns="4"
+                            android:horizontalSpacing="3dp"
+                            android:verticalSpacing="@dimen/margin_3_dp"
+                            android:stretchMode="columnWidth" />
                         <LinearLayout
                             android:id="@+id/ll_selfie"
                             app:layout_constraintTop_toTopOf="parent"
@@ -107,12 +120,13 @@
                                     android:src="@drawable/camera"
                                     android:layout_width="@dimen/dp_25"
                                     android:layout_height="@dimen/dp_25"/>
+
                                 <ImageView
-                                    android:id="@+id/select_construction_images"
-                                    android:scaleType="centerCrop"
+                                    android:id="@+id/select_image"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:adjustViewBounds="true"/>
+                                    android:adjustViewBounds="true"
+                                    android:scaleType="centerCrop" />
                                 <ImageView
                                     android:id="@+id/ic_uploaded_selfie"
                                     android:visibility="gone"
@@ -219,6 +233,39 @@
                         app:startIconTint="@color/grey_dark">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edt_construction_owner"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:background="@null"
+                            android:hint="owner name"
+                            android:inputType="text"
+                            android:lines="4"
+                            android:padding="@dimen/dp_0"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="@dimen/text_size_14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/black"
+                        app:boxStrokeColor="@color/grey_light"
+                        app:hintTextColor="@color/black"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:startIconTint="@color/grey_dark">
+
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_construction_contact_number"
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
@@ -289,8 +336,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
                             android:background="@null"
-                            android:hint="Cost"
-                            android:inputType="text"
+                            android:hint="Price Range"
+                            android:inputType=""
                             android:lines="4"
                             android:padding="@dimen/dp_0"
                             android:textColor="@color/black"
@@ -323,7 +370,7 @@
                             android:layout_height="45dp"
                             android:background="@null"
                             android:hint="Opening Time"
-                            android:inputType="text"
+                            android:inputType=""
                             android:lines="4"
                             android:padding="@dimen/dp_0"
                             android:textColor="@color/black"
@@ -356,7 +403,7 @@
                             android:layout_height="45dp"
                             android:background="@null"
                             android:hint="Closing Time"
-                            android:inputType="text"
+                            android:inputType=""
                             android:lines="4"
                             android:padding="@dimen/dp_0"
                             android:textColor="@color/black"
@@ -431,40 +478,6 @@
                             android:textSize="@dimen/text_size_14sp" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColorHint="@color/black"
-                        app:boxStrokeColor="@color/grey_light"
-                        app:hintTextColor="@color/black"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:startIconTint="@color/grey_dark">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edt_construction_owner"
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:background="@null"
-                            android:hint="owner name"
-                            android:inputType="text"
-                            android:lines="4"
-                            android:padding="@dimen/dp_0"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/black"
-                            android:textSize="@dimen/text_size_14sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -621,7 +634,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
                             android:background="@null"
-                            android:hint="Experience"
+                            android:hint="Business Startd In"
                             android:inputType="text"
                             android:lines="4"
                             android:padding="@dimen/dp_0"
@@ -631,71 +644,6 @@
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColorHint="@color/black"
-                        app:boxStrokeColor="@color/grey_light"
-                        app:hintTextColor="@color/black"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:startIconTint="@color/grey_dark">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edt_construction_model"
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:background="@null"
-                            android:hint="Construction Model"
-                            android:inputType="text"
-                            android:lines="4"
-                            android:padding="@dimen/dp_0"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/black"
-                            android:textSize="@dimen/text_size_14sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColorHint="@color/black"
-                        app:boxStrokeColor="@color/grey_light"
-                        app:hintTextColor="@color/black"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:startIconTint="@color/grey_dark">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edt_construction_verified_not"
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:background="@null"
-                            android:hint="Verified or not"
-                            android:inputType="text"
-                            android:lines="4"
-                            android:padding="@dimen/dp_0"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/black"
-                            android:textSize="@dimen/text_size_14sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

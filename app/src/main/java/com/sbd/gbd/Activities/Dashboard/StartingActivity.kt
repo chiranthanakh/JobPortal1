@@ -222,11 +222,7 @@ class StartingActivity : AppCompatActivity() {
                                 .into(binding.ivNavImage)
                             try {
                             } catch (cce: ClassCastException) {
-                                try {
-                                    val mString = dataMap[key].toString()
-                                    //addTextToView(mString);
-                                } catch (cce2: ClassCastException) {
-                                }
+
                             }
                         }
                     }

@@ -117,11 +117,7 @@ class SeeAllLayoutActivity : AppCompatActivity(), View.OnClickListener {
                                         + "---" + userData[AppConstants.propertysize] + "---" + userData[AppConstants.location] + "---" + userData[AppConstants.number]
                             )
                         } catch (cce: ClassCastException) {
-                            try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
-                            } catch (cce2: ClassCastException) {
-                            }
+
                         }
                     }
                     Collections.shuffle(layoutslists)

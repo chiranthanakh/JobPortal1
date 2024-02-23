@@ -90,9 +90,6 @@ class BusinessFragment : Fragment() {
         iv_back = view.findViewById(R.id.iv_business_back)
         iv_search = view.findViewById(R.id.iv_business_search)
 
-        //val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.bottomNavShift)
-        //bottomNav?.visibility = View.GONE
-
         fetchbusiness("")
         fetchbusinessCategorys()
         main_edt_search2?.setOnClickListener { view: View? ->
@@ -125,6 +122,7 @@ class BusinessFragment : Fragment() {
             )
             startActivity(intent)
         }
+
     }
 
     fun onBackButtonClicked() {
@@ -152,11 +150,7 @@ class BusinessFragment : Fragment() {
                                 )
                             )
                         } catch (cce: ClassCastException) {
-                            try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
-                            } catch (cce2: ClassCastException) {
-                            }
+
                         }
                     }
                     //RecyclerView.LayoutManager nlayoutManager1 = new LinearLayoutManager(BusinessActivity.this, RecyclerView.HORIZONTAL, false);
@@ -174,7 +168,7 @@ class BusinessFragment : Fragment() {
     }
 
     private fun fetchbusiness(cat: String) {
-        val coroselimage = FirebaseDatabase.getInstance().reference.child("BusinessListing").orderByChild(AppConstants.Status).equalTo("2")
+        val coroselimage = FirebaseDatabase.getInstance().reference.child("BusinessListing").orderByChild(AppConstants.Status).equalTo(AppConstants.user)
         coroselimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {

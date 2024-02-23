@@ -50,8 +50,6 @@ public class UserPlacedApplicationAdapter extends FirebaseRecyclerAdapter<Model,
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
-
-            //assigning the address of the materials
             txtTitle = (TextView) itemView.findViewById(R.id.Title);
             txtDesc = (TextView) itemView.findViewById(R.id.Desc);
         }

@@ -1,4 +1,4 @@
-package com.sbd.gbd.Activities.Propertys
+package com.sbd.gbd.Activities.Admin
 
 import android.app.ProgressDialog
 import android.content.Intent
@@ -77,18 +77,16 @@ class AdminAddNewProductActivity : AppCompatActivity() {
 
     private fun initilize() {
 
-        binding.rbData.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { arg0, id ->
+        binding.rbData.setOnCheckedChangeListener { _, id ->
             when (id) {
                 R.id.rb_owner -> {
                     ownerORagent = AppConstants.owner
                 }
-
                 R.id.rb_agent -> {
                     ownerORagent = AppConstants.agent
                 }
             }
-
-        })
+        }
 
         binding.spPropertyType.onItemSelectedListener=object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {

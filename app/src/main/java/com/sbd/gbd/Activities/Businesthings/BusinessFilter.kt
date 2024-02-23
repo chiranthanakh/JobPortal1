@@ -71,11 +71,7 @@ class BusinessFilter : AppCompatActivity() {
                                 )
                             }
                         } catch (cce: ClassCastException) {
-                            try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
-                            } catch (cce2: ClassCastException) {
-                            }
+
                         }
                     }
                     businessAdaptor = BusinessAdaptor(businesslist, this@BusinessFilter)

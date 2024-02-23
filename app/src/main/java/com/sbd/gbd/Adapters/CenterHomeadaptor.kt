@@ -38,9 +38,9 @@ class CenterHomeadaptor(private val productInfos: ArrayList<HotelsModel>, privat
             .load(productInfo.image)
             .into(holder.iv_image)
         holder.tv_name_hot.text = productInfo.name
-        holder.tv_final_price_hot.text = "Rent: " + productInfo.price
+        holder.tv_final_price_hot.text = productInfo.price
        // holder.tv_hotel_website.text = productInfo.website
-        holder.tv_advance.text = "Advance: "
+        holder.tv_advance.text = productInfo.category
         holder.tv_loaction_hot.text = productInfo.address
 
         if (productInfo.status.equals("1")) {

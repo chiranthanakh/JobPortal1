@@ -1,5 +1,6 @@
 package com.sbd.gbd.Activities.BasicActivitys
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import com.sbd.gbd.Model.LivingPlaceModel
 import com.sbd.gbd.Adapters.LivingPlaceAdaptor
@@ -10,6 +11,7 @@ import android.os.AsyncTask
 import android.os.Handler
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.DataSnapshot
@@ -18,6 +20,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.sbd.gbd.Utilitys.AppConstants
 import com.google.firebase.database.DatabaseError
+import com.sbd.gbd.Activities.Admin.AdminLivingPlacess
+import com.sbd.gbd.Activities.Admin.Admin_hotels
+import com.sbd.gbd.Activities.Admin.Admin_travels
 import java.lang.ClassCastException
 import java.util.ArrayList
 import java.util.HashMap
@@ -30,6 +35,7 @@ class LivingPlaceActivity : AppCompatActivity() {
     var backButton: ImageView? = null
     var type: String? = null
     var iv_back_leving : ImageView? = null
+    var btn_add_hotel : AppCompatButton? = null
     var tv_heading : TextView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,10 +45,15 @@ class LivingPlaceActivity : AppCompatActivity() {
         //backButton = findViewById(R.id.back_tool)
         rv_center_prop = findViewById(R.id.rv_center_prop)
         iv_back_leving = findViewById(R.id.iv_back_leving)
+        btn_add_hotel = findViewById(R.id.btn_add_hotel)
         tv_heading = findViewById(R.id.tv_heading)
         tv_heading?.setText("Homes or Commercial Placess ")
         AsyncTask.execute { fetchdata() }
 
+        btn_add_hotel?.setOnClickListener {
+            val intent = Intent(this, AdminLivingPlacess::class.java)
+            startActivity(intent)
+        }
         iv_back_leving?.setOnClickListener {
             finish()
         }
@@ -79,7 +90,8 @@ class LivingPlaceActivity : AppCompatActivity() {
                                     userData["discription"].toString(),
                                     userData[AppConstants.image2].toString(),
                                     userData[AppConstants.image].toString(),
-                                    "","","","","","","",
+                                    userData[AppConstants.Deposit].toString(),
+                                    "","","","","","",
                                     AppConstants.user
                                 )
                             )

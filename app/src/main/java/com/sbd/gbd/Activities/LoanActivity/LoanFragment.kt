@@ -96,11 +96,7 @@ class LoanFragment : Fragment(), View.OnClickListener {
                             val userData = data as HashMap<String, Any>?
                             coroselimagelist.add((userData?.get(AppConstants.image) ?: "") as String)
                         } catch (cce: ClassCastException) {
-                            try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
-                            } catch (cce2: ClassCastException) {
-                            }
+
                         }
                     }
                     coroselListAdaptor = LoanCoroselListAdaptor(coroselimagelist, context)
@@ -164,11 +160,7 @@ class LoanFragment : Fragment(), View.OnClickListener {
                                 )
                             )
                         } catch (cce: ClassCastException) {
-                            try {
-                                val mString = dataMap[key].toString()
-                                //addTextToView(mString);
-                            } catch (cce2: ClassCastException) {
-                            }
+
                         }
                     }
                     loanoffersAdaptor = LoanoffersAdaptor(bankadslist, context)
