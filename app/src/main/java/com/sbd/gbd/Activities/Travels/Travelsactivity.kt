@@ -1,4 +1,4 @@
-package com.sbd.gbd.Activities.BasicActivitys
+package com.sbd.gbd.Activities.Travels
 
 import android.content.Intent
 import android.os.Bundle
@@ -21,6 +21,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.sbd.gbd.Activities.Admin.Admin_travels
+import com.sbd.gbd.Activities.BasicActivitys.OtpLoginActivity
+import com.sbd.gbd.Utilitys.PreferenceManager
+import com.sbd.gbd.Utilitys.UtilityMethods
 
 class Travelsactivity : AppCompatActivity(), View.OnClickListener {
     var ll_car: LinearLayout? = null
@@ -37,6 +40,8 @@ class Travelsactivity : AppCompatActivity(), View.OnClickListener {
     var rv_travels: RecyclerView? = null
     var mHandler = Handler()
     var type: String? = null
+    lateinit var preferenceManager: PreferenceManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_travelsactivity)
@@ -53,6 +58,7 @@ class Travelsactivity : AppCompatActivity(), View.OnClickListener {
         ll_heavyvehicles = findViewById(R.id.ll_heavy_vehicles)
         btn_add_vehicle = findViewById(R.id.btn_add_vehicle)
         iv_nav_view = findViewById(R.id.iv_nav_view)
+        preferenceManager= PreferenceManager(this);
         ll_car?.setOnClickListener(this)
         ll_bus?.setOnClickListener(this)
         ll_transport?.setOnClickListener(this)
@@ -66,8 +72,14 @@ class Travelsactivity : AppCompatActivity(), View.OnClickListener {
         }
 
         btn_add_vehicle?.setOnClickListener {
-            val intent = Intent(this, Admin_travels::class.java)
-            startActivity(intent)
+            if (preferenceManager.getLoginState()) {
+                val intent = Intent(this, Admin_travels::class.java)
+                startActivity(intent)
+            } else {
+                UtilityMethods.showToast(this,"Please Login to process")
+                val intent = Intent(this, OtpLoginActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 

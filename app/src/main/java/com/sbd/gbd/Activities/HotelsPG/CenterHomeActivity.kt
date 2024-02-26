@@ -1,4 +1,4 @@
-package com.sbd.gbd.Activities.BasicActivitys
+package com.sbd.gbd.Activities.HotelsPG
 
 import android.content.Intent
 import android.os.AsyncTask
@@ -16,10 +16,13 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.sbd.gbd.Activities.Admin.Admin_hotels
+import com.sbd.gbd.Activities.BasicActivitys.OtpLoginActivity
 import com.sbd.gbd.Adapters.CenterHomeadaptor
 import com.sbd.gbd.Model.HotelsModel
 import com.sbd.gbd.R
 import com.sbd.gbd.Utilitys.AppConstants
+import com.sbd.gbd.Utilitys.PreferenceManager
+import com.sbd.gbd.Utilitys.UtilityMethods
 
 class CenterHomeActivity : AppCompatActivity() {
     var productinfolist: ArrayList<HotelsModel> = ArrayList<HotelsModel>()
@@ -29,6 +32,8 @@ class CenterHomeActivity : AppCompatActivity() {
     var mHandler = Handler()
     var btn_add_hotel : AppCompatButton? = null
     var type: String? = null
+    lateinit var preferenceManager: PreferenceManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_center_home)
@@ -37,11 +42,19 @@ class CenterHomeActivity : AppCompatActivity() {
         rv_center_prop = findViewById(R.id.rv_center_prop)
         iv_back_leving = findViewById(R.id.iv_back_leving)
         btn_add_hotel = findViewById(R.id.btn_add_hotel)
+        preferenceManager= PreferenceManager(this);
+
         AsyncTask.execute { fetchdata() }
 
         btn_add_hotel?.setOnClickListener {
-            val intent = Intent(this, Admin_hotels::class.java)
-            startActivity(intent)
+            if (preferenceManager.getLoginState()) {
+                val intent = Intent(this, Admin_hotels::class.java)
+                startActivity(intent)
+            } else {
+                UtilityMethods.showToast(this,"Please Login to process")
+                val intent = Intent(this, OtpLoginActivity::class.java)
+                startActivity(intent)
+            }
         }
         iv_back_leving?.setOnClickListener {
             finish()

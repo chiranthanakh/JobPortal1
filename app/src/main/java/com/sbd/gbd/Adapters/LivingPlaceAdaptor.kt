@@ -12,7 +12,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.database.FirebaseDatabase
-import com.sbd.gbd.Activities.BasicActivitys.RentHomeDetails
+import com.sbd.gbd.Activities.HomeRentels.RentHomeDetails
 import com.sbd.gbd.Model.LivingPlaceModel
 import com.sbd.gbd.R
 import com.sbd.gbd.Utilitys.AppConstants

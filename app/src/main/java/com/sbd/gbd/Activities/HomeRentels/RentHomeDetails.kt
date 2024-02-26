@@ -1,4 +1,4 @@
-package com.sbd.gbd.Activities.BasicActivitys
+package com.sbd.gbd.Activities.HomeRentels
 
 import android.os.Bundle
 import android.view.View

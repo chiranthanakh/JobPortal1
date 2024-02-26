@@ -8,7 +8,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.sbd.gbd.CalldetailsRecords
+import com.sbd.gbd.Utilitys.CalldetailsRecords
 import com.sbd.gbd.Model.HotDealsModel
 import com.sbd.gbd.R
 import com.sbd.gbd.Utilitys.AppConstants

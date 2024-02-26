@@ -6,7 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.sbd.gbd.CalldetailsRecords
+import com.sbd.gbd.Utilitys.CalldetailsRecords
 import com.sbd.gbd.Model.ConstructionModel
 import com.sbd.gbd.Utilitys.AppConstants
 import com.sbd.gbd.Utilitys.Utilitys

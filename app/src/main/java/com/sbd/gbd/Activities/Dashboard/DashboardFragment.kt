@@ -23,11 +23,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sbd.gbd.Activities.Admin.AdminDashboard
-import com.sbd.gbd.Activities.BasicActivitys.CenterHomeActivity
-import com.sbd.gbd.Activities.BasicActivitys.LivingPlaceActivity
+import com.sbd.gbd.Activities.HotelsPG.CenterHomeActivity
+import com.sbd.gbd.Activities.HomeRentels.LivingPlaceActivity
 import com.sbd.gbd.Activities.BasicActivitys.SearchActivity
 import com.sbd.gbd.Activities.BasicActivitys.SeeAllLayoutActivity
-import com.sbd.gbd.Activities.BasicActivitys.Travelsactivity
+import com.sbd.gbd.Activities.Travels.Travelsactivity
 import com.sbd.gbd.Activities.BasicActivitys.UpcommingProjects
 import com.sbd.gbd.Activities.Businesthings.BusinessActivity
 import com.sbd.gbd.Activities.Businesthings.BusinessFragment
@@ -80,12 +80,9 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
     var carouselView: CarouselView? = null
     var mHandler = Handler()
     var tv_location: TextView? = null
-    var tv_pincode: TextView? = null
     var progressDialog: ProgressDialog? = null
-    var admin_btn: TextView? = null
     var bundle = Bundle()
 
-    //var view: View? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -103,15 +100,13 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
         mail = sh.getString("mail", null)
         pic = sh.getString("pic", null)
         progressDialog = ProgressDialog(context)
-        //if (!reload) {
         initilize(view)
-        //}
     }
 
     private fun initilize(view: View) {
         reload = true
         tv_location = view.findViewById(R.id.tv_location)
-        binding.mainEdtSearch2.setInputType(InputType.TYPE_NULL) // disable soft input
+        binding.mainEdtSearch2.setInputType(InputType.TYPE_NULL)
         binding.mainEdtSearch2.setOnClickListener(this)
         binding.tvSeeallLayouts.setOnClickListener(this)
         binding.tvSeeallUpcomming.setOnClickListener(this)
@@ -133,22 +128,13 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
             fetchlayouts()
         }
 
-        /*if (progressDialog != null) {
-            if (!progressDialog!!.isShowing) {
-                progressDialog?.setCancelable(false)
-                progressDialog?.setMessage("Please wait...")
-                progressDialog?.show()
-                AsyncTask.execute {
-                    fetchcorosel()
-                    fetchdata()
-                    fetchads()
-                    fetchlayouts()
-                }
+        if (AppConstants.user.equals("1")) {
+            binding.ivBell.visibility = View.GONE
+        } else {
+            binding.ivBell.setOnClickListener {
+                val intent = Intent(context, AdminDashboard::class.java)
+                startActivity(intent)
             }
-        }*/
-        binding.ivBell.setOnClickListener {
-            val intent = Intent(context, AdminDashboard::class.java)
-            startActivity(intent)
         }
     }
 
@@ -197,7 +183,8 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
 
 
     private fun fetchads() {
-        val adsimage = FirebaseDatabase.getInstance().reference.child("adsforyou").orderByChild(AppConstants.Status).equalTo(AppConstants.user)
+        val adsimage = FirebaseDatabase.getInstance().reference.child("adsforyou")
+            .orderByChild(AppConstants.Status).equalTo(AppConstants.user)
         adsimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -260,7 +247,8 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
     }
 
     private fun fetchlayouts() {
-        val layouts = FirebaseDatabase.getInstance().reference.child("layoutsforyou").orderByChild(AppConstants.Status).equalTo(AppConstants.user)
+        val layouts = FirebaseDatabase.getInstance().reference.child("layoutsforyou")
+            .orderByChild(AppConstants.Status).equalTo(AppConstants.user)
         layouts.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -321,7 +309,8 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
     }
 
     private fun fetchdata() {
-        val productsinfo = FirebaseDatabase.getInstance().reference.child("hotforyou").orderByChild(AppConstants.Status).equalTo(AppConstants.user)
+        val productsinfo = FirebaseDatabase.getInstance().reference.child("hotforyou")
+            .orderByChild(AppConstants.Status).equalTo(AppConstants.user)
         productsinfo.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -352,8 +341,6 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
 
                         }
                     }
-
-                    // Upcoming Event
                     bottomhomeRecyclarviewAdaptor =
                         BottomhomeRecyclarviewAdaptor(productinfolist, context!!)
                     val elayoutManager: RecyclerView.LayoutManager =

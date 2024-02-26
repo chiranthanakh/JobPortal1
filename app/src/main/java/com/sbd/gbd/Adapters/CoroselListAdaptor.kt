@@ -11,8 +11,8 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.sbd.gbd.Activities.BasicActivitys.CoroselDetailsActivity
-import com.sbd.gbd.Activities.BasicActivitys.LayoutDetailsActivity
+import com.sbd.gbd.Activities.Dashboard.CoroselDetailsActivity
+import com.sbd.gbd.Activities.Dashboard.LayoutDetailsActivity
 import com.sbd.gbd.Activities.HotDealsactivity.HotDealsDetailsActivity
 import com.sbd.gbd.Activities.LoanActivity.LoanForm
 import com.sbd.gbd.Model.Corosolmodel

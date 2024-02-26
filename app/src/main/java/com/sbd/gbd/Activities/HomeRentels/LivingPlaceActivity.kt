@@ -1,4 +1,4 @@
-package com.sbd.gbd.Activities.BasicActivitys
+package com.sbd.gbd.Activities.HomeRentels
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -21,8 +21,9 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import com.sbd.gbd.Utilitys.AppConstants
 import com.google.firebase.database.DatabaseError
 import com.sbd.gbd.Activities.Admin.AdminLivingPlacess
-import com.sbd.gbd.Activities.Admin.Admin_hotels
-import com.sbd.gbd.Activities.Admin.Admin_travels
+import com.sbd.gbd.Activities.BasicActivitys.OtpLoginActivity
+import com.sbd.gbd.Utilitys.PreferenceManager
+import com.sbd.gbd.Utilitys.UtilityMethods
 import java.lang.ClassCastException
 import java.util.ArrayList
 import java.util.HashMap
@@ -37,6 +38,8 @@ class LivingPlaceActivity : AppCompatActivity() {
     var iv_back_leving : ImageView? = null
     var btn_add_hotel : AppCompatButton? = null
     var tv_heading : TextView? = null
+    lateinit var preferenceManager: PreferenceManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_center_home)
@@ -48,11 +51,18 @@ class LivingPlaceActivity : AppCompatActivity() {
         btn_add_hotel = findViewById(R.id.btn_add_hotel)
         tv_heading = findViewById(R.id.tv_heading)
         tv_heading?.setText("Homes or Commercial Placess ")
+        preferenceManager= PreferenceManager(this);
         AsyncTask.execute { fetchdata() }
 
         btn_add_hotel?.setOnClickListener {
-            val intent = Intent(this, AdminLivingPlacess::class.java)
-            startActivity(intent)
+            if (preferenceManager.getLoginState()) {
+                val intent = Intent(this, AdminLivingPlacess::class.java)
+                startActivity(intent)
+            } else {
+                UtilityMethods.showToast(this,"Please Login to process")
+                val intent = Intent(this, OtpLoginActivity::class.java)
+                startActivity(intent)
+            }
         }
         iv_back_leving?.setOnClickListener {
             finish()

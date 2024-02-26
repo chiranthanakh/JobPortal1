@@ -13,8 +13,8 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.database.FirebaseDatabase
-import com.sbd.gbd.Activities.BasicActivitys.AdsDetailsActivity
-import com.sbd.gbd.CalldetailsRecords
+import com.sbd.gbd.Activities.Dashboard.AdsDetailsActivity
+import com.sbd.gbd.Utilitys.CalldetailsRecords
 import com.sbd.gbd.R
 import com.sbd.gbd.Utilitys.AppConstants
 import com.sbd.gbd.Utilitys.Utilitys

@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.sbd.gbd.Activities.BasicActivitys.LayoutDetailsActivity;
+import com.sbd.gbd.Activities.Dashboard.LayoutDetailsActivity;
 import com.sbd.gbd.Model.LayoutModel;
 import com.sbd.gbd.R;
 import com.sbd.gbd.Utilitys.AppConstants;

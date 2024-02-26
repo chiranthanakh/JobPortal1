@@ -1,7 +1,6 @@
 package com.sbd.gbd.Utilitys
 
 import android.Manifest
-import com.sbd.gbd.CalldetailsRecords
 import android.content.pm.PackageManager
 import android.content.Intent
 import androidx.core.content.ContextCompat
@@ -9,7 +8,7 @@ import androidx.core.app.ActivityCompat
 import android.app.Activity
 import android.content.Context
 import android.net.Uri
-import com.sbd.gbd.Activities.OtpLoginActivity
+import com.sbd.gbd.Activities.BasicActivitys.OtpLoginActivity
 import com.gun0912.tedpermission.PermissionListener
 
 class Utilitys {

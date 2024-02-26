@@ -29,6 +29,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.sbd.gbd.Activities.BasicActivitys.OtpLoginActivity
+import com.sbd.gbd.Utilitys.PreferenceManager
+import com.sbd.gbd.Utilitys.UtilityMethods
 
 
 class BusinessFragment : Fragment() {
@@ -51,6 +54,7 @@ class BusinessFragment : Fragment() {
     var iv_back : ImageView?= null
     var iv_search : ImageView?= null
     var fragmentInt : FragmentInteractionListener?= null
+    lateinit var preferenceManager: PreferenceManager
 
 
     override fun onCreateView(
@@ -82,6 +86,7 @@ class BusinessFragment : Fragment() {
     }
 
     private fun initilize(view: View) {
+        preferenceManager= PreferenceManager(requireContext());
         recyclerView = view.findViewById(R.id.recycler_business)
         llsearch = view.findViewById(R.id.ll_search_business)
         gridView = view.findViewById(R.id.id_gridview)
@@ -116,11 +121,15 @@ class BusinessFragment : Fragment() {
             startActivity(intent)
         }
         add_button?.setOnClickListener { view: View? ->
-            val intent = Intent(
-                context,
-                AdminBusinessListings::class.java
-            )
-            startActivity(intent)
+            if (preferenceManager.getLoginState()) {
+                val intent = Intent(context, AdminBusinessListings::class.java)
+                intent.putExtra("page", "2")
+                startActivity(intent)
+            } else {
+                UtilityMethods.showToast(requireContext(),"Please Login to process")
+                val intent = Intent(context, OtpLoginActivity::class.java)
+                startActivity(intent)
+            }
         }
 
     }

@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.sbd.gbd.Activities.BasicActivitys.AdsDetailsActivity;
+import com.sbd.gbd.Activities.Dashboard.AdsDetailsActivity;
 import com.sbd.gbd.Model.AdsModel;
 import com.sbd.gbd.R;
 import com.sbd.gbd.Utilitys.AppConstants;

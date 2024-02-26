@@ -29,6 +29,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.sbd.gbd.Activities.BasicActivitys.OtpLoginActivity
+import com.sbd.gbd.Utilitys.PreferenceManager
+import com.sbd.gbd.Utilitys.UtilityMethods
 
 class BusinessActivity : AppCompatActivity(), View.OnClickListener, FilterCategory {
     private var ProductsRef: DatabaseReference? = null
@@ -36,7 +39,6 @@ class BusinessActivity : AppCompatActivity(), View.OnClickListener, FilterCatego
     var main_edt_search2: EditText? = null
     private var gridView: RecyclerView? = null
     var back: ImageView? = null
-    var btnListbusiness: AppCompatButton? = null
     var llsearch: LinearLayout? = null
     var businesslist = ArrayList<BusinessModel>()
     var filterbusinesslist = ArrayList<BusinessModel>()
@@ -44,6 +46,7 @@ class BusinessActivity : AppCompatActivity(), View.OnClickListener, FilterCatego
     var businesscatAdaptor: BusinessCategoryAdaptor? = null
     var businessAdaptor: BusinessAdaptor? = null
     var add_button: AppCompatButton? = null
+    lateinit var preferenceManager: PreferenceManager
     var mHandler = Handler()
     var bundle = Bundle()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,29 +71,38 @@ class BusinessActivity : AppCompatActivity(), View.OnClickListener, FilterCatego
     private fun initilize() {
         recyclerView = findViewById(R.id.recycler_business)
         llsearch = findViewById(R.id.ll_search_business)
-        back = findViewById(R.id.back_toolbar_business)
+        back = findViewById(R.id.iv_business_back)
         gridView = findViewById(R.id.id_gridview)
         main_edt_search2 = findViewById(R.id.main_edt_search2)
         add_button = findViewById(R.id.btn_add_business)
+        preferenceManager= PreferenceManager(this);
         fetchbusiness("")
         fetchbusinessCategorys()
-        main_edt_search2?.setOnClickListener(View.OnClickListener { view: View? ->
+
+        main_edt_search2?.setOnClickListener { view: View? ->
             val intent = Intent(this@BusinessActivity, SearchActivity::class.java)
             bundle.putString("searchtype", "business")
             intent.putExtras(bundle)
             startActivity(intent)
-        })
-        back?.setOnClickListener(View.OnClickListener { finish() })
-        llsearch?.setOnClickListener(View.OnClickListener { view: View? ->
+        }
+        back?.setOnClickListener { finish() }
+
+        llsearch?.setOnClickListener {
             val intent = Intent(this@BusinessActivity, SearchActivity::class.java)
             bundle.putString("searchtype", "business")
             intent.putExtras(bundle)
             startActivity(intent)
-        })
-        add_button?.setOnClickListener(View.OnClickListener { view: View? ->
-            val intent = Intent(this@BusinessActivity, AdminBusinessListings::class.java)
-            startActivity(intent)
-        })
+        }
+        add_button?.setOnClickListener {
+            if (preferenceManager.getLoginState()) {
+                val intent = Intent(this, AdminBusinessListings::class.java)
+                startActivity(intent)
+            } else {
+                UtilityMethods.showToast(this, "Please Login to process")
+                val intent = Intent(this, OtpLoginActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 
     private fun fetchbusinessCategorys() {

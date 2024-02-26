@@ -3,7 +3,6 @@ package com.sbd.gbd.Activities.Construction
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +24,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.sbd.gbd.Activities.Admin.Admin_Construction
+import com.sbd.gbd.Activities.BasicActivitys.OtpLoginActivity
+import com.sbd.gbd.Utilitys.PreferenceManager
+import com.sbd.gbd.Utilitys.UtilityMethods
 
 class ConstructionActivity : AppCompatActivity() {
     var backarrow : ImageView? = null
@@ -42,7 +44,7 @@ class ConstructionActivity : AppCompatActivity() {
     private var rv_category: RecyclerView? = null
     var businesscatAdaptor: BusinessCategoryAdaptor? = null
     var bundle = Bundle()
-
+    lateinit var preferenceManager: PreferenceManager
     var constructioninfo: ArrayList<ConstructionModel> = ArrayList<ConstructionModel>()
     var categorylists = java.util.ArrayList<Categorymmodel>()
 
@@ -64,6 +66,7 @@ class ConstructionActivity : AppCompatActivity() {
         llsearch = findViewById(R.id.ll_search_business)
         edt_const_search = findViewById(R.id.iv_business_search)
         btn_add_business = findViewById(R.id.btn_add_business)
+        preferenceManager= PreferenceManager(this);
 
         llsearch?.setOnClickListener {
             val intent = Intent(this@ConstructionActivity, SearchActivity::class.java)
@@ -82,8 +85,14 @@ class ConstructionActivity : AppCompatActivity() {
         }
 
         btn_add_business?.setOnClickListener{
-            val intent = Intent(this@ConstructionActivity, Admin_Construction::class.java)
-            startActivity(intent)
+            if (preferenceManager.getLoginState()) {
+                val intent = Intent(this, Admin_Construction::class.java)
+                startActivity(intent)
+            } else {
+                UtilityMethods.showToast(this,"Please Login to process")
+                val intent = Intent(this, OtpLoginActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 

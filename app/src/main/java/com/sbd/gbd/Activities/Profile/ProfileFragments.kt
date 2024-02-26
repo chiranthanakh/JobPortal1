@@ -25,7 +25,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.sbd.gbd.Activities.Dashboard.StartingActivity
-import com.sbd.gbd.Activities.OtpLoginActivity
+import com.sbd.gbd.Activities.BasicActivitys.OtpLoginActivity
 import com.sbd.gbd.Adapters.*
 import com.sbd.gbd.Interface.OnItemClick
 import com.sbd.gbd.Model.BusinessModel

@@ -13,7 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.sbd.gbd.Activities.BasicActivitys.AdsDetailsActivity;
+import com.sbd.gbd.Activities.Dashboard.AdsDetailsActivity;
 import com.sbd.gbd.Model.PropertytModel;
 import com.sbd.gbd.R;
 import com.sbd.gbd.Utilitys.AppConstants;

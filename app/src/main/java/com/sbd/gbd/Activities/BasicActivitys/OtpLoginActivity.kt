@@ -1,4 +1,4 @@
-package com.sbd.gbd.Activities
+package com.sbd.gbd.Activities.BasicActivitys
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,7 +13,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
-import com.sbd.gbd.Activities.BasicActivitys.UserDetailsActivity
 import com.sbd.gbd.R
 import com.sbd.gbd.Utilitys.AppConstants
 import com.sbd.gbd.Utilitys.PreferenceManager

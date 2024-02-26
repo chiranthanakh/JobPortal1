@@ -20,14 +20,14 @@ import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.sbd.gbd.Activities.BasicActivitys.AboutUsActivity
-import com.sbd.gbd.Activities.BasicActivitys.LivingPlaceActivity
-import com.sbd.gbd.Activities.BasicActivitys.Travelsactivity
+import com.sbd.gbd.Activities.HomeRentels.LivingPlaceActivity
+import com.sbd.gbd.Activities.Travels.Travelsactivity
 import com.sbd.gbd.Activities.Businesthings.BusinessActivity
 import com.sbd.gbd.Activities.Businesthings.BusinessFragment
 import com.sbd.gbd.Activities.Construction.ConstructionActivity
 import com.sbd.gbd.Activities.LoanActivity.LoanActivity
 import com.sbd.gbd.Activities.LoanActivity.LoanFragment
-import com.sbd.gbd.Activities.OtpLoginActivity
+import com.sbd.gbd.Activities.BasicActivitys.OtpLoginActivity
 import com.sbd.gbd.Activities.Profile.ProfileFragments
 import com.sbd.gbd.Activities.Propertys.PropertyFragment
 import com.sbd.gbd.R
@@ -54,7 +54,6 @@ class StartingActivity : AppCompatActivity() {
     var startingFragment = DashboardFragment()
     var businessFragment = BusinessFragment()
     var propertyFragment = PropertyFragment()
-    var loanFragment = LoanFragment()
     var frameLayout: FrameLayout? = null
     var drawer_layout: DrawerLayout? = null
     var progressDialog: ProgressDialog? = null
@@ -68,19 +67,13 @@ class StartingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivityStartingBinding.inflate(layoutInflater)
-        preferenceManager= PreferenceManager(this);
         setContentView(binding.root)
-       /* if (BuildConfig.FLAVOR.equals("dev")) {
-            FirebaseApp.initializeApp(this,
-                FirebaseOptions.fromResource(this, R.raw.google_services_dev)!!
-            );
-        } else if (BuildConfig.FLAVOR.equals("release")) {
-            FirebaseApp.initializeApp(this, FirebaseOptions.fromResource(this, R.raw.google_services_release));
-        }*/
+
+        progressDialog = ProgressDialog(this)
+        preferenceManager= PreferenceManager(this);
         FirebaseApp.initializeApp(this)
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
         analytics = Firebase.analytics
-        progressDialog = ProgressDialog(this)
         initilize()
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, startingFragment).commit()
     }
@@ -90,26 +83,20 @@ class StartingActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onResume() {
-        super.onResume()
-        //supportFragmentManager.beginTransaction().replace(R.id.fragment_container, startingFragment).commit()
-    }
-
     private fun initilize() {
         iv_drawer_nav = findViewById<ImageView>(R.id.iv_drawer_nav)
-
         iv_drawer_nav?.setOnClickListener{
             if (preferenceManager.getLoginState()) {
                 fetchProfile()
             } else {
                 binding.btnNavLogout.setText("LogIn")
             }
-            binding.drawerLayoutMainD?.openDrawer(GravityCompat.START)
+            binding.drawerLayoutMainD.openDrawer(GravityCompat.START)
         }
 
-        binding.dashboardProperty?.setOnClickListener {
+        binding.dashboardProperty.setOnClickListener {
             replaceFragment(propertyFragment)
-            binding.drawerLayoutMainD?.closeDrawer(GravityCompat.START)
+            binding.drawerLayoutMainD.closeDrawer(GravityCompat.START)
         }
 
         binding.dashboardLoans.setOnClickListener {
