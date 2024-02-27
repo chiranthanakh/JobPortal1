@@ -75,6 +75,7 @@ class StartingActivity : AppCompatActivity() {
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
         analytics = Firebase.analytics
         initilize()
+        checkPermissions()
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, startingFragment).commit()
     }
 
@@ -148,7 +149,9 @@ class StartingActivity : AppCompatActivity() {
                 val editor = sh?.edit()
                 editor?.clear()
                 editor?.apply()
-                binding.drawerLayoutMainD?.closeDrawer(GravityCompat.START)
+                binding.drawerLayoutMainD.closeDrawer(GravityCompat.START)
+                preferenceManager.logOut()
+                preferenceManager.saveLoginState(false)
             } else {
                 val intent = Intent(this, OtpLoginActivity::class.java)
                 startActivity(intent)
@@ -168,6 +171,15 @@ class StartingActivity : AppCompatActivity() {
             }
             true
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (preferenceManager.getLoginState()) {
+            binding.btnNavLogout.setText("LogOut")
+        } else {
+            binding.btnNavLogout.setText("LogIn")
+        }
     }
 
     override fun onBackPressed() {
@@ -248,7 +260,7 @@ class StartingActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             TedPermission.create()
                 .setPermissionListener(permissionListener)
-                .setDeniedMessage("Please Provide permission ")
+              //  .setDeniedMessage("Please Provide permission ")
                 .setPermissions(
                     Manifest.permission.READ_MEDIA_VIDEO,
                     Manifest.permission.READ_MEDIA_IMAGES,
@@ -258,7 +270,7 @@ class StartingActivity : AppCompatActivity() {
         } else {
             TedPermission.create()
                 .setPermissionListener(permissionListener)
-                .setDeniedMessage("Please provide Permission")
+              //  .setDeniedMessage("Please provide Permission")
                 .setPermissions(
                     Manifest.permission.READ_EXTERNAL_STORAGE,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE,

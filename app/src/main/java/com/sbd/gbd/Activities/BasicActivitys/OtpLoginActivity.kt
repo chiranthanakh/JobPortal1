@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -37,19 +38,19 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
     var cvOtp: CardView? = null
     var btn_continue: Button? = null
     var mVerificationId: String? = null
-    var timertext : TextView? = null
+    var timertext: TextView? = null
+    var progress_layout: RelativeLayout? = null
     private lateinit var mAuth: FirebaseAuth
     private var verificationId: String? = null
-    lateinit var preferenceManager:PreferenceManager
+    lateinit var preferenceManager: PreferenceManager
     private lateinit var countDownTimer: CountDownTimer
     private var timerRunning = false
     private val totalTimeInMillis: Long = 60000 // 1 minute
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_otp_login)
-        preferenceManager= PreferenceManager(this);
+        preferenceManager = PreferenceManager(this);
         mAuth = FirebaseAuth.getInstance()
         edtPhone = findViewById(R.id.edt_phone)
         tvSendOtp = findViewById(R.id.tv_send_otp)
@@ -57,8 +58,10 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
         timertext = findViewById(R.id.tv_timmer)
         btn_continue = findViewById(R.id.btn_continue)
         edt_otp = findViewById(R.id.edt_otp)
+        progress_layout = findViewById(R.id.progress_layout)
         tvSendOtp?.setOnClickListener(this)
         btn_continue?.setOnClickListener(this)
+
         edtPhone?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
@@ -101,14 +104,14 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
                 )
                 startTimer()
             }
+
             R.id.btn_continue ->
+
                 if (edt_otp?.text?.length == 0) {
-
-                Toast.makeText(applicationContext, "Enter the otp", Toast.LENGTH_SHORT).show()
-
-            } else if (edt_otp?.text?.length == 6) {
-                verifyCode(edt_otp?.text.toString())
-            }
+                    Toast.makeText(applicationContext, "Enter the otp", Toast.LENGTH_SHORT).show()
+                } else if (edt_otp?.text?.length == 6) {
+                    verifyCode(edt_otp?.text.toString())
+                }
         }
     }
 
@@ -122,7 +125,7 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
         val seconds = (timeInMillis / 1000) % 60
 
         val timeLeftFormatted = String.format("%02d:%02d", minutes, seconds)
-        timertext?.text = "Resend OTP in : "+timeLeftFormatted+ " sec"
+        timertext?.text = "Resend OTP in : " + timeLeftFormatted + " sec"
     }
 
     var mCallbacks: OnVerificationStateChangedCallbacks =
@@ -135,8 +138,12 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
             }
 
             override fun onVerificationFailed(e: FirebaseException) {
-                fetchProfile(edtPhone?.text.toString()) //romove this
-                Toast.makeText(applicationContext, "OTP Request Failed, please try Sometime", Toast.LENGTH_SHORT).show()
+                //fetchProfile(edtPhone?.text.toString()) //romove this
+                Toast.makeText(
+                    applicationContext,
+                    "OTP Request Failed, please try Sometime",
+                    Toast.LENGTH_SHORT
+                ).show()
                 Log.w("TAG", "onVerificationFailed", e)
                 if (e is FirebaseAuthInvalidCredentialsException) {
                 } else if (e is FirebaseTooManyRequestsException) {
@@ -154,17 +161,20 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
 
     // below method is use to verify code from Firebase.
     private fun verifyCode(code: String) {
+
+        progress_layout?.visibility = View.VISIBLE
         val credential = PhoneAuthProvider.getCredential(mVerificationId!!, code)
         signInWithPhoneAuthCredential(credential)
     }
 
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
-        mAuth!!.signInWithCredential(credential)
+        mAuth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     fetchProfile(edtPhone?.text.toString())
 
                 } else {
+                    progress_layout?.visibility = View.GONE
                     Toast.makeText(applicationContext, "Invalid Otp", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -172,26 +182,40 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun fetchProfile(userNumber: String) {
         if (userNumber !== "") {
-            val profile = FirebaseDatabase.getInstance().reference.child(AppConstants.profile).child(userNumber)
+            val profile = FirebaseDatabase.getInstance().reference.child(AppConstants.profile)
+                .child(userNumber)
             profile.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
                         val dataMap = snapshot.value as HashMap<String, Any>?
                         for (key in dataMap!!.keys) {
                             preferenceManager.saveLoginState(true)
-                            val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
+                            val sharedPreferences =
+                                getSharedPreferences("MySharedPref", MODE_PRIVATE)
                             val myEdit = sharedPreferences.edit()
                             myEdit.putString(AppConstants.number, edtPhone?.text.toString())
                             myEdit.commit()
                             finish()
                         }
                     } else {
-                        startActivity(Intent(this@OtpLoginActivity, UserDetailsActivity::class.java))
+                        startActivity(
+                            Intent(
+                                this@OtpLoginActivity,
+                                UserDetailsActivity::class.java
+                            )
+                        )
+                        var bundle = Bundle()
+                        val intent10 = Intent(this@OtpLoginActivity, UserDetailsActivity::class.java)
+                        bundle.putString("usernumber",edtPhone?.text.toString())
+                        intent10.putExtras(bundle)
+                        startActivity(intent10)
                         finish()
                     }
                 }
+
                 override fun onCancelled(error: DatabaseError) {}
             })
         }
+        progress_layout?.visibility = View.GONE
     }
 }

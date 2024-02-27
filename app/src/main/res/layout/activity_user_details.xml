@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/pb3"
+    android:background="@drawable/bg3"
     android:orientation="vertical"
     tools:context=".Activities.BasicActivitys.UserDetailsActivity">
 
@@ -12,25 +12,20 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:layout_gravity="center"
         tools:ignore="MissingConstraints">
 
-
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-             />
+            android:text="Enter Your Details"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_marginStart="@dimen/dp_25"
+            android:textSize="@dimen/dp_25"/>
 
     </LinearLayout>
-
-
-
-
 
         <LinearLayout
             android:id="@+id/ll_field"
@@ -50,13 +45,13 @@
                 android:layout_height="@dimen/margin_100dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/dp_20"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="5dp">
                 <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="@dimen/margin_100dp"
                     android:layout_height="@dimen/margin_100dp"
                     android:layout_gravity="center"
                     android:src="@drawable/person"
-                    app:tint="@color/green"
+                    app:tint="@color/black"
                     android:scaleType="centerCrop"
                     android:adjustViewBounds="true"
                     app:shapeAppearanceOverlay="@style/circleImageView"/>
@@ -68,6 +63,12 @@
                     android:adjustViewBounds="true"
                     app:shapeAppearanceOverlay="@style/circleImageView"/>
             </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Click Here To Upload Image"
+                android:textStyle="bold"/>
 
 
             <androidx.cardview.widget.CardView
@@ -81,7 +82,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <ImageView
-                        android:src="@drawable/telephone"
+                        android:src="@drawable/user"
                         android:padding="@dimen/dp_5"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="15dp"
@@ -124,6 +125,7 @@
                         android:background="@null"
                         android:layout_weight="1"
                         android:maxLength="10"
+                        android:enabled="false"
                         android:inputType="number"
                         android:paddingStart="10dp"
                         android:hint="Enter Mobile Number"
@@ -143,7 +145,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <ImageView
-                        android:src="@drawable/telephone"
+                        android:src="@drawable/email"
                         android:padding="@dimen/dp_5"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="15dp"
@@ -154,7 +156,6 @@
                         android:layout_gravity="center_vertical"
                         android:background="@null"
                         android:layout_weight="1"
-                        android:maxLength="10"
                         android:inputType="text"
                         android:paddingStart="10dp"
                         android:hint="Enter Email"
@@ -179,6 +180,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:visibility="gone"
                 android:orientation="horizontal">
 
                 <CheckBox
@@ -201,7 +203,8 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="10dp"
-                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -214,7 +217,7 @@
                     android:layout_alignParentBottom="true"
                     android:fontFamily="@font/proxima_nova_bold"
                     android:insetTop="0dp"
-                    android:background="@drawable/button_capsule"
+                    android:background="@drawable/gradient"
                     android:insetBottom="0dp"
                     android:text="Submit"
                     android:textColor="@color/white" />

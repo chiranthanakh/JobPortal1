@@ -11,7 +11,10 @@ import com.sbd.gbd.Activities.Admin.AdminLivingPlacess
 import com.sbd.gbd.Activities.Admin.Admin_Construction
 import com.sbd.gbd.Activities.Admin.Admin_ads_dashboard
 import com.sbd.gbd.Activities.Admin.Admin_travels
+import com.sbd.gbd.Activities.BasicActivitys.OtpLoginActivity
 import com.sbd.gbd.R
+import com.sbd.gbd.Utilitys.PreferenceManager
+import com.sbd.gbd.Utilitys.UtilityMethods
 
 class SellActivity : AppCompatActivity(), View.OnClickListener {
     var ll_post_property: LinearLayout? = null
@@ -21,6 +24,8 @@ class SellActivity : AppCompatActivity(), View.OnClickListener {
     var ll_business_Lissting : LinearLayout? = null
     var ll_rent : LinearLayout? = null
     var iv_nav_view : ImageView? = null
+    lateinit var preferenceManager: PreferenceManager
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +37,7 @@ class SellActivity : AppCompatActivity(), View.OnClickListener {
         ll_business_Lissting = findViewById(R.id.ll_business_Lissting)
         iv_nav_view = findViewById(R.id.iv_nav_back)
         ll_rent = findViewById(R.id.ll_rent)
+        preferenceManager= PreferenceManager(this);
         ll_post_property?.setOnClickListener(this)
         ll_travel_posting?.setOnClickListener(this)
         ll_post_constructions?.setOnClickListener(this)
@@ -44,29 +50,65 @@ class SellActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.ll_post_property -> {
-                val intent = Intent(this, Admin_ads_dashboard::class.java)
-                intent.putExtra("page", "2")
-                startActivity(intent)
+                if (preferenceManager.getLoginState()) {
+                    val intent = Intent(this, Admin_ads_dashboard::class.java)
+                    intent.putExtra("page", "2")
+                    startActivity(intent)
+                } else {
+                    UtilityMethods.showToast(this,"Please Login to process")
+                    val intent = Intent(this, OtpLoginActivity::class.java)
+                    startActivity(intent)
+                }
             }
             R.id.ll_travels_listing -> {
-                val intent2 = Intent(this, Admin_travels::class.java)
-                startActivity(intent2)
+                if (preferenceManager.getLoginState()) {
+                    val intent2 = Intent(this, Admin_travels::class.java)
+                    startActivity(intent2)
+                } else {
+                    UtilityMethods.showToast(this,"Please Login to process")
+                    val intent = Intent(this, OtpLoginActivity::class.java)
+                    startActivity(intent)
+                }
             }
             R.id.ll_post_constructions -> {
-                val intent3 = Intent(this, Admin_Construction::class.java)
-                startActivity(intent3)
+                if (preferenceManager.getLoginState()) {
+                    val intent3 = Intent(this, Admin_Construction::class.java)
+                    startActivity(intent3)
+                } else {
+                    UtilityMethods.showToast(this,"Please Login to process")
+                    val intent = Intent(this, OtpLoginActivity::class.java)
+                    startActivity(intent)
+                }
             }
             R.id.ll_business_Lissting -> {
-                val intent2 = Intent(this, AdminBusinessListings::class.java)
-                startActivity(intent2)
+                if (preferenceManager.getLoginState()) {
+                    val intent2 = Intent(this, AdminBusinessListings::class.java)
+                    startActivity(intent2)
+                } else {
+                    UtilityMethods.showToast(this,"Please Login to process")
+                    val intent = Intent(this, OtpLoginActivity::class.java)
+                    startActivity(intent)
+                }
             }
             R.id.ll_other_posting -> {
-                val intent2 = Intent(this, AdminBusinessListings::class.java)
-                startActivity(intent2)
+                if (preferenceManager.getLoginState()) {
+                    val intent2 = Intent(this, AdminBusinessListings::class.java)
+                    startActivity(intent2)
+                } else {
+                    UtilityMethods.showToast(this,"Please Login to process")
+                    val intent = Intent(this, OtpLoginActivity::class.java)
+                    startActivity(intent)
+                }
             }
             R.id.ll_rent -> {
-                val intent2 = Intent(this, AdminLivingPlacess::class.java)
-                startActivity(intent2)
+                if (preferenceManager.getLoginState()) {
+                    val intent2 = Intent(this, AdminLivingPlacess::class.java)
+                    startActivity(intent2)
+                } else {
+                    UtilityMethods.showToast(this,"Please Login to process")
+                    val intent = Intent(this, OtpLoginActivity::class.java)
+                    startActivity(intent)
+                }
             }
             R.id.iv_nav_back -> {
                 finish()

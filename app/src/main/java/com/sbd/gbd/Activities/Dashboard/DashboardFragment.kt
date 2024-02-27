@@ -114,13 +114,14 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
         binding.searchLayout.setOnClickListener(this)
         binding.btnPost.setOnClickListener(this)
         binding.cvLoans.setOnClickListener(this)
-        binding.cvServicess1.setOnClickListener(this)
+        binding.llConstructions.setOnClickListener(this)
         binding.cvJobs.setOnClickListener(this)
         binding.llConstructions.setOnClickListener(this)
         binding.llHomeRent.setOnClickListener(this)
         binding.llTravels.setOnClickListener(this)
         binding.llHotels.setOnClickListener(this)
 
+        binding.progressLayout.visibility= View.VISIBLE
         AsyncTask.execute {
             fetchcorosel()
             fetchdata()
@@ -128,13 +129,18 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
             fetchlayouts()
         }
 
-        if (AppConstants.user.equals("1")) {
+        if (AppConstants.user.equals("2")) {
             binding.ivBell.visibility = View.GONE
         } else {
             binding.ivBell.setOnClickListener {
                 val intent = Intent(context, AdminDashboard::class.java)
                 startActivity(intent)
             }
+        }
+
+        binding.llBusiness.setOnClickListener {
+            val intent = Intent(context, BusinessActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -300,8 +306,11 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                         }
                         binding.rvLayouts.adapter = layoutsAdaptor
                         layoutsAdaptor!!.notifyItemRangeInserted(0, adslist.size)
+                        binding.progressLayout.visibility= View.GONE
+
                     }
                 }
+                binding.progressLayout.visibility= View.GONE
             }
 
             override fun onCancelled(error: DatabaseError) {}
@@ -349,7 +358,6 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                     binding.rvDashProp.itemAnimator = DefaultItemAnimator()
                     mHandler.post { binding.rvDashProp.adapter = bottomhomeRecyclarviewAdaptor }
                 }
-
             }
 
             override fun onCancelled(databaseError: DatabaseError) {}

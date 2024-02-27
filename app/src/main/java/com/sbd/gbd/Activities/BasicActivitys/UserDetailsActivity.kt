@@ -63,7 +63,8 @@ class UserDetailsActivity : AppCompatActivity() {
         // verifyOTPBtn = findViewById(R.id.btn_submit_login);
         submit = findViewById(R.id.btn_submit_login)
         loadingBar = ProgressDialog(this)
-
+        val number = intent.getStringExtra("usernumber")
+        edtPhone?.setText(number)
         profileImage?.setOnClickListener { OpenGallery() }
 
         submit?.setOnClickListener {

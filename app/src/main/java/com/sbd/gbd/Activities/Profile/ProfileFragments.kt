@@ -11,6 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ProgressBar
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -53,6 +55,7 @@ class ProfileFragments : Fragment(), OnItemClick {
     var constructioninfo: java.util.ArrayList<ConstructionModel?> =
         java.util.ArrayList<ConstructionModel?>()
     var vehicleinfo: java.util.ArrayList<TravelsModel?> = java.util.ArrayList<TravelsModel?>()
+    var progress_layout : RelativeLayout?= null
 
     private var constructionAdaptor: ProfileConstructorAdaptor? = null
 
@@ -97,6 +100,7 @@ class ProfileFragments : Fragment(), OnItemClick {
         tv_name = view.findViewById(R.id.tv_profile_name)
         tv_email = view.findViewById(R.id.tv_profile_email)
         tv_number = view.findViewById(R.id.tv_profile_number)
+        progress_layout = view.findViewById(R.id.progress_layout)
         val ll_logout = view.findViewById<LinearLayout>(R.id.ll_logout)
         val ll_login = view.findViewById<LinearLayout>(R.id.ll_login)
 
@@ -120,6 +124,7 @@ class ProfileFragments : Fragment(), OnItemClick {
         }
 
         ll_logout.setOnClickListener {
+            progress_layout?.visibility = View.VISIBLE
             val sh = context?.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
             val editor = sh?.edit()
             editor?.clear()

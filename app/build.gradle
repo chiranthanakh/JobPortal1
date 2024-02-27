@@ -6,14 +6,14 @@ plugins {
 }
 
 android {
-    signingConfigs {
+   /* signingConfigs {
         release {
             storeFile file('C:\\Users\\admin\\Desktop\\keySore-for GBD\\gbd-keystore.jks')
             storePassword 'Kurudi@123'
             keyAlias 'Key0'
             keyPassword 'Kurudi@123'
         }
-    }
+    }*/
     compileSdk 34
 
     defaultConfig {
