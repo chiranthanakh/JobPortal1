@@ -23,6 +23,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.sbd.gbd.Adapters.CoroselListAdaptor
+import com.sbd.gbd.Model.Corosolmodel
 
 class LoanActivity : AppCompatActivity(), View.OnClickListener {
     var cv_PL: CardView? = null
@@ -32,12 +34,12 @@ class LoanActivity : AppCompatActivity(), View.OnClickListener {
     var cv_LAP: CardView? = null
     var cv_VL: CardView? = null
     var btn_next: Button? = null
-    var coroselimagelist: ArrayList<String> = ArrayList<String>()
+    var coroselimagelist = ArrayList<Corosolmodel>()
     var bankadslist = ArrayList<LoanOffersModel>()
     var recyclerView: RecyclerView? = null
     var recyclarviewloanads: RecyclerView? = null
     var iv_nav_view : ImageView? = null
-    private var coroselListAdaptor: LoanCoroselListAdaptor? = null
+    private var coroselListAdaptor: CoroselListAdaptor? = null
     private var loanoffersAdaptor: LoanoffersAdaptor? = null
     var mHandler = Handler()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,7 +75,7 @@ class LoanActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun fetchcorosel() {
-        val coroselimage = FirebaseDatabase.getInstance().reference.child("Corosels")
+        val coroselimage = FirebaseDatabase.getInstance().reference.child("Corosels").orderByChild(AppConstants.category).equalTo("Loan")
         coroselimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -82,12 +84,23 @@ class LoanActivity : AppCompatActivity(), View.OnClickListener {
                         val data = dataMap[key]
                         try {
                             val userData = data as HashMap<String, Any>?
-                            coroselimagelist.add((userData?.get(AppConstants.image) ?: "") as String)
+                            //coroselimagelist.add((userData?.get(AppConstants.image) ?: "") as String)
+
+                            coroselimagelist.add(
+                                Corosolmodel(
+                                    userData!![AppConstants.image].toString(),
+                                    userData[AppConstants.type].toString(),
+                                    userData[AppConstants.category].toString(),
+                                    userData[AppConstants.pid].toString(),
+                                    userData[AppConstants.pname].toString(),
+                                    userData[AppConstants.description].toString()
+                                )
+                            )
                         } catch (cce: ClassCastException) {
 
                         }
                     }
-                    coroselListAdaptor = LoanCoroselListAdaptor(coroselimagelist, this@LoanActivity)
+                    coroselListAdaptor = CoroselListAdaptor(coroselimagelist, this@LoanActivity)
                     val nlayoutManager: RecyclerView.LayoutManager =
                         LinearLayoutManager(this@LoanActivity, RecyclerView.HORIZONTAL, false)
                     recyclerView?.layoutManager = nlayoutManager

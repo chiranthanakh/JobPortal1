@@ -35,18 +35,19 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:text="The Taj Hotel Bangalore"
+                android:text=""
+                android:maxLines="1"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
             <ImageView
-
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center_vertical"
                 android:background="?selectableItemBackground"
                 android:padding="15dp"
+                android:visibility="gone"
                 android:src="@drawable/share"
                 app:tint="@color/black" />
 
@@ -636,7 +637,7 @@
                 android:insetTop="0dp"
                 android:textSize="14sp"
                 android:insetBottom="0dp"
-                android:text="Call Us"
+                android:text="Call"
                 android:textColor="@color/white" />
 
 
@@ -660,7 +661,7 @@
                 android:insetTop="0dp"
                 android:textSize="14sp"
                 android:insetBottom="0dp"
-                android:text="Message us"
+                android:text="WhatsApp"
                 android:textColor="@color/white" />
 
         </LinearLayout>

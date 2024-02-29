@@ -49,7 +49,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/lato_bold"
-                        android:text="The Taj Hotel Bangalore"
+                        android:text="Product"
+                        android:maxLines="1"
                         android:textColor="@color/white"
                         android:textSize="18sp" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -730,7 +731,7 @@
                 android:fontFamily="@font/proxima_nova_bold"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="Call Us"
+                android:text="Call"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 
@@ -754,7 +755,7 @@
                 android:fontFamily="@font/proxima_nova_bold"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="Message us"
+                android:text="WhatsApp"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 

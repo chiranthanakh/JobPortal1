@@ -106,7 +106,6 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
             }
 
             R.id.btn_continue ->
-
                 if (edt_otp?.text?.length == 0) {
                     Toast.makeText(applicationContext, "Enter the otp", Toast.LENGTH_SHORT).show()
                 } else if (edt_otp?.text?.length == 6) {
@@ -161,7 +160,6 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
 
     // below method is use to verify code from Firebase.
     private fun verifyCode(code: String) {
-
         progress_layout?.visibility = View.VISIBLE
         val credential = PhoneAuthProvider.getCredential(mVerificationId!!, code)
         signInWithPhoneAuthCredential(credential)

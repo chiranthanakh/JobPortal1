@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@drawable/gradient"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <ImageView
@@ -30,10 +31,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Layouts"
-            android:layout_gravity="center"
+            android:gravity="center_vertical"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
-            android:textSize="@dimen/dp_30"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/white"/>
 

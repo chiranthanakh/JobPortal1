@@ -81,10 +81,10 @@ class LoanForm : AppCompatActivity() {
 
 
         btn_next?.setOnClickListener(View.OnClickListener { view: View? ->
-            if (TextUtils.isEmpty(et_number?.getText().toString())) {
+            if (TextUtils.isEmpty(et_name?.getText().toString())) {
+                toast("Please enter Your Name.")
+            } else if(TextUtils.isEmpty(et_number?.getText().toString()) || et_number?.getText().toString().length != 10){
                 toast("Please enter a valid phone number.")
-            } else if(TextUtils.isEmpty(et_name?.getText().toString())){
-                toast("Please your name.")
             }else if(TextUtils.isEmpty(et_dob?.getText().toString())){
                 toast("Please enter date of birth.")
             }else if(TextUtils.isEmpty(et_address?.getText().toString())){

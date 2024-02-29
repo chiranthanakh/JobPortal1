@@ -58,7 +58,7 @@ class UpcommingProjects : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun fetchads() {
-        val adsimage = FirebaseDatabase.getInstance().reference.child("adsforyou")
+        val adsimage = FirebaseDatabase.getInstance().reference.child("adsforyou").orderByChild(AppConstants.Status).equalTo(AppConstants.user)
         adsimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -78,7 +78,8 @@ class UpcommingProjects : AppCompatActivity(), View.OnClickListener {
                                     userData[AppConstants.propertysize].toString(),
                                     userData[AppConstants.location].toString(),
                                     userData[AppConstants.number].toString(),
-                                    userData[AppConstants.type].toString()
+                                    userData[AppConstants.type].toString(),
+                                    userData[AppConstants.Status].toString()
                                 )
                             )
                         } catch (cce: ClassCastException) {

@@ -137,7 +137,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_10_dp"
                     android:backgroundTint="@color/app_blue"
-                    android:hint="Enter Your name"
+                    android:hint="Enter Amount Required"
                     android:textColorHint="@color/profile_textHint" />
 
             </LinearLayout>

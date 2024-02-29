@@ -75,7 +75,8 @@ class SeeAllLayoutActivity : AppCompatActivity(), View.OnClickListener {
                             layoutlist.add(
                                 userData!![AppConstants.image].toString() + "!!" + userData[AppConstants.pid] + "---" + userData[AppConstants.description] + "---" +
                                         userData[AppConstants.category] + "---" + userData[AppConstants.price] + "---" + userData[AppConstants.pname]
-                                        + "---" + userData[AppConstants.propertysize] + "---" + userData[AppConstants.location] + "---" + userData[AppConstants.number] + "---" + userData[AppConstants.type]
+                                        + "---" + userData[AppConstants.propertysize] + "---" + userData[AppConstants.location] + "---" + userData[AppConstants.number]
+                                        + "---" + userData[AppConstants.type]+ "---" + userData[AppConstants.Status]
                             )
                         } catch (cce: ClassCastException) {
 

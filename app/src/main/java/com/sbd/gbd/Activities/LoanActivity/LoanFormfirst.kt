@@ -25,6 +25,7 @@ class LoanFormfirst : AppCompatActivity() {
         val ll_tenure = findViewById<LinearLayout>(R.id.ll_tenure)
         val ll_company = findViewById<LinearLayout>(R.id.ll_company_name)
         val nextbtn = findViewById<Button>(R.id.btn_next_form)
+        val iv_nav_view = findViewById<ImageView>(R.id.iv_nav_view)
 
         val loantype = resources.getStringArray(R.array.typeofemp)
         val tenurelist = resources.getStringArray(R.array.tenure)
@@ -41,6 +42,9 @@ class LoanFormfirst : AppCompatActivity() {
             ll_tenure.visibility = View.GONE
         }
 
+        iv_nav_view.setOnClickListener {
+            finish()
+        }
         emptype.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>,

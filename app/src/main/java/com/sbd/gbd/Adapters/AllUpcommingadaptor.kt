@@ -1,96 +1,122 @@
-package com.sbd.gbd.Adapters;
+package com.sbd.gbd.Adapters
 
-import android.content.Context;
-import android.content.Intent;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.content.Context
+import android.content.Intent
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.google.firebase.database.FirebaseDatabase
+import com.sbd.gbd.Activities.Dashboard.AdsDetailsActivity
+import com.sbd.gbd.Model.PropertytModel
+import com.sbd.gbd.R
+import com.sbd.gbd.Utilitys.AppConstants
+import com.sbd.gbd.Utilitys.Utilitys
 
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
+class AllUpcommingadaptor(
+    private val productInfos: List<PropertytModel>,
+    private var context: Context
+) : RecyclerView.Adapter<AllUpcommingadaptor.ViewHolder>() {
+    var utilitys = Utilitys()
 
-import com.bumptech.glide.Glide;
-import com.sbd.gbd.Activities.Dashboard.AdsDetailsActivity;
-import com.sbd.gbd.Model.PropertytModel;
-import com.sbd.gbd.R;
-import com.sbd.gbd.Utilitys.AppConstants;
-
-import java.util.List;
-
-public class AllUpcommingadaptor extends RecyclerView.Adapter<AllUpcommingadaptor.ViewHolder>{
-
-    private List<PropertytModel> productInfos;
-    private Context context;
-
-    public AllUpcommingadaptor(List<PropertytModel> productInfos, Context context) {
-        this.productInfos = productInfos;
-        this.context = context;
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        context = parent.context
+        val listItem =
+            layoutInflater.inflate(R.layout.product_items_layout, parent, false)
+        return ViewHolder(listItem)
     }
 
-    @NonNull
-    @Override
-    public AllUpcommingadaptor.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        context = parent.getContext();
-        View listItem= layoutInflater.inflate(R.layout.product_items_layout, parent, false);
-        AllUpcommingadaptor.ViewHolder viewHolder = new AllUpcommingadaptor.ViewHolder(listItem);
-        return viewHolder;
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull AllUpcommingadaptor.ViewHolder holder, int position) {
-        PropertytModel propertyinfo = productInfos.get(position);
-
-        String imagesdata = propertyinfo.getImage();
-
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val propertyinfo = productInfos[position]
+        val imagesdata = propertyinfo.image
         Glide.with(context)
-                .load(imagesdata)
-                .into(holder.iv_image);
+            .load(imagesdata)
+            .into(holder.iv_image)
+        holder.product_type1.text = propertyinfo.type
+        holder.product_location1.text = propertyinfo.location
+        holder.product_price.text = propertyinfo.price
+        holder.product_size1.text = propertyinfo.propertysize
+        holder.product_name.text = propertyinfo.pname
 
-        holder.product_type1.setText(propertyinfo.getType());
-        holder.product_location1.setText(propertyinfo.getLocation());
-        holder.product_price.setText(propertyinfo.getPrice());
-        holder.product_size1.setText(propertyinfo.getPropertysize());
-        holder.product_name.setText(propertyinfo.getPname());
+        if (propertyinfo.status.equals("1")) {
+            holder.ll_approve.visibility = View.VISIBLE
+            holder.ll_call?.visibility = View.GONE
+        } else if (propertyinfo.status.equals("3")) {
+            holder.ll_approve.visibility = View.VISIBLE
+            holder.ll_call?.visibility = View.GONE
+        } else {
+            holder.ll_approve.visibility = View.GONE
+            holder.ll_call?.visibility = View.VISIBLE
+        }
 
-        holder.cv_layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent =new Intent(context, AdsDetailsActivity.class);
-                intent.putExtra(AppConstants.pid,propertyinfo.getPid());
-                intent.putExtra("page","1");
-                context.startActivity(intent);
+        holder.cv_layout.setOnClickListener {
+            val intent = Intent(context, AdsDetailsActivity::class.java)
+            intent.putExtra(AppConstants.pid, propertyinfo.pid)
+            intent.putExtra("page", "1")
+            context.startActivity(intent)
+        }
+
+        holder.property_btn_call.setOnClickListener { view: View? ->
+            utilitys.navigateCall(
+                context,
+                propertyinfo.number,
+                propertyinfo.pid
+            )
+        }
+        holder.property_btn_whatsapp.setOnClickListener { view: View? ->
+            utilitys.navigateWhatsapp(
+                context,
+                propertyinfo.number,
+                propertyinfo.pid
+            )
+        }
+        holder.ll_approve.setOnClickListener {
+            propertyinfo.pid?.let { it1 ->
+                FirebaseDatabase.getInstance().reference.child("adsforyou").child(it1)
+                    .child(AppConstants.Status).setValue("2")
             }
-        });
-    }
-
-    @Override
-    public int getItemCount() {
-        return productInfos.size();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
-        ImageView iv_image;
-        CardView cv_layout;
-        TextView product_name,product_price,product_size1,product_location1,product_type1;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            iv_image = itemView.findViewById(R.id.product_image);
-            product_name = itemView.findViewById(R.id.product_name1);
-            product_price = itemView.findViewById(R.id.product_price);
-            product_size1 = itemView.findViewById(R.id.product_size1);
-            product_location1 = itemView.findViewById(R.id.product_location1);
-            product_type1 = itemView.findViewById(R.id.product_type1);
-            cv_layout = itemView.findViewById(R.id.cv_layout);
         }
     }
 
+    override fun getItemCount(): Int {
+        return productInfos.size
+    }
 
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var iv_image: ImageView
+        var cv_layout: CardView
+        var product_name: TextView
+        var product_price: TextView
+        var product_size1: TextView
+        var product_location1: TextView
+        var product_type1: TextView
+        var ll_approve : LinearLayout
+        var ll_call : LinearLayout
+        var property_btn_call: ImageView
+        var property_btn_whatsapp: ImageView
+
+
+        init {
+            iv_image = itemView.findViewById(R.id.product_image)
+            product_name = itemView.findViewById(R.id.product_name1)
+            product_price = itemView.findViewById(R.id.product_price)
+            product_size1 = itemView.findViewById(R.id.product_size1)
+            product_location1 = itemView.findViewById(R.id.product_location1)
+            product_type1 = itemView.findViewById(R.id.product_type1)
+            cv_layout = itemView.findViewById(R.id.cv_layout)
+            ll_approve = itemView.findViewById(R.id.ll_approve)
+            ll_call = itemView.findViewById(R.id.ll_call)
+            property_btn_call = itemView.findViewById(R.id.property_btn_call)
+            property_btn_whatsapp = itemView.findViewById(R.id.property_btn_whatsapp)
+        }
+    }
 }
-

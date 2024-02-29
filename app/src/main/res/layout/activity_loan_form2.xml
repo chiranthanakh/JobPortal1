@@ -157,6 +157,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_10_dp"
                     android:inputType="phone"
+                    android:maxLength="10"
                     android:backgroundTint="@color/app_blue"
                     android:hint="Enter monthly income"
                     android:textColorHint="@color/profile_textHint" />

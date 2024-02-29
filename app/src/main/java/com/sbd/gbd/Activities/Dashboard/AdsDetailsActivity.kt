@@ -119,7 +119,6 @@ class AdsDetailsActivity : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists() && dataSnapshot.getValue(AdsModel::class.java) != null) {
                     val products = dataSnapshot.getValue(AdsModel::class.java)
-                    Log.d("check details", products?.postedBy.toString())
                     productName?.text = products!!.pname
                     productPrice?.text = "Rs." + products.price
                     productDescription?.text = products.description
