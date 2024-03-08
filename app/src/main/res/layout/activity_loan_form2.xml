@@ -73,7 +73,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/dp_20"
                 android:fontFamily="@font/lato_bold"
-                android:text="Personal loan"
+                android:text="Please Fill the Form "
                 android:textColor="@color/purple_700"
                 android:textSize="20sp"
                 android:textStyle="bold" />

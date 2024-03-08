@@ -97,11 +97,6 @@ class LayoutDetailsActivity : AppCompatActivity() {
         iv_back_ads?.setOnClickListener(View.OnClickListener { finish() })
     }
 
-    override fun onStart() {
-        super.onStart()
-        //CheckOrderState();
-    }
-
     private fun getProductDetails(productID: String?) {
         val productsRef: DatabaseReference
         productsRef = if (page == "3") {

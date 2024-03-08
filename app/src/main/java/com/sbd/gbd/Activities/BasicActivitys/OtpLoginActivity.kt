@@ -139,8 +139,8 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
             override fun onVerificationFailed(e: FirebaseException) {
                 //fetchProfile(edtPhone?.text.toString()) //romove this
                 Toast.makeText(
-                    applicationContext,
-                    "OTP Request Failed, please try Sometime",
+                    applicationContext,e.toString(),
+                    //"OTP Request Failed, please try Sometime",
                     Toast.LENGTH_SHORT
                 ).show()
                 Log.w("TAG", "onVerificationFailed", e)

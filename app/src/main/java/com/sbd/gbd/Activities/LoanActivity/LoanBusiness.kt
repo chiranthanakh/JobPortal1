@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
 import com.sbd.gbd.R
@@ -29,11 +30,13 @@ class LoanBusiness : AppCompatActivity() {
         val sp_company_type = findViewById<Spinner>(R.id.Sp_company_type)
         val sp_business_nature = findViewById<Spinner>(R.id.sp_business_nature)
         val nextbtn = findViewById<Button>(R.id.btn_next_form)
-
-       // binding= ActivityLoanBusinessBinding.inflate(layoutInflater)
-
+        val iv_nav_view = findViewById<ImageView>(R.id.iv_nav_view)
         val comtype = resources.getStringArray(R.array.companyType)
         val nature = resources.getStringArray(R.array.businessNature)
+
+        iv_nav_view.setOnClickListener {
+            finish()
+        }
 
         sp_company_type.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {

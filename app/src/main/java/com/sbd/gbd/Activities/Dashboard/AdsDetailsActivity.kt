@@ -167,6 +167,7 @@ class AdsDetailsActivity : AppCompatActivity() {
     var imageListener = ImageListener { position, imageView ->
         Glide.with(this@AdsDetailsActivity)
             .load(url[position])
+            .fitCenter()
             .into(imageView)
     }
 }

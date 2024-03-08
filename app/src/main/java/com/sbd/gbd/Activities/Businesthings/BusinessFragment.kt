@@ -67,20 +67,6 @@ class BusinessFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        /*if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.darkTheme)
-            //when dark mode is enabled, we use the dark theme
-        } else {
-            setTheme(R.style.JobPortaltheam) //default app theme
-        }
-        if (Build.VERSION.SDK_INT >= 21) {
-            val window: Window = this.getWindow()
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-            window.statusBarColor = this.resources.getColor(R.color.app_blue)
-        }*/
-
         ProductsRef = FirebaseDatabase.getInstance().reference.child("Products")
         initilize(view)
     }

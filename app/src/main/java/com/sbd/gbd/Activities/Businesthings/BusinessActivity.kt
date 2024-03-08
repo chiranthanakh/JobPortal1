@@ -53,7 +53,7 @@ class BusinessActivity : AppCompatActivity(), View.OnClickListener, FilterCatego
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_business)
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.darkTheme)
+           // setTheme(R.style.darkTheme)
             //when dark mode is enabled, we use the dark theme
         } else {
             setTheme(R.style.JobPortaltheam) //default app theme

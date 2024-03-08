@@ -114,14 +114,15 @@
                             style="?attr/materialButtonOutlinedStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Sites"
-                            />
+                            android:textColor="@color/black"
+                            android:text="Sites" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/button2"
                             style="?attr/materialButtonOutlinedStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:text="G-land" />
 
                         <com.google.android.material.button.MaterialButton
@@ -129,6 +130,7 @@
                             style="?attr/materialButtonOutlinedStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:text="Homes" />
 
                         <com.google.android.material.button.MaterialButton
@@ -136,6 +138,7 @@
                             style="?attr/materialButtonOutlinedStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:text="Layouts" />
 
                         <!-- Add more MaterialButtons as needed -->

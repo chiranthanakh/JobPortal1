@@ -20,8 +20,8 @@ android {
         applicationId "com.sbd.gbd"
         minSdkVersion 28
         targetSdkVersion 34
-        versionCode 12
-        versionName "1.0"
+        versionCode 16
+        versionName "1.13"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -30,7 +30,7 @@ android {
         dev {
             dimension "default"
             applicationIdSuffix ".debug"
-          //  buildConfigField("String", "GOOGLE_SERVICES_JSON", "\"google-services.json\"")
+          ////  buildConfigField("String", "GOOGLE_SERVICES_JSON", "\"google-services.json\"")
 
         }
         prod {
@@ -42,7 +42,7 @@ android {
 
     buildTypes {
         release {
-            debuggable false
+           // debuggable false
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -97,7 +97,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:22.3.1'
     implementation 'com.google.firebase:firebase-appcheck-safetynet:16.1.2'
     implementation platform('com.google.firebase:firebase-bom:31.2.3')
-    implementation 'com.google.firebase:firebase-database:20.3.0'
+    implementation 'com.google.firebase:firebase-database:20.3.1'
 
     // Add the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies

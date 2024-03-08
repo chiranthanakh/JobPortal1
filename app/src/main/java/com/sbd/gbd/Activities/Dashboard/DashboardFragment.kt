@@ -7,9 +7,11 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
+import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +24,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.sbd.gbd.Activities.Admin.AdminDashboard
 import com.sbd.gbd.Activities.HotelsPG.CenterHomeActivity
 import com.sbd.gbd.Activities.HomeRentels.LivingPlaceActivity
@@ -52,7 +55,10 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.sbd.gbd.Activities.HotDealsactivity.HotDealsDetailsActivity
+import com.sbd.gbd.Activities.LoanActivity.LoanForm
 import com.synnapps.carouselview.CarouselView
+import com.synnapps.carouselview.ImageListener
 import java.io.IOException
 import java.util.Collections
 import java.util.Locale
@@ -73,6 +79,8 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
     var adsAdaptor: AdsAdaptor? = null
     var layoutsAdaptor: LayoutsAdaptor? = null
     private var reload = false
+    private var count: Int? = 0
+    private var totalCarousel: Int? = 0
     var coroselimagelist = ArrayList<Corosolmodel>()
     var adslist: ArrayList<Any?> = ArrayList<Any?>()
     var layoutslists: ArrayList<Any?> = ArrayList<Any?>()
@@ -80,14 +88,15 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
     var carouselView: CarouselView? = null
     var mHandler = Handler()
     var tv_location: TextView? = null
-    var progressDialog: ProgressDialog? = null
     var bundle = Bundle()
+    private var url: ArrayList<String> = ArrayList<String>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DashboardFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -99,7 +108,6 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
         name = sh.getString("name", "")
         mail = sh.getString("mail", null)
         pic = sh.getString("pic", null)
-        progressDialog = ProgressDialog(context)
         initilize(view)
     }
 
@@ -115,7 +123,6 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
         binding.btnPost.setOnClickListener(this)
         binding.cvLoans.setOnClickListener(this)
         binding.llConstructions.setOnClickListener(this)
-        binding.cvJobs.setOnClickListener(this)
         binding.llConstructions.setOnClickListener(this)
         binding.llHomeRent.setOnClickListener(this)
         binding.llTravels.setOnClickListener(this)
@@ -150,6 +157,7 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     val dataMap = snapshot.value as HashMap<String, Any>?
+                    url.clear()
                     for (key in dataMap!!.keys) {
                         val data = dataMap[key]
                         try {
@@ -164,21 +172,23 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                                     userData[AppConstants.description].toString()
                                 )
                             )
+                            url.add(userData[AppConstants.image].toString())
                         } catch (cce: ClassCastException) {
                             //through exception
                         }
                     }
                     if (coroselimagelist.size != 0) {
+                        binding.caroselDashboard.setImageListener(imageListener)
+                        binding.caroselDashboard.pageCount = url.size
+
+                        binding.caroselDashboard.setImageClickListener {
+                            carouselClick(coroselimagelist.get(it))
+                        }
+
                         coroselListAdaptor = CoroselListAdaptor(coroselimagelist, context!!)
                         val nlayoutManager: RecyclerView.LayoutManager =
                             LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-                        binding.rvHomeEvent.layoutManager = nlayoutManager
-                        binding.rvHomeEvent.itemAnimator = DefaultItemAnimator()
-                        binding.rvHomeEvent.onFlingListener = null
-                        mHandler.post {
-                            binding.rvHomeEvent.adapter = coroselListAdaptor
-                        }
-                        coroselListAdaptor!!.notifyItemRangeInserted(0, coroselimagelist.size)
+
                     }
                 }
             }
@@ -186,7 +196,6 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
             override fun onCancelled(error: DatabaseError) {}
         })
     }
-
 
     private fun fetchads() {
         val adsimage = FirebaseDatabase.getInstance().reference.child("adsforyou")
@@ -237,11 +246,6 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                     binding.rvAddsLayots1.layoutManager = n1layoutManager
                     binding.rvAddsLayots1.itemAnimator = DefaultItemAnimator()
                     mHandler.post {
-                        if (progressDialog != null) {
-                            if (progressDialog!!.isShowing) {
-                                progressDialog!!.dismiss()
-                            }
-                        }
                         binding.rvAddsLayots1.adapter = adsAdaptor
                         adsAdaptor?.notifyItemRangeInserted(0, adslist.size)
                     }
@@ -299,11 +303,6 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                     binding.rvLayouts.layoutManager = n1layoutManager
                     binding.rvLayouts.itemAnimator = DefaultItemAnimator()
                     mHandler.post {
-                        if (progressDialog != null) {
-                            if (progressDialog!!.isShowing) {
-                                progressDialog!!.dismiss()
-                            }
-                        }
                         binding.rvLayouts.adapter = layoutsAdaptor
                         layoutsAdaptor!!.notifyItemRangeInserted(0, adslist.size)
                         binding.progressLayout.visibility= View.GONE
@@ -480,6 +479,40 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
         }
     }
 
+    private fun carouselClick( itemClick : Corosolmodel) {
+        if (itemClick.type == "2") {
+            val uri = Uri.parse("http://www.google.com")
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            context?.startActivity(intent)
+        } else {
+            if (itemClick.category == "Layout") {
+                val intent = Intent(context, LayoutDetailsActivity::class.java)
+                intent.putExtra(AppConstants.pid, itemClick.pid)
+                intent.putExtra("page", "3")
+                context?.startActivity(intent)
+            } else if (itemClick.category == "Loan") {
+                val intent = Intent(context, LoanForm::class.java)
+                intent.putExtra(AppConstants.pid, itemClick.pid)
+                intent.putExtra("page", "3")
+                context?.startActivity(intent)
+            } else if (itemClick.category == "hotdeals") {
+                val intent = Intent(context, HotDealsDetailsActivity::class.java)
+                intent.putExtra(AppConstants.pid, itemClick.pid)
+                intent.putExtra("page", "3")
+                context?.startActivity(intent)
+            } else {
+                val intent = Intent(context, CoroselDetailsActivity::class.java)
+                intent.putExtra(AppConstants.pid, itemClick.pid)
+                intent.putExtra(AppConstants.image, itemClick.imageurl)
+                intent.putExtra(AppConstants.category, itemClick.category)
+                intent.putExtra(AppConstants.pname, itemClick.pname)
+                intent.putExtra(AppConstants.description, itemClick.discription)
+                intent.putExtra("page", "3")
+                context?.startActivity(intent)
+            }
+        }
+    }
+
     override fun onFragmentInteraction() {
         val businessFragment = BusinessFragment()
         val fragmentManager = requireActivity().supportFragmentManager
@@ -487,5 +520,11 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
         fragmentTransaction.replace(R.id.fragment_container, businessFragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
+    }
+
+    var imageListener = ImageListener { position, imageView ->
+        Glide.with(this@DashboardFragment)
+            .load(url[position])
+            .into(imageView)
     }
 }

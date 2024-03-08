@@ -1,6 +1,9 @@
 package com.sbd.gbd.Model
 
-class AdsModel(
+import androidx.annotation.Keep
+
+@Keep
+data class AdsModel(
     var image: String? = "",
     var image2: String? = "",
     var pid: String? = "",

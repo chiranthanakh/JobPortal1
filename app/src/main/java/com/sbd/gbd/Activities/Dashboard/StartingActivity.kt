@@ -46,6 +46,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
+import com.sbd.gbd.BuildConfig
 import java.util.*
 
 class StartingActivity : AppCompatActivity() {
@@ -56,7 +57,6 @@ class StartingActivity : AppCompatActivity() {
     var propertyFragment = PropertyFragment()
     var frameLayout: FrameLayout? = null
     var drawer_layout: DrawerLayout? = null
-    var progressDialog: ProgressDialog? = null
     var iv_drawer_nav: ImageView? = null
     private var permissionListener: PermissionListener? = null
     private lateinit var binding: ActivityStartingBinding
@@ -68,8 +68,6 @@ class StartingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding=ActivityStartingBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        progressDialog = ProgressDialog(this)
         preferenceManager= PreferenceManager(this);
         FirebaseApp.initializeApp(this)
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
@@ -86,6 +84,8 @@ class StartingActivity : AppCompatActivity() {
 
     private fun initilize() {
         iv_drawer_nav = findViewById<ImageView>(R.id.iv_drawer_nav)
+        val versionName = BuildConfig.VERSION_NAME
+        binding.tvVersion.setText("Version : "+versionName)
         iv_drawer_nav?.setOnClickListener{
             if (preferenceManager.getLoginState()) {
                 fetchProfile()
@@ -251,10 +251,10 @@ class StartingActivity : AppCompatActivity() {
             }
 
             override fun onPermissionDenied(deniedPermissions: List<String>) {
-                Toast.makeText(
+               /* Toast.makeText(
                     this@StartingActivity,
                     "Permission Denied\n$deniedPermissions", Toast.LENGTH_SHORT
-                ).show()
+                ).show()*/
             }
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {

@@ -174,7 +174,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="122dp"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/toolbar">
 
@@ -189,51 +189,14 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/gradient"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
+                     <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
                             android:gravity="center"
+                            android:paddingTop="@dimen/margin_10dp"
                             android:orientation="horizontal"
+                            android:background="@drawable/gradient"
                             app:layout_constraintTop_toTopOf="parent">
-
-                            <LinearLayout
-                                android:id="@+id/cv_jobs"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                android:paddingBottom="8dp"
-                                android:visibility="gone">
-
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="30dp"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginBottom="5dp"
-                                    android:src="@drawable/ic_job" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="10dp"
-                                    android:layout_marginTop="2dp"
-                                    android:layout_marginEnd="10dp"
-                                    android:fontFamily="@font/proxima_nova_semi_bold"
-                                    android:gravity="center"
-                                    android:maxLines="2"
-                                    android:text="Jobs"
-                                    android:textColor="@color/white"
-                                    android:textSize="14sp" />
-
-                            </LinearLayout>
 
                             <LinearLayout
                                 android:id="@+id/cv_loans"
@@ -326,28 +289,41 @@
 
                             </LinearLayout>
                         </LinearLayout>
-                    </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:background="@color/white"
-                        android:orientation="vertical"
-                        app:layout_constraintTop_toTopOf="parent">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="360dp"
+                        android:layout_height="170dp"
+                        android:elevation="1dp"
+                        android:id="@+id/cv_card_deals"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="@dimen/margin_10dp"
+                        android:layout_marginLeft="@dimen/margin_10dp"
+                        android:layout_marginTop="@dimen/margin_10dp"
+                        android:layout_marginBottom="@dimen/margin_10dp"
+                        android:backgroundTint="@color/white"
+                        app:cardCornerRadius="5dp">
 
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rv_home_event"
+                        <com.synnapps.carouselview.CarouselView
+                            android:id="@+id/carosel_dashboard"
                             android:layout_width="match_parent"
-                            android:layout_height="160dp"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="3dp"
-                            android:layout_marginEnd="3dp" />
+                            android:layout_height="match_parent"
+                            app:fillColor="#FFFFFFFF"
+                            app:pageColor="#00000000"
+                            app:radius="3dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitXY"
+                            app:slideInterval="4000"
+                            app:strokeColor="#FF777777"
+                            app:strokeWidth="1dp" />
 
-                    </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -458,7 +434,7 @@
                                     android:fontFamily="@font/lato"
                                     android:gravity="center"
                                     android:maxLines="2"
-                                    android:text="Construction"
+                                    android:text="Business"
                                     android:textColor="@color/black"
                                     android:textSize="12sp" />
 

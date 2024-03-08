@@ -1,6 +1,11 @@
 package com.sbd.gbd.Model
 
-class LayoutModel(
+import androidx.annotation.Keep
+import com.google.firebase.database.IgnoreExtraProperties
+
+@IgnoreExtraProperties
+@Keep
+data class LayoutModel(
     var image: String? = "",
     var image2: String? = "",
     var pid: String? = "",

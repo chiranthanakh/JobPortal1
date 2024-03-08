@@ -5,12 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import com.sbd.gbd.R
 import com.google.android.material.textfield.TextInputEditText
 
 class LoanVehicle : AppCompatActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,8 +22,11 @@ class LoanVehicle : AppCompatActivity() {
         val edt_pan = findViewById<EditText>(R.id.edt_pancard)
         val edt_aadhar = findViewById<EditText>(R.id.edt_aadhaar)
         val nextbtn = findViewById<Button>(R.id.btn_next_form)
+        val iv_nav_view = findViewById<ImageView>(R.id.iv_nav_view)
 
-
+        iv_nav_view.setOnClickListener {
+            finish()
+        }
         nextbtn.setOnClickListener{
             var amt = amount.text.toString().trim()
             var inc = income.text.toString().trim()

@@ -8,6 +8,7 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RadioGroup
 import android.widget.TextView
@@ -34,6 +35,7 @@ class LoanForm : AppCompatActivity() {
     private var gender : RadioGroup? = null
     private var edt_city : EditText ?= null
     private var tv_loantype : TextView ?= null
+    private var iv_nav_view : ImageView ?= null
     var type : String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +58,11 @@ class LoanForm : AppCompatActivity() {
         et_address = findViewById(R.id.edt_address)
          gender = findViewById(R.id.rb_gender)
         edt_city = findViewById(R.id.edt_city)
+        iv_nav_view = findViewById(R.id.iv_nav_view)
+
+        iv_nav_view?.setOnClickListener {
+            finish()
+        }
 
         if(type.equals("2")) {
             tv_loantype?.setText("Business Loan")

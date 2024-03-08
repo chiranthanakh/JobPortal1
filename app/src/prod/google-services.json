@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "516107878759",
+    "firebase_url": "https://my-gbd-174fe-default-rtdb.firebaseio.com",
     "project_id": "my-gbd-174fe",
     "storage_bucket": "my-gbd-174fe.appspot.com"
   },
@@ -12,7 +13,36 @@
           "package_name": "com.sbd.gbd.release"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "516107878759-6k2irskdsqb7jtbmjb9t40v6idoui8ih.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sbd.gbd.release",
+            "certificate_hash": "2feff55067a17ed9f0409814bab411fbccccc94d"
+          }
+        },
+        {
+          "client_id": "516107878759-bdjvh8j79dmo7jprqjge90nfjsdoat54.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sbd.gbd.release",
+            "certificate_hash": "30711eb3e7d8f9d0185fdc9d214bc15181dd237a"
+          }
+        },
+        {
+          "client_id": "516107878759-vkm32h97pkctpe8s85le3rmorkr556r0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sbd.gbd.release",
+            "certificate_hash": "25f13aec1526f7b5c365a7d039bd32b471537dda"
+          }
+        },
+        {
+          "client_id": "516107878759-i4i4ute1sgglsp20l7kc5c38tgkt9r1q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCHlQ95nmWZC-NL_mZhk-NeBM2d_34HCUM"
@@ -20,7 +50,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "516107878759-i4i4ute1sgglsp20l7kc5c38tgkt9r1q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
