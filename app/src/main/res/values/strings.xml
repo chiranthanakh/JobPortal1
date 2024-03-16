@@ -53,6 +53,20 @@
         <item>"layout"</item>
     </string-array>
 
+    <string-array name="businessCat">
+        <item>"Select Category"</item>
+        <item>"Business"</item>
+        <item>"Construction"</item>
+        <item>"Both"</item>
+    </string-array>
+
+    <string-array name="businessType">
+        <item>"Services"</item>
+        <item>"Retail"</item>
+        <item>"Wholesaler"</item>
+        <item>"Manufacturing"</item>
+    </string-array>
+
     <string-array name="companyType">
         <item>"Proprietorship / Individual "</item>
         <item>"Partnership firm"</item>

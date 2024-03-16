@@ -168,7 +168,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/livingplace_name"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
+                        android:layout_height="60dp"
                         android:background="@null"
                         android:hint="Property Name"
                         android:inputType="text"
@@ -234,7 +234,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/livingplace_flore"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
+                        android:layout_height="60dp"
                         android:background="@null"
                         android:hint="Number of flore"
                         android:inputType="text"
@@ -267,7 +267,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/livingplace_rent_amount"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
+                        android:layout_height="60dp"
                         android:background="@null"
                         android:hint="rent/lease prise"
                         android:inputType="text"
@@ -300,7 +300,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/livingplace_deposite_amount"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
+                        android:layout_height="60dp"
                         android:background="@null"
                         android:hint="Deposite Amount"
                         android:inputType="number"
@@ -333,7 +333,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/livingplace_location"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
+                        android:layout_height="60dp"
                         android:background="@null"
                         android:hint="Address"
                         android:inputType="text"
@@ -367,7 +367,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/livingplace_contact_number"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
+                        android:layout_height="60dp"
                         android:background="@null"
                         android:hint="contact number"
                         android:maxLength="10"
@@ -402,7 +402,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/leavingplace_verify_or_nt"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
+                        android:layout_height="60dp"
                         android:background="@null"
                         android:hint="Verified or not"
                         android:inputType="text"
@@ -435,7 +435,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/livingplace_number_of_bhk"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
+                        android:layout_height="60dp"
                         android:background="@null"
                         android:hint="Number of BHK"
                         android:inputType="number"
@@ -468,7 +468,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/livingplace_sqft"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
+                        android:layout_height="60dp"
                         android:background="@null"
                         android:hint="Total Measurement"
                         android:inputType="text"
@@ -501,7 +501,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/livingplace_water_facility"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
+                        android:layout_height="60dp"
                         android:background="@null"
                         android:hint="Water Facility"
                         android:inputType="text"
@@ -534,7 +534,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/livingplace_vehicle_parking"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
+                        android:layout_height="60dp"
                         android:background="@null"
                         android:hint="Vehicle parking availability "
                         android:inputType="text"
@@ -567,7 +567,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/livingplace_posted_by"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
+                        android:layout_height="60dp"
                         android:background="@null"
                         android:hint="Posting by owner/broker"
                         android:inputType="text"

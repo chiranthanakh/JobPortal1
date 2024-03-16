@@ -2,6 +2,8 @@ package com.sbd.gbd.Activities.Businesthings
 
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -23,19 +25,26 @@ class BusinessFilter : AppCompatActivity() {
     var businessAdaptor: BusinessAdaptor? = null
     var mHandler = Handler()
     var tv_cat_name: TextView? = null
+    var iv_nodata: ImageView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_business_filter)
         recyclerView = findViewById(R.id.rv_business_filter)
         tv_cat_name = findViewById(R.id.tv_cat_name)
+        iv_nodata = findViewById(R.id.iv_nodata)
+        var iv_nav_view = findViewById<ImageView>(R.id.iv_nav_view)
         val bundle = intent.extras
         val type = bundle!!.getString("center")
         tv_cat_name?.setText(type)
         fetchbusiness(type)
+
+        iv_nav_view.setOnClickListener {
+            finish()
+        }
     }
 
     private fun fetchbusiness(cat: String?) {
-        val coroselimage = FirebaseDatabase.getInstance().reference.child("BusinessListing").orderByChild(AppConstants.Status).equalTo(AppConstants.user)
+        val coroselimage = FirebaseDatabase.getInstance().reference.child("BusinessListing").orderByChild(AppConstants.category).equalTo(cat)
         coroselimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -44,7 +53,7 @@ class BusinessFilter : AppCompatActivity() {
                         val data = dataMap[key]
                         try {
                             val userData = data as HashMap<String, Any>?
-                            if (userData!![AppConstants.category].toString() == cat) {
+                            if (userData!![AppConstants.Status].toString() == AppConstants.user) {
                                 businesslist.add(
                                     BusinessModel(
                                         userData[AppConstants.pid].toString(),
@@ -65,6 +74,7 @@ class BusinessFilter : AppCompatActivity() {
                                         userData[AppConstants.Status].toString(),
                                         userData["gst"].toString(),
                                         userData["from"].toString(),
+                                        userData["city"].toString(),
                                         userData["productServicess"].toString(),
                                         userData["workingHrs"].toString()
                                     )
@@ -76,6 +86,12 @@ class BusinessFilter : AppCompatActivity() {
                     }
                     businessAdaptor = BusinessAdaptor(businesslist, this@BusinessFilter)
                     recyadaptor(businesslist)
+                } else {
+                    if (businesslist.isEmpty()) {
+                        iv_nodata?.visibility = View.VISIBLE
+                    } else {
+                        iv_nodata?.visibility = View.GONE
+                    }
                 }
             }
 

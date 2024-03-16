@@ -11,6 +11,7 @@ object AppConstants {
     const val date = "date"
     const val category = "category"
     const val price = "price"
+    const val city = "city"
     const val pname = "pname"
     const val katha = "katha"
     const val propertysize = "propertysize"

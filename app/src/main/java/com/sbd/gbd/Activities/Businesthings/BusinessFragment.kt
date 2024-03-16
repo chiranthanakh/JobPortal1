@@ -125,8 +125,7 @@ class BusinessFragment : Fragment() {
     }
 
     private fun fetchbusinessCategorys() {
-        val categorylist =
-            FirebaseDatabase.getInstance().reference.child("BusinessListing_category")
+        var categorylist = FirebaseDatabase.getInstance().reference.child("BusinessListing_category").orderByChild(AppConstants.category).equalTo("Business")
         categorylist.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -153,7 +152,7 @@ class BusinessFragment : Fragment() {
                     gridView?.layoutManager = nlayoutManager1
                     gridView?.itemAnimator = DefaultItemAnimator()
                     businesscatAdaptor =
-                        context?.let { BusinessCategoryAdaptor(categorylists, it) }
+                        context?.let { BusinessCategoryAdaptor(2,categorylists, it) }
                     mHandler.post { gridView!!.adapter = businesscatAdaptor }
                     businesscatAdaptor!!.notifyItemRangeInserted(0, businesslist.size)
                 }

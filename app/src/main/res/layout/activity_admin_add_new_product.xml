@@ -173,7 +173,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_owner_name"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Please enter owner name"
                             android:inputType="phone"
@@ -206,7 +206,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/contact_number"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Contact Number"
                             android:inputType="text"
@@ -238,7 +238,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/project_name"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Property Name"
                             android:inputType="text"
@@ -292,7 +292,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/product_size"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Property mesurment"
                             android:inputType="text"
@@ -325,7 +325,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/product_price"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Property Price"
                             android:inputType="number"
@@ -358,7 +358,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_property_facing"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Property facing"
                             android:inputType="number"
@@ -391,7 +391,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_property_katha"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Katha type"
                             android:inputType="number"
@@ -424,7 +424,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/product_location_admin"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Property Location"
                             android:inputType="text"

@@ -97,8 +97,8 @@ class ConstructionActivity : AppCompatActivity() {
     }
 
     private fun fetchbusinessCategorys() {
-        val categorylist =
-                FirebaseDatabase.getInstance().reference.child("constListing_category")
+        var categorylist = FirebaseDatabase.getInstance().reference.child("BusinessListing_category").orderByChild(AppConstants.category).equalTo("Construction")
+
         categorylist.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -123,9 +123,8 @@ class ConstructionActivity : AppCompatActivity() {
                     rv_category?.setLayoutManager(nlayoutManager1)
                     rv_category?.setItemAnimator(DefaultItemAnimator())
                     businesscatAdaptor =
-                            BusinessCategoryAdaptor(categorylists, this@ConstructionActivity)
+                            BusinessCategoryAdaptor(1,categorylists, this@ConstructionActivity)
                     mHandler.post { rv_category?.setAdapter(businesscatAdaptor) }
-                    // businesscatAdaptor.notifyItemRangeInserted(0, businesslist.size)
                 }
             }
 

@@ -64,28 +64,6 @@
                         android:gravity="center"
                         android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Name :"
-                            android:gravity="center|start"
-                            android:textColor="@color/black"
-                            android:textSize="12sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/tv_business_name"
@@ -95,9 +73,9 @@
                             android:gravity="center|start"
                             android:maxLines="2"
                             android:text="Home/Land Type"
-                            android:textColor="@color/black"
-                            android:textSize="12sp" />
-                        </LinearLayout>
+                            android:textColor="#051C4A"
+                            android:textSize="18sp"
+                            android:textStyle="bold"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -109,19 +87,13 @@
                         android:gravity="center"
                         android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="90dp"
                             android:layout_height="wrap_content"
-                            android:text="Type:"
+                            android:text="BusinessType :"
                             android:textColor="@color/black"
                             android:textSize="12sp" />
-                        </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -139,8 +111,6 @@
                             android:textColor="@color/black"
                             android:textSize="12sp" />
                         </LinearLayout>
-
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -152,19 +122,12 @@
                         android:gravity="center"
                         android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="90dp"
                             android:layout_height="wrap_content"
-                            android:text="Size:"
+                            android:text="Timings :"
                             android:textColor="@color/black"
                             android:textSize="12sp" />
-                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -178,7 +141,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/proxima_nova_semi_bold"
                             android:singleLine="true"
-                            android:text="Available in 2400/sft."
+                            android:text="Timings"
                             android:textColor="@color/black"
                             android:textSize="13dp" />
                         </LinearLayout>
@@ -192,20 +155,14 @@
                         android:layout_marginEnd="5dp"
                         android:gravity="center"
                         android:orientation="horizontal">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="90dp"
                             android:layout_height="wrap_content"
-                            android:text="Location:"
+                            android:text="Address :"
                             android:textColor="@color/black"
                             android:textSize="12sp" />
-                        </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

@@ -166,7 +166,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/Business_name"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Business Name"
                             android:inputType="text"
@@ -200,7 +200,7 @@
                         <AutoCompleteTextView
                             android:id="@+id/Business_type_admin"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Business category"
                             android:inputType="text"
@@ -234,7 +234,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/Business_size"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Product or Servicess"
                             android:inputType="text"
@@ -247,7 +247,6 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -264,18 +263,20 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:startIconTint="@color/grey_dark">
 
-                        <com.google.android.material.textfield.TextInputEditText
+                        <AutoCompleteTextView
                             android:id="@+id/Business_price_admin"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
-                            android:hint="Price Range"
+                            android:hint="Business Type"
                             android:inputType="text"
                             android:lines="4"
                             android:padding="@dimen/dp_0"
+                            android:paddingStart="15dp"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
                             android:textSize="@dimen/text_size_14sp" />
+
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -300,7 +301,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/business_open"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Business open timings"
                             android:inputType=""
@@ -333,7 +334,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/business_close"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Business closeing timings"
                             android:inputType=""
@@ -363,45 +364,13 @@
                         app:startIconTint="@color/grey_dark">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/Business_location_admin"
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:background="@null"
-                            android:hint="Address"
-                            android:inputType="text"
-                            android:lines="4"
-                            android:padding="@dimen/dp_0"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/black"
-                            android:textSize="@dimen/text_size_14sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColorHint="@color/black"
-                        app:boxStrokeColor="@color/grey_light"
-                        app:hintTextColor="@color/black"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:startIconTint="@color/grey_dark">
-
-                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/Business_number1"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Contact number"
-                            android:inputType="text"
+                            android:inputType="number"
+                            android:maxLength="10"
                             android:lines="4"
                             android:padding="@dimen/dp_0"
                             android:textColor="@color/black"
@@ -430,7 +399,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/Business_owner_name"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Owner name"
                             android:inputType="text"
@@ -462,7 +431,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/Business_email"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Email"
                             android:inputType="text"
@@ -494,7 +463,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/Business_gst"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="GST number"
                             android:inputType="text"
@@ -526,7 +495,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/Business_from"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Business Started Year"
                             android:inputType="text"
@@ -559,7 +528,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/Business_pors"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Select Product / Servicess"
                             android:inputType="text"
@@ -570,6 +539,71 @@
                             android:textSize="@dimen/text_size_14sp" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/black"
+                        app:boxStrokeColor="@color/grey_light"
+                        app:hintTextColor="@color/black"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:startIconTint="@color/grey_dark">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/Business_location_admin"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:background="@null"
+                            android:hint="Address"
+                            android:inputType="text"
+                            android:lines="4"
+                            android:padding="@dimen/dp_0"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="@dimen/text_size_14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/black"
+                        app:boxStrokeColor="@color/grey_light"
+                        app:hintTextColor="@color/black"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:startIconTint="@color/grey_dark">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/Business_City"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:background="@null"
+                            android:hint="City"
+                            android:inputType="text"
+                            android:lines="4"
+                            android:padding="@dimen/dp_0"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="@dimen/text_size_14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

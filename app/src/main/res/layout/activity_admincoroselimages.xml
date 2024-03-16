@@ -49,11 +49,12 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_business_listing"
+            android:id="@+id/btn_business_category"
             android:layout_width="@dimen/margin_100dp"
             android:layout_height="100dp"
             android:layout_marginRight="@dimen/dp_20"
-            android:text="Business listing"/>
+            android:text="Add Loan offers"/>
+
 
     <Button
         android:id="@+id/btn_loan_offers"
@@ -79,11 +80,11 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_business_category"
+            android:id="@+id/btn_Hotels"
             android:layout_width="@dimen/margin_100dp"
             android:layout_height="100dp"
             android:layout_marginRight="@dimen/dp_20"
-            android:text="Add Loan offers"/>
+            android:text="Add Hotels/Pg"/>
 
         <Button
             android:id="@+id/btn_livingplace"
@@ -111,25 +112,26 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_construction_category"
+            android:id="@+id/business_for_approval"
             android:layout_width="@dimen/margin_100dp"
             android:layout_height="100dp"
             android:layout_marginRight="@dimen/dp_20"
-            android:text="Add construction category"/>
+            android:text="Business category"/>
 
         <Button
             android:id="@+id/btn_construction"
             android:layout_width="@dimen/margin_100dp"
             android:layout_height="100dp"
             android:layout_marginRight="@dimen/dp_20"
-            android:text="Add construction"/>
+            android:text="construction Listing"/>
+
 
         <Button
-            android:id="@+id/btn_Hotels"
+            android:id="@+id/btn_business_listing"
             android:layout_width="@dimen/margin_100dp"
             android:layout_height="100dp"
             android:layout_marginRight="@dimen/dp_20"
-            android:text="Add Hotels/Pg"/>
+            android:text="Business listing"/>
 
 
     </LinearLayout>
@@ -141,24 +143,21 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:paddingBottom="@dimen/dp_20"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/propertys_for_approval"
-            android:layout_width="match_parent"
+            android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_marginRight="@dimen/dp_20"
             android:text="propertys for approval"/>
 
-        <Button
-            android:id="@+id/business_for_approval"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:text="Business for approval"/>
 
         <Button
             android:id="@+id/travel_approval"
-            android:layout_width="match_parent"
+            android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_marginRight="@dimen/dp_20"
             android:text="Travel for approval"/>
 
     </LinearLayout>

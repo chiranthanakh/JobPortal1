@@ -20,6 +20,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -56,7 +57,7 @@ class AdminBusinessListings : AppCompatActivity() {
     private var businessopen: EditText? = null
     private var businessClose: EditText? = null
     private var InputProductDescription: EditText? = null
-    private var InputProductPrice: EditText? = null
+    private var InputProductPrice: AutoCompleteTextView? = null
     private var et_sell_name: EditText? = null
     private var et_location: EditText? = null
     private var et_number: EditText? = null
@@ -76,11 +77,13 @@ class AdminBusinessListings : AppCompatActivity() {
     private var ProductImagesRef: StorageReference? = null
     private var ProductsRef: DatabaseReference? = null
     private var loadingBar: ProgressDialog? = null
+    private var Business_City : TextInputEditText? = null
     private var business_category: AutoCompleteTextView? = null
     var fileNameList: ArrayList<String?> = ArrayList<String?>()
     var fileDoneList: ArrayList<String> = ArrayList<String>()
     var categoryList: ArrayList<String> = ArrayList<String>()
     var arrayAdapter: ArrayAdapter<*>? = null
+     var BtypeAdaptor: ArrayAdapter<*>? = null
     var back_btn: ImageView? = null
     private lateinit var imageAdapter: ImageAdaptor
     private val selectedImages = mutableListOf<Uri>()
@@ -95,7 +98,7 @@ class AdminBusinessListings : AppCompatActivity() {
         InputProductName = findViewById<View>(R.id.Business_name) as EditText
         business_category = findViewById(R.id.Business_type_admin)
         InputProductDescription = findViewById<View>(R.id.Business_description) as EditText
-        InputProductPrice = findViewById<View>(R.id.Business_price_admin) as EditText
+        InputProductPrice = findViewById(R.id.Business_price_admin)
         et_sell_name = findViewById(R.id.Business_size)
         et_location = findViewById(R.id.Business_location_admin)
         et_number = findViewById(R.id.Business_number1)
@@ -108,6 +111,7 @@ class AdminBusinessListings : AppCompatActivity() {
         et_pors = findViewById(R.id.Business_pors)
         et_from = findViewById(R.id.Business_from)
         back_btn = findViewById(R.id.iv_nav_view)
+        Business_City = findViewById(R.id.Business_City)
         loadingBar = ProgressDialog(this)
         fetchbusinessCategorys()
         imageAdapter = ImageAdaptor(this, selectedImages)
@@ -120,6 +124,11 @@ class AdminBusinessListings : AppCompatActivity() {
         back_btn?.setOnClickListener{ finish() }
         business_category?.setOnFocusChangeListener({ v: View?, hasFocus: Boolean -> if (hasFocus) business_category!!.showDropDown() })
         arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, categoryList)
+
+        InputProductPrice?.setOnFocusChangeListener({ v: View?, hasFocus: Boolean -> if (hasFocus) InputProductPrice!!.showDropDown() })
+        BtypeAdaptor = ArrayAdapter(this, android.R.layout.simple_list_item_1, resources.getStringArray(R.array.businessType))
+        InputProductPrice!!.setAdapter(BtypeAdaptor)
+        InputProductPrice!!.inputType = 0
 
         businessopen?.setOnClickListener {
             val cal = Calendar.getInstance()
@@ -145,7 +154,7 @@ class AdminBusinessListings : AppCompatActivity() {
 
     private fun fetchbusinessCategorys() {
         val categorylist =
-            FirebaseDatabase.getInstance().reference.child("BusinessListing_category")
+            FirebaseDatabase.getInstance().reference.child("BusinessListing_category").orderByChild(AppConstants.category).equalTo("Business")
         categorylist.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -154,7 +163,7 @@ class AdminBusinessListings : AppCompatActivity() {
                         val data = dataMap[key]
                         try {
                             val userData = data as HashMap<String, Any>?
-                            categoryList.add(userData!![AppConstants.category].toString())
+                            categoryList.add(userData!!["subcategory"].toString())
                         } catch (cce: ClassCastException) {
                             try {
                                 val mString = dataMap[key].toString()
@@ -272,6 +281,8 @@ class AdminBusinessListings : AppCompatActivity() {
             Toast.makeText(this, "Please write product name...", Toast.LENGTH_SHORT).show()
         } else if (TextUtils.isEmpty(from)) {
             Toast.makeText(this, "Please write business started year...", Toast.LENGTH_SHORT).show()
+        } else if (TextUtils.isEmpty(Business_City?.text.toString())) {
+        Toast.makeText(this, "Please write business started year...", Toast.LENGTH_SHORT).show()
         } else {
             SaveProductInfoToDatabase()
         }
@@ -302,12 +313,11 @@ class AdminBusinessListings : AppCompatActivity() {
         productMap["workingHrs"] = "$open to $close"
         productMap["gst"] = gst
         productMap["from"] = from
+        productMap[AppConstants.city] = Business_City?.text.toString()
         productMap["productServicess"] = productorservicess
         ProductsRef!!.child(productRandomKey!!).updateChildren(productMap)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    // Intent intent = new Intent(AdminAddNewProductActivity.this, .class);
-                    //startActivity(intent);
                     loadingBar!!.dismiss()
                     Toast.makeText(
                         this@AdminBusinessListings,
@@ -315,6 +325,7 @@ class AdminBusinessListings : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                     loadingBar?.dismiss()
+                    finish()
                 } else {
                     loadingBar!!.dismiss()
                     val message = task.exception.toString()

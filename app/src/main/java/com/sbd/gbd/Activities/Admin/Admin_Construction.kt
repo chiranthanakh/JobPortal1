@@ -20,11 +20,18 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.sbd.gbd.Adapters.BusinessCategoryAdaptor
 import com.sbd.gbd.Adapters.ImageAdaptor
+import com.sbd.gbd.Model.Categorymmodel
 import com.sbd.gbd.R
 import com.sbd.gbd.Utilitys.AppConstants
 import java.text.SimpleDateFormat
@@ -50,6 +57,7 @@ class Admin_Construction : AppCompatActivity() {
     var owner: String? = null
     var product_services: String? = null
     var gst: String? = null
+    val list: ArrayList<String> = ArrayList<String>()
     private var edt_construction_name: EditText? = null
     private var edt_construction_number: EditText? = null
     private var edt_construction_cost: EditText? = null
@@ -115,7 +123,8 @@ class Admin_Construction : AppCompatActivity() {
         loadingBar = ProgressDialog(this)
         btn_corosel?.setOnClickListener { OpenGallery() }
         add_new_construction.setOnClickListener { ValidateProductData() }
-        val list: ArrayList<String> = ArrayList<String>()
+        fetchbusinessCategorys()
+        /*val list: ArrayList<String> = ArrayList<String>()
         list.add("Contractors")
         list.add("Architect")
         list.add("Interior Designer")
@@ -125,7 +134,7 @@ class Admin_Construction : AppCompatActivity() {
         list.add("Carpenters")
         list.add("Electrician")
         list.add("Plumber")
-        list.add("Other")
+        list.add("Other")*/
 
         val arrayAdapter: ArrayAdapter<*> =
             ArrayAdapter(this, android.R.layout.simple_list_item_1, list)
@@ -159,6 +168,29 @@ class Admin_Construction : AppCompatActivity() {
             TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
         }
     }
+
+    private fun fetchbusinessCategorys() {
+        var categorylist = FirebaseDatabase.getInstance().reference.child("BusinessListing_category").orderByChild(AppConstants.category).equalTo("Construction")
+        categorylist.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    val dataMap = snapshot.value as HashMap<String, Any>?
+                    for (key in dataMap!!.keys) {
+                        val data = dataMap[key]
+                        try {
+                            val userData = data as HashMap<String, Any>?
+                            list.add(userData?.get("subcategory").toString())
+                        } catch (cce: ClassCastException) {
+
+                        }
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+        })
+    }
+
 
     private fun OpenGallery() {
         val galleryIntent = Intent()

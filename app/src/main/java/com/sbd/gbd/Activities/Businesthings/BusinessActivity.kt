@@ -39,12 +39,12 @@ class BusinessActivity : AppCompatActivity(), View.OnClickListener, FilterCatego
     var main_edt_search2: EditText? = null
     private var gridView: RecyclerView? = null
     var back: ImageView? = null
-    var llsearch: LinearLayout? = null
     var businesslist = ArrayList<BusinessModel>()
     var filterbusinesslist = ArrayList<BusinessModel>()
     var categorylists = ArrayList<Categorymmodel>()
     var businesscatAdaptor: BusinessCategoryAdaptor? = null
     var businessAdaptor: BusinessAdaptor? = null
+    var iv_business_search: ImageView? = null
     var add_button: AppCompatButton? = null
     lateinit var preferenceManager: PreferenceManager
     var mHandler = Handler()
@@ -53,10 +53,8 @@ class BusinessActivity : AppCompatActivity(), View.OnClickListener, FilterCatego
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_business)
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-           // setTheme(R.style.darkTheme)
-            //when dark mode is enabled, we use the dark theme
         } else {
-            setTheme(R.style.JobPortaltheam) //default app theme
+            setTheme(R.style.JobPortaltheam)
         }
         if (Build.VERSION.SDK_INT >= 21) {
             val window = this.window
@@ -70,9 +68,9 @@ class BusinessActivity : AppCompatActivity(), View.OnClickListener, FilterCatego
 
     private fun initilize() {
         recyclerView = findViewById(R.id.recycler_business)
-        llsearch = findViewById(R.id.ll_search_business)
         back = findViewById(R.id.iv_business_back)
         gridView = findViewById(R.id.id_gridview)
+        iv_business_search = findViewById(R.id.iv_business_search)
         main_edt_search2 = findViewById(R.id.main_edt_search2)
         add_button = findViewById(R.id.btn_add_business)
         preferenceManager= PreferenceManager(this);
@@ -87,7 +85,7 @@ class BusinessActivity : AppCompatActivity(), View.OnClickListener, FilterCatego
         }
         back?.setOnClickListener { finish() }
 
-        llsearch?.setOnClickListener {
+        iv_business_search?.setOnClickListener {
             val intent = Intent(this@BusinessActivity, SearchActivity::class.java)
             bundle.putString("searchtype", "business")
             intent.putExtras(bundle)
@@ -106,8 +104,7 @@ class BusinessActivity : AppCompatActivity(), View.OnClickListener, FilterCatego
     }
 
     private fun fetchbusinessCategorys() {
-        val categorylist =
-            FirebaseDatabase.getInstance().reference.child("BusinessListing_category")
+        var categorylist = FirebaseDatabase.getInstance().reference.child("BusinessListing_category").orderByChild(AppConstants.category).equalTo("Business")
         categorylist.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -128,12 +125,11 @@ class BusinessActivity : AppCompatActivity(), View.OnClickListener, FilterCatego
 
                         }
                     }
-                    //RecyclerView.LayoutManager nlayoutManager1 = new LinearLayoutManager(BusinessActivity.this, RecyclerView.HORIZONTAL, false);
                     val nlayoutManager1 = GridLayoutManager(this@BusinessActivity, 4)
                     gridView!!.layoutManager = nlayoutManager1
                     gridView!!.itemAnimator = DefaultItemAnimator()
                     businesscatAdaptor =
-                        BusinessCategoryAdaptor(categorylists, this@BusinessActivity)
+                        BusinessCategoryAdaptor(2,categorylists, this@BusinessActivity)
                     mHandler.post { gridView!!.adapter = businesscatAdaptor }
                     businesscatAdaptor!!.notifyItemRangeInserted(0, businesslist.size)
                 }
@@ -199,6 +195,7 @@ class BusinessActivity : AppCompatActivity(), View.OnClickListener, FilterCatego
                                     userData[AppConstants.Status].toString(),
                                     userData["gst"].toString(),
                                     userData["from"].toString(),
+                                    userData["city"].toString(),
                                     userData["productServicess"].toString(),
                                     userData["workingHrs"].toString()
                                 )

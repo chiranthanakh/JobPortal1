@@ -154,7 +154,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/corosel_name"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
+                        android:layout_height="60dp"
                         android:background="@null"
                         android:hint="Name"
                         android:inputType="text"
@@ -202,7 +202,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/corosel_size"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
+                        android:layout_height="60dp"
                         android:background="@null"
                         android:hint="URL"
                         android:inputType="text"
@@ -235,7 +235,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/corosel_price_admin"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
+                        android:layout_height="60dp"
                         android:background="@null"
                         android:hint="Price"
                         android:inputType="text"
@@ -268,7 +268,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/corosel_location_admin"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
+                        android:layout_height="60dp"
                         android:background="@null"
                         android:hint="Type 1 or 2"
                         android:inputType="text"
@@ -302,7 +302,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/contact_number1"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
+                        android:layout_height="60dp"
                         android:background="@null"
                         android:hint="Contact Number"
                         android:inputType="text"

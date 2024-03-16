@@ -98,11 +98,10 @@ class ConstructionDetailsActivity : AppCompatActivity() {
         productsRef = FirebaseDatabase.getInstance().reference.child("constructionforyou")
         productsRef.child(productID.toString()).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-               //if (dataSnapshot.exists() && dataSnapshot.getValue(ConstructionModel.class) != null){
                 val products = dataSnapshot.getValue(ConstructionModel::class.java)
                 productName?.text = products?.name
                 const_price_details?.text = "Rs." + products?.cost
-                productDescription?.text = products?.discription
+                productDescription?.text = products?.description
                 tv_topbar_productName?.text = products?.name
                 const_location?.text = products?.address
                 const_category?.text = products?.category

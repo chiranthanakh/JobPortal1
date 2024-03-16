@@ -2,6 +2,7 @@ package com.sbd.gbd.Activities.Businesthings
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +33,7 @@ class BusinessDetails : AppCompatActivity() {
     var tv_business_gst : TextView? =  null
     var tv_business_owner : TextView? =  null
     var number : String? = null
+    var iv_back_ads : ImageView? = null
     var productName : String? = null
     var utilitys = Utilitys()
 
@@ -49,6 +51,7 @@ class BusinessDetails : AppCompatActivity() {
     }
 
     private fun initilize() {
+        iv_back_ads = findViewById(R.id.iv_back_ads)
         business_name = findViewById(R.id.business_name)
         tv_business_timings = findViewById(R.id.tv_business_timings)
         tv_business_gst = findViewById(R.id.tv_business_gst)
@@ -80,6 +83,9 @@ class BusinessDetails : AppCompatActivity() {
                 productName
             )
         }
+        iv_back_ads?.setOnClickListener {
+            finish()
+        }
     }
 
     private fun getProductDetails(productID: String) {
@@ -90,13 +96,13 @@ class BusinessDetails : AppCompatActivity() {
                if (dataSnapshot.exists() && dataSnapshot.getValue(BusinessModel::class.java) != null) {
                     val products = dataSnapshot.getValue(BusinessModel::class.java)
                     business_name?.setText(products?.Businessname)
-                    tv_business_cat?.setText(products?.Business_category)
+                    tv_business_cat?.setText(products?.category)
                     tv_address?.setText(products?.location)
                     tv_price?.setText(products?.price)
                     tv_discription?.setText(products?.description)
                     number = products?.number
                     productName = products?.Businessname
-                    tv_product_servicess?.setText(products?.Category)
+                    tv_product_servicess?.setText(products?.city)
                     tv_business_gst?.setText(products?.gst)
                     tv_business_owner?.setText(products?.owner)
                     tv_business_timings?.setText(products?.time)

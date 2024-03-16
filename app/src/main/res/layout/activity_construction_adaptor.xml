@@ -236,10 +236,12 @@
                         android:id="@+id/ll_call"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="end"
                         android:layout_marginStart="5dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginEnd="5dp"
                         android:layout_marginBottom="@dimen/margin_10dp"
+                        android:background="@drawable/button_capsule"
                         android:gravity="center"
                         android:orientation="horizontal">
 
@@ -247,40 +249,41 @@
                             android:id="@+id/tv_contect_whome"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="3dp"
-                            android:gravity="center|start"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             android:text="Contact:"
-                            android:textColor="#000000" />
+                            android:textColor="@color/white" />
 
 
                         <ImageView
                             android:id="@+id/iv_const_call_bottom"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginEnd="8dp"
-                            android:gravity="center"
-                            android:padding="10dp"
+                            android:layout_height="35dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1"
                             android:src="@drawable/ic_call"
-                            app:tint="@color/green" />
+                            app:tint="@color/white" />
 
 
                         <ImageView
                             android:id="@+id/iv_const_whatsapp_bottom"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="25dp"
+                            android:layout_height="35dp"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginStart="3dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="1"
                             android:gravity="center"
-                            android:padding="10dp"
-                            android:src="@drawable/whatapp"
+                            android:src="@drawable/whatsapp"
                             android:text="Call Us"
                             android:textColor="@color/white"
                             android:textStyle="bold"
-                            android:visibility="visible"
-                            app:tint="@color/green" />
+                            android:visibility="visible" />
 
                     </LinearLayout>
+
 
                     <LinearLayout
                         android:id="@+id/ll_approve"

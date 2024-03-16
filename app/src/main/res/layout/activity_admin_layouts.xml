@@ -155,7 +155,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/ads_name"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Layout name"
                             android:inputType="text"
@@ -187,7 +187,7 @@
                         <AutoCompleteTextView
                             android:id="@+id/ads_type_admin"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Category"
                             android:inputType="text"
@@ -235,7 +235,7 @@
                         <AutoCompleteTextView
                             android:id="@+id/no_available_sites"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="number of available sites"
                             android:inputType="number"
@@ -268,7 +268,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/ads_size"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="site measurements"
                             android:inputType="text"
@@ -301,7 +301,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/ads_price_admin"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Price range"
                             android:inputType="number"
@@ -333,7 +333,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_layout_facing"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Facing"
                             android:inputType="text"
@@ -365,7 +365,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_layout_area"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="layout area"
                             android:inputType="text"
@@ -398,7 +398,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/ads_location_admin"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Location"
                             android:inputType="text"
@@ -431,7 +431,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/ads_contact_number"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Contact number"
                             android:inputType="phone"
@@ -464,7 +464,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/ads_verify_or_nt"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Verified or not"
                             android:inputType="text"
@@ -496,7 +496,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/ads_text1"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Points 1"
                             android:inputType="text"
@@ -528,7 +528,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/ads_text2"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Points 2"
                             android:inputType="text"
@@ -561,7 +561,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/ads_text3"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Points 3"
                             android:inputType="text"
@@ -594,7 +594,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/ads_text4"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Points 4"
                             android:inputType="text"

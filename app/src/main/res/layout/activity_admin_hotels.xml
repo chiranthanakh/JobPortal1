@@ -169,7 +169,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_hotel_name"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Hotel / PG name"
                             android:inputType="text"
@@ -223,7 +223,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_hotel_price"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Price"
                             android:inputType="text"
@@ -256,7 +256,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_hotel_address"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Address"
                             android:inputType="text"
@@ -289,7 +289,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_hotel_contact_person"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Contact person"
                             android:inputType="text"
@@ -322,7 +322,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_hotel_number"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Phone number"
                             android:maxLength="10"
@@ -355,7 +355,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_alternative_nu"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="alternative number"
                             android:lines="4"
@@ -390,7 +390,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_hotel_email"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Email"
                             android:inputType="text"
@@ -423,7 +423,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/tv_hotel_website"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Website"
                             android:inputType="text"
@@ -456,7 +456,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/tv_hotel_fecility1"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Room Fecilitys 1"
                             android:inputType="text"
@@ -489,7 +489,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/tv_hotel_fecility2"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Room Fecilitys 2"
                             android:inputType="text"
@@ -522,7 +522,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/tv_hotel_fecility3"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Room Fecilitys 3"
                             android:inputType="text"
@@ -555,7 +555,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/tv_hotel_parking"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Vehicle parking availability "
                             android:inputType="text"

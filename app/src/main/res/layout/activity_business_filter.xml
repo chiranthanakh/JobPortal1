@@ -50,11 +50,15 @@
                     android:textSize="18sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
-
         </LinearLayout>
-
-
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_nodata"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/nodatafound"/>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

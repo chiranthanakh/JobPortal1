@@ -173,7 +173,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_vehicle_name"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Vehicle / Travels Name"
                             android:inputType="text"
@@ -222,7 +222,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_travel_vehicle_number"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Vehicle Number"
                             android:inputType="text"
@@ -255,7 +255,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_rupes_for_km"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Price per KM"
                             android:inputType="text"
@@ -287,7 +287,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_travel_contact"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Contact Number"
                             android:inputType="text"
@@ -321,7 +321,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_travel_vehicle_model"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Vehicle Model"
                             android:inputType="text"
@@ -354,7 +354,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_owner_name"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Owner name"
                             android:inputType="text"
@@ -388,7 +388,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_travel_verified_not"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Verified or not"
                             android:inputType="text"

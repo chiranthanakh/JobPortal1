@@ -32,6 +32,9 @@
             android:name="com.sbd.gbd.Activities.LoanActivity.LoanBusiness"
             android:exported="false" />
         <activity
+            android:name="com.sbd.gbd.Activities.Construction.ConstructionFilter"
+            android:exported="false" />
+        <activity
             android:name="com.sbd.gbd.Activities.BasicActivitys.AboutUsActivity"
             android:exported="false" />
         <activity
@@ -109,9 +112,7 @@
         <activity
             android:name="com.sbd.gbd.Activities.Admin.AdminLivingPlacess"
             android:exported="false" />
-        <activity
-            android:name="com.sbd.gbd.Activities.Admin.AdminConstructionCategorys"
-            android:exported="false" />
+
         <activity
             android:name="com.sbd.gbd.Activities.HotelsPG.CenterHomeActivity"
             android:exported="false" />

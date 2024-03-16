@@ -168,7 +168,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_construction_name"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Business name"
                             android:inputType="text"
@@ -201,7 +201,7 @@
                         <AutoCompleteTextView
                             android:id="@+id/edt_construction_category"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Contractors/interior/others"
                             android:inputType="text"
@@ -235,7 +235,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_construction_owner"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="owner name"
                             android:inputType="text"
@@ -268,7 +268,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_construction_contact_number"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Contact number"
                             android:inputType="text"
@@ -301,7 +301,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_product_services"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Type of Product/Services "
                             android:inputType="text"
@@ -334,7 +334,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_construction_cost"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Price Range"
                             android:inputType=""
@@ -367,7 +367,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etd_opening_time"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Opening Time"
                             android:inputType=""
@@ -400,7 +400,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etd_closing_time"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Closing Time"
                             android:inputType=""
@@ -434,7 +434,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_construction_address"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Address"
                             android:inputType="text"
@@ -467,7 +467,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_construction_gst"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="GST number"
                             android:inputType="text"
@@ -500,7 +500,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_construction_servicessoffer_1"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Services provides 1"
                             android:inputType="text"
@@ -533,7 +533,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_construction_servicessoffer_2"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Services provides 2"
                             android:inputType="text"
@@ -566,7 +566,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_construction_servicessoffer_3"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Services provides 3"
                             android:inputType="text"
@@ -599,7 +599,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_construction_servicessoffer_4"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Services provides 4"
                             android:inputType="text"
@@ -632,7 +632,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_construction_experience"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Business Startd In"
                             android:inputType="text"

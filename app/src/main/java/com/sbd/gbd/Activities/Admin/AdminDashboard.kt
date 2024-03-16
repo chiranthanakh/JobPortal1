@@ -24,7 +24,6 @@ class AdminDashboard : AppCompatActivity() {
         val btn_livingplace_add = findViewById<Button>(R.id.btn_livingplace)
         val btn_travels = findViewById<Button>(R.id.btn_travels)
         val btn_construction = findViewById<Button>(R.id.btn_construction)
-        val btn_constCategory = findViewById<Button>(R.id.btn_construction_category)
         val btn_hotels = findViewById<Button>(R.id.btn_Hotels)
         val travel_approval = findViewById<Button>(R.id.travel_approval)
 
@@ -32,10 +31,7 @@ class AdminDashboard : AppCompatActivity() {
             val intent = Intent(this@AdminDashboard, Admin_hotels::class.java)
             startActivity(intent)
         }
-        btn_constCategory.setOnClickListener { view: View? ->
-            val intent = Intent(this@AdminDashboard, AdminConstructionCategorys::class.java)
-            startActivity(intent)
-        }
+
         btn_construction.setOnClickListener { view: View? ->
             val intent = Intent(this@AdminDashboard, Admin_Construction::class.java)
             startActivity(intent)

@@ -38,10 +38,10 @@ class BusinessAdaptor(private val productInfos: List<BusinessModel>, private var
         Glide.with(context)
             .load(propertyinfo.image)
             .into(holder.business_image)
-        holder.tv_business_type.text = propertyinfo.Business_category
+        holder.tv_business_type.text = propertyinfo.price
         holder.tv_business_locatin.text = propertyinfo.location
         holder.tv_business_name.text = propertyinfo.Businessname
-        holder.tv_business_servicess.text = propertyinfo.description
+        holder.tv_business_servicess.text = propertyinfo.workingHrs
         holder.cv_layout.setOnClickListener {
             val intent = Intent(context, BusinessDetails::class.java)
             intent.putExtra(AppConstants.pid, propertyinfo.pid)

@@ -53,7 +53,7 @@
                 <com.synnapps.carouselview.CarouselView
                     android:id="@+id/business_carouselView"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="260dp"
                     app:fillColor="#FFFFFFFF"
                     app:pageColor="#00000000"
                     app:radius="3dp"
@@ -70,7 +70,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="15dp"
                         android:layout_marginTop="@dimen/margin_10dp"
                         android:background="@color/white"
                         android:orientation="vertical">
@@ -79,6 +79,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
+                            android:layout_marginStart="@dimen/margin_10dp"
                             android:layout_marginBottom="5dp">
 
                             <LinearLayout
@@ -106,7 +107,7 @@
                                 android:layout_marginEnd="10dp"
                                 android:fontFamily="@font/proxima_family"
                                 android:text="Category"
-                                android:textColor="#0E5E2B"
+                                android:textColor="#0A0A0B"
                                 android:textSize="12sp"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -115,6 +116,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_10dp"
                             android:orientation="vertical">
 
                             <TextView
@@ -123,7 +125,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/proxima_nova_semi_bold"
                                 android:text=""
-                                android:textColor="#0E5E2B"
+                                android:textColor="#0A0B0A"
                                 android:textSize="20sp"
                                 android:textStyle="bold" />
 
@@ -255,7 +257,7 @@
                             <View
                                 android:layout_width="140dp"
                                 android:layout_height="5dp"
-                                android:background="#0E5E2B" />
+                                android:background="#2644DC" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -283,7 +285,7 @@
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/proxima_nova_regular"
                                         android:gravity="start|center"
-                                        android:text="Business opening time"
+                                        android:text="Opening Time"
                                         android:textColor="@color/black"
                                         android:textSize="14sp" />
                                 </LinearLayout>
@@ -329,7 +331,7 @@
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/proxima_nova_regular"
                                         android:gravity="start|center"
-                                        android:text="Business Type :"
+                                        android:text="Business City :"
                                         android:textColor="@color/black"
                                         android:textSize="14sp" />
                                 </LinearLayout>
@@ -468,7 +470,7 @@
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/proxima_nova_regular"
                                         android:gravity="start|center"
-                                        android:text="Contact person name  :"
+                                        android:text="Contact name  :"
                                         android:textColor="@color/black"
                                         android:textSize="14sp" />
                                 </LinearLayout>
@@ -545,12 +547,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="1dp"
                             android:layout_marginTop="7dp"
-                            android:background="@color/grey" />
+                            android:background="@color/red" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
+                            android:layout_marginBottom="@dimen/dp_20"
                             android:orientation="vertical">
 
                             <TextView
