@@ -18,7 +18,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SnapHelper
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.database.DataSnapshot
@@ -32,6 +34,7 @@ import com.sbd.gbd.Adapters.*
 import com.sbd.gbd.Interface.OnItemClick
 import com.sbd.gbd.Model.BusinessModel
 import com.sbd.gbd.Model.ConstructionModel
+import com.sbd.gbd.Model.Corosolmodel
 import com.sbd.gbd.Model.ProfileListModel
 import com.sbd.gbd.Model.TravelsModel
 import com.sbd.gbd.R
@@ -45,17 +48,23 @@ class ProfileFragments : Fragment(), OnItemClick {
     private var tv_email: TextView? = null
     private var tv_number: TextView? = null
     private var iv_edit: ImageView? = null
+    private var isAvailable : Boolean? = false
+    private var iv_empty : ImageView? = null
     private var rv_my_postings: RecyclerView? = null
     private var rv_my_business: RecyclerView? = null
     private var rv_my_construction: RecyclerView? = null
     private var rv_my_travels: RecyclerView? = null
     var businesslist = java.util.ArrayList<BusinessModel>()
     var businessAdaptor: ProfileBusinessAdaptor? = null
+    var coroselimagelist = ArrayList<Corosolmodel>()
     private var travelsAdaptor: ProfileTravelsAdaptor? = null
     var constructioninfo: java.util.ArrayList<ConstructionModel?> =
         java.util.ArrayList<ConstructionModel?>()
     var vehicleinfo: java.util.ArrayList<TravelsModel?> = java.util.ArrayList<TravelsModel?>()
     var progress_layout : RelativeLayout?= null
+    private var coroselListAdaptor: CoroselListAdaptor? = null
+    var recyclerView: RecyclerView? = null
+
 
     private var constructionAdaptor: ProfileConstructorAdaptor? = null
 
@@ -101,8 +110,10 @@ class ProfileFragments : Fragment(), OnItemClick {
         tv_email = view.findViewById(R.id.tv_profile_email)
         tv_number = view.findViewById(R.id.tv_profile_number)
         progress_layout = view.findViewById(R.id.progress_layout)
+        iv_empty = view.findViewById(R.id.iv_empty)
         val ll_logout = view.findViewById<LinearLayout>(R.id.ll_logout)
         val ll_login = view.findViewById<LinearLayout>(R.id.ll_login)
+        recyclerView = view.findViewById<View>(R.id.rv_loan_event) as RecyclerView
 
         rv_my_postings = view.findViewById(R.id.rv_my_postings)
         rv_my_business = view.findViewById(R.id.rv_my_business);
@@ -136,11 +147,11 @@ class ProfileFragments : Fragment(), OnItemClick {
             startActivity(intent)
 
         }
+            fetchcorosel()
     }
 
 
     private fun fetchProfile() {
-
         if (userNumber !== "") {
             val profile =
                 FirebaseDatabase.getInstance().reference.child("Profile").child(userNumber)
@@ -172,6 +183,51 @@ class ProfileFragments : Fragment(), OnItemClick {
         }
     }
 
+    private fun fetchcorosel() {
+        val coroselimage = FirebaseDatabase.getInstance().reference.child("Corosels").orderByChild(AppConstants.category).equalTo("Loan")
+        coroselimage.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    val dataMap = snapshot.value as HashMap<String, Any>?
+                    for (key in dataMap!!.keys) {
+                        val data = dataMap[key]
+                        try {
+                            val userData = data as HashMap<String, Any>?
+                            //coroselimagelist.add((userData?.get(AppConstants.image) ?: "") as String)
+
+                            coroselimagelist.add(
+                                Corosolmodel(
+                                    userData!![AppConstants.image].toString(),
+                                    userData[AppConstants.type].toString(),
+                                    userData[AppConstants.category].toString(),
+                                    userData[AppConstants.pid].toString(),
+                                    userData[AppConstants.pname].toString(),
+                                    userData[AppConstants.description].toString()
+                                )
+                            )
+                        } catch (cce: ClassCastException) {
+
+                        }
+                    }
+                    coroselListAdaptor = CoroselListAdaptor(coroselimagelist, requireContext())
+                    val nlayoutManager: RecyclerView.LayoutManager =
+                        LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+                    recyclerView?.layoutManager = nlayoutManager
+                    recyclerView?.itemAnimator = DefaultItemAnimator()
+                    val snapHelper: SnapHelper = PagerSnapHelper()
+                    snapHelper.attachToRecyclerView(recyclerView)
+                    snapHelper.onFling(20, 20)
+                    mHandler.post { recyclerView!!.adapter = coroselListAdaptor }
+                    coroselListAdaptor!!.notifyItemRangeInserted(0, coroselimagelist.size)
+
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+        })
+    }
+
+
     private fun fetchbusiness() {
         val coroselimage = FirebaseDatabase.getInstance().reference.child("BusinessListing")
         coroselimage.addValueEventListener(object : ValueEventListener {
@@ -184,6 +240,8 @@ class ProfileFragments : Fragment(), OnItemClick {
                         try {
                             val userData = data as java.util.HashMap<String, Any>?
                             if (userData?.get(AppConstants.number) == userNumber) {
+                                recyclerView?.visibility = View.GONE
+                                iv_empty?.visibility = View.GONE
                                 businesslist.add(
                                     BusinessModel(
                                         userData[AppConstants.pid].toString(),
@@ -241,6 +299,8 @@ class ProfileFragments : Fragment(), OnItemClick {
                         try {
                             val userData = data as java.util.HashMap<String, Any>?
                             if (userData?.get("number1") == userNumber) {
+                                recyclerView?.visibility = View.GONE
+                                iv_empty?.visibility = View.GONE
                                 constructioninfo.add(
                                     ConstructionModel(
                                         userData!![AppConstants.pid].toString(),
@@ -302,6 +362,8 @@ class ProfileFragments : Fragment(), OnItemClick {
                         try {
                             val userData = data as java.util.HashMap<String, Any>?
                             if (userData?.get("contactnumber") == userNumber) {
+                                recyclerView?.visibility = View.GONE
+                                iv_empty?.visibility = View.GONE
                                 vehicleinfo.add(
                                     TravelsModel(
                                         userData!![AppConstants.pid].toString(),
@@ -359,11 +421,8 @@ class ProfileFragments : Fragment(), OnItemClick {
                         try {
                             val userData = data as HashMap<String, Any>?
                             if (userData?.get(AppConstants.number)?.equals(userNumber) == true) {
-                                Log.d(
-                                    "dataparm5",
-                                    userData?.get(AppConstants.number)
-                                        .toString() + "--" + userData?.get(AppConstants.Status)
-                                )
+                                recyclerView?.visibility = View.GONE
+                                iv_empty?.visibility = View.GONE
                                 productinfolist.add(
                                     ProfileListModel(
                                         userData!![AppConstants.category].toString(),
@@ -393,23 +452,6 @@ class ProfileFragments : Fragment(), OnItemClick {
                             }
                         }
                     }
-
-                    // Upcoming Event
-                    /*val bottomhomeRecyclarviewAdaptor = context?.let {
-                        ProfilePostingListings(
-                            productinfolist,
-                            it, userNumber, nameofuser
-                        )
-                    }
-                    val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(
-                        context, RecyclerView.VERTICAL, false
-                    )
-                    rv_my_postings?.setLayoutManager(GridLayoutManager(context, 1))
-                    rv_my_postings?.setItemAnimator(DefaultItemAnimator())
-                    rv_my_postings?.setNestedScrollingEnabled(false);
-                    mHandler.post(Runnable { rv_my_postings?.setAdapter(
-                        bottomhomeRecyclarviewAdaptor
-                    ) })*/
                 }
             }
 
@@ -429,6 +471,8 @@ class ProfileFragments : Fragment(), OnItemClick {
                         try {
                             val userData = data as HashMap<String, Any>?
                             if (userData?.get(AppConstants.number)?.equals(userNumber) == true) {
+                                recyclerView?.visibility = View.GONE
+                                iv_empty?.visibility = View.GONE
                                 productinfolist.add(
                                     ProfileListModel(
                                         userData!![AppConstants.category].toString(),
@@ -454,21 +498,6 @@ class ProfileFragments : Fragment(), OnItemClick {
                         }
                     }
 
-                    // Upcoming Event
-                    /*val bottomhomeRecyclarviewAdaptor = context?.let {
-                        ProfilePostingListings(
-                            productinfolist,
-                            it, userNumber, nameofuser
-                        )
-                    }
-                    val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(
-                        context, RecyclerView.VERTICAL, false
-                    )
-                    rv_my_postings?.setLayoutManager(GridLayoutManager(context, 1))
-                    rv_my_postings?.setItemAnimator(DefaultItemAnimator())
-                    mHandler.post(Runnable { rv_my_postings?.setAdapter(
-                        bottomhomeRecyclarviewAdaptor
-                    ) })*/
                 }
             }
 
@@ -487,6 +516,8 @@ class ProfileFragments : Fragment(), OnItemClick {
                             val userData = data as HashMap<String, Any>?
                             Log.d("dataparm1", productinfolist.toString())
                             if (userData?.get(AppConstants.number)?.equals(userNumber) == true) {
+                                recyclerView?.visibility = View.GONE
+                                iv_empty?.visibility = View.GONE
                                 productinfolist.add(
                                     ProfileListModel(
                                         userData!![AppConstants.category].toString(),

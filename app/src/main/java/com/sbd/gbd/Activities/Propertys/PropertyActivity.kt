@@ -12,7 +12,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,7 +22,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.sbd.gbd.Activities.Admin.AdminAddNewProductActivity
+import com.sbd.gbd.Activities.Admin.AdminNewPropurtyActivity
 import com.sbd.gbd.Activities.BasicActivitys.SearchActivity
 import com.sbd.gbd.Adapters.AdsAdaptor
 import com.sbd.gbd.Adapters.PropertyAdaptor
@@ -229,7 +228,7 @@ class PropertyActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.btn_add_property -> {
-                val intent = Intent(this@PropertyActivity, AdminAddNewProductActivity::class.java)
+                val intent = Intent(this@PropertyActivity, AdminNewPropurtyActivity::class.java)
                 startActivity(intent)
             }
 

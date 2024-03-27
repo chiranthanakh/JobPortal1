@@ -52,13 +52,13 @@ public class LoanoffersAdaptor extends RecyclerView.Adapter<LoanoffersAdaptor.Vi
         LoanOffersModel productInfo = productInfos.get(position);
 
         Glide.with(context)
-                .load(productInfo.getImageurl())
+                .load(productInfo.imageurl)
                 .into(holder.iv_image);
 
-        holder.tv_bankname.setText(productInfo.getBankname());
-        holder.tv_loantype.setText(productInfo.getBankloantype());
-        holder.tv_intrestrate.setText(productInfo.getBankintrest());
-        holder.tv_amountprovid.setText(productInfo.getBankamountprovid());
+        holder.tv_bankname.setText(productInfo.bankname);
+        holder.tv_loantype.setText(productInfo.bankloantype);
+        holder.tv_intrestrate.setText(productInfo.bankintrest);
+        holder.tv_amountprovid.setText(productInfo.bankamountprovid);
         //holder.tv_btn_call_hot.setText("");
 
         holder.btn_applayLoan.setOnClickListener(new View.OnClickListener() {

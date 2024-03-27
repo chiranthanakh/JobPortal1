@@ -175,7 +175,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
                             android:background="@null"
-                            android:hint="Please enter owner name"
+                            android:hint="Owner name"
                             android:inputType="phone"
                             android:lines="4"
                             android:padding="@dimen/dp_0"

@@ -39,19 +39,6 @@ class PropertyDetailsActivity : AppCompatActivity() {
         productPrice = findViewById<View>(R.id.product_price_details) as TextView
         getProductDetails(productID)
 
-
-        /*addToCartButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (state.equals("Order Placed") || state.equals("Order Shipped")){
-                    Toast.makeText(PropertyDetailsActivity.this,"You can add Purchase more product, once your order is shipped or confirmed",Toast.LENGTH_LONG).show();
-                }
-                else
-                {
-                }
-            }
-        });*/
     }
 
     override fun onStart() {

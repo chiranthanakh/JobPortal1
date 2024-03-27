@@ -39,7 +39,6 @@
     </string-array>
 
     <string-array name="property_type">
-        <item>" "</item>
         <item>"Site"</item>
         <item>"Green Land"</item>
         <item>"Layout"</item>

@@ -279,7 +279,7 @@ class Admin_hotels : AppCompatActivity() {
     @SuppressLint("Range")
     fun getFileName(uri: Uri?): String? {
         var result: String? = null
-        if (uri!!.scheme == "content") {
+        if (uri?.scheme == "content") {
             val cursor = contentResolver.query(uri, null, null, null, null)
             try {
                 if (cursor != null && cursor.moveToFirst()) {
@@ -290,7 +290,7 @@ class Admin_hotels : AppCompatActivity() {
             }
         }
         if (result == null) {
-            result = uri.path
+            result = uri?.path
             val cut = result!!.lastIndexOf('/')
             if (cut != -1) {
                 result = result.substring(cut + 1)

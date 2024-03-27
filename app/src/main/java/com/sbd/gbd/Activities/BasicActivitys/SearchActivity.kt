@@ -2,12 +2,10 @@ package com.sbd.gbd.Activities.BasicActivitys
 
 import android.content.Intent
 import android.os.AsyncTask
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
-import android.view.WindowManager
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -34,7 +32,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.sbd.gbd.Activities.Admin.AdminAddNewProductActivity
+import com.sbd.gbd.Activities.Admin.AdminNewPropurtyActivity
 import java.util.Collections
 import java.util.Locale
 
@@ -68,12 +66,12 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
-        /*if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.darkTheme)
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.JobPortaltheam) //default app theme
             //when dark mode is enabled, we use the dark theme
         } else {
             setTheme(R.style.JobPortaltheam) //default app theme
-        }*/
+        }
        /* if (Build.VERSION.SDK_INT >= 21) {
             val window = this.window
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
@@ -378,7 +376,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.btn_add_property -> {
-                val intent = Intent(this@SearchActivity, AdminAddNewProductActivity::class.java)
+                val intent = Intent(this@SearchActivity, AdminNewPropurtyActivity::class.java)
                 startActivity(intent)
             }
 

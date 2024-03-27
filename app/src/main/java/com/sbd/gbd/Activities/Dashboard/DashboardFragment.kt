@@ -57,6 +57,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.sbd.gbd.Activities.HotDealsactivity.HotDealsDetailsActivity
 import com.sbd.gbd.Activities.LoanActivity.LoanForm
+import com.sbd.gbd.Utilitys.UtilityMethods
 import com.synnapps.carouselview.CarouselView
 import com.synnapps.carouselview.ImageListener
 import java.io.IOException
@@ -108,7 +109,13 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
         name = sh.getString("name", "")
         mail = sh.getString("mail", null)
         pic = sh.getString("pic", null)
-        initilize(view)
+        if (UtilityMethods.isNetworkAvailable(requireContext())){
+            initilize(view)
+        }else{
+            binding.ivNoInternet.visibility = View.VISIBLE
+            binding.mainItemsLayout.visibility = View.GONE
+            UtilityMethods.showToast(requireContext(),"Please check your internet connection")
+        }
     }
 
     private fun initilize(view: View) {

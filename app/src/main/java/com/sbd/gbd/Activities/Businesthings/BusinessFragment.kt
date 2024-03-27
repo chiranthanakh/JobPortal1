@@ -49,6 +49,8 @@ class BusinessFragment : Fragment() {
     var businesscatAdaptor: BusinessCategoryAdaptor? = null
     var businessAdaptor: BusinessAdaptor? = null
     var add_button: AppCompatButton? = null
+    var iv_no_internet: ImageView? = null
+    var business_layout : LinearLayout? = null
     var mHandler = Handler()
     var bundle = Bundle()
     var iv_back : ImageView?= null
@@ -68,7 +70,15 @@ class BusinessFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ProductsRef = FirebaseDatabase.getInstance().reference.child("Products")
-        initilize(view)
+        if (UtilityMethods.isNetworkAvailable(requireContext())){
+            initilize(view)
+        }else{
+            iv_no_internet = view.findViewById(R.id.iv_no_internet)
+            business_layout = view.findViewById(R.id.business_layout)
+            iv_no_internet?.visibility = View.VISIBLE
+            business_layout?.visibility = View.GONE
+            UtilityMethods.showToast(requireContext(),"Please check your internet connection")
+        }
     }
 
     private fun initilize(view: View) {
@@ -80,6 +90,7 @@ class BusinessFragment : Fragment() {
         add_button = view.findViewById(R.id.btn_add_business)
         iv_back = view.findViewById(R.id.iv_business_back)
         iv_search = view.findViewById(R.id.iv_business_search)
+        iv_no_internet = view.findViewById(R.id.iv_no_internet)
 
         fetchbusiness("")
         fetchbusinessCategorys()

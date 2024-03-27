@@ -18,7 +18,6 @@ public class CalldetailsRecords implements Calldetails {
     private DatabaseReference CallerRef;
     private String productRandomKey;
 
-    //class for saving call info in bd
     @Override
     public void callinfo(String number, String name, String caller_number, String caller_name) {
         CallerRef = FirebaseDatabase.getInstance().getReference().child("callDetails");
@@ -47,5 +46,5 @@ public class CalldetailsRecords implements Calldetails {
                         {}
                     }
                 });
-    }
-}
+            }
+        }

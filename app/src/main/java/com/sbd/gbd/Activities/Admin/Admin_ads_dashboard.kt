@@ -73,6 +73,7 @@ class Admin_ads_dashboard : AppCompatActivity() {
     private var rbButton: RadioGroup? = null
     private var loadingBar: ProgressDialog? = null
     private var propertyType: Spinner? = null
+    private var ads_landmark : EditText? = null
     private var gridView: GridView? = null
     private var btn_corosel : ImageView? = null
     private var ll_selfie : LinearLayout? = null
@@ -89,7 +90,6 @@ class Admin_ads_dashboard : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_ads)
         val propertyPage = intent.getStringExtra("page")
-        //CategoryName = "cqat";
         if (propertyPage == "2") {
             ProductImagesRef = FirebaseStorage.getInstance().reference.child("Product Images")
             ProductsRef = FirebaseDatabase.getInstance().reference.child("Products")
@@ -105,6 +105,7 @@ class Admin_ads_dashboard : AppCompatActivity() {
         ads_facing = findViewById(R.id.ads_facing)
         edt_katha = findViewById(R.id.edt_property_katha)
         gridView = findViewById(R.id.gridView)
+        ads_landmark = findViewById(R.id.ads_landmark)
         ads_approved_by = findViewById(R.id.ads_approved_by)
         ads_approved_by?.visibility = View.GONE
         rbButton = findViewById(R.id.rb_data)
@@ -207,7 +208,9 @@ class Admin_ads_dashboard : AppCompatActivity() {
             Toast.makeText(this, "Please Select whether you owner or agent", Toast.LENGTH_SHORT).show()
         } else if (TextUtils.isEmpty(katha)) {
             Toast.makeText(this, "Please enter katha type", Toast.LENGTH_SHORT).show()
-        }  else {
+        } else if (TextUtils.isEmpty(ads_landmark?.text.toString())) {
+            Toast.makeText(this, "Please enter Landmark or City name", Toast.LENGTH_SHORT).show()
+        }   else {
             SaveProductInfoToDatabase()
         }
     }
@@ -283,6 +286,7 @@ class Admin_ads_dashboard : AppCompatActivity() {
         productMap[AppConstants.propertysize] = propertysize
         productMap[AppConstants.location] = location
         productMap[AppConstants.number] = number
+        productMap[AppConstants.city] = ads_landmark?.text.toString()
         productMap[AppConstants.verified] = "1"
         productMap[AppConstants.postedOn] = UtilityMethods.getDate()
         productMap[AppConstants.postedBy] = postedBy

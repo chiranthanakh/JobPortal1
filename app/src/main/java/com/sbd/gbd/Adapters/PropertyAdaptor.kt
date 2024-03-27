@@ -57,15 +57,17 @@ class PropertyAdaptor(private val productInfos: List<*>, private var context: Co
             context.startActivity(intent)
         }
 
-        if (data[9].equals("1")) {
-            holder.ll_approve.visibility = View.VISIBLE
-            holder.ll_call?.visibility = View.GONE
-        } else if (data[9].equals("3")) {
-            holder.ll_approve.visibility = View.VISIBLE
-            holder.ll_call?.visibility = View.GONE
-        } else {
-            holder.ll_approve.visibility = View.GONE
-            holder.ll_call?.visibility = View.VISIBLE
+        if (data[9] != null) {
+            if (data[9].equals("1")) {
+                holder.ll_approve.visibility = View.VISIBLE
+                holder.ll_call?.visibility = View.GONE
+            } else if (data[9].equals("3")) {
+                holder.ll_approve.visibility = View.VISIBLE
+                holder.ll_call?.visibility = View.GONE
+            } else {
+                holder.ll_approve.visibility = View.GONE
+                holder.ll_call?.visibility = View.VISIBLE
+            }
         }
 
         holder.ll_approve.setOnClickListener {

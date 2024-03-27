@@ -1,6 +1,7 @@
 package com.sbd.gbd.Utilitys
 
 import android.content.Context
+import android.net.ConnectivityManager
 import android.widget.Toast
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -36,5 +37,12 @@ object UtilityMethods {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd")
         val formattedDate: String = dateFormat.format(currentDate)
         return formattedDate
+    }
+
+    fun isNetworkAvailable(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return connectivityManager.activeNetworkInfo != null && connectivityManager.activeNetworkInfo!!
+            .isConnected
     }
 }

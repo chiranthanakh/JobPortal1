@@ -9,7 +9,9 @@ import android.os.Bundle
 import com.sbd.gbd.R
 import android.os.AsyncTask
 import android.os.Handler
+import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import com.google.firebase.database.FirebaseDatabase
@@ -38,6 +40,8 @@ class LivingPlaceActivity : AppCompatActivity() {
     var iv_back_leving : ImageView? = null
     var btn_add_hotel : AppCompatButton? = null
     var tv_heading : TextView? = null
+    var ll_layout : LinearLayout? = null
+    var iv_nodata : ImageView? = null
     lateinit var preferenceManager: PreferenceManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +54,9 @@ class LivingPlaceActivity : AppCompatActivity() {
         iv_back_leving = findViewById(R.id.iv_back_leving)
         btn_add_hotel = findViewById(R.id.btn_add_hotel)
         tv_heading = findViewById(R.id.tv_heading)
+        iv_nodata = findViewById(R.id.iv_nodata)
+        ll_layout = findViewById(R.id.ll_layout)
+
         tv_heading?.setText("Homes or Commercial Placess ")
         preferenceManager= PreferenceManager(this);
         AsyncTask.execute { fetchdata() }
@@ -79,6 +86,9 @@ class LivingPlaceActivity : AppCompatActivity() {
                         val data = dataMap[key]
                         try {
                             val userData = data as HashMap<String, Any>?
+                            ll_layout?.visibility = View.VISIBLE
+                            iv_nodata?.visibility = View.GONE
+
                             productinfolist.add(
                                 LivingPlaceModel(
                                     userData!![AppConstants.pid].toString(),

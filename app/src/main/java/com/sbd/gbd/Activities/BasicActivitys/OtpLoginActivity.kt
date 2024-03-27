@@ -106,6 +106,7 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
             }
 
             R.id.btn_continue ->
+
                 if (edt_otp?.text?.length == 0) {
                     Toast.makeText(applicationContext, "Enter the otp", Toast.LENGTH_SHORT).show()
                 } else if (edt_otp?.text?.length == 6) {
@@ -139,7 +140,7 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
             override fun onVerificationFailed(e: FirebaseException) {
                 //fetchProfile(edtPhone?.text.toString()) //romove this
                 Toast.makeText(
-                    applicationContext,e.toString(),
+                    applicationContext, e.toString(),
                     //"OTP Request Failed, please try Sometime",
                     Toast.LENGTH_SHORT
                 ).show()
@@ -161,8 +162,13 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
     // below method is use to verify code from Firebase.
     private fun verifyCode(code: String) {
         progress_layout?.visibility = View.VISIBLE
-        val credential = PhoneAuthProvider.getCredential(mVerificationId!!, code)
-        signInWithPhoneAuthCredential(credential)
+        if (mVerificationId.isNullOrEmpty()) {
+            progress_layout?.visibility = View.GONE
+            Toast.makeText(applicationContext, "Please Enter Valid OTP", Toast.LENGTH_SHORT).show()
+        } else {
+            val credential = PhoneAuthProvider.getCredential(mVerificationId!!, code)
+            signInWithPhoneAuthCredential(credential)
+        }
     }
 
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
@@ -203,8 +209,9 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
                             )
                         )
                         var bundle = Bundle()
-                        val intent10 = Intent(this@OtpLoginActivity, UserDetailsActivity::class.java)
-                        bundle.putString("usernumber",edtPhone?.text.toString())
+                        val intent10 =
+                            Intent(this@OtpLoginActivity, UserDetailsActivity::class.java)
+                        bundle.putString("usernumber", edtPhone?.text.toString())
                         intent10.putExtras(bundle)
                         startActivity(intent10)
                         finish()

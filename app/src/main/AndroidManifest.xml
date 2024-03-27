@@ -23,7 +23,6 @@
         android:icon="@mipmap/ic_logo1"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_logo1"
-        android:supportsRtl="true"
         android:theme="@style/JobPortaltheam">
         <activity
             android:name="com.sbd.gbd.Activities.LoanActivity.LoanVehicle"
@@ -102,7 +101,8 @@
             android:exported="false" />
         <activity
             android:name="com.sbd.gbd.Activities.BasicActivitys.UserDetailsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:noHistory="true"/>
         <activity
             android:name="com.sbd.gbd.Activities.BasicActivitys.SeeAllLayoutActivity"
             android:exported="false" />
@@ -171,7 +171,7 @@
             android:exported="false" />
 
         <activity
-            android:name="com.sbd.gbd.Activities.Admin.AdminAddNewProductActivity"
+            android:name="com.sbd.gbd.Activities.Admin.AdminNewPropurtyActivity"
             android:exported="false" />
 
         <activity

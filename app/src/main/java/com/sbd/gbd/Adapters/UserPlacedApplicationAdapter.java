@@ -27,8 +27,8 @@ public class UserPlacedApplicationAdapter extends FirebaseRecyclerAdapter<Model,
 
         Context context = holder.txtTitle.getContext();
         //for loading selected applications into recycler view
-        holder.txtTitle.setText(model.getCompanyName());
-        holder.txtDesc.setText(model.getJobTitle());
+        holder.txtTitle.setText(model.companyName);
+        holder.txtDesc.setText(model.jobTitle);
     }
 
 

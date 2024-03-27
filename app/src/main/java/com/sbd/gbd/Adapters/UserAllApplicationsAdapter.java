@@ -28,8 +28,8 @@ public class UserAllApplicationsAdapter extends FirebaseRecyclerAdapter<Model, U
         Context context = holder.txtTitle.getContext();
 
         //for loading applications of a user into recycler view
-        holder.txtTitle.setText(model.getCompanyName());
-        holder.txtDesc.setText(model.getJobTitle());
+        holder.txtTitle.setText(model.companyName);
+        holder.txtDesc.setText(model.jobTitle);
 
 
     }

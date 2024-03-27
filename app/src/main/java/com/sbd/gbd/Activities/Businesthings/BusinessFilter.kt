@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -21,17 +22,18 @@ import com.google.firebase.database.ValueEventListener
 class BusinessFilter : AppCompatActivity() {
     var recyclerView: RecyclerView? = null
     var businesslist = ArrayList<BusinessModel>()
-    var filterbusinesslist = ArrayList<BusinessModel>()
     var businessAdaptor: BusinessAdaptor? = null
     var mHandler = Handler()
     var tv_cat_name: TextView? = null
     var iv_nodata: ImageView? = null
+    var loan_corosel : LinearLayout? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_business_filter)
         recyclerView = findViewById(R.id.rv_business_filter)
         tv_cat_name = findViewById(R.id.tv_cat_name)
         iv_nodata = findViewById(R.id.iv_nodata)
+        loan_corosel = findViewById(R.id.loan_corosel)
         var iv_nav_view = findViewById<ImageView>(R.id.iv_nav_view)
         val bundle = intent.extras
         val type = bundle!!.getString("center")
@@ -79,6 +81,10 @@ class BusinessFilter : AppCompatActivity() {
                                         userData["workingHrs"].toString()
                                     )
                                 )
+
+                                iv_nodata?.visibility = View.GONE
+                                loan_corosel?.visibility = View.VISIBLE
+
                             }
                         } catch (cce: ClassCastException) {
 
@@ -87,11 +93,7 @@ class BusinessFilter : AppCompatActivity() {
                     businessAdaptor = BusinessAdaptor(businesslist, this@BusinessFilter)
                     recyadaptor(businesslist)
                 } else {
-                    if (businesslist.isEmpty()) {
-                        iv_nodata?.visibility = View.VISIBLE
-                    } else {
-                        iv_nodata?.visibility = View.GONE
-                    }
+
                 }
             }
 

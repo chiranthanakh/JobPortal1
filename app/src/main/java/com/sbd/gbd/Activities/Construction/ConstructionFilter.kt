@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -34,6 +35,8 @@ class ConstructionFilter : AppCompatActivity() {
     private var constructionAdaptor: ConstructorAdaptor? = null
     var type: String? = null
     var iv_nodata: ImageView? = null
+    var loan_corosel : LinearLayout? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +44,8 @@ class ConstructionFilter : AppCompatActivity() {
         recyclerView = findViewById(R.id.rv_business_filter)
         tv_cat_name = findViewById(R.id.tv_cat_name)
         iv_nodata = findViewById(R.id.iv_nodata)
+        loan_corosel = findViewById(R.id.loan_corosel)
+
         var iv_nav_view = findViewById<ImageView>(R.id.iv_nav_view)
         val bundle = intent.extras
         val type = bundle!!.getString("center")
@@ -90,6 +95,8 @@ class ConstructionFilter : AppCompatActivity() {
                                         userData["workingHrs"].toString()
                                     )
                                 )
+                                iv_nodata?.visibility = View.GONE
+                                loan_corosel?.visibility = View.VISIBLE
                             }
                         } catch (cce: ClassCastException) {
 

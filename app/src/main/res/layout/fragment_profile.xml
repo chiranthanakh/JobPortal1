@@ -311,7 +311,18 @@
 
                 </LinearLayout>
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_loan_event"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="5dp"/>
+
+
                 <LinearLayout
+                    android:id="@+id/ll_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -324,7 +335,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -338,6 +349,13 @@
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
+                        <ImageView
+                            android:id="@+id/iv_empty"
+                            android:layout_width="300dp"
+                            android:layout_height="300dp"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/emptyprofile"/>
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -350,6 +368,7 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         app:layout_constraintTop_toTopOf="parent">
+
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_my_postings"

@@ -31,6 +31,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.sbd.gbd.Activities.Admin.AdminNewPropurtyActivity
 import com.sbd.gbd.Activities.BasicActivitys.OtpLoginActivity
 import com.sbd.gbd.Utilitys.PreferenceManager
 import com.sbd.gbd.Utilitys.UtilityMethods
@@ -49,6 +50,8 @@ class PropertyFragment : Fragment(), View.OnClickListener {
     var iv_home: ImageView? = null
     var iv_commercial: ImageView? = null
     var mHandler = Handler()
+    var iv_no_internet: ImageView? = null
+    var business_layout : LinearLayout? = null
     var propertylist: ArrayList<String> = ArrayList<String>()
     var greenlandlist: ArrayList<*> = ArrayList<Any?>()
     var siteslist: ArrayList<*> = ArrayList<Any?>()
@@ -78,8 +81,16 @@ class PropertyFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ProductsRef = FirebaseDatabase.getInstance().reference.child("Products")
-        initilize(view)
-        AsyncTask.execute { fetchads() }
+        if (UtilityMethods.isNetworkAvailable(requireContext())){
+            initilize(view)
+            AsyncTask.execute { fetchads() }
+        }else{
+            iv_no_internet = view.findViewById(R.id.iv_no_internet)
+            business_layout = view.findViewById(R.id.business_layout)
+            iv_no_internet?.visibility = View.VISIBLE
+            business_layout?.visibility = View.GONE
+            UtilityMethods.showToast(requireContext(),"Please check your internet connection")
+        }
     }
 
     private fun initilize(view: View) {
@@ -260,7 +271,7 @@ class PropertyFragment : Fragment(), View.OnClickListener {
         when (view.id) {
             R.id.btn_add_property -> {
                 if (preferenceManager.getLoginState()) {
-                    val intent = Intent(context, Admin_ads_dashboard::class.java)
+                    val intent = Intent(context, AdminNewPropurtyActivity::class.java)
                     intent.putExtra("page", "2")
                     startActivity(intent)
                 } else {

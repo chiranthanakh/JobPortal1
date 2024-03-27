@@ -75,8 +75,15 @@
             </LinearLayout>
         </LinearLayout>
 
+        <ImageView
+            android:id="@+id/iv_no_internet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:src="@drawable/nointernet"/>
 
     <LinearLayout
+        android:id="@+id/business_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#f9f9f9"

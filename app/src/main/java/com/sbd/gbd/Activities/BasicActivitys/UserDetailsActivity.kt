@@ -108,7 +108,16 @@ class UserDetailsActivity : AppCompatActivity() {
 
     private fun StoreProductInformation(data: Intent) {
         downloadImageUrl = ""
-        val fileUri = data.data
+        var fileUri = data.data
+
+        if (data.data != null) {
+            profileImage?.setImageURI(fileUri)
+        } else if (data.clipData != null) {
+            val clipData = data.clipData
+            fileUri = clipData?.getItemAt(0)?.uri
+                profileImage?.setImageURI(fileUri)
+        }
+
         val fileName = getFileName(fileUri)
         profileImage!!.setImageURI(fileUri)
         fileNameList.add(fileName!!)
@@ -168,7 +177,7 @@ class UserDetailsActivity : AppCompatActivity() {
     @SuppressLint("Range")
     fun getFileName(uri: Uri?): String? {
         var result: String? = null
-        if (uri!!.scheme == "content") {
+        if (uri?.scheme == "content") {
             val cursor = contentResolver.query(uri, null, null, null, null)
             try {
                 if (cursor != null && cursor.moveToFirst()) {
@@ -179,10 +188,12 @@ class UserDetailsActivity : AppCompatActivity() {
             }
         }
         if (result == null) {
-            result = uri.path
-            val cut = result!!.lastIndexOf('/')
+            result = uri?.path
+            val cut = result?.lastIndexOf('/')
             if (cut != -1) {
-                result = result.substring(cut + 1)
+                if (cut != null) {
+                    result = result?.substring(cut + 1)
+                }
             }
         }
         return result

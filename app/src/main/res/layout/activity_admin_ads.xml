@@ -167,72 +167,7 @@
                         android:layout_height="wrap_content"/>
                 </RadioGroup>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColorHint="@color/black"
-                        app:boxStrokeColor="@color/grey_light"
-                        app:hintTextColor="@color/black"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:startIconTint="@color/grey_dark">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edt_owner_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:background="@null"
-                            android:hint="Please enter owner name"
-                            android:inputType="text"
-                            android:lines="4"
-                            android:padding="@dimen/dp_0"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/black"
-                            android:textSize="@dimen/text_size_14sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColorHint="@color/black"
-                        app:boxStrokeColor="@color/grey_light"
-                        app:hintTextColor="@color/black"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:startIconTint="@color/grey_dark">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edt_contact_number"
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:background="@null"
-                            android:hint="Contact Number"
-                            android:inputType="phone"
-                            android:lines="4"
-                            android:maxLength="10"
-                            android:padding="@dimen/dp_0"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/black"
-                            android:textSize="@dimen/text_size_14sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -254,7 +189,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/ads_name"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Property name"
                             android:inputType="text"
@@ -283,7 +218,7 @@
                         android:id="@+id/sp_property_type"
                         android:entries="@array/property_type"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="60dp"/>
 
                 </LinearLayout>
 
@@ -308,7 +243,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/ads_size"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Property measurement"
                             android:inputType="text"
@@ -340,7 +275,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/ads_price_admin"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Property Price"
                             android:inputType="text"
@@ -372,7 +307,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/ads_facing"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Property facing"
                             android:inputType="text"
@@ -405,7 +340,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_property_katha"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="Katha type"
                             android:inputType="text"
@@ -417,6 +352,72 @@
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/black"
+                        app:boxStrokeColor="@color/grey_light"
+                        app:hintTextColor="@color/black"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:startIconTint="@color/grey_dark">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edt_owner_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:background="@null"
+                            android:hint="Please enter owner name"
+                            android:inputType="text"
+                            android:lines="4"
+                            android:padding="@dimen/dp_0"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="@dimen/text_size_14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/black"
+                        app:boxStrokeColor="@color/grey_light"
+                        app:hintTextColor="@color/black"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:startIconTint="@color/grey_dark">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edt_contact_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:background="@null"
+                            android:hint="Contact Number"
+                            android:inputType="phone"
+                            android:lines="4"
+                            android:maxLength="10"
+                            android:padding="@dimen/dp_0"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="@dimen/text_size_14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -438,9 +439,9 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/ads_location_admin"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
-                            android:hint="Location"
+                            android:hint="Address"
                             android:inputType="text"
                             android:lines="4"
                             android:padding="@dimen/dp_0"
@@ -449,6 +450,39 @@
                             android:textSize="@dimen/text_size_14sp" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/black"
+                        app:boxStrokeColor="@color/grey_light"
+                        app:hintTextColor="@color/black"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:startIconTint="@color/grey_dark">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/ads_landmark"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:background="@null"
+                            android:hint="City / Landmark"
+                            android:inputType="text"
+                            android:lines="4"
+                            android:padding="@dimen/dp_0"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="@dimen/text_size_14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -471,7 +505,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/ads_approved_by"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
                             android:hint="approved by"
                             android:inputType="text"
@@ -482,6 +516,7 @@
                             android:textSize="@dimen/text_size_14sp" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -504,9 +539,9 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/ads_text1"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
-                            android:hint="Property features 1"
+                            android:hint="Is Water Facility Available"
                             android:inputType="text"
                             android:lines="4"
                             android:padding="@dimen/dp_0"
@@ -537,9 +572,9 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/ads_text2"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
-                            android:hint="Property features 2"
+                            android:hint="Electricity"
                             android:inputType="text"
                             android:lines="4"
                             android:padding="@dimen/dp_0"
@@ -570,9 +605,9 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/ads_text3"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
-                            android:hint="Property features 3"
+                            android:hint="Mention Other Feature if u have any"
                             android:inputType="text"
                             android:lines="4"
                             android:padding="@dimen/dp_0"
@@ -603,9 +638,9 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/ads_text4"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="60dp"
                             android:background="@null"
-                            android:hint="Property features 4"
+                            android:hint="Mention Other Feature if u have any"
                             android:inputType="text"
                             android:lines="4"
                             android:padding="@dimen/dp_0"

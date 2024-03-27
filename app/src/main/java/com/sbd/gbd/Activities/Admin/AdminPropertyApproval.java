@@ -232,7 +232,7 @@ public class AdminPropertyApproval extends AppCompatActivity implements View.OnC
 
         switch (view.getId()) {
             case R.id.btn_add_property:
-                Intent intent = new Intent(AdminPropertyApproval.this, AdminAddNewProductActivity.class);
+                Intent intent = new Intent(AdminPropertyApproval.this, AdminNewPropurtyActivity.class);
                 startActivity(intent);
                 break;
 
