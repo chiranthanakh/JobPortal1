@@ -26,5 +26,6 @@ data class AdsModel(
     var text1: String? = "",
     var text2: String? = "",
     var text3: String? = "",
-    var text4: String? = ""
+    var text4: String? = "",
+    var city: String? = ""
 )

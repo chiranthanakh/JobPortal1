@@ -15,7 +15,6 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
 
     <application
@@ -101,8 +100,7 @@
             android:exported="false" />
         <activity
             android:name="com.sbd.gbd.Activities.BasicActivitys.UserDetailsActivity"
-            android:exported="false"
-            android:noHistory="true"/>
+            android:exported="false" />
         <activity
             android:name="com.sbd.gbd.Activities.BasicActivitys.SeeAllLayoutActivity"
             android:exported="false" />

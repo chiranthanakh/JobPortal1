@@ -60,7 +60,6 @@ class UserDetailsActivity : AppCompatActivity() {
         edtName = findViewById(R.id.edt_name_login)
         edtEmail = findViewById(R.id.edt_email_login)
         profileImage = findViewById(R.id.select_profile_image)
-        // verifyOTPBtn = findViewById(R.id.btn_submit_login);
         submit = findViewById(R.id.btn_submit_login)
         loadingBar = ProgressDialog(this)
         val number = intent.getStringExtra("usernumber")

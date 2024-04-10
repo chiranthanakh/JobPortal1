@@ -30,6 +30,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.sbd.gbd.Activities.BasicActivitys.OtpLoginActivity
+import com.sbd.gbd.Activities.BasicActivitys.UserDetailsActivity
 import com.sbd.gbd.Utilitys.PreferenceManager
 import com.sbd.gbd.Utilitys.UtilityMethods
 
@@ -124,7 +125,7 @@ class BusinessFragment : Fragment() {
                 startActivity(intent)
             } else {
                 UtilityMethods.showToast(requireContext(),"Please Login to process")
-                val intent = Intent(context, OtpLoginActivity::class.java)
+                val intent = Intent(context, UserDetailsActivity::class.java)
                 startActivity(intent)
             }
         }

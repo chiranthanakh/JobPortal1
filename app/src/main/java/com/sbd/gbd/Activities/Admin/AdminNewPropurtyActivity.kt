@@ -37,16 +37,9 @@ class AdminNewPropurtyActivity : AppCompatActivity() {
     private var katha: String? = null
     private var ownerName: String? = null
     private var facing: String? = null
-    private var AddNewProductButton: AppCompatButton? = null
-    private var InputProductImage: ImageView? = null
-    private var InputProductName: EditText? = null
-    private var InputProductDescription: EditText? = null
-    private var InputProductPrice: EditText? = null
-    private var propertyType: EditText? = null
     private var et_size: EditText? = null
     private var et_location: EditText? = null
     private var et_number: EditText? = null
-    private val ImageUri: Uri? = null
     private var productRandomKey: String? = null
     private var downloadImageUrl: String? = null
     private var ProductImagesRef: StorageReference? = null
@@ -80,24 +73,27 @@ class AdminNewPropurtyActivity : AppCompatActivity() {
                 R.id.rb_owner -> {
                     ownerORagent = AppConstants.owner
                 }
+
                 R.id.rb_agent -> {
                     ownerORagent = AppConstants.agent
                 }
             }
         }
 
-        binding.spPropertyType.onItemSelectedListener=object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                if (p2>0){
-                    val propertyArray = resources.getStringArray(R.array.property_type)
-                    type = propertyArray[p2]
+        binding.spPropertyType.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                    if (p2 > 0) {
+                        val propertyArray = resources.getStringArray(R.array.property_type)
+                        type = propertyArray[p2]
+                    }
                 }
-            }
-            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+
+                }
 
             }
-
-        }
     }
 
     private fun OpenGallery() {
@@ -111,27 +107,8 @@ class AdminNewPropurtyActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
-            /*ImageUri = data.getData();
-            InputProductImage.setImageURI(ImageUri);*/
             StoreProductInformation(data)
         }
-
-        /*if (requestCode == 1 && resultCode == RESULT_OK){
-            if (data.getClipData() != null){
-                //Toast.makeText(this, "Selected Multiple Files", Toast.LENGTH_SHORT).show();
-                int totalItems = data.getClipData().getItemCount();
-                for (int i = 0;i < totalItems; i++){
-                    Uri fileUri = data.getClipData().getItemAt(i).getUri();
-                    String fileName = getFileName(fileUri);
-                    fileNameList.add(fileName);
-                    fileDoneList.add("Uploading");
-
-                    StoreProductInformation(data);
-                }
-            } else if (data.getData() != null){
-                Toast.makeText(this, "Selected Single File", Toast.LENGTH_SHORT).show();
-            }
-        }*/
     }
 
     private fun ValidateProductData() {
@@ -147,19 +124,20 @@ class AdminNewPropurtyActivity : AppCompatActivity() {
 
         if (TextUtils.isEmpty(downloadImageUrl)) {
             Toast.makeText(this, "Product image is mandatory...", Toast.LENGTH_SHORT).show()
-        }else if (TextUtils.isEmpty(ownerORagent)) {
-            Toast.makeText(this, "Please select whether are you owner or agent", Toast.LENGTH_SHORT).show()
-        }else if (TextUtils.isEmpty(type)) {
+        } else if (TextUtils.isEmpty(ownerORagent)) {
+            Toast.makeText(this, "Please select whether are you owner or agent", Toast.LENGTH_SHORT)
+                .show()
+        } else if (TextUtils.isEmpty(type)) {
             Toast.makeText(this, "Please select property type...", Toast.LENGTH_SHORT).show()
         } else if (TextUtils.isEmpty(Price)) {
             Toast.makeText(this, "Please enter property Price...", Toast.LENGTH_SHORT).show()
         } else if (TextUtils.isEmpty(Pname)) {
             Toast.makeText(this, "Please enter property name...", Toast.LENGTH_SHORT).show()
-        }else if (TextUtils.isEmpty(katha)) {
+        } else if (TextUtils.isEmpty(katha)) {
             Toast.makeText(this, "Please write property katha...", Toast.LENGTH_SHORT).show()
-        }else if (TextUtils.isEmpty(ownerName)) {
+        } else if (TextUtils.isEmpty(ownerName)) {
             Toast.makeText(this, "Please enter property owner name...", Toast.LENGTH_SHORT).show()
-        }else if (TextUtils.isEmpty(facing)) {
+        } else if (TextUtils.isEmpty(facing)) {
             Toast.makeText(this, "Please enter property facing...", Toast.LENGTH_SHORT).show()
         } else if (TextUtils.isEmpty(Description)) {
             Toast.makeText(this, "Please enter property description...", Toast.LENGTH_SHORT).show()
@@ -169,10 +147,6 @@ class AdminNewPropurtyActivity : AppCompatActivity() {
     }
 
     private fun StoreProductInformation(data: Intent) {
-        loadingBar?.setTitle("Property Posting");
-        loadingBar?.setMessage("please wait while we are adding the new Property.");
-        loadingBar?.setCanceledOnTouchOutside(false);
-        loadingBar?.show();
         downloadImageUrl = ""
         val totalItems = data.clipData!!.itemCount
         for (i in 0 until totalItems) {
@@ -181,14 +155,18 @@ class AdminNewPropurtyActivity : AppCompatActivity() {
             fileNameList.add(fileName)
             fileDoneList.add("Uploading")
             productRandomKey = UtilityMethods.getCurrentTimeDate()
-            val filePath = ProductImagesRef!!.child(fileUri.lastPathSegment + productRandomKey + ".jpg")
+            val filePath =
+                ProductImagesRef!!.child(fileUri.lastPathSegment + productRandomKey + ".jpg")
             val uploadTask = filePath.putFile(fileUri)
             uploadTask.addOnFailureListener { e ->
                 val message = e.toString()
-                UtilityMethods.showToast(this@AdminNewPropurtyActivity,"Error: $message", )
+                UtilityMethods.showToast(this@AdminNewPropurtyActivity, "Error: $message")
                 loadingBar!!.dismiss()
             }.addOnSuccessListener {
-                UtilityMethods.showToast(this@AdminNewPropurtyActivity,"Property Image uploaded Successfully..." )
+                UtilityMethods.showToast(
+                    this@AdminNewPropurtyActivity,
+                    "Property Image uploaded Successfully..."
+                )
                 val urlTask = uploadTask.continueWithTask { task ->
                     if (!task.isSuccessful) {
                         throw task.exception!!
@@ -202,7 +180,10 @@ class AdminNewPropurtyActivity : AppCompatActivity() {
                             } else {
                                 downloadImageUrl + "---" + task.result.toString()
                             }
-                            UtilityMethods.showToast(this@AdminNewPropurtyActivity,"got the Property image Url Successfully..." )
+                            UtilityMethods.showToast(
+                                this@AdminNewPropurtyActivity,
+                                "got the Property image Url Successfully..."
+                            )
                         }
                     }
             }

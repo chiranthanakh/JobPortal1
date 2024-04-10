@@ -31,7 +31,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.sbd.gbd.Activities.Admin.AdminNewPropurtyActivity
 import com.sbd.gbd.Activities.BasicActivitys.OtpLoginActivity
 import com.sbd.gbd.Utilitys.PreferenceManager
 import com.sbd.gbd.Utilitys.UtilityMethods
@@ -271,7 +270,7 @@ class PropertyFragment : Fragment(), View.OnClickListener {
         when (view.id) {
             R.id.btn_add_property -> {
                 if (preferenceManager.getLoginState()) {
-                    val intent = Intent(context, AdminNewPropurtyActivity::class.java)
+                    val intent = Intent(requireContext(), Admin_ads_dashboard::class.java)
                     intent.putExtra("page", "2")
                     startActivity(intent)
                 } else {

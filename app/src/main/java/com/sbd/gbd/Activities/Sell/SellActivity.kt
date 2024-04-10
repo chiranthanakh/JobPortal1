@@ -8,7 +8,6 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.sbd.gbd.Activities.Admin.AdminBusinessListings
 import com.sbd.gbd.Activities.Admin.AdminLivingPlacess
-import com.sbd.gbd.Activities.Admin.AdminNewPropurtyActivity
 import com.sbd.gbd.Activities.Admin.Admin_Construction
 import com.sbd.gbd.Activities.Admin.Admin_ads_dashboard
 import com.sbd.gbd.Activities.Admin.Admin_travels

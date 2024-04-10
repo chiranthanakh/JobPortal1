@@ -106,6 +106,13 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
             }
 
             R.id.btn_continue ->
+                //fetchProfile(edtPhone?.text.toString())
+                /*startActivity(
+                    Intent(
+                        this@OtpLoginActivity,
+                        UserDetailsActivity::class.java
+                    )
+                )*/
 
                 if (edt_otp?.text?.length == 0) {
                     Toast.makeText(applicationContext, "Enter the otp", Toast.LENGTH_SHORT).show()
@@ -202,12 +209,6 @@ class OtpLoginActivity : AppCompatActivity(), View.OnClickListener {
                             finish()
                         }
                     } else {
-                        startActivity(
-                            Intent(
-                                this@OtpLoginActivity,
-                                UserDetailsActivity::class.java
-                            )
-                        )
                         var bundle = Bundle()
                         val intent10 =
                             Intent(this@OtpLoginActivity, UserDetailsActivity::class.java)

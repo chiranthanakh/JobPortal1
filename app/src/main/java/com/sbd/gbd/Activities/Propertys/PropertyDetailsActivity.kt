@@ -41,10 +41,6 @@ class PropertyDetailsActivity : AppCompatActivity() {
 
     }
 
-    override fun onStart() {
-        super.onStart()
-        //CheckOrderState();
-    }
 
     private fun getProductDetails(productID: String?) {
         val productsRef = FirebaseDatabase.getInstance().reference.child("Products")

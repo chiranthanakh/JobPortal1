@@ -58,7 +58,6 @@ public class AdminPropertyApproval extends AppCompatActivity implements View.OnC
     AdminPropertyAdaptor propertyAdaptor;
     AdminAdsAdaptor adsAdaptor;
     RecyclerView recyclarviewads;
-    CardView cv_homes, cv_sites, cv_green, cv_comerical;
     Bundle bundle = new Bundle();
 
     @Override

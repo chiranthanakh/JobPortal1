@@ -32,7 +32,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.sbd.gbd.Activities.Admin.AdminNewPropurtyActivity
+import com.sbd.gbd.Activities.Admin.Admin_ads_dashboard
 import java.util.Collections
 import java.util.Locale
 
@@ -376,7 +376,8 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.btn_add_property -> {
-                val intent = Intent(this@SearchActivity, AdminNewPropurtyActivity::class.java)
+                val intent = Intent(this, Admin_ads_dashboard::class.java)
+                intent.putExtra("page", "2")
                 startActivity(intent)
             }
 

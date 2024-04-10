@@ -6,22 +6,14 @@ plugins {
 }
 
 android {
-   /* signingConfigs {
-        release {
-            storeFile file('C:\\Users\\admin\\Desktop\\keySore-for GBD\\gbd-keystore.jks')
-            storePassword 'Kurudi@123'
-            keyAlias 'Key0'
-            keyPassword 'Kurudi@123'
-        }
-    }*/
     compileSdk 34
 
     defaultConfig {
         applicationId "com.sbd.gbd"
         minSdkVersion 28
         targetSdkVersion 34
-        versionCode 1001
-        versionName "1.2.1"
+        versionCode 1006
+        versionName "1.2.6"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -30,13 +22,10 @@ android {
         dev {
             dimension "default"
             applicationIdSuffix ".debug"
-          ////  buildConfigField("String", "GOOGLE_SERVICES_JSON", "\"google-services.json\"")
-
         }
         prod {
             dimension "default"
             applicationIdSuffix ".release"
-            ////buildConfigField("String", "GOOGLE_SERVICES_JSON", "\"google-services.json\"")
         }
       }
 
@@ -109,6 +98,7 @@ dependencies {
     //For Circular ImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.synnapps:carouselview:0.1.5'
+    implementation "com.google.android.gms:play-services-safetynet:18.0.0"
 
     implementation 'com.github.mindinventory:minavdrawer:1.2.2'
     implementation 'com.github.aabhasr1:OtpView:v1.1.2'

@@ -127,7 +127,7 @@ class AdsDetailsActivity : AppCompatActivity() {
                     tv_size_details?.text = products.propertysize
                     tv_prop_type?.text = products.category
                     tv_ads_posted?.text = products.postedBy
-                    tv_ads_ownership?.text = products.ownership
+                    tv_ads_ownership?.text = products.city
                     ads_tv_facing?.text = products.facing
                     ads_approved_by?.text = products.approvedBy
                     tv_katha?.text = products.katha

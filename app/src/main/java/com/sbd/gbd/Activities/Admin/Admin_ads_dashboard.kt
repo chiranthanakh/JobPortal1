@@ -200,7 +200,7 @@ class Admin_ads_dashboard : AppCompatActivity() {
             Toast.makeText(this, "Please enter contact number...", Toast.LENGTH_SHORT).show()
         } else if (TextUtils.isEmpty(Pname)) {
             Toast.makeText(this, "Please write product name...", Toast.LENGTH_SHORT).show()
-        } else if (TextUtils.isEmpty(CategoryName)) {
+        } else if (TextUtils.isEmpty(CategoryName) || CategoryName.equals("")) {
             Toast.makeText(this, "Please enter category", Toast.LENGTH_SHORT).show()
         } else if (TextUtils.isEmpty(facing)) {
             Toast.makeText(this, "Please enter facing", Toast.LENGTH_SHORT).show()

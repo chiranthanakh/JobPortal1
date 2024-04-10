@@ -57,7 +57,6 @@ object AppConstants {
         return productMap
     }
 
-
     const val user = "2"
 
 }

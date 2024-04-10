@@ -22,7 +22,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.sbd.gbd.Activities.Admin.AdminNewPropurtyActivity
+import com.sbd.gbd.Activities.Admin.Admin_ads_dashboard
 import com.sbd.gbd.Activities.BasicActivitys.SearchActivity
 import com.sbd.gbd.Adapters.AdsAdaptor
 import com.sbd.gbd.Adapters.PropertyAdaptor
@@ -228,7 +228,8 @@ class PropertyActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.btn_add_property -> {
-                val intent = Intent(this@PropertyActivity, AdminNewPropurtyActivity::class.java)
+                val intent = Intent(this, Admin_ads_dashboard::class.java)
+                intent.putExtra("page", "2")
                 startActivity(intent)
             }
 
