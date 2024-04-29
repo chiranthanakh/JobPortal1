@@ -32,6 +32,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.sbd.gbd.Activities.BasicActivitys.OtpLoginActivity
+import com.sbd.gbd.Model.FilterModel
 import com.sbd.gbd.Utilitys.PreferenceManager
 import com.sbd.gbd.Utilitys.UtilityMethods
 import java.util.Collections
@@ -51,11 +52,11 @@ class PropertyFragment : Fragment(), View.OnClickListener {
     var mHandler = Handler()
     var iv_no_internet: ImageView? = null
     var business_layout : LinearLayout? = null
-    var propertylist: ArrayList<String> = ArrayList<String>()
-    var greenlandlist: ArrayList<*> = ArrayList<Any?>()
-    var siteslist: ArrayList<*> = ArrayList<Any?>()
-    var Homeslist: ArrayList<*> = ArrayList<Any?>()
-    var Rentallist: ArrayList<*> = ArrayList<Any?>()
+    var propertylist: ArrayList<FilterModel> = ArrayList<FilterModel>()
+    var greenlandlist: ArrayList<FilterModel> = ArrayList<FilterModel>()
+    var siteslist: ArrayList<FilterModel> = ArrayList<FilterModel>()
+    var Homeslist: ArrayList<FilterModel> = ArrayList<FilterModel>()
+    var Rentallist: ArrayList<FilterModel> = ArrayList<FilterModel>()
     var adslist: ArrayList<AdsModel?> = ArrayList<AdsModel?>()
     var buttonToggleGroup: MaterialButtonToggleGroup? = null
     var propertyAdaptor: PropertyAdaptor? = null
@@ -242,10 +243,21 @@ class PropertyFragment : Fragment(), View.OnClickListener {
                                     ?.equals(AppConstants.user) == true
                             ) {
                             propertylist.add(
-                                userData!![AppConstants.image].toString() + "!!" + userData[AppConstants.pid] + "---" + userData[AppConstants.description] + "---" +
-                                        userData[AppConstants.category] + "---" + userData[AppConstants.price] + "---" + userData[AppConstants.pname]
-                                        + "---" + userData[AppConstants.propertysize] + "---" + userData[AppConstants.location] + "---" + userData[AppConstants.number] + "---" + userData[AppConstants.type] + "---" + userData[AppConstants.Status]
-                            )
+                                FilterModel(
+                                    userData!![AppConstants.pname].toString(),
+                                    userData[AppConstants.description].toString(),
+                                    userData[AppConstants.price].toString(),
+                                    userData[AppConstants.image].toString(),
+                                    userData[AppConstants.category].toString(),
+                                    userData[AppConstants.pid].toString(),
+                                    AppConstants.date,
+                                    AppConstants.time,
+                                    userData[AppConstants.type].toString(),
+                                    userData[AppConstants.propertysize].toString(),
+                                    userData[AppConstants.location].toString(),
+                                    userData[AppConstants.number].toString(),
+                                    userData[AppConstants.Status].toString()
+                                )                            )
                         }
 
                         } catch (cce: ClassCastException) {

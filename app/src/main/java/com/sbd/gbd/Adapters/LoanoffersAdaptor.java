@@ -23,7 +23,6 @@ import java.util.List;
 
 public class LoanoffersAdaptor extends RecyclerView.Adapter<LoanoffersAdaptor.ViewHolder> {
 
-
     private List<LoanOffersModel> productInfos;
     private Context context;
     private String number, name;

@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.provider.OpenableColumns
 import android.text.InputType
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.widget.ArrayAdapter
@@ -114,7 +115,6 @@ class Admin_Construction : AppCompatActivity() {
         edt_construction_servicessoffer_1 = findViewById(R.id.edt_construction_servicessoffer_1)
         edt_construction_servicessoffer_2 = findViewById(R.id.edt_construction_servicessoffer_2)
         edt_construction_servicessoffer_3 = findViewById(R.id.edt_construction_servicessoffer_3)
-        edt_construction_servicessoffer_4 = findViewById(R.id.edt_construction_servicessoffer_4)
         edt_construction_discription = findViewById(R.id.edt_construction_discription)
         edt_construction_address = findViewById(R.id.edt_construction_address)
         edt_construction_gst = findViewById(R.id.edt_construction_gst)
@@ -243,7 +243,9 @@ class Admin_Construction : AppCompatActivity() {
         val uploadTask = filePath.putFile(uri)
         uploadTask.addOnFailureListener { e ->
             val message = e.toString()
-            Toast.makeText(this@Admin_Construction, "Error: $message", Toast.LENGTH_SHORT).show()
+            Log.d("error12345",message)
+            edt_construction_discription?.setText(message)
+            Toast.makeText(this@Admin_Construction, "$message", Toast.LENGTH_SHORT).show()
             loadingBar!!.dismiss()
         }.addOnSuccessListener {
             val urlTask = uploadTask.continueWithTask { task ->

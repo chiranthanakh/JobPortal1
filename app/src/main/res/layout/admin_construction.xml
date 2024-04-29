@@ -483,6 +483,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
+                    android:visibility="gone"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp">
 
@@ -493,6 +494,7 @@
                         android:textColorHint="@color/black"
                         app:boxStrokeColor="@color/grey_light"
                         app:hintTextColor="@color/black"
+                        android:visibility="gone"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:startIconTint="@color/grey_dark">
@@ -517,6 +519,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
+                    android:visibility="gone"
                     android:layout_marginEnd="10dp">
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -550,6 +553,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
+                    android:visibility="gone"
                     android:layout_marginEnd="10dp">
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -582,6 +586,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
+                    android:visibility="gone"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp">
 
@@ -597,11 +602,11 @@
                         app:startIconTint="@color/grey_dark">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edt_construction_servicessoffer_4"
+                            android:id="@+id/edt_construction_servicess"
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
                             android:background="@null"
-                            android:hint="Services provides 4"
+                            android:hint="Services provides"
                             android:inputType="text"
                             android:lines="4"
                             android:padding="@dimen/dp_0"
@@ -634,7 +639,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
                             android:background="@null"
-                            android:hint="Business Startd In"
+                            android:hint="Business Started Year"
                             android:inputType="text"
                             android:lines="4"
                             android:padding="@dimen/dp_0"
@@ -667,7 +672,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="90dp"
                             android:background="@null"
-                            android:hint="Description"
+                            android:hint="Describe Your Servicess / Products"
                             android:inputType="text"
                             android:lines="4"
                             android:padding="@dimen/dp_0"

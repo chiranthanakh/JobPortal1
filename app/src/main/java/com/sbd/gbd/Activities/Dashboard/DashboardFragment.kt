@@ -184,7 +184,7 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                             //through exception
                         }
                     }
-                    if (coroselimagelist.size != 0) {
+                    if (coroselimagelist.size != 0 && !coroselimagelist.isNullOrEmpty()) {
                         binding.caroselDashboard.setImageListener(imageListener)
                         binding.caroselDashboard.pageCount = url.size
 
@@ -192,9 +192,9 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                             carouselClick(coroselimagelist.get(it))
                         }
 
-                        coroselListAdaptor = CoroselListAdaptor(coroselimagelist, context!!)
-                        val nlayoutManager: RecyclerView.LayoutManager =
-                            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                       // coroselListAdaptor = CoroselListAdaptor(coroselimagelist, context!!)
+                        //val nlayoutManager: RecyclerView.LayoutManager =
+                          //  LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
 
                     }
                 }
@@ -379,13 +379,6 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
             }
 
             R.id.cv_servicess1 -> {
-                /*binding.bottomNavShift.visibility = View.GONE
-                val businessFragment = BusinessFragment()
-                val fragmentManager = requireActivity().supportFragmentManager
-                val fragmentTransaction = fragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.fragment_container, businessFragment)
-                fragmentTransaction.addToBackStack(null)
-                fragmentTransaction.commit()*/
                 val intent2 = Intent(context, BusinessActivity::class.java)
                 startActivity(intent2)
             }

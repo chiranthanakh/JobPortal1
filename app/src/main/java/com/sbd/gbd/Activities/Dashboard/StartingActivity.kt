@@ -47,6 +47,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
+import com.sbd.gbd.Activities.Construction.ConstructionFragment
 import com.sbd.gbd.BuildConfig
 import com.sbd.gbd.Utilitys.UtilityMethods
 import java.util.*
@@ -55,7 +56,7 @@ class StartingActivity : AppCompatActivity() {
     var bottomNavShift: BottomNavigationView? = null
     var profileFragment = ProfileFragments()
     var startingFragment = DashboardFragment()
-    var businessFragment = BusinessFragment()
+    var businessFragment = ConstructionFragment()
     var propertyFragment = PropertyFragment()
     var frameLayout: FrameLayout? = null
     var drawer_layout: DrawerLayout? = null

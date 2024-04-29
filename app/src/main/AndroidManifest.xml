@@ -7,15 +7,16 @@
         android:required="false" />
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="34" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="34" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
 
     <application
         android:allowBackup="true"
@@ -24,136 +25,136 @@
         android:roundIcon="@mipmap/ic_logo1"
         android:theme="@style/JobPortaltheam">
         <activity
-            android:name="com.sbd.gbd.Activities.LoanActivity.LoanVehicle"
+            android:name=".Activities.Admin.CallsListActivity"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.LoanActivity.LoanBusiness"
+            android:name=".Activities.LoanActivity.LoanVehicle"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Construction.ConstructionFilter"
+            android:name=".Activities.LoanActivity.LoanBusiness"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.BasicActivitys.AboutUsActivity"
+            android:name=".Activities.Construction.ConstructionFilter"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Admin.AdminTravelApproval"
+            android:name=".Activities.BasicActivitys.AboutUsActivity"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.BasicActivitys.SearchActivity"
+            android:name=".Activities.Admin.AdminTravelApproval"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Businesthings.BusinessFilter"
+            android:name=".Activities.BasicActivitys.SearchActivity"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.HomeRentels.RentHomeDetails"
+            android:name=".Activities.Businesthings.BusinessFilter"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.LoanActivity.LoanActivity"
+            android:name=".Activities.HomeRentels.RentHomeDetails"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.LoanActivity.LoanFormGeneral"
+            android:name=".Activities.LoanActivity.LoanActivity"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Construction.ConstructionActivity"
+            android:name=".Activities.LoanActivity.LoanFormGeneral"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Construction.ConstructionDetailsActivity"
+            android:name=".Activities.Construction.ConstructionActivity"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Businesthings.BusinessDetails"
+            android:name=".Activities.Construction.ConstructionDetailsActivity"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.HomeRentels.LivingPlaceActivity"
+            android:name=".Activities.Businesthings.BusinessDetails"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.HotelsPG.HotelsDetails"
+            android:name=".Activities.HomeRentels.LivingPlaceActivity"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Admin.AdminPropertyApproval"
+            android:name=".Activities.HotelsPG.HotelsDetails"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.BasicActivitys.OtpLoginActivity"
+            android:name=".Activities.Admin.AdminPropertyApproval"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.LoanActivity.LoanFormfirst"
+            android:name=".Activities.BasicActivitys.OtpLoginActivity"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Admin.AdminBusinessCategorys"
+            android:name=".Activities.LoanActivity.LoanFormfirst"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Dashboard.LayoutDetailsActivity"
+            android:name=".Activities.Admin.AdminBusinessCategorys"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Admin.Admin_Construction"
+            android:name=".Activities.Dashboard.LayoutDetailsActivity"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Admin.Admin_travels"
+            android:name=".Activities.Admin.Admin_Construction"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.LoanActivity.LoanForm"
+            android:name=".Activities.Admin.Admin_travels"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Travels.Travelsactivity"
+            android:name=".Activities.LoanActivity.LoanForm"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Admin.Admin_hotels"
+            android:name=".Activities.Travels.Travelsactivity"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.BasicActivitys.UserDetailsActivity"
+            android:name=".Activities.Admin.Admin_hotels"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.BasicActivitys.SeeAllLayoutActivity"
+            android:name=".Activities.BasicActivitys.UserDetailsActivity"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.BasicActivitys.UpcommingProjects"
+            android:name=".Activities.BasicActivitys.SeeAllLayoutActivity"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Admin.AdminLivingPlacess"
-            android:exported="false" />
-
-        <activity
-            android:name="com.sbd.gbd.Activities.HotelsPG.CenterHomeActivity"
+            android:name=".Activities.BasicActivitys.UpcommingProjects"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Profile.ProfileActivity"
+            android:name=".Activities.Admin.AdminLivingPlacess"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Admin.Admin_ads_dashboard"
+            android:name=".Activities.HotelsPG.CenterHomeActivity"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Admin.Admin_hotdeals_dashboard"
+            android:name=".Activities.Profile.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Admin.AdminBusinessListings"
+            android:name=".Activities.Admin.Admin_ads_dashboard"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Admin.AdminloanOffers"
+            android:name=".Activities.Admin.Admin_hotdeals_dashboard"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Sell.SellActivity"
+            android:name=".Activities.Admin.AdminBusinessListings"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Dashboard.CoroselDetailsActivity"
+            android:name=".Activities.Admin.AdminloanOffers"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Businesthings.BusinessActivity"
+            android:name=".Activities.Sell.SellActivity"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Propertys.PropertyDetailsActivity"
+            android:name=".Activities.Dashboard.CoroselDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Businesthings.BusinessActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Propertys.PropertyDetailsActivity"
             android:exported="false" />
 
         <service
-            android:name="com.sbd.gbd.Utilitys.NotificationListener"
-            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
-            android:exported="true">
+            android:name=".Utilitys.NotificationListener"
+            android:exported="true"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>
                 <action android:name="android.service.notification.NotificationListenerService" />
             </intent-filter>
         </service>
-
-
         <service
-            android:name="com.sbd.gbd.Utilitys.myFirebaseMessagingServices"
+            android:name=".Utilitys.myFirebaseMessagingServices"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -161,31 +162,28 @@
         </service>
 
         <activity
-            android:name="com.sbd.gbd.Activities.Propertys.PropertyActivity"
-            android:exported="false" />
-
-        <activity
-            android:name="com.sbd.gbd.Activities.Admin.AdminDashboard"
-            android:exported="false" />
-
-        <activity
-            android:name="com.sbd.gbd.Activities.Admin.AdminNewPropurtyActivity"
-            android:exported="false" />
-
-        <activity
-            android:name="com.sbd.gbd.Activities.Dashboard.AdsDetailsActivity"
+            android:name=".Activities.Propertys.PropertyActivity"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.HotDealsactivity.HotDealsDetailsActivity"
+            android:name=".Activities.Admin.AdminDashboard"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Admin.Admin_corosel_dashboard"
+            android:name=".Activities.Admin.AdminNewPropurtyActivity"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Admin.Admin_layouts_dashboard"
+            android:name=".Activities.Dashboard.AdsDetailsActivity"
             android:exported="false" />
         <activity
-            android:name="com.sbd.gbd.Activities.Dashboard.StartingActivity"
+            android:name=".Activities.HotDealsactivity.HotDealsDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Admin.Admin_corosel_dashboard"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Admin.Admin_layouts_dashboard"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Dashboard.StartingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

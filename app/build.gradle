@@ -10,10 +10,10 @@ android {
 
     defaultConfig {
         applicationId "com.sbd.gbd"
-        minSdkVersion 28
+        minSdkVersion 24
         targetSdkVersion 34
-        versionCode 1006
-        versionName "1.2.6"
+        versionCode 1008
+        versionName "1.2.8"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -31,7 +31,7 @@ android {
 
     buildTypes {
         release {
-            debuggable false
+           // debuggable false
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -60,7 +60,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:20.3.0'
     implementation 'com.google.android.gms:play-services-auth:21.0.0'
     implementation 'com.google.android.gms:play-services-location:21.1.0'
-    implementation 'com.android.car.ui:car-ui-lib:2.6.0'
+   // implementation 'com.android.car.ui:car-ui-lib:2.6.0'
     implementation 'com.google.android.play:core-ktx:1.8.1'
     implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'com.google.firebase:firebase-analytics:21.5.1'

@@ -31,7 +31,7 @@ class AdsDetailsActivity : AppCompatActivity() {
     private var productName: TextView? = null
     private var tv_topbar_productName: TextView? = null
     private var tv_ads_details_verify: TextView? = null
-    private var tv_ads_ownership: TextView? = null
+    private var tv_ads_landmark: TextView? = null
     private var ads_tv_facing: TextView? = null
     private var ads_approved_by: TextView? = null
     private var tv_place_location: TextView? = null
@@ -72,7 +72,7 @@ class AdsDetailsActivity : AppCompatActivity() {
         tv_katha = findViewById(R.id.tv_katha)
 
 
-        tv_ads_ownership = findViewById(R.id.tv_ads_ownership)
+        tv_ads_landmark = findViewById(R.id.tv_ads_landmark)
         tv_ads_details_verify = findViewById(R.id.ads_details_verifyed)
         ads_approved_by = findViewById(R.id.ads_approved_by)
         // ads_details_not_verified = findViewById(R.id.ads_details_not_verified);
@@ -127,7 +127,7 @@ class AdsDetailsActivity : AppCompatActivity() {
                     tv_size_details?.text = products.propertysize
                     tv_prop_type?.text = products.category
                     tv_ads_posted?.text = products.postedBy
-                    tv_ads_ownership?.text = products.city
+                    tv_ads_landmark?.text = products.city
                     ads_tv_facing?.text = products.facing
                     ads_approved_by?.text = products.approvedBy
                     tv_katha?.text = products.katha

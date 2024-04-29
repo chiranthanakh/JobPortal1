@@ -38,6 +38,12 @@ class LoanFormfirst : AppCompatActivity() {
         if(type.equals("3")) {
             tv_loantype.setText("Home Loan")
             ll_company.visibility = View.GONE
+        } else if(type.equals("4")) {
+            tv_loantype.setText("Martgage loan")
+            ll_company.visibility = View.GONE
+        } else if(type.equals("5")) {
+            tv_loantype.setText("LAP")
+            ll_company.visibility = View.GONE
         } else {
             ll_tenure.visibility = View.GONE
         }

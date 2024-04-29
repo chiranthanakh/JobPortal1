@@ -59,9 +59,8 @@ class PropertyActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_property)
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
            // setTheme(R.style.darkTheme)
-            //when dark mode is enabled, we use the dark theme
         } else {
-            setTheme(R.style.JobPortaltheam) //default app theme
+            setTheme(R.style.JobPortaltheam)
         }
         if (Build.VERSION.SDK_INT >= 21) {
             val window = this.window
@@ -170,7 +169,7 @@ class PropertyActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun fetchcorosel() {
         val coroselimage = FirebaseDatabase.getInstance().reference.child("Products")
-        coroselimage.addValueEventListener(object : ValueEventListener {
+       /* coroselimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     val dataMap = snapshot.value as HashMap<String, Any>?
@@ -222,11 +221,11 @@ class PropertyActivity : AppCompatActivity(), View.OnClickListener {
             }
 
             override fun onCancelled(error: DatabaseError) {}
-        })
+        })*/
     }
 
     override fun onClick(view: View) {
-        when (view.id) {
+       /* when (view.id) {
             R.id.btn_add_property -> {
                 val intent = Intent(this, Admin_ads_dashboard::class.java)
                 intent.putExtra("page", "2")
@@ -274,6 +273,6 @@ class PropertyActivity : AppCompatActivity(), View.OnClickListener {
             }
 
             R.id.back_toolbar_property -> finish()
-        }
+        }*/
     }
 }

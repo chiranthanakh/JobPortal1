@@ -13,8 +13,8 @@
 
     <item
         android:id="@+id/it_business"
-        android:icon="@drawable/ic_business2"
-        android:title="Business" />
+        android:icon="@drawable/ic_construction"
+        android:title="Construction" />
 
     <item
         android:id="@+id/profile"

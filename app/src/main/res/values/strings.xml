@@ -26,9 +26,9 @@
     </string-array>
 
     <string-array name="building_type">
-    <item>"Please Select Type"</item>
-    <item>"Residential"</item>
-    <item>"Commercial"</item>
+        <item>"Please Select Type"</item>
+        <item>"Residential"</item>
+        <item>"Commercial"</item>
     </string-array>
 
     <string-array name="home_type">

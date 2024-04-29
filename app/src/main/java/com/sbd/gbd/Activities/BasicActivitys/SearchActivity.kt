@@ -61,7 +61,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
     var recyclarviewads: RecyclerView? = null
     var edt_filter: SearchView? = null
     var buttonToggleGroup: MaterialButtonToggleGroup? = null
-    var filterarraylist: ArrayList<String> = ArrayList<String>()
+    var filterarraylist: ArrayList<FilterModel> = ArrayList<FilterModel>()
     var type = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -233,7 +233,8 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
                                     userData[AppConstants.type].toString(),
                                     userData[AppConstants.propertysize].toString(),
                                     userData[AppConstants.location].toString(),
-                                    userData[AppConstants.number].toString()
+                                    userData[AppConstants.number].toString(),
+                                    userData[AppConstants.Status].toString()
                                 )
                             )
                             propertylist.add(
@@ -249,7 +250,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
                             }
                         }
                     }
-                    propertyAdaptor = PropertyAdaptor(propertylist, this@SearchActivity)
+                    propertyAdaptor = PropertyAdaptor(Propertyfilterlist, this@SearchActivity)
                     val nlayoutManager: RecyclerView.LayoutManager =
                         LinearLayoutManager(this@SearchActivity, RecyclerView.VERTICAL, false)
                     recyclerView!!.layoutManager = nlayoutManager
@@ -382,43 +383,43 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
             }
 
             R.id.iv_sites -> {
-                propertyAdaptor = PropertyAdaptor(siteslist, this@SearchActivity)
+                /*propertyAdaptor = PropertyAdaptor(siteslist, this@SearchActivity)
                 val nlayoutManager: RecyclerView.LayoutManager =
                     LinearLayoutManager(this@SearchActivity, RecyclerView.VERTICAL, false)
                 recyclerView!!.layoutManager = nlayoutManager
                 recyclerView!!.itemAnimator = DefaultItemAnimator()
                 mHandler.post { recyclerView!!.adapter = propertyAdaptor }
-                propertyAdaptor!!.notifyItemRangeInserted(0, siteslist.size)
+                propertyAdaptor!!.notifyItemRangeInserted(0, siteslist.size)*/
             }
 
             R.id.iv_home -> {
-                propertyAdaptor = PropertyAdaptor(Homeslist, this@SearchActivity)
+               /* propertyAdaptor = PropertyAdaptor(Homeslist, this@SearchActivity)
                 val nlayoutManager1: RecyclerView.LayoutManager =
                     LinearLayoutManager(this@SearchActivity, RecyclerView.VERTICAL, false)
                 recyclerView!!.layoutManager = nlayoutManager1
                 recyclerView!!.itemAnimator = DefaultItemAnimator()
                 mHandler.post { recyclerView!!.adapter = propertyAdaptor }
-                propertyAdaptor!!.notifyItemRangeInserted(0, Homeslist.size)
+                propertyAdaptor!!.notifyItemRangeInserted(0, Homeslist.size)*/
             }
 
             R.id.iv_commercial -> {
-                propertyAdaptor = PropertyAdaptor(Rentallist, this@SearchActivity)
+                /*propertyAdaptor = PropertyAdaptor(Rentallist, this@SearchActivity)
                 val nlayoutManager2: RecyclerView.LayoutManager =
                     LinearLayoutManager(this@SearchActivity, RecyclerView.VERTICAL, false)
                 recyclerView!!.layoutManager = nlayoutManager2
                 recyclerView!!.itemAnimator = DefaultItemAnimator()
                 mHandler.post { recyclerView!!.adapter = propertyAdaptor }
-                propertyAdaptor!!.notifyItemRangeInserted(0, Rentallist.size)
+                propertyAdaptor!!.notifyItemRangeInserted(0, Rentallist.size)*/
             }
 
             R.id.iv_green_land -> {
-                propertyAdaptor = PropertyAdaptor(greenlandlist, this@SearchActivity)
+              /*  propertyAdaptor = PropertyAdaptor(greenlandlist, this@SearchActivity)
                 val nlayoutManager3: RecyclerView.LayoutManager =
                     LinearLayoutManager(this@SearchActivity, RecyclerView.VERTICAL, false)
                 recyclerView!!.layoutManager = nlayoutManager3
                 recyclerView!!.itemAnimator = DefaultItemAnimator()
                 mHandler.post { recyclerView!!.adapter = propertyAdaptor }
-                propertyAdaptor!!.notifyItemRangeInserted(0, greenlandlist.size)
+                propertyAdaptor!!.notifyItemRangeInserted(0, greenlandlist.size)*/
             }
 
             R.id.back_toolbar_search -> finish()
@@ -518,26 +519,19 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
             Log.d("insidebbusiness2", "property")
             filterarraylist.clear()
             for (i in Propertyfilterlist.indices) {
-                if (Propertyfilterlist[i].location.lowercase(Locale.getDefault())
-                        .contains(text.lowercase(Locale.getDefault())) ||
-                    Propertyfilterlist[i].pname.lowercase(Locale.getDefault())
-                        .contains(text.lowercase(Locale.getDefault())) ||
-                    Propertyfilterlist[i].price.lowercase(Locale.getDefault())
-                        .contains(text.lowercase(Locale.getDefault())) ||
-                    Propertyfilterlist[i].type.lowercase(Locale.getDefault())
-                        .contains(text.lowercase(Locale.getDefault()))
+                if (Propertyfilterlist[i].location?.lowercase(Locale.getDefault())!!.contains(text.lowercase(Locale.getDefault())) ||
+                    Propertyfilterlist[i].pname?.lowercase(Locale.getDefault())
+                        !!.contains(text.lowercase(Locale.getDefault())) ||
+                    Propertyfilterlist[i].price?.lowercase(Locale.getDefault())
+                        !!.contains(text.lowercase(Locale.getDefault())) ||
+                    Propertyfilterlist[i].type?.lowercase(Locale.getDefault())
+                        !!.contains(text.lowercase(Locale.getDefault()))
                 ) {
-                    filterarraylist.add(
-                        Propertyfilterlist[i]
-                            .image + "!!" + Propertyfilterlist[i]
-                            .pid + "---" + Propertyfilterlist[i].description + "---" +
-                                Propertyfilterlist[i].category + "---" + Propertyfilterlist[i]!!
-                            .price + "---" + Propertyfilterlist[i].pname
-                                + "---" + Propertyfilterlist[i]
-                            .size + "---" + Propertyfilterlist[i]
-                            .location + "---" + Propertyfilterlist[i]
-                            .number + "---" + Propertyfilterlist[i].type
-                    )
+
+                    filterarraylist.add(FilterModel( Propertyfilterlist[i].pname,Propertyfilterlist[i].description,Propertyfilterlist[i].price,
+                        Propertyfilterlist[i].image,Propertyfilterlist[i].category,Propertyfilterlist[i].pid,AppConstants.date, AppConstants.time,
+                        Propertyfilterlist[i].type,Propertyfilterlist[i].size,Propertyfilterlist[i].location,Propertyfilterlist[i].number,Propertyfilterlist[i].status.toString()
+                    ))
                 }
                 propertyAdaptor = if (filterarraylist.size == 0) {
                     PropertyAdaptor(Propertyfilterlist, this@SearchActivity)

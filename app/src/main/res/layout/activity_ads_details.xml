@@ -457,7 +457,7 @@
                                     android:layout_weight="1">
 
                                     <TextView
-                                        android:id="@+id/tv_ads_ownership"
+                                        android:id="@+id/tv_ads_landmark"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/lato_bold"

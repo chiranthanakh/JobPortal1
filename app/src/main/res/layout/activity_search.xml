@@ -78,7 +78,7 @@
                 android:layout_marginTop="3dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/edittext_back"
+                android:background="@drawable/searchbar_background"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.SearchView
@@ -90,7 +90,7 @@
                     android:drawablePadding="@dimen/dp_20"
                     android:gravity="center_vertical"
                     android:hint="Search here..."
-                    android:textColor="@color/red"
+                    android:textColor="@color/black"
                     android:layout_marginStart="@dimen/margin_10dp"
                     android:textSize="18sp"
                     android:text="cdcsdc"
@@ -104,7 +104,7 @@
 
         <com.google.android.material.button.MaterialButtonToggleGroup
             android:id="@+id/buttonToggleGroup"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             app:singleSelection="true">
@@ -112,7 +112,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button1"
                 style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:text="Property" />
@@ -120,7 +120,8 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button2"
                 style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:text="Business" />
@@ -128,7 +129,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button3"
                 style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:text="Constructions" />

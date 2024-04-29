@@ -42,6 +42,7 @@ class LayoutDetailsActivity : AppCompatActivity() {
     private var tv_future4: TextView? = null
     private var tv_contact_type: TextView? = null
     private var tv_ads_posted_on: TextView? = null
+    private var ads_size_katha: TextView? = null
     private val tv_ads_posted: TextView? = null
     private val ads_details_not_verified: TextView? = null
     private var productID: String? = ""
@@ -60,6 +61,7 @@ class LayoutDetailsActivity : AppCompatActivity() {
         ads_whatsapp_btn = findViewById(R.id.ads_whtsapp_btn)
         carouselView = findViewById(R.id.ads_details_carouselView)
         tv_prop_type = findViewById(R.id.tv_prop_type)
+        ads_size_katha = findViewById(R.id.ads_size_katha)
         iv_back_ads = findViewById(R.id.iv_back_ads)
         //tv_ads_posted = findViewById(R.id.tv_ads_posted);
         tv_future1 = findViewById(R.id.tv_futures1)
@@ -118,6 +120,7 @@ class LayoutDetailsActivity : AppCompatActivity() {
                     tv_layout_facing!!.text = products.facing
                     tv_no_sites!!.text = products.sitesAvailable
                     tv_layout_area!!.text = products.layoutarea
+                    ads_size_katha?.text = products.katha
                     // tv_ads_posted.setText("Posted by : "+products.getPostedBy());
                     if (products.date == null) {
                         tv_ads_posted_on!!.visibility = View.GONE

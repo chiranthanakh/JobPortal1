@@ -58,7 +58,7 @@
                 <com.synnapps.carouselview.CarouselView
                     android:id="@+id/hot_details_carouselView"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="260dp"
                     app:fillColor="#FFFFFFFF"
                     app:pageColor="#00000000"
                     app:radius="3dp"
@@ -325,7 +325,7 @@
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/proxima_nova_regular"
                                         android:gravity="start|center"
-                                        android:text="Contact timings"
+                                        android:text="Contact timings               :"
                                         android:textColor="@color/black"
                                         android:textSize="14sp" />
                                 </LinearLayout>
@@ -418,7 +418,7 @@
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/proxima_nova_regular"
                                         android:gravity="start|center"
-                                        android:text="Prise Range :"
+                                        android:text="Prise Range                    :"
                                         android:textColor="@color/black"
                                         android:textSize="14sp" />
                                 </LinearLayout>
@@ -450,6 +450,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginTop="10dp"
                                 android:gravity="center"
+                                android:visibility="gone"
                                 android:orientation="horizontal">
 
                                 <LinearLayout
@@ -593,7 +594,7 @@
                                 android:gravity="center"
                                 android:text="Newly Constructed Property"
                                 android:textColor="@color/black"
-                                android:textSize="12sp" />
+                                android:textSize="13sp" />
 
                             <TextView
                                 android:id="@+id/tv_special_option2"
@@ -605,7 +606,7 @@
                                 android:gravity="center"
                                 android:text="Newly Constructed Property"
                                 android:textColor="@color/black"
-                                android:textSize="12sp" />
+                                android:textSize="13sp" />
 
 
                         </LinearLayout>
@@ -635,7 +636,7 @@
                                 android:fontFamily="@font/proxima_family"
                                 android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.remaining essentially unchanged."
                                 android:textColor="@color/black"
-                                android:textSize="12sp" />
+                                android:textSize="14sp" />
                         </LinearLayout>
                     </LinearLayout>
                 </FrameLayout>

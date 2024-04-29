@@ -3,7 +3,6 @@ package com.sbd.gbd.Utilitys
 import android.content.Context
 
 object AppConstants {
-
     const val image = "image"
     const val image2 = "image2"
     const val pid = "pid"
@@ -42,7 +41,7 @@ object AppConstants {
     const val owner = "owner"
     const val agent = "agent"
     const val notVerified = "VERIFIED PROPERTY"
-    const val verified1 = " VERIFIED"
+    const val verified1 = "VERIFIED"
     const val Deposit = "deposit"
 
     fun profileinfoadd(contest : Context): HashMap<String, Any?> {
@@ -57,6 +56,6 @@ object AppConstants {
         return productMap
     }
 
-    const val user = "2"
+    const val user = "1"
 
 }

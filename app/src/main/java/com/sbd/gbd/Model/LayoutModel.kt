@@ -25,5 +25,6 @@ data class LayoutModel(
     var point1: String? = "",
     var point2: String? = "",
     var point3: String? = "",
-    var point4: String? = ""
+    var point4: String? = "",
+    var katha : String? = ""
 )

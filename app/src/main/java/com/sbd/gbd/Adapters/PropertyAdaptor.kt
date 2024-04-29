@@ -14,12 +14,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.database.FirebaseDatabase
 import com.sbd.gbd.Activities.Dashboard.AdsDetailsActivity
+import com.sbd.gbd.Model.FilterModel
 import com.sbd.gbd.Utilitys.CalldetailsRecords
 import com.sbd.gbd.R
 import com.sbd.gbd.Utilitys.AppConstants
 import com.sbd.gbd.Utilitys.Utilitys
 
-class PropertyAdaptor(private val productInfos: List<*>, private var context: Context) :
+class PropertyAdaptor(private val productInfos: List<FilterModel>, private var context: Context) :
     RecyclerView.Adapter<PropertyAdaptor.ViewHolder>() {
     var calldetails = CalldetailsRecords()
     var utilitys = Utilitys()
@@ -35,33 +36,29 @@ class PropertyAdaptor(private val productInfos: List<*>, private var context: Co
     }
 
     override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
-        val propertyinfo = productInfos[position].toString()
-        val imagesdata = propertyinfo.split("!!".toRegex()).dropLastWhile { it.isEmpty() }
-            .toTypedArray()
-        val data = imagesdata[1].split("---".toRegex()).dropLastWhile { it.isEmpty() }
-            .toTypedArray()
-        val imageurl = imagesdata[0].split("---".toRegex()).dropLastWhile { it.isEmpty() }
-            .toTypedArray()
+        val propertyinfo = productInfos[position]
+        val imagesdata = propertyinfo.image
+        val imageurl = propertyinfo.image
         Glide.with(context)
-            .load(imageurl[0])
+            .load(imageurl)
             .into(holder.iv_image)
-        holder.product_type1.text = data[2]
-        holder.product_location1.text = data[6]
-        holder.product_price.text = data[3]
-        holder.product_size1.text = data[5]
-        holder.product_name.text = data[4]
+        holder.product_type1.text = propertyinfo.type
+        holder.product_location1.text = propertyinfo.location
+        holder.product_price.text = propertyinfo.price
+        holder.product_size1.text = propertyinfo.size
+        holder.product_name.text = propertyinfo.pname
         holder.cv_layout.setOnClickListener {
             val intent = Intent(context, AdsDetailsActivity::class.java)
-            intent.putExtra(AppConstants.pid, data[0])
+            intent.putExtra(AppConstants.pid, propertyinfo.pid)
             intent.putExtra("page", "2")
             context.startActivity(intent)
         }
 
-        if (data[9] != null) {
-            if (data[9].equals("1")) {
+        if (!propertyinfo.status.isNullOrEmpty()) {
+            if (propertyinfo.status.equals("1")) {
                 holder.ll_approve.visibility = View.VISIBLE
                 holder.ll_call?.visibility = View.GONE
-            } else if (data[9].equals("3")) {
+            } else if (propertyinfo.status.equals("3")) {
                 holder.ll_approve.visibility = View.VISIBLE
                 holder.ll_call?.visibility = View.GONE
             } else {
@@ -71,23 +68,25 @@ class PropertyAdaptor(private val productInfos: List<*>, private var context: Co
         }
 
         holder.ll_approve.setOnClickListener {
-            data[0].let { it1 ->
+
+            propertyinfo.pid?.let { it1 ->
                 FirebaseDatabase.getInstance().reference.child("Products").child(it1)
                     .child(AppConstants.Status).setValue("2")
             }
+
         }
 
         //calling function
         holder.property_btn_call.setOnClickListener { view: View? ->
             utilitys.navigateCall(
-                context, data[7], data[0]
+                context, propertyinfo.number, propertyinfo.pid
             )
         }
 
         //whatsapp function
         holder.property_btn_whatsapp.setOnClickListener { view: View? ->
             utilitys.navigateWhatsapp(
-                context, data[7], data[0]
+                context, propertyinfo.number, propertyinfo.pid
             )
         }
     }

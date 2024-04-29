@@ -1,5 +1,10 @@
 package com.sbd.gbd.Model
 
+import androidx.annotation.Keep
+import com.google.firebase.database.IgnoreExtraProperties
+
+@IgnoreExtraProperties
+@Keep
  class HotDealsModel{
     var pname: String? = ""
     var description: String? = ""
@@ -23,53 +28,4 @@ package com.sbd.gbd.Model
     var approval = 0
     var ownerName : String? = ""
     var timings : String? =""
-
-    constructor() {}
-    constructor(
-        postedOn: String?,
-        pname: String?,
-        description: String?,
-        price: String?,
-        image: String?,
-        category: String?,
-        pid: String?,
-        date: String?,
-        time: String?,
-        type: String?,
-        propertysize: String?,
-        location: String?,
-        number: String?,
-        image2: String?,
-        text1: String?,
-        text2: String?,
-        text3: String?,
-        text4: String?,
-        postedby: String?,
-        approval: Int,
-        ownerName : String?,
-        timings : String?
-    ) {
-        this.postedOn = postedOn
-        this.pname = pname
-        this.description = description
-        this.price = price
-        this.image = image
-        this.category = category
-        this.pid = pid
-        this.date = date
-        this.time = time
-        this.type = type
-        this.propertysize = propertysize
-        this.location = location
-        this.number = number
-        this.image2 = image2
-        this.text1 = text1
-        this.text2 = text2
-        this.text3 = text3
-        this.text4 = text4
-        this.postedby = postedby
-        this.approval = approval
-        this.ownerName = ownerName
-        this.timings = timings
-    }
 }

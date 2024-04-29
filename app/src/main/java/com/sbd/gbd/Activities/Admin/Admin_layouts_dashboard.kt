@@ -38,6 +38,7 @@ class Admin_layouts_dashboard : AppCompatActivity() {
     private var Pname: String? = null
     private var saveCurrentDate: String? = null
     private var saveCurrentTime: String? = null
+    private var katha: String? = null
     private var propertysize: String? = null
     private var location: String? = null
     private var number: String? = null
@@ -46,6 +47,7 @@ class Admin_layouts_dashboard : AppCompatActivity() {
     private val Inputtype: EditText? = null
     private var InputProductDescription: EditText? = null
     private var InputProductPrice: EditText? = null
+    private var edt_layout_katha: EditText? = null
     private var et_size: EditText? = null
     private var et_location: EditText? = null
     private var et_number: EditText? = null
@@ -92,6 +94,7 @@ class Admin_layouts_dashboard : AppCompatActivity() {
         et_no_available_sites = findViewById(R.id.no_available_sites)
         edt_layout_facing = findViewById(R.id.edt_layout_facing)
         edt_layout_area = findViewById(R.id.edt_layout_area)
+        edt_layout_katha = findViewById(R.id.edt_layout_katha)
         placement = findViewById(R.id.sp_placement)
         et_future1 = findViewById(R.id.ads_text1)
         et_future2 = findViewById(R.id.ads_text2)
@@ -158,9 +161,10 @@ class Admin_layouts_dashboard : AppCompatActivity() {
         propertysize = et_size!!.text.toString()
         location = et_location!!.text.toString()
         number = et_number!!.text.toString()
-        CategoryName = category!!.text.toString()
-        facing = edt_layout_facing!!.text.toString()
-        layoutArea = edt_layout_area!!.text.toString()
+        CategoryName = category?.text.toString()
+        katha = edt_layout_katha?.text.toString()
+        facing = edt_layout_facing?.text.toString()
+        layoutArea = edt_layout_area?.text.toString()
         if (TextUtils.isEmpty(downloadImageUrl)) {
             Toast.makeText(this, "Product image is mandatory...", Toast.LENGTH_SHORT).show()
         } else if (TextUtils.isEmpty(Description)) {
@@ -261,6 +265,7 @@ class Admin_layouts_dashboard : AppCompatActivity() {
         productMap[AppConstants.category] = CategoryName
         productMap[AppConstants.price] = Price
         productMap[AppConstants.pname] = Pname
+        productMap[AppConstants.katha] = katha
         productMap[AppConstants.propertysize] = propertysize
         productMap[AppConstants.location] = location
         productMap[AppConstants.number] = number
