@@ -57,6 +57,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.sbd.gbd.Activities.HotDealsactivity.HotDealsDetailsActivity
 import com.sbd.gbd.Activities.LoanActivity.LoanForm
+import com.sbd.gbd.Activities.Propertys.PropertyActivity
 import com.sbd.gbd.Utilitys.UtilityMethods
 import com.synnapps.carouselview.CarouselView
 import com.synnapps.carouselview.ImageListener
@@ -133,7 +134,9 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
         binding.llConstructions.setOnClickListener(this)
         binding.llHomeRent.setOnClickListener(this)
         binding.llTravels.setOnClickListener(this)
-        binding.llHotels.setOnClickListener(this)
+        binding.llHouses.setOnClickListener(this)
+        binding.llSites.setOnClickListener(this)
+        binding.llGreenLand.setOnClickListener(this)
 
         binding.progressLayout.visibility= View.VISIBLE
         AsyncTask.execute {
@@ -225,7 +228,7 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                                     userData[AppConstants.date].toString(),
                                     userData[AppConstants.category].toString(),
                                     userData[AppConstants.price].toString(),
-                                    userData[AppConstants.pname].toString(),
+                                    userData[AppConstants.pname].toString() ?: "",
                                     userData[AppConstants.propertysize].toString(),
                                     userData[AppConstants.location].toString(),
                                     userData[AppConstants.number].toString(),
@@ -409,18 +412,38 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                 startActivity(intent7)
             }
 
-            R.id.ll_hotels -> {
+            /*R.id.ll_Houses -> {
                 val intent8 = Intent(context, CenterHomeActivity::class.java)
                 bundle.putString("center", "commercial")
                 intent8.putExtras(bundle)
                 startActivity(intent8)
-            }
+            }*/
 
             R.id.ll_travels -> {
                 val intent9 = Intent(context, Travelsactivity::class.java)
                 bundle.putString("center", "hotel")
                 intent9.putExtras(bundle)
                 startActivity(intent9)
+            }
+            R.id.ll_green_land -> {
+                val intent14 = Intent(context, PropertyActivity::class.java)
+                bundle.putString("type", "Green Land")
+                intent14.putExtras(bundle)
+                startActivity(intent14)
+            }
+
+            R.id.ll_sites -> {
+                val intent15 = Intent(context, PropertyActivity::class.java)
+                bundle.putString("type", "Site")
+                intent15.putExtras(bundle)
+                startActivity(intent15)
+            }
+
+            R.id.ll_Houses ->{
+                val intent10 = Intent(context, PropertyActivity::class.java)
+                bundle.putString("type", "House")
+                intent10.putExtras(bundle)
+                startActivity(intent10)
             }
 
             R.id.tv_seeall_upcomming -> {

@@ -204,15 +204,15 @@ class PropertyFragment : Fragment(), View.OnClickListener {
                     adsAdaptor = AdsAdaptor(adslist, context)
                     val n1layoutManager: RecyclerView.LayoutManager =
                         LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-                    recyclarviewads!!.layoutManager = n1layoutManager
-                    recyclarviewads!!.itemAnimator = DefaultItemAnimator()
+                    recyclarviewads?.layoutManager = n1layoutManager
+                    recyclarviewads?.itemAnimator = DefaultItemAnimator()
                     mHandler.post { /*if (progressDialog != null) {
                                 if (progressDialog.isShowing()) {
                                     progressDialog.dismiss();
                                 }
                             }*/
-                        recyclarviewads!!.adapter = adsAdaptor
-                        adsAdaptor!!.notifyItemRangeInserted(0, adslist.size)
+                        recyclarviewads?.adapter = adsAdaptor
+                        adsAdaptor?.notifyItemRangeInserted(0, adslist.size)
                     }
                 }
             }
@@ -281,7 +281,7 @@ class PropertyFragment : Fragment(), View.OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.btn_add_property -> {
-                if (preferenceManager.getLoginState()) {
+                if (!preferenceManager.getLoginState()) {
                     val intent = Intent(requireContext(), Admin_ads_dashboard::class.java)
                     intent.putExtra("page", "2")
                     startActivity(intent)

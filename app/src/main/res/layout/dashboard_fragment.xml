@@ -56,7 +56,7 @@
                         android:fontFamily="@font/lato_bold"
                         android:gravity="start"
                         android:paddingLeft="15dp"
-                        android:text="GBD"
+                        android:text="Bhuvi"
                         android:textColor="@color/white"
                         android:textSize="20sp" />
 
@@ -362,20 +362,23 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <LinearLayout
-                                android:id="@+id/ll_home_rent"
-                                android:layout_width="match_parent"
+                                android:id="@+id/ll_sites"
+                                android:layout_width="200dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:orientation="vertical"
                                 android:paddingBottom="8dp">
 
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginBottom="2dp"
-                                    android:src="@drawable/ic_rent" />
+                                <com.google.android.material.imageview.ShapeableImageView
+                                    android:layout_width="70dp"
+                                    android:layout_height="70dp"
+                                    android:padding="5dp"
+                                    android:layout_gravity="center"
+                                    app:strokeWidth="3dp"
+                                    app:strokeColor="@android:color/holo_blue_dark"
+                                    app:shapeAppearanceOverlay="@style/circleImageView"
+                                    android:src="@drawable/sites"
+                                    android:layout_margin="5dp"/>
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -383,27 +386,30 @@
                                     android:fontFamily="@font/lato"
                                     android:gravity="center"
                                     android:maxLines="2"
-                                    android:text="House For Rent"
+                                    android:text="Sites"
+                                    android:textStyle="bold"
                                     android:textColor="@color/black"
                                     android:textSize="12sp" />
                             </LinearLayout>
-
 
                             <LinearLayout
-                                android:id="@+id/ll_hotels"
-                                android:layout_width="match_parent"
+                                android:id="@+id/ll_green_land"
+                                android:layout_width="200dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:orientation="vertical"
                                 android:paddingBottom="8dp">
 
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="30dp"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginBottom="2dp"
-                                    android:src="@drawable/ic_hotel" />
+                                <com.google.android.material.imageview.ShapeableImageView
+                                    android:layout_width="70dp"
+                                    android:layout_height="70dp"
+                                    android:padding="5dp"
+                                    android:layout_gravity="center"
+                                    app:strokeWidth="3dp"
+                                    app:strokeColor="@android:color/holo_blue_dark"
+                                    app:shapeAppearanceOverlay="@style/circleImageView"
+                                    android:src="@drawable/land"
+                                    android:layout_margin="5dp"/>
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -411,12 +417,75 @@
                                     android:fontFamily="@font/lato"
                                     android:gravity="center"
                                     android:maxLines="2"
-                                    android:text="Hotels / PG"
+                                    android:text="Green Land"
+                                    android:textStyle="bold"
                                     android:textColor="@color/black"
                                     android:textSize="12sp" />
-
                             </LinearLayout>
 
+                            <LinearLayout
+                                android:id="@+id/ll_Houses"
+                                android:layout_width="200dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:paddingBottom="8dp">
+
+                                <com.google.android.material.imageview.ShapeableImageView
+                                    android:layout_width="70dp"
+                                    android:layout_height="70dp"
+                                    android:padding="5dp"
+                                    android:layout_gravity="center"
+                                    app:strokeWidth="3dp"
+                                    android:scaleType="fitXY"
+                                    app:strokeColor="@android:color/holo_blue_dark"
+                                    app:shapeAppearanceOverlay="@style/circleImageView"
+                                    android:src="@drawable/home2"
+                                    android:layout_margin="5dp"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato"
+                                    android:gravity="center"
+                                    android:maxLines="2"
+                                    android:text="House"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_home_rent"
+                                android:layout_width="200dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:paddingBottom="8dp">
+
+                                <com.google.android.material.imageview.ShapeableImageView
+                                    android:layout_width="70dp"
+                                    android:layout_height="70dp"
+                                    android:padding="5dp"
+                                    android:layout_gravity="center"
+                                    app:strokeWidth="3dp"
+                                    android:scaleType="fitXY"
+                                    app:strokeColor="@android:color/holo_blue_dark"
+                                    app:shapeAppearanceOverlay="@style/circleImageView"
+                                    android:src="@drawable/rent1"
+                                    android:layout_margin="5dp"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato"
+                                    android:gravity="center"
+                                    android:maxLines="2"
+                                    android:text="Rent Out"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
 
                             <LinearLayout
                                 android:id="@+id/ll_business"

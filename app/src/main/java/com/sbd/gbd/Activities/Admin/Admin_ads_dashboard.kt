@@ -25,8 +25,11 @@ import com.sbd.gbd.R
 import com.sbd.gbd.Utilitys.AppConstants
 import com.sbd.gbd.Utilitys.UtilityMethods
 import com.google.android.gms.tasks.Task
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.sbd.gbd.Adapters.ImageAdaptor
@@ -35,6 +38,7 @@ class Admin_ads_dashboard : AppCompatActivity() {
     private var CategoryName: String? = null
     private var Description: String? = null
     private var Price: String? = null
+    private var Taluk: String? = null
     private var Pname: String? = null
     private var postedBy: String? = null
     private var katha: String? = null
@@ -74,12 +78,14 @@ class Admin_ads_dashboard : AppCompatActivity() {
     private var loadingBar: ProgressDialog? = null
     private var propertyType: Spinner? = null
     private var ads_landmark : EditText? = null
+    private var sp_taluk : Spinner? = null
     private var gridView: GridView? = null
     private var btn_corosel : ImageView? = null
     private var ll_selfie : LinearLayout? = null
     var fileNameList: ArrayList<String> = ArrayList<String>()
     var fileDoneList: ArrayList<String> = ArrayList<String>()
     var categoryList: ArrayList<String> = ArrayList<String>()
+    var locationList: ArrayList<String> = ArrayList<String>()
     private var ads_name: EditText? = null
     private var arrayAdapter: ArrayAdapter<*>? = null
     var backBtn: ImageView? = null
@@ -110,6 +116,7 @@ class Admin_ads_dashboard : AppCompatActivity() {
         ads_approved_by?.visibility = View.GONE
         rbButton = findViewById(R.id.rb_data)
         ads_name = findViewById(R.id.ads_name)
+        sp_taluk = findViewById(R.id.sp_taluk)
         ll_selfie = findViewById(R.id.ll_selfie)
         et_size = findViewById(R.id.ads_size)
         et_text1 = findViewById(R.id.ads_text1)
@@ -130,6 +137,7 @@ class Admin_ads_dashboard : AppCompatActivity() {
         add_new_corosel.setOnClickListener { ValidateProductData() }
         postedBy = "owner"
         initilize()
+        getlocations()
     }
 
 
@@ -153,6 +161,17 @@ class Admin_ads_dashboard : AppCompatActivity() {
                 if (p2>0){
                     val propertyArray = resources.getStringArray(R.array.property_type)
                     CategoryName = propertyArray[p2]
+                }
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+        }
+        sp_taluk?.onItemSelectedListener=object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                if (p2>0){
+                    val propertyArray = resources.getStringArray(R.array.property_type)
+                    Taluk = propertyArray[p2]
                 }
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -210,7 +229,11 @@ class Admin_ads_dashboard : AppCompatActivity() {
             Toast.makeText(this, "Please enter katha type", Toast.LENGTH_SHORT).show()
         } else if (TextUtils.isEmpty(ads_landmark?.text.toString())) {
             Toast.makeText(this, "Please enter Landmark or City name", Toast.LENGTH_SHORT).show()
-        }   else {
+        } else if (TextUtils.isEmpty(location)) {
+        Toast.makeText(this, "Please enter Location", Toast.LENGTH_SHORT).show()
+        }else if (TextUtils.isEmpty(Taluk)) {
+            Toast.makeText(this, "Please select Taluk", Toast.LENGTH_SHORT).show()
+        } else {
             SaveProductInfoToDatabase()
         }
     }
@@ -335,6 +358,31 @@ class Admin_ads_dashboard : AppCompatActivity() {
             }
         }
         return result
+    }
+
+    private fun getlocations() {
+        val myDataRef = FirebaseDatabase.getInstance().reference.child("Locations")
+        myDataRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val dataMap = dataSnapshot.value as HashMap<*, *>?
+                for (key in dataMap!!.keys) {
+                    val data = dataMap[key]
+                    try {
+                        val userData = data as HashMap<String, Any>?
+                        locationList.add(userData!!["taluk"].toString())
+                    }catch (cce: ClassCastException) {
+                    }
+                }
+                arrayAdapter = ArrayAdapter(this@Admin_ads_dashboard, android.R.layout.simple_spinner_item, locationList)
+                arrayAdapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                sp_taluk?.adapter = arrayAdapter
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+                println("Failed to read value: ${error.message}")
+            }
+        })
     }
 
     companion object {

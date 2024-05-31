@@ -25,6 +25,7 @@ class AdminDashboard : AppCompatActivity() {
         val btn_travels = findViewById<Button>(R.id.btn_travels)
         val btn_construction = findViewById<Button>(R.id.btn_construction)
         val btn_hotels = findViewById<Button>(R.id.btn_Hotels)
+        val add_location = findViewById<Button>(R.id.add_locations)
         val travel_approval = findViewById<Button>(R.id.travel_approval)
 
         btn_hotels.setOnClickListener {
@@ -32,6 +33,10 @@ class AdminDashboard : AppCompatActivity() {
             startActivity(intent)
         }
 
+        add_location.setOnClickListener {
+            val intent = Intent(this@AdminDashboard, AdminLocations::class.java)
+            startActivity(intent)
+        }
         btn_construction.setOnClickListener { view: View? ->
             val intent = Intent(this@AdminDashboard, Admin_Construction::class.java)
             startActivity(intent)

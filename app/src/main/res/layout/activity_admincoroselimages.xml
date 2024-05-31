@@ -160,6 +160,13 @@
             android:layout_marginRight="@dimen/dp_20"
             android:text="Travel for approval"/>
 
+        <Button
+            android:id="@+id/add_locations"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="@dimen/dp_20"
+            android:text="Add Locations"/>
+
     </LinearLayout>
 
 

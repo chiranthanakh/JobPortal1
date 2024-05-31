@@ -43,6 +43,9 @@ object AppConstants {
     const val notVerified = "VERIFIED PROPERTY"
     const val verified1 = "VERIFIED"
     const val Deposit = "deposit"
+    const val district = "district"
+    const val taluk = "taluk"
+
 
     fun profileinfoadd(contest : Context): HashMap<String, Any?> {
         val sh = contest.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
@@ -56,6 +59,6 @@ object AppConstants {
         return productMap
     }
 
-    const val user = "1"
+    const val user = "2"
 
 }

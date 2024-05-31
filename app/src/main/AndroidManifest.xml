@@ -64,6 +64,9 @@
             android:name=".Activities.Construction.ConstructionDetailsActivity"
             android:exported="false" />
         <activity
+            android:name=".Activities.Admin.AdminLocations"
+            android:exported="false" />
+        <activity
             android:name=".Activities.Businesthings.BusinessDetails"
             android:exported="false" />
         <activity

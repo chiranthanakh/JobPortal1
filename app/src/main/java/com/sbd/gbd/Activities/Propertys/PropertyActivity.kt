@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -27,6 +28,7 @@ import com.sbd.gbd.Activities.BasicActivitys.SearchActivity
 import com.sbd.gbd.Adapters.AdsAdaptor
 import com.sbd.gbd.Adapters.PropertyAdaptor
 import com.sbd.gbd.Model.AdsModel
+import com.sbd.gbd.Model.FilterModel
 import com.sbd.gbd.R
 import com.sbd.gbd.Utilitys.AppConstants
 import java.util.Collections
@@ -43,9 +45,12 @@ class PropertyActivity : AppCompatActivity(), View.OnClickListener {
     var iv_green_land: ImageView? = null
     var iv_home: ImageView? = null
     var iv_commercial: ImageView? = null
+    var ll_field : LinearLayout? = null
+    var buttonToggleGroup : MaterialButtonToggleGroup? = null
+    var ll_assetRecyclrView : LinearLayout? = null
+    var ll_assetText : LinearLayout? = null
     var mHandler = Handler()
-    var propertylist: ArrayList<String> = ArrayList<String>()
-    var greenlandlist: ArrayList<String> = ArrayList<String>()
+    var propertylist: ArrayList<FilterModel> = ArrayList<FilterModel>()
     var siteslist: ArrayList<String> = ArrayList<String>()
     var Homeslist: ArrayList<String> = ArrayList<String>()
     var Rentallist: ArrayList<String> = ArrayList<String>()
@@ -62,6 +67,7 @@ class PropertyActivity : AppCompatActivity(), View.OnClickListener {
         } else {
             setTheme(R.style.JobPortaltheam)
         }
+
         if (Build.VERSION.SDK_INT >= 21) {
             val window = this.window
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
@@ -71,6 +77,7 @@ class PropertyActivity : AppCompatActivity(), View.OnClickListener {
         ProductsRef = FirebaseDatabase.getInstance().reference.child("Products")
         initilize()
         AsyncTask.execute { fetchads() }
+        intent.getStringExtra("type")?.let { fetchproducts(it) }
     }
 
     private fun initilize() {
@@ -79,6 +86,12 @@ class PropertyActivity : AppCompatActivity(), View.OnClickListener {
         iv_sites = findViewById(R.id.iv_sites)
         iv_commercial = findViewById(R.id.iv_commercial)
         iv_green_land = findViewById(R.id.iv_green_land)
+        ll_assetText = findViewById(R.id.ll_assetText)
+        ll_assetRecyclrView = findViewById(R.id.ll_assetRecyclrView)
+        buttonToggleGroup = findViewById(R.id.buttonToggleGroup)
+        ll_assetText?.visibility = View.GONE
+        buttonToggleGroup?.visibility = View.GONE
+        ll_assetRecyclrView?.visibility = View.GONE
         iv_home = findViewById(R.id.iv_home)
         search = findViewById(R.id.llsearch_property)
         iv_sites?.setOnClickListener(this)
@@ -92,7 +105,6 @@ class PropertyActivity : AppCompatActivity(), View.OnClickListener {
         recyclerView?.setHasFixedSize(true)
         val mgrid = GridLayoutManager(this, 1)
         recyclerView?.setLayoutManager(mgrid)
-        fetchcorosel()
         search?.setOnClickListener(View.OnClickListener {
             val intent = Intent(this@PropertyActivity, SearchActivity::class.java)
             bundle.putString("searchtype", "property")
@@ -167,47 +179,48 @@ class PropertyActivity : AppCompatActivity(), View.OnClickListener {
         })
     }
 
-    private fun fetchcorosel() {
-        val coroselimage = FirebaseDatabase.getInstance().reference.child("Products")
-       /* coroselimage.addValueEventListener(object : ValueEventListener {
+    private fun fetchproducts(type : String) {
+        var coroselimage = if(type == "" || type == null ) {
+            FirebaseDatabase.getInstance().reference.child("Products").orderByChild(AppConstants.Status).equalTo(AppConstants.user)
+        } else {
+            FirebaseDatabase.getInstance().reference.child("Products").orderByChild(AppConstants.type).equalTo(type)
+        }
+        coroselimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     val dataMap = snapshot.value as HashMap<String, Any>?
+                    propertylist.clear()
+                    siteslist.clear()
+                    Homeslist.clear()
+                    Rentallist.clear()
                     for (key in dataMap!!.keys) {
                         val data = dataMap[key]
                         try {
                             val userData = data as HashMap<String, Any>?
-                            propertylist.add(
-                                userData!![AppConstants.image].toString() + "!!" + userData[AppConstants.pid] + "---" + userData[AppConstants.description] + "---" +
-                                        userData[AppConstants.category] + "---" + userData[AppConstants.price] + "---" + userData[AppConstants.pname]
-                                        + "---" + userData[AppConstants.propertysize] + "---" + userData[AppConstants.location] + "---" + userData[AppConstants.number] + "---" + userData[AppConstants.type]
-                            )
-                            if (userData[AppConstants.type] == "sites") {
-                                siteslist.add(
-                                    userData[AppConstants.type].toString() + "!!" + userData[AppConstants.pid] + "---" + userData[AppConstants.description] + "---" +
-                                            userData[AppConstants.category] + "---" + userData[AppConstants.price] + "---" + userData[AppConstants.pname]
-                                            + "---" + userData[AppConstants.propertysize] + "---" + userData[AppConstants.location] + "---" + userData[AppConstants.number] + "---" + userData[AppConstants.type]
-                                )
-                            } else if (userData[AppConstants.type] == "homes") {
-                                Homeslist.add(
-                                    userData[AppConstants.image].toString() + "!!" + userData[AppConstants.pid] + "---" + userData[AppConstants.description] + "---" +
-                                            userData[AppConstants.category] + "---" + userData[AppConstants.price] + "---" + userData[AppConstants.pname]
-                                            + "---" + userData[AppConstants.propertysize] + "---" + userData[AppConstants.location] + "---" + userData[AppConstants.number] + "---" + userData[AppConstants.type]
-                                )
-                            } else if (userData[AppConstants.type] == "greenland") {
-                                greenlandlist.add(
-                                    userData[AppConstants.image].toString() + "!!" + userData[AppConstants.pid] + "---" + userData[AppConstants.description] + "---" +
-                                            userData[AppConstants.category] + "---" + userData[AppConstants.price] + "---" + userData[AppConstants.pname]
-                                            + "---" + userData[AppConstants.propertysize] + "---" + userData[AppConstants.location] + "---" + userData[AppConstants.number] + "---" + userData[AppConstants.type]
-                                )
-                            } else if (userData[AppConstants.type] == "rental") {
-                                Rentallist.add(
-                                    userData[AppConstants.image].toString() + "!!" + userData[AppConstants.pid] + "---" + userData[AppConstants.description] + "---" +
-                                            userData[AppConstants.category] + "---" + userData[AppConstants.price] + "---" + userData[AppConstants.pname]
-                                            + "---" + userData[AppConstants.propertysize] + "---" + userData[AppConstants.location] + "---" + userData[AppConstants.number] + "---" + userData[AppConstants.type]
+                            if (userData?.get(AppConstants.Status)
+                                    ?.equals(AppConstants.user) == true
+                            ) {
+                                propertylist.add(
+                                    FilterModel(
+                                        userData[AppConstants.pname].toString(),
+                                        userData[AppConstants.description].toString(),
+                                        userData[AppConstants.price].toString(),
+                                        userData[AppConstants.image].toString(),
+                                        userData[AppConstants.category].toString(),
+                                        userData[AppConstants.pid].toString(),
+                                        AppConstants.date,
+                                        AppConstants.time,
+                                        userData[AppConstants.type].toString(),
+                                        userData[AppConstants.propertysize].toString(),
+                                        userData[AppConstants.location].toString(),
+                                        userData[AppConstants.number].toString(),
+                                        userData[AppConstants.Status].toString()
+                                    )
                                 )
                             }
+
                         } catch (cce: ClassCastException) {
+
                         }
                     }
                     propertyAdaptor = PropertyAdaptor(propertylist, this@PropertyActivity)
@@ -221,7 +234,7 @@ class PropertyActivity : AppCompatActivity(), View.OnClickListener {
             }
 
             override fun onCancelled(error: DatabaseError) {}
-        })*/
+        })
     }
 
     override fun onClick(view: View) {
