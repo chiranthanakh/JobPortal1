@@ -5,6 +5,7 @@ import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
@@ -63,7 +64,6 @@ class PropertyActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_property)
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-           // setTheme(R.style.darkTheme)
         } else {
             setTheme(R.style.JobPortaltheam)
         }
@@ -105,16 +105,12 @@ class PropertyActivity : AppCompatActivity(), View.OnClickListener {
         recyclerView?.setHasFixedSize(true)
         val mgrid = GridLayoutManager(this, 1)
         recyclerView?.setLayoutManager(mgrid)
-        search?.setOnClickListener(View.OnClickListener {
+        search?.setOnClickListener{
             val intent = Intent(this@PropertyActivity, SearchActivity::class.java)
             bundle.putString("searchtype", "property")
             intent.putExtras(bundle)
             startActivity(intent)
-        })
-    }
-
-    override fun onResume() {
-        super.onResume()
+        }
     }
 
     private fun fetchads() {
@@ -123,11 +119,11 @@ class PropertyActivity : AppCompatActivity(), View.OnClickListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     adslist.clear()
-                    val dataMap = snapshot.value as HashMap<String, Any>?
+                    val dataMap = snapshot.value as HashMap<*, *>?
                     for (key in dataMap!!.keys) {
                         val data = dataMap[key]
                         try {
-                            val userData = data as HashMap<String, Any>?
+                            val userData = data as HashMap<*, *>?
                             adslist.add(
                                 AdsModel(
                                     userData!![AppConstants.image].toString(),
@@ -155,22 +151,18 @@ class PropertyActivity : AppCompatActivity(), View.OnClickListener {
                                     userData[AppConstants.text4].toString()
                                 )
                             )
-                        } catch (cce: ClassCastException) {
+                        } catch (_: ClassCastException) {
                         }
                     }
-                    Collections.shuffle(adslist)
+                    adslist.shuffle()
                     adsAdaptor = AdsAdaptor(adslist, this@PropertyActivity)
                     val n1layoutManager: RecyclerView.LayoutManager =
                         LinearLayoutManager(this@PropertyActivity, RecyclerView.HORIZONTAL, false)
-                    recyclarviewads!!.layoutManager = n1layoutManager
-                    recyclarviewads!!.itemAnimator = DefaultItemAnimator()
-                    mHandler.post { /*if (progressDialog != null) {
-                                if (progressDialog.isShowing()) {
-                                    progressDialog.dismiss();
-                                }
-                            }*/
-                        recyclarviewads!!.adapter = adsAdaptor
-                        adsAdaptor!!.notifyItemRangeInserted(0, adslist.size)
+                    recyclarviewads?.layoutManager = n1layoutManager
+                    recyclarviewads?.itemAnimator = DefaultItemAnimator()
+                    mHandler.post {
+                        recyclarviewads?.adapter = adsAdaptor
+                        adsAdaptor?.notifyItemRangeInserted(0, adslist.size)
                     }
                 }
             }
@@ -183,7 +175,7 @@ class PropertyActivity : AppCompatActivity(), View.OnClickListener {
         var coroselimage = if(type == "" || type == null ) {
             FirebaseDatabase.getInstance().reference.child("Products").orderByChild(AppConstants.Status).equalTo(AppConstants.user)
         } else {
-            FirebaseDatabase.getInstance().reference.child("Products").orderByChild(AppConstants.type).equalTo(type)
+            FirebaseDatabase.getInstance().reference.child("Products").orderByChild(AppConstants.category).equalTo(type)
         }
         coroselimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
-import com.sbd.gbd.Activities.Dashboard.DashboardFragment
 import com.sbd.gbd.Adapters.LoanCoroselListAdaptor
 import com.sbd.gbd.Adapters.LoanoffersAdaptor
 import com.sbd.gbd.Model.LoanOffersModel
@@ -26,6 +25,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.sbd.gbd.Activities.Dashboard.DashboardFragment
 
 class LoanFragment : Fragment(), View.OnClickListener {
     var cv_PL: CardView? = null

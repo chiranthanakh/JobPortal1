@@ -339,7 +339,7 @@
                         android:layout_marginEnd="5dp"
                         android:background="@drawable/card_shadow_back_login"
                         android:orientation="vertical"
-                        android:outlineSpotShadowColor="@color/green"
+                        android:outlineSpotShadowColor="@color/purple_500"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
@@ -370,14 +370,13 @@
                                 android:paddingBottom="8dp">
 
                                 <com.google.android.material.imageview.ShapeableImageView
-                                    android:layout_width="70dp"
-                                    android:layout_height="70dp"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
                                     android:padding="5dp"
                                     android:layout_gravity="center"
-                                    app:strokeWidth="3dp"
-                                    app:strokeColor="@android:color/holo_blue_dark"
+                                    app:strokeWidth="2dp"
                                     app:shapeAppearanceOverlay="@style/circleImageView"
-                                    android:src="@drawable/sites"
+                                    android:src="@drawable/land"
                                     android:layout_margin="5dp"/>
 
                                 <TextView
@@ -401,14 +400,13 @@
                                 android:paddingBottom="8dp">
 
                                 <com.google.android.material.imageview.ShapeableImageView
-                                    android:layout_width="70dp"
-                                    android:layout_height="70dp"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
                                     android:padding="5dp"
                                     android:layout_gravity="center"
-                                    app:strokeWidth="3dp"
-                                    app:strokeColor="@android:color/holo_blue_dark"
+                                    app:strokeWidth="2dp"
                                     app:shapeAppearanceOverlay="@style/circleImageView"
-                                    android:src="@drawable/land"
+                                    android:src="@drawable/green_land"
                                     android:layout_margin="5dp"/>
 
                                 <TextView
@@ -432,15 +430,14 @@
                                 android:paddingBottom="8dp">
 
                                 <com.google.android.material.imageview.ShapeableImageView
-                                    android:layout_width="70dp"
-                                    android:layout_height="70dp"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
                                     android:padding="5dp"
                                     android:layout_gravity="center"
-                                    app:strokeWidth="3dp"
+                                    app:strokeWidth="2dp"
                                     android:scaleType="fitXY"
-                                    app:strokeColor="@android:color/holo_blue_dark"
                                     app:shapeAppearanceOverlay="@style/circleImageView"
-                                    android:src="@drawable/home2"
+                                    android:src="@drawable/home"
                                     android:layout_margin="5dp"/>
 
                                 <TextView
@@ -464,15 +461,14 @@
                                 android:paddingBottom="8dp">
 
                                 <com.google.android.material.imageview.ShapeableImageView
-                                    android:layout_width="70dp"
-                                    android:layout_height="70dp"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
                                     android:padding="5dp"
                                     android:layout_gravity="center"
-                                    app:strokeWidth="3dp"
+                                    app:strokeWidth="2dp"
                                     android:scaleType="fitXY"
-                                    app:strokeColor="@android:color/holo_blue_dark"
                                     app:shapeAppearanceOverlay="@style/circleImageView"
-                                    android:src="@drawable/rent1"
+                                    android:src="@drawable/rent"
                                     android:layout_margin="5dp"/>
 
                                 <TextView

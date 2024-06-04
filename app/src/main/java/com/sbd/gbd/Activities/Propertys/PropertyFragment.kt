@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sbd.gbd.Activities.Admin.Admin_ads_dashboard
 import com.sbd.gbd.Activities.BasicActivitys.SearchActivity
-import com.sbd.gbd.Activities.Dashboard.DashboardFragment
 import com.sbd.gbd.Adapters.AdsAdaptor
 import com.sbd.gbd.Adapters.PropertyAdaptor
 import com.sbd.gbd.Model.AdsModel
@@ -32,6 +31,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.sbd.gbd.Activities.BasicActivitys.OtpLoginActivity
+import com.sbd.gbd.Activities.Dashboard.DashboardFragment
 import com.sbd.gbd.Model.FilterModel
 import com.sbd.gbd.Utilitys.PreferenceManager
 import com.sbd.gbd.Utilitys.UtilityMethods
@@ -73,7 +73,6 @@ class PropertyFragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.activity_property, container, false)
     }
