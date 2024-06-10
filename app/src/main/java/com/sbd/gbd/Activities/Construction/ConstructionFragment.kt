@@ -12,6 +12,7 @@ import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatButton
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,24 +38,18 @@ import com.sbd.gbd.Adapters.ConstructorAdaptor
 import com.sbd.gbd.Model.ConstructionModel
 import com.sbd.gbd.Utilitys.PreferenceManager
 import com.sbd.gbd.Utilitys.UtilityMethods
+import com.sbd.gbd.databinding.ActivityConstructionBinding
+import com.sbd.gbd.databinding.ActivityPropertyBinding
+import kotlinx.coroutines.launch
 
 
 class ConstructionFragment : Fragment() {
-
-
-    var backarrow : ImageView? = null
-    var cv_plumbers: CardView? = null
+    private lateinit var binding: ActivityConstructionBinding
     var Name: String? = null
     var category: String? = null
     var saveCurrentDate: String? = null
     var saveCurrentTime: String? = null
     var discription: String? = null
-    var vehicleNumber: String? = null
-    var llsearch: LinearLayout? = null
-    var edt_const_search : ImageView? = null
-    var rv_construction: RecyclerView? = null
-    private var btn_add_business: AppCompatButton? = null
-    private var rv_category: RecyclerView? = null
     var businesscatAdaptor: BusinessCategoryAdaptor? = null
     var bundle = Bundle()
 
@@ -78,12 +73,12 @@ class ConstructionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.activity_construction, container, false)
-    }
+        binding = ActivityConstructionBinding.inflate(inflater, container, false)
+        return binding.root    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ProductsRef = FirebaseDatabase.getInstance().reference.child("Products")
+        ProductsRef = FirebaseDatabase.getInstance().reference.child(AppConstants.products)
         if (UtilityMethods.isNetworkAvailable(requireContext())){
             initilize(view)
         }else{
@@ -96,32 +91,26 @@ class ConstructionFragment : Fragment() {
     }
 
     private fun initilize(view: View) {
-        rv_construction = view.findViewById(R.id.rv_constructions_relates)
-        rv_category = view.findViewById(R.id.id_gridview_construction)
-        backarrow = view.findViewById(R.id.iv_const_backarrow)
-        llsearch = view.findViewById(R.id.ll_search_business)
-        edt_const_search = view.findViewById(R.id.iv_business_search)
-        btn_add_business = view.findViewById(R.id.btn_add_business)
         preferenceManager= PreferenceManager(requireContext());
+        lifecycleScope.launch {
+            fetchbusinessCategorys()
+            fetchdata()
+        }
 
-        fetchbusinessCategorys()
-        fetchdata()
-
-        llsearch?.setOnClickListener {
+        /*llsearch?.setOnClickListener {
+            val intent = Intent(requireContext(), SearchActivity::class.java)
+            bundle.putString("searchtype", "const")
+            intent.putExtras(bundle)
+            startActivity(intent)
+        }*/
+        binding.ivBusinessSearch.setOnClickListener {
             val intent = Intent(requireContext(), SearchActivity::class.java)
             bundle.putString("searchtype", "const")
             intent.putExtras(bundle)
             startActivity(intent)
         }
-        edt_const_search?.setOnClickListener {
-            val intent = Intent(requireContext(), SearchActivity::class.java)
-            bundle.putString("searchtype", "const")
-            intent.putExtras(bundle)
-            startActivity(intent)
-        }
-        backarrow?.visibility = View.GONE
-
-        btn_add_business?.setOnClickListener{
+        binding.ivConstBackarrow.visibility = View.GONE
+        binding.btnAddBusiness.setOnClickListener{
             if (preferenceManager.getLoginState()) {
                 val intent = Intent(requireContext(), Admin_Construction::class.java)
                 startActivity(intent)
@@ -141,7 +130,6 @@ class ConstructionFragment : Fragment() {
     private fun fetchbusinessCategorys() {
         categorylists.clear()
         var categorylist = FirebaseDatabase.getInstance().reference.child("BusinessListing_category").orderByChild(AppConstants.category).equalTo("Construction")
-
         categorylist.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -163,20 +151,18 @@ class ConstructionFragment : Fragment() {
                         }
                     }
                     val nlayoutManager1 = GridLayoutManager(requireContext(), 4)
-                    rv_category?.setLayoutManager(nlayoutManager1)
-                    rv_category?.setItemAnimator(DefaultItemAnimator())
+                    binding.idGridviewConstruction.setLayoutManager(nlayoutManager1)
+                    binding.idGridviewConstruction.setItemAnimator(DefaultItemAnimator())
                     businesscatAdaptor =
                         BusinessCategoryAdaptor(1,categorylists, requireContext())
-                    mHandler.post { rv_category?.setAdapter(businesscatAdaptor) }
+                    mHandler.post { binding.idGridviewConstruction.setAdapter(businesscatAdaptor) }
                 }
             }
-
             override fun onCancelled(error: DatabaseError) {}
         })
     }
 
     private fun fetchdata() {
-
         val productsinfo = FirebaseDatabase.getInstance().reference.child("constructionforyou").orderByChild(AppConstants.Status).equalTo(AppConstants.user)
         productsinfo.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -223,10 +209,10 @@ class ConstructionFragment : Fragment() {
                     // Upcoming Event
                     constructionAdaptor = ConstructorAdaptor(constructioninfo, requireContext())
                     val elayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-                    rv_construction!!.layoutManager = GridLayoutManager(requireContext(), 1)
-                    rv_construction!!.itemAnimator = DefaultItemAnimator()
-                    rv_construction!!.itemAnimator = DefaultItemAnimator()
-                    mHandler.post { rv_construction!!.adapter = constructionAdaptor }
+                    binding.rvConstructionsRelates.layoutManager = GridLayoutManager(requireContext(), 1)
+                    binding.rvConstructionsRelates.itemAnimator = DefaultItemAnimator()
+                    binding.rvConstructionsRelates.itemAnimator = DefaultItemAnimator()
+                    mHandler.post { binding.rvConstructionsRelates.adapter = constructionAdaptor }
                 }
             }
 

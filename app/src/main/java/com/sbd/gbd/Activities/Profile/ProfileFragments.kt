@@ -248,7 +248,7 @@ class ProfileFragments : Fragment(), OnItemClick {
                                         userData[AppConstants.date].toString(),
                                         userData[AppConstants.time].toString(),
                                         userData["Businessname"].toString(),
-                                        userData["products"].toString(),
+                                        userData[AppConstants.products].toString(),
                                         userData[AppConstants.category].toString(),
                                         userData[AppConstants.description].toString(),
                                         userData[AppConstants.price].toString(),
@@ -410,7 +410,7 @@ class ProfileFragments : Fragment(), OnItemClick {
 
     private fun fetchdata() {
         productinfolist.clear()
-        val productsinfo = FirebaseDatabase.getInstance().reference.child("hotforyou")
+        val productsinfo = FirebaseDatabase.getInstance().reference.child(AppConstants.hotdeals)
             .orderByChild(AppConstants.number).equalTo(userNumber)
         productsinfo.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {

@@ -79,7 +79,7 @@ public class AdminPropertyApproval extends AppCompatActivity implements View.OnC
             window.setStatusBarColor(this.getResources().getColor(R.color.app_blue));
         }
 
-        ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
+        ProductsRef = FirebaseDatabase.getInstance().getReference().child(AppConstants.products);
         initilize();
 
         AsyncTask.execute(new Runnable() {
@@ -178,7 +178,7 @@ public class AdminPropertyApproval extends AppCompatActivity implements View.OnC
 
 
     private void fetchcorosel() {
-        DatabaseReference coroselimage = FirebaseDatabase.getInstance().getReference().child("Products");
+        DatabaseReference coroselimage = FirebaseDatabase.getInstance().getReference().child(AppConstants.products);
 
         coroselimage.addValueEventListener(new ValueEventListener() {
             @Override
@@ -235,7 +235,7 @@ public class AdminPropertyApproval extends AppCompatActivity implements View.OnC
                 startActivity(intent);
                 break;
 
-            case R.id.iv_sites:
+           /* case R.id.iv_sites:
 
                 propertyAdaptor = new AdminPropertyAdaptor(siteslist, AdminPropertyApproval.this);
                 RecyclerView.LayoutManager nlayoutManager = new LinearLayoutManager(AdminPropertyApproval.this, RecyclerView.VERTICAL, false);
@@ -296,7 +296,7 @@ public class AdminPropertyApproval extends AppCompatActivity implements View.OnC
                 });
                 propertyAdaptor.notifyItemRangeInserted(0, greenlandlist.size());
 
-                break;
+                break;*/
 
             /*case R.id.iv_back_toolbar:
                 finish();

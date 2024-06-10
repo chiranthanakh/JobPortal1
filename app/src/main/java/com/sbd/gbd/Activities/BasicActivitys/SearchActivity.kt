@@ -72,12 +72,6 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
         } else {
             setTheme(R.style.JobPortaltheam) //default app theme
         }
-       /* if (Build.VERSION.SDK_INT >= 21) {
-            val window = this.window
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-            window.statusBarColor = this.resources.getColor(R.color.app_blue)
-        }*/
         val bundle = intent.extras
         if (bundle != null) {
             type = bundle.getString("searchtype", "")
@@ -208,7 +202,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun fetchpropertys() {
-        val coroselimage = FirebaseDatabase.getInstance().reference.child("Products").orderByChild(AppConstants.Status).equalTo(AppConstants.user)
+        val coroselimage = FirebaseDatabase.getInstance().reference.child(AppConstants.products).orderByChild(AppConstants.Status).equalTo(AppConstants.user)
         coroselimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -382,59 +376,20 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
                 startActivity(intent)
             }
 
-            R.id.iv_sites -> {
-                /*propertyAdaptor = PropertyAdaptor(siteslist, this@SearchActivity)
-                val nlayoutManager: RecyclerView.LayoutManager =
-                    LinearLayoutManager(this@SearchActivity, RecyclerView.VERTICAL, false)
-                recyclerView!!.layoutManager = nlayoutManager
-                recyclerView!!.itemAnimator = DefaultItemAnimator()
-                mHandler.post { recyclerView!!.adapter = propertyAdaptor }
-                propertyAdaptor!!.notifyItemRangeInserted(0, siteslist.size)*/
-            }
-
-            R.id.iv_home -> {
-               /* propertyAdaptor = PropertyAdaptor(Homeslist, this@SearchActivity)
-                val nlayoutManager1: RecyclerView.LayoutManager =
-                    LinearLayoutManager(this@SearchActivity, RecyclerView.VERTICAL, false)
-                recyclerView!!.layoutManager = nlayoutManager1
-                recyclerView!!.itemAnimator = DefaultItemAnimator()
-                mHandler.post { recyclerView!!.adapter = propertyAdaptor }
-                propertyAdaptor!!.notifyItemRangeInserted(0, Homeslist.size)*/
-            }
-
-            R.id.iv_commercial -> {
-                /*propertyAdaptor = PropertyAdaptor(Rentallist, this@SearchActivity)
-                val nlayoutManager2: RecyclerView.LayoutManager =
-                    LinearLayoutManager(this@SearchActivity, RecyclerView.VERTICAL, false)
-                recyclerView!!.layoutManager = nlayoutManager2
-                recyclerView!!.itemAnimator = DefaultItemAnimator()
-                mHandler.post { recyclerView!!.adapter = propertyAdaptor }
-                propertyAdaptor!!.notifyItemRangeInserted(0, Rentallist.size)*/
-            }
-
-            R.id.iv_green_land -> {
-              /*  propertyAdaptor = PropertyAdaptor(greenlandlist, this@SearchActivity)
-                val nlayoutManager3: RecyclerView.LayoutManager =
-                    LinearLayoutManager(this@SearchActivity, RecyclerView.VERTICAL, false)
-                recyclerView!!.layoutManager = nlayoutManager3
-                recyclerView!!.itemAnimator = DefaultItemAnimator()
-                mHandler.post { recyclerView!!.adapter = propertyAdaptor }
-                propertyAdaptor!!.notifyItemRangeInserted(0, greenlandlist.size)*/
-            }
-
             R.id.back_toolbar_search -> finish()
         }
     }
 
     private fun filter(text: String) {
+
         if (type.equals("business")) {
             if (text == "") {
             } else {
                 businesslistFiltered.clear()
                 for (i in businesslist.indices) {
-                    if (businesslist[i].Businessname!!.contains(text.lowercase(Locale.getDefault())) ||
-                        businesslist[i].Business_category!!.contains(text.lowercase(Locale.getDefault())) ||
-                        businesslist[i].location!!.contains(text.lowercase(Locale.getDefault()))
+                    if (businesslist[i].Businessname!!.lowercase().contains(text.lowercase(Locale.getDefault())) ||
+                        businesslist[i].Business_category!!.lowercase().contains(text.lowercase(Locale.getDefault())) ||
+                        businesslist[i].location!!.lowercase().contains(text.lowercase(Locale.getDefault()))
                     ) {
                         businesslistFiltered.add(
                             BusinessModel(
@@ -475,9 +430,9 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
             } else {
                 constlistFiltered.clear()
                 for (i in constructionList.indices) {
-                    if (constructionList[i]?.name!!.contains(text.lowercase(Locale.getDefault())) ||
-                        constructionList[i]?.category!!.contains(text.lowercase(Locale.getDefault())) ||
-                        constructionList[i]?.address!!.contains(text.lowercase(Locale.getDefault()))
+                    if (constructionList[i].name!!.lowercase().contains(text.lowercase(Locale.getDefault())) ||
+                        constructionList[i].category!!.lowercase().contains(text.lowercase(Locale.getDefault())) ||
+                        constructionList[i].address!!.lowercase().contains(text.lowercase(Locale.getDefault()))
                     ) {
                         constlistFiltered.add(
                             ConstructionModel(

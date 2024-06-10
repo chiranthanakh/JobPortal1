@@ -55,7 +55,7 @@ class AdminNewPropurtyActivity : AppCompatActivity() {
         setContentView(binding.root)
         CategoryName = "cqat"
         ProductImagesRef = FirebaseStorage.getInstance().reference.child("Product Images")
-        ProductsRef = FirebaseDatabase.getInstance().reference.child("Products")
+        ProductsRef = FirebaseDatabase.getInstance().reference.child(AppConstants.products)
         et_size = findViewById(R.id.product_size)
         et_location = findViewById(R.id.product_location_admin)
         et_number = findViewById(R.id.contact_number)

@@ -47,6 +47,10 @@ object AppConstants {
     const val taluk = "taluk"
 
 
+    const val products = "Products"
+    const val hotdeals = "hotforyou"
+
+
     fun profileinfoadd(contest : Context): HashMap<String, Any?> {
         val sh = contest.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
         val nameofuser = sh?.getString("name", "")

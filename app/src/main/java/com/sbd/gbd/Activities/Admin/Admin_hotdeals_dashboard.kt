@@ -64,7 +64,7 @@ class Admin_hotdeals_dashboard : AppCompatActivity() {
         setContentView(R.layout.activity_admin_hotdeals)
         CategoryName = "hotdeals"
         ProductImagesRef = FirebaseStorage.getInstance().reference.child("hot")
-        ProductsRef = FirebaseDatabase.getInstance().reference.child("hotforyou")
+        ProductsRef = FirebaseDatabase.getInstance().reference.child(AppConstants.hotdeals)
         val btn_corosel = findViewById<ImageView>(R.id.select_hot_image)
         val add_new_corosel = findViewById<Button>(R.id.add_new_hot)
         InputProductName = findViewById<View>(R.id.hot_name) as EditText

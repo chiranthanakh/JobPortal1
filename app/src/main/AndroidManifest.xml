@@ -121,9 +121,6 @@
             android:name=".Activities.HotelsPG.CenterHomeActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.Profile.ProfileActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activities.Admin.Admin_ads_dashboard"
             android:exported="false" />
         <activity

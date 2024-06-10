@@ -70,7 +70,7 @@ class BusinessFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ProductsRef = FirebaseDatabase.getInstance().reference.child("Products")
+        ProductsRef = FirebaseDatabase.getInstance().reference.child(AppConstants.products)
         if (UtilityMethods.isNetworkAvailable(requireContext())){
             initilize(view)
         }else{
@@ -185,7 +185,7 @@ class BusinessFragment : Fragment() {
                         val data = dataMap[key]
                         try {
                             val userData = data as java.util.HashMap<String, Any>?
-                            if (userData!!["products"].toString() == cat) {
+                            if (userData!![AppConstants.products].toString() == cat) {
                                 businesslist.add(
                                     BusinessModel(
                                         userData[AppConstants.pid].toString(),

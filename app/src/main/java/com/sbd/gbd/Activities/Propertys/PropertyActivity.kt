@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,24 +33,19 @@ import com.sbd.gbd.Model.AdsModel
 import com.sbd.gbd.Model.FilterModel
 import com.sbd.gbd.R
 import com.sbd.gbd.Utilitys.AppConstants
+import com.sbd.gbd.databinding.ActivityPropertyBinding
+import com.sbd.gbd.databinding.ActivityStartingBinding
+import com.sbd.gbd.databinding.DashboardFragmentBinding
+import kotlinx.coroutines.launch
 import java.util.Collections
 
-class PropertyActivity : AppCompatActivity(), View.OnClickListener {
+class PropertyActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityPropertyBinding
     private var ProductsRef: DatabaseReference? = null
     var adapter: FirebaseRecyclerAdapter<Products, ProductViewHolder>? = null
-    private var recyclerView: RecyclerView? = null
     var layoutManager: RecyclerView.LayoutManager? = null
-    var btn_add: Button? = null
     var search: LinearLayout? = null
-    var iv_back_toolbar: ImageView? = null
-    var iv_sites: ImageView? = null
-    var iv_green_land: ImageView? = null
-    var iv_home: ImageView? = null
-    var iv_commercial: ImageView? = null
     var ll_field : LinearLayout? = null
-    var buttonToggleGroup : MaterialButtonToggleGroup? = null
-    var ll_assetRecyclrView : LinearLayout? = null
-    var ll_assetText : LinearLayout? = null
     var mHandler = Handler()
     var propertylist: ArrayList<FilterModel> = ArrayList<FilterModel>()
     var siteslist: ArrayList<String> = ArrayList<String>()
@@ -58,11 +54,11 @@ class PropertyActivity : AppCompatActivity(), View.OnClickListener {
     var adslist: ArrayList<AdsModel> = ArrayList<AdsModel>()
     var propertyAdaptor: PropertyAdaptor? = null
     var adsAdaptor: AdsAdaptor? = null
-    var recyclarviewads: RecyclerView? = null
     var bundle = Bundle()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_property)
+        binding= ActivityPropertyBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
         } else {
             setTheme(R.style.JobPortaltheam)
@@ -74,37 +70,22 @@ class PropertyActivity : AppCompatActivity(), View.OnClickListener {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
             window.statusBarColor = this.resources.getColor(R.color.app_blue)
         }
-        ProductsRef = FirebaseDatabase.getInstance().reference.child("Products")
+        ProductsRef = FirebaseDatabase.getInstance().reference.child(AppConstants.products)
         initilize()
-        AsyncTask.execute { fetchads() }
-        intent.getStringExtra("type")?.let { fetchproducts(it) }
+        lifecycleScope.launch {
+            fetchads()
+            intent.getStringExtra("type")?.let { fetchproducts(it) }
+        }
     }
 
     private fun initilize() {
-        btn_add = findViewById(R.id.btn_add_property)
-        btn_add?.setOnClickListener(this)
-        iv_sites = findViewById(R.id.iv_sites)
-        iv_commercial = findViewById(R.id.iv_commercial)
-        iv_green_land = findViewById(R.id.iv_green_land)
-        ll_assetText = findViewById(R.id.ll_assetText)
-        ll_assetRecyclrView = findViewById(R.id.ll_assetRecyclrView)
-        buttonToggleGroup = findViewById(R.id.buttonToggleGroup)
-        ll_assetText?.visibility = View.GONE
-        buttonToggleGroup?.visibility = View.GONE
-        ll_assetRecyclrView?.visibility = View.GONE
-        iv_home = findViewById(R.id.iv_home)
+        binding.llAssetText.visibility = View.GONE
+        binding.buttonToggleGroup.visibility = View.GONE
+        binding.llAssetRecyclrView.visibility = View.GONE
         search = findViewById(R.id.llsearch_property)
-        iv_sites?.setOnClickListener(this)
-        iv_green_land?.setOnClickListener(this)
-        iv_commercial?.setOnClickListener(this)
-        iv_home?.setOnClickListener(this)
-        iv_back_toolbar = findViewById(R.id.back_toolbar_property)
-        iv_back_toolbar?.setOnClickListener(this)
-        recyclarviewads = findViewById(R.id.rv_adds_layots2)
-        recyclerView = findViewById(R.id.recycler_menu)
-        recyclerView?.setHasFixedSize(true)
+        binding.recyclerMenu.setHasFixedSize(true)
         val mgrid = GridLayoutManager(this, 1)
-        recyclerView?.setLayoutManager(mgrid)
+        binding.recyclerMenu.setLayoutManager(mgrid)
         search?.setOnClickListener{
             val intent = Intent(this@PropertyActivity, SearchActivity::class.java)
             bundle.putString("searchtype", "property")
@@ -158,10 +139,10 @@ class PropertyActivity : AppCompatActivity(), View.OnClickListener {
                     adsAdaptor = AdsAdaptor(adslist, this@PropertyActivity)
                     val n1layoutManager: RecyclerView.LayoutManager =
                         LinearLayoutManager(this@PropertyActivity, RecyclerView.HORIZONTAL, false)
-                    recyclarviewads?.layoutManager = n1layoutManager
-                    recyclarviewads?.itemAnimator = DefaultItemAnimator()
+                    binding.rvAddsLayots2.layoutManager = n1layoutManager
+                    binding.rvAddsLayots2.itemAnimator = DefaultItemAnimator()
                     mHandler.post {
-                        recyclarviewads?.adapter = adsAdaptor
+                        binding.rvAddsLayots2.adapter = adsAdaptor
                         adsAdaptor?.notifyItemRangeInserted(0, adslist.size)
                     }
                 }
@@ -173,9 +154,9 @@ class PropertyActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun fetchproducts(type : String) {
         var coroselimage = if(type == "" || type == null ) {
-            FirebaseDatabase.getInstance().reference.child("Products").orderByChild(AppConstants.Status).equalTo(AppConstants.user)
+            FirebaseDatabase.getInstance().reference.child(AppConstants.products).orderByChild(AppConstants.Status).equalTo(AppConstants.user)
         } else {
-            FirebaseDatabase.getInstance().reference.child("Products").orderByChild(AppConstants.category).equalTo(type)
+            FirebaseDatabase.getInstance().reference.child(AppConstants.products).orderByChild(AppConstants.category).equalTo(type)
         }
         coroselimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -210,7 +191,6 @@ class PropertyActivity : AppCompatActivity(), View.OnClickListener {
                                     )
                                 )
                             }
-
                         } catch (cce: ClassCastException) {
 
                         }
@@ -218,66 +198,14 @@ class PropertyActivity : AppCompatActivity(), View.OnClickListener {
                     propertyAdaptor = PropertyAdaptor(propertylist, this@PropertyActivity)
                     val nlayoutManager: RecyclerView.LayoutManager =
                         LinearLayoutManager(this@PropertyActivity, RecyclerView.VERTICAL, false)
-                    recyclerView!!.layoutManager = nlayoutManager
-                    recyclerView!!.itemAnimator = DefaultItemAnimator()
-                    mHandler.post { recyclerView!!.adapter = propertyAdaptor }
-                    propertyAdaptor!!.notifyItemRangeInserted(0, propertylist.size)
+                    binding.recyclerMenu.layoutManager = nlayoutManager
+                    binding.recyclerMenu.itemAnimator = DefaultItemAnimator()
+                    mHandler.post { binding.recyclerMenu.adapter = propertyAdaptor }
+                    propertyAdaptor?.notifyItemRangeInserted(0, propertylist.size)
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {}
         })
-    }
-
-    override fun onClick(view: View) {
-       /* when (view.id) {
-            R.id.btn_add_property -> {
-                val intent = Intent(this, Admin_ads_dashboard::class.java)
-                intent.putExtra("page", "2")
-                startActivity(intent)
-            }
-
-            R.id.iv_sites -> {
-                propertyAdaptor = PropertyAdaptor(siteslist, this@PropertyActivity)
-                val nlayoutManager: RecyclerView.LayoutManager =
-                    LinearLayoutManager(this@PropertyActivity, RecyclerView.VERTICAL, false)
-                recyclerView!!.layoutManager = nlayoutManager
-                recyclerView!!.itemAnimator = DefaultItemAnimator()
-                mHandler.post { recyclerView!!.adapter = propertyAdaptor }
-                propertyAdaptor!!.notifyItemRangeInserted(0, siteslist.size)
-            }
-
-            R.id.iv_home -> {
-                propertyAdaptor = PropertyAdaptor(Homeslist, this@PropertyActivity)
-                val nlayoutManager1: RecyclerView.LayoutManager =
-                    LinearLayoutManager(this@PropertyActivity, RecyclerView.VERTICAL, false)
-                recyclerView!!.layoutManager = nlayoutManager1
-                recyclerView!!.itemAnimator = DefaultItemAnimator()
-                mHandler.post { recyclerView!!.adapter = propertyAdaptor }
-                propertyAdaptor!!.notifyItemRangeInserted(0, Homeslist.size)
-            }
-
-            R.id.iv_commercial -> {
-                propertyAdaptor = PropertyAdaptor(Rentallist, this@PropertyActivity)
-                val nlayoutManager2: RecyclerView.LayoutManager =
-                    LinearLayoutManager(this@PropertyActivity, RecyclerView.VERTICAL, false)
-                recyclerView!!.layoutManager = nlayoutManager2
-                recyclerView!!.itemAnimator = DefaultItemAnimator()
-                mHandler.post { recyclerView!!.adapter = propertyAdaptor }
-                propertyAdaptor!!.notifyItemRangeInserted(0, Rentallist.size)
-            }
-
-            R.id.iv_green_land -> {
-                propertyAdaptor = PropertyAdaptor(greenlandlist, this@PropertyActivity)
-                val nlayoutManager3: RecyclerView.LayoutManager =
-                    LinearLayoutManager(this@PropertyActivity, RecyclerView.VERTICAL, false)
-                recyclerView!!.layoutManager = nlayoutManager3
-                recyclerView!!.itemAnimator = DefaultItemAnimator()
-                mHandler.post { recyclerView!!.adapter = propertyAdaptor }
-                propertyAdaptor!!.notifyItemRangeInserted(0, greenlandlist.size)
-            }
-
-            R.id.back_toolbar_property -> finish()
-        }*/
     }
 }

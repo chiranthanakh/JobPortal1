@@ -62,7 +62,7 @@ class BusinessActivity : AppCompatActivity(), View.OnClickListener, FilterCatego
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
             window.statusBarColor = this.resources.getColor(R.color.app_blue)
         }
-        ProductsRef = FirebaseDatabase.getInstance().reference.child("Products")
+        ProductsRef = FirebaseDatabase.getInstance().reference.child(AppConstants.products)
         initilize()
     }
 
@@ -149,14 +149,14 @@ class BusinessActivity : AppCompatActivity(), View.OnClickListener, FilterCatego
                         val data = dataMap[key]
                         try {
                             val userData = data as HashMap<String, Any>?
-                            if (userData!!["products"].toString() == cat) {
+                            if (userData!![AppConstants.products].toString() == cat) {
                                 businesslist.add(
                                     BusinessModel(
                                         userData[AppConstants.pid].toString(),
                                         userData[AppConstants.date].toString(),
                                         userData[AppConstants.time].toString(),
                                         userData["Businessname"].toString(),
-                                        userData["products"].toString(),
+                                        userData[AppConstants.products].toString(),
                                         userData[AppConstants.category].toString(),
                                         userData[AppConstants.description].toString(),
                                         userData[AppConstants.price].toString(),
@@ -181,7 +181,7 @@ class BusinessActivity : AppCompatActivity(), View.OnClickListener, FilterCatego
                                     userData[AppConstants.date].toString(),
                                     userData[AppConstants.time].toString(),
                                     userData["Businessname"].toString(),
-                                    userData["products"].toString(),
+                                    userData[AppConstants.products].toString(),
                                     userData[AppConstants.category].toString(),
                                     userData[AppConstants.description].toString(),
                                     userData[AppConstants.price].toString(),

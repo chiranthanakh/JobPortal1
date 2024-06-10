@@ -62,7 +62,7 @@ class BusinessFilter : AppCompatActivity() {
                                         userData[AppConstants.date].toString(),
                                         userData[AppConstants.time].toString(),
                                         userData["Businessname"].toString(),
-                                        userData["products"].toString(),
+                                        userData[AppConstants.products].toString(),
                                         userData[AppConstants.category].toString(),
                                         userData[AppConstants.description].toString(),
                                         userData[AppConstants.price].toString(),

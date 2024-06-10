@@ -42,8 +42,6 @@ class Admin_ads_dashboard : AppCompatActivity() {
     private var Pname: String? = null
     private var postedBy: String? = null
     private var katha: String? = null
-    private var saveCurrentDate: String? = null
-    private var saveCurrentTime: String? = null
     private var propertysize: String? = null
     private var location: String? = null
     private var number: String? = null
@@ -51,10 +49,7 @@ class Admin_ads_dashboard : AppCompatActivity() {
     private var facing: String? = null
     private var approvedBy: String? = null
     private var InputProductName: EditText? = null
-    private val Inputtype: EditText? = null
     private var InputProductDescription: EditText? = null
-    private var ads_ownerShip: EditText? = null
-    private var ownerORagent: String? = null
     private var ads_facing: EditText? = null
     private var ads_approved_by: EditText? = null
     private var InputProductPrice: EditText? = null
@@ -84,7 +79,6 @@ class Admin_ads_dashboard : AppCompatActivity() {
     private var ll_selfie : LinearLayout? = null
     var fileNameList: ArrayList<String> = ArrayList<String>()
     var fileDoneList: ArrayList<String> = ArrayList<String>()
-    var categoryList: ArrayList<String> = ArrayList<String>()
     var locationList: ArrayList<String> = ArrayList<String>()
     private var ads_name: EditText? = null
     private var arrayAdapter: ArrayAdapter<*>? = null
@@ -98,7 +92,7 @@ class Admin_ads_dashboard : AppCompatActivity() {
         val propertyPage = intent.getStringExtra("page")
         if (propertyPage == "2") {
             ProductImagesRef = FirebaseStorage.getInstance().reference.child("Product Images")
-            ProductsRef = FirebaseDatabase.getInstance().reference.child("Products")
+            ProductsRef = FirebaseDatabase.getInstance().reference.child(AppConstants.products)
         } else {
             ProductImagesRef = FirebaseStorage.getInstance().reference.child("ads")
             ProductsRef = FirebaseDatabase.getInstance().reference.child("adsforyou")
@@ -192,7 +186,6 @@ class Admin_ads_dashboard : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == GalleryPick && resultCode == RESULT_OK && data != null) {
             ImageUri = data.data
-            //InputProductImage.setImageURI(ImageUri);
             StoreProductInformation(data)
         }
     }
@@ -378,7 +371,6 @@ class Admin_ads_dashboard : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
                 println("Failed to read value: ${error.message}")
             }
         })

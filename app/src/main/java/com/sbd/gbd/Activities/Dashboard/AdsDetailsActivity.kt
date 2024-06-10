@@ -111,7 +111,7 @@ class AdsDetailsActivity : AppCompatActivity() {
         productsRef = if (page == "1") {
             FirebaseDatabase.getInstance().reference.child("adsforyou")
         } else if (page == "2") {
-            FirebaseDatabase.getInstance().reference.child("Products")
+            FirebaseDatabase.getInstance().reference.child(AppConstants.products)
         } else {
             FirebaseDatabase.getInstance().reference.child("layoutsforyou")
         }

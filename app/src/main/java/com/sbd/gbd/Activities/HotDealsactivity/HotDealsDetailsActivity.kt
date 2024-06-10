@@ -101,7 +101,7 @@ class HotDealsDetailsActivity : AppCompatActivity() {
         productsRef = if (page == "3") {
             FirebaseDatabase.getInstance().reference.child("Corosels")
         } else {
-            FirebaseDatabase.getInstance().reference.child("hotforyou")
+            FirebaseDatabase.getInstance().reference.child(AppConstants.hotdeals)
         }
         productsRef.child(productID!!).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {

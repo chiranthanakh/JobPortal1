@@ -70,7 +70,7 @@ class PropertyAdaptor(private val productInfos: List<FilterModel>, private var c
         holder.ll_approve.setOnClickListener {
 
             propertyinfo.pid?.let { it1 ->
-                FirebaseDatabase.getInstance().reference.child("Products").child(it1)
+                FirebaseDatabase.getInstance().reference.child(AppConstants.products).child(it1)
                     .child(AppConstants.Status).setValue("2")
             }
 

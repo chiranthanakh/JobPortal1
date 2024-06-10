@@ -1,17 +1,14 @@
 package com.sbd.gbd.Activities.Dashboard
 
 import android.Manifest
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
 import android.net.Uri
-import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
 import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
@@ -20,13 +17,13 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sbd.gbd.Activities.Admin.AdminDashboard
-import com.sbd.gbd.Activities.HotelsPG.CenterHomeActivity
 import com.sbd.gbd.Activities.HomeRentels.LivingPlaceActivity
 import com.sbd.gbd.Activities.BasicActivitys.SearchActivity
 import com.sbd.gbd.Activities.BasicActivitys.SeeAllLayoutActivity
@@ -39,7 +36,6 @@ import com.sbd.gbd.Activities.LoanActivity.LoanActivity
 import com.sbd.gbd.Activities.Sell.SellActivity
 import com.sbd.gbd.Adapters.AdsAdaptor
 import com.sbd.gbd.Adapters.BottomhomeRecyclarviewAdaptor
-import com.sbd.gbd.Adapters.CoroselListAdaptor
 import com.sbd.gbd.Adapters.LayoutsAdaptor
 import com.sbd.gbd.Interface.FragmentInteractionListener
 import com.sbd.gbd.Model.AdsModel
@@ -61,8 +57,8 @@ import com.sbd.gbd.Activities.Propertys.PropertyActivity
 import com.sbd.gbd.Utilitys.UtilityMethods
 import com.synnapps.carouselview.CarouselView
 import com.synnapps.carouselview.ImageListener
+import kotlinx.coroutines.launch
 import java.io.IOException
-import java.util.Collections
 import java.util.Locale
 
 class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionListener {
@@ -72,26 +68,22 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
     var mail: String? = null
     var pic: String? = null
     var search: EditText? = null
-    var fusedLocationProviderClient: FusedLocationProviderClient? = null
+    private var fusedLocationProviderClient: FusedLocationProviderClient? = null
     private var bottomhomeRecyclarviewAdaptor: BottomhomeRecyclarviewAdaptor? = null
     var addresses: List<Address>? = null
-    val handler = Handler()
     var recyclerView: RecyclerView? = null
-    private var coroselListAdaptor: CoroselListAdaptor? = null
     var adsAdaptor: AdsAdaptor? = null
     var layoutsAdaptor: LayoutsAdaptor? = null
     private var reload = false
-    private var count: Int? = 0
-    private var totalCarousel: Int? = 0
     var coroselimagelist = ArrayList<Corosolmodel>()
-    var adslist: ArrayList<Any?> = ArrayList<Any?>()
-    var layoutslists: ArrayList<Any?> = ArrayList<Any?>()
-    var productinfolist: ArrayList<ProductInfo> = ArrayList<ProductInfo>()
+    var adslist: ArrayList<Any?> = ArrayList()
+    var layoutslists: ArrayList<Any?> = ArrayList()
+    var productinfolist: ArrayList<ProductInfo> = ArrayList()
     var carouselView: CarouselView? = null
     var mHandler = Handler()
     var tv_location: TextView? = null
     var bundle = Bundle()
-    private var url: ArrayList<String> = ArrayList<String>()
+    private var url: ArrayList<String> = ArrayList()
 
 
     override fun onCreateView(
@@ -139,7 +131,8 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
         binding.llGreenLand.setOnClickListener(this)
 
         binding.progressLayout.visibility= View.VISIBLE
-        AsyncTask.execute {
+
+        lifecycleScope.launch {
             fetchcorosel()
             fetchdata()
             fetchads()
@@ -166,12 +159,12 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
         coroselimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    val dataMap = snapshot.value as HashMap<String, Any>?
+                    val dataMap = snapshot.value as HashMap<*, *>?
                     url.clear()
                     for (key in dataMap!!.keys) {
                         val data = dataMap[key]
                         try {
-                            val userData = data as HashMap<String, Any>?
+                            val userData = data as HashMap<*, *>?
                             coroselimagelist.add(
                                 Corosolmodel(
                                     userData!![AppConstants.image].toString(),
@@ -190,15 +183,9 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                     if (coroselimagelist.size != 0 && !coroselimagelist.isNullOrEmpty()) {
                         binding.caroselDashboard.setImageListener(imageListener)
                         binding.caroselDashboard.pageCount = url.size
-
                         binding.caroselDashboard.setImageClickListener {
                             carouselClick(coroselimagelist.get(it))
                         }
-
-                       // coroselListAdaptor = CoroselListAdaptor(coroselimagelist, context!!)
-                        //val nlayoutManager: RecyclerView.LayoutManager =
-                          //  LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-
                     }
                 }
             }
@@ -214,11 +201,11 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     adslist.clear()
-                    val dataMap = snapshot.value as HashMap<String, Any>?
+                    val dataMap = snapshot.value as HashMap<*, *>?
                     for (key in dataMap!!.keys) {
                         val data = dataMap[key]
                         try {
-                            val userData = data as HashMap<String, Any>?
+                            val userData = data as HashMap<*, *>?
                             adslist.add(
                                 AdsModel(
                                     userData!![AppConstants.image].toString(),
@@ -228,7 +215,7 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                                     userData[AppConstants.date].toString(),
                                     userData[AppConstants.category].toString(),
                                     userData[AppConstants.price].toString(),
-                                    userData[AppConstants.pname].toString() ?: "",
+                                    userData[AppConstants.pname].toString() ,
                                     userData[AppConstants.propertysize].toString(),
                                     userData[AppConstants.location].toString(),
                                     userData[AppConstants.number].toString(),
@@ -245,11 +232,11 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                                     userData[AppConstants.text4].toString()
                                 )
                             )
-                        } catch (cce: ClassCastException) {
+                        } catch (_: ClassCastException) {
 
                         }
                     }
-                    Collections.shuffle(adslist)
+                    adslist.shuffle()
                     adsAdaptor = AdsAdaptor(adslist, context)
                     val n1layoutManager: RecyclerView.LayoutManager =
                         LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
@@ -261,7 +248,6 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                     }
                 }
             }
-
             override fun onCancelled(error: DatabaseError) {}
         })
     }
@@ -273,11 +259,11 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     layoutslists.clear()
-                    val dataMap = snapshot.value as HashMap<String, Any>?
+                    val dataMap = snapshot.value as HashMap<*, *>?
                     for (key in dataMap!!.keys) {
                         val data = dataMap[key]
                         try {
-                            val userData = data as HashMap<String, Any>?
+                            val userData = data as HashMap<*, *>?
                             layoutslists.add(
                                 LayoutModel(
                                     userData!![AppConstants.image].toString(),
@@ -302,11 +288,11 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                                     userData[AppConstants.point4].toString(),
                                 )
                             )
-                        } catch (cce: ClassCastException) {
+                        } catch (_: ClassCastException) {
 
                         }
                     }
-                    Collections.shuffle(layoutslists)
+                    layoutslists.shuffle()
                     layoutsAdaptor = LayoutsAdaptor(layoutslists, context)
                     val n1layoutManager: RecyclerView.LayoutManager =
                         LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
@@ -316,7 +302,6 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                         binding.rvLayouts.adapter = layoutsAdaptor
                         layoutsAdaptor!!.notifyItemRangeInserted(0, adslist.size)
                         binding.progressLayout.visibility= View.GONE
-
                     }
                 }
                 binding.progressLayout.visibility= View.GONE
@@ -327,17 +312,17 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
     }
 
     private fun fetchdata() {
-        val productsinfo = FirebaseDatabase.getInstance().reference.child("hotforyou")
+        val productsinfo = FirebaseDatabase.getInstance().reference.child(AppConstants.hotdeals)
             .orderByChild(AppConstants.Status).equalTo(AppConstants.user)
         productsinfo.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    val dataMap = dataSnapshot.value as HashMap<String, Any>?
+                    val dataMap = dataSnapshot.value as HashMap<*, *>?
                     productinfolist.clear()
                     for (key in dataMap!!.keys) {
                         val data = dataMap[key]
                         try {
-                            val userData = data as HashMap<String, Any>?
+                            val userData = data as HashMap<*, *>?
                             productinfolist.add(
                                 ProductInfo(
                                     userData!![AppConstants.category].toString(),
@@ -355,13 +340,13 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                                     userData[AppConstants.postedBy].toString()
                                 )
                             )
-                        } catch (cce: ClassCastException) {
+                        } catch (_: ClassCastException) {
 
                         }
                     }
                     bottomhomeRecyclarviewAdaptor =
                         BottomhomeRecyclarviewAdaptor(productinfolist, context!!)
-                    val elayoutManager: RecyclerView.LayoutManager =
+                    val elayoutMnager: RecyclerView.LayoutManager =
                         LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                     binding.rvDashProp.layoutManager = GridLayoutManager(context, 1)
                     binding.rvDashProp.itemAnimator = DefaultItemAnimator()

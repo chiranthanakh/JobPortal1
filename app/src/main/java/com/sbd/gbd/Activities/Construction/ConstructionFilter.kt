@@ -26,12 +26,10 @@ import com.sbd.gbd.Model.ConstructionModel
 class ConstructionFilter : AppCompatActivity() {
     var recyclerView: RecyclerView? = null
     var businesslist = ArrayList<BusinessModel>()
-    var filterbusinesslist = ArrayList<BusinessModel>()
     var businessAdaptor: BusinessAdaptor? = null
     var mHandler = Handler()
     var tv_cat_name: TextView? = null
     var constructioninfo: ArrayList<ConstructionModel> = ArrayList<ConstructionModel>()
-    var categorylists = java.util.ArrayList<Categorymmodel>()
     private var constructionAdaptor: ConstructorAdaptor? = null
     var type: String? = null
     var iv_nodata: ImageView? = null
@@ -59,7 +57,6 @@ class ConstructionFilter : AppCompatActivity() {
 
     private fun fetchdata(cat: String?) {
         val productsinfo = FirebaseDatabase.getInstance().reference.child("constructionforyou").orderByChild(AppConstants.category).equalTo(cat)
-
         productsinfo.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -141,7 +138,7 @@ class ConstructionFilter : AppCompatActivity() {
                                         userData[AppConstants.date].toString(),
                                         userData[AppConstants.time].toString(),
                                         userData["Businessname"].toString(),
-                                        userData["products"].toString(),
+                                        userData[AppConstants.products].toString(),
                                         userData[AppConstants.category].toString(),
                                         userData[AppConstants.description].toString(),
                                         userData[AppConstants.price].toString(),

@@ -43,7 +43,7 @@ class PropertyDetailsActivity : AppCompatActivity() {
 
 
     private fun getProductDetails(productID: String?) {
-        val productsRef = FirebaseDatabase.getInstance().reference.child("Products")
+        val productsRef = FirebaseDatabase.getInstance().reference.child(AppConstants.products)
         productsRef.child(productID!!).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
