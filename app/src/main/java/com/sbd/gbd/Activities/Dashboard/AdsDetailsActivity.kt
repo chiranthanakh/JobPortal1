@@ -109,11 +109,11 @@ class AdsDetailsActivity : AppCompatActivity() {
     private fun getProductDetails(productID: String?) {
         val productsRef: DatabaseReference
         productsRef = if (page == "1") {
-            FirebaseDatabase.getInstance().reference.child("adsforyou")
+            FirebaseDatabase.getInstance().reference.child(AppConstants.ads)
         } else if (page == "2") {
             FirebaseDatabase.getInstance().reference.child(AppConstants.products)
         } else {
-            FirebaseDatabase.getInstance().reference.child("layoutsforyou")
+            FirebaseDatabase.getInstance().reference.child(AppConstants.layouts)
         }
         productsRef.child(productID!!).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {

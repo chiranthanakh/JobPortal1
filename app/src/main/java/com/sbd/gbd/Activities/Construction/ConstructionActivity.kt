@@ -133,7 +133,7 @@ class ConstructionActivity : AppCompatActivity() {
     }
 
     private fun fetchdata() {
-        val productsinfo = FirebaseDatabase.getInstance().reference.child("constructionforyou").orderByChild(AppConstants.Status).equalTo(AppConstants.user)
+        val productsinfo = FirebaseDatabase.getInstance().reference.child(AppConstants.construction).orderByChild(AppConstants.Status).equalTo(AppConstants.user)
         productsinfo.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {

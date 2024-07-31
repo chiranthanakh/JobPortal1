@@ -35,7 +35,6 @@ class LivingPlaceActivity : AppCompatActivity() {
     private var livingPlaceAdaptor: LivingPlaceAdaptor? = null
     var rv_center_prop: RecyclerView? = null
     var mHandler = Handler()
-    var backButton: ImageView? = null
     var type: String? = null
     var iv_back_leving : ImageView? = null
     var btn_add_hotel : AppCompatButton? = null
@@ -49,17 +48,15 @@ class LivingPlaceActivity : AppCompatActivity() {
         setContentView(R.layout.activity_center_home)
         val bundle = intent.extras
         type = bundle?.getString("center")
-        //backButton = findViewById(R.id.back_tool)
         rv_center_prop = findViewById(R.id.rv_center_prop)
         iv_back_leving = findViewById(R.id.iv_back_leving)
         btn_add_hotel = findViewById(R.id.btn_add_hotel)
         tv_heading = findViewById(R.id.tv_heading)
         iv_nodata = findViewById(R.id.iv_nodata)
         ll_layout = findViewById(R.id.ll_layout)
-
-        tv_heading?.setText("Homes or Commercial Placess ")
-        preferenceManager= PreferenceManager(this);
-        AsyncTask.execute { fetchdata() }
+        tv_heading?.text = "Homes or Commercial Placess "
+        preferenceManager= PreferenceManager(this)
+        AsyncTask.execute{ fetchdata() }
 
         btn_add_hotel?.setOnClickListener {
             if (preferenceManager.getLoginState()) {
@@ -81,11 +78,11 @@ class LivingPlaceActivity : AppCompatActivity() {
         productsinfo?.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    val dataMap = dataSnapshot.value as HashMap<String, Any>?
+                    val dataMap = dataSnapshot.value as HashMap<*, *>?
                     for (key in dataMap!!.keys) {
                         val data = dataMap[key]
                         try {
-                            val userData = data as HashMap<String, Any>?
+                            val userData = data as HashMap<*, *>?
                             ll_layout?.visibility = View.VISIBLE
                             iv_nodata?.visibility = View.GONE
 
@@ -115,16 +112,13 @@ class LivingPlaceActivity : AppCompatActivity() {
                                     AppConstants.user
                                 )
                             )
-                        } catch (cce: ClassCastException) {
-
+                        } catch (_: ClassCastException) {
                         }
                     }
 
-                    // Upcoming Event
                     livingPlaceAdaptor =
                         LivingPlaceAdaptor(productinfolist, this@LivingPlaceActivity)
-                    val elayoutManager: RecyclerView.LayoutManager =
-                        LinearLayoutManager(this@LivingPlaceActivity, RecyclerView.VERTICAL, false)
+                    LinearLayoutManager(this@LivingPlaceActivity, RecyclerView.VERTICAL, false)
                     rv_center_prop!!.layoutManager = GridLayoutManager(this@LivingPlaceActivity, 1)
                     rv_center_prop!!.itemAnimator = DefaultItemAnimator()
                     mHandler.post { rv_center_prop!!.adapter = livingPlaceAdaptor }

@@ -1,31 +1,24 @@
 package com.sbd.gbd.Activities.Propertys
 
 import android.content.Intent
-import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
-import android.widget.Button
-import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
-import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.sbd.gbd.Activities.Admin.Admin_ads_dashboard
 import com.sbd.gbd.Activities.BasicActivitys.SearchActivity
 import com.sbd.gbd.Adapters.AdsAdaptor
 import com.sbd.gbd.Adapters.PropertyAdaptor
@@ -34,10 +27,7 @@ import com.sbd.gbd.Model.FilterModel
 import com.sbd.gbd.R
 import com.sbd.gbd.Utilitys.AppConstants
 import com.sbd.gbd.databinding.ActivityPropertyBinding
-import com.sbd.gbd.databinding.ActivityStartingBinding
-import com.sbd.gbd.databinding.DashboardFragmentBinding
 import kotlinx.coroutines.launch
-import java.util.Collections
 
 class PropertyActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPropertyBinding
@@ -47,11 +37,11 @@ class PropertyActivity : AppCompatActivity() {
     var search: LinearLayout? = null
     var ll_field : LinearLayout? = null
     var mHandler = Handler()
-    var propertylist: ArrayList<FilterModel> = ArrayList<FilterModel>()
-    var siteslist: ArrayList<String> = ArrayList<String>()
-    var Homeslist: ArrayList<String> = ArrayList<String>()
-    var Rentallist: ArrayList<String> = ArrayList<String>()
-    var adslist: ArrayList<AdsModel> = ArrayList<AdsModel>()
+    var propertylist: ArrayList<FilterModel> = ArrayList()
+    var siteslist: ArrayList<String> = ArrayList()
+    var Homeslist: ArrayList<String> = ArrayList()
+    var Rentallist: ArrayList<String> = ArrayList()
+    var adslist: ArrayList<AdsModel> = ArrayList()
     var propertyAdaptor: PropertyAdaptor? = null
     var adsAdaptor: AdsAdaptor? = null
     var bundle = Bundle()
@@ -59,10 +49,6 @@ class PropertyActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding= ActivityPropertyBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-        } else {
-            setTheme(R.style.JobPortaltheam)
-        }
 
         if (Build.VERSION.SDK_INT >= 21) {
             val window = this.window
@@ -95,7 +81,7 @@ class PropertyActivity : AppCompatActivity() {
     }
 
     private fun fetchads() {
-        val adsimage = FirebaseDatabase.getInstance().reference.child("adsforyou")
+        val adsimage = FirebaseDatabase.getInstance().reference.child(AppConstants.ads)
         adsimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {

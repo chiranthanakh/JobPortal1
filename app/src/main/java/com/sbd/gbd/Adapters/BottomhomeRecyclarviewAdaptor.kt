@@ -20,7 +20,7 @@ import com.sbd.gbd.Utilitys.Utilitys
 
 class BottomhomeRecyclarviewAdaptor(
     private val productInfos: ArrayList<ProductInfo>,
-    private var context: Context,
+    private var context: Context ?= null,
 ) : RecyclerView.Adapter<BottomhomeRecyclarviewAdaptor.ViewHolder?>() {
     var calldetails = CalldetailsRecords()
     var utilitys = Utilitys()
@@ -37,7 +37,7 @@ class BottomhomeRecyclarviewAdaptor(
 
     override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val productInfo = productInfos[position]
-        Glide.with(context)
+        Glide.with(context!!)
             .load(productInfo.image)
             .into(holder.iv_image)
         holder.tv_name_hot.text = productInfo.pname
@@ -50,20 +50,20 @@ class BottomhomeRecyclarviewAdaptor(
         holder.cv_deals.setOnClickListener { view: View? ->
             val intent = Intent(context, HotDealsDetailsActivity::class.java)
             intent.putExtra(AppConstants.pid, productInfo.pid)
-            context.startActivity(intent)
+            context?.startActivity(intent)
         }
 
         //calling function
         holder.iv_call_bottom.setOnClickListener { view: View? ->
             utilitys.navigateCall(
-                context, productInfo.number, productInfo.pname
+                context!!, productInfo.number, productInfo.pname
             )
         }
 
         //whatsapp function
         holder.iv_whatsapp_bottom.setOnClickListener { view: View? ->
             utilitys.navigateWhatsapp(
-                context, productInfo.number, productInfo.pname
+                context!!, productInfo.number, productInfo.pname
             )
         }
     }

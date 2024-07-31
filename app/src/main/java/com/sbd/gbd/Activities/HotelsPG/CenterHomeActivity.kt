@@ -51,7 +51,6 @@ class CenterHomeActivity : AppCompatActivity() {
         preferenceManager= PreferenceManager(this);
 
         AsyncTask.execute { fetchdata() }
-
         btn_add_hotel?.setOnClickListener {
             if (preferenceManager.getLoginState()) {
                 val intent = Intent(this, Admin_hotels::class.java)
@@ -72,11 +71,11 @@ class CenterHomeActivity : AppCompatActivity() {
         productsinfo.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    val dataMap = dataSnapshot.value as HashMap<String, Any>?
+                    val dataMap = dataSnapshot.value as HashMap<*, *>?
                     for (key in dataMap!!.keys) {
                         val data = dataMap[key]
                         try {
-                            val userData = data as HashMap<String, Any>?
+                            val userData = data as HashMap<*, *>?
                             ll_layout?.visibility = View.VISIBLE
                             iv_nodata?.visibility = View.GONE
                             productinfolist.add(
@@ -104,15 +103,12 @@ class CenterHomeActivity : AppCompatActivity() {
                                     userData["Approval"].toString()
                                 )
                             )
-                        } catch (cce: ClassCastException) {
+                        } catch (_: ClassCastException) {
 
                         }
                     }
-
-                    // Upcoming Event
                     centerHomeadaptor = CenterHomeadaptor(productinfolist, this@CenterHomeActivity)
-                    val elayoutManager: RecyclerView.LayoutManager =
-                        LinearLayoutManager(this@CenterHomeActivity, RecyclerView.VERTICAL, false)
+                    LinearLayoutManager(this@CenterHomeActivity, RecyclerView.VERTICAL, false)
                     rv_center_prop!!.layoutManager = GridLayoutManager(this@CenterHomeActivity, 1)
                     rv_center_prop!!.itemAnimator = DefaultItemAnimator()
                     mHandler.post { rv_center_prop!!.adapter = centerHomeadaptor }

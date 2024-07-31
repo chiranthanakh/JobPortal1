@@ -17,8 +17,6 @@ import com.synnapps.carouselview.CarouselView
 import com.synnapps.carouselview.ImageListener
 
 class PropertyDetailsActivity : AppCompatActivity() {
-    private val addToCartButton: Button? = null
-    private val productImage: ImageView? = null
     private var productPrice: TextView? = null
     private var productDescription: TextView? = null
     private var productName: TextView? = null

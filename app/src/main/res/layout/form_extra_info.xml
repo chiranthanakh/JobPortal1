@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <TextView
+        android:text="Additional Information"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"/>
+
+    <LinearLayout
+        android:id="@+id/ll_land_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="Is their road for this Land?"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"/>
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/roadGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_marginStart="15dp"
+            android:outlineSpotShadowColor="@color/background_black"
+            android:layout_gravity="center_horizontal"
+            app:singleSelection="true">
+
+
+            <Button
+                android:id="@+id/road_yes"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:text="Yes"
+                android:textColor="@color/black"
+                style="?attr/materialButtonOutlinedStyle" />
+
+            <Button
+                android:id="@+id/road_no"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:text="No"
+                android:textColor="@color/black"
+                style="?attr/materialButtonOutlinedStyle" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+
+        <TextView
+            android:text="Is Boarwell available?"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"/>
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/boarwellGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_marginStart="15dp"
+            android:outlineSpotShadowColor="@color/background_black"
+            android:layout_gravity="center_horizontal"
+            app:singleSelection="true">
+
+
+            <Button
+                android:id="@+id/boarwell_yes"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:text="Yes"
+                android:textColor="@color/black"
+                style="?attr/materialButtonOutlinedStyle" />
+
+            <Button
+                android:id="@+id/boarwell_no"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:text="No"
+                android:textColor="@color/black"
+                style="?attr/materialButtonOutlinedStyle" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_rented_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <TextView
+        android:text="Is it Furnished?"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"/>
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/furnishrGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:layout_marginStart="15dp"
+        android:outlineSpotShadowColor="@color/background_black"
+        android:layout_gravity="center_horizontal"
+        app:singleSelection="true">
+
+
+        <Button
+            android:id="@+id/furnish_yes"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            android:textColor="@color/black"
+            style="?attr/materialButtonOutlinedStyle" />
+
+        <Button
+            android:id="@+id/furnish_no"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:textColor="@color/black"
+            style="?attr/materialButtonOutlinedStyle" />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <TextView
+            android:text="Car Parking Available?"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"/>
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/CarGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_marginStart="15dp"
+            android:outlineSpotShadowColor="@color/background_black"
+            android:layout_gravity="center_horizontal"
+            app:singleSelection="true">
+
+
+            <Button
+                android:id="@+id/car_yes"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:text="Yes"
+                android:textColor="@color/black"
+                style="?attr/materialButtonOutlinedStyle" />
+
+            <Button
+                android:id="@+id/car_no"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:text="No"
+                android:textColor="@color/black"
+                style="?attr/materialButtonOutlinedStyle" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <TextView
+            android:text="Is it Gated Community?"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"/>
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/gatedGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_marginStart="15dp"
+            android:outlineSpotShadowColor="@color/background_black"
+            android:layout_gravity="center_horizontal"
+            app:singleSelection="true">
+
+
+            <Button
+                android:id="@+id/gated_yes"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:text="Yes"
+                android:textColor="@color/black"
+                style="?attr/materialButtonOutlinedStyle" />
+
+            <Button
+                android:id="@+id/gated_no"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:text="No"
+                android:textColor="@color/black"
+                style="?attr/materialButtonOutlinedStyle" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <TextView
+            android:text="Is it Available Immediately?"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"/>
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/immidateGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_marginStart="15dp"
+            android:outlineSpotShadowColor="@color/background_black"
+            android:layout_gravity="center_horizontal"
+            app:singleSelection="true">
+
+
+            <Button
+                android:id="@+id/immidate_yes"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:text="Yes"
+                android:textColor="@color/black"
+                style="?attr/materialButtonOutlinedStyle" />
+
+            <Button
+                android:id="@+id/immidate_no"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:text="No"
+                android:textColor="@color/black"
+                style="?attr/materialButtonOutlinedStyle" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_home_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <TextView
+        android:text="Water Facility Available?"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"/>
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/waterGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:layout_marginStart="15dp"
+        android:outlineSpotShadowColor="@color/background_black"
+        android:layout_gravity="center_horizontal"
+        app:singleSelection="true">
+
+        <Button
+            android:id="@+id/water_yes"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            android:textColor="@color/black"
+            style="?attr/materialButtonOutlinedStyle" />
+
+        <Button
+            android:id="@+id/water_no"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:textColor="@color/black"
+            style="?attr/materialButtonOutlinedStyle" />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    <TextView
+        android:text="Electricity Available?"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"/>
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/electricityGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:layout_marginStart="15dp"
+        android:outlineSpotShadowColor="@color/background_black"
+        android:layout_gravity="center_horizontal"
+        app:singleSelection="true">
+
+        <Button
+            android:id="@+id/electricity_yes"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            android:textColor="@color/black"
+            style="?attr/materialButtonOutlinedStyle" />
+
+        <Button
+            android:id="@+id/electricity_no"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:textColor="@color/black"
+            style="?attr/materialButtonOutlinedStyle" />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    <TextView
+        android:text="Sewage Connection Available?"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"/>
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/SewageGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:layout_marginStart="15dp"
+        android:outlineSpotShadowColor="@color/background_black"
+        android:layout_gravity="center_horizontal"
+        app:singleSelection="true">
+
+        <Button
+            android:id="@+id/Sewage_yes"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            android:textColor="@color/black"
+            style="?attr/materialButtonOutlinedStyle" />
+
+        <Button
+            android:id="@+id/Sewage_no"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:textColor="@color/black"
+            style="?attr/materialButtonOutlinedStyle" />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    <TextView
+        android:text="Is this Corner Sight?"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"/>
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/cornerGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:layout_marginStart="15dp"
+        android:outlineSpotShadowColor="@color/background_black"
+        android:layout_gravity="center_horizontal"
+        app:singleSelection="true">
+
+        <Button
+            android:id="@+id/corner_yes"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            android:textColor="@color/black"
+            style="?attr/materialButtonOutlinedStyle" />
+
+        <Button
+            android:id="@+id/corner_no"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:textColor="@color/black"
+            style="?attr/materialButtonOutlinedStyle" />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/black"
+            app:boxStrokeColor="@color/grey_light"
+            app:hintTextColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIconTint="@color/grey_dark">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ads_description"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:background="@null"
+                android:hint="Description"
+                android:inputType="text"
+                android:lines="4"
+                android:padding="@dimen/dp_0"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="@dimen/text_size_14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/add_new_ads"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_capsule_blue"
+        android:text="Submit"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold">
+    </androidx.appcompat.widget.AppCompatButton>
+
+</LinearLayout>

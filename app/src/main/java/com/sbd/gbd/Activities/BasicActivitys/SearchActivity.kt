@@ -43,14 +43,11 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
     var layoutManager: RecyclerView.LayoutManager? = null
     var back_toolbar_search: ImageView? = null
     var mHandler = Handler()
-    var propertylist: ArrayList<String> = ArrayList<String>()
-    var Propertyfilterlist: ArrayList<FilterModel> = ArrayList<FilterModel>()
-    var greenlandlist: ArrayList<String> = ArrayList<String>()
-    var siteslist: ArrayList<String> = ArrayList<String>()
-    var Homeslist: ArrayList<String> = ArrayList<String>()
-    var Rentallist: ArrayList<String> = ArrayList<String>()
-    var adslist: ArrayList<AdsModel> = ArrayList<AdsModel>()
-    var constructionList: ArrayList<ConstructionModel> = ArrayList<ConstructionModel>()
+    var propertylist: ArrayList<String> = ArrayList()
+    var Propertyfilterlist: ArrayList<FilterModel> = ArrayList()
+    var greenlandlist: ArrayList<String> = ArrayList()
+    var adslist: ArrayList<AdsModel> = ArrayList()
+    var constructionList: ArrayList<ConstructionModel> = ArrayList()
     var businesslist = ArrayList<BusinessModel>()
     var businesslistFiltered = ArrayList<BusinessModel>()
     var constlistFiltered = ArrayList<ConstructionModel>()
@@ -61,7 +58,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
     var recyclarviewads: RecyclerView? = null
     var edt_filter: SearchView? = null
     var buttonToggleGroup: MaterialButtonToggleGroup? = null
-    var filterarraylist: ArrayList<FilterModel> = ArrayList<FilterModel>()
+    var filterarraylist: ArrayList<FilterModel> = ArrayList()
     var type = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -144,7 +141,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun fetchads() {
-        val adsimage = FirebaseDatabase.getInstance().reference.child("adsforyou")
+        val adsimage = FirebaseDatabase.getInstance().reference.child(AppConstants.ads)
         adsimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -311,7 +308,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun fetchConstruction() {
-        val coroselimage = FirebaseDatabase.getInstance().reference.child("constructionforyou").orderByChild(AppConstants.Status).equalTo(AppConstants.user)
+        val coroselimage = FirebaseDatabase.getInstance().reference.child(AppConstants.construction).orderByChild(AppConstants.Status).equalTo(AppConstants.user)
         coroselimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -436,35 +433,34 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
                     ) {
                         constlistFiltered.add(
                             ConstructionModel(
-                                constructionList[i]?.pid,
-                                constructionList[i]?.saveCurrentDate,
-                                constructionList[i]?.saveCurrentTime,
-                                constructionList[i]?.name,
-                                constructionList[i]?.category,
-                                constructionList[i]?.cost,
-                                constructionList[i]?.contactDetails,
-                                constructionList[i]?.product_services,
-                                constructionList[i]?.experience,
-                                constructionList[i]?.service1,
-                                constructionList[i]?.service2,
-                                constructionList[i]?.service3,
-                                constructionList[i]?.service4,
-                                constructionList[i]?.description,
-                                constructionList[i]?.verified,
-                                constructionList[i]?.image,
-                                constructionList[i]?.image2,
-                                constructionList[i]?.owner,
-                                constructionList[i]?.address,
-                                constructionList[i]?.status,
-                                constructionList[i]?.gst,
-                                constructionList[i]?.workingHrs
+                                constructionList[i].pid,
+                                constructionList[i].saveCurrentDate,
+                                constructionList[i].saveCurrentTime,
+                                constructionList[i].name,
+                                constructionList[i].category,
+                                constructionList[i].cost,
+                                constructionList[i].contactDetails,
+                                constructionList[i].product_services,
+                                constructionList[i].experience,
+                                constructionList[i].service1,
+                                constructionList[i].service2,
+                                constructionList[i].service3,
+                                constructionList[i].service4,
+                                constructionList[i].description,
+                                constructionList[i].verified,
+                                constructionList[i].image,
+                                constructionList[i].image2,
+                                constructionList[i].owner,
+                                constructionList[i].address,
+                                constructionList[i].status,
+                                constructionList[i].gst,
+                                constructionList[i].workingHrs
                             )
                         )
                     }
                 }
                 constructionAdaptor = ConstructorAdaptor(constlistFiltered, this@SearchActivity)
-                val elayoutManager: RecyclerView.LayoutManager =
-                    LinearLayoutManager(this@SearchActivity, RecyclerView.VERTICAL, false)
+                LinearLayoutManager(this@SearchActivity, RecyclerView.VERTICAL, false)
                 recyclerView?.layoutManager = GridLayoutManager(this@SearchActivity, 1)
                 recyclerView?.itemAnimator = DefaultItemAnimator()
                 recyclerView?.itemAnimator = DefaultItemAnimator()

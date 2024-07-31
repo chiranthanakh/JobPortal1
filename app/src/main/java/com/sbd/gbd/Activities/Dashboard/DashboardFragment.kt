@@ -18,7 +18,6 @@ import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -47,15 +46,12 @@ import com.sbd.gbd.Utilitys.AppConstants
 import com.sbd.gbd.databinding.DashboardFragmentBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.sbd.gbd.Activities.HotDealsactivity.HotDealsDetailsActivity
 import com.sbd.gbd.Activities.LoanActivity.LoanForm
 import com.sbd.gbd.Activities.Propertys.PropertyActivity
+import com.sbd.gbd.BuildConfig
+import com.sbd.gbd.Utilitys.FirebaseConnects
 import com.sbd.gbd.Utilitys.UtilityMethods
-import com.synnapps.carouselview.CarouselView
 import com.synnapps.carouselview.ImageListener
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -63,23 +59,16 @@ import java.util.Locale
 
 class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionListener {
     private lateinit var binding: DashboardFragmentBinding
-    var id: String? = null
-    var name: String? = ""
-    var mail: String? = null
-    var pic: String? = null
     var search: EditText? = null
     private var fusedLocationProviderClient: FusedLocationProviderClient? = null
     private var bottomhomeRecyclarviewAdaptor: BottomhomeRecyclarviewAdaptor? = null
     var addresses: List<Address>? = null
-    var recyclerView: RecyclerView? = null
-    var adsAdaptor: AdsAdaptor? = null
     var layoutsAdaptor: LayoutsAdaptor? = null
     private var reload = false
     var coroselimagelist = ArrayList<Corosolmodel>()
-    var adslist: ArrayList<Any?> = ArrayList()
+    var adslist: ArrayList<AdsModel> = ArrayList()
     var layoutslists: ArrayList<Any?> = ArrayList()
     var productinfolist: ArrayList<ProductInfo> = ArrayList()
-    var carouselView: CarouselView? = null
     var mHandler = Handler()
     var tv_location: TextView? = null
     var bundle = Bundle()
@@ -97,14 +86,9 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val sh = requireActivity().getSharedPreferences("MyPref", Context.MODE_PRIVATE)
-        id = sh.getString("id", null)
-        name = sh.getString("name", "")
-        mail = sh.getString("mail", null)
-        pic = sh.getString("pic", null)
-        if (UtilityMethods.isNetworkAvailable(requireContext())){
+        if (UtilityMethods.isNetworkAvailable(requireContext())) {
             initilize(view)
-        }else{
+        } else {
             binding.ivNoInternet.visibility = View.VISIBLE
             binding.mainItemsLayout.visibility = View.GONE
             UtilityMethods.showToast(requireContext(),"Please check your internet connection")
@@ -129,7 +113,6 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
         binding.llHouses.setOnClickListener(this)
         binding.llSites.setOnClickListener(this)
         binding.llGreenLand.setOnClickListener(this)
-
         binding.progressLayout.visibility= View.VISIBLE
 
         lifecycleScope.launch {
@@ -139,7 +122,7 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
             fetchlayouts()
         }
 
-        if (AppConstants.user.equals("2")) {
+        if (BuildConfig.BUILD_TYPE == "release" && BuildConfig.FLAVOR == "prod") {
             binding.ivBell.visibility = View.GONE
         } else {
             binding.ivBell.setOnClickListener {
@@ -155,207 +138,163 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
     }
 
     private fun fetchcorosel() {
-        val coroselimage = FirebaseDatabase.getInstance().reference.child("Corosels")
-        coroselimage.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    val dataMap = snapshot.value as HashMap<*, *>?
-                    url.clear()
-                    for (key in dataMap!!.keys) {
-                        val data = dataMap[key]
-                        try {
-                            val userData = data as HashMap<*, *>?
-                            coroselimagelist.add(
-                                Corosolmodel(
-                                    userData!![AppConstants.image].toString(),
-                                    userData[AppConstants.type].toString(),
-                                    userData[AppConstants.category].toString(),
-                                    userData[AppConstants.pid].toString(),
-                                    userData[AppConstants.pname].toString(),
-                                    userData[AppConstants.description].toString()
-                                )
+        FirebaseConnects.fetchCarosel("Corosels") { dataMap ->
+            if (dataMap != null) {
+                url.clear()
+                for (data in dataMap) {
+                    try {
+                        val userData = data.value as HashMap<*, *>?
+                        coroselimagelist.add(Corosolmodel(
+                                userData!![AppConstants.image].toString(),
+                                userData[AppConstants.type].toString(),
+                                userData[AppConstants.category].toString(),
+                                userData[AppConstants.pid].toString(),
+                                userData[AppConstants.pname].toString(),
+                                userData[AppConstants.description].toString()
                             )
-                            url.add(userData[AppConstants.image].toString())
-                        } catch (cce: ClassCastException) {
-                            //through exception
-                        }
-                    }
-                    if (coroselimagelist.size != 0 && !coroselimagelist.isNullOrEmpty()) {
-                        binding.caroselDashboard.setImageListener(imageListener)
-                        binding.caroselDashboard.pageCount = url.size
-                        binding.caroselDashboard.setImageClickListener {
-                            carouselClick(coroselimagelist.get(it))
-                        }
+                        )
+                        url.add(userData[AppConstants.image].toString())
+                    } catch (cce: ClassCastException) { }
+                }
+                if (coroselimagelist.size != 0 && !coroselimagelist.isNullOrEmpty()) {
+                    binding.caroselDashboard.setImageListener(imageListener)
+                    binding.caroselDashboard.pageCount = url.size
+                    binding.caroselDashboard.setImageClickListener {
+                        carouselClick(coroselimagelist.get(it))
                     }
                 }
             }
-
-            override fun onCancelled(error: DatabaseError) {}
-        })
+        }
     }
 
+
+
     private fun fetchads() {
-        val adsimage = FirebaseDatabase.getInstance().reference.child("adsforyou")
-            .orderByChild(AppConstants.Status).equalTo(AppConstants.user)
-        adsimage.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
+        lifecycleScope.launch {
+            FirebaseConnects.fetchDataWithStatus(AppConstants.ads) { dataMap ->
+                if (dataMap != null) {
                     adslist.clear()
-                    val dataMap = snapshot.value as HashMap<*, *>?
-                    for (key in dataMap!!.keys) {
-                        val data = dataMap[key]
+                    for (data in dataMap) {
                         try {
-                            val userData = data as HashMap<*, *>?
+                            val userData = data.value as HashMap<*, *>?
                             adslist.add(
                                 AdsModel(
-                                    userData!![AppConstants.image].toString(),
-                                    userData[AppConstants.image2].toString(),
-                                    userData[AppConstants.pid].toString(),
-                                    userData[AppConstants.description].toString(),
-                                    userData[AppConstants.date].toString(),
-                                    userData[AppConstants.category].toString(),
-                                    userData[AppConstants.price].toString(),
-                                    userData[AppConstants.pname].toString() ,
-                                    userData[AppConstants.propertysize].toString(),
-                                    userData[AppConstants.location].toString(),
-                                    userData[AppConstants.number].toString(),
-                                    userData[AppConstants.Status].toString(),
-                                    userData[AppConstants.postedBy].toString(),
-                                    userData[AppConstants.approvedBy].toString(),
-                                    userData[AppConstants.facing].toString(),
-                                    userData[AppConstants.ownership].toString(),
-                                    userData[AppConstants.postedOn].toString(),
-                                    userData[AppConstants.postedOn].toString(),
-                                    userData[AppConstants.text1].toString(),
-                                    userData[AppConstants.text2].toString(),
-                                    userData[AppConstants.text3].toString(),
-                                    userData[AppConstants.text4].toString()
+                                    userData?.get(AppConstants.image).toString(),
+                                    userData?.get(AppConstants.image2).toString(),
+                                    userData?.get(AppConstants.pid).toString(),
+                                    userData?.get(AppConstants.description).toString(),
+                                    userData?.get(AppConstants.date).toString(),
+                                    userData?.get(AppConstants.category).toString(),
+                                    userData?.get(AppConstants.price).toString(),
+                                    userData?.get(AppConstants.pname).toString(),
+                                    userData?.get(AppConstants.propertysize).toString(),
+                                    userData?.get(AppConstants.location).toString(),
+                                    userData?.get(AppConstants.number).toString(),
+                                    userData?.get(AppConstants.Status).toString(),
+                                    userData?.get(AppConstants.postedBy).toString(),
+                                    userData?.get(AppConstants.approvedBy).toString(),
+                                    userData?.get(AppConstants.facing).toString(),
+                                    userData?.get(AppConstants.ownership).toString(),
+                                    userData?.get(AppConstants.postedOn).toString(),
+                                    userData?.get(AppConstants.verified).toString(),
+                                    userData?.get(AppConstants.katha).toString(),
+                                    userData?.get(AppConstants.text1).toString(),
+                                    userData?.get(AppConstants.text2).toString(),
+                                    userData?.get(AppConstants.text3).toString(),
+                                    userData?.get(AppConstants.text4).toString(),
+                                    userData?.get(AppConstants.city).toString()
                                 )
                             )
-                        } catch (_: ClassCastException) {
-
-                        }
+                        } catch (_: ClassCastException) { }
                     }
                     adslist.shuffle()
-                    adsAdaptor = AdsAdaptor(adslist, context)
-                    val n1layoutManager: RecyclerView.LayoutManager =
-                        LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-                    binding.rvAddsLayots1.layoutManager = n1layoutManager
-                    binding.rvAddsLayots1.itemAnimator = DefaultItemAnimator()
-                    mHandler.post {
-                        binding.rvAddsLayots1.adapter = adsAdaptor
-                        adsAdaptor?.notifyItemRangeInserted(0, adslist.size)
-                    }
+                    val adsAdaptor = AdsAdaptor(adslist, context)
+                    val n1layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                    binding.rvAddsLayots1 .layoutManager = n1layoutManager
+                    binding.rvAddsLayots1.adapter = adsAdaptor.apply { notifyDataSetChanged() }
+                } else {
                 }
             }
-            override fun onCancelled(error: DatabaseError) {}
-        })
+        }
     }
 
     private fun fetchlayouts() {
-        val layouts = FirebaseDatabase.getInstance().reference.child("layoutsforyou")
-            .orderByChild(AppConstants.Status).equalTo(AppConstants.user)
-        layouts.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
+        FirebaseConnects.fetchDataWithStatus(AppConstants.layouts) { dataMap ->
+            if (dataMap != null) {
                     layoutslists.clear()
-                    val dataMap = snapshot.value as HashMap<*, *>?
-                    for (key in dataMap!!.keys) {
-                        val data = dataMap[key]
+                    for (data in dataMap) {
                         try {
-                            val userData = data as HashMap<*, *>?
+                            val userData = data.value as HashMap<*, *>?
                             layoutslists.add(
                                 LayoutModel(
-                                    userData!![AppConstants.image].toString(),
-                                    userData[AppConstants.image2].toString(),
-                                    userData[AppConstants.pid].toString(),
-                                    userData[AppConstants.description].toString(),
-                                    userData[AppConstants.date].toString(),
-                                    userData[AppConstants.category].toString(),
-                                    userData[AppConstants.price].toString(),
-                                    userData[AppConstants.pname].toString(),
-                                    userData[AppConstants.propertysize].toString(),
-                                    userData[AppConstants.location].toString(),
-                                    userData[AppConstants.number].toString(),
-                                    userData[AppConstants.Status].toString(),
-                                    userData[AppConstants.sitesAvailable].toString(),
-                                    userData[AppConstants.postedBy].toString(),
-                                    userData[AppConstants.facing].toString(),
-                                    userData[AppConstants.layoutarea].toString(),
-                                    userData[AppConstants.point1].toString(),
-                                    userData[AppConstants.point2].toString(),
-                                    userData[AppConstants.point3].toString(),
-                                    userData[AppConstants.point4].toString(),
+                                    userData?.get(AppConstants.image).toString(),
+                                    userData?.get(AppConstants.image2).toString(),
+                                    userData?.get(AppConstants.pid).toString(),
+                                    userData?.get(AppConstants.description).toString(),
+                                    userData?.get(AppConstants.date).toString(),
+                                    userData?.get(AppConstants.category).toString(),
+                                    userData?.get(AppConstants.price).toString(),
+                                    userData?.get(AppConstants.pname).toString(),
+                                    userData?.get(AppConstants.propertysize).toString(),
+                                    userData?.get(AppConstants.location).toString(),
+                                    userData?.get(AppConstants.number).toString(),
+                                    userData?.get(AppConstants.Status).toString(),
+                                    userData?.get(AppConstants.sitesAvailable).toString(),
+                                    userData?.get(AppConstants.postedBy).toString(),
+                                    userData?.get(AppConstants.facing).toString(),
+                                    userData?.get(AppConstants.layoutarea).toString(),
+                                    userData?.get(AppConstants.point1).toString(),
+                                    userData?.get(AppConstants.point2).toString(),
+                                    userData?.get(AppConstants.point3).toString(),
+                                    userData?.get(AppConstants.point4).toString(),
                                 )
                             )
-                        } catch (_: ClassCastException) {
-
-                        }
+                        } catch (_: ClassCastException) { }
                     }
                     layoutslists.shuffle()
-                    layoutsAdaptor = LayoutsAdaptor(layoutslists, context)
-                    val n1layoutManager: RecyclerView.LayoutManager =
-                        LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                    val layoutsAdaptor = LayoutsAdaptor(layoutslists, context)
+                    val n1layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                     binding.rvLayouts.layoutManager = n1layoutManager
-                    binding.rvLayouts.itemAnimator = DefaultItemAnimator()
-                    mHandler.post {
-                        binding.rvLayouts.adapter = layoutsAdaptor
-                        layoutsAdaptor!!.notifyItemRangeInserted(0, adslist.size)
-                        binding.progressLayout.visibility= View.GONE
-                    }
+                    binding.rvLayouts.adapter = layoutsAdaptor.apply { notifyDataSetChanged() }
+                    binding.progressLayout.visibility = View.GONE
                 }
                 binding.progressLayout.visibility= View.GONE
             }
 
-            override fun onCancelled(error: DatabaseError) {}
-        })
     }
 
     private fun fetchdata() {
-        val productsinfo = FirebaseDatabase.getInstance().reference.child(AppConstants.hotdeals)
-            .orderByChild(AppConstants.Status).equalTo(AppConstants.user)
-        productsinfo.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    val dataMap = dataSnapshot.value as HashMap<*, *>?
+        FirebaseConnects.fetchDataWithStatus(AppConstants.hotdeals) { dataMap ->
+            if (dataMap != null) {
                     productinfolist.clear()
-                    for (key in dataMap!!.keys) {
-                        val data = dataMap[key]
+                    for (data in dataMap) {
                         try {
-                            val userData = data as HashMap<*, *>?
+                            val userData = data.value as HashMap<*, *>?
                             productinfolist.add(
                                 ProductInfo(
-                                    userData!![AppConstants.category].toString(),
-                                    userData[AppConstants.date].toString(),
-                                    userData[AppConstants.description].toString(),
-                                    userData[AppConstants.image].toString(),
-                                    userData[AppConstants.location].toString(),
-                                    userData[AppConstants.number].toString(),
-                                    userData[AppConstants.pid].toString(),
-                                    userData[AppConstants.pname].toString(),
-                                    userData[AppConstants.price].toString(),
-                                    userData[AppConstants.propertysize].toString(),
-                                    userData[AppConstants.time].toString(),
-                                    userData[AppConstants.type].toString(),
-                                    userData[AppConstants.postedBy].toString()
+                                    userData?.get(AppConstants.category).toString(),
+                                    userData?.get(AppConstants.date).toString(),
+                                    userData?.get(AppConstants.description).toString(),
+                                    userData?.get(AppConstants.image).toString(),
+                                    userData?.get(AppConstants.location).toString(),
+                                    userData?.get(AppConstants.number).toString(),
+                                    userData?.get(AppConstants.pid).toString(),
+                                    userData?.get(AppConstants.pname).toString(),
+                                    userData?.get(AppConstants.price).toString(),
+                                    userData?.get(AppConstants.propertysize).toString(),
+                                    userData?.get(AppConstants.time).toString(),
+                                    userData?.get(AppConstants.type).toString(),
+                                    userData?.get(AppConstants.postedBy).toString()
                                 )
                             )
-                        } catch (_: ClassCastException) {
-
-                        }
+                        } catch (_: ClassCastException) { }
                     }
                     bottomhomeRecyclarviewAdaptor =
-                        BottomhomeRecyclarviewAdaptor(productinfolist, context!!)
-                    val elayoutMnager: RecyclerView.LayoutManager =
-                        LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                        BottomhomeRecyclarviewAdaptor(productinfolist, context)
                     binding.rvDashProp.layoutManager = GridLayoutManager(context, 1)
-                    binding.rvDashProp.itemAnimator = DefaultItemAnimator()
                     mHandler.post { binding.rvDashProp.adapter = bottomhomeRecyclarviewAdaptor }
                 }
             }
-
-            override fun onCancelled(databaseError: DatabaseError) {}
-        })
     }
 
     override fun onClick(view: View) {

@@ -1,6 +1,7 @@
 package com.sbd.gbd.Utilitys
 
 import android.content.Context
+import com.sbd.gbd.BuildConfig
 
 object AppConstants {
     const val image = "image"
@@ -25,6 +26,7 @@ object AppConstants {
     const val ownership = "ownership"
     const val postedOn = "postedOn"
     const val verified = "verified"
+    const val nearby = "nearBy"
     const val payment = "payment"
     const val type = "type"
     const val time = "time"
@@ -45,24 +47,35 @@ object AppConstants {
     const val Deposit = "deposit"
     const val district = "district"
     const val taluk = "taluk"
-
-
     const val products = "Products"
     const val hotdeals = "hotforyou"
+    const val layouts = "layoutsforyou"
+    const val ads = "adsforyou"
+    const val Profiles = "Profile"
+    const val construction = "constructionforyou"
 
 
-    fun profileinfoadd(contest : Context): HashMap<String, Any?> {
+    fun profileinfoadd(contest: Context): HashMap<String, Any?> {
         val sh = contest.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
-        val nameofuser = sh?.getString("name", "")
-        val userNumber = sh?.getString(AppConstants.number, "")
-        val useremail = sh?.getString("email", "")
         val productMap = HashMap<String, Any?>()
-        productMap["loginUser"] = nameofuser
-        productMap["loginNumber"] = userNumber
-        productMap["loginEmail"] = useremail
+        productMap["loginUser"] = sh?.getString("name", "")
+        productMap["loginNumber"] = sh?.getString(AppConstants.number, "")
+        productMap["loginEmail"] = sh?.getString("email", "")
+        productMap[time] = UtilityMethods.getDate()
+        productMap[date] = UtilityMethods.getTime()
         return productMap
     }
 
-    const val user = "2"
+
+    val user = when {
+        BuildConfig.FLAVOR == "dev" -> if (BuildConfig.BUILD_TYPE == "debug") "2" else "1"
+        BuildConfig.FLAVOR == "prod" -> if (BuildConfig.BUILD_TYPE == "debug") "1" else "2"
+        BuildConfig.FLAVOR == "stag" -> "3"
+        else -> "2"
+    }
+
+    // 1 dev
+    // 2 prod
+    //const val user = "1"
 
 }

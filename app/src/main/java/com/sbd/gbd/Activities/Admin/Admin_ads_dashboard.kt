@@ -5,26 +5,13 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.OpenableColumns
-import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.GridView
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RadioGroup
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.cast.framework.media.ImagePicker
-import com.sbd.gbd.R
-import com.sbd.gbd.Utilitys.AppConstants
-import com.sbd.gbd.Utilitys.UtilityMethods
-import com.google.android.gms.tasks.Task
+import androidx.lifecycle.lifecycleScope
+import com.google.android.material.chip.Chip
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -33,13 +20,30 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.sbd.gbd.Adapters.ImageAdaptor
+import com.sbd.gbd.R
+import com.sbd.gbd.Utilitys.AppConstants
+import com.sbd.gbd.Utilitys.UtilityMethods
+import com.sbd.gbd.Utilitys.UtilityMethods.CompressImage
+import com.sbd.gbd.Utilitys.UtilityMethods.getDistricts
+import com.sbd.gbd.Utilitys.UtilityMethods.getFileName
+import com.sbd.gbd.Utilitys.UtilityMethods.getTaluks
+import com.sbd.gbd.databinding.ActivityAdminAdsBinding
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 class Admin_ads_dashboard : AppCompatActivity() {
+    private lateinit var binding: ActivityAdminAdsBinding
     private var CategoryName: String? = null
     private var Description: String? = null
     private var Price: String? = null
     private var Taluk: String? = null
+    private var District: String? = null
     private var Pname: String? = null
+    private var layoutName: String? = null
+    private var bedrooms: String? = null
+    private var bathrooms: String? = null
+    private var floors: String? = null
+    private var CategoryType: String? = null
     private var postedBy: String? = null
     private var katha: String? = null
     private var propertysize: String? = null
@@ -47,129 +51,282 @@ class Admin_ads_dashboard : AppCompatActivity() {
     private var number: String? = null
     private var ownerName: String? = null
     private var facing: String? = null
+    private var landMark: String? = null
+    private var taluk: String? = null
+    private var deposite: String? = null
+    private var rent: String? = null
+
+    private var water: Boolean? = null
+    private var electricty: Boolean? = null
+    private var sewage: Boolean? = null
+    private var corner: Boolean? = null
+    private var road: Boolean? = null
+    private var boarwell: Boolean? = null
+    private var furnished: Boolean? = null
+    private var parking: Boolean? = null
+    private var gated: Boolean? = null
+    private var immidateAvailable: Boolean? = null
+    private var noOfAvavilableSites: String? = null
+
     private var approvedBy: String? = null
-    private var InputProductName: EditText? = null
-    private var InputProductDescription: EditText? = null
-    private var ads_facing: EditText? = null
-    private var ads_approved_by: EditText? = null
-    private var InputProductPrice: EditText? = null
-    private var et_size: EditText? = null
-    private var et_location: EditText? = null
-    private var et_number: EditText? = null
-    private var edt_katha : EditText? = null
-    private var et_verified: EditText? = null
-    private var et_text1: EditText? = null
-    private var et_text2: EditText? = null
-    private var et_text3: EditText? = null
-    private var et_text4: EditText? = null
-    private var propertyOwner: EditText? = null
     private var ImageUri: Uri? = null
     private var productRandomKey: String? = null
     private var downloadImageUrl: String? = null
     private var MainimageUrl: String? = null
     private var ProductImagesRef: StorageReference? = null
     private var ProductsRef: DatabaseReference? = null
-    private var rbButton: RadioGroup? = null
     private var loadingBar: ProgressDialog? = null
-    private var propertyType: Spinner? = null
-    private var ads_landmark : EditText? = null
-    private var sp_taluk : Spinner? = null
-    private var gridView: GridView? = null
-    private var btn_corosel : ImageView? = null
-    private var ll_selfie : LinearLayout? = null
-    var fileNameList: ArrayList<String> = ArrayList<String>()
-    var fileDoneList: ArrayList<String> = ArrayList<String>()
-    var locationList: ArrayList<String> = ArrayList<String>()
-    private var ads_name: EditText? = null
+    var fileNameList: ArrayList<String> = ArrayList()
+    var fileDoneList: ArrayList<String> = ArrayList()
+    var locationList: ArrayList<String> = ArrayList()
+    var locationMap = mutableMapOf<String, String>()
+    var districtList : ArrayList<String> = ArrayList()
     private var arrayAdapter: ArrayAdapter<*>? = null
-    var backBtn: ImageView? = null
+    private var districtAdapter: ArrayAdapter<*>? = null
     private lateinit var imageAdapter: ImageAdaptor
     private val selectedImages = mutableListOf<Uri>()
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_admin_ads)
+        binding = ActivityAdminAdsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         val propertyPage = intent.getStringExtra("page")
         if (propertyPage == "2") {
             ProductImagesRef = FirebaseStorage.getInstance().reference.child("Product Images")
             ProductsRef = FirebaseDatabase.getInstance().reference.child(AppConstants.products)
         } else {
             ProductImagesRef = FirebaseStorage.getInstance().reference.child("ads")
-            ProductsRef = FirebaseDatabase.getInstance().reference.child("adsforyou")
+            ProductsRef = FirebaseDatabase.getInstance().reference.child(AppConstants.ads)
         }
-        btn_corosel = findViewById<ImageView>(R.id.select_image)
-        val add_new_corosel = findViewById<Button>(R.id.add_new_ads)
-        InputProductName = findViewById<View>(R.id.ads_name) as EditText
-        InputProductDescription = findViewById<View>(R.id.ads_description) as EditText
-        InputProductPrice = findViewById<View>(R.id.ads_price_admin) as EditText
-        ads_facing = findViewById(R.id.ads_facing)
-        edt_katha = findViewById(R.id.edt_property_katha)
-        gridView = findViewById(R.id.gridView)
-        ads_landmark = findViewById(R.id.ads_landmark)
-        ads_approved_by = findViewById(R.id.ads_approved_by)
-        ads_approved_by?.visibility = View.GONE
-        rbButton = findViewById(R.id.rb_data)
-        ads_name = findViewById(R.id.ads_name)
-        sp_taluk = findViewById(R.id.sp_taluk)
-        ll_selfie = findViewById(R.id.ll_selfie)
-        et_size = findViewById(R.id.ads_size)
-        et_text1 = findViewById(R.id.ads_text1)
-        et_text2 = findViewById(R.id.ads_text2)
-        et_text3 = findViewById(R.id.ads_text3)
-        et_text4 = findViewById(R.id.ads_text4)
-        backBtn = findViewById(R.id.iv_nav_view)
-        et_location = findViewById(R.id.ads_location_admin)
-        et_number = findViewById(R.id.edt_contact_number)
-        et_verified = findViewById(R.id.ads_verify_or_nt)
-        propertyOwner = findViewById(R.id.edt_owner_name)
+        binding.llLocation.adsApprovedBy.visibility = View.GONE
         loadingBar = ProgressDialog(this)
-        propertyType = findViewById(R.id.sp_property_type)
         imageAdapter = ImageAdaptor(this, selectedImages)
-        gridView?.adapter = imageAdapter
-        btn_corosel?.setOnClickListener { OpenGallery() }
-        backBtn?.setOnClickListener(View.OnClickListener { finish() })
-        add_new_corosel.setOnClickListener { ValidateProductData() }
+        binding.gridView.adapter = imageAdapter
+
+        binding.llSelfie.setOnClickListener { OpenGallery() }
+        binding.ivNavView.setOnClickListener { finish() }
+        binding.llExtra.addNewAds.setOnClickListener { ValidateSitesData() }
         postedBy = "owner"
         initilize()
         getlocations()
+        gettaluks("")
+        
     }
 
 
     private fun initilize() {
-
-        rbButton?.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { arg0, id ->
-            when (id) {
-                R.id.rb_owner -> {
-                    postedBy = "owner"
-                }
-
-                R.id.rb_agent -> {
-                    postedBy = "agent"
+        binding.buttonToggleGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.owner -> { postedBy = "owner" }
+                    R.id.agent -> { postedBy = "agent" }
                 }
             }
+        }
+        binding.propertyType.setOnCheckedChangeListener { group, checkedId ->
+            val chip = group.findViewById<Chip>(checkedId)
+            chip?.let {
+                CategoryName = it.text.toString()
+                binding.llProperty.llPropDetails.visibility = View.VISIBLE
 
-        })
-
-        propertyType?.onItemSelectedListener=object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                if (p2>0){
-                    val propertyArray = resources.getStringArray(R.array.property_type)
-                    CategoryName = propertyArray[p2]
-                }
-            }
-            override fun onNothingSelected(p0: AdapterView<*>?) {
+                setVisiableSite(CategoryName!!)
 
             }
         }
-        sp_taluk?.onItemSelectedListener=object : AdapterView.OnItemSelectedListener {
+        binding.llProperty.kathaType.setOnCheckedChangeListener { group, checkedId ->
+            val chip = group.findViewById<Chip>(checkedId)
+            chip?.let { katha = it.text.toString() }
+        }
+        binding.llProperty.propertyFacing.setOnCheckedChangeListener { group, checkedId ->
+            val chip = group.findViewById<Chip>(checkedId)
+            chip?.let { facing = it.text.toString() }
+        }
+        binding.llLocation.spTaluk.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                if (p2>0){
-                    val propertyArray = resources.getStringArray(R.array.property_type)
-                    Taluk = propertyArray[p2]
+                if (p2 > 0) {
+                    Taluk = locationList[p2]
                 }
             }
-            override fun onNothingSelected(p0: AdapterView<*>?) {
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+        }
+        binding.llLocation.spDistrict.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                if (p2 > 0) {
+                    District = districtList[p2]
+                    gettaluks(District!!)
+                }
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+        }
+        binding.llBhk.spBedrooms.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                if (p2 > 0) {
+                    bedrooms = resources.getStringArray(R.array.numbers).get(p2)
+                }
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+        }
+        binding.llBhk.spBathroomsrooms.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                if (p2 > 0) {
+                    bathrooms = resources.getStringArray(R.array.numbers).get(p2)
+                }
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+        }
+        binding.llBhk.spFloors.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                if (p2 > 0) {
+                    floors = resources.getStringArray(R.array.numbers).get(p2)
+                }
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+        }
+        binding.llExtra.waterGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.water_yes -> { water = true }
+                    R.id.water_no -> { water = false }
+                }
+            }
+        }
+        binding.llExtra.electricityGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.electricity_yes -> { electricty = true }
+                    R.id.electricity_no -> { electricty = false }
+                }
+            }
+        }
+        binding.llExtra.SewageGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.Sewage_yes -> { sewage = true }
+                    R.id.Sewage_no -> { sewage = false }
+                }
+            }
+        }
+        binding.llExtra.cornerGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.corner_yes -> { corner = true }
+                    R.id.corner_no -> { corner = false }
+                }
+            }
+        }
 
+        binding.llExtra.roadGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.road_yes -> { road = true }
+                    R.id.road_no -> { road = false }
+                }
+            }
+        }
+        binding.llExtra.boarwellGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.boarwell_yes -> { boarwell = true }
+                    R.id.boarwell_no -> { boarwell = false }
+                }
+            }
+        }
+        binding.llExtra.furnishrGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.furnish_yes -> { furnished = true }
+                    R.id.furnish_no -> { furnished = false }
+                }
+            }
+        }
+        binding.llExtra.CarGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.car_yes -> { parking = true }
+                    R.id.car_no -> { parking = false }
+                }
+            }
+        }
+        binding.llExtra.gatedGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.gated_yes -> { gated = true }
+                    R.id.gated_no -> { gated = false }
+                }
+            }
+        }
+        binding.llExtra.immidateGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.immidate_yes -> { immidateAvailable = true }
+                    R.id.immidate_no -> { immidateAvailable = false }
+                }
+            }
+        }
+    }
+
+    private fun setVisiableSite(CategoryName: String) {
+        binding.llDetailsForms.visibility = View.VISIBLE
+        binding.llProperty.clPropertname.visibility = View.VISIBLE
+        binding.llProperty.clPlottname.visibility = View.GONE
+        binding.llBhk.formBhk.visibility = View.GONE
+        binding.llProperty.clNoSites.visibility = View.GONE
+        binding.llProperty.kathaType.visibility = View.VISIBLE
+        binding.llProperty.tvKatha.visibility = View.VISIBLE
+        binding.llProperty.clPrice.visibility = View.VISIBLE
+        binding.llExtra.llRentedInfo.visibility = View.GONE
+        binding.llExtra.llLandInfo.visibility = View.GONE
+        binding.llExtra.llHomeInfo.visibility = View.GONE
+        binding.llProperty.clRent.visibility = View.GONE
+        binding.llProperty.clDeposite.visibility = View.GONE
+        binding.llProperty.clNoSites.visibility = View.GONE
+        binding.llProperty.clPrice.visibility = View.VISIBLE
+
+
+        when(CategoryName){
+            "Site" -> {
+                CategoryType = "101"
+                binding.llProperty.clPlottname.visibility = View.GONE
+                binding.llExtra.llHomeInfo.visibility = View.VISIBLE
+            }
+            "Layout/Plot" -> {
+                CategoryType = "102"
+                binding.llProperty.clPlottname.visibility = View.VISIBLE
+                binding.llProperty.clNoSites.visibility = View.VISIBLE
+                binding.llProperty.clPropertname.visibility = View.GONE
+                binding.llExtra.llLandInfo.visibility = View.VISIBLE
+            }
+            "Green Land" -> {
+                CategoryType = "103"
+                binding.llExtra.llLandInfo.visibility = View.VISIBLE
+                binding.llProperty.clNoSites.visibility = View.GONE
+                binding.llProperty.kathaType.visibility = View.GONE
+                binding.llProperty.tvKatha.visibility = View.GONE
+            }
+            "House" -> {
+                CategoryType = "104"
+                binding.llProperty.clNoSites.visibility = View.GONE
+                binding.llBhk.formBhk.visibility = View.VISIBLE
+                binding.llExtra.llRentedInfo.visibility = View.VISIBLE
+            }
+            "Independent Building" -> {
+                CategoryType = "105"
+                binding.llProperty.clNoSites.visibility = View.GONE
+                binding.llBhk.formBhk.visibility = View.VISIBLE
+                binding.llExtra.llRentedInfo.visibility = View.VISIBLE
+                binding.llExtra.llHomeInfo.visibility = View.VISIBLE
+            }
+            "House Rent" -> {
+                CategoryType = "106"
+                binding.llBhk.formBhk.visibility = View.VISIBLE
+                binding.llExtra.llRentedInfo.visibility = View.VISIBLE
+                binding.llExtra.llHomeInfo.visibility = View.VISIBLE
+                binding.llProperty.clRent.visibility = View.VISIBLE
+                binding.llProperty.clDeposite.visibility = View.VISIBLE
+                binding.llProperty.clPrice.visibility = View.GONE
+                binding.llProperty.kathaType.visibility = View.GONE
+                binding.llProperty.tvKatha.visibility = View.GONE
             }
         }
     }
@@ -182,6 +339,7 @@ class Admin_ads_dashboard : AppCompatActivity() {
         startActivityForResult(galleryIntent, GalleryPick)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == GalleryPick && resultCode == RESULT_OK && data != null) {
@@ -190,166 +348,222 @@ class Admin_ads_dashboard : AppCompatActivity() {
         }
     }
 
-    private fun ValidateProductData() {
-        Description = InputProductDescription!!.text.toString()
-        Price = InputProductPrice!!.text.toString()
-        Pname = InputProductName!!.text.toString()
-        propertysize = et_size!!.text.toString()
-        location = et_location!!.text.toString()
-        number = et_number!!.text.toString()
-        facing = ads_facing?.text.toString()
-        ownerName = propertyOwner?.text.toString()
-        approvedBy = ads_approved_by?.text.toString()
-        katha = edt_katha?.text.toString()
-        if (TextUtils.isEmpty(downloadImageUrl)) {
-            Toast.makeText(this, "Product image is mandatory...", Toast.LENGTH_SHORT).show()
-        } else if (TextUtils.isEmpty(Description)) {
-            Toast.makeText(this, "Please write product description...", Toast.LENGTH_SHORT).show()
-        } else if (TextUtils.isEmpty(Price)) {
-            Toast.makeText(this, "Please write product Price...", Toast.LENGTH_SHORT).show()
-        } else if (TextUtils.isEmpty(number) && number.toString().length != 10) {
-            Toast.makeText(this, "Please enter contact number...", Toast.LENGTH_SHORT).show()
-        } else if (TextUtils.isEmpty(Pname)) {
-            Toast.makeText(this, "Please write product name...", Toast.LENGTH_SHORT).show()
-        } else if (TextUtils.isEmpty(CategoryName) || CategoryName.equals("")) {
-            Toast.makeText(this, "Please enter category", Toast.LENGTH_SHORT).show()
-        } else if (TextUtils.isEmpty(facing)) {
-            Toast.makeText(this, "Please enter facing", Toast.LENGTH_SHORT).show()
-        } else if (TextUtils.isEmpty(postedBy)) {
-            Toast.makeText(this, "Please Select whether you owner or agent", Toast.LENGTH_SHORT).show()
-        } else if (TextUtils.isEmpty(katha)) {
-            Toast.makeText(this, "Please enter katha type", Toast.LENGTH_SHORT).show()
-        } else if (TextUtils.isEmpty(ads_landmark?.text.toString())) {
-            Toast.makeText(this, "Please enter Landmark or City name", Toast.LENGTH_SHORT).show()
-        } else if (TextUtils.isEmpty(location)) {
-        Toast.makeText(this, "Please enter Location", Toast.LENGTH_SHORT).show()
-        }else if (TextUtils.isEmpty(Taluk)) {
-            Toast.makeText(this, "Please select Taluk", Toast.LENGTH_SHORT).show()
-        } else {
-            SaveProductInfoToDatabase()
+    private fun ValidateSitesData() {
+         Description = binding.llExtra.adsDescription.text.toString()
+         Price = binding.llProperty.adsPriceAdmin.text.toString()
+        Pname = binding.llProperty.edtPropertyName.text.toString()
+        propertysize = binding.llProperty.edtMeasurment.text.toString()
+         location = binding.llLocation.adsLocationAdmin.text.toString()
+         number = binding.llPersonal.edtContactNumber.text.toString()
+         ownerName = binding.llPersonal.edtOwnerName.text.toString()
+         approvedBy = binding.llLocation.adsApprovedBy.text.toString()
+        landMark = binding.llLocation.adsLandmark.text.toString()
+        layoutName = binding.llProperty.edtLayoutName.text.toString()
+
+        val errorMessages = mutableListOf<String>()
+
+        if (downloadImageUrl?.isNullOrEmpty() == true) errorMessages.add("Product image is mandatory")
+        if (Description?.isNullOrEmpty() == true) errorMessages.add("Please write product description")
+        if (number?.isNullOrEmpty() == true || number?.length != 10) errorMessages.add("Please enter valid contact number")
+        if (CategoryName?.isNullOrEmpty() == true) errorMessages.add("Please enter category")
+        if (facing?.isNullOrEmpty() == true) errorMessages.add("Please enter facing")
+        if (postedBy?.isNullOrEmpty() == true) errorMessages.add("Please select whether you owner or agent")
+        if (landMark?.isNullOrEmpty() == true) errorMessages.add("Please enter Landmark or City name")
+        if (location?.isNullOrEmpty() == true) errorMessages.add("Please enter Location")
+        if (taluk?.isNullOrEmpty() == true) errorMessages.add("Please enter Location")
+        if (District?.isNullOrEmpty() == true) errorMessages.add("Please enter Location")
+
+        when(CategoryName){
+            "Site" -> {
+                if (Price?.isEmpty() == true) errorMessages.add("Please write product Price")
+                if (katha?.isEmpty() == true) errorMessages.add("Please enter katha type")
+            }
+            "Layout/Plot" -> {
+                noOfAvavilableSites = binding.llProperty.edtNuSites.text.toString()
+                Pname = binding.llProperty.edtLayoutName.text.toString()
+
+                if (noOfAvavilableSites?.isNullOrEmpty() == true) errorMessages.add("Please Enter number of available sites")
+                if (Price?.isNullOrEmpty() == true) errorMessages.add("Please write product Price")
+                if (katha?.isNullOrEmpty() == true) errorMessages.add("Please enter katha type")
+                if (layoutName?.isNullOrEmpty() == true) errorMessages.add("Please enter layout name")
+
+            }
+            "Green Land" -> {
+                if (Price?.isEmpty() == true) errorMessages.add("Please write product Price")
+                if (katha?.isEmpty() == true) errorMessages.add("Please enter katha type")
+
+            }
+            "House" -> {
+                if (Price?.isEmpty() == true) errorMessages.add("Please write product Price")
+                if (katha?.isEmpty() == true) errorMessages.add("Please enter katha type")
+                if (bedrooms?.isEmpty() == true) errorMessages.add("Please enter number of Bedrooms")
+                if (bathrooms?.isEmpty() == true) errorMessages.add("Please enter number of Bathrooms")
+                if (floors?.isEmpty() == true) errorMessages.add("Please enter number of floors")
+
+            }
+            "Independent Building" -> {
+                if (Price?.isEmpty() == true) errorMessages.add("Please write product Price")
+                if (katha?.isEmpty() == true) errorMessages.add("Please enter katha type")
+                if (floors?.isEmpty() == true) errorMessages.add("Please enter number of Bathrooms")
+                if (bedrooms?.isEmpty() == true) errorMessages.add("Please enter number of Bedrooms")
+                if (bathrooms?.isEmpty() == true) errorMessages.add("Please enter number of Bathrooms")
+                if (floors?.isEmpty() == true) errorMessages.add("Please enter number of floors")
+
+            }
+            "House Rent" -> {
+                deposite = binding.llLocation.adsLandmark.text.toString()
+                rent = binding.llProperty.edtPriceRent.text.toString()
+                if (Pname?.isNullOrEmpty() == true) errorMessages.add("Please write product name")
+                if (deposite?.isNullOrEmpty() == true) errorMessages.add("Please enter Deposit Amount")
+                if (rent?.isNullOrEmpty() == true) errorMessages.add("Please enter rent amount")
+                if (floors?.isNullOrEmpty() == true) errorMessages.add("Please enter number of Bathrooms")
+                if (bedrooms?.isNullOrEmpty() == true) errorMessages.add("Please enter number of Bedrooms")
+                if (bathrooms?.isNullOrEmpty() == true) errorMessages.add("Please enter number of Bathrooms")
+                if (floors?.isNullOrEmpty() == true) errorMessages.add("Please enter number of floors")
+            }
         }
+
+        if (errorMessages.isNotEmpty()) {
+            //val errorMessage = errorMessages.joinToString("\n")
+            Toast.makeText(this, errorMessages.get(0), Toast.LENGTH_LONG).show()
+            return
+        }
+        saveProductInfoToDatabase()
     }
 
     private fun StoreProductInformation(data: Intent) {
         downloadImageUrl = ""
         if (data.data != null) {
+            binding.llSelfie.visibility = View.GONE
+            binding.gridView.visibility = View.VISIBLE
             val uri = data.data
-            btn_corosel?.setImageURI(uri)
-            uploadTostorage(data, uri)
+            selectedImages.add(uri!!)
+            uploadImageToStorage(uri)
         } else if (data.clipData != null) {
-            ll_selfie?.visibility = View.GONE
-            gridView?.visibility = View.VISIBLE
+            binding.llSelfie.visibility = View.GONE
+            binding.gridView.visibility = View.VISIBLE
             val clipData = data.clipData
-            btn_corosel?.setImageURI(clipData?.getItemAt(0)?.uri)
             for (i in 0 until clipData!!.itemCount) {
                 val uri = clipData.getItemAt(i).uri
                 selectedImages.add(uri)
-                uploadTostorage(data, uri)
+                uploadImageToStorage(uri)
             }
             imageAdapter.notifyDataSetChanged()
         }
     }
 
-    private fun uploadTostorage(data: Intent, uri: Uri?) {
-        val fileName = getFileName(uri)
-        fileNameList.add(fileName.toString())
+    private fun uploadImageToStorage(uri: Uri?) {
+        if (uri == null) return  // Handle case where no image is selected
+        val fileName = getFileName(contentResolver, uri)
+        fileNameList.add(fileName!!)
         fileDoneList.add("Uploading")
-        productRandomKey = UtilityMethods.getCurrentTimeDate()
-        val filePath = ProductImagesRef!!.child(uri!!.lastPathSegment + productRandomKey + ".jpg")
-        val uploadTask = filePath.putFile(uri)
-        uploadTask.addOnFailureListener { e ->
-            val message = e.toString()
-            Toast.makeText(this@Admin_ads_dashboard, "Error: $message", Toast.LENGTH_SHORT).show()
-            loadingBar!!.dismiss()
-        }.addOnSuccessListener {
-            val urlTask = uploadTask.continueWithTask { task ->
-                if (!task.isSuccessful) {
-                    throw task.exception!!
-                }
-                filePath.downloadUrl
-            }
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        if (downloadImageUrl == "") {
-                            downloadImageUrl = task.result.toString()
-                            MainimageUrl = task.result.toString()
-                        } else {
-                            downloadImageUrl = downloadImageUrl + "---" + task.result.toString()
-                        }
+         productRandomKey = UtilityMethods.getCurrentTimeDate()
+        val filePath = ProductImagesRef?.child(uri.lastPathSegment + productRandomKey + ".jpg")
+        val uploadTask = filePath?.putBytes(CompressImage(contentResolver,uri)) // Compress image before upload
+        uploadTask?.addOnFailureListener {
+            UtilityMethods.showToast(this@Admin_ads_dashboard, it.toString())
+            loadingBar?.dismiss()
+        }?.addOnSuccessListener {
+            filePath.downloadUrl.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val imageUrl = task.result.toString()
+                    if (downloadImageUrl?.isEmpty() == true) {
+                        downloadImageUrl = imageUrl
+                        MainimageUrl = imageUrl
+                    } else {
+                        downloadImageUrl += "---$imageUrl"
                     }
                 }
+            }
         }
     }
 
-    private fun SaveProductInfoToDatabase() {
-       loadingBar?.setTitle("Posting New Property");
-       loadingBar?.setMessage("please wait while we are listing your property");
-       loadingBar?.setCanceledOnTouchOutside(false);
-       loadingBar?.show();
-        val productMap = HashMap<String, Any?>()
-        productMap[AppConstants.pid] = productRandomKey
-        productMap[AppConstants.date] = UtilityMethods.getDate()
-        productMap[AppConstants.time] = UtilityMethods.getTime()
-        productMap[AppConstants.description] = Description
-        productMap[AppConstants.image2] = downloadImageUrl
-        productMap[AppConstants.image] = MainimageUrl
-        productMap[AppConstants.category] = CategoryName
-        productMap[AppConstants.type] = CategoryName
-        productMap[AppConstants.price] = Price
-        productMap[AppConstants.pname] = Pname
-        productMap[AppConstants.katha] = katha
-        productMap[AppConstants.propertysize] = propertysize
-        productMap[AppConstants.location] = location
-        productMap[AppConstants.number] = number
-        productMap[AppConstants.city] = ads_landmark?.text.toString()
-        productMap[AppConstants.verified] = "1"
-        productMap[AppConstants.postedOn] = UtilityMethods.getDate()
-        productMap[AppConstants.postedBy] = postedBy
-        productMap[AppConstants.facing] = facing
-        productMap[AppConstants.ownership] = ownerName
-        productMap[AppConstants.payment] = ""
-        productMap[AppConstants.text1] = et_text1!!.text.toString()
-        productMap[AppConstants.text2] = et_text2!!.text.toString()
-        productMap[AppConstants.text3] = et_text3!!.text.toString()
-        productMap[AppConstants.text4] = et_text4!!.text.toString()
-        productMap[AppConstants.Status] = "1"
-        ProductsRef!!.child(productRandomKey!!).updateChildren(productMap + AppConstants.profileinfoadd(this))
-            .addOnCompleteListener { task: Task<Void?> ->
+    private fun saveProductInfoToDatabase() {
+        loadingBar?.setTitle("Posting New Property")
+        loadingBar?.setMessage("Please wait while we are listing your property")
+        loadingBar?.setCanceledOnTouchOutside(false)
+        loadingBar?.show()
+        val productMap = hashMapOf(
+            AppConstants.pid to productRandomKey,
+            AppConstants.description to Description,
+            AppConstants.image2 to downloadImageUrl,
+            AppConstants.image to MainimageUrl,
+            AppConstants.category to CategoryName,
+            AppConstants.type to CategoryType,
+            AppConstants.pname to Pname,
+            AppConstants.katha to katha,
+            AppConstants.propertysize to propertysize,
+            AppConstants.location to location,
+            AppConstants.number to number,
+            AppConstants.city to landMark,
+            AppConstants.district to District,
+            AppConstants.taluk to taluk,
+            AppConstants.nearby to binding.llLocation.edtNearby.text.toString(),
+            AppConstants.postedOn to UtilityMethods.getDate(),
+            AppConstants.postedBy to postedBy,
+            AppConstants.facing to facing,
+            AppConstants.ownership to ownerName,
+            AppConstants.payment to "",
+            "deposit" to facing,
+            "rent"  to rent,
+            AppConstants.ownership to ownerName,
+            AppConstants.payment to "",
+            AppConstants.Status to "1",
+            AppConstants.verified to "1",
+            )
+        if (CategoryType == "106" || CategoryType == "105" || CategoryType =="104") {
+            productMap.put("bedrooms", bedrooms)
+            productMap.put("bathrooms", bedrooms)
+            productMap.put("floors", bedrooms)
+            productMap.put("furnished", furnished.toString())
+            productMap.put("parking", parking.toString())
+            productMap.put("gated", gated.toString())
+            productMap.put("immidate", immidateAvailable.toString())
+        } else if (CategoryType == "102") {
+            productMap.put("availableSites", noOfAvavilableSites)
+            productMap.put("waterFacility", water.toString())
+            productMap.put("electricity", electricty.toString())
+            productMap.put("sewage", sewage.toString())
+
+        } else if(CategoryType == "103") {
+            productMap.put("boarwell", boarwell.toString())
+            productMap.put("road", road.toString())
+        } else if(CategoryType == "101") {
+            productMap.put("waterFacility", water.toString())
+            productMap.put("electricity", electricty.toString())
+            productMap.put("sewage", sewage.toString())
+        }
+
+        ProductsRef?.child(productRandomKey!!)?.updateChildren(productMap + AppConstants.profileinfoadd(this))
+            ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    loadingBar!!.dismiss()
-                    UtilityMethods.showToast(
-                        this@Admin_ads_dashboard, "Property is added successfully..")
+                    UtilityMethods.showToast(this@Admin_ads_dashboard, "Property  added successfully..")
                     loadingBar?.dismiss()
                     finish()
                 } else {
-                    loadingBar!!.dismiss()
+                    loadingBar?.dismiss()
                     val message = task.exception.toString()
                     UtilityMethods.showToast(this@Admin_ads_dashboard, "Error: $message")
                 }
             }
     }
 
-    @SuppressLint("Range")
-    fun getFileName(uri: Uri?): String? {
-        var result: String? = null
-        if (uri!!.scheme == "content") {
-            val cursor = contentResolver.query(uri, null, null, null, null)
-            try {
-                if (cursor != null && cursor.moveToFirst()) {
-                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
-                }
-            } finally {
-                cursor?.close()
+
+    fun gettaluks(district: String) {
+        locationList.clear()
+        locationList.add("Select Taluk")
+        locationMap.forEach{
+            if (district == it.value) {
+                UtilityMethods.locationList.add(it.key)
             }
         }
-        if (result == null) {
-            result = uri.path
-            val cut = result!!.lastIndexOf('/')
-            if (cut != -1) {
-                result = result.substring(cut + 1)
-            }
-        }
-        return result
+        arrayAdapter = ArrayAdapter(
+            this@Admin_ads_dashboard,
+            android.R.layout.simple_spinner_item,
+            locationList
+        )
+        arrayAdapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.llLocation.spTaluk.adapter = arrayAdapter
     }
 
     private fun getlocations() {
@@ -357,23 +571,41 @@ class Admin_ads_dashboard : AppCompatActivity() {
         myDataRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val dataMap = dataSnapshot.value as HashMap<*, *>?
+                districtList.clear() // Clear the list before adding new data
                 for (key in dataMap!!.keys) {
                     val data = dataMap[key]
                     try {
-                        val userData = data as HashMap<String, Any>?
-                        locationList.add(userData!!["taluk"].toString())
-                    }catch (cce: ClassCastException) {
+                        val userData = data as HashMap<*, *>?
+                        districtList.add(userData!!["district"].toString())
+                        locationMap.put(userData["taluk"].toString(), userData["district"].toString())
+                    } catch (_: ClassCastException) {
                     }
                 }
-                arrayAdapter = ArrayAdapter(this@Admin_ads_dashboard, android.R.layout.simple_spinner_item, locationList)
-                arrayAdapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                sp_taluk?.adapter = arrayAdapter
+                districtAdapter = ArrayAdapter(
+                    this@Admin_ads_dashboard,
+                    android.R.layout.simple_spinner_item,
+                    districtList
+                )
+                districtAdapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                binding.llLocation.spDistrict.adapter = districtAdapter
+               // binding.llLocation.spDistrict.not // Notify adapter about data change
             }
 
             override fun onCancelled(error: DatabaseError) {
                 println("Failed to read value: ${error.message}")
             }
         })
+    }
+
+    fun getTaluks(district: String): ArrayList<String> {
+        UtilityMethods.locationList.clear()
+        UtilityMethods.locationList.add("Select Taluk")
+        UtilityMethods.locationMap.forEach{
+            if (district == it.value) {
+                UtilityMethods.locationList.add(it.key)
+            }
+        }
+        return UtilityMethods.locationList
     }
 
     companion object {

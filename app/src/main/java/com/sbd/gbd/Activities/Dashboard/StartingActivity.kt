@@ -1,17 +1,14 @@
 package com.sbd.gbd.Activities.Dashboard
 
 import android.Manifest
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
@@ -27,7 +24,6 @@ import com.sbd.gbd.Activities.Businesthings.BusinessActivity
 import com.sbd.gbd.Activities.Businesthings.BusinessFragment
 import com.sbd.gbd.Activities.Construction.ConstructionActivity
 import com.sbd.gbd.Activities.LoanActivity.LoanActivity
-import com.sbd.gbd.Activities.LoanActivity.LoanFragment
 import com.sbd.gbd.Activities.BasicActivitys.OtpLoginActivity
 import com.sbd.gbd.Activities.Profile.ProfileFragments
 import com.sbd.gbd.Activities.Propertys.PropertyFragment
@@ -49,7 +45,6 @@ import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
 import com.sbd.gbd.Activities.Construction.ConstructionFragment
 import com.sbd.gbd.BuildConfig
-import com.sbd.gbd.Utilitys.UtilityMethods
 import java.util.*
 
 class StartingActivity : AppCompatActivity() {
@@ -88,7 +83,7 @@ class StartingActivity : AppCompatActivity() {
     private fun initilize() {
         iv_drawer_nav = findViewById<ImageView>(R.id.iv_drawer_nav)
         val versionName = BuildConfig.VERSION_NAME
-        binding.tvVersion.setText("Version : "+versionName)
+        binding.tvVersion.setText("Version : "+versionName+"("+BuildConfig.VERSION_CODE+")")
         iv_drawer_nav?.setOnClickListener{
             if (preferenceManager.getLoginState()) {
                 fetchProfile()

@@ -49,7 +49,7 @@ class PropertyFragment : Fragment(), View.OnClickListener {
     var siteslist: ArrayList<FilterModel> = ArrayList()
     var Homeslist: ArrayList<FilterModel> = ArrayList()
     var Rentallist: ArrayList<FilterModel> = ArrayList()
-    var adslist: ArrayList<AdsModel?> = ArrayList()
+    var adslist: ArrayList<AdsModel> = ArrayList()
     var propertyAdaptor: PropertyAdaptor? = null
     var adsAdaptor: AdsAdaptor? = null
     var bundle = Bundle()
@@ -128,7 +128,7 @@ class PropertyFragment : Fragment(), View.OnClickListener {
     }
 
     private fun fetchads() {
-        val adsimage = FirebaseDatabase.getInstance().reference.child("adsforyou")
+        val adsimage = FirebaseDatabase.getInstance().reference.child(AppConstants.ads)
         adsimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -246,7 +246,7 @@ class PropertyFragment : Fragment(), View.OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.btn_add_property -> {
-                if (!preferenceManager.getLoginState()) {
+                if (preferenceManager.getLoginState()) {
                     val intent = Intent(requireContext(), Admin_ads_dashboard::class.java)
                     intent.putExtra("page", "2")
                     startActivity(intent)

@@ -56,7 +56,7 @@ class ConstructionFilter : AppCompatActivity() {
     }
 
     private fun fetchdata(cat: String?) {
-        val productsinfo = FirebaseDatabase.getInstance().reference.child("constructionforyou").orderByChild(AppConstants.category).equalTo(cat)
+        val productsinfo = FirebaseDatabase.getInstance().reference.child(AppConstants.construction).orderByChild(AppConstants.category).equalTo(cat)
         productsinfo.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -122,7 +122,7 @@ class ConstructionFilter : AppCompatActivity() {
 
 
     private fun fetchbusiness(cat: String?) {
-        val coroselimage = FirebaseDatabase.getInstance().reference.child("constructionforyou").orderByChild(AppConstants.category).equalTo(cat)
+        val coroselimage = FirebaseDatabase.getInstance().reference.child(AppConstants.construction).orderByChild(AppConstants.category).equalTo(cat)
         coroselimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {

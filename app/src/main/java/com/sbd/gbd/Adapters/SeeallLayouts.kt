@@ -86,7 +86,7 @@ class SeeallLayouts(private val productInfos: List<*>, private var context: Cont
 
         holder.ll_approve.setOnClickListener {
             data[1].let { it1 ->
-                FirebaseDatabase.getInstance().reference.child("adsforyou").child(it1)
+                FirebaseDatabase.getInstance().reference.child(AppConstants.ads).child(it1)
                     .child(AppConstants.Status).setValue("2")
             }
         }

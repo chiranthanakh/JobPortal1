@@ -6,7 +6,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.OpenableColumns
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -25,22 +24,17 @@ import com.sbd.gbd.Utilitys.PreferenceManager
 class UserDetailsActivity : AppCompatActivity() {
     private var mAuth: FirebaseAuth? = null
     private var edtPhone: EditText? = null
-    private val edtOTP: EditText? = null
     private var edtEmail: EditText? = null
     private var edtName: EditText? = null
-    private var saveCurrentDate: String? = null
-    private var saveCurrentTime: String? = null
-    private val verifyOTPBtn: Button? = null
     private var submit: Button? = null
-    private val verificationId: String? = null
     private var Profiles: DatabaseReference? = null
     private var ProfileImagesRef: StorageReference? = null
     private var productRandomKey: String? = null
     private var downloadImageUrl: String? = null
     private var MainProfileUrl: String? = null
     private var loadingBar: ProgressDialog? = null
-    var fileNameList: ArrayList<String> = ArrayList<String>()
-    var fileDoneList: ArrayList<String> = ArrayList<String>()
+    var fileNameList: ArrayList<String> = ArrayList()
+    var fileDoneList: ArrayList<String> = ArrayList()
     var profileImage: ImageView? = null
     private var ImageUri: Uri? = null
     lateinit var preferenceManager: PreferenceManager
@@ -77,7 +71,7 @@ class UserDetailsActivity : AppCompatActivity() {
                 val myEdit = sharedPreferences.edit()
                 myEdit.putString("name", edtName?.getText().toString())
                 myEdit.putString(AppConstants.number, edtPhone?.getText().toString())
-                myEdit.commit()
+                myEdit.apply()
                 finish()
             } else {
                 Toast.makeText(
@@ -129,13 +123,12 @@ class UserDetailsActivity : AppCompatActivity() {
             Toast.makeText(this@UserDetailsActivity, "Error: $message", Toast.LENGTH_SHORT).show()
             loadingBar!!.dismiss()
         }.addOnSuccessListener {
-            val urlTask = uploadTask.continueWithTask { task ->
+            uploadTask.continueWithTask { task ->
                 if (!task.isSuccessful) {
                     throw task.exception!!
                 }
                 filePath.downloadUrl
-            }
-                .addOnCompleteListener { task ->
+            }.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         if (downloadImageUrl == "") {
                             downloadImageUrl = task.result.toString()
@@ -197,7 +190,6 @@ class UserDetailsActivity : AppCompatActivity() {
         }
         return result
     }
-
     companion object {
         private const val GalleryPick = 1
     }

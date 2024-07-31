@@ -96,7 +96,7 @@ class Admin_Construction : AppCompatActivity() {
         setContentView(R.layout.admin_construction)
 
         ProductImagesRef = FirebaseStorage.getInstance().reference.child("construction")
-        ProductsRef = FirebaseDatabase.getInstance().reference.child("constructionforyou")
+        ProductsRef = FirebaseDatabase.getInstance().reference.child(AppConstants.construction)
         val add_new_construction = findViewById<Button>(R.id.add_new_construction)
         edt_construction_name = findViewById<View>(R.id.edt_construction_name) as EditText
         edt_construction_category = findViewById(R.id.edt_construction_category)

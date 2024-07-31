@@ -132,7 +132,7 @@ public class AdminPropertyApproval extends AppCompatActivity implements View.OnC
 
     private void fetchads() {
 
-        DatabaseReference adsimage = FirebaseDatabase.getInstance().getReference().child("adsforyou");
+        DatabaseReference adsimage = FirebaseDatabase.getInstance().getReference().child(AppConstants.ads);
 
         adsimage.addValueEventListener(new ValueEventListener() {
             @Override

@@ -118,7 +118,6 @@ class RentHomeDetails : AppCompatActivity() {
                     tv_rent_amount?.setText(products?.rentamount)
                     number = products?.contactNumber
                     name = products?.postedBy
-                    //tv_ads_posted.setText(products?.Postedby)
                     tv_rent_availableFrom?.setText(products?.availableFrom)
                     tv_rent_no_bedrooms?.setText(products?.bedroom)
                     tv_rent_bathrooms?.setText(products?.bathroom)

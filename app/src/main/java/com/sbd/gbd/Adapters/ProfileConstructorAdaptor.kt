@@ -57,7 +57,7 @@ class ProfileConstructorAdaptor(
         }
 
         holder.ll_remove.setOnClickListener{
-            FirebaseDatabase.getInstance().reference.child("constructionforyou").child(
+            FirebaseDatabase.getInstance().reference.child(AppConstants.construction).child(
                 productInfo?.pid.toString()
             ).child(AppConstants.Status).setValue("3")
         }

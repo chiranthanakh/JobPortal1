@@ -52,18 +52,15 @@ class ConstructionFragment : Fragment() {
     var discription: String? = null
     var businesscatAdaptor: BusinessCategoryAdaptor? = null
     var bundle = Bundle()
-
-
     private var ProductsRef: DatabaseReference? = null
     var recyclerView: RecyclerView? = null
     var iv_no_internet: ImageView? = null
     var business_layout : LinearLayout? = null
     var mHandler = Handler()
-    var iv_back : ImageView?= null
     var iv_search : ImageView?= null
     var fragmentInt : FragmentInteractionListener?= null
     lateinit var preferenceManager: PreferenceManager
-    var constructioninfo: ArrayList<ConstructionModel> = ArrayList<ConstructionModel>()
+    var constructioninfo: ArrayList<ConstructionModel> = ArrayList()
     var categorylists = java.util.ArrayList<Categorymmodel>()
     private var constructionAdaptor: ConstructorAdaptor? = null
 
@@ -72,7 +69,7 @@ class ConstructionFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = ActivityConstructionBinding.inflate(inflater, container, false)
         return binding.root    }
 
@@ -97,12 +94,6 @@ class ConstructionFragment : Fragment() {
             fetchdata()
         }
 
-        /*llsearch?.setOnClickListener {
-            val intent = Intent(requireContext(), SearchActivity::class.java)
-            bundle.putString("searchtype", "const")
-            intent.putExtras(bundle)
-            startActivity(intent)
-        }*/
         binding.ivBusinessSearch.setOnClickListener {
             val intent = Intent(requireContext(), SearchActivity::class.java)
             bundle.putString("searchtype", "const")
@@ -133,11 +124,11 @@ class ConstructionFragment : Fragment() {
         categorylist.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    val dataMap = snapshot.value as HashMap<String, Any>?
+                    val dataMap = snapshot.value as HashMap<*, *>?
                     for (key in dataMap!!.keys) {
                         val data = dataMap[key]
                         try {
-                            val userData = data as HashMap<String, Any>?
+                            val userData = data as HashMap<*, *>?
                             categorylists.add(
                                 Categorymmodel(
                                     userData!![AppConstants.pid].toString(),
@@ -146,7 +137,7 @@ class ConstructionFragment : Fragment() {
                                     userData["subcategory"].toString()
                                 )
                             )
-                        } catch (cce: ClassCastException) {
+                        } catch (_: ClassCastException) {
 
                         }
                     }
@@ -163,17 +154,17 @@ class ConstructionFragment : Fragment() {
     }
 
     private fun fetchdata() {
-        val productsinfo = FirebaseDatabase.getInstance().reference.child("constructionforyou").orderByChild(AppConstants.Status).equalTo(AppConstants.user)
+        val productsinfo = FirebaseDatabase.getInstance().reference.child(AppConstants.construction).orderByChild(AppConstants.Status).equalTo(AppConstants.user)
         productsinfo.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    val dataMap = dataSnapshot.value as HashMap<String, Any>?
+                    val dataMap = dataSnapshot.value as HashMap<*, *>?
                     constructioninfo.clear()
                     for (key in dataMap!!.keys) {
                         val data = dataMap[key]
                         try {
-                            val userData = data as HashMap<String, Any>?
-                            if (userData?.get(AppConstants.Status).toString().equals(AppConstants.user)) {
+                            val userData = data as HashMap<*, *>?
+                            if (userData?.get(AppConstants.Status).toString() == AppConstants.user) {
                                 constructioninfo.add(
                                     ConstructionModel(
                                         userData!![AppConstants.pid].toString(),
@@ -201,14 +192,14 @@ class ConstructionFragment : Fragment() {
                                     )
                                 )
                             }
-                        } catch (cce: ClassCastException) {
+                        } catch (_: ClassCastException) {
 
                         }
                     }
 
                     // Upcoming Event
                     constructionAdaptor = ConstructorAdaptor(constructioninfo, requireContext())
-                    val elayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+                    LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
                     binding.rvConstructionsRelates.layoutManager = GridLayoutManager(requireContext(), 1)
                     binding.rvConstructionsRelates.itemAnimator = DefaultItemAnimator()
                     binding.rvConstructionsRelates.itemAnimator = DefaultItemAnimator()

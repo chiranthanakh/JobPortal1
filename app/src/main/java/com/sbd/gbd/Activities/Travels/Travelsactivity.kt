@@ -4,10 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatButton
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,54 +22,42 @@ import com.sbd.gbd.Activities.Admin.Admin_travels
 import com.sbd.gbd.Activities.BasicActivitys.OtpLoginActivity
 import com.sbd.gbd.Utilitys.PreferenceManager
 import com.sbd.gbd.Utilitys.UtilityMethods
+import com.sbd.gbd.databinding.ActivityTravelsactivityBinding
+import kotlinx.coroutines.launch
 
 class Travelsactivity : AppCompatActivity(), View.OnClickListener {
-    var ll_car: LinearLayout? = null
-    var ll_tt: LinearLayout? = null
-    var ll_bus: LinearLayout? = null
-    var ll_auto: LinearLayout? = null
-    var iv_nav_view: ImageView? = null
-    var ll_transport: LinearLayout? = null
-    var ll_heavyvehicles: LinearLayout? = null
-    var vehicleinfo: ArrayList<TravelsModel> = ArrayList<TravelsModel>()
-    var vehicleinfofilter: ArrayList<TravelsModel> = ArrayList<TravelsModel>()
-    var btn_add_vehicle : AppCompatButton? = null
+    private lateinit var binding: ActivityTravelsactivityBinding
+    var vehicleinfo: ArrayList<TravelsModel> = ArrayList()
+    var vehicleinfofilter: ArrayList<TravelsModel> = ArrayList()
     private var travelsAdaptor: TravelsAdaptor? = null
-    var rv_travels: RecyclerView? = null
     var mHandler = Handler()
     var type: String? = null
     lateinit var preferenceManager: PreferenceManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_travelsactivity)
+        binding=ActivityTravelsactivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         initilize()
-        fetchdata()
+        lifecycleScope.launch {
+            fetchdata()
+        }
     }
 
     private fun initilize() {
-        ll_car = findViewById(R.id.ll_car)
-        ll_bus = findViewById(R.id.ll_bus)
-        ll_tt = findViewById(R.id.ll_tempotravel)
-        ll_auto = findViewById(R.id.ll_auto)
-        ll_transport = findViewById(R.id.ll_transports)
-        ll_heavyvehicles = findViewById(R.id.ll_heavy_vehicles)
-        btn_add_vehicle = findViewById(R.id.btn_add_vehicle)
-        iv_nav_view = findViewById(R.id.iv_nav_view)
         preferenceManager= PreferenceManager(this);
-        ll_car?.setOnClickListener(this)
-        ll_bus?.setOnClickListener(this)
-        ll_transport?.setOnClickListener(this)
-        ll_tt?.setOnClickListener(this)
-        ll_auto?.setOnClickListener(this)
-        ll_heavyvehicles?.setOnClickListener(this)
-        rv_travels = findViewById(R.id.rv_travels)
+        binding.llCar.setOnClickListener(this)
+        binding.llBus.setOnClickListener(this)
+        binding.llTransports.setOnClickListener(this)
+        binding.llTempotravel.setOnClickListener(this)
+        binding.llAuto.setOnClickListener(this)
+        binding.llHeavyVehicles.setOnClickListener(this)
 
-        iv_nav_view?.setOnClickListener {
+        binding.ivNavView.setOnClickListener {
             finish()
         }
 
-        btn_add_vehicle?.setOnClickListener {
+        binding.btnAddVehicle.setOnClickListener {
             if (preferenceManager.getLoginState()) {
                 val intent = Intent(this, Admin_travels::class.java)
                 startActivity(intent)
@@ -89,11 +75,11 @@ class Travelsactivity : AppCompatActivity(), View.OnClickListener {
         productsinfo.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    val dataMap = dataSnapshot.value as HashMap<String, Any>?
+                    val dataMap = dataSnapshot.value as HashMap<*, *>?
                     for (key in dataMap!!.keys) {
                         val data = dataMap[key]
                         try {
-                            val userData = data as HashMap<String, Any>?
+                            val userData = data as HashMap<*, *>?
                             vehicleinfo.add(
                                 TravelsModel(
                                     userData!![AppConstants.pid].toString(),
@@ -113,20 +99,17 @@ class Travelsactivity : AppCompatActivity(), View.OnClickListener {
                                     userData[AppConstants.Status].toString()
                                 )
                             )
-                        } catch (cce: ClassCastException) {
+                        } catch (_: ClassCastException) {
 
                         }
                     }
 
-
-                    // Upcoming Event
                     travelsAdaptor = TravelsAdaptor(vehicleinfo, this@Travelsactivity)
-                    val elayoutManager: RecyclerView.LayoutManager =
-                        LinearLayoutManager(this@Travelsactivity, RecyclerView.VERTICAL, false)
-                    rv_travels?.layoutManager = GridLayoutManager(this@Travelsactivity, 1)
-                    rv_travels?.itemAnimator = DefaultItemAnimator()
+                    LinearLayoutManager(this@Travelsactivity, RecyclerView.VERTICAL, false)
+                    binding.rvTravels.layoutManager = GridLayoutManager(this@Travelsactivity, 1)
+                    binding.rvTravels.itemAnimator = DefaultItemAnimator()
                     mHandler.post {
-                        rv_travels?.adapter = travelsAdaptor
+                        binding.rvTravels.adapter = travelsAdaptor
                     }
                 }
             }
@@ -136,12 +119,11 @@ class Travelsactivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(view: View) {
-        val bundle = Bundle()
         when (view.id) {
             R.id.ll_car -> {
                 vehicleinfofilter.clear()
                 for (items in vehicleinfo ) {
-                    if (items?.category.equals("cab")){
+                    if (items.category.equals("cab")){
                         vehicleinfofilter.add(items)
                     }
                 }
@@ -151,7 +133,7 @@ class Travelsactivity : AppCompatActivity(), View.OnClickListener {
             R.id.ll_bus -> {
                 vehicleinfofilter.clear()
                 for (items in vehicleinfo ) {
-                    if (items?.category.equals("Bus")){
+                    if (items.category.equals("Bus")){
                         vehicleinfofilter.add(items)
                     }
                 }
@@ -161,7 +143,7 @@ class Travelsactivity : AppCompatActivity(), View.OnClickListener {
             R.id.ll_tempotravel -> {
                 vehicleinfofilter.clear()
                 for (items in vehicleinfo ) {
-                    if (items?.category.equals("Tempo Traveler")){
+                    if (items.category.equals("Tempo Traveler")){
                         vehicleinfofilter.add(items)
                     }
                 }
@@ -171,7 +153,7 @@ class Travelsactivity : AppCompatActivity(), View.OnClickListener {
             R.id.ll_auto -> {
                 vehicleinfofilter.clear()
                 for (items in vehicleinfo ) {
-                    if (items?.category.equals("Auto")){
+                    if (items.category.equals("Auto")){
                         vehicleinfofilter.add(items)
                     }
                 }
@@ -181,7 +163,7 @@ class Travelsactivity : AppCompatActivity(), View.OnClickListener {
             R.id.ll_transports -> {
                 vehicleinfofilter.clear()
                 for (items in vehicleinfo ) {
-                    if (items?.category.equals("goods vehicles")){
+                    if (items.category.equals("goods vehicles")){
                         vehicleinfofilter.add(items)
                     }
                 }
@@ -191,7 +173,7 @@ class Travelsactivity : AppCompatActivity(), View.OnClickListener {
             R.id.ll_heavy_vehicles -> {
                 vehicleinfofilter.clear()
                 for (items in vehicleinfo ) {
-                    if (items?.category.equals("Heavy Vehicles")){
+                    if (items.category.equals("Heavy Vehicles")){
                         vehicleinfofilter.add(items)
                     }
                 }
@@ -202,10 +184,9 @@ class Travelsactivity : AppCompatActivity(), View.OnClickListener {
 
     private fun addtofilteradaptor() {
        travelsAdaptor = TravelsAdaptor(vehicleinfofilter, this@Travelsactivity)
-        val elayoutManager: RecyclerView.LayoutManager =
-            LinearLayoutManager(this@Travelsactivity, RecyclerView.VERTICAL, false)
-        rv_travels?.layoutManager = GridLayoutManager(this@Travelsactivity, 1)
-        rv_travels?.itemAnimator = DefaultItemAnimator()
-        mHandler.post { rv_travels?.adapter = travelsAdaptor }
+        LinearLayoutManager(this@Travelsactivity, RecyclerView.VERTICAL, false)
+        binding.rvTravels.layoutManager = GridLayoutManager(this@Travelsactivity, 1)
+        binding.rvTravels.itemAnimator = DefaultItemAnimator()
+        mHandler.post { binding.rvTravels.adapter = travelsAdaptor }
     }
 }

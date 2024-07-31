@@ -1,20 +1,16 @@
 package com.sbd.gbd.Activities.LoanActivity
 
 import android.content.Intent
-import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
-import com.sbd.gbd.Adapters.LoanCoroselListAdaptor
 import com.sbd.gbd.Adapters.LoanoffersAdaptor
 import com.sbd.gbd.Model.LoanOffersModel
 import com.sbd.gbd.R
@@ -25,51 +21,36 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.sbd.gbd.Adapters.CoroselListAdaptor
 import com.sbd.gbd.Model.Corosolmodel
+import com.sbd.gbd.databinding.ActivityLoanBinding
+import kotlinx.coroutines.launch
 
 class LoanActivity : AppCompatActivity(), View.OnClickListener {
-    var cv_PL: CardView? = null
-    var cv_BL: CardView? = null
-    var cv_HL: CardView? = null
-    var cv_ML: CardView? = null
-    var cv_LAP: CardView? = null
-    var cv_VL: CardView? = null
-    var btn_next: Button? = null
+    private lateinit var binding: ActivityLoanBinding
     var coroselimagelist = ArrayList<Corosolmodel>()
     var bankadslist = ArrayList<LoanOffersModel>()
-    var recyclerView: RecyclerView? = null
-    var recyclarviewloanads: RecyclerView? = null
-    var iv_nav_view : ImageView? = null
     private var coroselListAdaptor: CoroselListAdaptor? = null
     private var loanoffersAdaptor: LoanoffersAdaptor? = null
     var mHandler = Handler()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_loan)
+        binding=ActivityLoanBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         initilize()
     }
 
     private fun initilize() {
-        cv_PL = findViewById(R.id.cv_personal_loan)
-        cv_BL = findViewById(R.id.cv_business_loan)
-        cv_HL = findViewById(R.id.cv_home_loan)
-        cv_ML = findViewById(R.id.cv_martgage_loan)
-        cv_LAP = findViewById(R.id.cv_lap)
-        cv_VL = findViewById(R.id.cv_vehicle)
-        iv_nav_view = findViewById(R.id.iv_nav_view)
-        recyclerView = findViewById<View>(R.id.rv_loan_event) as RecyclerView
-        recyclarviewloanads = findViewById(R.id.recycler_loanoffers)
-        cv_PL?.setOnClickListener(this)
-        cv_BL?.setOnClickListener(this)
-        cv_HL?.setOnClickListener(this)
-        cv_LAP?.setOnClickListener(this)
-        cv_ML?.setOnClickListener(this)
-        cv_VL?.setOnClickListener(this)
-        AsyncTask.execute {
+        binding.cvPersonalLoan.setOnClickListener(this)
+        binding.cvBusinessLoan.setOnClickListener(this)
+        binding.cvHomeLoan.setOnClickListener(this)
+        binding.cvLap.setOnClickListener(this)
+        binding.cvMartgageLoan.setOnClickListener(this)
+        binding.cvVehicle.setOnClickListener(this)
+        lifecycleScope.launch {
             fetchcorosel()
             fetchbankads()
         }
 
-        iv_nav_view?.setOnClickListener{
+        binding.ivNavView.setOnClickListener{
             finish()
         }
     }
@@ -79,13 +60,11 @@ class LoanActivity : AppCompatActivity(), View.OnClickListener {
         coroselimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    val dataMap = snapshot.value as HashMap<String, Any>?
+                    val dataMap = snapshot.value as HashMap<*, *>?
                     for (key in dataMap!!.keys) {
                         val data = dataMap[key]
                         try {
-                            val userData = data as HashMap<String, Any>?
-                            //coroselimagelist.add((userData?.get(AppConstants.image) ?: "") as String)
-
+                            val userData = data as HashMap<*, *>?
                             coroselimagelist.add(
                                 Corosolmodel(
                                     userData!![AppConstants.image].toString(),
@@ -96,19 +75,19 @@ class LoanActivity : AppCompatActivity(), View.OnClickListener {
                                     userData[AppConstants.description].toString()
                                 )
                             )
-                        } catch (cce: ClassCastException) {
+                        } catch (_: ClassCastException) {
 
                         }
                     }
                     coroselListAdaptor = CoroselListAdaptor(coroselimagelist, this@LoanActivity)
                     val nlayoutManager: RecyclerView.LayoutManager =
                         LinearLayoutManager(this@LoanActivity, RecyclerView.HORIZONTAL, false)
-                    recyclerView?.layoutManager = nlayoutManager
-                    recyclerView?.itemAnimator = DefaultItemAnimator()
+                    binding.rvLoanEvent.layoutManager = nlayoutManager
+                    binding.rvLoanEvent.itemAnimator = DefaultItemAnimator()
                     val snapHelper: SnapHelper = PagerSnapHelper()
-                    snapHelper.attachToRecyclerView(recyclerView)
+                    snapHelper.attachToRecyclerView(binding.rvLoanEvent)
                     snapHelper.onFling(20, 20)
-                    mHandler.post { recyclerView!!.adapter = coroselListAdaptor }
+                    mHandler.post { binding.rvLoanEvent.adapter = coroselListAdaptor }
                     coroselListAdaptor!!.notifyItemRangeInserted(0, coroselimagelist.size)
 
                 }
@@ -123,11 +102,11 @@ class LoanActivity : AppCompatActivity(), View.OnClickListener {
         coroselimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    val dataMap = snapshot.value as HashMap<String, Any>?
+                    val dataMap = snapshot.value as HashMap<*, *>?
                     for (key in dataMap!!.keys) {
                         val data = dataMap[key]
                         try {
-                            val userData = data as HashMap<String, Any>?
+                            val userData = data as HashMap<*, *>?
                             bankadslist.add(
                                 LoanOffersModel(
                                     userData!![AppConstants.pid].toString(),
@@ -139,20 +118,20 @@ class LoanActivity : AppCompatActivity(), View.OnClickListener {
                                     userData[AppConstants.image].toString()
                                 )
                             )
-                        } catch (cce: ClassCastException) {
+                        } catch (_: ClassCastException) {
 
                         }
                     }
                     loanoffersAdaptor = LoanoffersAdaptor(bankadslist, this@LoanActivity)
                     val nlayoutManager: RecyclerView.LayoutManager =
                         LinearLayoutManager(this@LoanActivity, RecyclerView.VERTICAL, false)
-                    recyclarviewloanads!!.layoutManager = nlayoutManager
-                    recyclarviewloanads!!.itemAnimator = DefaultItemAnimator()
+                    binding.recyclerLoanoffers.layoutManager = nlayoutManager
+                    binding.recyclerLoanoffers.itemAnimator = DefaultItemAnimator()
                     val snapHelper: SnapHelper = PagerSnapHelper()
-                    snapHelper.attachToRecyclerView(recyclarviewloanads)
+                    snapHelper.attachToRecyclerView(binding.recyclerLoanoffers)
                     snapHelper.onFling(20, 20)
-                    mHandler.post { recyclarviewloanads!!.adapter = loanoffersAdaptor }
-                    loanoffersAdaptor!!.notifyItemRangeInserted(0, bankadslist.size)
+                    mHandler.post { binding.recyclerLoanoffers.adapter = loanoffersAdaptor }
+                    loanoffersAdaptor?.notifyItemRangeInserted(0, bankadslist.size)
                 }
             }
 

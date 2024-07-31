@@ -74,11 +74,11 @@ public class AdminAdsAdaptor extends RecyclerView.Adapter<AdminAdsAdaptor.ViewHo
         }
 
         holder.btn_approve.setOnClickListener(view -> {
-            adminPropertyApproval.sendpdi("adsforyou",data[1],2);
+            adminPropertyApproval.sendpdi(AppConstants.ads,data[1],2);
         });
 
         holder.btn_remove.setOnClickListener(view -> {
-            adminPropertyApproval.sendpdi("adsforyou",data[1],3);
+            adminPropertyApproval.sendpdi(AppConstants.ads,data[1],3);
         });
         holder.cv_card.setOnClickListener(new View.OnClickListener() {
             @Override

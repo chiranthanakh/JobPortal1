@@ -6,40 +6,27 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RadioGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.sbd.gbd.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.storage.StorageReference
+import com.sbd.gbd.databinding.ActivityLoanForm2Binding
 
 class LoanForm : AppCompatActivity() {
-    private val ProductImagesRef: StorageReference? = null
+    private lateinit var binding: ActivityLoanForm2Binding
     private var ProductsRef: DatabaseReference? = null
-    private var et_name: EditText? = null
-    private var et_address: EditText? = null
-    private var edt_email: EditText? = null
-    private var et_number: EditText? = null
-    private var et_dob: EditText? = null
-    private var btn_next: Button? = null
     private var loadingBar: ProgressDialog? = null
     private var mAuth: FirebaseAuth? = null
     private var genderType: String? = "Male"
-    private var gender : RadioGroup? = null
-    private var edt_city : EditText ?= null
-    private var tv_loantype : TextView ?= null
-    private var iv_nav_view : ImageView ?= null
     var type : String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_loan_form2)
+        binding= ActivityLoanForm2Binding.inflate(layoutInflater)
+        setContentView(binding.root)
         ProductsRef = FirebaseDatabase.getInstance().reference.child("Loans")
         mAuth = FirebaseAuth.getInstance()
         loadingBar = ProgressDialog(this)
@@ -49,33 +36,21 @@ class LoanForm : AppCompatActivity() {
     }
 
     private fun initilize() {
-        et_name = findViewById(R.id.edt_name)
-        tv_loantype = findViewById(R.id.tv_loantype)
-        edt_email = findViewById(R.id.edt_email)
-        btn_next = findViewById(R.id.btn_next)
-        et_number = findViewById(R.id.edt_number)
-        et_dob = findViewById(R.id.edt_dob)
-        et_address = findViewById(R.id.edt_address)
-         gender = findViewById(R.id.rb_gender)
-        edt_city = findViewById(R.id.edt_city)
-        iv_nav_view = findViewById(R.id.iv_nav_view)
-
-        iv_nav_view?.setOnClickListener {
+        binding.ivNavView.setOnClickListener {
             finish()
         }
-
         if(type.equals("2")) {
-            tv_loantype?.setText("Business Loan")
+            binding.tvLoantype.text = "Business Loan"
         } else if (type.equals("3")) {
-            tv_loantype?.setText("Home Loan")
+            binding.tvLoantype.text = "Home Loan"
         } else if (type.equals("4")) {
-            tv_loantype?.setText("Martgage Loan")
+            binding.tvLoantype.text = "Martgage Loan"
         }else if (type.equals("5")) {
-            tv_loantype?.setText("LAP")
+            binding.tvLoantype.text = "LAP"
         }else if (type.equals("6")) {
-            tv_loantype?.setText("Vehicle Loan")
+            binding.tvLoantype.text = "Vehicle Loan"
         }
-        gender?.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { arg0, id ->
+        binding.rbGender.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { arg0, id ->
             when (id) {
                 R.id.rb_male -> {
                     genderType = "Male"
@@ -87,19 +62,19 @@ class LoanForm : AppCompatActivity() {
         })
 
 
-        btn_next?.setOnClickListener(View.OnClickListener { view: View? ->
-            if (TextUtils.isEmpty(et_name?.getText().toString())) {
+        binding.btnNext.setOnClickListener(View.OnClickListener { view: View? ->
+            if (TextUtils.isEmpty(binding.edtName.getText().toString())) {
                 toast("Please enter Your Name.")
-            } else if(TextUtils.isEmpty(et_number?.getText().toString()) || et_number?.getText().toString().length != 10){
+            } else if(TextUtils.isEmpty(binding.edtNumber.getText().toString()) || binding.edtNumber.getText().toString().length != 10){
                 toast("Please enter a valid phone number.")
-            }else if(TextUtils.isEmpty(et_dob?.getText().toString())){
+            }else if(TextUtils.isEmpty(binding.edtDob.getText().toString())){
                 toast("Please enter date of birth.")
-            }else if(TextUtils.isEmpty(et_address?.getText().toString())){
+            }else if(TextUtils.isEmpty(binding.edtAddress.getText().toString())){
                 toast("Please enter your address.")
-            }else if(TextUtils.isEmpty(edt_city?.getText().toString())){
+            }else if(TextUtils.isEmpty(binding.edtCity.getText().toString())){
                 toast("Please enter your city")
             } else {
-                val phone = "+91" + et_number?.getText().toString()
+                val phone = "+91" + binding.edtNumber.getText().toString()
                 //sendVerificationCode(phone);
                 if(type.equals("2")) {
                     SaveBusinessDetails()
@@ -136,13 +111,13 @@ class LoanForm : AppCompatActivity() {
         val LoanMap = HashMap<String, Any>()
 
         LoanMap["loanType"] = "VehicleLoan"
-        LoanMap["name"] = et_name!!.text.toString()
-        LoanMap["number"] = et_number!!.text.toString()
-        LoanMap["email"] = edt_email!!.text.toString()
-        LoanMap["dob"] = et_dob!!.text.toString()
-        LoanMap["address"] = et_address!!.text.toString()
+        LoanMap["name"] = binding.edtName.text.toString()
+        LoanMap["number"] = binding.edtNumber.text.toString()
+        LoanMap["email"] = binding.edtEmail.text.toString()
+        LoanMap["dob"] = binding.edtDob.text.toString()
+        LoanMap["address"] = binding.edtAddress.text.toString()
         LoanMap["gender"]  = genderType.toString()
-        LoanMap["city"]  = edt_city?.text.toString()
+        LoanMap["city"]  = binding.edtCity.text.toString()
         LoanMap["reqAmount"] = amount
         LoanMap["monthincome"] = income
         LoanMap["tenure"] = tenure
@@ -150,7 +125,7 @@ class LoanForm : AppCompatActivity() {
         LoanMap["pancard"] = pancard
         LoanMap["aadhar"] = aadhar
 
-        ProductsRef!!.child(et_number!!.text.toString()).updateChildren(LoanMap)
+        ProductsRef!!.child(binding.edtNumber.text.toString()).updateChildren(LoanMap)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     loadingBar!!.dismiss()
@@ -180,20 +155,20 @@ class LoanForm : AppCompatActivity() {
         val pancard = bundle.getString("pancard", "")
         val aadhar = bundle.getString("aadhar", "")
         val LoanMap = HashMap<String, Any>()
-        LoanMap["name"] = et_name!!.text.toString()
-        LoanMap["number"] = et_number!!.text.toString()
-        LoanMap["email"] = edt_email!!.text.toString()
-        LoanMap["dob"] = et_dob!!.text.toString()
-        LoanMap["address"] = et_address!!.text.toString()
+        LoanMap["name"] = binding.edtName.text.toString()
+        LoanMap["number"] = binding.edtNumber.text.toString()
+        LoanMap["email"] = binding.edtEmail.text.toString()
+        LoanMap["dob"] = binding.edtDob.text.toString()
+        LoanMap["address"] = binding.edtAddress.text.toString()
         LoanMap["gender"]  = genderType.toString()
-        LoanMap["city"]  = edt_city?.text.toString()
+        LoanMap["city"]  = binding.edtCity.text.toString()
         LoanMap["reqAmount"] = amount
         LoanMap["monthincome"] = income
         LoanMap["emptype"] = emptype
         LoanMap["pancard"] = pancard
         LoanMap["aadhar"] = aadhar
 
-        ProductsRef!!.child(et_number!!.text.toString()).updateChildren(LoanMap)
+        ProductsRef!!.child(binding.edtNumber.text.toString()).updateChildren(LoanMap)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     loadingBar!!.dismiss()
@@ -229,13 +204,13 @@ class LoanForm : AppCompatActivity() {
 
         val LoanMap = HashMap<String, Any>()
         LoanMap["loanType"] = "business"
-        LoanMap["name"] = et_name!!.text.toString()
-        LoanMap["number"] = et_number!!.text.toString()
-        LoanMap["email"] = edt_email!!.text.toString()
-        LoanMap["dob"] = et_dob!!.text.toString()
-        LoanMap["address"] = et_address!!.text.toString()
+        LoanMap["name"] = binding.edtName.text.toString()
+        LoanMap["number"] = binding.edtNumber.text.toString()
+        LoanMap["email"] = binding.edtEmail.text.toString()
+        LoanMap["dob"] = binding.edtDob.text.toString()
+        LoanMap["address"] = binding.edtAddress.text.toString()
         LoanMap["gender"]  = genderType.toString()
-        LoanMap["city"]  = edt_city?.text.toString()
+        LoanMap["city"]  = binding.edtCity.text.toString()
         LoanMap["reqAmount"] = amount
         LoanMap["monthlyincome"] = income
         LoanMap["pancard"] = pan
@@ -245,7 +220,7 @@ class LoanForm : AppCompatActivity() {
         LoanMap["companyType"] = companyType
         LoanMap["nature"] = nature
 
-        ProductsRef!!.child(et_number!!.text.toString()).updateChildren(LoanMap)
+        ProductsRef!!.child(binding.edtNumber.text.toString()).updateChildren(LoanMap)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     loadingBar!!.dismiss()

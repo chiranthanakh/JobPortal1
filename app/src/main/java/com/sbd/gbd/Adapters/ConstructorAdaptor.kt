@@ -66,7 +66,7 @@ class ConstructorAdaptor(
         holder.ll_approve.setOnClickListener {
             productInfo.pid.let { it1 ->
                 if (it1 != null) {
-                    FirebaseDatabase.getInstance().reference.child("constructionforyou").child(it1)
+                    FirebaseDatabase.getInstance().reference.child(AppConstants.construction).child(it1)
                         .child(AppConstants.Status).setValue("2")
                 }
             }

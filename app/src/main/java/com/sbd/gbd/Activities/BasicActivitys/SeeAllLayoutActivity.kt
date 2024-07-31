@@ -63,7 +63,7 @@ class SeeAllLayoutActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun fetchLayouts() {
-        val adsimage = FirebaseDatabase.getInstance().reference.child("layoutsforyou").orderByChild(AppConstants.Status).equalTo(AppConstants.user)
+        val adsimage = FirebaseDatabase.getInstance().reference.child(AppConstants.layouts).orderByChild(AppConstants.Status).equalTo(AppConstants.user)
         adsimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -97,7 +97,7 @@ class SeeAllLayoutActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun fetchlayouts() {
-        val adsimage = FirebaseDatabase.getInstance().reference.child("layoutsforyou")
+        val adsimage = FirebaseDatabase.getInstance().reference.child(AppConstants.layouts)
         adsimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {

@@ -2,19 +2,14 @@ package com.sbd.gbd.Activities.Profile
 
 import android.content.Context
 import android.content.Intent
-import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.RelativeLayout
-import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,67 +26,49 @@ import com.google.firebase.database.ValueEventListener
 import com.sbd.gbd.Activities.Dashboard.StartingActivity
 import com.sbd.gbd.Activities.BasicActivitys.OtpLoginActivity
 import com.sbd.gbd.Adapters.*
-import com.sbd.gbd.Interface.OnItemClick
 import com.sbd.gbd.Model.BusinessModel
 import com.sbd.gbd.Model.ConstructionModel
 import com.sbd.gbd.Model.Corosolmodel
 import com.sbd.gbd.Model.ProfileListModel
 import com.sbd.gbd.Model.TravelsModel
-import com.sbd.gbd.R
 import com.sbd.gbd.Utilitys.AppConstants
-import de.hdodenhof.circleimageview.CircleImageView
+import com.sbd.gbd.databinding.FragmentProfileBinding
+import kotlinx.coroutines.launch
 
-class ProfileFragments : Fragment(), OnItemClick {
+class ProfileFragments : Fragment() {
+    private lateinit var binding: FragmentProfileBinding
     private var ProductsRef: DatabaseReference? = null
-    private var iv_profile_image: CircleImageView? = null
-    private var tv_name: TextView? = null
-    private var tv_email: TextView? = null
-    private var tv_number: TextView? = null
-    private var iv_edit: ImageView? = null
-    private var isAvailable : Boolean? = false
-    private var iv_empty : ImageView? = null
-    private var rv_my_postings: RecyclerView? = null
-    private var rv_my_business: RecyclerView? = null
-    private var rv_my_construction: RecyclerView? = null
-    private var rv_my_travels: RecyclerView? = null
-    var businesslist = java.util.ArrayList<BusinessModel>()
+    var businessList = ArrayList<BusinessModel>()
     var businessAdaptor: ProfileBusinessAdaptor? = null
     var coroselimagelist = ArrayList<Corosolmodel>()
     private var travelsAdaptor: ProfileTravelsAdaptor? = null
-    var constructioninfo: java.util.ArrayList<ConstructionModel?> =
-        java.util.ArrayList<ConstructionModel?>()
-    var vehicleinfo: java.util.ArrayList<TravelsModel?> = java.util.ArrayList<TravelsModel?>()
-    var progress_layout : RelativeLayout?= null
+    var constructionInfo: ArrayList<ConstructionModel?> = ArrayList()
+    var vehicleinfo: ArrayList<TravelsModel?> = ArrayList()
     private var coroselListAdaptor: CoroselListAdaptor? = null
-    var recyclerView: RecyclerView? = null
-
-
+    val TAG = "ProfileActivity"
     private var constructionAdaptor: ProfileConstructorAdaptor? = null
-
     private lateinit var nameofuser: String
     private lateinit var userNumber: String
     private lateinit var useremail: String
     var mHandler = Handler()
-
-
-    var productinfolist: ArrayList<ProfileListModel?> = ArrayList<ProfileListModel?>()
+    var productinfolist: ArrayList<ProfileListModel?> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_profile, container, false)
-        val sh = context?.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
-        nameofuser = sh?.getString("name", "")!!
-        userNumber = sh?.getString(AppConstants.number, "")!!
-        useremail = sh?.getString("email", "")!!
-        initilize(view)
-        return view
+    ): View {
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        ProductsRef = FirebaseDatabase.getInstance().reference.child("Profile")
+        ProductsRef = FirebaseDatabase.getInstance().reference.child(AppConstants.profile)
+        val sh = context?.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
+        nameofuser = sh?.getString("name", "")!!
+        userNumber = sh.getString(AppConstants.number, "")!!
+        useremail = sh.getString("email", "")!!
+        initilize()
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -99,80 +76,63 @@ class ProfileFragments : Fragment(), OnItemClick {
         super.onResume()
         val sh = context?.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
         nameofuser = sh?.getString("name", "")!!
-        userNumber = sh?.getString(AppConstants.number, "")!!
-        useremail = sh?.getString("email", "")!!
+        userNumber = sh.getString(AppConstants.number, "")!!
+        useremail = sh.getString("email", "")!!
         fetchProfile()
     }
 
-    private fun initilize(view: View) {
-        iv_profile_image = view.findViewById(R.id.iv_profile_image)
-        tv_name = view.findViewById(R.id.tv_profile_name)
-        tv_email = view.findViewById(R.id.tv_profile_email)
-        tv_number = view.findViewById(R.id.tv_profile_number)
-        progress_layout = view.findViewById(R.id.progress_layout)
-        iv_empty = view.findViewById(R.id.iv_empty)
-        val ll_logout = view.findViewById<LinearLayout>(R.id.ll_logout)
-        val ll_login = view.findViewById<LinearLayout>(R.id.ll_login)
-        recyclerView = view.findViewById<View>(R.id.rv_loan_event) as RecyclerView
-
-        rv_my_postings = view.findViewById(R.id.rv_my_postings)
-        rv_my_business = view.findViewById(R.id.rv_my_business);
-        rv_my_construction = view.findViewById(R.id.rv_my_construction)
-        rv_my_travels = view.findViewById(R.id.rv_my_travels)
-        AsyncTask.execute { fetchdata() }
-        fetchbusiness()
+    private fun initilize() {
+        lifecycleScope.launch {
+            fetchdata()
+            fetchbusiness()
+            fetchCarosel()
+        }
         if (userNumber == null || userNumber.equals("")) {
-            ll_logout.visibility = View.GONE
-            ll_login.visibility = View.VISIBLE
+            binding.llLogout.visibility = View.GONE
+            binding.llLogin.visibility = View.VISIBLE
         } else {
-            ll_logout.visibility = View.VISIBLE
-            ll_login.visibility = View.GONE
+            binding.llLogout.visibility = View.VISIBLE
+            binding.llLogin.visibility = View.GONE
         }
 
-        ll_login.setOnClickListener {
+        binding.llLogin.setOnClickListener {
             val intent = Intent(context, OtpLoginActivity::class.java)
             context?.startActivity(intent)
         }
 
-        ll_logout.setOnClickListener {
-            progress_layout?.visibility = View.VISIBLE
+        binding.llLogout.setOnClickListener {
+            binding.progressLayout.visibility = View.VISIBLE
             val sh = context?.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
             val editor = sh?.edit()
             editor?.clear()
             editor?.apply()
             val ft = fragmentManager?.beginTransaction()
             ft?.detach(this)?.attach(this)?.commit()
-
             val intent = Intent(activity, StartingActivity::class.java)
             startActivity(intent)
-
         }
-            fetchcorosel()
     }
 
 
     private fun fetchProfile() {
         if (userNumber !== "") {
             val profile =
-                FirebaseDatabase.getInstance().reference.child("Profile").child(userNumber)
+                FirebaseDatabase.getInstance().reference.child(AppConstants.Profiles).child(userNumber)
             profile.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
-                        val dataMap = snapshot.value as HashMap<String, Any>?
+                        val dataMap = snapshot.value as HashMap<*, *>?
                         for (key in dataMap!!.keys) {
-                            tv_name?.text = dataMap["name"] as CharSequence?
-                            tv_email?.text = dataMap["Email"] as CharSequence?
-                            tv_number?.text = dataMap["number"] as CharSequence?
+                            binding.tvProfileName.text = dataMap["name"] as CharSequence?
+                            binding.tvProfileEmail.text = dataMap["Email"] as CharSequence?
+                            binding.tvProfileNumber.text = dataMap["number"] as CharSequence?
                             Glide.with(context!!)
                                 .load(dataMap[AppConstants.image])
                                 .apply(RequestOptions().override(500, 500))
-                                .into(iv_profile_image!!)
+                                .into(binding.ivProfileImage)
                             try {
-                            } catch (cce: ClassCastException) {
-                                try {
+                            } catch (_: ClassCastException) {
 
-                                } catch (cce2: ClassCastException) {
-                                }
                             }
                         }
                     }
@@ -183,18 +143,16 @@ class ProfileFragments : Fragment(), OnItemClick {
         }
     }
 
-    private fun fetchcorosel() {
+    private fun fetchCarosel() {
         val coroselimage = FirebaseDatabase.getInstance().reference.child("Corosels").orderByChild(AppConstants.category).equalTo("Loan")
         coroselimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    val dataMap = snapshot.value as HashMap<String, Any>?
+                    val dataMap = snapshot.value as HashMap<*, *>?
                     for (key in dataMap!!.keys) {
                         val data = dataMap[key]
                         try {
-                            val userData = data as HashMap<String, Any>?
-                            //coroselimagelist.add((userData?.get(AppConstants.image) ?: "") as String)
-
+                            val userData = data as HashMap<*, *>?
                             coroselimagelist.add(
                                 Corosolmodel(
                                     userData!![AppConstants.image].toString(),
@@ -205,19 +163,19 @@ class ProfileFragments : Fragment(), OnItemClick {
                                     userData[AppConstants.description].toString()
                                 )
                             )
-                        } catch (cce: ClassCastException) {
+                        } catch (_: ClassCastException) {
 
                         }
                     }
                     coroselListAdaptor = CoroselListAdaptor(coroselimagelist, requireContext())
                     val nlayoutManager: RecyclerView.LayoutManager =
                         LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-                    recyclerView?.layoutManager = nlayoutManager
-                    recyclerView?.itemAnimator = DefaultItemAnimator()
+                    binding.rvLoanEvent.layoutManager = nlayoutManager
+                    binding.rvLoanEvent.itemAnimator = DefaultItemAnimator()
                     val snapHelper: SnapHelper = PagerSnapHelper()
-                    snapHelper.attachToRecyclerView(recyclerView)
+                    snapHelper.attachToRecyclerView(binding.rvLoanEvent)
                     snapHelper.onFling(20, 20)
-                    mHandler.post { recyclerView!!.adapter = coroselListAdaptor }
+                    mHandler.post { binding.rvLoanEvent.adapter = coroselListAdaptor }
                     coroselListAdaptor!!.notifyItemRangeInserted(0, coroselimagelist.size)
 
                 }
@@ -233,16 +191,16 @@ class ProfileFragments : Fragment(), OnItemClick {
         coroselimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    val dataMap = snapshot.value as java.util.HashMap<String, Any>?
-                    businesslist.clear()
+                    val dataMap = snapshot.value as java.util.HashMap<*, *>?
+                    businessList.clear()
                     for (key in dataMap!!.keys) {
                         val data = dataMap[key]
                         try {
-                            val userData = data as java.util.HashMap<String, Any>?
+                            val userData = data as java.util.HashMap<*, *>?
                             if (userData?.get(AppConstants.number) == userNumber) {
-                                recyclerView?.visibility = View.GONE
-                                iv_empty?.visibility = View.GONE
-                                businesslist.add(
+                                binding.rvLoanEvent.visibility = View.GONE
+                                binding.ivEmpty.visibility = View.GONE
+                                businessList.add(
                                     BusinessModel(
                                         userData[AppConstants.pid].toString(),
                                         userData[AppConstants.date].toString(),
@@ -269,18 +227,18 @@ class ProfileFragments : Fragment(), OnItemClick {
                                 )
                             }
 
-                        } catch (cce: java.lang.ClassCastException) {
+                        } catch (_: java.lang.ClassCastException) {
 
                         }
                     }
-                    businessAdaptor = context?.let { ProfileBusinessAdaptor(businesslist, it) }
+                    businessAdaptor = context?.let { ProfileBusinessAdaptor(businessList, it) }
                     val nlayoutManager: RecyclerView.LayoutManager =
                         LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-                    rv_my_business?.setLayoutManager(nlayoutManager)
-                    rv_my_business?.setItemAnimator(DefaultItemAnimator())
-                    rv_my_business?.setNestedScrollingEnabled(false);
+                    binding.rvMyBusiness.setLayoutManager(nlayoutManager)
+                    binding.rvMyBusiness.setItemAnimator(DefaultItemAnimator())
+                    binding.rvMyBusiness.isNestedScrollingEnabled = false;
 
-                    mHandler.post { rv_my_business?.setAdapter(businessAdaptor) }
+                    mHandler.post { binding.rvMyBusiness.setAdapter(businessAdaptor) }
 
                 }
             }
@@ -288,22 +246,22 @@ class ProfileFragments : Fragment(), OnItemClick {
             override fun onCancelled(error: DatabaseError) {}
         })
 
-        val productsinfo = FirebaseDatabase.getInstance().reference.child("constructionforyou")
+        val productsinfo = FirebaseDatabase.getInstance().reference.child(AppConstants.construction)
         productsinfo.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    val dataMap = dataSnapshot.value as java.util.HashMap<String, Any>?
-                    constructioninfo.clear()
+                    val dataMap = dataSnapshot.value as java.util.HashMap<*, *>?
+                    constructionInfo.clear()
                     for (key in dataMap!!.keys) {
                         val data = dataMap[key]
                         try {
-                            val userData = data as java.util.HashMap<String, Any>?
+                            val userData = data as java.util.HashMap<*, *>?
                             if (userData?.get("number1") == userNumber) {
-                                recyclerView?.visibility = View.GONE
-                                iv_empty?.visibility = View.GONE
-                                constructioninfo.add(
+                                binding.rvLoanEvent.visibility = View.GONE
+                                binding.ivEmpty.visibility = View.GONE
+                                constructionInfo.add(
                                     ConstructionModel(
-                                        userData!![AppConstants.pid].toString(),
+                                        userData[AppConstants.pid].toString(),
                                         userData[AppConstants.date].toString(),
                                         userData[AppConstants.time].toString(),
                                         userData["name"].toString(),
@@ -328,23 +286,16 @@ class ProfileFragments : Fragment(), OnItemClick {
                                     )
                                 )
                             }
-                        } catch (cce: java.lang.ClassCastException) {
-                            try {
+                        } catch (_: java.lang.ClassCastException) {
 
-                            } catch (cce2: java.lang.ClassCastException) {
-                            }
                         }
                     }
-
-                    // Upcoming Event
                     constructionAdaptor =
-                        context?.let { ProfileConstructorAdaptor(constructioninfo, it) }
-                    val elayoutManager: RecyclerView.LayoutManager =
-                        LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-                    rv_my_construction?.layoutManager = GridLayoutManager(context, 1)
-                    rv_my_construction?.itemAnimator = DefaultItemAnimator()
-                    rv_my_construction?.itemAnimator = DefaultItemAnimator()
-                    mHandler.post { rv_my_construction?.adapter = constructionAdaptor }
+                        context?.let { ProfileConstructorAdaptor(constructionInfo, it) }
+                    LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                    binding.rvMyConstruction.layoutManager = GridLayoutManager(context, 1)
+                    binding.rvMyConstruction.itemAnimator = DefaultItemAnimator()
+                    mHandler.post { binding.rvMyConstruction.adapter = constructionAdaptor }
                 }
             }
 
@@ -355,50 +306,43 @@ class ProfileFragments : Fragment(), OnItemClick {
         travelsinfo.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    val dataMap = dataSnapshot.value as java.util.HashMap<String, Any>?
+                    val dataMap = dataSnapshot.value as java.util.HashMap<*, *>?
                     vehicleinfo.clear()
                     for (key in dataMap!!.keys) {
-                        val data = dataMap!![key]
+                        val data = dataMap[key]
                         try {
-                            val userData = data as java.util.HashMap<String, Any>?
+                            val userData = data as java.util.HashMap<*, *>?
                             if (userData?.get("contactnumber") == userNumber) {
-                                recyclerView?.visibility = View.GONE
-                                iv_empty?.visibility = View.GONE
+                                binding.rvLoanEvent.visibility = View.GONE
+                                binding.ivEmpty.visibility = View.GONE
                                 vehicleinfo.add(
                                     TravelsModel(
-                                        userData!![AppConstants.pid].toString(),
-                                        userData!![AppConstants.date].toString(),
-                                        userData!![AppConstants.time].toString(),
-                                        userData!!["vehiclename"].toString(),
-                                        userData!![AppConstants.category].toString(),
-                                        userData!!["vehiclenumber"].toString(),
-                                        userData!!["costperkm"].toString(),
-                                        userData!!["contactnumber"].toString(),
-                                        userData!!["ownerNmae"].toString(),
-                                        userData!![AppConstants.verified].toString(),
-                                        userData!![AppConstants.description].toString(),
-                                        userData!![AppConstants.image].toString(),
-                                        userData!![AppConstants.image2].toString(),
-                                        userData!!["model"].toString(),
-                                        userData!![AppConstants.Status].toString()
+                                        userData[AppConstants.pid].toString(),
+                                        userData[AppConstants.date].toString(),
+                                        userData[AppConstants.time].toString(),
+                                        userData["vehiclename"].toString(),
+                                        userData[AppConstants.category].toString(),
+                                        userData["vehiclenumber"].toString(),
+                                        userData["costperkm"].toString(),
+                                        userData["contactnumber"].toString(),
+                                        userData["ownerNmae"].toString(),
+                                        userData[AppConstants.verified].toString(),
+                                        userData[AppConstants.description].toString(),
+                                        userData[AppConstants.image].toString(),
+                                        userData[AppConstants.image2].toString(),
+                                        userData["model"].toString(),
+                                        userData[AppConstants.Status].toString()
                                     )
                                 )
                             }
-                        } catch (cce: java.lang.ClassCastException) {
-                            try {
-
-                            } catch (cce2: java.lang.ClassCastException) {
-                            }
+                        } catch (_: java.lang.ClassCastException) {
                         }
                     }
-
-                    // Upcoming Event
                     travelsAdaptor = context?.let { ProfileTravelsAdaptor(vehicleinfo, it) }
-                    val elayoutManager: RecyclerView.LayoutManager =
-                        LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-                    rv_my_travels?.setLayoutManager(GridLayoutManager(context, 1))
-                    rv_my_travels?.setItemAnimator(DefaultItemAnimator())
-                    mHandler.post { rv_my_travels?.setAdapter(travelsAdaptor) }
+                    LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                    binding.rvMyTravels.setLayoutManager(GridLayoutManager(context, 1))
+                    binding.rvMyTravels.setItemAnimator(DefaultItemAnimator())
+                    mHandler.post { binding.rvMyTravels.setAdapter(travelsAdaptor) }
                 }
             }
 
@@ -415,17 +359,17 @@ class ProfileFragments : Fragment(), OnItemClick {
         productsinfo.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    val dataMap = dataSnapshot.value as HashMap<String, Any>?
+                    val dataMap = dataSnapshot.value as HashMap<*, *>?
                     for (key in dataMap!!.keys) {
                         val data = dataMap[key]
                         try {
-                            val userData = data as HashMap<String, Any>?
+                            val userData = data as HashMap<*, *>?
                             if (userData?.get(AppConstants.number)?.equals(userNumber) == true) {
-                                recyclerView?.visibility = View.GONE
-                                iv_empty?.visibility = View.GONE
+                                binding.rvLoanEvent.visibility = View.GONE
+                                binding.ivEmpty.visibility = View.GONE
                                 productinfolist.add(
                                     ProfileListModel(
-                                        userData!![AppConstants.category].toString(),
+                                        userData[AppConstants.category].toString(),
                                         userData[AppConstants.date].toString(),
                                         userData[AppConstants.description].toString(),
                                         userData[AppConstants.image].toString(),
@@ -442,14 +386,10 @@ class ProfileFragments : Fragment(), OnItemClick {
                                         userData[AppConstants.Status].toString()
                                     )
                                 )
-                                Log.d("dataparm61", productinfolist.size.toString())
-                                //}
+                                Log.d(TAG, productinfolist.size.toString())
                             }
-                        } catch (cce: ClassCastException) {
-                            try {
+                        } catch (_: ClassCastException) {
 
-                            } catch (cce2: ClassCastException) {
-                            }
                         }
                     }
                 }
@@ -458,24 +398,23 @@ class ProfileFragments : Fragment(), OnItemClick {
             override fun onCancelled(databaseError: DatabaseError) {}
         })
 
-
         //layouts
-        val productsinfoLayouts = FirebaseDatabase.getInstance().reference.child("layoutsforyou")
+        val productsinfoLayouts = FirebaseDatabase.getInstance().reference.child(AppConstants.layouts)
             .orderByChild(AppConstants.number).equalTo(userNumber)
         productsinfoLayouts.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    val dataMap = dataSnapshot.value as HashMap<String, Any>?
+                    val dataMap = dataSnapshot.value as HashMap<*, *>?
                     for (key in dataMap!!.keys) {
                         val data = dataMap[key]
                         try {
-                            val userData = data as HashMap<String, Any>?
+                            val userData = data as HashMap<*, *>?
                             if (userData?.get(AppConstants.number)?.equals(userNumber) == true) {
-                                recyclerView?.visibility = View.GONE
-                                iv_empty?.visibility = View.GONE
+                                binding.rvLoanEvent.visibility = View.GONE
+                                binding.ivEmpty.visibility = View.GONE
                                 productinfolist.add(
                                     ProfileListModel(
-                                        userData!![AppConstants.category].toString(),
+                                        userData[AppConstants.category].toString(),
                                         userData[AppConstants.date].toString(),
                                         userData[AppConstants.description].toString(),
                                         userData[AppConstants.image].toString(),
@@ -493,34 +432,33 @@ class ProfileFragments : Fragment(), OnItemClick {
                                     )
                                 )
                             }
-                        } catch (cce: ClassCastException) {
+                        } catch (_: ClassCastException) {
 
                         }
                     }
-
                 }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {}
         })
 
-        val productsinfogeneral = FirebaseDatabase.getInstance().reference.child("adsforyou")
+        val productsinfogeneral = FirebaseDatabase.getInstance().reference.child(AppConstants.ads)
             .orderByChild(AppConstants.number).equalTo(userNumber)
         productsinfogeneral.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    val dataMap = dataSnapshot.value as HashMap<String, Any>?
+                    val dataMap = dataSnapshot.value as HashMap<*, *>?
                     for (key in dataMap!!.keys) {
                         val data = dataMap[key]
                         try {
-                            val userData = data as HashMap<String, Any>?
-                            Log.d("dataparm1", productinfolist.toString())
+                            val userData = data as HashMap<*, *>?
+                            Log.d(TAG, productinfolist.toString())
                             if (userData?.get(AppConstants.number)?.equals(userNumber) == true) {
-                                recyclerView?.visibility = View.GONE
-                                iv_empty?.visibility = View.GONE
+                                binding.rvLoanEvent.visibility = View.GONE
+                                binding.ivEmpty.visibility = View.GONE
                                 productinfolist.add(
                                     ProfileListModel(
-                                        userData!![AppConstants.category].toString(),
+                                        userData[AppConstants.category].toString(),
                                         userData[AppConstants.date].toString(),
                                         userData[AppConstants.description].toString(),
                                         userData[AppConstants.image].toString(),
@@ -539,40 +477,28 @@ class ProfileFragments : Fragment(), OnItemClick {
                                     )
                                 )
                             }
-                        } catch (cce: ClassCastException) {
-                            try {
-                            } catch (cce2: ClassCastException) {
-                            }
+                        } catch (_: ClassCastException) {
                         }
                     }
-
-                    // Upcoming Event
                     val bottomhomeRecyclarviewAdaptor = context?.let {
                         ProfilePostingListings(
                             productinfolist,
                             it, userNumber, nameofuser
                         )
                     }
-                    val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(
-                        context, RecyclerView.VERTICAL, false
-                    )
-                    rv_my_postings?.setLayoutManager(GridLayoutManager(context, 1))
-                    rv_my_postings?.setItemAnimator(DefaultItemAnimator())
-                    rv_my_postings?.setNestedScrollingEnabled(false);
-                    mHandler.post(Runnable {
-                        rv_my_postings?.setAdapter(
+                    LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                    binding.rvMyPostings.setLayoutManager(GridLayoutManager(context, 1))
+                    binding.rvMyPostings.setItemAnimator(DefaultItemAnimator())
+                    binding.rvMyPostings.isNestedScrollingEnabled = false;
+                    mHandler.post {
+                        binding.rvMyPostings.setAdapter(
                             bottomhomeRecyclarviewAdaptor
                         )
-                    })
+                    }
                 }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {}
         })
     }
-
-    override fun onClick1() {
-        TODO("Not yet implemented")
-    }
-
 }

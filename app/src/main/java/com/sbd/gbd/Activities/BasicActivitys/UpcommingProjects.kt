@@ -32,12 +32,6 @@ class UpcommingProjects : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_upcomming_projects)
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            //setTheme(R.style.darkTheme)
-            //when dark mode is enabled, we use the dark theme
-        } else {
-            setTheme(R.style.JobPortaltheam) //default app theme
-        }
         if (Build.VERSION.SDK_INT >= 21) {
             val window = this.window
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
@@ -51,14 +45,13 @@ class UpcommingProjects : AppCompatActivity(), View.OnClickListener {
     private fun initilize() {
         recyclerView = findViewById(R.id.recyclarview_allupcomming)
         back_toolbar_up = findViewById(R.id.back_toolbar_up)
-        //  recyclerView.setHasFixedSize(true);
         val mgrid = GridLayoutManager(this, 1)
         recyclerView?.setLayoutManager(mgrid)
-        back_toolbar_up?.setOnClickListener(View.OnClickListener { finish() })
+        back_toolbar_up?.setOnClickListener {finish()}
     }
 
     private fun fetchads() {
-        val adsimage = FirebaseDatabase.getInstance().reference.child("adsforyou").orderByChild(AppConstants.Status).equalTo(AppConstants.user)
+        val adsimage = FirebaseDatabase.getInstance().reference.child(AppConstants.ads).orderByChild(AppConstants.Status).equalTo(AppConstants.user)
         adsimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -82,7 +75,7 @@ class UpcommingProjects : AppCompatActivity(), View.OnClickListener {
                                     userData[AppConstants.Status].toString()
                                 )
                             )
-                        } catch (cce: ClassCastException) {
+                        } catch (_: ClassCastException) {
 
                         }
                     }

@@ -68,8 +68,6 @@ class AdminLocations : AppCompatActivity() {
     private fun SaveProductInfoToDatabase() {
         val productMap = HashMap<String, Any?>()
         productMap[AppConstants.pid] = UtilityMethods.getCurrentTimeDate()
-        productMap[AppConstants.date] = UtilityMethods.getDate()
-        productMap[AppConstants.time] = UtilityMethods.getTime()
         productMap[AppConstants.district] = district
         productMap[AppConstants.taluk] = taluk
         productMap["id"] = locationId
@@ -82,9 +80,9 @@ class AdminLocations : AppCompatActivity() {
                         "Location Added Successfully",
                         Toast.LENGTH_SHORT
                     ).show()
-                    finish()
+                   // finish()
                 } else {
-                    loadingBar!!.dismiss()
+                    loadingBar?.dismiss()
                     val message = task.exception.toString()
                     Log.d("fnffh",message)
                     Toast.makeText(

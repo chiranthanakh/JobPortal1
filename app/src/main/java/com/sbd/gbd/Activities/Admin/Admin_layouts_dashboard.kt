@@ -78,7 +78,7 @@ class Admin_layouts_dashboard : AppCompatActivity() {
 
         //CategoryName = "cqat";
         ProductImagesRef = FirebaseStorage.getInstance().reference.child("layouts")
-        ProductsRef = FirebaseDatabase.getInstance().reference.child("layoutsforyou")
+        ProductsRef = FirebaseDatabase.getInstance().reference.child(AppConstants.layouts)
         val btn_corosel = findViewById<ImageView>(R.id.select_corosel_image)
         val add_new_corosel = findViewById<Button>(R.id.add_new_ads)
         InputProductName = findViewById<View>(R.id.ads_name) as EditText
