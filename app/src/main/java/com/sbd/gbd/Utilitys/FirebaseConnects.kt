@@ -30,6 +30,24 @@ object FirebaseConnects {
         })
     }
 
+    fun fetchDataWithLayout(tabelName: String,type: String, callback: (HashMap<*, *>?) -> Unit) {
+        val adsimage = FirebaseDatabase.getInstance().reference.child(AppConstants.products)
+            .orderByChild(AppConstants.type).equalTo(type)
+           // .orderByChild(AppConstants.Status).equalTo(AppConstants.user)
+
+        adsimage.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val dataMap = snapshot.value
+                        as? HashMap<*, *>
+                callback(dataMap)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                callback(null)
+            }
+        })
+    }
+
     fun fetchCarosel(tabelName: String, callback: (HashMap<*, *>?) -> Unit) {
         val carosel = FirebaseDatabase.getInstance().reference.child(tabelName)
         carosel.addValueEventListener(object : ValueEventListener {

@@ -102,8 +102,9 @@ class SellActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.ll_rent -> {
                 if (preferenceManager.getLoginState()) {
-                    val intent2 = Intent(this, AdminLivingPlacess::class.java)
-                    startActivity(intent2)
+                    val intent = Intent(this@SellActivity, Admin_ads_dashboard::class.java)
+                    intent.putExtra("page", "3")
+                    startActivity(intent)
                 } else {
                     UtilityMethods.showToast(this,"Please Login to process")
                     val intent = Intent(this, OtpLoginActivity::class.java)

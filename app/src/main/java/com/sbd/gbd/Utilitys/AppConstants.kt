@@ -13,6 +13,7 @@ object AppConstants {
     const val price = "price"
     const val city = "city"
     const val pname = "pname"
+    const val layoutsname = "Layout"
     const val katha = "katha"
     const val propertysize = "propertysize"
     const val location = "location"

@@ -21,6 +21,7 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_propertname"
             android:layout_width="match_parent"
@@ -33,8 +34,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/black"
-                app:boxStrokeColor="@color/grey_light"
-                app:hintTextColor="@color/black"
+                app:boxStrokeColor="@color/purple_500"
+                app:hintTextColor="@color/purple_500"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:startIconTint="@color/grey_dark">
@@ -66,17 +67,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/black"
-                app:boxStrokeColor="@color/grey_light"
+                app:boxStrokeColor="@color/purple_500"
+                android:outlineSpotShadowColor="@color/purple_500"
                 app:hintTextColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:startIconTint="@color/grey_dark">
+                app:startIconTint="@color/purple_500">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_layout_name"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:background="@null"
                     android:hint="Layout / Plot name"
                     android:inputType="text"
                     android:lines="4"
@@ -208,7 +209,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:background="@null"
-                    android:hint="Deposite"
+                    android:hint="Deposite Amount"
                     android:inputType="number"
                     android:lines="4"
                     android:padding="@dimen/dp_0"

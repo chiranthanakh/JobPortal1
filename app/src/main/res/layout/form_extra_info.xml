@@ -5,6 +5,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ll_home"
+        android:orientation="vertical">
+
     <TextView
         android:text="Additional Information"
         android:layout_width="wrap_content"
@@ -23,6 +29,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_road"
             android:text="Is their road for this Land?"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -105,6 +112,7 @@
         android:orientation="vertical">
 
     <TextView
+        android:id="@+id/tv_furnished"
         android:text="Is it Furnished?"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -142,6 +150,7 @@
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
         <TextView
+            android:id="@+id/tv_carparking"
             android:text="Car Parking Available?"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -369,6 +378,7 @@
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
     <TextView
+        android:id="@+id/tv_cornersight"
         android:text="Is this Corner Sight?"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -405,6 +415,211 @@
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
     </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/llextrainfo2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_additional"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_pool"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Swiming Pool available?"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/poolGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="15dp"
+                android:outlineSpotShadowColor="@color/background_black"
+                android:weightSum="2"
+                app:singleSelection="true">
+
+
+                <Button
+                    android:id="@+id/pool_yes"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Available"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/pool_no"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Not available"
+                    android:textColor="@color/black" />
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Club house"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/clubhouseGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="15dp"
+                android:outlineSpotShadowColor="@color/background_black"
+                android:weightSum="2"
+                app:singleSelection="true">
+
+
+                <Button
+                    android:id="@+id/clubhouse_yes"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Available"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/clubhouse_no"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Not available"
+                    android:textColor="@color/black" />
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+
+            <TextView
+                android:id="@+id/tv_gurdan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Garden area / Play area"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/gardenGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="15dp"
+                android:outlineSpotShadowColor="@color/background_black"
+                android:weightSum="2"
+                app:singleSelection="true">
+
+
+                <Button
+                    android:id="@+id/garden_yes"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Available"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/garden_no"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Not available"
+                    android:textColor="@color/black" />
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            <TextView
+                android:id="@+id/tv_gym"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:text="GYM"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/gynGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="15dp"
+                android:outlineSpotShadowColor="@color/background_black"
+                android:weightSum="2"
+                app:singleSelection="true">
+
+
+                <Button
+                    android:id="@+id/gym_yes"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Available"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/gym_no"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Not available"
+                    android:textColor="@color/black" />
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    </LinearLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/black"
+            app:boxStrokeColor="@color/grey_light"
+            app:hintTextColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIconTint="@color/grey_dark">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_additional_points"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@null"
+                android:hint="Additional Features"
+                android:inputType="text"
+                android:lines="4"
+                android:padding="@dimen/dp_0"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="@dimen/text_size_14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

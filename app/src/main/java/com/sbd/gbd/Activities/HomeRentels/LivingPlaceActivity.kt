@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import com.sbd.gbd.Utilitys.AppConstants
 import com.google.firebase.database.DatabaseError
 import com.sbd.gbd.Activities.Admin.AdminLivingPlacess
+import com.sbd.gbd.Activities.Admin.Admin_ads_dashboard
 import com.sbd.gbd.Activities.BasicActivitys.OtpLoginActivity
 import com.sbd.gbd.Utilitys.PreferenceManager
 import com.sbd.gbd.Utilitys.UtilityMethods
@@ -60,7 +61,8 @@ class LivingPlaceActivity : AppCompatActivity() {
 
         btn_add_hotel?.setOnClickListener {
             if (preferenceManager.getLoginState()) {
-                val intent = Intent(this, AdminLivingPlacess::class.java)
+                val intent = Intent(this@LivingPlaceActivity, Admin_ads_dashboard::class.java)
+                intent.putExtra("page", "3")
                 startActivity(intent)
             } else {
                 UtilityMethods.showToast(this,"Please Login to process")
@@ -91,16 +93,18 @@ class LivingPlaceActivity : AppCompatActivity() {
                                     userData!![AppConstants.pid].toString(),
                                     userData["saveCurrentDate"].toString(),
                                     userData["saveCurrentTime"].toString(),
-                                    userData["title"].toString(),
+                                    userData["pname"].toString(),
                                     userData[AppConstants.category].toString(),
-                                    userData["rent_lease"].toString(),
+                                    userData["type"].toString(),
+                                    userData["buildingType"].toString(),
                                     userData["floore"].toString(),
-                                    userData["rentamount"].toString(),
+                                    userData["rent"].toString(),
+                                    userData["deposit"].toString(),
                                     userData[AppConstants.location].toString(),
-                                    userData["contactNumber"].toString(),
+                                    userData["number"].toString(),
                                     userData["Approval"].toString(),
-                                    userData["nuBHK"].toString(),
-                                    userData["sqft"].toString(),
+                                    userData["nuBhk"].toString(),
+                                    userData["propertysize"].toString(),
                                     userData["water"].toString(),
                                     userData["parking"].toString(),
                                     userData[AppConstants.postedBy].toString(),

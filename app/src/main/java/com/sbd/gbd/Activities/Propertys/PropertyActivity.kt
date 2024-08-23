@@ -27,10 +27,11 @@ import com.sbd.gbd.Model.FilterModel
 import com.sbd.gbd.R
 import com.sbd.gbd.Utilitys.AppConstants
 import com.sbd.gbd.databinding.ActivityPropertyBinding
+import com.sbd.gbd.databinding.ActivityPropertyMainBinding
 import kotlinx.coroutines.launch
 
 class PropertyActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityPropertyBinding
+    private lateinit var binding: ActivityPropertyMainBinding
     private var ProductsRef: DatabaseReference? = null
     var adapter: FirebaseRecyclerAdapter<Products, ProductViewHolder>? = null
     var layoutManager: RecyclerView.LayoutManager? = null
@@ -47,7 +48,7 @@ class PropertyActivity : AppCompatActivity() {
     var bundle = Bundle()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivityPropertyBinding.inflate(layoutInflater)
+        binding= ActivityPropertyMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         if (Build.VERSION.SDK_INT >= 21) {

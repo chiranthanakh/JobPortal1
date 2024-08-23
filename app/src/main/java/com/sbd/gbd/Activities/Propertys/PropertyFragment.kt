@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.sbd.gbd.Activities.Admin.Admin_ads_dashboard
 import com.sbd.gbd.Activities.BasicActivitys.SearchActivity
 import com.sbd.gbd.Adapters.AdsAdaptor
@@ -23,12 +24,14 @@ import com.sbd.gbd.R
 import com.sbd.gbd.Utilitys.AppConstants
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.sbd.gbd.Activities.BasicActivitys.OtpLoginActivity
+import com.sbd.gbd.Adapters.PropertyFragmentPagerAdapter
 import com.sbd.gbd.Model.FilterModel
 import com.sbd.gbd.Utilitys.PreferenceManager
 import com.sbd.gbd.Utilitys.UtilityMethods
@@ -94,7 +97,20 @@ class PropertyFragment : Fragment(), View.OnClickListener {
             startActivity(intent)
         }
 
-        binding.buttonToggleGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+        val adapter = PropertyFragmentPagerAdapter(childFragmentManager, lifecycle)
+        binding.viewPager.isSaveEnabled = false
+        binding.viewPager.adapter = adapter
+        TabLayoutMediator(binding.tabLayout,binding.viewPager){tab,index ->
+            tab.text = when(index) {
+                0 -> "Sites"
+                1 -> "Homes"
+                3 -> "Layouts"
+                2 -> "G-Land"
+                else -> {""}
+            }
+        }.attach()
+
+        /*binding.buttonToggleGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             view.findViewById<MaterialButton>(checkedId)
             if (isChecked) {
                 when (checkedId) {
@@ -123,7 +139,7 @@ class PropertyFragment : Fragment(), View.OnClickListener {
                     }
                 }
             }
-        }
+        }*/
 
     }
 

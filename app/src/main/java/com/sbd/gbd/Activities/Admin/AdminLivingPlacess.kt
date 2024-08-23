@@ -9,6 +9,7 @@ import android.provider.OpenableColumns
 import android.text.TextUtils
 import android.view.View
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.GridView
@@ -27,10 +28,13 @@ import com.google.firebase.storage.UploadTask
 import com.sbd.gbd.Adapters.ImageAdaptor
 import com.sbd.gbd.R
 import com.sbd.gbd.Utilitys.AppConstants
+import com.sbd.gbd.databinding.ActivityAdminAdsBinding
+import com.sbd.gbd.databinding.ActivityAdminLivingPlacessBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
 class AdminLivingPlacess : AppCompatActivity() {
+    private lateinit var binding: ActivityAdminLivingPlacessBinding
     var saveCurrentDate: String? = null
     var saveCurrentTime: String? = null
     var title: String? = null
@@ -45,8 +49,13 @@ class AdminLivingPlacess : AppCompatActivity() {
     var nuBHK: String? = null
     var sqft: String? = null
     var water: String? = null
-    var parking: String? = null
-    var postedBY: String? = null
+    private var taluk: String? = ""
+    private var postedBy: String? = ""
+    private var boarwell: Boolean? = false
+    private var furnished: Boolean? = false
+    private var parking: Boolean? = false
+    private var gated: Boolean? = false
+    private var immidateAvailable: Boolean? = false
     var discription: String? = null
     private var livingplace_name: EditText? = null
     private var livingplace_category: Spinner? = null
@@ -71,72 +80,68 @@ class AdminLivingPlacess : AppCompatActivity() {
     private var MainimageUrl: String? = null
     private var ProductImagesRef: StorageReference? = null
     private var ProductsRef: DatabaseReference? = null
-    var fileNameList: ArrayList<String?> = ArrayList<String?>()
-    var fileDoneList: ArrayList<String> = ArrayList<String>()
     var back_btn: ImageView? = null
     private var gridView: GridView? = null
     private var btn_corosel : ImageView? = null
     private var ll_selfie : LinearLayout? = null
+    private var add_images : ImageView? = null
+
+    var fileNameList: ArrayList<String> = ArrayList()
+    var fileDoneList: ArrayList<String> = ArrayList()
+    var locationList: ArrayList<String> = ArrayList()
+    var locationMap = mutableMapOf<String, String>()
+    var districtList : ArrayList<String> = ArrayList()
+    private var arrayAdapter: ArrayAdapter<*>? = null
+    private var districtAdapter: ArrayAdapter<*>? = null
     private lateinit var imageAdapter: ImageAdaptor
     private val selectedImages = mutableListOf<Uri>()
-    private var add_images : ImageView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_admin_living_placess)
+        binding = ActivityAdminLivingPlacessBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         ProductImagesRef = FirebaseStorage.getInstance().reference.child("livingplace")
         ProductsRef = FirebaseDatabase.getInstance().reference.child("livingplaceforyou")
         initilize()
     }
 
     private fun initilize() {
-         add_images = findViewById(R.id.select_image)
-        val btn_add_livingplace = findViewById<Button>(R.id.livingplace_submit)
-        livingplace_name = findViewById(R.id.livingplace_name)
-        livingplace_category = findViewById(R.id.sp_building_type)
-        livingplace_rent_lease = findViewById(R.id.sp_home_type)
-        livingplace_flore = findViewById(R.id.livingplace_flore)
-        livingplace_deposite_amount = findViewById(R.id.livingplace_deposite_amount)
-        livingplace_rent_amount = findViewById(R.id.livingplace_rent_amount)
-        livingplace_location = findViewById(R.id.livingplace_location)
-        livingplace_contact_number = findViewById(R.id.livingplace_contact_number)
-        leavingplace_verify_or_nt = findViewById(R.id.leavingplace_verify_or_nt)
-        livingplace_number_of_bhk = findViewById(R.id.livingplace_number_of_bhk)
-        livingplace_sqft = findViewById(R.id.livingplace_sqft)
-        livingplace_water_facility = findViewById(R.id.livingplace_water_facility)
-        livingplace_vehicle_parking = findViewById(R.id.livingplace_vehicle_parking)
-        livingplace_posted_by = findViewById(R.id.livingplace_posted_by)
-        livingplace_discription = findViewById(R.id.livingplace_discription)
         back_btn = findViewById(R.id.iv_nav_view)
         loadingBar = ProgressDialog(this)
         ll_selfie = findViewById(R.id.ll_selfie)
         gridView = findViewById(R.id.gridView)
         add_images?.setOnClickListener {  OpenGallery() }
-        btn_add_livingplace.setOnClickListener {  ValidateProductData() }
-        back_btn?.setOnClickListener{ view: View? -> finish() }
 
-        imageAdapter = ImageAdaptor(this, selectedImages)
-        gridView?.adapter = imageAdapter
-
-        livingplace_category?.onItemSelectedListener=object : AdapterView.OnItemSelectedListener {
-            val frequencyArray = resources.getStringArray(R.array.building_type)
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                if (p2>0){
-                    category = frequencyArray.get(p2)
+        binding.furnishrGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.furnish_yes -> { furnished = true }
+                    R.id.furnish_no -> { furnished = false }
                 }
-            }
-            override fun onNothingSelected(p0: AdapterView<*>?) {
             }
         }
-
-        livingplace_rent_lease?.onItemSelectedListener=object : AdapterView.OnItemSelectedListener {
-            val frequencyArray = resources.getStringArray(R.array.home_type)
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                if (p2>0){
-                    rent_lease = frequencyArray.get(p2)
+        binding.CarGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.car_yes -> { parking = true }
+                    R.id.car_no -> { parking = false }
                 }
             }
-            override fun onNothingSelected(p0: AdapterView<*>?) {
+        }
+        binding.gatedGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.gated_yes -> { gated = true }
+                    R.id.gated_no -> { gated = false }
+                }
+            }
+        }
+        binding.immidateGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.immidate_yes -> { immidateAvailable = true }
+                    R.id.immidate_no -> { immidateAvailable = false }
+                }
             }
         }
     }
@@ -179,7 +184,7 @@ class AdminLivingPlacess : AppCompatActivity() {
 
     private fun uploadTostorage(data: Intent, uri: Uri?) {
         val fileName = getFileName(uri)
-        fileNameList.add(fileName)
+       // fileNameList.add(fileName)
         fileDoneList.add("Uploading")
         val calendar = Calendar.getInstance()
         val currentDate = SimpleDateFormat("MMM dd")
@@ -222,8 +227,8 @@ class AdminLivingPlacess : AppCompatActivity() {
         nuBHK = livingplace_number_of_bhk?.text.toString()
         sqft = livingplace_sqft!!.text.toString()
         water = livingplace_water_facility?.text.toString()
-        parking = livingplace_vehicle_parking?.text.toString()
-        postedBY = livingplace_posted_by?.text.toString()
+       // parking = livingplace_vehicle_parking?.text.toString()
+        //postedBY = livingplace_posted_by?.text.toString()
 
         discription = livingplace_discription!!.text.toString()
         if (TextUtils.isEmpty(downloadImageUrl)) {
@@ -269,7 +274,7 @@ class AdminLivingPlacess : AppCompatActivity() {
         productMap[AppConstants.postedOn] = saveCurrentDate
         productMap["Approval"] = 1
         productMap["parking"] = parking
-        productMap[AppConstants.postedBy] = postedBY
+       // productMap[AppConstants.postedBy] = postedBY
         productMap["discription"] = discription
         productMap[AppConstants.Status] = "1"
         ProductsRef?.child(productRandomKey!!)?.updateChildren(productMap)

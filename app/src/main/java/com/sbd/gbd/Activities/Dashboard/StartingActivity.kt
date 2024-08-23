@@ -71,7 +71,7 @@ class StartingActivity : AppCompatActivity() {
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
         analytics = Firebase.analytics
         initilize()
-        checkPermissions()
+        //checkPermissions()
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, startingFragment).commit()
     }
 

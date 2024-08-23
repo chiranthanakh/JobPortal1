@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.database.FirebaseDatabase
 import com.sbd.gbd.Activities.Dashboard.AdsDetailsActivity
+import com.sbd.gbd.Activities.Dashboard.LayoutDetailsActivity
 import com.sbd.gbd.Model.FilterModel
 import com.sbd.gbd.Utilitys.CalldetailsRecords
 import com.sbd.gbd.R
@@ -48,10 +49,17 @@ class PropertyAdaptor(private val productInfos: List<FilterModel>, private var c
         holder.product_size1.text = propertyinfo.size
         holder.product_name.text = propertyinfo.pname
         holder.cv_layout.setOnClickListener {
-            val intent = Intent(context, AdsDetailsActivity::class.java)
-            intent.putExtra(AppConstants.pid, propertyinfo.pid)
-            intent.putExtra("page", "2")
-            context.startActivity(intent)
+            if(propertyinfo.type == AppConstants.layoutsname ) {
+                val intent = Intent(context, LayoutDetailsActivity::class.java)
+                intent.putExtra(AppConstants.pid, propertyinfo.pid)
+                intent.putExtra("page", "2")
+                context.startActivity(intent)
+            } else {
+                val intent = Intent(context, AdsDetailsActivity::class.java)
+                intent.putExtra(AppConstants.pid, propertyinfo.pid)
+                intent.putExtra("page", "2")
+                context.startActivity(intent)
+            }
         }
 
         if (!propertyinfo.status.isNullOrEmpty()) {

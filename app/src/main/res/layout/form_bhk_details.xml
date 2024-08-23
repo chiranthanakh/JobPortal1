@@ -20,6 +20,30 @@
 
 
     <TextView
+        android:text="Number of BHK?"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/spinner_background"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp">
+
+        <Spinner
+            android:id="@+id/sp_bhk"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:entries="@array/bhk"/>
+
+    </LinearLayout>
+
+    <TextView
         android:text="Number Of BedRooms?"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

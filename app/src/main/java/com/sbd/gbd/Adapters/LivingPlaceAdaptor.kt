@@ -40,10 +40,10 @@ class LivingPlaceAdaptor(
         Glide.with(context)
             .load(productInfo.image)
             .into(holder.iv_living_image)
-        holder.tv_living_title.text = productInfo.title
-        holder.tv_living_rent_amount.text =  productInfo.rentamount
-        holder.tv_living_sqft.text = productInfo.sqft
-        holder.tv_number_bhk.text = productInfo.nuBHK + "BHK"
+        holder.tv_living_title.text = productInfo.pname
+        holder.tv_living_rent_amount.text =  productInfo.rent
+        holder.tv_living_sqft.text = productInfo.propertysize
+        holder.tv_number_bhk.text = productInfo.nuBhk
         holder.tv_loaction_living.text = productInfo.location
         holder.cv_card_living.setOnClickListener {
             val intent = Intent(context, RentHomeDetails::class.java)
@@ -58,7 +58,7 @@ class LivingPlaceAdaptor(
             holder.ll_call?.visibility = View.GONE
         } else {
             holder.ll_approve.visibility = View.GONE
-            holder.ll_call?.visibility = View.VISIBLE
+            holder.ll_call.visibility = View.VISIBLE
         }
 
         holder.ll_approve.setOnClickListener {
@@ -70,14 +70,14 @@ class LivingPlaceAdaptor(
         holder.iv_const_call_bottom.setOnClickListener { view: View? ->
             utilitys.navigateCall(
                 context,
-                productInfo.contactNumber,
+                productInfo.number,
                 productInfo.postedBy
             )
         }
         holder.iv_const_whatsapp_bottom.setOnClickListener { view: View? ->
             utilitys.navigateWhatsapp(
                 context,
-                productInfo.contactNumber,
+                productInfo.number,
                 productInfo.postedBy
             )
         }

@@ -45,6 +45,13 @@ class LayoutDetailsActivity : AppCompatActivity() {
                 binding.productNameDetails.text.toString()
             )
         }
+        binding.llWhatsapp.setOnClickListener {
+            utilitys.navigateWhatsapp(
+                this@LayoutDetailsActivity,
+                number,
+                binding.productNameDetails.text.toString()
+            )
+        }
         binding.ivBackAds.setOnClickListener { finish() }
     }
 
@@ -52,7 +59,7 @@ class LayoutDetailsActivity : AppCompatActivity() {
         val productsRef: DatabaseReference = if (page == "3") {
             FirebaseDatabase.getInstance().reference.child("Corosels")
         } else {
-            FirebaseDatabase.getInstance().reference.child(AppConstants.layouts)
+            FirebaseDatabase.getInstance().reference.child(AppConstants.products)
         }
         productsRef.child(productID!!).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -64,11 +71,12 @@ class LayoutDetailsActivity : AppCompatActivity() {
                     binding.tvTopbarProductName.text = products.pname
                     binding.adsPlaceLocation.text = products.location
                     binding.adsSizeDetails.text = products.propertysize
-                    binding.tvPropType.text = products.category
+                    binding.tvPropType.text = products.type
                     binding.tvLayoutFacing.text = products.facing
-                    binding.tvSitesAvailable.text = products.sitesAvailable
+                    binding.tvSitesAvailable.text = products.availableSites
                     binding.tvLayoutArea.text = products.layoutarea
                     binding.adsSizeKatha.text = products.katha
+                    binding.tvLayoutFeatures.text = products.additionalPoints
                     if (products.date == null) {
                         binding.tvAdsPostedOn.visibility = View.GONE
                     } else {
@@ -80,18 +88,34 @@ class LayoutDetailsActivity : AppCompatActivity() {
                     binding.adsDetailsCarouselView.pageCount = url.size
                     val test = 1 //Integer.parseInt(products.getStatus());
                     if (test == 1) {
-                        binding.adsDetailsVerifyed.visibility = View.GONE
+                       // binding.adsDetailsVerifyed.visibility = View.GONE
                     } else {
                         //ads_details_not_verified.setVisibility(View.GONE);
                     }
                     number = products.number
                     binding.tvContactWho.text = products.postedBy
-                    if (products.point1 != null) {
-                        binding.tvFutures1.text = products.point1
-                        binding.tvFutures2.text = products.point2
-                        binding.tvFutures3.text = products.point3
-                        binding.tvFutures4.text = products.point4
+                    if(products.pool.equals("true")) {
+                        binding.tvFutures1.text = "Swiming Pool available"
+                    } else {
+                        binding.tvFutures1.text = "Swiming Pool not available"
                     }
+                    if(products.garden.equals("true")) {
+                        binding.tvFutures2.text = "garden / play area available"
+                    } else {
+                        binding.tvFutures2.text = "garden / play area  Not available"
+                    }
+                    if(products.clubhouse.equals("true")) {
+                        binding.tvFutures3.text = "clubhouse available"
+                    } else {
+                        binding.tvFutures3.text = "clubhouse Not available"
+                    }
+                    if(products.gym.equals("true")) {
+                        binding.tvFutures4.text = "gym available"
+                    } else {
+                        binding.tvFutures4.text = "gym Not available"
+                    }
+                   // binding.tvFutures4.text = "Ready for registration"
+
                 }
             }
 
@@ -102,6 +126,7 @@ class LayoutDetailsActivity : AppCompatActivity() {
     var imageListener = ImageListener { position, imageView ->
         Glide.with(this@LayoutDetailsActivity)
             .load(url[position])
+            .fitCenter()
             .into(imageView)
     }
 }

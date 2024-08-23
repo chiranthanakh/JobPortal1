@@ -1,102 +1,94 @@
-package com.sbd.gbd.Adapters;
+package com.sbd.gbd.Adapters
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.sbd.gbd.Activities.BasicActivitys.SeeAllLayoutActivity
+import com.sbd.gbd.Activities.Dashboard.LayoutDetailsActivity
+import com.sbd.gbd.Model.LayoutModel
+import com.sbd.gbd.R
+import com.sbd.gbd.Utilitys.AppConstants
 
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
+class LayoutsAdaptor(layoutsList: ArrayList<LayoutModel>, context: Context) :
+    RecyclerView.Adapter<LayoutsAdaptor.ViewHolder>() {
+    private val layoutsList: ArrayList<LayoutModel>
+    private var context: Context
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.sbd.gbd.Activities.Dashboard.LayoutDetailsActivity;
-import com.sbd.gbd.Model.LayoutModel;
-import com.sbd.gbd.R;
-import com.sbd.gbd.Utilitys.AppConstants;
-
-import java.util.ArrayList;
-
-public class LayoutsAdaptor extends RecyclerView.Adapter<LayoutsAdaptor.ViewHolder> {
-
-    private ArrayList<LayoutModel> layoutsList;
-    private Context context;
-    public LayoutsAdaptor(ArrayList layoutsList, Context context) {
-        this.layoutsList = layoutsList;
-        this.context = context;
-
+    init {
+        this.layoutsList = layoutsList
+        this.context = context
     }
 
-    @NonNull
-    @Override
-    public LayoutsAdaptor.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        context = parent.getContext();
-        View listItem= layoutInflater.inflate(R.layout.ads_recyclarview_layout, parent, false);
-        LayoutsAdaptor.ViewHolder viewHolder = new LayoutsAdaptor.ViewHolder(listItem);
-        return viewHolder;
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        context = parent.context
+        val listItem = layoutInflater.inflate(R.layout.ads_recyclarview_layout, parent, false)
+        val viewHolder: ViewHolder = ViewHolder(listItem)
+        return viewHolder
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        LayoutModel layoutinfo = layoutsList.get(position);
-
-        RequestOptions options = new RequestOptions();
-        options.fitCenter();
+    override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
+        val layoutinfo = layoutsList[position]
+        if (position == getItemCount() - 1 ) {
+            holder.cv_card_next.visibility = View.VISIBLE
+            holder.cv_card.visibility = View.GONE
+            holder.cv_card_next.setOnClickListener {
+                val intent11 = Intent(context, SeeAllLayoutActivity::class.java)
+                context.startActivity(intent11)
+            }
+        } else {
+        val options = RequestOptions()
+        options.fitCenter()
 
         Glide.with(context)
-                .load(layoutinfo.getImage())
-                .apply(new RequestOptions().override(1000, 500))
-                .into(holder.iv_corosel_image);
+            .load(layoutinfo.image)
+            .apply(RequestOptions().override(1000, 500))
+            .into(holder.iv_corosel_image)
 
-        holder.tv_ads_category.setText(layoutinfo.getCategory());
-        holder.tv_amount.setText(layoutinfo.getPrice());
-        holder.tv_space.setText(layoutinfo.getPropertysize());
-        holder.ads_location_adaptor.setText(layoutinfo.getLocation());
-        holder.tv_layout_name.setText(layoutinfo.getPname());
+        holder.tv_ads_category.text = layoutinfo.type
+        holder.tv_amount.text = layoutinfo.price
+        holder.tv_space.text = layoutinfo.propertysize
+        holder.ads_location_adaptor.text = layoutinfo.location
+        holder.tv_layout_name.text = layoutinfo.pname
 
-        holder.cv_card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent =new Intent(context, LayoutDetailsActivity.class);
-                intent.putExtra(AppConstants.pid,layoutinfo.getPid());
-                intent.putExtra("page","2");
-                context.startActivity(intent);
-            }
-        });
+        holder.cv_card.setOnClickListener {
+            val intent = Intent(context, LayoutDetailsActivity::class.java)
+            intent.putExtra(AppConstants.pid, layoutinfo.pid)
+            intent.putExtra("page", "2")
+            context.startActivity(intent)
+        }
+    }
     }
 
 
-    @Override
-    public int getItemCount() {
-        return layoutsList.size();
+    override fun getItemCount(): Int {
+        return layoutsList.size
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var iv_corosel_image: ImageView = itemView.findViewById(R.id.iv_ads_image)
+        var tv_ads_category: TextView = itemView.findViewById(R.id.tv_ads_category)
+        var tv_amount: TextView = itemView.findViewById(R.id.tv_ads_amount)
+        var tv_space: TextView = itemView.findViewById(R.id.tv_ads_spaces)
+        var ads_location_adaptor: TextView = itemView.findViewById(R.id.ads_location_adaptor)
+        var tv_layout_name: TextView = itemView.findViewById(R.id.tv_layout_name)
+        var cv_card: CardView = itemView.findViewById(R.id.cv_card)
+        var cv_card_next: CardView = itemView.findViewById(R.id.cv_card_next)
 
-        ImageView iv_corosel_image;
-        TextView tv_ads_category,tv_amount,tv_space,ads_location_adaptor,tv_layout_name;
-        CardView cv_card;
-        LinearLayout ll_enquiry;
+        var ll_enquiry: LinearLayout? = null
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            this.iv_corosel_image=itemView.findViewById(R.id.iv_ads_image);
-            this.cv_card = itemView.findViewById(R.id.cv_card);
-            this.tv_ads_category=itemView.findViewById(R.id.tv_ads_category);
-            this.tv_amount = itemView.findViewById(R.id.tv_ads_amount);
-            this.tv_space = itemView.findViewById(R.id.tv_ads_spaces);
-            this.ads_location_adaptor = itemView.findViewById(R.id.ads_location_adaptor);
-            this.tv_layout_name = itemView.findViewById(R.id.tv_layout_name);
-           /// this.ll_enquiry = itemView.findViewById(R.id.ll_enquiry);
-
+        init {
+            /// this.ll_enquiry = itemView.findViewById(R.id.ll_enquiry);
         }
     }
 }

@@ -20,6 +20,7 @@
 
 
             <ImageView
+                android:id="@+id/iv_back"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
@@ -427,94 +428,6 @@
 
                             </LinearLayout>
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="10dp"
-                                android:gravity="center"
-                                android:orientation="horizontal">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_weight="1">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:fontFamily="@font/proxima_nova_regular"
-                                        android:gravity="start|center"
-                                        android:text="Furnished Type:"
-                                        android:textColor="@color/black"
-                                        android:textSize="14sp" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_weight="1">
-
-                                    <TextView
-                                        android:id="@+id/tv_rent_furnished"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:fontFamily="@font/lato_bold"
-                                        android:gravity="center|start"
-                                        android:maxLines="2"
-                                        android:text="Fully Furnished"
-                                        android:textColor="@color/black"
-                                        android:textSize="14sp" />
-                                </LinearLayout>
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="10dp"
-                                android:gravity="center"
-                                android:orientation="horizontal">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_weight="1">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:fontFamily="@font/proxima_nova_regular"
-                                        android:gravity="start|center"
-                                        android:text="Floor :"
-                                        android:textColor="@color/black"
-                                        android:textSize="14sp" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_weight="1">
-
-                                    <TextView
-                                        android:id="@+id/tv_rent_floor"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:fontFamily="@font/lato_bold"
-                                        android:gravity="center|start"
-                                        android:maxLines="2"
-                                        android:text="Floor"
-                                        android:textColor="@color/black"
-                                        android:textSize="14sp" />
-                                </LinearLayout>
-
-                            </LinearLayout>
-
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -559,50 +472,6 @@
                                         android:textSize="14sp" />
                                 </LinearLayout>
                             </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="10dp"
-                                android:gravity="center"
-                                android:orientation="horizontal">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_weight="1">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:fontFamily="@font/proxima_nova_regular"
-                                        android:gravity="start|center"
-                                        android:text="Parking : "
-                                        android:textColor="@color/black"
-                                        android:textSize="14sp" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_weight="1">
-
-                                    <TextView
-                                        android:id="@+id/tv_rent_parking"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:fontFamily="@font/lato_bold"
-                                        android:gravity="center|start"
-                                        android:maxLines="2"
-                                        android:text=""
-                                        android:textColor="@color/black"
-                                        android:textSize="14sp" />
-                                </LinearLayout>
-                            </LinearLayout>
-
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -742,31 +611,30 @@
 
                         </LinearLayout>
 
-                        <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="7dp"
-                            android:background="@color/grey" />
-
 
                         <LinearLayout
+                            android:id="@+id/ll_rent_details"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:visibility="gone"
+                            android:paddingTop="15dp"
+                            android:paddingBottom="@dimen/dp_20"
+                            android:gravity="center"
+                            android:background="#F0F9FF"
                             android:orientation="vertical">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_gravity="center"
                                 android:gravity="center"
+                                android:layout_marginStart="@dimen/margin_10_dp"
                                 android:orientation="horizontal">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
                                     android:layout_weight="1"
                                     android:orientation="vertical">
 
@@ -775,11 +643,12 @@
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/proxima_nova_regular"
                                         android:gravity="start|center"
-                                        android:text="PROPERTY TYPE"
+                                        android:text="Number of floors"
                                         android:textColor="@color/black"
                                         android:textSize="14sp" />
 
                                     <TextView
+                                        android:id="@+id/tv_rent_floor"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="10dp"
@@ -834,6 +703,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginTop="20dp"
                                 android:gravity="center"
+                                android:layout_marginStart="@dimen/margin_10_dp"
                                 android:orientation="horizontal">
 
                                 <LinearLayout
@@ -880,7 +750,7 @@
                                         android:fontFamily="@font/proxima_nova_regular"
                                         android:gravity="center|start"
                                         android:maxLines="2"
-                                        android:text="BALCONY"
+                                        android:text="HALL"
                                         android:textColor="@color/black"
                                         android:textSize="14sp" />
 
@@ -902,14 +772,155 @@
                                 </LinearLayout>
                             </LinearLayout>
 
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="20dp"
+                                android:gravity="center"
+                                android:layout_marginStart="@dimen/margin_10_dp"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:fontFamily="@font/proxima_nova_regular"
+                                        android:gravity="start|center"
+                                        android:text="Furnished"
+                                        android:textColor="@color/black"
+                                        android:textSize="14sp" />
+
+                                    <TextView
+                                        android:id="@+id/tv_rent_furnished"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:drawablePadding="10dp"
+                                        android:fontFamily="@font/proxima_nova_semi_bold"
+                                        android:gravity="start|center"
+                                        android:singleLine="true"
+                                        android:text=""
+                                        android:textColor="@color/black"
+                                        android:textSize="12sp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:fontFamily="@font/proxima_nova_regular"
+                                        android:gravity="center|start"
+                                        android:maxLines="2"
+                                        android:text="Gated Community"
+                                        android:textColor="@color/black"
+                                        android:textSize="14sp" />
+
+                                    <TextView
+                                        android:id="@+id/tv_gated"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:drawablePadding="10dp"
+                                        android:fontFamily="@font/proxima_nova_semi_bold"
+                                        android:gravity="center|start"
+                                        android:maxLines="2"
+                                        android:minLines="2"
+                                        android:singleLine="true"
+                                        android:text=""
+                                        android:textColor="@color/black"
+                                        android:textSize="12sp" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="20dp"
+                                android:gravity="center"
+                                android:layout_marginStart="@dimen/margin_10_dp"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:fontFamily="@font/proxima_nova_regular"
+                                        android:gravity="start|center"
+                                        android:text="PARKING"
+                                        android:textColor="@color/black"
+                                        android:textSize="14sp" />
+
+                                    <TextView
+                                        android:id="@+id/tv_rent_parking"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:drawablePadding="10dp"
+                                        android:fontFamily="@font/proxima_nova_semi_bold"
+                                        android:gravity="start|center"
+                                        android:singleLine="true"
+                                        android:text=""
+                                        android:textColor="@color/black"
+                                        android:textSize="12sp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1"
+                                    android:visibility="invisible"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:fontFamily="@font/proxima_nova_regular"
+                                        android:gravity="center|start"
+                                        android:maxLines="2"
+                                        android:text="Gated Community"
+                                        android:textColor="@color/black"
+                                        android:textSize="14sp" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:drawablePadding="10dp"
+                                        android:fontFamily="@font/proxima_nova_semi_bold"
+                                        android:gravity="center|start"
+                                        android:maxLines="2"
+                                        android:minLines="2"
+                                        android:singleLine="true"
+                                        android:text=""
+                                        android:textColor="@color/black"
+                                        android:textSize="12sp" />
+                                </LinearLayout>
+                            </LinearLayout>
+
 
                         </LinearLayout>
 
-                        <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="15dp"
-                            android:background="@color/grey" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -970,52 +981,65 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@color/white"
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:id="@+id/ll_whatsapp"
+            android:layout_width="170dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="@dimen/margin_10dp"
+            android:background="@drawable/card_carner"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_rent_call"
+            <TextView
+                android:id="@+id/ads_whtsapp_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/gradient"
                 android:fontFamily="@font/proxima_nova_bold"
                 android:insetTop="0dp"
+                android:gravity="center"
                 android:textSize="14sp"
                 android:insetBottom="0dp"
-                android:text="Call"
-                android:textColor="@color/white" />
-
+                android:layout_gravity="center"
+                android:drawableLeft="@drawable/whatapp"
+                android:drawablePadding="-25dp"
+                android:layout_marginStart="@dimen/margin_20_dp"
+                android:text="WhatsApp"
+                android:textColor="#215E06" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:id="@+id/ll_call"
+            android:layout_width="170dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="@dimen/margin_10dp"
+            android:background="@drawable/gradent3"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_rent_whatsApp"
+            <TextView
+                android:id="@+id/ads_cl_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/gradient"
                 android:fontFamily="@font/proxima_nova_bold"
                 android:insetTop="0dp"
-                android:textSize="14sp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textSize="16sp"
                 android:insetBottom="0dp"
-                android:text="WhatsApp"
+                android:text="Call"
                 android:textColor="@color/white" />
-
         </LinearLayout>
 
     </LinearLayout>

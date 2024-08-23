@@ -67,7 +67,7 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
     private var reload = false
     var coroselimagelist = ArrayList<Corosolmodel>()
     var adslist: ArrayList<AdsModel> = ArrayList()
-    var layoutslists: ArrayList<Any?> = ArrayList()
+    var layoutslists: ArrayList<LayoutModel> = ArrayList()
     var productinfolist: ArrayList<ProductInfo> = ArrayList()
     var mHandler = Handler()
     var tv_location: TextView? = null
@@ -174,38 +174,43 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
             FirebaseConnects.fetchDataWithStatus(AppConstants.ads) { dataMap ->
                 if (dataMap != null) {
                     adslist.clear()
+                    var index = 0
                     for (data in dataMap) {
-                        try {
-                            val userData = data.value as HashMap<*, *>?
-                            adslist.add(
-                                AdsModel(
-                                    userData?.get(AppConstants.image).toString(),
-                                    userData?.get(AppConstants.image2).toString(),
-                                    userData?.get(AppConstants.pid).toString(),
-                                    userData?.get(AppConstants.description).toString(),
-                                    userData?.get(AppConstants.date).toString(),
-                                    userData?.get(AppConstants.category).toString(),
-                                    userData?.get(AppConstants.price).toString(),
-                                    userData?.get(AppConstants.pname).toString(),
-                                    userData?.get(AppConstants.propertysize).toString(),
-                                    userData?.get(AppConstants.location).toString(),
-                                    userData?.get(AppConstants.number).toString(),
-                                    userData?.get(AppConstants.Status).toString(),
-                                    userData?.get(AppConstants.postedBy).toString(),
-                                    userData?.get(AppConstants.approvedBy).toString(),
-                                    userData?.get(AppConstants.facing).toString(),
-                                    userData?.get(AppConstants.ownership).toString(),
-                                    userData?.get(AppConstants.postedOn).toString(),
-                                    userData?.get(AppConstants.verified).toString(),
-                                    userData?.get(AppConstants.katha).toString(),
-                                    userData?.get(AppConstants.text1).toString(),
-                                    userData?.get(AppConstants.text2).toString(),
-                                    userData?.get(AppConstants.text3).toString(),
-                                    userData?.get(AppConstants.text4).toString(),
-                                    userData?.get(AppConstants.city).toString()
+                        if (index < 10) {
+                            index++
+                            try {
+                                val userData = data.value as HashMap<*, *>?
+                                adslist.add(
+                                    AdsModel(
+                                        userData?.get(AppConstants.image).toString(),
+                                        userData?.get(AppConstants.image2).toString(),
+                                        userData?.get(AppConstants.pid).toString(),
+                                        userData?.get(AppConstants.description).toString(),
+                                        userData?.get(AppConstants.date).toString(),
+                                        userData?.get(AppConstants.category).toString(),
+                                        userData?.get(AppConstants.price).toString(),
+                                        userData?.get(AppConstants.pname).toString(),
+                                        userData?.get(AppConstants.propertysize).toString(),
+                                        userData?.get(AppConstants.location).toString(),
+                                        userData?.get(AppConstants.number).toString(),
+                                        userData?.get(AppConstants.Status).toString(),
+                                        userData?.get(AppConstants.postedBy).toString(),
+                                        userData?.get(AppConstants.approvedBy).toString(),
+                                        userData?.get(AppConstants.facing).toString(),
+                                        userData?.get(AppConstants.ownership).toString(),
+                                        userData?.get(AppConstants.postedOn).toString(),
+                                        userData?.get(AppConstants.verified).toString(),
+                                        userData?.get(AppConstants.katha).toString(),
+                                        userData?.get(AppConstants.text1).toString(),
+                                        userData?.get(AppConstants.text2).toString(),
+                                        userData?.get(AppConstants.text3).toString(),
+                                        userData?.get(AppConstants.text4).toString(),
+                                        userData?.get(AppConstants.city).toString()
+                                    )
                                 )
-                            )
-                        } catch (_: ClassCastException) { }
+                            } catch (_: ClassCastException) {
+                            }
+                    }
                     }
                     adslist.shuffle()
                     val adsAdaptor = AdsAdaptor(adslist, context)
@@ -219,48 +224,59 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
     }
 
     private fun fetchlayouts() {
-        FirebaseConnects.fetchDataWithStatus(AppConstants.layouts) { dataMap ->
+        FirebaseConnects.fetchDataWithLayout(AppConstants.layouts,AppConstants.layoutsname) { dataMap ->
             if (dataMap != null) {
                     layoutslists.clear()
+                var index = 0
                     for (data in dataMap) {
-                        try {
-                            val userData = data.value as HashMap<*, *>?
-                            layoutslists.add(
-                                LayoutModel(
-                                    userData?.get(AppConstants.image).toString(),
-                                    userData?.get(AppConstants.image2).toString(),
-                                    userData?.get(AppConstants.pid).toString(),
-                                    userData?.get(AppConstants.description).toString(),
-                                    userData?.get(AppConstants.date).toString(),
-                                    userData?.get(AppConstants.category).toString(),
-                                    userData?.get(AppConstants.price).toString(),
-                                    userData?.get(AppConstants.pname).toString(),
-                                    userData?.get(AppConstants.propertysize).toString(),
-                                    userData?.get(AppConstants.location).toString(),
-                                    userData?.get(AppConstants.number).toString(),
-                                    userData?.get(AppConstants.Status).toString(),
-                                    userData?.get(AppConstants.sitesAvailable).toString(),
-                                    userData?.get(AppConstants.postedBy).toString(),
-                                    userData?.get(AppConstants.facing).toString(),
-                                    userData?.get(AppConstants.layoutarea).toString(),
-                                    userData?.get(AppConstants.point1).toString(),
-                                    userData?.get(AppConstants.point2).toString(),
-                                    userData?.get(AppConstants.point3).toString(),
-                                    userData?.get(AppConstants.point4).toString(),
-                                )
-                            )
-                        } catch (_: ClassCastException) { }
+                        if (index < 10) {
+                            index++
+                            try {
+                                val userData = data.value as HashMap<*, *>?
+                                if (userData?.get(AppConstants.Status).toString()
+                                        .equals(AppConstants.user)
+                                ) {
+                                    layoutslists.add(
+                                        LayoutModel(
+                                            userData?.get(AppConstants.image).toString(),
+                                            userData?.get(AppConstants.image2).toString(),
+                                            userData?.get(AppConstants.pid).toString(),
+                                            userData?.get(AppConstants.description).toString(),
+                                            userData?.get(AppConstants.date).toString(),
+                                            userData?.get(AppConstants.type).toString(),
+                                            userData?.get(AppConstants.price).toString(),
+                                            userData?.get(AppConstants.pname).toString(),
+                                            userData?.get(AppConstants.propertysize).toString(),
+                                            userData?.get(AppConstants.location).toString(),
+                                            userData?.get(AppConstants.number).toString(),
+                                            userData?.get(AppConstants.Status).toString(),
+                                            userData?.get(AppConstants.sitesAvailable).toString(),
+                                            userData?.get(AppConstants.postedBy).toString(),
+                                            userData?.get(AppConstants.facing).toString(),
+                                            userData?.get(AppConstants.layoutarea).toString(),
+                                            userData?.get(AppConstants.point1).toString(),
+                                            userData?.get(AppConstants.point2).toString(),
+                                            userData?.get(AppConstants.point3).toString(),
+                                            userData?.get(AppConstants.point4).toString(),
+                                        )
+                                    )
+                                }
+                            } catch (_: ClassCastException) {
+                            }
+                        }
                     }
                     layoutslists.shuffle()
-                    val layoutsAdaptor = LayoutsAdaptor(layoutslists, context)
-                    val n1layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-                    binding.rvLayouts.layoutManager = n1layoutManager
-                    binding.rvLayouts.adapter = layoutsAdaptor.apply { notifyDataSetChanged() }
-                    binding.progressLayout.visibility = View.GONE
+                   if( isAdded) {
+                       val layoutsAdaptor = LayoutsAdaptor(layoutslists, requireContext())
+                       val n1layoutManager =
+                           LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                       binding.rvLayouts.layoutManager = n1layoutManager
+                       binding.rvLayouts.adapter = layoutsAdaptor.apply { notifyDataSetChanged() }
+                       binding.progressLayout.visibility = View.GONE
+                   }
                 }
                 binding.progressLayout.visibility= View.GONE
             }
-
     }
 
     private fun fetchdata() {
@@ -432,7 +448,7 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
             val intent = Intent(Intent.ACTION_VIEW, uri)
             context?.startActivity(intent)
         } else {
-            if (itemClick.category == "Layout") {
+            if (itemClick.category == AppConstants.layoutsname) {
                 val intent = Intent(context, LayoutDetailsActivity::class.java)
                 intent.putExtra(AppConstants.pid, itemClick.pid)
                 intent.putExtra("page", "3")

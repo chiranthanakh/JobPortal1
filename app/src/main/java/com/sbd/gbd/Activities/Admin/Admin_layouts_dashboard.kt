@@ -105,7 +105,7 @@ class Admin_layouts_dashboard : AppCompatActivity() {
         val list: ArrayList<String> = ArrayList<String>()
         list.add("Site")
         list.add("site in Layout")
-        list.add("Layout")
+        list.add(AppConstants.layoutsname)
         list.add("form land")
         list.add("home")
         val arrayAdapter: ArrayAdapter<*> =

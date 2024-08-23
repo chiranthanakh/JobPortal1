@@ -91,5 +91,6 @@
     <dimen name="dp_27">27dp</dimen>
     <dimen name="common_margin_bottom_labour_detail">12dp</dimen>
     <dimen name="dp24">24dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 
 </resources>

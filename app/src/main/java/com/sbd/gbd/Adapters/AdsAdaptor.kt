@@ -22,11 +22,13 @@ import com.sbd.gbd.Utilitys.AppConstants
 class AdsAdaptor(noticeBoardList: ArrayList<AdsModel>, context: Context?) :
     RecyclerView.Adapter<AdsAdaptor.ViewHolder>() {
     private val noticeBoardList: ArrayList<AdsModel>
-    private var context: Context
+    private var context: Context? = null
 
     init {
         this.noticeBoardList = noticeBoardList
-        this.context = context!!
+        if (context != null) {
+            this.context = context
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -41,10 +43,12 @@ class AdsAdaptor(noticeBoardList: ArrayList<AdsModel>, context: Context?) :
 
         val adsModel = noticeBoardList[position]
         val data = noticeimage.split("---".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-        Glide.with(context)
-            .load(adsModel.image)
-            .apply(RequestOptions().override(500, 500))
-            .into(holder.iv_corosel_image)
+        context?.let {
+            Glide.with(it)
+                .load(adsModel.image)
+                .apply(RequestOptions().override(500, 500))
+                .into(holder.iv_corosel_image)
+        }
 
         holder.tv_ads_category.text = adsModel.category
         holder.tv_amount.text = adsModel.price
@@ -64,7 +68,7 @@ class AdsAdaptor(noticeBoardList: ArrayList<AdsModel>, context: Context?) :
             val intent = Intent(context, AdsDetailsActivity::class.java)
             intent.putExtra(AppConstants.pid, adsModel.pid)
             intent.putExtra("page", "1")
-            context.startActivity(intent)
+            context?.startActivity(intent)
         }
     }
 

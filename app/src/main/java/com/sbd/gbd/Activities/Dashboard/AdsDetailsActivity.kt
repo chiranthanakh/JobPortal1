@@ -71,7 +71,6 @@ class AdsDetailsActivity : AppCompatActivity() {
         tv_future4 = findViewById(R.id.tv_futures4)
         tv_katha = findViewById(R.id.tv_katha)
 
-
         tv_ads_landmark = findViewById(R.id.tv_ads_landmark)
         tv_ads_details_verify = findViewById(R.id.ads_details_verifyed)
         ads_approved_by = findViewById(R.id.ads_approved_by)
@@ -84,21 +83,21 @@ class AdsDetailsActivity : AppCompatActivity() {
         productDescription = findViewById<View>(R.id.product_description_details) as TextView
         productPrice = findViewById<View>(R.id.product_price_details) as TextView
         getProductDetails(productID)
-        ads_cl_btn?.setOnClickListener(View.OnClickListener { view: View? ->
+        ads_cl_btn?.setOnClickListener {
             utilitys.navigateCall(
                 this@AdsDetailsActivity,
                 number,
                 productName!!.text.toString()
             )
-        })
-        ads_whatsapp_btn?.setOnClickListener(View.OnClickListener { view: View? ->
+        }
+        ads_whatsapp_btn?.setOnClickListener {
             utilitys.navigateWhatsapp(
                 this@AdsDetailsActivity,
                 number,
                 productName!!.text.toString()
             )
-        })
-        iv_back_ads?.setOnClickListener(View.OnClickListener { finish() })
+        }
+        iv_back_ads?.setOnClickListener { finish() }
     }
 
     override fun onStart() {

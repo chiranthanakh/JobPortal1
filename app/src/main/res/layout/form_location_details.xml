@@ -50,6 +50,7 @@
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     <TextView
         android:text="Please Select District"
         android:layout_width="wrap_content"
@@ -70,7 +71,7 @@
         <Spinner
             android:id="@+id/sp_district"
             android:layout_width="match_parent"
-            android:layout_height="50dp"/>
+            android:layout_height="50dp" />
 
     </LinearLayout>
 

@@ -18,7 +18,7 @@ data class LayoutModel(
     var location: String? = "",
     var number: String? = "",
     var status: String? = "",
-    var sitesAvailable: String? = "",
+    var availableSites: String? = "",
     var postedBy: String? = "",
     var facing: String? = "",
     var layoutarea: String? = "",
@@ -26,5 +26,14 @@ data class LayoutModel(
     var point2: String? = "",
     var point3: String? = "",
     var point4: String? = "",
-    var katha : String? = ""
+    var katha : String? = "",
+    var type : String? = "",
+    var waterFacility : String? = "",
+    var electricity : String? = "",
+    var pool : String? = "",
+    var garden : String? = "",
+    var clubhouse : String? = "",
+    var gym : String? = "",
+    var sewage : String? = "",
+    var additionalPoints : String? = ""
 )

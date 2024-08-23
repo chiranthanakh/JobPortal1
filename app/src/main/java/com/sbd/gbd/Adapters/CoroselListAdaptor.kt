@@ -46,7 +46,7 @@ class CoroselListAdaptor(
                 val intent = Intent(Intent.ACTION_VIEW, uri)
                 context.startActivity(intent)
             } else {
-                if (noticeimage.category == "Layout") {
+                if (noticeimage.category == AppConstants.layoutsname) {
                     val intent = Intent(context, LayoutDetailsActivity::class.java)
                     intent.putExtra(AppConstants.pid, noticeimage.pid)
                     intent.putExtra("page", "3")

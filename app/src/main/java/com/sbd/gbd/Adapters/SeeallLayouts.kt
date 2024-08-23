@@ -13,13 +13,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.database.FirebaseDatabase
 import com.sbd.gbd.Activities.Dashboard.LayoutDetailsActivity
+import com.sbd.gbd.Model.LayoutModel
 import com.sbd.gbd.R
 import com.sbd.gbd.Utilitys.AppConstants
 import com.sbd.gbd.Utilitys.Utilitys
 
-class SeeallLayouts(private val productInfos: List<*>, private var context: Context) :
+class SeeallLayouts(productInfos: ArrayList<LayoutModel>, context: Context) :
     RecyclerView.Adapter<SeeallLayouts.ViewHolder?>() {
     var utilitys = Utilitys()
+    private val productInfos: ArrayList<LayoutModel>
+    private var context: Context
+
+    init {
+        this.productInfos = productInfos
+        this.context = context
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -33,26 +41,20 @@ class SeeallLayouts(private val productInfos: List<*>, private var context: Cont
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val propertyinfo = productInfos[position].toString()
-        val imagesdata = propertyinfo.split("!!".toRegex()).dropLastWhile { it.isEmpty() }
-            .toTypedArray()
-        val data = imagesdata[1].split("---".toRegex()).dropLastWhile { it.isEmpty() }
-            .toTypedArray()
-        val imageurl = imagesdata[0].split("---".toRegex()).dropLastWhile { it.isEmpty() }
-            .toTypedArray()
+        val propertyinfo = productInfos[position]
         Glide.with(context)
-            .load(imageurl[0])
+            .load(propertyinfo.image)
             .into(holder.iv_image)
-        holder.product_type1.text = data[2]
-        holder.product_location1.text = data[6]
-        holder.product_price.text = data[3]
-        holder.product_size1.text = data[5]
-        holder.product_name.text = data[4]
+        holder.product_type1.text = AppConstants.layoutsname
+        holder.product_location1.text = propertyinfo.location
+        holder.product_price.text = propertyinfo.price
+        holder.product_size1.text = propertyinfo.propertysize
+        holder.product_name.text = propertyinfo.pname
 
-        if (data[4].equals("1")) {
+        if (propertyinfo.status.equals("1")) {
             holder.ll_approve.visibility = View.VISIBLE
             holder.ll_call?.visibility = View.GONE
-        } else if (data[4].equals("3")) {
+        } else if (propertyinfo.status.equals("3")) {
             holder.ll_approve.visibility = View.VISIBLE
             holder.ll_call?.visibility = View.GONE
         } else {
@@ -64,7 +66,7 @@ class SeeallLayouts(private val productInfos: List<*>, private var context: Cont
             // intent.putExtra(AppConstants.pid,data[0]);
             // context.startActivity(intent);
             val intent = Intent(context, LayoutDetailsActivity::class.java)
-            intent.putExtra(AppConstants.pid, data[0])
+            intent.putExtra(AppConstants.pid, propertyinfo.pid)
             intent.putExtra("page", "2")
             context.startActivity(intent)
         }
@@ -72,21 +74,21 @@ class SeeallLayouts(private val productInfos: List<*>, private var context: Cont
         holder.property_btn_call.setOnClickListener { view: View? ->
             utilitys.navigateCall(
                 context,
-                data[8],
-                data[1]
+                propertyinfo.number,
+                propertyinfo.pid
             )
         }
         holder.property_btn_whatsapp.setOnClickListener { view: View? ->
             utilitys.navigateWhatsapp(
                 context,
-                data[8],
-                data[1]
+                propertyinfo.number,
+                propertyinfo.pid
             )
         }
 
         holder.ll_approve.setOnClickListener {
-            data[1].let { it1 ->
-                FirebaseDatabase.getInstance().reference.child(AppConstants.ads).child(it1)
+            propertyinfo.pid.let { it1 ->
+                FirebaseDatabase.getInstance().reference.child(AppConstants.ads).child(it1.toString())
                     .child(AppConstants.Status).setValue("2")
             }
         }

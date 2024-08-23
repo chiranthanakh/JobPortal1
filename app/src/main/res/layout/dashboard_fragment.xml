@@ -347,7 +347,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
-                            android:fontFamily="@font/proxima_nova_semi_bold"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/lato_bold"
                             android:text="Are you looking for"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
@@ -374,7 +375,6 @@
                                     android:layout_height="50dp"
                                     android:padding="5dp"
                                     android:layout_gravity="center"
-                                    app:strokeWidth="2dp"
                                     app:shapeAppearanceOverlay="@style/circleImageView"
                                     android:src="@drawable/land"
                                     android:layout_margin="5dp"/>
@@ -404,7 +404,6 @@
                                     android:layout_height="50dp"
                                     android:padding="5dp"
                                     android:layout_gravity="center"
-                                    app:strokeWidth="2dp"
                                     app:shapeAppearanceOverlay="@style/circleImageView"
                                     android:src="@drawable/green_land"
                                     android:layout_margin="5dp"/>
@@ -434,7 +433,6 @@
                                     android:layout_height="50dp"
                                     android:padding="5dp"
                                     android:layout_gravity="center"
-                                    app:strokeWidth="2dp"
                                     android:scaleType="fitXY"
                                     app:shapeAppearanceOverlay="@style/circleImageView"
                                     android:src="@drawable/home"
@@ -465,7 +463,6 @@
                                     android:layout_height="50dp"
                                     android:padding="5dp"
                                     android:layout_gravity="center"
-                                    app:strokeWidth="2dp"
                                     android:scaleType="fitXY"
                                     app:shapeAppearanceOverlay="@style/circleImageView"
                                     android:src="@drawable/rent"
@@ -518,7 +515,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:background="@color/white"
                         android:orientation="vertical"
                         app:layout_constraintTop_toTopOf="parent">
 
@@ -527,18 +523,20 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
                             android:orientation="horizontal">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
+                                android:layout_marginStart="15dp"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/proxima_nova_semi_bold"
                                 android:gravity="start|center"
                                 android:text="Layouts"
+                                android:textStyle="bold"
                                 android:textColor="@color/black"
-                                android:textSize="15sp" />
+                                android:textSize="16sp" />
 
                             <TextView
                                 android:id="@+id/tv_seeall_layouts"
@@ -549,7 +547,7 @@
                                 android:fontFamily="@font/proxima_nova_semi_bold"
                                 android:text="See All"
                                 android:textColor="@color/red"
-                                android:textSize="15sp" />
+                                android:textSize="18sp" />
 
                         </LinearLayout>
 
@@ -572,9 +570,6 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="3dp"
                                 android:layout_marginEnd="3dp" />
-
-                            <!--  </androidx.cardview.widget.CardView>-->
-
 
                         </LinearLayout>
                     </LinearLayout>
@@ -599,24 +594,25 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginEnd="10dp"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/proxima_nova_semi_bold"
                                 android:gravity="start|center"
                                 android:text="Buy Assets"
                                 android:textColor="@color/black"
-                                android:textSize="15sp" />
+                                android:textSize="16sp" />
 
                             <TextView
                                 android:id="@+id/tv_seeall_upcomming"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:layout_marginEnd="20dp"
+                                android:layout_marginEnd="15dp"
                                 android:fontFamily="@font/proxima_nova_semi_bold"
                                 android:text="See All"
                                 android:textColor="@color/red"
-                                android:textSize="15sp" />
+                                android:textSize="16sp" />
 
                         </LinearLayout>
 
@@ -791,10 +787,7 @@
                                     android:textSize="12sp" />
 
                             </LinearLayout>
-
                         </LinearLayout>
-
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -808,13 +801,13 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
+                            android:layout_marginStart="15dp"
                             android:layout_marginTop="10dp"
                             android:fontFamily="@font/proxima_nova_semi_bold"
                             android:gravity="center"
                             android:text="Hot Deals for you"
                             android:textColor="@color/black"
-                            android:textSize="15sp" />
+                            android:textSize="16sp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"

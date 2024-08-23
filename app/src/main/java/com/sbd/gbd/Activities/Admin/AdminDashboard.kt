@@ -46,7 +46,8 @@ class AdminDashboard : AppCompatActivity() {
             startActivity(intent)
         }
         btn_livingplace_add.setOnClickListener {
-            val intent = Intent(this@AdminDashboard, AdminLivingPlacess::class.java)
+            val intent = Intent(this@AdminDashboard, Admin_ads_dashboard::class.java)
+            intent.putExtra("page", "3")
             startActivity(intent)
         }
         btn_propertys_approval.setOnClickListener {
@@ -70,7 +71,10 @@ class AdminDashboard : AppCompatActivity() {
             startActivity(intent)
         }
         btn_layouts.setOnClickListener {
-            val intent = Intent(this@AdminDashboard, Admin_layouts_dashboard::class.java)
+           // val intent = Intent(this@AdminDashboard, Admin_layouts_dashboard::class.java)
+           // startActivity(intent)
+            val intent = Intent(this@AdminDashboard, Admin_ads_dashboard::class.java)
+            intent.putExtra("page", "2")
             startActivity(intent)
         }
         btn_corosel.setOnClickListener {

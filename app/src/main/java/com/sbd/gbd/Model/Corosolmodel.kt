@@ -6,4 +6,5 @@ class Corosolmodel(
     var category : String? = "",
     var pid : String? = "",
     var pname : String? = "",
-    var discription : String? = "")
+    var discription : String? = ""
+)
