@@ -25,6 +25,9 @@
         android:roundIcon="@mipmap/ic_logo1"
         android:theme="@style/JobPortaltheam">
         <activity
+            android:name=".Activities.Dashboard.LocationSelectActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.Admin.CallsListActivity"
             android:exported="false" />
         <activity

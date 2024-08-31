@@ -110,37 +110,6 @@ class PropertyFragment : Fragment(), View.OnClickListener {
             }
         }.attach()
 
-        /*binding.buttonToggleGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
-            view.findViewById<MaterialButton>(checkedId)
-            if (isChecked) {
-                when (checkedId) {
-                    R.id.button1 -> {
-                        lifecycleScope.launch { fetchproducts("Site") }
-                        binding.llAssetText.visibility = View.GONE
-                        binding.llAssetRecyclrView.visibility = View.GONE
-                    }
-
-                    R.id.button2 -> {
-                        lifecycleScope.launch { fetchproducts("Green Land") }
-                        binding.llAssetText.visibility = View.GONE
-                        binding.llAssetRecyclrView.visibility = View.GONE
-                    }
-
-                    R.id.button3 -> {
-                        lifecycleScope.launch { fetchproducts("House") }
-                        binding.llAssetText.visibility = View.GONE
-                        binding.llAssetRecyclrView.visibility = View.GONE
-                    }
-
-                    R.id.button -> {
-                        lifecycleScope.launch { fetchproducts("Layout") }
-                        binding.llAssetText.visibility = View.GONE
-                        binding.llAssetRecyclrView.visibility = View.GONE
-                    }
-                }
-            }
-        }*/
-
     }
 
     private fun fetchads() {

@@ -110,6 +110,7 @@ class RentHomeDetails : AppCompatActivity() {
 
     private fun getProductDetails(productID: String) {
         var productsRef: DatabaseReference? = null
+
         productsRef = FirebaseDatabase.getInstance().reference.child("livingplaceforyou")
         productsRef?.child(productID)?.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {

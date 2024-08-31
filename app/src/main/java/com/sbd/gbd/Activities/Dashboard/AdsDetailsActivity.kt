@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -23,8 +24,8 @@ import com.synnapps.carouselview.ImageListener
 
 class AdsDetailsActivity : AppCompatActivity() {
     private var iv_back_ads: ImageView? = null
-    private var ads_cl_btn: MaterialButton? = null
-    private var ads_whatsapp_btn: MaterialButton? = null
+    private var ads_cl_btn: LinearLayout? = null
+    private var ads_whatsapp_btn: LinearLayout? = null
     var carouselView: CarouselView? = null
     private var productPrice: TextView? = null
     private var productDescription: TextView? = null
@@ -42,7 +43,9 @@ class AdsDetailsActivity : AppCompatActivity() {
     private var tv_future3: TextView? = null
     private var tv_future4: TextView? = null
     private var tv_katha : TextView? = null
-    private val tv_contact_type: TextView? = null
+    private var ads_place_district : TextView? = null
+
+    private var tv_ads_nearby: TextView? = null
     private var tv_ads_posted_on: TextView? = null
     private var tv_ads_posted: TextView? = null
     private val ads_details_not_verified: TextView? = null
@@ -58,8 +61,8 @@ class AdsDetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_ads_details)
         productID = intent.getStringExtra(AppConstants.pid)
         page = intent.getStringExtra("page")
-        ads_cl_btn = findViewById(R.id.ads_cl_btn)
-        ads_whatsapp_btn = findViewById(R.id.ads_whtsapp_btn)
+        ads_cl_btn = findViewById(R.id.ll_call)
+        ads_whatsapp_btn = findViewById(R.id.ll_whatsapp)
         carouselView = findViewById(R.id.ads_details_carouselView)
         tv_prop_type = findViewById(R.id.tv_prop_type)
         iv_back_ads = findViewById(R.id.iv_back_ads)
@@ -70,6 +73,8 @@ class AdsDetailsActivity : AppCompatActivity() {
         tv_future3 = findViewById(R.id.tv_futures3)
         tv_future4 = findViewById(R.id.tv_futures4)
         tv_katha = findViewById(R.id.tv_katha)
+        tv_ads_nearby = findViewById(R.id.tv_ads_nearby)
+        ads_place_district = findViewById(R.id.ads_place_district)
 
         tv_ads_landmark = findViewById(R.id.tv_ads_landmark)
         tv_ads_details_verify = findViewById(R.id.ads_details_verifyed)
@@ -81,7 +86,7 @@ class AdsDetailsActivity : AppCompatActivity() {
         productName = findViewById<View>(R.id.product_name_details) as TextView
         tv_topbar_productName = findViewById<View>(R.id.tv_topbar_productName) as TextView
         productDescription = findViewById<View>(R.id.product_description_details) as TextView
-        productPrice = findViewById<View>(R.id.product_price_details) as TextView
+        productPrice = findViewById(R.id.product_price_details)
         getProductDetails(productID)
         ads_cl_btn?.setOnClickListener {
             utilitys.navigateCall(
@@ -129,7 +134,13 @@ class AdsDetailsActivity : AppCompatActivity() {
                     tv_ads_landmark?.text = products.city
                     ads_tv_facing?.text = products.facing
                     ads_approved_by?.text = products.approvedBy
-                    tv_katha?.text = products.katha
+                    if(products.type == "Green Land") {
+                        tv_katha?.text = "Green Land"
+                    } else {
+                        tv_katha?.text = products.katha
+                    }
+                    tv_ads_nearby?.text = products.nearBy
+                    ads_place_district?.text = products.taluk+"(T), ${products.district}(D)"
                     if (products.postedOn == null) {
                         tv_ads_posted_on?.visibility = View.GONE
                     } else {
@@ -145,21 +156,29 @@ class AdsDetailsActivity : AppCompatActivity() {
                     carouselView?.setImageListener(imageListener)
                     carouselView?.pageCount = url.size
                     number = products.number
-                    if (products.text1 != null && products.text1 !== "") {
-                        tv_future1?.text = products.text1
-                        tv_future2?.text = products.text2
-                        tv_future3?.text = products.text3
-                        tv_future4?.text = products.text4
+
+                    if(products.road == "true") {
+                        tv_future1?.text = "Road Available for this property"
                     } else {
-                        tv_future1?.visibility = View.GONE
-                        tv_future2?.visibility = View.GONE
-                        tv_future3?.visibility = View.GONE
-                        tv_future4?.visibility = View.GONE
+                        tv_future1?.text = "Road Not Available for this property"
                     }
+                    if(products.boarwell == "true") {
+                        tv_future2?.text = "Boarwell available"
+                    } else {
+                        tv_future2?.text = "Boarwell Not Available"
+                    }
+                    if(products.fencing == "true") {
+                        tv_future3?.text = "Fencing available"
+                    } else {
+                        tv_future3?.text = "Fencing not available"
+                    }
+                    tv_future4?.visibility = View.GONE
                 }
             }
 
-            override fun onCancelled(databaseError: DatabaseError) {}
+            override fun onCancelled(databaseError: DatabaseError) {
+
+            }
         })
     }
 

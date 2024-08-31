@@ -67,6 +67,11 @@ class StartingActivity : AppCompatActivity() {
         binding=ActivityStartingBinding.inflate(layoutInflater)
         setContentView(binding.root)
         preferenceManager= PreferenceManager(this);
+        if (preferenceManager.getDistrict() == "") {
+            val intent = Intent(this@StartingActivity, LocationSelectActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
         FirebaseApp.initializeApp(this)
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
         analytics = Firebase.analytics

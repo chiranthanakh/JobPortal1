@@ -1,6 +1,7 @@
 package com.sbd.gbd.Activities.Dashboard
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -61,10 +62,12 @@ class LayoutDetailsActivity : AppCompatActivity() {
         } else {
             FirebaseDatabase.getInstance().reference.child(AppConstants.products)
         }
+        Log.d("checkProduction","123")
         productsRef.child(productID!!).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists() && dataSnapshot.getValue(LayoutModel::class.java) != null) {
                     val products = dataSnapshot.getValue(LayoutModel::class.java)
+                    Log.d("checkProduction",products.toString())
                     binding.productNameDetails.text = products!!.pname
                     binding.productPriceDetails.text = "Rs." + products.price
                     binding.productDescriptionDetails.text = products.description

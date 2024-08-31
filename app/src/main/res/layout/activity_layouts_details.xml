@@ -153,7 +153,8 @@
                                 android:text="Rs. 50,3000"
                                 android:textColor="@color/purple_700"
                                 android:textSize="16sp"
-                                app:layout_constraintTop_toBottomOf="@+id/view1"/>
+                                app:layout_constraintTop_toBottomOf="@+id/view1"
+                                app:layout_constraintStart_toStartOf="parent"/>
 
 
                         <LinearLayout

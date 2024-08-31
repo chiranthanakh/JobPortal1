@@ -17,10 +17,17 @@ object FirebaseConnects {
      fun fetchDataWithStatus(tabelName: String, callback: (HashMap<*, *>?) -> Unit) {
         val adsimage = FirebaseDatabase.getInstance().reference.child(tabelName)
             .orderByChild(AppConstants.Status).equalTo(AppConstants.user)
+
         adsimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val dataMap = snapshot.value
                         as? HashMap<*, *>
+                val filteredData
+                        = snapshot.children.filter {
+                    // Your filtering logic here
+                    // Example: Filter based on another child property
+                    it.child("anotherProperty").getValue() == "desiredValue"
+                }
                 callback(dataMap)
             }
 

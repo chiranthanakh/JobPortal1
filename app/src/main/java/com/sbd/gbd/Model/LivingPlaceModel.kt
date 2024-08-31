@@ -1,5 +1,10 @@
 package com.sbd.gbd.Model
 
+import androidx.annotation.Keep
+import com.google.firebase.database.IgnoreExtraProperties
+
+@IgnoreExtraProperties
+@Keep
 class LivingPlaceModel(
     var pid: String,
     var saveCurrentDate: String = "",

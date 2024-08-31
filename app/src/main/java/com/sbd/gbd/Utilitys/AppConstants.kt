@@ -54,6 +54,7 @@ object AppConstants {
     const val ads = "adsforyou"
     const val Profiles = "Profile"
     const val construction = "constructionforyou"
+    const val locations = "Locations"
 
 
     fun profileinfoadd(contest: Context): HashMap<String, Any?> {

@@ -22,20 +22,26 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.sbd.gbd.Activities.Admin.AdminDashboard
-import com.sbd.gbd.Activities.HomeRentels.LivingPlaceActivity
 import com.sbd.gbd.Activities.BasicActivitys.SearchActivity
 import com.sbd.gbd.Activities.BasicActivitys.SeeAllLayoutActivity
-import com.sbd.gbd.Activities.Travels.Travelsactivity
 import com.sbd.gbd.Activities.BasicActivitys.UpcommingProjects
 import com.sbd.gbd.Activities.Businesthings.BusinessActivity
 import com.sbd.gbd.Activities.Businesthings.BusinessFragment
 import com.sbd.gbd.Activities.Construction.ConstructionActivity
+import com.sbd.gbd.Activities.HomeRentels.LivingPlaceActivity
+import com.sbd.gbd.Activities.HotDealsactivity.HotDealsDetailsActivity
 import com.sbd.gbd.Activities.LoanActivity.LoanActivity
+import com.sbd.gbd.Activities.LoanActivity.LoanForm
+import com.sbd.gbd.Activities.Propertys.PropertyActivity
 import com.sbd.gbd.Activities.Sell.SellActivity
+import com.sbd.gbd.Activities.Travels.Travelsactivity
 import com.sbd.gbd.Adapters.AdsAdaptor
 import com.sbd.gbd.Adapters.BottomhomeRecyclarviewAdaptor
 import com.sbd.gbd.Adapters.LayoutsAdaptor
+import com.sbd.gbd.BuildConfig
 import com.sbd.gbd.Interface.FragmentInteractionListener
 import com.sbd.gbd.Model.AdsModel
 import com.sbd.gbd.Model.Corosolmodel
@@ -43,15 +49,9 @@ import com.sbd.gbd.Model.LayoutModel
 import com.sbd.gbd.Model.ProductInfo
 import com.sbd.gbd.R
 import com.sbd.gbd.Utilitys.AppConstants
-import com.sbd.gbd.databinding.DashboardFragmentBinding
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
-import com.sbd.gbd.Activities.HotDealsactivity.HotDealsDetailsActivity
-import com.sbd.gbd.Activities.LoanActivity.LoanForm
-import com.sbd.gbd.Activities.Propertys.PropertyActivity
-import com.sbd.gbd.BuildConfig
 import com.sbd.gbd.Utilitys.FirebaseConnects
 import com.sbd.gbd.Utilitys.UtilityMethods
+import com.sbd.gbd.databinding.DashboardFragmentBinding
 import com.synnapps.carouselview.ImageListener
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -133,6 +133,12 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
 
         binding.llBusiness.setOnClickListener {
             val intent = Intent(context, BusinessActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.tvBuy.setOnClickListener{
+            val intent = Intent(context, LocationSelectActivity::class.java)
+            intent.putExtra("page", "1")
             startActivity(intent)
         }
     }

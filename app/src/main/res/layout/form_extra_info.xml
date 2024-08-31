@@ -65,6 +65,43 @@
                 style="?attr/materialButtonOutlinedStyle" />
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
+        <TextView
+            android:id="@+id/tv_fencing"
+            android:text="Fencing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"/>
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/fencingGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_marginStart="15dp"
+            android:outlineSpotShadowColor="@color/background_black"
+            android:layout_gravity="center_horizontal"
+            app:singleSelection="true">
+
+
+            <Button
+                android:id="@+id/fencing_yes"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:text="Available"
+                android:textColor="@color/black"
+                style="?attr/materialButtonOutlinedStyle" />
+
+            <Button
+                android:id="@+id/fencing_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Not Available"
+                android:textColor="@color/black"
+                style="?attr/materialButtonOutlinedStyle" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
 
         <TextView
             android:text="Is Boarwell available?"

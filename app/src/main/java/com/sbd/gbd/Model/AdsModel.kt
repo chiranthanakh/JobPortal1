@@ -15,9 +15,14 @@ data class AdsModel(
     var propertysize: String? = "",
     var location: String? = "",
     var number: String? = "",
+    var road: String? = "",
+    var nearBy: String? = "",
+    var boarwell: String? = "",
+    var fencing: String? = "",
     var status: String? = "2",
     var postedBy: String? = "",
     var approvedBy: String? = "",
+    var type: String? = "",
     var facing: String? = "",
     var ownership: String?= "",
     var postedOn: String?="",
@@ -27,5 +32,7 @@ data class AdsModel(
     var text2: String? = "",
     var text3: String? = "",
     var text4: String? = "",
-    var city: String? = ""
+    var city: String? = "",
+    var taluk: String?="",
+    var district: String?="",
 )

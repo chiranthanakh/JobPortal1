@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.LinearLayout
@@ -26,6 +27,7 @@ import com.sbd.gbd.Model.AdsModel
 import com.sbd.gbd.Model.FilterModel
 import com.sbd.gbd.R
 import com.sbd.gbd.Utilitys.AppConstants
+import com.sbd.gbd.Utilitys.PreferenceManager
 import com.sbd.gbd.databinding.ActivityPropertyBinding
 import com.sbd.gbd.databinding.ActivityPropertyMainBinding
 import kotlinx.coroutines.launch
@@ -46,11 +48,13 @@ class PropertyActivity : AppCompatActivity() {
     var propertyAdaptor: PropertyAdaptor? = null
     var adsAdaptor: AdsAdaptor? = null
     var bundle = Bundle()
+    private lateinit var preferenceManager: PreferenceManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityPropertyMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        preferenceManager= PreferenceManager(this)
         if (Build.VERSION.SDK_INT >= 21) {
             val window = this.window
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
@@ -140,10 +144,11 @@ class PropertyActivity : AppCompatActivity() {
     }
 
     private fun fetchproducts(type : String) {
+        Log.d("typeprint",type)
         var coroselimage = if(type == "" || type == null ) {
             FirebaseDatabase.getInstance().reference.child(AppConstants.products).orderByChild(AppConstants.Status).equalTo(AppConstants.user)
         } else {
-            FirebaseDatabase.getInstance().reference.child(AppConstants.products).orderByChild(AppConstants.category).equalTo(type)
+            FirebaseDatabase.getInstance().reference.child(AppConstants.products).orderByChild(AppConstants.type).equalTo(type)
         }
         coroselimage.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -157,9 +162,11 @@ class PropertyActivity : AppCompatActivity() {
                         val data = dataMap[key]
                         try {
                             val userData = data as HashMap<String, Any>?
+                            Log.d("checkdataofdist",  userData?.get(AppConstants.district).toString()+"--"+preferenceManager.getDistrict())
                             if (userData?.get(AppConstants.Status)
-                                    ?.equals(AppConstants.user) == true
-                            ) {
+                                    ?.equals(AppConstants.user) == true &&
+                                userData?.get(AppConstants.district).toString() == preferenceManager.getDistrict())
+                             {
                                 propertylist.add(
                                     FilterModel(
                                         userData[AppConstants.pname].toString(),

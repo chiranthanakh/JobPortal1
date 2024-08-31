@@ -12,8 +12,8 @@ android {
         applicationId "com.sbd.gbd"
         minSdkVersion 24
         targetSdkVersion 34
-        versionCode 1018
-        versionName "1.3.8"
+        versionCode 2001
+        versionName "2.0.1"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -41,6 +41,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debug
             multiDexEnabled true
+           // outputDirectory "C:\\user backup chiranth\\Downloads\\GBD\\app\\build\\outputs/aab"
         }
     }
     compileOptions {
@@ -65,11 +66,16 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:21.0.0'
     implementation 'com.google.android.gms:play-services-auth:21.2.0'
     implementation 'com.google.android.gms:play-services-location:21.3.0'
-   // implementation 'com.android.car.ui:car-ui-lib:2.6.0'
+
+    implementation 'com.google.android.play:review:2.0.1'
+    implementation 'com.google.android.play:app-update:2.1.0'
+
+    // implementation 'com.android.car.ui:car-ui-lib:2.6.0'
    // implementation 'com.google.android.play:core-ktx:1.8.1'
     implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'com.google.firebase:firebase-analytics:21.5.1'
     implementation 'com.google.android.gms:play-services-cast-framework:21.4.0'
+    implementation 'androidx.activity:activity:1.9.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'

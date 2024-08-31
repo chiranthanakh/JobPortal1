@@ -24,6 +24,16 @@ class PreferenceManager constructor(context: Context){
         editor?.apply()
     }
 
+    fun saveDistrict(districtId: String){
+        val editor = sharedPreferences.edit()
+        editor.putString(AppConstants.district,districtId)
+        editor.apply()
+    }
+
+    fun getDistrict(): String? {
+        return  sharedPreferences.getString(AppConstants.district,"")
+    }
+
     fun saveLoginState(state: Boolean){
         val editor = sharedPreferences.edit()
         editor.putBoolean("login",state)

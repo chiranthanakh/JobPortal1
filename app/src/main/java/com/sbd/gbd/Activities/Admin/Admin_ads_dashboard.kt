@@ -62,6 +62,7 @@ class Admin_ads_dashboard : AppCompatActivity() {
     private var sewage: Boolean? = false
     private var corner: Boolean? = false
     private var road: Boolean? = false
+    private var fencing: Boolean? = false
     private var boarwell: Boolean? = false
     private var furnished: Boolean? = false
     private var parking: Boolean? = false
@@ -84,9 +85,9 @@ class Admin_ads_dashboard : AppCompatActivity() {
     private var loadingBar: ProgressDialog? = null
     var fileNameList: ArrayList<String> = ArrayList()
     var fileDoneList: ArrayList<String> = ArrayList()
-    var locationList: ArrayList<String> = ArrayList()
+    var locationList : ArrayList<String> = ArrayList()
     var locationMap = mutableMapOf<String, String>()
-    var districtList : ArrayList<String> = ArrayList()
+    var districtList = mutableSetOf<String>()
     private var arrayAdapter: ArrayAdapter<*>? = null
     private var districtAdapter: ArrayAdapter<*>? = null
     private lateinit var imageAdapter: ImageAdaptor
@@ -196,7 +197,8 @@ class Admin_ads_dashboard : AppCompatActivity() {
         binding.llLocation.spDistrict.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 if (p2 > 0) {
-                    District = districtList[p2]
+                    val list = districtList.toList()
+                    District = list[p2]
                     gettaluks(District!!)
                 }
             }
@@ -239,6 +241,14 @@ class Admin_ads_dashboard : AppCompatActivity() {
                 when (checkedId) {
                     R.id.water_yes -> { water = true }
                     R.id.water_no -> { water = false }
+                }
+            }
+        }
+        binding.llExtra.waterGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.fencing_yes -> { fencing = true }
+                    R.id.fencing_no -> { fencing = false }
                 }
             }
         }
@@ -695,6 +705,8 @@ class Admin_ads_dashboard : AppCompatActivity() {
         } else if(CategoryType == "103") {
             productMap.put("boarwell", boarwell.toString())
             productMap.put("road", road.toString())
+            productMap.put("fensing", fencing.toString())
+
         } else if(CategoryType == "101") {
             productMap.put("waterFacility", water.toString())
             productMap.put("electricity", electricty.toString())
@@ -752,7 +764,7 @@ class Admin_ads_dashboard : AppCompatActivity() {
                 districtAdapter = ArrayAdapter(
                     this@Admin_ads_dashboard,
                     android.R.layout.simple_spinner_item,
-                    districtList
+                    districtList.toList()
                 )
                 districtAdapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 binding.llLocation.spDistrict.adapter = districtAdapter
