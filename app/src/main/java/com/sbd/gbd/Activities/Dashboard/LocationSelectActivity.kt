@@ -118,8 +118,7 @@ class LocationSelectActivity : AppCompatActivity() {
                         userData?.get("id")?.let {
                             locationMap.put(userData.get(AppConstants.district).toString(), it.toString())
                         }
-                    } catch (_: Exception) {
-                    }
+                    } catch (_: Exception) { }
                 }
                 districtAdapter = ArrayAdapter(
                     this@LocationSelectActivity,

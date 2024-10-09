@@ -186,7 +186,7 @@ class StartingActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if(binding.navViewMainA?.isVisible == true){
+        if(binding.navViewMainA.isVisible == true){
             drawer_layout?.closeDrawer(GravityCompat.START)
         }else {
             val homeItem: MenuItem? = bottomNavShift?.getMenu()?.getItem(0)
@@ -214,17 +214,19 @@ class StartingActivity : AppCompatActivity() {
             profile.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
-                        val dataMap = snapshot.value as HashMap<String, Any>?
-                        for (key in dataMap!!.keys) {
-                            binding.tvNavUsername?.text = dataMap["name"] as CharSequence?
-                            binding.tvNavEmail?.text = dataMap["Email"] as CharSequence?
-                            Glide.with(this@StartingActivity)
-                                .load(dataMap[AppConstants.image])
-                                .apply(RequestOptions().override(500, 500))
-                                .into(binding.ivNavImage)
-                            try {
-                            } catch (cce: ClassCastException) {
+                        val dataMap = snapshot.value as HashMap<*, *>?
+                         if (dataMap != null) {
+                            for (key in dataMap.keys) {
+                                binding.tvNavUsername.text = dataMap["name"] as CharSequence?
+                                binding.tvNavEmail.text = dataMap["Email"] as CharSequence?
+                                Glide.with(this@StartingActivity)
+                                    .load(dataMap[AppConstants.image])
+                                    .apply(RequestOptions().override(500, 500))
+                                    .into(binding.ivNavImage)
+                                try {
+                                } catch (_: ClassCastException) {
 
+                                }
                             }
                         }
                     }

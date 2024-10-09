@@ -20,6 +20,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.sbd.gbd.Activities.Admin.Admin_ads_dashboard
+import com.sbd.gbd.Activities.BasicActivitys.OtpLoginActivity
 import com.sbd.gbd.Activities.BasicActivitys.SearchActivity
 import com.sbd.gbd.Adapters.AdsAdaptor
 import com.sbd.gbd.Adapters.PropertyAdaptor
@@ -28,6 +30,7 @@ import com.sbd.gbd.Model.FilterModel
 import com.sbd.gbd.R
 import com.sbd.gbd.Utilitys.AppConstants
 import com.sbd.gbd.Utilitys.PreferenceManager
+import com.sbd.gbd.Utilitys.UtilityMethods
 import com.sbd.gbd.databinding.ActivityPropertyBinding
 import com.sbd.gbd.databinding.ActivityPropertyMainBinding
 import kotlinx.coroutines.launch
@@ -77,11 +80,23 @@ class PropertyActivity : AppCompatActivity() {
         binding.recyclerMenu.setHasFixedSize(true)
         val mgrid = GridLayoutManager(this, 1)
         binding.recyclerMenu.setLayoutManager(mgrid)
-        search?.setOnClickListener{
+
+        binding.ivSearch.setOnClickListener{
             val intent = Intent(this@PropertyActivity, SearchActivity::class.java)
             bundle.putString("searchtype", "property")
             intent.putExtras(bundle)
             startActivity(intent)
+        }
+        binding.btnAddProperty.setOnClickListener {
+            if (preferenceManager.getLoginState()) {
+                val intent = Intent(this, Admin_ads_dashboard::class.java)
+                intent.putExtra("page", "2")
+                startActivity(intent)
+            } else {
+                UtilityMethods.showToast(this,"Please Login to process")
+                val intent = Intent(this, OtpLoginActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
@@ -123,8 +138,7 @@ class PropertyActivity : AppCompatActivity() {
                                     userData[AppConstants.text4].toString()
                                 )
                             )
-                        } catch (_: ClassCastException) {
-                        }
+                        } catch (_: ClassCastException) { }
                     }
                     adslist.shuffle()
                     adsAdaptor = AdsAdaptor(adslist, this@PropertyActivity)
@@ -164,8 +178,8 @@ class PropertyActivity : AppCompatActivity() {
                             val userData = data as HashMap<String, Any>?
                             Log.d("checkdataofdist",  userData?.get(AppConstants.district).toString()+"--"+preferenceManager.getDistrict())
                             if (userData?.get(AppConstants.Status)
-                                    ?.equals(AppConstants.user) == true &&
-                                userData?.get(AppConstants.district).toString() == preferenceManager.getDistrict())
+                                    ?.equals(AppConstants.user) == true)
+                                //&& userData?.get(AppConstants.district).toString() == preferenceManager.getDistrict())
                              {
                                 propertylist.add(
                                     FilterModel(

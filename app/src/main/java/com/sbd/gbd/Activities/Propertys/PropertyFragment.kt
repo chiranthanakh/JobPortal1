@@ -109,7 +109,6 @@ class PropertyFragment : Fragment(), View.OnClickListener {
                 else -> {""}
             }
         }.attach()
-
     }
 
     private fun fetchads() {

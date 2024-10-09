@@ -53,6 +53,7 @@ import com.sbd.gbd.Utilitys.FirebaseConnects
 import com.sbd.gbd.Utilitys.UtilityMethods
 import com.sbd.gbd.databinding.DashboardFragmentBinding
 import com.synnapps.carouselview.ImageListener
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.io.IOException
 import java.util.Locale
@@ -116,10 +117,16 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
         binding.progressLayout.visibility= View.VISIBLE
 
         lifecycleScope.launch {
-            fetchcorosel()
-            fetchdata()
-            fetchads()
-            fetchlayouts()
+            val coroselJob = async { fetchcorosel() }
+            val dataJob = async { fetchdata() }
+            val adsJob = async { fetchads() }
+            val layoutsJob = async { fetchlayouts() }
+
+            val coroselResult = coroselJob.await()
+            val dataResult = dataJob.await()
+            val adsResult = adsJob.await()
+            val layoutsResult = layoutsJob.await()
+
         }
 
         if (BuildConfig.BUILD_TYPE == "release" && BuildConfig.FLAVOR == "prod") {
@@ -196,6 +203,7 @@ class DashboardFragment : Fragment(), View.OnClickListener, FragmentInteractionL
                                         userData?.get(AppConstants.category).toString(),
                                         userData?.get(AppConstants.price).toString(),
                                         userData?.get(AppConstants.pname).toString(),
+                                        "",
                                         userData?.get(AppConstants.propertysize).toString(),
                                         userData?.get(AppConstants.location).toString(),
                                         userData?.get(AppConstants.number).toString(),

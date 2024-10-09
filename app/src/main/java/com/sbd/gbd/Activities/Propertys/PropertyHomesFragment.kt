@@ -36,7 +36,7 @@ class PropertyHomesFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentPropertySitesBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -46,7 +46,7 @@ class PropertyHomesFragment : Fragment() {
         ProductsRef = FirebaseDatabase.getInstance().reference.child(AppConstants.products)
         binding.recyclerMenu.setHasFixedSize(true)
         binding.recyclerMenu.setLayoutManager(GridLayoutManager(context, 1))
-        lifecycleScope.launch { fetchproducts("Homes") }
+        lifecycleScope.launch { fetchproducts("House") }
     }
 
 

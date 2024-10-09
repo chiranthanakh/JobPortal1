@@ -672,9 +672,10 @@ class Admin_ads_dashboard : AppCompatActivity() {
             AppConstants.verified to "1",
             )
         if ( CategoryType == "105" || CategoryType =="104") {
+            productMap.put("nuBhk", nuBhk)
             productMap.put("bedrooms", bedrooms)
-            productMap.put("bathrooms", bedrooms)
-            productMap.put("floors", bedrooms)
+            productMap.put("bathrooms", bathrooms)
+            productMap.put("floors", floors)
             productMap.put("furnished", furnished.toString())
             productMap.put("parking", parking.toString())
             productMap.put("gated", gated.toString())
@@ -713,7 +714,7 @@ class Admin_ads_dashboard : AppCompatActivity() {
             productMap.put("sewage", sewage.toString())
         }
 
-        ProductsRef?.child(productRandomKey!!)?.updateChildren(productMap + AppConstants.profileinfoadd(this))
+        ProductsRef?.child(productRandomKey+"."+PropertyType)?.updateChildren(productMap + AppConstants.profileinfoadd(this))
             ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     UtilityMethods.showToast(this@Admin_ads_dashboard, "Property  added successfully..")

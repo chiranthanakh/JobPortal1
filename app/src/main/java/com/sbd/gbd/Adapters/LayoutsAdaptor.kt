@@ -39,7 +39,7 @@ class LayoutsAdaptor(layoutsList: ArrayList<LayoutModel>, context: Context) :
 
     override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val layoutinfo = layoutsList[position]
-        if (position == getItemCount() - 1 ) {
+        if (position == getItemCount() - 1 && getItemCount() > 10 ) {
             holder.cv_card_next.visibility = View.VISIBLE
             holder.cv_card.visibility = View.GONE
             holder.cv_card_next.setOnClickListener {
@@ -55,7 +55,7 @@ class LayoutsAdaptor(layoutsList: ArrayList<LayoutModel>, context: Context) :
             .apply(RequestOptions().override(1000, 500))
             .into(holder.iv_corosel_image)
 
-        holder.tv_ads_category.text = layoutinfo.type
+        holder.tv_ads_category.text = layoutinfo.category
         holder.tv_amount.text = layoutinfo.price
         holder.tv_space.text = layoutinfo.propertysize
         holder.ads_location_adaptor.text = layoutinfo.location

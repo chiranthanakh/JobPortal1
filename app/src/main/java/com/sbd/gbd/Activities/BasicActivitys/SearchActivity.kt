@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -28,16 +30,28 @@ import com.sbd.gbd.R
 import com.sbd.gbd.Utilitys.AppConstants
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.google.android.material.button.MaterialButtonToggleGroup
+import com.google.android.material.chip.Chip
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.mohammedalaa.seekbar.DoubleValueSeekBarView
+import com.mohammedalaa.seekbar.OnDoubleValueSeekBarChangeListener
 import com.sbd.gbd.Activities.Admin.Admin_ads_dashboard
+import com.sbd.gbd.Activities.Dashboard.StartingActivity
+import com.sbd.gbd.Activities.Propertys.PropertyLayoutFragment
+import com.sbd.gbd.Activities.Propertys.PropertySitesFragment
+import com.sbd.gbd.Utilitys.UtilityMethods.districtList
+import com.sbd.gbd.Utilitys.UtilityMethods.getDistricts
+import com.sbd.gbd.Utilitys.UtilityMethods.locationMap
+import com.sbd.gbd.databinding.ActivityLocationSelectBinding
+import com.sbd.gbd.databinding.ActivitySearchBinding
 import java.util.Collections
 import java.util.Locale
 
 
 class SearchActivity : AppCompatActivity(), View.OnClickListener {
+    private lateinit var binding: ActivitySearchBinding
     var adapter: FirebaseRecyclerAdapter<Products, ProductViewHolder>? = null
     private var recyclerView: RecyclerView? = null
     var layoutManager: RecyclerView.LayoutManager? = null
@@ -56,313 +70,133 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
     var businessAdaptor: BusinessAdaptor? = null
     var adsAdaptor: AdsAdaptor? = null
     var recyclarviewads: RecyclerView? = null
-    var edt_filter: SearchView? = null
+    var P_Type = ""
+    var min_price = 0
+    var max_price = 0
+    var plot_type = ""
+    var noBedroom = ""
+    var place = ""
+    var bundle = Bundle()
+    private var districtList = mutableSetOf<String>()
+    private var districtAdapter: ArrayAdapter<*>? = null
     var buttonToggleGroup: MaterialButtonToggleGroup? = null
     var filterarraylist: ArrayList<FilterModel> = ArrayList()
     var type = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.JobPortaltheam) //default app theme
-            //when dark mode is enabled, we use the dark theme
-        } else {
-            setTheme(R.style.JobPortaltheam) //default app theme
-        }
-        val bundle = intent.extras
-        if (bundle != null) {
-            type = bundle.getString("searchtype", "")
-        }
+        binding = ActivitySearchBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+//        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+//            setTheme(R.style.JobPortaltheam)
+//        } else {
+//            setTheme(R.style.JobPortaltheam)
+//        }
+//        val bundle = intent.extras
+//        if (bundle != null) {
+//            type = bundle.getString("searchtype", "")
+//        }
+        getlocations()
         initilize()
     }
 
     private fun initilize() {
+
+        binding.spDistrict.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                if (p2 > 0) {
+                    val list = districtList.toList()
+                    place = list[p2]
+                }
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+        }
+
+        binding.propertyType.setOnCheckedChangeListener { group, checkedId ->
+            val chip = group.findViewById<Chip>(checkedId)
+            chip?.let {
+                P_Type = it.text.toString()
+                if (it.text.toString() == "Flat") {
+                    binding.tvPlot.visibility = View.GONE
+                    binding.cgPlotType.visibility = View.GONE
+                    binding.tvBedroom.visibility = View.VISIBLE
+                    binding.cgBedroom.visibility = View.VISIBLE
+                } else if (it.text.toString() == "Plots") {
+                    binding.tvPlot.visibility = View.VISIBLE
+                    binding.cgPlotType.visibility = View.VISIBLE
+                    binding.tvBedroom.visibility = View.GONE
+                    binding.cgBedroom.visibility = View.GONE
+                }else if (it.text.toString() == "House / Villa") {
+                    binding.tvPlot.visibility = View.GONE
+                    binding.cgPlotType.visibility = View.GONE
+                    binding.tvBedroom.visibility = View.VISIBLE
+                    binding.cgBedroom.visibility = View.VISIBLE
+                }else if (it.text.toString() == "Commercial") {
+                    binding.tvPlot.visibility = View.GONE
+                    binding.cgPlotType.visibility = View.GONE
+                    binding.tvBedroom.visibility = View.GONE
+                    binding.cgBedroom.visibility = View.GONE
+                } else {
+
+                }
+            }
+        }
+
+        binding.cgPlotType.setOnCheckedChangeListener { group, checkedId ->
+            val chip = group.findViewById<Chip>(checkedId)
+            chip?.let {
+                plot_type = it.text.toString()
+            }
+        }
+
+        binding.cgBedroom.setOnCheckedChangeListener { group, checkedId ->
+            val chip = group.findViewById<Chip>(checkedId)
+            chip?.let {
+                noBedroom = it.text.toString()
+            }
+        }
+
+        binding.llSearch.setOnClickListener{
+            val intent = Intent(this@SearchActivity, SearchResultActivity::class.java)
+            bundle.putString("pType",P_Type)
+            bundle.putString("plotType",plot_type)
+            bundle.putInt("minPrice",min_price)
+            bundle.putInt("maxPrice",max_price)
+            bundle.putString("bedroom", noBedroom)
+            bundle.putString("place", place)
+            intent.putExtras(bundle)
+            startActivity(intent)
+        }
+
+        binding.doubleRangeSeekbar.setOnRangeSeekBarViewChangeListener(object : OnDoubleValueSeekBarChangeListener{
+            override fun onStartTrackingTouch(
+                seekBar: DoubleValueSeekBarView?, min: Int, max: Int
+            ) {}
+
+            override fun onStopTrackingTouch(seekBar: DoubleValueSeekBarView?, min: Int, max: Int) {
+                binding.tvPriceRange.text = "Price Range : ₹${min} to ₹${max} /Sqft"
+                min_price = min
+
+            }
+
+            override fun onValueChanged(
+                seekBar: DoubleValueSeekBarView?, min: Int, max: Int, fromUser: Boolean
+            ) {}
+
+        })
+
         recyclarviewads = findViewById(R.id.rv_adds_layots2);
-        edt_filter = findViewById(R.id.edt_filter)
         recyclerView = findViewById(R.id.recycler_search_results)
         back_toolbar_search = findViewById(R.id.back_toolbar_search)
-        buttonToggleGroup = findViewById<MaterialButtonToggleGroup>(R.id.buttonToggleGroup)
-        back_toolbar_search?.setOnClickListener(this)
-        edt_filter?.requestFocus()
-        edt_filter?.setFocusable(true)
+        back_toolbar_search?.setOnClickListener(this)      //  edt_filter = findViewById(R.id.edt_filter)
+
+        //edt_filter?.requestFocus()
+        //edt_filter?.setFocusable(true)
         recyclerView?.setHasFixedSize(true)
         val mgrid = GridLayoutManager(this, 1)
         recyclerView?.setLayoutManager(mgrid)
-        if (type == "business") {
-            AsyncTask.execute { fetchbusiness() }
-        } else if (type == "const") {
-            AsyncTask.execute { fetchConstruction() }
-        } else {
-            AsyncTask.execute { fetchpropertys() }
-        }
 
-        buttonToggleGroup?.addOnButtonCheckedListener { _, checkedId, isChecked ->
-            if (isChecked) {
-                when (checkedId) {
-                    R.id.button1 -> {
-                        type = "property"
-                        propertylist.clear()
-                        businesslist.clear()
-                        AsyncTask.execute { fetchpropertys() }
-                    }
 
-                    R.id.button2 -> {
-                        type = "business"
-                        propertylist.clear()
-                        businesslist.clear()
-                        AsyncTask.execute { fetchbusiness() }
-                    }
 
-                    R.id.button3 -> {
-                        type = "const"
-                        propertylist.clear()
-                        businesslist.clear()
-                        AsyncTask.execute { fetchConstruction() }
-                    }
-                }
-            } else {
-
-            }
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        edt_filter!!.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(s: String): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(s: String): Boolean {
-                filter(s)
-                return false
-            }
-        })
-    }
-
-    private fun fetchads() {
-        val adsimage = FirebaseDatabase.getInstance().reference.child(AppConstants.ads)
-        adsimage.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    adslist.clear()
-                    val dataMap = snapshot.value as HashMap<String, Any>?
-                    for (key in dataMap!!.keys) {
-                        val data = dataMap[key]
-                        try {
-                            val userData = data as HashMap<String, Any>?
-                            adslist.add(
-                                AdsModel(
-                                    userData!![AppConstants.image].toString(),
-                                    userData[AppConstants.image2].toString(),
-                                    userData[AppConstants.pid].toString(),
-                                    userData[AppConstants.description].toString(),
-                                    userData[AppConstants.date].toString(),
-                                    userData[AppConstants.category].toString(),
-                                    userData[AppConstants.price].toString(),
-                                    userData[AppConstants.pname].toString(),
-                                    userData[AppConstants.propertysize].toString(),
-                                    userData[AppConstants.location].toString(),
-                                    userData[AppConstants.number].toString(),
-                                    userData[AppConstants.Status].toString(),
-                                    userData[AppConstants.postedBy].toString(),
-                                    userData[AppConstants.approvedBy].toString(),
-                                    userData[AppConstants.facing].toString(),
-                                    userData[AppConstants.ownership].toString(),
-                                    userData[AppConstants.postedOn].toString(),
-                                    userData[AppConstants.postedOn].toString(),
-                                    userData[AppConstants.text1].toString(),
-                                    userData[AppConstants.text2].toString(),
-                                    userData[AppConstants.text3].toString(),
-                                    userData[AppConstants.text4].toString()
-                                )
-                            )
-                        } catch (cce: ClassCastException) {
-
-                        }
-                    }
-                    Collections.shuffle(adslist)
-                    adsAdaptor = AdsAdaptor(adslist, this@SearchActivity)
-                    val n1layoutManager: RecyclerView.LayoutManager =
-                        LinearLayoutManager(this@SearchActivity, RecyclerView.HORIZONTAL, false)
-                    recyclarviewads!!.layoutManager = n1layoutManager
-                    recyclarviewads!!.itemAnimator = DefaultItemAnimator()
-                    mHandler.post {
-                        recyclarviewads!!.adapter = adsAdaptor
-                        adsAdaptor!!.notifyItemRangeInserted(0, adslist.size)
-                    }
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {}
-        })
-    }
-
-    private fun fetchpropertys() {
-        val coroselimage = FirebaseDatabase.getInstance().reference.child(AppConstants.products).orderByChild(AppConstants.Status).equalTo(AppConstants.user)
-        coroselimage.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    val dataMap = snapshot.value as HashMap<String, Any>?
-                    propertylist.clear()
-                    Propertyfilterlist.clear()
-                    for (key in dataMap!!.keys) {
-                        Log.d("testflight",key)
-                        val data = dataMap[key]
-                        try {
-                            val userData = data as HashMap<String, Any>?
-                            Propertyfilterlist.add(
-                                FilterModel(
-                                    userData!![AppConstants.pname].toString(),
-                                    userData[AppConstants.description].toString(),
-                                    userData[AppConstants.price].toString(),
-                                    userData[AppConstants.image].toString(),
-                                    userData[AppConstants.category].toString(),
-                                    userData[AppConstants.pid].toString(),
-                                    AppConstants.date,
-                                    AppConstants.time,
-                                    userData[AppConstants.type].toString(),
-                                    userData[AppConstants.propertysize].toString(),
-                                    userData[AppConstants.location].toString(),
-                                    userData[AppConstants.number].toString(),
-                                    userData[AppConstants.Status].toString()
-                                )
-                            )
-                            propertylist.add(
-                                userData[AppConstants.image].toString() + "!!" + userData[AppConstants.pid] + "---" + userData[AppConstants.description] + "---" +
-                                        userData[AppConstants.category] + "---" + userData[AppConstants.price] + "---" + userData[AppConstants.pname]
-                                        + "---" + userData[AppConstants.propertysize] + "---" + userData[AppConstants.location] + "---" + userData[AppConstants.number] + "---" + userData[AppConstants.type] + "---" + userData[AppConstants.Status]
-                            )
-
-                        } catch (cce: ClassCastException) {
-                            try {
-
-                            } catch (cce2: ClassCastException) {
-                            }
-                        }
-                    }
-                    propertyAdaptor = PropertyAdaptor(Propertyfilterlist, this@SearchActivity)
-                    val nlayoutManager: RecyclerView.LayoutManager =
-                        LinearLayoutManager(this@SearchActivity, RecyclerView.VERTICAL, false)
-                    recyclerView!!.layoutManager = nlayoutManager
-                    recyclerView!!.itemAnimator = DefaultItemAnimator()
-                    mHandler.post { recyclerView!!.adapter = propertyAdaptor }
-                    propertyAdaptor!!.notifyItemRangeInserted(0, propertylist.size)
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {}
-        })
-    }
-
-    private fun fetchbusiness() {
-        val coroselimage = FirebaseDatabase.getInstance().reference.child("BusinessListing").orderByChild(AppConstants.Status).equalTo(AppConstants.user)
-        coroselimage.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    val dataMap = snapshot.value as HashMap<String, Any>?
-                    for (key in dataMap!!.keys) {
-                        val data = dataMap[key]
-                        try {
-                            val userData = data as HashMap<String, Any>?
-                            businesslist.add(
-                                BusinessModel(
-                                    userData!![AppConstants.pid].toString(),
-                                    userData[AppConstants.date].toString(),
-                                    userData[AppConstants.time].toString(),
-                                    userData["Businessname"].toString(),
-                                    userData["products"].toString(),
-                                    userData[AppConstants.category].toString(),
-                                    userData[AppConstants.description].toString(),
-                                    userData[AppConstants.price].toString(),
-                                    userData[AppConstants.location].toString(),
-                                    userData[AppConstants.number].toString(),
-                                    userData["owner"].toString(),
-                                    userData["email"].toString(),
-                                    userData["rating"].toString(),
-                                    userData[AppConstants.image].toString(),
-                                    userData[AppConstants.image2].toString(),
-                                    userData[AppConstants.Status].toString(),
-                                    userData["gst"].toString(),
-                                    userData["from"].toString(),
-                                    userData["productServicess"].toString(),
-                                    userData["workingHrs"].toString()
-                                )
-                            )
-                        } catch (cce: ClassCastException) {
-
-                        }
-                    }
-                    businessAdaptor = BusinessAdaptor(businesslist, this@SearchActivity)
-                    val nlayoutManager: RecyclerView.LayoutManager =
-                        LinearLayoutManager(this@SearchActivity, RecyclerView.VERTICAL, false)
-                    recyclerView!!.layoutManager = nlayoutManager
-                    recyclerView!!.itemAnimator = DefaultItemAnimator()
-                    mHandler.post { recyclerView!!.adapter = businessAdaptor }
-                    businessAdaptor!!.notifyItemRangeInserted(0, businesslist.size)
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {}
-        })
-    }
-
-    private fun fetchConstruction() {
-        val coroselimage = FirebaseDatabase.getInstance().reference.child(AppConstants.construction).orderByChild(AppConstants.Status).equalTo(AppConstants.user)
-        coroselimage.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    val dataMap = snapshot.value as HashMap<String, Any>?
-                    for (key in dataMap!!.keys) {
-                        val data = dataMap[key]
-                        try {
-                            val userData = data as HashMap<String, Any>?
-                            constructionList.add(
-                                ConstructionModel(
-                                    userData!![AppConstants.pid].toString(),
-                                    userData[AppConstants.date].toString(),
-                                    userData[AppConstants.time].toString(),
-                                    userData["name"].toString(),
-                                    userData[AppConstants.category].toString(),
-                                    userData["cost"].toString(),
-                                    userData["number1"].toString(),
-                                    userData["product_services"].toString(),
-                                    userData["experience"].toString(),
-                                    userData["servicess1"].toString(),
-                                    userData["servicess2"].toString(),
-                                    userData["servicess3"].toString(),
-                                    userData["servicess4"].toString(),
-                                    userData["discription"].toString(),
-                                    userData[AppConstants.verified].toString(),
-                                    userData[AppConstants.image].toString(),
-                                    userData[AppConstants.image2].toString(),
-                                    userData["owner"].toString(),
-                                    userData["address"].toString(),
-                                    userData[AppConstants.Status].toString(),
-                                    userData["gst"].toString(),
-                                    userData["workingHrs"].toString()
-                                )
-                            )
-                        } catch (cce: ClassCastException) {
-                            try {
-
-                            } catch (cce2: ClassCastException) {
-                            }
-                        }
-                    }
-                    // Upcoming Event
-                    constructionAdaptor = ConstructorAdaptor(constructionList, this@SearchActivity)
-                    val elayoutManager: RecyclerView.LayoutManager =
-                        LinearLayoutManager(this@SearchActivity, RecyclerView.VERTICAL, false)
-                    recyclerView?.layoutManager = GridLayoutManager(this@SearchActivity, 1)
-                    recyclerView?.itemAnimator = DefaultItemAnimator()
-                    recyclerView?.itemAnimator = DefaultItemAnimator()
-                    mHandler.post { recyclerView?.adapter = constructionAdaptor }
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {}
-        })
     }
 
     override fun onClick(view: View) {
@@ -372,13 +206,11 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
                 intent.putExtra("page", "2")
                 startActivity(intent)
             }
-
             R.id.back_toolbar_search -> finish()
         }
     }
 
     private fun filter(text: String) {
-
         if (type.equals("business")) {
             if (text == "") {
             } else {
@@ -499,4 +331,38 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
             propertyAdaptor!!.notifyItemRangeInserted(0, greenlandlist.size)
         }
     }
+
+    private fun getlocations() {
+        val myDataRef = FirebaseDatabase.getInstance().reference.child(AppConstants.locations)
+        myDataRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val dataMap = dataSnapshot.value as HashMap<*, *>?
+                districtList.clear()
+                districtList.add("Select Place")
+                for (key in dataMap?.keys!!) {
+                    val data = dataMap[key]
+                    try {
+                        val userData = data as HashMap<*, *>?
+                        districtList.add(userData?.get(AppConstants.district)?.toString() ?: "select District")
+                        userData?.get("id")?.let {
+                            locationMap.put(userData.get(AppConstants.district).toString(), it.toString())
+                        }
+                    } catch (_: Exception) {
+                    }
+                }
+                districtAdapter = ArrayAdapter(
+                    this@SearchActivity,
+                    android.R.layout.simple_spinner_item,
+                    districtList.toList()
+                )
+                districtAdapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                binding.spDistrict.adapter = districtAdapter
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                println("Failed to read value: ${error.message}")
+            }
+        })
+    }
+
 }

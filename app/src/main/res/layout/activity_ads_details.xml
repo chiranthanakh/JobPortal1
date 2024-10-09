@@ -13,50 +13,56 @@
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:id="@+id/toolbar"
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@color/purple_500"
-            android:orientation="horizontal">
-
-
-            <ImageView
-                android:id="@+id/iv_back_ads"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="5dp"
-                android:background="?selectableItemBackground"
-                android:padding="14dp"
-                android:src="@drawable/back_arrow_new"
-                app:tint="@color/white" />
+            android:layout_marginBottom="@dimen/margin_10_dp"
+            app:cardCornerRadius="4dp"
+            android:showDividers="end"
+            app:cardElevation="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.9"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:showDividers="end">
 
-                <androidx.appcompat.widget.LinearLayoutCompat
+
+                <ImageView
+                    android:id="@+id/iv_back_ads"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:padding="14dp"
+                    android:src="@drawable/back_arrow_new"
+                    app:tint="@color/purple_700" />
+
+                <TextView
+                    android:id="@+id/tv_topbar_productName"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="dhvbhdvbhd"
+                    android:maxLines="1"
+                    android:textColor="@color/purple_700"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tv_topbar_productName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/lato_bold"
-                        android:text="Product"
-                        android:maxLines="1"
-                        android:textColor="@color/white"
-                        android:textSize="18sp" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="?selectableItemBackground"
+                    android:padding="15dp"
+                    android:visibility="gone"
+                    android:src="@drawable/share"
+                    app:tint="@color/black" />
+
             </LinearLayout>
-        </LinearLayout>
 
+        </androidx.cardview.widget.CardView>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -68,17 +74,23 @@
                 android:layout_marginBottom="80dp"
                 android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:orientation="vertical">
+
                 <com.synnapps.carouselview.CarouselView
                     android:id="@+id/ads_details_carouselView"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     app:fillColor="#FFFFFFFF"
                     app:pageColor="#00000000"
                     app:radius="3dp"
                     app:slideInterval="3000"
                     app:strokeColor="#FF777777"
-                    app:strokeWidth="1dp"/>
+                    app:strokeWidth="1dp" />
 
+            </LinearLayout>
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -301,7 +313,56 @@
 
                             </LinearLayout>
 
-                            <LinearLayout
+                                <LinearLayout
+                                    android:id="@+id/ll_bhk"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:layout_marginTop="10dp"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:fontFamily="@font/proxima_nova_regular"
+                                            android:gravity="start|center"
+                                            android:text="Number of BHK:"
+                                            android:textColor="@color/black"
+                                            android:textSize="14sp" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_weight="1">
+
+                                        <TextView
+                                            android:id="@+id/tv_bhk_number"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:drawablePadding="3dp"
+                                            android:fontFamily="@font/lato_bold"
+                                            android:gravity="center|start"
+                                            android:maxLines="2"
+                                            android:text=""
+                                            android:textColor="@color/black"
+                                            android:textSize="14sp" />
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
@@ -524,6 +585,7 @@
                                     android:layout_gravity="center"
                                     android:layout_marginTop="@dimen/margin_10dp"
                                     android:gravity="center"
+                                    android:visibility="gone"
                                     android:orientation="horizontal">
 
                                     <LinearLayout
@@ -613,6 +675,316 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
                                 android:background="#E91E63" />
+
+                            <LinearLayout
+                                android:id="@+id/ll_home_details"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="@dimen/dp_20"
+                                android:gravity="center"
+                                android:background="#F0F9FF"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:layout_marginStart="@dimen/margin_10_dp"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:fontFamily="@font/proxima_nova_regular"
+                                            android:gravity="start|center"
+                                            android:text="Number of floors"
+                                            android:textColor="@color/black"
+                                            android:textSize="14sp" />
+
+                                        <TextView
+                                            android:id="@+id/tv_floor"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="10dp"
+                                            android:drawableStart="@drawable/ic_home_pro"
+                                            android:drawablePadding="10dp"
+                                            android:fontFamily="@font/proxima_nova_semi_bold"
+                                            android:gravity="start|center"
+                                            android:singleLine="true"
+                                            android:text="Ground Flat"
+                                            android:textColor="@color/black"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:fontFamily="@font/proxima_nova_regular"
+                                            android:gravity="center|start"
+                                            android:maxLines="2"
+                                            android:text="BEDROOMS"
+                                            android:textColor="@color/black"
+                                            android:textSize="14sp" />
+
+                                        <TextView
+                                            android:id="@+id/tv_no_bedrooms"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="10dp"
+                                            android:drawableStart="@drawable/ic_bed_pro"
+                                            android:drawablePadding="10dp"
+                                            android:fontFamily="@font/proxima_nova_semi_bold"
+                                            android:gravity="center|start"
+                                            android:maxLines="2"
+                                            android:minLines="2"
+                                            android:singleLine="true"
+                                            android:text="x2"
+                                            android:textColor="@color/black"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="20dp"
+                                    android:gravity="center"
+                                    android:layout_marginStart="@dimen/margin_10_dp"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:fontFamily="@font/proxima_nova_regular"
+                                            android:gravity="start|center"
+                                            android:text="BATHROOMS"
+                                            android:textColor="@color/black"
+                                            android:textSize="14sp" />
+
+                                        <TextView
+                                            android:id="@+id/tv_bathrooms"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="10dp"
+                                            android:drawableStart="@drawable/ic_batroom_pro"
+                                            android:drawablePadding="10dp"
+                                            android:fontFamily="@font/proxima_nova_semi_bold"
+                                            android:gravity="start|center"
+                                            android:singleLine="true"
+                                            android:text="x2"
+                                            android:textColor="@color/black"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:fontFamily="@font/proxima_nova_regular"
+                                            android:gravity="center|start"
+                                            android:maxLines="2"
+                                            android:text="HALL"
+                                            android:textColor="@color/black"
+                                            android:textSize="14sp" />
+
+                                        <TextView
+                                            android:id="@+id/tv_hall"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="10dp"
+                                            android:drawableStart="@drawable/ic_balcony_pro"
+                                            android:drawablePadding="10dp"
+                                            android:fontFamily="@font/proxima_nova_semi_bold"
+                                            android:gravity="center|start"
+                                            android:maxLines="2"
+                                            android:minLines="2"
+                                            android:singleLine="true"
+                                            android:text="x1"
+                                            android:textColor="@color/black"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="20dp"
+                                    android:gravity="center"
+                                    android:layout_marginStart="@dimen/margin_10_dp"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:fontFamily="@font/proxima_nova_regular"
+                                            android:gravity="start|center"
+                                            android:text="Furnished"
+                                            android:textColor="@color/black"
+                                            android:textSize="14sp" />
+
+                                        <TextView
+                                            android:id="@+id/tv_furnished"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="10dp"
+                                            android:drawablePadding="10dp"
+                                            android:fontFamily="@font/proxima_nova_semi_bold"
+                                            android:gravity="start|center"
+                                            android:singleLine="true"
+                                            android:text=""
+                                            android:textColor="@color/black"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:fontFamily="@font/proxima_nova_regular"
+                                            android:gravity="center|start"
+                                            android:maxLines="2"
+                                            android:text="Gated Community"
+                                            android:textColor="@color/black"
+                                            android:textSize="14sp" />
+
+                                        <TextView
+                                            android:id="@+id/tv_gated"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="10dp"
+                                            android:drawablePadding="10dp"
+                                            android:fontFamily="@font/proxima_nova_semi_bold"
+                                            android:gravity="center|start"
+                                            android:maxLines="2"
+                                            android:minLines="2"
+                                            android:singleLine="true"
+                                            android:text=""
+                                            android:textColor="@color/black"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="20dp"
+                                    android:gravity="center"
+                                    android:layout_marginStart="@dimen/margin_10_dp"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:fontFamily="@font/proxima_nova_regular"
+                                            android:gravity="start|center"
+                                            android:text="PARKING"
+                                            android:textColor="@color/black"
+                                            android:textSize="14sp" />
+
+                                        <TextView
+                                            android:id="@+id/tv_parking"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="10dp"
+                                            android:drawablePadding="10dp"
+                                            android:fontFamily="@font/proxima_nova_semi_bold"
+                                            android:gravity="start|center"
+                                            android:singleLine="true"
+                                            android:text=""
+                                            android:textColor="@color/black"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_weight="1"
+                                        android:visibility="invisible"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:fontFamily="@font/proxima_nova_regular"
+                                            android:gravity="center|start"
+                                            android:maxLines="2"
+                                            android:text="Gated Community"
+                                            android:textColor="@color/black"
+                                            android:textSize="14sp" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="10dp"
+                                            android:drawablePadding="10dp"
+                                            android:fontFamily="@font/proxima_nova_semi_bold"
+                                            android:gravity="center|start"
+                                            android:maxLines="2"
+                                            android:minLines="2"
+                                            android:singleLine="true"
+                                            android:text=""
+                                            android:textColor="@color/black"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -815,7 +1187,7 @@
                                 android:fontFamily="@font/proxima_family"
                                 android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.remaining essentially unchanged."
                                 android:textColor="@color/black"
-                                android:textSize="12sp" />
+                                android:textSize="14sp" />
                         </LinearLayout>
                     </LinearLayout>
                 </FrameLayout>
